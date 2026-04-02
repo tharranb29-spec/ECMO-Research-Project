@@ -29,14 +29,24 @@
         box-sizing: border-box;
       }
 
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
       body {
         margin: 0;
         color: var(--ink);
         font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+        overflow-x: hidden;
         background:
           radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.14), transparent 26%),
           radial-gradient(circle at 100% 10%, rgba(11, 127, 115, 0.12), transparent 24%),
           linear-gradient(180deg, #fbfcff 0%, #eef3fa 100%);
+      }
+
+      img {
+        display: block;
+        max-width: 100%;
       }
 
       .shell {
@@ -68,6 +78,7 @@
         display: flex;
         gap: 18px;
         align-items: flex-start;
+        min-width: 0;
       }
 
       .brand-mark {
@@ -91,6 +102,7 @@
       .brand-meta {
         display: grid;
         gap: 8px;
+        min-width: 0;
       }
 
       .brand-eyebrow {
@@ -116,6 +128,7 @@
         border-radius: 24px;
         background: rgba(255, 255, 255, 0.84);
         border: 1px solid rgba(20, 93, 242, 0.11);
+        min-width: 0;
       }
 
       .brand-badge strong {
@@ -150,6 +163,8 @@
         font-size: clamp(2.4rem, 5vw, 4.5rem);
         line-height: 0.95;
         letter-spacing: -0.02em;
+        text-wrap: balance;
+        overflow-wrap: anywhere;
       }
 
       .title-stack h2 {
@@ -157,6 +172,8 @@
         color: var(--teal);
         font-size: clamp(1.06rem, 1.8vw, 1.55rem);
         line-height: 1.45;
+        text-wrap: balance;
+        overflow-wrap: anywhere;
       }
 
       .title-stack p {
@@ -233,6 +250,7 @@
         font: inherit;
         cursor: pointer;
         transition: 0.2s ease;
+        white-space: nowrap;
       }
 
       .toggle.active,
@@ -392,6 +410,7 @@
         border: 1px solid var(--line);
         border-radius: 26px;
         background: rgba(255, 255, 255, 0.92);
+        min-width: 0;
       }
 
       .candidate-card.siglec {
@@ -413,6 +432,7 @@
       .candidate-title {
         margin: 0;
         font-size: 1.28rem;
+        overflow-wrap: anywhere;
       }
 
       .candidate-sub {
@@ -575,11 +595,13 @@
         padding: 18px;
         display: grid;
         gap: 12px;
+        min-width: 0;
       }
 
       .directory-title {
         margin: 0;
         font-size: 1.06rem;
+        overflow-wrap: anywhere;
       }
 
       .assistant-layout {
@@ -649,12 +671,16 @@
         max-height: 760px;
         overflow: auto;
         padding-right: 4px;
+        overscroll-behavior: contain;
+        scroll-behavior: smooth;
       }
 
       .message {
         padding: 16px 18px;
         border-radius: 22px;
         line-height: 1.7;
+        max-width: 100%;
+        overflow-wrap: anywhere;
       }
 
       .message.user {
@@ -742,6 +768,262 @@
         .message.assistant {
           margin-left: 0;
           margin-right: 0;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .shell {
+          width: min(100%, calc(100% - 18px));
+          margin: 10px auto 26px;
+        }
+
+        .masthead,
+        .controls,
+        .panel-head,
+        .assistant-shell,
+        .leaderboard,
+        .target-sections,
+        .weights-panel,
+        .directory-grid {
+          padding-left: 16px;
+          padding-right: 16px;
+        }
+
+        .masthead {
+          padding-top: 24px;
+          padding-bottom: 24px;
+          border-radius: 26px;
+        }
+
+        .panel,
+        .controls,
+        .stat {
+          border-radius: 24px;
+        }
+
+        .brand-row {
+          gap: 16px;
+        }
+
+        .brand-lockup {
+          gap: 14px;
+        }
+
+        .brand-mark {
+          width: 84px;
+          height: 84px;
+          border-radius: 22px;
+        }
+
+        .brand-mark img {
+          width: 68px;
+          height: 68px;
+        }
+
+        .title-stack h1 {
+          font-size: clamp(1.9rem, 9vw, 3rem);
+          line-height: 1.02;
+        }
+
+        .title-stack h2 {
+          font-size: 1rem;
+          line-height: 1.55;
+        }
+
+        .controls-top {
+          align-items: stretch;
+        }
+
+        .toggle-row,
+        .view-tabs,
+        .quick-prompts {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .toggle-row::-webkit-scrollbar,
+        .view-tabs::-webkit-scrollbar,
+        .quick-prompts::-webkit-scrollbar {
+          display: none;
+        }
+
+        .toggle,
+        .view-tab,
+        .quick-prompts button {
+          flex: 0 0 auto;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .assistant-messages {
+          min-height: 340px;
+          max-height: 60vh;
+        }
+
+        .prompt-row {
+          grid-template-columns: 1fr;
+        }
+
+        .ask-button {
+          min-height: 52px;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .shell {
+          width: calc(100% - 12px);
+          margin: 6px auto 20px;
+        }
+
+        .masthead {
+          gap: 18px;
+          padding: 18px 14px;
+          border-radius: 22px;
+        }
+
+        .brand-row,
+        .brand-lockup {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .brand-mark {
+          width: 72px;
+          height: 72px;
+        }
+
+        .brand-mark img {
+          width: 58px;
+          height: 58px;
+        }
+
+        .brand-eyebrow {
+          font-size: 0.72rem;
+          letter-spacing: 0.18em;
+        }
+
+        .brand-badge {
+          max-width: none;
+          padding: 14px;
+          border-radius: 18px;
+        }
+
+        .title-stack p,
+        .insight-item,
+        .panel-head p,
+        .candidate-copy,
+        .assistant-help,
+        .footer-note {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+
+        .insight-card {
+          padding: 16px;
+          border-radius: 20px;
+        }
+
+        .controls {
+          gap: 14px;
+          margin-top: 14px;
+          padding: 14px;
+          border-radius: 22px;
+        }
+
+        .controls-top {
+          gap: 10px;
+        }
+
+        .search-row {
+          gap: 10px;
+        }
+
+        .search-input,
+        .question-input,
+        .context-input {
+          padding: 13px 14px;
+          border-radius: 16px;
+        }
+
+        .hint {
+          padding: 12px 14px;
+          border-radius: 16px;
+        }
+
+        .stats-grid,
+        .directory-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .overview-grid {
+          gap: 14px;
+        }
+
+        .panel {
+          border-radius: 22px;
+        }
+
+        .panel-head {
+          padding: 18px 16px 14px;
+        }
+
+        .leaderboard,
+        .assistant-shell,
+        .target-sections,
+        .weights-panel,
+        .directory-grid {
+          padding: 14px;
+          gap: 14px;
+        }
+
+        .candidate-card,
+        .target-block,
+        .weight-block,
+        .directory-card {
+          border-radius: 20px;
+        }
+
+        .candidate-top,
+        .directory-head,
+        .target-head {
+          gap: 10px;
+        }
+
+        .score-block {
+          min-width: 0;
+        }
+
+        .score {
+          font-size: 1.9rem;
+        }
+
+        .mini-row {
+          padding: 14px;
+        }
+
+        .assistant-layout {
+          gap: 14px;
+        }
+
+        .assistant-messages {
+          min-height: 300px;
+          max-height: none;
+        }
+
+        .message {
+          padding: 14px;
+          border-radius: 18px;
+        }
+
+        .footer-note {
+          margin-top: 14px;
+          padding: 14px;
+          border-radius: 18px;
         }
       }
 
