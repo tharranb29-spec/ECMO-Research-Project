@@ -1,0 +1,3 @@
+.DS_Store
+outputs/dashboard-server.log
+outputs/dashboard-server.pid
