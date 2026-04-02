@@ -1,0 +1,9 @@
+{
+  "institution_name": "Zhejiang University International School of Medicine",
+  "program_name": "AI-Driven ECMO Interface Research Project",
+  "english_title": "AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming",
+  "chinese_title": "人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究",
+  "short_title": "ECMO Ligand Ranking Dashboard",
+  "branding_note": "Internal project dashboard for group review, candidate triage, and discussion support.",
+  "logo_path": "assets/zju-ism-mark.svg"
+}

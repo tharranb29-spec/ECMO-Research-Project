@@ -1,0 +1,15 @@
+{
+  "last_updated": "2026-04-02T05:37:22.467771+00:00",
+  "article_count": 30,
+  "lead_count": 1,
+  "queries": [
+    {
+      "target_receptor": "Siglec-9",
+      "query": "(Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR agonist OR peptide OR sialoside) sort_date:y"
+    },
+    {
+      "target_receptor": "SIRPa",
+      "query": "(\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist) sort_date:y"
+    }
+  ]
+}

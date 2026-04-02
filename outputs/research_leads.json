@@ -1,0 +1,16 @@
+{
+  "last_updated": "2026-04-02T05:37:22.467771+00:00",
+  "leads": [
+    {
+      "candidate_name": "STING",
+      "target_receptor": "SIRPa",
+      "modality_guess": "antibody",
+      "lead_score": 50,
+      "lead_type": "literature_candidate_lead",
+      "rationale": "Recent literature mention in article: Dual-Functional Anti-SIRPα-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
+      "publication_date": "2026-04-01",
+      "source_title": "Dual-Functional Anti-SIRPα-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
+      "source_url": "https://europepmc.org/article/MED/41918375"
+    }
+  ]
+}

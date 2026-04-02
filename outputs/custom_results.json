@@ -1,0 +1,60 @@
+{
+  "models": {
+    "SIRPa": {
+      "target": "SIRPa",
+      "weights": {
+        "affinity_strength_score": 0.254708824320116,
+        "specificity_score": 0.13269691413328458,
+        "functional_immunomodulation_score": 0.23022402110011048,
+        "surface_validation_score": 0.21753723624916155,
+        "conjugation_feasibility_score": 0.08463987031559307,
+        "hemocompatibility_proxy_score": 0.12864026167921436,
+        "multivalency_or_clustering_score": 0.06428910706740609,
+        "literature_confidence_score": 0.03217814748238371
+      },
+      "bias": -0.13953793572110645
+    },
+    "Siglec-9": {
+      "target": "Siglec-9",
+      "weights": {
+        "affinity_strength_score": 0.26616100464879733,
+        "specificity_score": 0.15030057723321946,
+        "functional_immunomodulation_score": 0.2677794043498648,
+        "surface_validation_score": 0.13860946260794435,
+        "conjugation_feasibility_score": 0.09769491421795652,
+        "hemocompatibility_proxy_score": 0.0870282695253188,
+        "multivalency_or_clustering_score": 0.0889993512669093,
+        "literature_confidence_score": 0.03494726250474451
+      },
+      "bias": -0.0393956478312162
+    }
+  },
+  "metrics": {
+    "SIRPa": 4.480099706564318,
+    "Siglec-9": 8.364828687179712
+  },
+  "ranked": [
+    {
+      "id": "your_sirpa_candidate",
+      "candidate_name": "Your SIRPa Candidate",
+      "target_receptor": "SIRPa",
+      "modality": "peptide",
+      "predicted_score": 73.9,
+      "recommendation": "secondary",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, surface-translation support.",
+      "evidence_summary": "Example row you can overwrite with your own candidate",
+      "source_urls": []
+    },
+    {
+      "id": "your_siglec-9_candidate",
+      "candidate_name": "Your Siglec-9 Candidate",
+      "target_receptor": "Siglec-9",
+      "modality": "glycomimetic",
+      "predicted_score": 66.9,
+      "recommendation": "secondary",
+      "explanation": "strong affinity evidence, good target specificity, strong immunomodulation evidence.",
+      "evidence_summary": "Example row you can overwrite with your own candidate",
+      "source_urls": []
+    }
+  ]
+}

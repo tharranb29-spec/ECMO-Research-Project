@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Research Portal Access</title>
+    <style>
+      :root {
+        --bg: #edf5f7;
+        --panel: rgba(248, 253, 254, 0.9);
+        --panel-border: rgba(22, 86, 96, 0.14);
+        --text: #13323a;
+        --muted: #547079;
+        --accent: #0d7a86;
+        --accent-dark: #0a5862;
+        --input: #fcfeff;
+        --shadow: 0 24px 60px rgba(18, 69, 79, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(13, 122, 134, 0.16), transparent 30%),
+          radial-gradient(circle at bottom right, rgba(58, 158, 170, 0.14), transparent 26%),
+          linear-gradient(135deg, #eff8fa 0%, #dceef2 100%);
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+
+      .shell {
+        width: min(980px, 100%);
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        border: 1px solid var(--panel-border);
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--panel);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--shadow);
+      }
+
+      .hero {
+        padding: 56px;
+        position: relative;
+        background:
+          linear-gradient(180deg, rgba(244, 251, 252, 0.84), rgba(219, 239, 243, 0.96)),
+          linear-gradient(135deg, #eef9fb, #cde8ee);
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 42px 42px auto;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(13, 122, 134, 0.16), transparent 56%),
+          repeating-linear-gradient(
+            135deg,
+            rgba(13, 122, 134, 0.18) 0 10px,
+            rgba(13, 122, 134, 0.02) 10px 20px
+          );
+        opacity: 0.9;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        font-size: 0.82rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+        line-height: 0.95;
+        font-weight: 700;
+      }
+
+      .hero p {
+        max-width: 28rem;
+        margin: 22px 0 0;
+        font-size: 1.08rem;
+        line-height: 1.7;
+        color: var(--muted);
+        position: relative;
+        z-index: 1;
+      }
+
+      .highlights {
+        display: grid;
+        gap: 14px;
+        margin-top: 30px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .highlight {
+        width: fit-content;
+        padding: 10px 14px;
+        border: 1px solid rgba(13, 122, 134, 0.12);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.56);
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .card {
+        padding: 42px 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(252, 255, 255, 0.84);
+      }
+
+      .panel {
+        width: min(380px, 100%);
+      }
+
+      .tabs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 6px;
+        border-radius: 999px;
+        background: rgba(113, 178, 186, 0.14);
+        margin-bottom: 24px;
+      }
+
+      .tab {
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 16px;
+        font: inherit;
+        font-size: 0.98rem;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition: 0.25s ease;
+      }
+
+      .tab.active {
+        background: #fff;
+        color: var(--text);
+        box-shadow: 0 10px 24px rgba(24, 99, 110, 0.12);
+      }
+
+      .heading {
+        margin: 0 0 8px;
+        font-size: 2rem;
+      }
+
+      .subheading {
+        margin: 0 0 28px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .field {
+        margin-bottom: 16px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 0.95rem;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid rgba(68, 120, 128, 0.16);
+        border-radius: 16px;
+        padding: 14px 16px;
+        font: inherit;
+        font-size: 1rem;
+        color: var(--text);
+        background: var(--input);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: rgba(13, 122, 134, 0.65);
+        box-shadow: 0 0 0 4px rgba(13, 122, 134, 0.12);
+        transform: translateY(-1px);
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 6px 0 22px;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      .checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .checkbox input {
+        width: auto;
+        margin: 0;
+      }
+
+      .link {
+        color: var(--accent-dark);
+        text-decoration: none;
+      }
+
+      .link:hover {
+        text-decoration: underline;
+      }
+
+      .primary {
+        width: 100%;
+        border: 0;
+        border-radius: 16px;
+        padding: 15px 18px;
+        font: inherit;
+        font-size: 1rem;
+        color: #fffaf5;
+        background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+        cursor: pointer;
+        box-shadow: 0 18px 32px rgba(10, 88, 98, 0.22);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 22px 34px rgba(10, 88, 98, 0.28);
+      }
+
+      .switch {
+        margin-top: 18px;
+        text-align: center;
+        color: var(--muted);
+      }
+
+      .switch button {
+        border: 0;
+        background: none;
+        padding: 0;
+        color: var(--accent-dark);
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @media (max-width: 860px) {
+        .shell {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 40px 30px 24px;
+        }
+
+        .card {
+          padding: 14px 22px 32px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Clinical Research Network</p>
+        <h1>Access the study portal.</h1>
+        <p>
+          Sign in to review protocols, participant records, and study updates, or create a new
+          account to join the research workspace.
+        </p>
+        <div class="highlights">
+          <div class="highlight">Protocol tracking and trial coordination</div>
+          <div class="highlight">Secure access for investigators and staff</div>
+          <div class="highlight">Structured records for ongoing studies</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="panel">
+          <div class="tabs" aria-label="Authentication Mode">
+            <button class="tab active" id="loginTab" type="button">Log In</button>
+            <button class="tab" id="signupTab" type="button">Sign Up</button>
+          </div>
+
+          <form id="authForm">
+            <h2 class="heading" id="formTitle">Research login</h2>
+            <p class="subheading" id="formSubtitle">
+              Enter your credentials to continue into the medical research portal.
+            </p>
+
+            <div class="field hidden" id="nameField">
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Dr. Alex Morgan" />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="researcher@institute.org"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="password">Password</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <div class="field hidden" id="confirmField">
+              <label for="confirmPassword">Confirm password</label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm your password"
+              />
+            </div>
+
+            <div class="meta" id="loginMeta">
+              <label class="checkbox" for="rememberMe">
+                <input id="rememberMe" name="rememberMe" type="checkbox" />
+                Keep me signed in
+              </label>
+              <a class="link" href="#">Reset access</a>
+            </div>
+
+            <button class="primary" id="submitButton" type="submit">Log In</button>
+
+            <p class="switch">
+              <span id="switchLabel">Don't have an account?</span>
+              <button id="switchMode" type="button">Sign up</button>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const loginTab = document.getElementById("loginTab");
+      const signupTab = document.getElementById("signupTab");
+      const formTitle = document.getElementById("formTitle");
+      const formSubtitle = document.getElementById("formSubtitle");
+      const nameField = document.getElementById("nameField");
+      const confirmField = document.getElementById("confirmField");
+      const loginMeta = document.getElementById("loginMeta");
+      const submitButton = document.getElementById("submitButton");
+      const switchMode = document.getElementById("switchMode");
+      const switchLabel = document.getElementById("switchLabel");
+      const nameInput = document.getElementById("name");
+      const confirmPasswordInput = document.getElementById("confirmPassword");
+
+      function setMode(mode) {
+        const isSignup = mode === "signup";
+
+        loginTab.classList.toggle("active", !isSignup);
+        signupTab.classList.toggle("active", isSignup);
+        nameField.classList.toggle("hidden", !isSignup);
+        confirmField.classList.toggle("hidden", !isSignup);
+        loginMeta.classList.toggle("hidden", isSignup);
+
+        formTitle.textContent = isSignup ? "Create researcher account" : "Research login";
+        formSubtitle.textContent = isSignup
+          ? "Register for portal access with your institutional email and password."
+          : "Enter your credentials to continue into the medical research portal.";
+        submitButton.textContent = isSignup ? "Create Account" : "Log In";
+        switchLabel.textContent = isSignup ? "Already have an account?" : "Don't have an account?";
+        switchMode.textContent = isSignup ? "Log in" : "Sign up";
+
+        nameInput.required = isSignup;
+        confirmPasswordInput.required = isSignup;
+      }
+
+      loginTab.addEventListener("click", () => setMode("login"));
+      signupTab.addEventListener("click", () => setMode("signup"));
+      switchMode.addEventListener("click", () => {
+        const nextMode = signupTab.classList.contains("active") ? "login" : "signup";
+        setMode(nextMode);
+      });
+    </script>
+  </body>
+</html>

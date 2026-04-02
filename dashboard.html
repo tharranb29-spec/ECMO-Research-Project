@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ECMO Research Assistant Dashboard</title>
+    <style>
+      :root {
+        --bg: #f3f6fb;
+        --panel: rgba(255, 255, 255, 0.88);
+        --panel-strong: #ffffff;
+        --ink: #132540;
+        --muted: #637289;
+        --line: rgba(19, 37, 64, 0.11);
+        --accent: #145df2;
+        --accent-strong: #0c43af;
+        --teal: #0b7f73;
+        --teal-soft: rgba(11, 127, 115, 0.12);
+        --siglec: #e8f1ff;
+        --sirpa: #e8f8ef;
+        --advance: #117a4d;
+        --secondary: #af6d05;
+        --hold: #b45309;
+        --reject: #b42318;
+        --shadow: 0 28px 80px rgba(19, 37, 64, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+        background:
+          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.14), transparent 26%),
+          radial-gradient(circle at 100% 10%, rgba(11, 127, 115, 0.12), transparent 24%),
+          linear-gradient(180deg, #fbfcff 0%, #eef3fa 100%);
+      }
+
+      .shell {
+        width: min(1380px, calc(100% - 28px));
+        margin: 18px auto 42px;
+      }
+
+      .masthead {
+        display: grid;
+        gap: 22px;
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(239, 245, 255, 0.93)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.09), transparent 30%);
+        box-shadow: var(--shadow);
+      }
+
+      .brand-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .brand-lockup {
+        display: flex;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .brand-mark {
+        width: 108px;
+        height: 108px;
+        border-radius: 30px;
+        display: grid;
+        place-items: center;
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 16px 38px rgba(20, 93, 242, 0.16);
+        border: 1px solid rgba(20, 93, 242, 0.10);
+        overflow: hidden;
+      }
+
+      .brand-mark img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+      }
+
+      .brand-meta {
+        display: grid;
+        gap: 8px;
+      }
+
+      .brand-eyebrow {
+        margin: 0;
+        font-size: 0.8rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+
+      .institution,
+      .program {
+        margin: 0;
+      }
+
+      .program {
+        color: var(--muted);
+      }
+
+      .brand-badge {
+        max-width: 340px;
+        padding: 18px;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(20, 93, 242, 0.11);
+      }
+
+      .brand-badge strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .brand-badge p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .title-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 24px;
+      }
+
+      .title-stack {
+        display: grid;
+        gap: 14px;
+      }
+
+      .title-stack h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2.4rem, 5vw, 4.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+      }
+
+      .title-stack h2 {
+        margin: 0;
+        color: var(--teal);
+        font-size: clamp(1.06rem, 1.8vw, 1.55rem);
+        line-height: 1.45;
+      }
+
+      .title-stack p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 66ch;
+      }
+
+      .insight-card {
+        padding: 24px;
+        border-radius: 28px;
+        border: 1px solid var(--line);
+        background: linear-gradient(155deg, rgba(255,255,255,0.97), rgba(233, 242, 255, 0.82));
+        display: grid;
+        gap: 14px;
+      }
+
+      .insight-card h3 {
+        margin: 0;
+        font-size: 0.98rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .insight-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .insight-item {
+        padding: 12px 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .controls {
+        display: grid;
+        gap: 16px;
+        margin-top: 20px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
+      }
+
+      .controls-top {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .toggle-row,
+      .view-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .toggle,
+      .view-tab {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 11px 16px;
+        background: #fff;
+        color: var(--muted);
+        font: inherit;
+        cursor: pointer;
+        transition: 0.2s ease;
+      }
+
+      .toggle.active,
+      .view-tab.active {
+        color: white;
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        box-shadow: 0 14px 30px rgba(20, 93, 242, 0.22);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .meta-chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(19, 37, 64, 0.06);
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .search-row {
+        display: grid;
+        grid-template-columns: 1fr 340px;
+        gap: 12px;
+      }
+
+      input,
+      textarea,
+      button {
+        font: inherit;
+      }
+
+      .search-input,
+      .question-input,
+      .context-input {
+        width: 100%;
+        border: 1px solid rgba(19, 37, 64, 0.14);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.94);
+        color: var(--ink);
+        padding: 14px 16px;
+      }
+
+      .context-input {
+        min-height: 132px;
+        resize: vertical;
+        line-height: 1.6;
+      }
+
+      .search-input:focus,
+      .question-input:focus,
+      .context-input:focus {
+        outline: none;
+        border-color: rgba(20, 93, 242, 0.48);
+        box-shadow: 0 0 0 4px rgba(20, 93, 242, 0.10);
+      }
+
+      .hint {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(11, 127, 115, 0.08);
+        color: var(--teal);
+        line-height: 1.6;
+      }
+
+      .view {
+        display: none;
+        margin-top: 18px;
+      }
+
+      .view.active {
+        display: block;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .stat {
+        padding: 22px;
+        border-radius: 24px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
+      }
+
+      .stat-label {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .stat-value {
+        margin: 10px 0 0;
+        font-size: clamp(1.85rem, 3vw, 2.5rem);
+        line-height: 1.02;
+      }
+
+      .overview-grid {
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      .overview-stack,
+      .assistant-stack {
+        display: grid;
+        gap: 18px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: var(--panel);
+        box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
+        overflow: hidden;
+      }
+
+      .panel-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: flex-start;
+        padding: 22px 24px 16px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.75);
+      }
+
+      .panel-head h2,
+      .panel-head h3 {
+        margin: 0;
+      }
+
+      .panel-head p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .leaderboard {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .candidate-card {
+        display: grid;
+        gap: 14px;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.92);
+      }
+
+      .candidate-card.siglec {
+        background: linear-gradient(180deg, rgba(232, 241, 255, 0.92), rgba(255,255,255,0.98));
+      }
+
+      .candidate-card.sirpa {
+        background: linear-gradient(180deg, rgba(232, 248, 239, 0.92), rgba(255,255,255,0.98));
+      }
+
+      .candidate-top {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: flex-start;
+      }
+
+      .candidate-title {
+        margin: 0;
+        font-size: 1.28rem;
+      }
+
+      .candidate-sub {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+
+      .score-block {
+        min-width: 132px;
+        text-align: right;
+      }
+
+      .score {
+        margin: 0;
+        font-size: 2.25rem;
+        line-height: 1;
+      }
+
+      .score-label {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .bar {
+        height: 12px;
+        border-radius: 999px;
+        background: rgba(19, 37, 64, 0.08);
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #22c576, #145df2);
+      }
+
+      .tag-row,
+      .source-list,
+      .quick-prompts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .tag {
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .advance { background: rgba(17, 122, 77, 0.12); color: var(--advance); }
+      .secondary { background: rgba(175, 109, 5, 0.12); color: var(--secondary); }
+      .hold { background: rgba(180, 83, 9, 0.12); color: var(--hold); }
+      .reject { background: rgba(180, 35, 24, 0.12); color: var(--reject); }
+      .target-tag { background: rgba(19, 37, 64, 0.06); color: var(--ink); }
+
+      .candidate-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.68;
+      }
+
+      .source-list a {
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.92rem;
+      }
+
+      .source-list a:hover {
+        text-decoration: underline;
+      }
+
+      .target-sections,
+      .weights-panel,
+      .directory-grid {
+        display: grid;
+        gap: 16px;
+        padding: 18px;
+      }
+
+      .target-block,
+      .weight-block,
+      .directory-card {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.92);
+        overflow: hidden;
+      }
+
+      .target-head,
+      .directory-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .target-head.siglec { background: var(--siglec); }
+      .target-head.sirpa { background: var(--sirpa); }
+
+      .mini-list {
+        display: grid;
+      }
+
+      .mini-row {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr 96px;
+        gap: 12px;
+        padding: 16px 18px;
+        border-top: 1px solid var(--line);
+        align-items: center;
+      }
+
+      .mini-row:first-child {
+        border-top: 0;
+      }
+
+      .mini-name {
+        font-weight: 700;
+      }
+
+      .mini-exp {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .mini-score {
+        text-align: right;
+        font-weight: 700;
+      }
+
+      .weight-list {
+        display: grid;
+        gap: 12px;
+        padding: 18px;
+      }
+
+      .weight-item {
+        display: grid;
+        gap: 8px;
+      }
+
+      .weight-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .directory-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .directory-card {
+        padding: 18px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .directory-title {
+        margin: 0;
+        font-size: 1.06rem;
+      }
+
+      .assistant-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+        gap: 18px;
+      }
+
+      .assistant-shell {
+        display: grid;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .assistant-status {
+        padding: 12px 14px;
+        border-radius: 18px;
+        line-height: 1.55;
+      }
+
+      .assistant-status.live {
+        background: rgba(20, 93, 242, 0.10);
+        color: var(--accent-strong);
+      }
+
+      .assistant-status.fallback {
+        background: rgba(180, 83, 9, 0.10);
+        color: var(--hold);
+      }
+
+      .assistant-help {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .prompt-row {
+        display: grid;
+        grid-template-columns: 1fr 120px;
+        gap: 10px;
+      }
+
+      .ask-button,
+      .quick-prompts button {
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+
+      .ask-button {
+        border-radius: 18px;
+        color: white;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        box-shadow: 0 14px 30px rgba(20, 93, 242, 0.22);
+      }
+
+      .quick-prompts button {
+        border-radius: 999px;
+        padding: 9px 12px;
+        background: white;
+        color: var(--muted);
+        border-color: var(--line);
+      }
+
+      .assistant-messages {
+        display: grid;
+        gap: 12px;
+        min-height: 460px;
+        max-height: 760px;
+        overflow: auto;
+        padding-right: 4px;
+      }
+
+      .message {
+        padding: 16px 18px;
+        border-radius: 22px;
+        line-height: 1.7;
+      }
+
+      .message.user {
+        margin-left: 80px;
+        background: rgba(20, 93, 242, 0.10);
+      }
+
+      .message.assistant {
+        margin-right: 80px;
+        background: rgba(11, 127, 115, 0.10);
+      }
+
+      .message strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .message-body {
+        display: grid;
+        gap: 10px;
+      }
+
+      .message-body p,
+      .message-body ul {
+        margin: 0;
+      }
+
+      .message-body ul {
+        padding-left: 20px;
+      }
+
+      .message-body code {
+        padding: 1px 6px;
+        border-radius: 8px;
+        background: rgba(19, 37, 64, 0.06);
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.94em;
+      }
+
+      .message-body pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        padding: 12px;
+        border-radius: 14px;
+        background: rgba(19, 37, 64, 0.05);
+      }
+
+      .empty-state {
+        padding: 24px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .footer-note {
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: rgba(19, 37, 64, 0.05);
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1180px) {
+        .title-grid,
+        .overview-grid,
+        .assistant-layout,
+        .search-row,
+        .stats-grid,
+        .directory-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .mini-row {
+          grid-template-columns: 1fr;
+        }
+
+        .score-block,
+        .mini-score {
+          text-align: left;
+        }
+
+        .message.user,
+        .message.assistant {
+          margin-left: 0;
+          margin-right: 0;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        .shell {
+          width: 100%;
+          margin: 0;
+        }
+
+        .controls,
+        #assistant-view {
+          display: none !important;
+        }
+
+        .panel,
+        .masthead,
+        .stat {
+          box-shadow: none;
+          background: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="masthead">
+        <div class="brand-row">
+          <div class="brand-lockup">
+            <div class="brand-mark">
+              <img id="brand-logo" src="assets/zju-ism-mark.svg" alt="University logo" />
+            </div>
+            <div class="brand-meta">
+              <p class="brand-eyebrow">Research Dashboard</p>
+              <p class="institution" id="brand-institution">Zhejiang University International School of Medicine</p>
+              <p class="program" id="brand-program">AI-Driven ECMO Interface Research Project</p>
+            </div>
+          </div>
+
+          <aside class="brand-badge">
+            <strong>Project Use</strong>
+            <p id="brand-note">Internal project dashboard for group review, candidate triage, and discussion support.</p>
+          </aside>
+        </div>
+
+        <div class="title-grid">
+          <div class="title-stack">
+            <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
+            <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
+            <p>
+              This dashboard is designed for presentation, triage, and discussion. Use the
+              <strong>Overview</strong> tab to show rankings and target-specific summaries, and use the
+              <strong>Assistant</strong> tab for broader project questions, candidate comparison, and live reasoning over pasted notes.
+            </p>
+          </div>
+
+          <aside class="insight-card">
+            <h3>Suggested Meeting Flow</h3>
+            <div class="insight-list">
+              <div class="insight-item">Start with the Overview tab to show top-ranked ligands and the target-specific picture for Siglec-9 and SIRPa.</div>
+              <div class="insight-item">Use the Directory panel to quickly scan every candidate without opening raw JSON or reports.</div>
+              <div class="insight-item">Switch to the Assistant tab when your group wants direct answers, comparisons, or reasoning over new docking or assay notes.</div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="controls">
+        <div class="controls-top">
+          <div class="toggle-row">
+            <button class="toggle active" data-dataset="seed">Seed Dataset</button>
+            <button class="toggle" data-dataset="custom">Custom Candidates</button>
+            <button class="toggle" data-dataset="autonomous">Autonomous Discovery</button>
+          </div>
+
+          <div class="view-tabs">
+            <button class="view-tab active" data-view="overview">Overview</button>
+            <button class="view-tab" data-view="assistant">Assistant</button>
+          </div>
+        </div>
+
+        <div class="controls-top">
+          <div class="meta" id="meta-row"></div>
+        </div>
+
+        <div class="search-row">
+          <input id="search-input" class="search-input" type="text" placeholder="Search by candidate, receptor, modality, or recommendation tier..." />
+          <div class="hint">Try search terms like <strong>pS9L</strong>, <strong>advance</strong>, <strong>Siglec-9</strong>, or <strong>protein</strong>.</div>
+        </div>
+      </section>
+
+      <section id="overview-view" class="view active">
+        <div class="stats-grid" id="stats-grid"></div>
+
+        <div class="overview-grid">
+          <div class="overview-stack">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Top Ranked Candidates</h2>
+                  <p>Presentation-friendly cards for the strongest candidates in the current visible dataset.</p>
+                </div>
+              </div>
+              <div class="leaderboard" id="leaderboard"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Candidate Directory</h3>
+                  <p>A compact full-list view for quick scanning during discussions.</p>
+                </div>
+              </div>
+              <div class="directory-grid" id="directory-grid"></div>
+            </section>
+          </div>
+
+          <div class="overview-stack">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Target Views</h3>
+                  <p>Separate receptor-level summaries for clearer biological interpretation.</p>
+                </div>
+              </div>
+              <div class="target-sections" id="target-sections"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Learned Feature Weights</h3>
+                  <p>What the current rough model emphasizes for each receptor target.</p>
+                </div>
+              </div>
+              <div class="weights-panel" id="weights-panel"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Autonomous Research Leads</h3>
+                  <p>Recent literature-derived candidate leads discovered by the background updater.</p>
+                </div>
+              </div>
+              <div class="target-sections" id="research-leads"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="assistant-view" class="view">
+        <div class="assistant-layout">
+          <div class="assistant-stack">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h2>Ask The Research Assistant</h2>
+                  <p>Use this full-width workspace for broader questions, candidate comparison, and live reasoning over new pasted inputs.</p>
+                </div>
+              </div>
+              <div class="assistant-shell">
+                <div id="assistant-status" class="assistant-status fallback">Checking live assistant status...</div>
+
+                <div class="assistant-help">
+                  Paste new candidate features, docking notes, wet-lab observations, or meeting questions below. The assistant will combine that context with the current ranked dataset when answering.
+                </div>
+
+                <textarea id="context-input" class="context-input" placeholder="Optional context: paste docking results, affinity estimates, synthesis notes, assay summaries, or meeting notes here..."></textarea>
+
+                <div class="prompt-row">
+                  <input id="question-input" class="question-input" type="text" placeholder="Ask a broad or specific question about the project..." />
+                  <button id="ask-button" class="ask-button">Ask</button>
+                </div>
+
+                <div class="quick-prompts">
+                  <button type="button" data-prompt="What is the top candidate overall?">Top overall</button>
+                  <button type="button" data-prompt="What is the top candidate for Siglec-9?">Top Siglec-9</button>
+                  <button type="button" data-prompt="What is the top candidate for SIRPa?">Top SIRPa</button>
+                  <button type="button" data-prompt="Compare pS9L and MTTSNeu5Ac.">Compare candidates</button>
+                  <button type="button" data-prompt="Show all advance candidates and explain why they are prioritized.">Explain advance tier</button>
+                </div>
+
+                <div class="assistant-messages" id="assistant-messages"></div>
+              </div>
+            </section>
+          </div>
+
+          <div class="assistant-stack">
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Current Top Hits</h3>
+                  <p>Fast reference while you’re asking questions.</p>
+                </div>
+              </div>
+              <div class="leaderboard" id="assistant-side-hits"></div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Question Ideas</h3>
+                  <p>Examples that work well with the live assistant.</p>
+                </div>
+              </div>
+              <div class="empty-state">
+                Try questions like:
+                <br /><br />
+                <strong>“Given these docking notes, would this new candidate likely rank above MTTSNeu5Ac?”</strong>
+                <br /><br />
+                <strong>“Why is WT CD47 still competitive even if N3612 has stronger affinity?”</strong>
+                <br /><br />
+                <strong>“What additional wet-lab data would most improve confidence in the current ranking?”</strong>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        Workflow:
+        run <code>python3 ecmo_seed_ranker.py</code> or your custom input command,
+        then <code>python3 build_dashboard_bundle.py</code>,
+        then either open <code>dashboard.html</code> for static viewing or run <code>python3 research_assistant_server.py</code> for the full live assistant.
+      </div>
+    </main>
+
+    <script src="dashboard-data.js"></script>
+    <script src="dashboard.js"></script>
+  </body>
+</html>
