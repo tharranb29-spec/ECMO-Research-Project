@@ -252,12 +252,13 @@
           </div>
 
           <p class="summary">
-            This structure window is a compact visual companion to the main dashboard. It provides a clean, projection-friendly scene while the main dashboard presents ranked ligands, target views, and live assistant outputs.
+            This structure window is a compact visual companion to the main dashboard. It now displays a real protein complex tied to the ranked candidate set: the human CD47 ectodomain bound to SIRPalpha, directly relevant to the `CD47 ectodomain WT` candidate.
           </p>
 
           <div class="pill-row">
             <span class="pill">Zhejiang University International School of Medicine</span>
-            <span class="pill">Siglec-9 / SIRPalpha focus</span>
+            <span class="pill">CD47 ectodomain WT candidate</span>
+            <span class="pill">PDB 2JJS</span>
             <span class="pill">16:9 projection layout</span>
           </div>
 
@@ -270,23 +271,28 @@
         <section class="viewer-panel">
           <div class="viewer-head">
             <div>
-              <h3>Illustrative Protein Structure View</h3>
-              <p>Visual context for receptor-targeted ligand discovery and immune-interface design.</p>
+              <h3>Actual Protein Complex View</h3>
+              <p>Human CD47 ectodomain bound to SIRPalpha, used here as a real candidate-linked structural example.</p>
             </div>
-            <span class="badge">Window-Friendly Demo</span>
+            <span class="badge">Real PDB Example</span>
           </div>
 
           <div class="viewer-stage">
-            <canvas data-protein-viewer aria-label="Rotating protein structure illustration"></canvas>
+            <div
+              data-protein-viewer
+              data-structure-id="2JJS"
+              data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+              aria-label="Interactive protein structure viewer"
+            ></div>
             <div class="viewer-overlay">
-              <span class="pill">Immune receptor engagement</span>
-              <span class="pill">Bio-inspired ECMO interface</span>
-              <span class="pill">AI-guided candidate selection</span>
+              <span class="pill">Human CD47-SIRPalpha complex</span>
+              <span class="pill">Actual candidate-linked structure</span>
+              <span class="pill">ECMO interface relevance</span>
             </div>
           </div>
 
           <div class="viewer-foot">
-            <p>The main interactive dashboard remains available at <strong>ecmo-research-dashboard.onrender.com</strong>.</p>
+            <p>The main interactive dashboard remains available at <strong>ecmo-research-dashboard.onrender.com</strong>, with this same real structure available from the header panel.</p>
             <a class="back-link" href="dashboard.html">Return to Dashboard</a>
           </div>
         </section>

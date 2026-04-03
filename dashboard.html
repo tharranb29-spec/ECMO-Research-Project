@@ -1218,22 +1218,29 @@
               <div class="structure-head">
                 <div>
                   <h3>Projection-Ready Structure View</h3>
-                  <p>Compact visual panel for roadshows, lab talks, and school demos.</p>
+                  <p>Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
                 </div>
-                <span class="projection-chip">16:9 Demo Panel</span>
+                <span class="projection-chip">PDB 2JJS</span>
               </div>
 
               <div class="structure-viewer">
-                <canvas id="protein-canvas" class="structure-canvas" data-protein-viewer aria-label="Rotating protein structure illustration"></canvas>
+                <div
+                  id="protein-canvas"
+                  class="structure-canvas"
+                  data-protein-viewer
+                  data-structure-id="2JJS"
+                  data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                  aria-label="Interactive protein structure viewer"
+                ></div>
                 <div class="structure-overlay">
-                  <span class="structure-tag">Immune inhibitory interfaces</span>
-                  <span class="structure-tag">Siglec-9 / SIRPalpha</span>
-                  <span class="structure-tag">Window-friendly demo mode</span>
+                  <span class="structure-tag">Actual ranked candidate example</span>
+                  <span class="structure-tag">CD47 ectodomain WT / SIRPalpha</span>
+                  <span class="structure-tag">Immune inhibitory interface</span>
                 </div>
               </div>
 
               <div class="structure-actions">
-                <p class="compact-note">Open the separate structure window during projection for a cleaner visual display.</p>
+                <p class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
                 <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
               </div>
             </section>

@@ -1,145 +1,152 @@
 (function () {
-  function buildCurves() {
-    const palettes = [
-      { stroke: "rgba(20, 93, 242, 0.88)", fill: "rgba(20, 93, 242, 0.22)" },
-      { stroke: "rgba(11, 127, 115, 0.90)", fill: "rgba(11, 127, 115, 0.24)" },
-      { stroke: "rgba(31, 63, 122, 0.82)", fill: "rgba(31, 63, 122, 0.20)" },
-      { stroke: "rgba(67, 160, 71, 0.84)", fill: "rgba(67, 160, 71, 0.20)" },
-    ];
+  const MOLSTAR_CSS = "https://unpkg.com/molstar/build/viewer/molstar.css";
+  const MOLSTAR_JS = "https://unpkg.com/molstar/build/viewer/molstar.js";
+  const DEFAULT_STRUCTURE = {
+    id: "2JJS",
+    title: "CD47 ectodomain WT bound to SIRPalpha",
+    subtitle: "Human CD47-SIRPalpha complex from the ranked candidate family",
+  };
 
-    return palettes.map((palette, index) => {
-      const points = [];
-      const phase = index * 1.27;
-      const steps = 180;
-      for (let i = 0; i <= steps; i += 1) {
-        const t = (i / steps) * Math.PI * 4.4;
-        const radius = 1.1 + 0.18 * Math.sin(2.8 * t + phase);
-        const x = Math.cos(t + phase) * radius;
-        const y = Math.sin(1.85 * t + phase * 0.7) * 0.68 + Math.cos(t * 0.35 + phase) * 0.18;
-        const z = Math.sin(t * 0.92 + phase) * 1.18 + Math.cos(t * 0.55 + phase) * 0.24;
-        points.push({ x, y, z });
+  let molstarLoaderPromise = null;
+
+  function ensureMolstarAssets() {
+    if (window.molstar && window.molstar.Viewer) {
+      return Promise.resolve(window.molstar);
+    }
+
+    if (molstarLoaderPromise) {
+      return molstarLoaderPromise;
+    }
+
+    molstarLoaderPromise = new Promise((resolve, reject) => {
+      if (!document.querySelector('link[data-molstar-css="true"]')) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = MOLSTAR_CSS;
+        link.dataset.molstarCss = "true";
+        document.head.append(link);
       }
-      return { palette, points };
+
+      const existingScript = document.querySelector('script[data-molstar-js="true"]');
+      if (existingScript) {
+        existingScript.addEventListener("load", () => resolve(window.molstar));
+        existingScript.addEventListener("error", () => reject(new Error("Failed to load Mol* script.")));
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = MOLSTAR_JS;
+      script.async = true;
+      script.dataset.molstarJs = "true";
+      script.onload = () => {
+        if (window.molstar && window.molstar.Viewer) {
+          resolve(window.molstar);
+        } else {
+          reject(new Error("Mol* loaded, but the viewer API was not found."));
+        }
+      };
+      script.onerror = () => reject(new Error("Failed to load Mol* assets."));
+      document.head.append(script);
     });
+
+    return molstarLoaderPromise;
   }
 
-  function rotatePoint(point, yaw, pitch) {
-    const cy = Math.cos(yaw);
-    const sy = Math.sin(yaw);
-    const cp = Math.cos(pitch);
-    const sp = Math.sin(pitch);
+  function fallbackMarkup(container, structure) {
+    container.innerHTML = "";
+    container.style.display = "grid";
+    container.style.placeItems = "center";
+    container.style.padding = "24px";
 
-    const x1 = point.x * cy - point.z * sy;
-    const z1 = point.x * sy + point.z * cy;
-    const y1 = point.y * cp - z1 * sp;
-    const z2 = point.y * sp + z1 * cp;
+    const card = document.createElement("div");
+    card.style.maxWidth = "440px";
+    card.style.padding = "18px";
+    card.style.borderRadius = "18px";
+    card.style.background = "rgba(255,255,255,0.82)";
+    card.style.border = "1px solid rgba(19, 37, 64, 0.08)";
+    card.style.color = "#5e6f88";
+    card.style.fontFamily = "Arial, Calibri, sans-serif";
+    card.style.lineHeight = "1.55";
 
-    return { x: x1, y: y1, z: z2 };
+    const title = document.createElement("strong");
+    title.style.display = "block";
+    title.style.marginBottom = "10px";
+    title.style.color = "#145df2";
+    title.textContent = structure.title;
+
+    const body = document.createElement("p");
+    body.style.margin = "0 0 10px";
+    body.textContent = `Unable to load the interactive 3D viewer right now. This panel is intended to show the real PDB structure ${structure.id} (${structure.title}).`;
+
+    const link = document.createElement("a");
+    link.href = `https://www.rcsb.org/structure/${structure.id}`;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.textContent = `Open PDB ${structure.id} on RCSB`;
+    link.style.color = "#0c43af";
+    link.style.fontWeight = "700";
+
+    card.append(title, body, link);
+    container.append(card);
   }
 
-  function mount(canvas) {
-    if (!canvas || canvas.__proteinViewerMounted) {
+  async function mount(container) {
+    if (!container || container.__proteinViewerMounted) {
       return;
     }
-    canvas.__proteinViewerMounted = true;
+    container.__proteinViewerMounted = true;
 
-    const context = canvas.getContext("2d");
-    const curves = buildCurves();
-    const parent = canvas.parentElement || canvas;
-    const dpr = () => Math.max(1, Math.min(window.devicePixelRatio || 1, 2));
-    let width = 0;
-    let height = 0;
+    const structure = {
+      id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
+      title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
+      subtitle: container.dataset.structureSubtitle || DEFAULT_STRUCTURE.subtitle,
+    };
 
-    function resize() {
-      const rect = parent.getBoundingClientRect();
-      width = Math.max(220, Math.floor(rect.width));
-      height = Math.max(220, Math.floor(rect.height));
-      canvas.width = Math.floor(width * dpr());
-      canvas.height = Math.floor(height * dpr());
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      context.setTransform(dpr(), 0, 0, dpr(), 0, 0);
-    }
-
-    function drawFrame(now) {
-      const time = now * 0.001;
-      const yaw = time * 0.55;
-      const pitch = 0.45 + Math.sin(time * 0.45) * 0.12;
-      const scale = Math.min(width, height) * 0.18;
-      const perspective = 4.3;
-      const cx = width / 2;
-      const cy = height / 2;
-
-      context.clearRect(0, 0, width, height);
-
-      const background = context.createRadialGradient(cx, cy, Math.min(width, height) * 0.08, cx, cy, Math.min(width, height) * 0.64);
-      background.addColorStop(0, "rgba(255,255,255,0.96)");
-      background.addColorStop(1, "rgba(228,236,248,0.18)");
-      context.fillStyle = background;
-      context.fillRect(0, 0, width, height);
-
-      context.save();
-      context.strokeStyle = "rgba(19, 37, 64, 0.08)";
-      context.lineWidth = 1;
-      for (let ring = 0; ring < 4; ring += 1) {
-        const radius = Math.min(width, height) * (0.18 + ring * 0.085);
-        context.beginPath();
-        context.arc(cx, cy, radius, 0, Math.PI * 2);
-        context.stroke();
-      }
-      context.restore();
-
-      curves.forEach((curve) => {
-        const projected = curve.points.map((point) => {
-          const rotated = rotatePoint(point, yaw, pitch);
-          const depth = perspective / (perspective - rotated.z);
-          return {
-            x: cx + rotated.x * depth * scale,
-            y: cy + rotated.y * depth * scale,
-            z: rotated.z,
-            depth,
-          };
-        });
-
-        context.beginPath();
-        projected.forEach((point, index) => {
-          if (index === 0) {
-            context.moveTo(point.x, point.y);
-          } else {
-            context.lineTo(point.x, point.y);
-          }
-        });
-        context.strokeStyle = curve.palette.stroke;
-        context.lineWidth = 2.4;
-        context.stroke();
-
-        projected.forEach((point, index) => {
-          if (index % 14 !== 0) {
-            return;
-          }
-          context.beginPath();
-          context.arc(point.x, point.y, Math.max(1.6, point.depth * 2.3), 0, Math.PI * 2);
-          context.fillStyle = curve.palette.fill;
-          context.fill();
-        });
+    try {
+      await ensureMolstarAssets();
+      const viewer = new window.molstar.Viewer(container, {
+        layoutIsExpanded: false,
+        layoutShowControls: false,
+        layoutShowRemoteState: false,
+        layoutShowSequence: false,
+        layoutShowLog: false,
+        viewportShowExpand: false,
+        viewportShowSelectionMode: false,
+        viewportShowAnimation: true,
+        pdbProvider: "rcsb",
       });
 
-      context.save();
-      context.fillStyle = "rgba(19, 37, 64, 0.58)";
-      context.font = "12px Arial, Calibri, sans-serif";
-      context.fillText("Illustrative rotating structure view", 16, height - 18);
-      context.restore();
+      container.__molstarViewer = viewer;
 
-      window.requestAnimationFrame(drawFrame);
+      await viewer.loadPdb(structure.id, {
+        representationParams: {
+          theme: {
+            globalName: "chain-id",
+          },
+        },
+      });
+
+      if (viewer.plugin && viewer.plugin.managers && viewer.plugin.managers.camera) {
+        viewer.plugin.managers.camera.reset();
+      }
+
+      if (viewer.plugin && viewer.plugin.canvas3d) {
+        viewer.plugin.canvas3d.setProps({
+          trackball: {
+            animate: { name: "spin", params: { speed: 0.6 } },
+          },
+          renderer: {
+            backgroundColor: 0xf6f9ff,
+          },
+        });
+      }
+    } catch (error) {
+      fallbackMarkup(container, structure);
     }
-
-    resize();
-    window.addEventListener("resize", resize);
-    window.requestAnimationFrame(drawFrame);
   }
 
   function mountAll() {
-    document.querySelectorAll("[data-protein-viewer]").forEach((canvas) => mount(canvas));
+    document.querySelectorAll("[data-protein-viewer]").forEach((element) => mount(element));
   }
 
   window.ECMOProteinViewer = { mount, mountAll };
