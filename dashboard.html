@@ -36,7 +36,7 @@
       body {
         margin: 0;
         color: var(--ink);
-        font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+        font-family: Arial, Calibri, sans-serif;
         overflow-x: hidden;
         background:
           radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.14), transparent 26%),
@@ -64,6 +64,7 @@
           linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(239, 245, 255, 0.93)),
           radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.09), transparent 30%);
         box-shadow: var(--shadow);
+        align-items: center;
       }
 
       .brand-row {
@@ -148,8 +149,9 @@
 
       .title-grid {
         display: grid;
-        grid-template-columns: 1.08fr 0.92fr;
+        grid-template-columns: 0.92fr 1.08fr;
         gap: 24px;
+        align-items: stretch;
       }
 
       .title-stack {
@@ -159,7 +161,7 @@
 
       .title-stack h1 {
         margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "Times New Roman", Times, serif;
         font-size: clamp(2.4rem, 5vw, 4.5rem);
         line-height: 0.95;
         letter-spacing: -0.02em;
@@ -179,8 +181,8 @@
       .title-stack p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.75;
-        max-width: 66ch;
+        line-height: 1.58;
+        max-width: 58ch;
       }
 
       .insight-card {
@@ -190,6 +192,116 @@
         background: linear-gradient(155deg, rgba(255,255,255,0.97), rgba(233, 242, 255, 0.82));
         display: grid;
         gap: 14px;
+      }
+
+      .presentation-stage {
+        display: grid;
+        gap: 16px;
+        min-width: 0;
+      }
+
+      .structure-card {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 14px;
+        padding: 20px;
+        border-radius: 28px;
+        border: 1px solid var(--line);
+        background:
+          linear-gradient(160deg, rgba(255,255,255,0.97), rgba(234, 242, 252, 0.94)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.08), transparent 34%);
+        aspect-ratio: 16 / 9;
+        min-height: 360px;
+      }
+
+      .structure-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .structure-head h3 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .structure-head p {
+        margin: 6px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .projection-chip {
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: rgba(20, 93, 242, 0.10);
+        color: var(--accent-strong);
+        font-size: 0.84rem;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .structure-viewer {
+        position: relative;
+        min-height: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          radial-gradient(circle at 50% 36%, rgba(255,255,255,0.98), rgba(231, 239, 249, 0.90) 58%, rgba(218, 228, 241, 0.76));
+      }
+
+      .structure-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .structure-overlay {
+        position: absolute;
+        inset: auto 14px 14px 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .structure-tag {
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.84);
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .structure-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .compact-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .ghost-button {
+        border: 1px solid rgba(20, 93, 242, 0.16);
+        border-radius: 999px;
+        padding: 11px 15px;
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--accent-strong);
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
       }
 
       .insight-card h3 {
@@ -394,7 +506,7 @@
       .panel-head p {
         margin: 8px 0 0;
         color: var(--muted);
-        line-height: 1.6;
+        line-height: 1.5;
       }
 
       .leaderboard {
@@ -494,7 +606,7 @@
       .candidate-copy {
         margin: 0;
         color: var(--muted);
-        line-height: 1.68;
+        line-height: 1.56;
       }
 
       .source-list a {
@@ -634,7 +746,7 @@
 
       .assistant-help {
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.55;
       }
 
       .prompt-row {
@@ -678,7 +790,7 @@
       .message {
         padding: 16px 18px;
         border-radius: 22px;
-        line-height: 1.7;
+        line-height: 1.56;
         max-width: 100%;
         overflow-wrap: anywhere;
       }
@@ -768,6 +880,11 @@
         .message.assistant {
           margin-left: 0;
           margin-right: 0;
+        }
+
+        .structure-card {
+          aspect-ratio: auto;
+          min-height: 340px;
         }
       }
 
@@ -865,6 +982,16 @@
           max-height: 60vh;
         }
 
+        .structure-card {
+          min-height: 320px;
+          padding: 16px;
+          border-radius: 24px;
+        }
+
+        .structure-viewer {
+          border-radius: 20px;
+        }
+
         .prompt-row {
           grid-template-columns: 1fr;
         }
@@ -926,6 +1053,11 @@
         .insight-card {
           padding: 16px;
           border-radius: 20px;
+        }
+
+        .structure-card {
+          min-height: 280px;
+          border-radius: 22px;
         }
 
         .controls {
@@ -1077,19 +1209,43 @@
             <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
             <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
             <p>
-              This dashboard is designed for presentation, triage, and discussion. Use the
-              <strong>Overview</strong> tab to show rankings and target-specific summaries, and use the
-              <strong>Assistant</strong> tab for broader project questions, candidate comparison, and live reasoning over pasted notes.
+              This platform combines ligand ranking, literature monitoring, and a live assistant to support fast ECMO candidate triage for <strong>Siglec-9</strong> and <strong>SIRPalpha</strong> pathways.
             </p>
           </div>
 
-          <aside class="insight-card">
-            <h3>Suggested Meeting Flow</h3>
-            <div class="insight-list">
-              <div class="insight-item">Start with the Overview tab to show top-ranked ligands and the target-specific picture for Siglec-9 and SIRPa.</div>
-              <div class="insight-item">Use the Directory panel to quickly scan every candidate without opening raw JSON or reports.</div>
-              <div class="insight-item">Switch to the Assistant tab when your group wants direct answers, comparisons, or reasoning over new docking or assay notes.</div>
-            </div>
+          <aside class="presentation-stage">
+            <section class="structure-card">
+              <div class="structure-head">
+                <div>
+                  <h3>Projection-Ready Structure View</h3>
+                  <p>Compact visual panel for roadshows, lab talks, and school demos.</p>
+                </div>
+                <span class="projection-chip">16:9 Demo Panel</span>
+              </div>
+
+              <div class="structure-viewer">
+                <canvas id="protein-canvas" class="structure-canvas" data-protein-viewer aria-label="Rotating protein structure illustration"></canvas>
+                <div class="structure-overlay">
+                  <span class="structure-tag">Immune inhibitory interfaces</span>
+                  <span class="structure-tag">Siglec-9 / SIRPalpha</span>
+                  <span class="structure-tag">Window-friendly demo mode</span>
+                </div>
+              </div>
+
+              <div class="structure-actions">
+                <p class="compact-note">Open the separate structure window during projection for a cleaner visual display.</p>
+                <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
+              </div>
+            </section>
+
+            <section class="insight-card">
+              <h3>Suggested Meeting Flow</h3>
+              <div class="insight-list">
+                <div class="insight-item">Show top-ranked hits and target summaries first.</div>
+                <div class="insight-item">Use the assistant for direct comparisons and follow-up questions.</div>
+                <div class="insight-item">Keep the structure window open for projection-friendly visual context.</div>
+              </div>
+            </section>
           </aside>
         </div>
       </section>
@@ -1256,6 +1412,7 @@
     </main>
 
     <script src="dashboard-data.js"></script>
+    <script src="protein-viewer.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>

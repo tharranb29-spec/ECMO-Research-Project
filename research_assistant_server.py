@@ -31,6 +31,8 @@ STATIC_FILES = {
     "/": ROOT / "dashboard.html",
     "/dashboard.html": ROOT / "dashboard.html",
     "/dashboard.js": ROOT / "dashboard.js",
+    "/protein-viewer.js": ROOT / "protein-viewer.js",
+    "/structure-showcase.html": ROOT / "structure-showcase.html",
     "/dashboard-data.js": ROOT / "dashboard-data.js",
     "/dashboard-config.json": ROOT / "dashboard-config.json",
     "/assets/zju-ism-mark.svg": ROOT / "assets" / "zju-ism-mark.svg",

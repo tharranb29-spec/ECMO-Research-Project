@@ -37,6 +37,7 @@
   const contextInput = document.getElementById("context-input");
   const questionInput = document.getElementById("question-input");
   const askButton = document.getElementById("ask-button");
+  const openStructureWindowButton = document.getElementById("open-structure-window");
 
   let activeDataset = datasets.seed ? "seed" : datasets.autonomous ? "autonomous" : datasets.custom ? "custom" : "seed";
   let activeView = "overview";
@@ -797,6 +798,15 @@
     addMessage("assistant", intro);
   }
 
+  function openStructureWindow() {
+    const showcaseUrl = window.location.protocol === "file:" ? "structure-showcase.html" : "/structure-showcase.html";
+    const features = "popup=yes,width=1280,height=820,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes";
+    const popup = window.open(showcaseUrl, "ecmo-structure-showcase", features);
+    if (!popup) {
+      window.location.href = showcaseUrl;
+    }
+  }
+
   datasetButtons.forEach((button) => {
     button.addEventListener("click", () => {
       activeDataset = button.dataset.dataset;
@@ -829,7 +839,14 @@
     }
   });
 
+  if (openStructureWindowButton) {
+    openStructureWindowButton.addEventListener("click", openStructureWindow);
+  }
+
   setBranding();
+  if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
+    window.ECMOProteinViewer.mountAll();
+  }
   renderAll();
   setView("overview");
   checkLiveAssistant().finally(resetAssistant);
