@@ -34,6 +34,9 @@
   const searchInput = document.getElementById("search-input");
   const assistantMessages = document.getElementById("assistant-messages");
   const assistantStatus = document.getElementById("assistant-status");
+  const assistantModeChip = document.getElementById("assistant-mode-chip");
+  const assistantDatasetChip = document.getElementById("assistant-dataset-chip");
+  const assistantHistoryChip = document.getElementById("assistant-history-chip");
   const contextInput = document.getElementById("context-input");
   const questionInput = document.getElementById("question-input");
   const askButton = document.getElementById("ask-button");
@@ -71,6 +74,42 @@
 
   function scoreClass(label) {
     return ["advance", "secondary", "hold", "reject"].includes(label) ? label : "hold";
+  }
+
+  function datasetLabel(datasetKey) {
+    if (datasetKey === "custom") {
+      return "Custom candidates";
+    }
+    if (datasetKey === "autonomous") {
+      return "Autonomous discovery";
+    }
+    return "Seed dataset";
+  }
+
+  function createTimestampLabel() {
+    return new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }
+
+  function updateAssistantChrome() {
+    if (assistantDatasetChip) {
+      assistantDatasetChip.textContent = datasetLabel(activeDataset);
+    }
+
+    if (assistantHistoryChip) {
+      const questionCount = histories[activeDataset].filter((item) => item.role === "user").length;
+      assistantHistoryChip.textContent = `${questionCount} prompt${questionCount === 1 ? "" : "s"}`;
+    }
+
+    if (assistantModeChip) {
+      const label = liveAssistant.connected
+        ? `Live ${liveAssistant.provider ? `via ${liveAssistant.provider}` : "assistant"}`
+        : liveAssistant.checked
+          ? "Fallback mode"
+          : "Checking connection";
+      assistantModeChip.textContent = label;
+      assistantModeChip.classList.remove("primary", "warning");
+      assistantModeChip.classList.add(liveAssistant.connected ? "primary" : "warning");
+    }
   }
 
   function createMetaChip(text) {
@@ -127,6 +166,7 @@
     }
     setBranding();
     renderAll();
+    updateAssistantChrome();
   }
 
   function getData(datasetKey) {
@@ -606,20 +646,58 @@
     return body;
   }
 
-  function addMessage(role, content) {
+  function createPendingBody() {
+    const body = document.createElement("div");
+    body.className = "message-body";
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "Reviewing the current dataset and any pasted context before answering.";
+
+    const dots = document.createElement("div");
+    dots.className = "typing-dots";
+    dots.append(document.createElement("span"), document.createElement("span"), document.createElement("span"));
+
+    body.append(paragraph, dots);
+    return body;
+  }
+
+  function createMessageElement(role, content, options = {}) {
     const bubble = document.createElement("div");
-    bubble.className = `message ${role}`;
+    bubble.className = `message ${role}${options.pending ? " pending" : ""}`;
+
+    const meta = document.createElement("div");
+    meta.className = "message-meta";
+
     const label = document.createElement("strong");
-    label.textContent = role === "user" ? "You" : "Research Assistant";
-    bubble.append(label, createMessageBody(content));
+    const badge = document.createElement("span");
+    badge.className = "message-badge";
+    badge.textContent = role === "user" ? "Q" : "AI";
+    const labelText = document.createElement("span");
+    labelText.textContent = role === "user" ? "You" : "Research Assistant";
+    label.append(badge, labelText);
+
+    const time = document.createElement("span");
+    time.className = "message-time";
+    time.textContent = options.pending ? "Thinking..." : options.timestamp || createTimestampLabel();
+
+    meta.append(label, time);
+    bubble.append(meta, options.pending ? createPendingBody() : createMessageBody(content));
+    return bubble;
+  }
+
+  function addMessage(role, content, options = {}) {
+    const bubble = createMessageElement(role, content, options);
     assistantMessages.append(bubble);
     assistantMessages.scrollTop = assistantMessages.scrollHeight;
+    updateAssistantChrome();
+    return bubble;
   }
 
   function setAssistantStatus(message, live) {
     assistantStatus.textContent = message;
     assistantStatus.classList.remove("live", "fallback");
     assistantStatus.classList.add(live ? "live" : "fallback");
+    updateAssistantChrome();
   }
 
   function localAnswer(question) {
@@ -766,7 +844,10 @@
     histories[activeDataset].push({ role: "user", content: question });
     questionInput.value = "";
     askButton.disabled = true;
-    askButton.textContent = "Thinking...";
+    questionInput.disabled = true;
+    contextInput.disabled = true;
+    askButton.textContent = "Analyzing...";
+    const pendingMessage = addMessage("assistant", "", { pending: true });
 
     try {
       let answer;
@@ -775,9 +856,11 @@
       } else {
         answer = localAnswer(question);
       }
+      pendingMessage.remove();
       addMessage("assistant", answer);
       histories[activeDataset].push({ role: "assistant", content: answer });
     } catch (err) {
+      pendingMessage.remove();
       const fallback = `${err.message}\n\nFalling back to local dashboard answer:\n\n${localAnswer(question)}`;
       setAssistantStatus("Live assistant request failed. Using local fallback answers.", false);
       addMessage("assistant", fallback);
@@ -785,7 +868,11 @@
       liveAssistant.connected = false;
     } finally {
       askButton.disabled = false;
+      questionInput.disabled = false;
+      contextInput.disabled = false;
       askButton.textContent = "Ask";
+      questionInput.focus();
+      updateAssistantChrome();
     }
   }
 
@@ -793,9 +880,10 @@
     clear(assistantMessages);
     histories[activeDataset] = [];
     const intro = liveAssistant.connected
-      ? "Live research assistant is ready.\n\nAsk broader project questions, compare candidates, or paste new docking and assay notes into the context box before asking."
-      : "Fallback mode is active.\n\nYou can still ask focused questions about the current ranking results, but broader reasoning will be limited until the live backend is running.";
+      ? "Live research assistant is ready.\n\nAsk broader project questions, compare candidates, or paste new docking and assay notes into the context box before asking.\n\n- It can synthesize the current dataset with pasted context.\n- It works best for comparisons, explanations, and next-step planning."
+      : "Fallback mode is active.\n\nYou can still ask focused questions about the current ranking results, but broader reasoning will be limited until the live backend is running.\n\n- Ask about top candidates or target-specific leaders.\n- Use the live backend for open-ended scientific reasoning.";
     addMessage("assistant", intro);
+    updateAssistantChrome();
   }
 
   function openStructureWindow() {
@@ -849,5 +937,6 @@
   }
   renderAll();
   setView("overview");
+  updateAssistantChrome();
   checkLiveAssistant().finally(resetAssistant);
 })();

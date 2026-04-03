@@ -14,8 +14,13 @@
         --line: rgba(19, 37, 64, 0.11);
         --accent: #145df2;
         --accent-strong: #0c43af;
+        --accent-soft: rgba(20, 93, 242, 0.10);
         --teal: #0b7f73;
         --teal-soft: rgba(11, 127, 115, 0.12);
+        --gold: #b97a11;
+        --gold-soft: rgba(185, 122, 17, 0.12);
+        --rose-soft: rgba(203, 89, 116, 0.10);
+        --ink-soft: rgba(19, 37, 64, 0.05);
         --siglec: #e8f1ff;
         --sirpa: #e8f8ef;
         --advance: #117a4d;
@@ -39,9 +44,10 @@
         font-family: Arial, Calibri, sans-serif;
         overflow-x: hidden;
         background:
-          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.14), transparent 26%),
+          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.15), transparent 26%),
           radial-gradient(circle at 100% 10%, rgba(11, 127, 115, 0.12), transparent 24%),
-          linear-gradient(180deg, #fbfcff 0%, #eef3fa 100%);
+          radial-gradient(circle at 50% 100%, rgba(185, 122, 17, 0.08), transparent 28%),
+          linear-gradient(180deg, #fbfcff 0%, #eef3fa 52%, #edf4fb 100%);
       }
 
       img {
@@ -367,7 +373,9 @@
         padding: 18px;
         border: 1px solid var(--line);
         border-radius: 28px;
-        background: var(--panel);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.94), rgba(241,247,255,0.90)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.07), transparent 26%);
         box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
       }
 
@@ -484,7 +492,7 @@
       .stat {
         padding: 22px;
         border-radius: 24px;
-        background: var(--panel);
+        background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245, 249, 255, 0.92));
         border: 1px solid var(--line);
         box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
       }
@@ -517,7 +525,7 @@
       .panel {
         border: 1px solid var(--line);
         border-radius: 30px;
-        background: var(--panel);
+        background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245,249,255,0.88));
         box-shadow: 0 18px 40px rgba(19, 37, 64, 0.08);
         overflow: hidden;
       }
@@ -529,7 +537,9 @@
         align-items: flex-start;
         padding: 22px 24px 16px;
         border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.75);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,249,255,0.78)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.07), transparent 30%);
       }
 
       .panel-head h2,
@@ -752,33 +762,247 @@
 
       .assistant-layout {
         display: grid;
-        grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
-        gap: 18px;
+        grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
+        gap: 20px;
       }
 
       .assistant-shell {
         display: grid;
-        gap: 14px;
-        padding: 18px;
+        gap: 16px;
+        padding: 20px;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.92), rgba(239,246,255,0.78)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.06), transparent 28%);
       }
 
       .assistant-status {
-        padding: 12px 14px;
+        padding: 14px 16px;
         border-radius: 18px;
         line-height: 1.55;
+        border: 1px solid transparent;
+        font-weight: 600;
       }
 
       .assistant-status.live {
         background: rgba(20, 93, 242, 0.10);
         color: var(--accent-strong);
+        border-color: rgba(20, 93, 242, 0.12);
       }
 
       .assistant-status.fallback {
         background: rgba(180, 83, 9, 0.10);
         color: var(--hold);
+        border-color: rgba(180, 83, 9, 0.14);
       }
 
       .assistant-help {
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .assistant-intro {
+        display: grid;
+        gap: 14px;
+      }
+
+      .assistant-frame {
+        display: grid;
+        gap: 14px;
+        min-height: 0;
+      }
+
+      .assistant-chat {
+        display: grid;
+        gap: 12px;
+        padding: 16px;
+        border-radius: 24px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.95), rgba(242,247,255,0.92)),
+          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 26%);
+      }
+
+      .assistant-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .assistant-title-group {
+        display: grid;
+        gap: 4px;
+      }
+
+      .assistant-title-group h3 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .assistant-title-group p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .assistant-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .assistant-chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        color: var(--muted);
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+
+      .assistant-chip.primary {
+        background: rgba(20, 93, 242, 0.10);
+        color: var(--accent-strong);
+        border-color: rgba(20, 93, 242, 0.10);
+      }
+
+      .assistant-chip.warning {
+        background: rgba(185, 122, 17, 0.12);
+        color: var(--hold);
+        border-color: rgba(185, 122, 17, 0.14);
+      }
+
+      .assistant-composer {
+        display: grid;
+        gap: 14px;
+        padding: 16px;
+        border-radius: 24px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,251,255,0.92)),
+          radial-gradient(circle at 100% 0%, rgba(11, 127, 115, 0.05), transparent 24%);
+      }
+
+      .assistant-composer-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .assistant-composer-head strong {
+        color: var(--ink);
+      }
+
+      .assistant-composer-head span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .assistant-context-card {
+        display: grid;
+        gap: 8px;
+      }
+
+      .assistant-context-card label,
+      .assistant-question-card label {
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .assistant-question-card {
+        display: grid;
+        gap: 10px;
+      }
+
+      .assistant-side-panel {
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.97), rgba(243,248,255,0.92)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.05), transparent 28%);
+      }
+
+      .assistant-side-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .assistant-signal-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .assistant-signal {
+        display: grid;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,250,255,0.92)),
+          radial-gradient(circle at 100% 0%, rgba(11, 127, 115, 0.04), transparent 28%);
+      }
+
+      .assistant-signal strong {
+        font-size: 0.92rem;
+        color: var(--accent-strong);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .assistant-signal span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .question-idea-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .question-idea {
+        display: grid;
+        gap: 8px;
+        width: 100%;
+        text-align: left;
+        padding: 16px 18px;
+        border-radius: 20px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.98), rgba(242,247,255,0.94)),
+          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 26%);
+        color: var(--ink);
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+
+      .question-idea:hover,
+      .question-idea:focus-visible {
+        transform: translateY(-1px);
+        border-color: rgba(20, 93, 242, 0.18);
+        box-shadow: 0 14px 28px rgba(19, 37, 64, 0.08);
+        outline: none;
+      }
+
+      .question-idea-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--accent-strong);
+      }
+
+      .question-idea-copy {
         color: var(--muted);
         line-height: 1.55;
       }
@@ -800,48 +1024,120 @@
         color: white;
         background: linear-gradient(135deg, var(--accent), var(--accent-strong));
         box-shadow: 0 14px 30px rgba(20, 93, 242, 0.22);
+        font-weight: 700;
       }
 
       .quick-prompts button {
         border-radius: 999px;
         padding: 9px 12px;
-        background: white;
+        background: rgba(255,255,255,0.96);
         color: var(--muted);
         border-color: var(--line);
+        box-shadow: 0 8px 18px rgba(19, 37, 64, 0.05);
       }
 
       .assistant-messages {
         display: grid;
-        gap: 12px;
-        min-height: 460px;
-        max-height: 760px;
+        gap: 14px;
+        min-height: 420px;
+        max-height: 720px;
         overflow: auto;
-        padding-right: 4px;
+        padding: 4px 6px 4px 2px;
         overscroll-behavior: contain;
         scroll-behavior: smooth;
+        align-content: start;
+      }
+
+      .assistant-messages::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      .assistant-messages::-webkit-scrollbar-thumb {
+        border-radius: 999px;
+        background: rgba(99, 114, 137, 0.22);
       }
 
       .message {
+        display: grid;
+        gap: 10px;
         padding: 16px 18px;
-        border-radius: 22px;
+        border-radius: 24px;
         line-height: 1.56;
-        max-width: 100%;
+        max-width: min(86%, 760px);
         overflow-wrap: anywhere;
+        border: 1px solid rgba(19, 37, 64, 0.07);
+        box-shadow: 0 14px 28px rgba(19, 37, 64, 0.07);
       }
 
       .message.user {
-        margin-left: 80px;
-        background: rgba(20, 93, 242, 0.10);
+        margin-left: auto;
+        background: linear-gradient(135deg, rgba(20, 93, 242, 0.94), rgba(12, 67, 175, 0.96));
+        color: white;
+        border-color: rgba(20, 93, 242, 0.2);
       }
 
       .message.assistant {
-        margin-right: 80px;
-        background: rgba(11, 127, 115, 0.10);
+        margin-right: auto;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.97), rgba(239,248,246,0.94)),
+          radial-gradient(circle at 0% 0%, rgba(11, 127, 115, 0.05), transparent 24%);
+        color: var(--ink);
+        border-color: rgba(11, 127, 115, 0.10);
       }
 
-      .message strong {
-        display: block;
-        margin-bottom: 8px;
+      .message.user code {
+        background: rgba(255,255,255,0.18);
+        color: white;
+      }
+
+      .message-meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .message-meta strong {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+      }
+
+      .message-badge {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .message.assistant .message-badge {
+        background: rgba(11, 127, 115, 0.12);
+        color: var(--teal);
+      }
+
+      .message.user .message-badge {
+        background: rgba(255,255,255,0.18);
+        color: white;
+      }
+
+      .message-time {
+        font-size: 0.8rem;
+        color: rgba(99, 114, 137, 0.9);
+      }
+
+      .message.user .message-time {
+        color: rgba(255,255,255,0.76);
+      }
+
+      .message.pending {
+        opacity: 0.92;
       }
 
       .message-body {
@@ -876,6 +1172,40 @@
         background: rgba(19, 37, 64, 0.05);
       }
 
+      .typing-dots {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 20px;
+      }
+
+      .typing-dots span {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(11, 127, 115, 0.38);
+        animation: assistant-pulse 1.2s ease-in-out infinite;
+      }
+
+      .typing-dots span:nth-child(2) {
+        animation-delay: 0.15s;
+      }
+
+      .typing-dots span:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+
+      @keyframes assistant-pulse {
+        0%, 80%, 100% {
+          transform: scale(0.82);
+          opacity: 0.45;
+        }
+        40% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
       .empty-state {
         padding: 24px;
         color: var(--muted);
@@ -886,7 +1216,9 @@
         margin-top: 18px;
         padding: 18px 20px;
         border-radius: 22px;
-        background: rgba(19, 37, 64, 0.05);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.84), rgba(240,245,252,0.82)),
+          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 22%);
         color: var(--muted);
         line-height: 1.7;
       }
@@ -905,6 +1237,10 @@
           grid-template-columns: 1fr;
         }
 
+        .assistant-signal-grid {
+          grid-template-columns: 1fr;
+        }
+
         .score-block,
         .mini-score {
           text-align: left;
@@ -914,6 +1250,10 @@
         .message.assistant {
           margin-left: 0;
           margin-right: 0;
+        }
+
+        .message {
+          max-width: 100%;
         }
 
         .structure-card {
@@ -1453,34 +1793,65 @@
                 </div>
               </div>
               <div class="assistant-shell">
-                <div id="assistant-status" class="assistant-status fallback">Checking live assistant status...</div>
+                <div class="assistant-intro">
+                  <div id="assistant-status" class="assistant-status fallback">Checking live assistant status...</div>
 
-                <div class="assistant-help">
-                  Paste new candidate features, docking notes, wet-lab observations, or meeting questions below. The assistant will combine that context with the current ranked dataset when answering.
+                  <div class="assistant-help">
+                    Paste new candidate features, docking notes, wet-lab observations, or meeting questions below. The assistant will combine that context with the current ranked dataset when answering.
+                  </div>
                 </div>
 
-                <textarea id="context-input" class="context-input" placeholder="Optional context: paste docking results, affinity estimates, synthesis notes, assay summaries, or meeting notes here..."></textarea>
+                <div class="assistant-frame">
+                  <div class="assistant-chat">
+                    <div class="assistant-toolbar">
+                      <div class="assistant-title-group">
+                        <h3>Conversation Workspace</h3>
+                        <p>Use the live assistant for ranking interpretation, candidate comparison, and reasoning over pasted experimental notes.</p>
+                      </div>
+                      <div class="assistant-chip-row">
+                        <span id="assistant-mode-chip" class="assistant-chip primary">Checking connection</span>
+                        <span id="assistant-dataset-chip" class="assistant-chip">Seed dataset</span>
+                        <span id="assistant-history-chip" class="assistant-chip">0 turns</span>
+                      </div>
+                    </div>
 
-                <div class="prompt-row">
-                  <input id="question-input" class="question-input" type="text" placeholder="Ask a broad or specific question about the project..." />
-                  <button id="ask-button" class="ask-button">Ask</button>
+                    <div class="assistant-messages" id="assistant-messages"></div>
+                  </div>
+
+                  <div class="assistant-composer">
+                    <div class="assistant-composer-head">
+                      <strong>Context and question composer</strong>
+                      <span>Optional notes improve ranking-focused reasoning.</span>
+                    </div>
+
+                    <div class="assistant-context-card">
+                      <label for="context-input">Extra context</label>
+                      <textarea id="context-input" class="context-input" placeholder="Paste docking results, affinity estimates, synthesis notes, assay summaries, meeting notes, or reviewer feedback here..."></textarea>
+                    </div>
+
+                    <div class="assistant-question-card">
+                      <label for="question-input">Ask the model</label>
+                      <div class="prompt-row">
+                        <input id="question-input" class="question-input" type="text" placeholder="Ask a broad or specific question about the project..." />
+                        <button id="ask-button" class="ask-button">Ask</button>
+                      </div>
+                    </div>
+
+                    <div class="quick-prompts">
+                      <button type="button" data-prompt="What is the top candidate overall?">Top overall</button>
+                      <button type="button" data-prompt="What is the top candidate for Siglec-9?">Top Siglec-9</button>
+                      <button type="button" data-prompt="What is the top candidate for SIRPa?">Top SIRPa</button>
+                      <button type="button" data-prompt="Compare pS9L and MTTSNeu5Ac.">Compare candidates</button>
+                      <button type="button" data-prompt="Show all advance candidates and explain why they are prioritized.">Explain advance tier</button>
+                    </div>
+                  </div>
                 </div>
-
-                <div class="quick-prompts">
-                  <button type="button" data-prompt="What is the top candidate overall?">Top overall</button>
-                  <button type="button" data-prompt="What is the top candidate for Siglec-9?">Top Siglec-9</button>
-                  <button type="button" data-prompt="What is the top candidate for SIRPa?">Top SIRPa</button>
-                  <button type="button" data-prompt="Compare pS9L and MTTSNeu5Ac.">Compare candidates</button>
-                  <button type="button" data-prompt="Show all advance candidates and explain why they are prioritized.">Explain advance tier</button>
-                </div>
-
-                <div class="assistant-messages" id="assistant-messages"></div>
               </div>
             </section>
           </div>
 
           <div class="assistant-stack">
-            <section class="panel">
+            <section class="panel assistant-side-panel">
               <div class="panel-head">
                 <div>
                   <h3>Current Top Hits</h3>
@@ -1490,21 +1861,54 @@
               <div class="leaderboard" id="assistant-side-hits"></div>
             </section>
 
-            <section class="panel">
+            <section class="panel assistant-side-panel">
+              <div class="panel-head">
+                <div>
+                  <h3>Assistant Strengths</h3>
+                  <p>How this workspace is most useful during meetings and candidate reviews.</p>
+                </div>
+              </div>
+              <div class="leaderboard">
+                <div class="assistant-signal-grid">
+                  <div class="assistant-signal">
+                    <strong>Compare</strong>
+                    <span>Ask which ligand is stronger and why, then follow up on tradeoffs in affinity, surface fit, or immune effect.</span>
+                  </div>
+                  <div class="assistant-signal">
+                    <strong>Interpret</strong>
+                    <span>Paste docking or assay notes to get a fast narrative explanation that still stays tied to the ranked dataset.</span>
+                  </div>
+                  <div class="assistant-signal">
+                    <strong>Triage</strong>
+                    <span>Use it to identify which candidates deserve synthesis, extra validation, or a hold decision before wet-lab work.</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel assistant-side-panel">
               <div class="panel-head">
                 <div>
                   <h3>Question Ideas</h3>
                   <p>Examples that work well with the live assistant.</p>
                 </div>
               </div>
-              <div class="empty-state">
-                Try questions like:
-                <br /><br />
-                <strong>“Given these docking notes, would this new candidate likely rank above MTTSNeu5Ac?”</strong>
-                <br /><br />
-                <strong>“Why is WT CD47 still competitive even if N3612 has stronger affinity?”</strong>
-                <br /><br />
-                <strong>“What additional wet-lab data would most improve confidence in the current ranking?”</strong>
+              <div class="leaderboard">
+                <p class="assistant-side-copy">These buttons drop a well-formed question straight into the live assistant so the team can move quickly during presentations.</p>
+                <div class="question-idea-list">
+                  <button type="button" class="question-idea" data-prompt="Given these docking notes, would this new candidate likely rank above MTTSNeu5Ac?">
+                    <span class="question-idea-title">Ranking from new notes</span>
+                    <span class="question-idea-copy">Use pasted docking or assay context to estimate where a new ligand would sit relative to an existing hit.</span>
+                  </button>
+                  <button type="button" class="question-idea" data-prompt="Why is WT CD47 still competitive even if N3612 has stronger affinity?">
+                    <span class="question-idea-title">Explain a tradeoff</span>
+                    <span class="question-idea-copy">Ask why a candidate remains competitive when another entry appears stronger on one feature alone.</span>
+                  </button>
+                  <button type="button" class="question-idea" data-prompt="What additional wet-lab data would most improve confidence in the current ranking?">
+                    <span class="question-idea-title">Plan the next experiment</span>
+                    <span class="question-idea-copy">Ask what single experiment or readout would most reduce uncertainty in the current ranking.</span>
+                  </button>
+                </div>
               </div>
             </section>
           </div>
