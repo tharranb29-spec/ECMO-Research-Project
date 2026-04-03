@@ -97,15 +97,15 @@
 
     if (assistantHistoryChip) {
       const questionCount = histories[activeDataset].filter((item) => item.role === "user").length;
-      assistantHistoryChip.textContent = `${questionCount} prompt${questionCount === 1 ? "" : "s"}`;
+      assistantHistoryChip.textContent = `${questionCount} turn${questionCount === 1 ? "" : "s"}`;
     }
 
     if (assistantModeChip) {
       const label = liveAssistant.connected
-        ? `Live ${liveAssistant.provider ? `via ${liveAssistant.provider}` : "assistant"}`
+        ? "Live assistant"
         : liveAssistant.checked
-          ? "Fallback mode"
-          : "Checking connection";
+          ? "Static fallback"
+          : "Checking live mode";
       assistantModeChip.textContent = label;
       assistantModeChip.classList.remove("primary", "warning");
       assistantModeChip.classList.add(liveAssistant.connected ? "primary" : "warning");
@@ -671,9 +671,9 @@
     const label = document.createElement("strong");
     const badge = document.createElement("span");
     badge.className = "message-badge";
-    badge.textContent = role === "user" ? "Q" : "AI";
+    badge.setAttribute("aria-hidden", "true");
     const labelText = document.createElement("span");
-    labelText.textContent = role === "user" ? "You" : "Research Assistant";
+    labelText.textContent = role === "user" ? "You" : "Assistant";
     label.append(badge, labelText);
 
     const time = document.createElement("span");

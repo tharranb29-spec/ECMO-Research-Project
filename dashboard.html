@@ -837,44 +837,68 @@
 
       .assistant-title-group h3 {
         margin: 0;
-        font-size: 1rem;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--accent-strong);
+        font-size: 1.02rem;
+        font-family: Arial, Calibri, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        color: var(--ink);
       }
 
       .assistant-title-group p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.55;
+        font-size: 0.96rem;
       }
 
       .assistant-chip-row {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
       }
 
       .assistant-chip {
-        padding: 8px 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 13px;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.92);
         border: 1px solid rgba(19, 37, 64, 0.08);
         color: var(--muted);
-        font-size: 0.84rem;
-        font-weight: 700;
+        font-size: 0.82rem;
+        font-family: Arial, Calibri, sans-serif;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
+      .assistant-chip::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(99, 114, 137, 0.42);
+        flex: 0 0 auto;
       }
 
       .assistant-chip.primary {
-        background: rgba(20, 93, 242, 0.10);
+        background: rgba(20, 93, 242, 0.08);
         color: var(--accent-strong);
-        border-color: rgba(20, 93, 242, 0.10);
+        border-color: rgba(20, 93, 242, 0.12);
+      }
+
+      .assistant-chip.primary::before {
+        background: var(--accent);
       }
 
       .assistant-chip.warning {
         background: rgba(185, 122, 17, 0.12);
         color: var(--hold);
         border-color: rgba(185, 122, 17, 0.14);
+      }
+
+      .assistant-chip.warning::before {
+        background: var(--gold);
       }
 
       .assistant-composer {
@@ -898,6 +922,9 @@
 
       .assistant-composer-head strong {
         color: var(--ink);
+        font-family: Arial, Calibri, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.01em;
       }
 
       .assistant-composer-head span {
@@ -912,11 +939,11 @@
 
       .assistant-context-card label,
       .assistant-question-card label {
-        font-size: 0.88rem;
+        font-size: 0.9rem;
         font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--accent-strong);
+        font-family: Arial, Calibri, sans-serif;
+        letter-spacing: 0.01em;
+        color: var(--ink);
       }
 
       .assistant-question-card {
@@ -954,10 +981,11 @@
       }
 
       .assistant-signal strong {
-        font-size: 0.92rem;
-        color: var(--accent-strong);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
+        font-size: 0.96rem;
+        font-family: Arial, Calibri, sans-serif;
+        font-weight: 700;
+        color: var(--ink);
+        letter-spacing: 0.01em;
       }
 
       .assistant-signal span {
@@ -995,11 +1023,11 @@
       }
 
       .question-idea-title {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--accent-strong);
+        font-family: Arial, Calibri, sans-serif;
+        letter-spacing: 0.01em;
+        color: var(--ink);
       }
 
       .question-idea-copy {
@@ -1103,33 +1131,36 @@
         align-items: center;
         gap: 8px;
         margin: 0;
-        font-size: 0.92rem;
-        letter-spacing: 0.02em;
+        font-size: 0.94rem;
+        font-family: Arial, Calibri, sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.01em;
       }
 
       .message-badge {
         display: inline-grid;
         place-items: center;
-        width: 28px;
-        height: 28px;
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        font-size: 0.78rem;
-        font-weight: 800;
+        font-size: 0;
+        line-height: 0;
+        box-shadow: 0 0 0 4px rgba(19, 37, 64, 0.04);
       }
 
       .message.assistant .message-badge {
-        background: rgba(11, 127, 115, 0.12);
-        color: var(--teal);
+        background: var(--teal);
       }
 
       .message.user .message-badge {
-        background: rgba(255,255,255,0.18);
-        color: white;
+        background: rgba(255,255,255,0.82);
+        box-shadow: 0 0 0 4px rgba(255,255,255,0.14);
       }
 
       .message-time {
         font-size: 0.8rem;
         color: rgba(99, 114, 137, 0.9);
+        font-family: Arial, Calibri, sans-serif;
       }
 
       .message.user .message-time {
