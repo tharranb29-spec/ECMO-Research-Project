@@ -8,6 +8,7 @@ import time
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 from urllib import error, request
 
 from build_dashboard_bundle import main as build_dashboard_bundle_main
@@ -35,6 +36,7 @@ STATIC_FILES = {
     "/structure-showcase.html": ROOT / "structure-showcase.html",
     "/dashboard-data.js": ROOT / "dashboard-data.js",
     "/dashboard-config.json": ROOT / "dashboard-config.json",
+    "/assets/3Dmol-min.js": ROOT / "assets" / "3Dmol-min.js",
     "/assets/zju-ism-mark.svg": ROOT / "assets" / "zju-ism-mark.svg",
 }
 
@@ -63,6 +65,32 @@ def load_bundle():
 
 def latest_research_status():
     return read_json(ROOT / "outputs" / "research_status.json") or {}
+
+
+def fetch_pdb_text(pdb_id):
+    clean = "".join(ch for ch in (pdb_id or "").upper() if ch.isalnum())
+    if len(clean) != 4:
+        raise ValueError("Invalid PDB id.")
+
+    cache_dir = ROOT / "outputs" / "structures"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_path = cache_dir / f"{clean}.pdb"
+    if cache_path.exists():
+        return cache_path.read_text(encoding="utf-8")
+
+    remote_url = f"https://files.rcsb.org/download/{clean}.pdb"
+    req = request.Request(remote_url, headers={"User-Agent": "ECMO-Dashboard/1.0"})
+    try:
+        with request.urlopen(req, timeout=45) as response:
+            body = response.read().decode("utf-8")
+    except error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"RCSB returned {exc.code} for {clean}: {detail[:200]}") from exc
+    except error.URLError as exc:
+        raise RuntimeError(f"Unable to fetch structure {clean} from RCSB: {exc.reason}") from exc
+
+    cache_path.write_text(body, encoding="utf-8")
+    return body
 
 
 def extract_response_text(payload):
@@ -319,7 +347,9 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self):
-        if self.path == "/api/status":
+        parsed = urlparse(self.path)
+
+        if parsed.path == "/api/status":
             self._send_json(
                 {
                     "ok": True,
@@ -334,11 +364,29 @@ class Handler(BaseHTTPRequestHandler):
                 }
             )
             return
-        if self.path == "/api/bundle":
+        if parsed.path == "/api/bundle":
             self._send_json({"ok": True, **load_bundle()})
             return
+        if parsed.path == "/api/structure":
+            params = parse_qs(parsed.query or "")
+            pdb_id = (params.get("pdb") or ["2JJS"])[0]
+            try:
+                body = fetch_pdb_text(pdb_id).encode("utf-8")
+            except ValueError as exc:
+                self._send_json({"ok": False, "error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                return
+            except RuntimeError as exc:
+                self._send_json({"ok": False, "error": str(exc)}, status=HTTPStatus.BAD_GATEWAY)
+                return
 
-        file_path = STATIC_FILES.get(self.path)
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-Type", "chemical/x-pdb; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        file_path = STATIC_FILES.get(parsed.path)
         if file_path is None:
             self.send_error(HTTPStatus.NOT_FOUND, "Not found")
             return

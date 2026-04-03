@@ -2,17 +2,16 @@
   const DEFAULT_STRUCTURE = {
     id: "2JJS",
     title: "CD47 ectodomain WT bound to SIRPalpha",
-    subtitle: "Human CD47-SIRPalpha complex from the ranked candidate family",
   };
 
-  function fallbackMarkup(container, structure) {
+  function fallbackMarkup(container, structure, detail) {
     container.innerHTML = "";
     container.style.display = "grid";
     container.style.placeItems = "center";
     container.style.padding = "24px";
 
     const card = document.createElement("div");
-    card.style.maxWidth = "440px";
+    card.style.maxWidth = "460px";
     card.style.padding = "18px";
     card.style.borderRadius = "18px";
     card.style.background = "rgba(255,255,255,0.82)";
@@ -29,7 +28,7 @@
 
     const body = document.createElement("p");
     body.style.margin = "0 0 10px";
-    body.textContent = `Unable to load the interactive 3D viewer right now. This panel is intended to show the real PDB structure ${structure.id} (${structure.title}).`;
+    body.textContent = detail || `Unable to render the live 3D model for ${structure.id} right now.`;
 
     const link = document.createElement("a");
     link.href = `https://www.rcsb.org/structure/${structure.id}`;
@@ -52,37 +51,40 @@
     const structure = {
       id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
       title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
-      subtitle: container.dataset.structureSubtitle || DEFAULT_STRUCTURE.subtitle,
     };
 
-    container.innerHTML = "";
-    const iframe = document.createElement("iframe");
-    iframe.src = `https://www.rcsb.org/3d-view/${encodeURIComponent(structure.id)}`;
-    iframe.title = structure.title;
-    iframe.loading = "lazy";
-    iframe.referrerPolicy = "no-referrer-when-downgrade";
-    iframe.setAttribute("allowfullscreen", "true");
-    iframe.style.width = "100%";
-    iframe.style.height = "100%";
-    iframe.style.border = "0";
-    iframe.style.display = "block";
-    container.append(iframe);
+    if (!window.$3Dmol || typeof window.$3Dmol.createViewer !== "function") {
+      fallbackMarkup(container, structure, "The local 3D viewer library did not load.");
+      return;
+    }
 
-    const fallbackTimer = window.setTimeout(() => {
-      if (!iframe.dataset.loaded) {
-        fallbackMarkup(container, structure);
+    try {
+      const response = await fetch(`/api/structure?pdb=${encodeURIComponent(structure.id)}`, {
+        headers: { Accept: "chemical/x-pdb,text/plain" },
+      });
+      if (!response.ok) {
+        throw new Error(`Structure request failed with status ${response.status}.`);
       }
-    }, 12000);
+      const pdbText = await response.text();
+      if (!pdbText || !pdbText.trim()) {
+        throw new Error("The structure response was empty.");
+      }
 
-    iframe.addEventListener("load", () => {
-      iframe.dataset.loaded = "true";
-      window.clearTimeout(fallbackTimer);
-    });
+      container.innerHTML = "";
+      const viewer = window.$3Dmol.createViewer(container, {
+        backgroundColor: "white",
+        antialias: true,
+      });
 
-    iframe.addEventListener("error", () => {
-      window.clearTimeout(fallbackTimer);
-      fallbackMarkup(container, structure);
-    });
+      viewer.addModel(pdbText, "pdb");
+      viewer.setStyle({}, { cartoon: { colorscheme: "chain" } });
+      viewer.zoomTo();
+      viewer.render();
+      viewer.spin(true);
+      container.__viewer = viewer;
+    } catch (error) {
+      fallbackMarkup(container, structure, error.message);
+    }
   }
 
   function mountAll() {
