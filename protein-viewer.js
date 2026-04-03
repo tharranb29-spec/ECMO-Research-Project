@@ -1,56 +1,9 @@
 (function () {
-  const MOLSTAR_CSS = "https://unpkg.com/molstar/build/viewer/molstar.css";
-  const MOLSTAR_JS = "https://unpkg.com/molstar/build/viewer/molstar.js";
   const DEFAULT_STRUCTURE = {
     id: "2JJS",
     title: "CD47 ectodomain WT bound to SIRPalpha",
     subtitle: "Human CD47-SIRPalpha complex from the ranked candidate family",
   };
-
-  let molstarLoaderPromise = null;
-
-  function ensureMolstarAssets() {
-    if (window.molstar && window.molstar.Viewer) {
-      return Promise.resolve(window.molstar);
-    }
-
-    if (molstarLoaderPromise) {
-      return molstarLoaderPromise;
-    }
-
-    molstarLoaderPromise = new Promise((resolve, reject) => {
-      if (!document.querySelector('link[data-molstar-css="true"]')) {
-        const link = document.createElement("link");
-        link.rel = "stylesheet";
-        link.href = MOLSTAR_CSS;
-        link.dataset.molstarCss = "true";
-        document.head.append(link);
-      }
-
-      const existingScript = document.querySelector('script[data-molstar-js="true"]');
-      if (existingScript) {
-        existingScript.addEventListener("load", () => resolve(window.molstar));
-        existingScript.addEventListener("error", () => reject(new Error("Failed to load Mol* script.")));
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src = MOLSTAR_JS;
-      script.async = true;
-      script.dataset.molstarJs = "true";
-      script.onload = () => {
-        if (window.molstar && window.molstar.Viewer) {
-          resolve(window.molstar);
-        } else {
-          reject(new Error("Mol* loaded, but the viewer API was not found."));
-        }
-      };
-      script.onerror = () => reject(new Error("Failed to load Mol* assets."));
-      document.head.append(script);
-    });
-
-    return molstarLoaderPromise;
-  }
 
   function fallbackMarkup(container, structure) {
     container.innerHTML = "";
@@ -102,47 +55,34 @@
       subtitle: container.dataset.structureSubtitle || DEFAULT_STRUCTURE.subtitle,
     };
 
-    try {
-      await ensureMolstarAssets();
-      const viewer = new window.molstar.Viewer(container, {
-        layoutIsExpanded: false,
-        layoutShowControls: false,
-        layoutShowRemoteState: false,
-        layoutShowSequence: false,
-        layoutShowLog: false,
-        viewportShowExpand: false,
-        viewportShowSelectionMode: false,
-        viewportShowAnimation: true,
-        pdbProvider: "rcsb",
-      });
+    container.innerHTML = "";
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.rcsb.org/3d-view/${encodeURIComponent(structure.id)}`;
+    iframe.title = structure.title;
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    iframe.setAttribute("allowfullscreen", "true");
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "0";
+    iframe.style.display = "block";
+    container.append(iframe);
 
-      container.__molstarViewer = viewer;
-
-      await viewer.loadPdb(structure.id, {
-        representationParams: {
-          theme: {
-            globalName: "chain-id",
-          },
-        },
-      });
-
-      if (viewer.plugin && viewer.plugin.managers && viewer.plugin.managers.camera) {
-        viewer.plugin.managers.camera.reset();
+    const fallbackTimer = window.setTimeout(() => {
+      if (!iframe.dataset.loaded) {
+        fallbackMarkup(container, structure);
       }
+    }, 12000);
 
-      if (viewer.plugin && viewer.plugin.canvas3d) {
-        viewer.plugin.canvas3d.setProps({
-          trackball: {
-            animate: { name: "spin", params: { speed: 0.6 } },
-          },
-          renderer: {
-            backgroundColor: 0xf6f9ff,
-          },
-        });
-      }
-    } catch (error) {
+    iframe.addEventListener("load", () => {
+      iframe.dataset.loaded = "true";
+      window.clearTimeout(fallbackTimer);
+    });
+
+    iframe.addEventListener("error", () => {
+      window.clearTimeout(fallbackTimer);
       fallbackMarkup(container, structure);
-    }
+    });
   }
 
   function mountAll() {
