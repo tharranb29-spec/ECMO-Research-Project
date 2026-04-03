@@ -293,6 +293,31 @@
         justify-content: space-between;
       }
 
+      .structure-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .structure-tab {
+        border: 1px solid rgba(19, 37, 64, 0.10);
+        border-radius: 999px;
+        padding: 9px 12px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .structure-tab.active {
+        color: white;
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        box-shadow: 0 12px 24px rgba(20, 93, 242, 0.18);
+      }
+
       .compact-note {
         margin: 0;
         color: var(--muted);
@@ -1225,9 +1250,69 @@
               <div class="structure-head">
                 <div>
                   <h3>Projection-Ready Structure View</h3>
-                  <p>Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+                  <p id="structure-description-main">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
                 </div>
-                <span class="projection-chip">PDB 2JJS</span>
+                <span id="structure-chip-main" class="projection-chip">PDB 2JJS</span>
+              </div>
+
+              <div class="structure-tabs" data-structure-switcher>
+                <button
+                  type="button"
+                  class="structure-tab active"
+                  data-structure-target="protein-canvas"
+                  data-chip-target="structure-chip-main"
+                  data-description-target="structure-description-main"
+                  data-note-target="structure-note-main"
+                  data-tag-one-target="structure-tag-1-main"
+                  data-tag-two-target="structure-tag-2-main"
+                  data-tag-three-target="structure-tag-3-main"
+                  data-structure-id="2JJS"
+                  data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                  data-chip-label="PDB 2JJS"
+                  data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
+                  data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
+                  data-tag-one="CD47 ectodomain WT"
+                  data-tag-two="Human CD47-SIRPalpha complex"
+                  data-tag-three="Direct interface structure"
+                >CD47 WT</button>
+                <button
+                  type="button"
+                  class="structure-tab"
+                  data-structure-target="protein-canvas"
+                  data-chip-target="structure-chip-main"
+                  data-description-target="structure-description-main"
+                  data-note-target="structure-note-main"
+                  data-tag-one-target="structure-tag-1-main"
+                  data-tag-two-target="structure-tag-2-main"
+                  data-tag-three-target="structure-tag-3-main"
+                  data-structure-id="2VSC"
+                  data-structure-title="Human CD47 ectodomain scaffold"
+                  data-chip-label="PDB 2VSC"
+                  data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
+                  data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
+                  data-tag-one="CD47 variant N3612 family"
+                  data-tag-two="Human CD47 ectodomain"
+                  data-tag-three="Variant scaffold reference"
+                >CD47 Variant Scaffold</button>
+                <button
+                  type="button"
+                  class="structure-tab"
+                  data-structure-target="protein-canvas"
+                  data-chip-target="structure-chip-main"
+                  data-description-target="structure-description-main"
+                  data-note-target="structure-note-main"
+                  data-tag-one-target="structure-tag-1-main"
+                  data-tag-two-target="structure-tag-2-main"
+                  data-tag-three-target="structure-tag-3-main"
+                  data-structure-id="2WNG"
+                  data-structure-title="Human SIRPalpha ectodomain"
+                  data-chip-label="PDB 2WNG"
+                  data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
+                  data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
+                  data-tag-one="Self peptide 21 aa family"
+                  data-tag-two="Human SIRPalpha receptor"
+                  data-tag-three="Receptor template"
+                >SIRPalpha Receptor</button>
               </div>
 
               <div class="structure-viewer">
@@ -1240,14 +1325,14 @@
                   aria-label="Interactive protein structure viewer"
                 ></div>
                 <div class="structure-overlay">
-                  <span class="structure-tag">Actual ranked candidate example</span>
-                  <span class="structure-tag">CD47 ectodomain WT / SIRPalpha</span>
-                  <span class="structure-tag">Immune inhibitory interface</span>
+                  <span id="structure-tag-1-main" class="structure-tag">CD47 ectodomain WT</span>
+                  <span id="structure-tag-2-main" class="structure-tag">Human CD47-SIRPalpha complex</span>
+                  <span id="structure-tag-3-main" class="structure-tag">Direct interface structure</span>
                 </div>
               </div>
 
               <div class="structure-actions">
-                <p class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
+                <p id="structure-note-main" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
                 <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
               </div>
             </section>

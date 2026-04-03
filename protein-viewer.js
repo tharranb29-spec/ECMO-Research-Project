@@ -42,17 +42,7 @@
     container.append(card);
   }
 
-  async function mount(container) {
-    if (!container || container.__proteinViewerMounted) {
-      return;
-    }
-    container.__proteinViewerMounted = true;
-
-    const structure = {
-      id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
-      title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
-    };
-
+  async function renderStructure(container, structure) {
     if (!window.$3Dmol || typeof window.$3Dmol.createViewer !== "function") {
       fallbackMarkup(container, structure, "The local 3D viewer library did not load.");
       return;
@@ -70,26 +60,98 @@
         throw new Error("The structure response was empty.");
       }
 
-      container.innerHTML = "";
-      const viewer = window.$3Dmol.createViewer(container, {
-        backgroundColor: "white",
-        antialias: true,
-      });
+      let viewer = container.__viewer;
+      if (!viewer) {
+        container.innerHTML = "";
+        viewer = window.$3Dmol.createViewer(container, {
+          backgroundColor: "white",
+          antialias: true,
+        });
+        container.__viewer = viewer;
+      } else {
+        viewer.clear();
+      }
 
       viewer.addModel(pdbText, "pdb");
       viewer.setStyle({}, { cartoon: { colorscheme: "chain" } });
       viewer.zoomTo();
       viewer.render();
       viewer.spin(true);
-      container.__viewer = viewer;
+      container.dataset.structureId = structure.id;
+      container.dataset.structureTitle = structure.title;
     } catch (error) {
       fallbackMarkup(container, structure, error.message);
     }
   }
 
-  function mountAll() {
-    document.querySelectorAll("[data-protein-viewer]").forEach((element) => mount(element));
+  async function mount(container) {
+    if (!container || container.__proteinViewerMounted) {
+      return;
+    }
+    container.__proteinViewerMounted = true;
+
+    await renderStructure(container, {
+      id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
+      title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
+    });
   }
 
-  window.ECMOProteinViewer = { mount, mountAll };
+  function updateTextTarget(id, value) {
+    if (!id || !value) {
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = value;
+    }
+  }
+
+  function activateStructure(button) {
+    const targetId = button.dataset.structureTarget;
+    const container = targetId ? document.getElementById(targetId) : null;
+    if (!container) {
+      return;
+    }
+
+    const structure = {
+      id: button.dataset.structureId || DEFAULT_STRUCTURE.id,
+      title: button.dataset.structureTitle || DEFAULT_STRUCTURE.title,
+    };
+
+    renderStructure(container, structure);
+
+    updateTextTarget(button.dataset.chipTarget, button.dataset.chipLabel);
+    updateTextTarget(button.dataset.descriptionTarget, button.dataset.description);
+    updateTextTarget(button.dataset.noteTarget, button.dataset.note);
+    updateTextTarget(button.dataset.tagOneTarget, button.dataset.tagOne);
+    updateTextTarget(button.dataset.tagTwoTarget, button.dataset.tagTwo);
+    updateTextTarget(button.dataset.tagThreeTarget, button.dataset.tagThree);
+    updateTextTarget(button.dataset.extraTarget, button.dataset.extraLabel);
+
+    const switcher = button.closest("[data-structure-switcher]");
+    if (switcher) {
+      switcher.querySelectorAll("button").forEach((node) => {
+        node.classList.toggle("active", node === button);
+      });
+    }
+  }
+
+  function mountSwitchers() {
+    document.querySelectorAll("[data-structure-switcher]").forEach((switcher) => {
+      switcher.querySelectorAll("button").forEach((button) => {
+        if (button.__structureBound) {
+          return;
+        }
+        button.__structureBound = true;
+        button.addEventListener("click", () => activateStructure(button));
+      });
+    });
+  }
+
+  function mountAll() {
+    document.querySelectorAll("[data-protein-viewer]").forEach((element) => mount(element));
+    mountSwitchers();
+  }
+
+  window.ECMOProteinViewer = { mount, mountAll, renderStructure };
 })();

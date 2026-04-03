@@ -159,6 +159,31 @@
         white-space: nowrap;
       }
 
+      .viewer-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .viewer-tab {
+        border: 1px solid rgba(19, 37, 64, 0.10);
+        border-radius: 999px;
+        padding: 9px 12px;
+        background: rgba(255, 255, 255, 0.92);
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .viewer-tab.active {
+        color: white;
+        border-color: transparent;
+        background: linear-gradient(135deg, #145df2, #0c43af);
+        box-shadow: 0 12px 24px rgba(20, 93, 242, 0.18);
+      }
+
       .viewer-stage {
         position: relative;
         min-height: 0;
@@ -253,13 +278,13 @@
           </div>
 
           <p class="summary">
-            This structure window is a compact visual companion to the main dashboard. It now displays a real protein complex tied to the ranked candidate set: the human CD47 ectodomain bound to SIRPalpha, directly relevant to the `CD47 ectodomain WT` candidate.
+            This structure window is a compact visual companion to the main dashboard. It now lets you switch among several real structures tied to the top SIRPalpha-focused candidate families in the ranking set.
           </p>
 
           <div class="pill-row">
             <span class="pill">Zhejiang University International School of Medicine</span>
-            <span class="pill">CD47 ectodomain WT candidate</span>
-            <span class="pill">PDB 2JJS</span>
+            <span class="pill">CD47 / SIRPalpha candidate family</span>
+            <span id="showcase-pill-pdb" class="pill">PDB 2JJS</span>
             <span class="pill">16:9 projection layout</span>
           </div>
 
@@ -273,27 +298,94 @@
           <div class="viewer-head">
             <div>
               <h3>Actual Protein Complex View</h3>
-              <p>Human CD47 ectodomain bound to SIRPalpha, used here as a real candidate-linked structural example.</p>
+              <p id="showcase-description">Human CD47 ectodomain bound to SIRPalpha, used here as a real candidate-linked structural example.</p>
             </div>
-            <span class="badge">Real PDB Example</span>
+            <span id="showcase-badge" class="badge">Real PDB Example</span>
+          </div>
+
+          <div class="viewer-tabs" data-structure-switcher>
+            <button
+              type="button"
+              class="viewer-tab active"
+              data-structure-target="showcase-protein-canvas"
+              data-chip-target="showcase-pill-pdb"
+              data-description-target="showcase-description"
+              data-note-target="showcase-note"
+              data-tag-one-target="showcase-tag-1"
+              data-tag-two-target="showcase-tag-2"
+              data-tag-three-target="showcase-tag-3"
+              data-extra-target="showcase-badge"
+              data-structure-id="2JJS"
+              data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+              data-chip-label="PDB 2JJS"
+              data-description="Human CD47 ectodomain bound to SIRPalpha, directly tied to the CD47 ectodomain WT candidate."
+              data-note="Use this structure when discussing the primary WT interface that anchors the CD47-SIRPalpha candidate branch."
+              data-tag-one="CD47 ectodomain WT"
+              data-tag-two="Human CD47-SIRPalpha complex"
+              data-tag-three="Direct interface structure"
+              data-extra-label="Real PDB Example"
+            >CD47 WT</button>
+            <button
+              type="button"
+              class="viewer-tab"
+              data-structure-target="showcase-protein-canvas"
+              data-chip-target="showcase-pill-pdb"
+              data-description-target="showcase-description"
+              data-note-target="showcase-note"
+              data-tag-one-target="showcase-tag-1"
+              data-tag-two-target="showcase-tag-2"
+              data-tag-three-target="showcase-tag-3"
+              data-extra-target="showcase-badge"
+              data-structure-id="2VSC"
+              data-structure-title="Human CD47 ectodomain scaffold"
+              data-chip-label="PDB 2VSC"
+              data-description="Human CD47 ectodomain scaffold used as a structural reference for engineered higher-affinity CD47 variants such as N3612."
+              data-note="Use this scaffold view to explain how engineered CD47 variants are interpreted on the same ectodomain backbone."
+              data-tag-one="CD47 variant N3612 family"
+              data-tag-two="Human CD47 ectodomain"
+              data-tag-three="Variant scaffold reference"
+              data-extra-label="Variant Scaffold"
+            >CD47 Variant Scaffold</button>
+            <button
+              type="button"
+              class="viewer-tab"
+              data-structure-target="showcase-protein-canvas"
+              data-chip-target="showcase-pill-pdb"
+              data-description-target="showcase-description"
+              data-note-target="showcase-note"
+              data-tag-one-target="showcase-tag-1"
+              data-tag-two-target="showcase-tag-2"
+              data-tag-three-target="showcase-tag-3"
+              data-extra-target="showcase-badge"
+              data-structure-id="2WNG"
+              data-structure-title="Human SIRPalpha ectodomain"
+              data-chip-label="PDB 2WNG"
+              data-description="Human SIRPalpha receptor structure used as a receptor template for Self peptide and other SIRPalpha-focused candidate designs."
+              data-note="Use this receptor view when discussing peptide mimics or designs that aim to engage the SIRPalpha binding surface."
+              data-tag-one="Self peptide 21 aa family"
+              data-tag-two="Human SIRPalpha receptor"
+              data-tag-three="Receptor template"
+              data-extra-label="Receptor Template"
+            >SIRPalpha Receptor</button>
           </div>
 
           <div class="viewer-stage">
             <div
+              id="showcase-protein-canvas"
               data-protein-viewer
               data-structure-id="2JJS"
               data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
               aria-label="Interactive protein structure viewer"
             ></div>
             <div class="viewer-overlay">
-              <span class="pill">Human CD47-SIRPalpha complex</span>
-              <span class="pill">Actual candidate-linked structure</span>
-              <span class="pill">ECMO interface relevance</span>
+              <span id="showcase-tag-1" class="pill">CD47 ectodomain WT</span>
+              <span id="showcase-tag-2" class="pill">Human CD47-SIRPalpha complex</span>
+              <span id="showcase-tag-3" class="pill">Direct interface structure</span>
             </div>
           </div>
 
           <div class="viewer-foot">
-            <p>The main interactive dashboard remains available at <strong>ecmo-research-dashboard.onrender.com</strong>, with this same real structure available from the header panel.</p>
+            <p id="showcase-note">The main interactive dashboard remains available at <strong>ecmo-research-dashboard.onrender.com</strong>, with these same real structures available from the header panel.</p>
             <a class="back-link" href="dashboard.html">Return to Dashboard</a>
           </div>
         </section>
