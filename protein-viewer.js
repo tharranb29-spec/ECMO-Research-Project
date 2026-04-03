@@ -4,6 +4,14 @@
     title: "CD47 ectodomain WT bound to SIRPalpha",
   };
 
+  function afterLayout() {
+    return new Promise((resolve) => {
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(resolve);
+      });
+    });
+  }
+
   function fallbackMarkup(container, structure, detail) {
     container.innerHTML = "";
     container.style.display = "grid";
@@ -60,6 +68,8 @@
         throw new Error("The structure response was empty.");
       }
 
+      await afterLayout();
+
       let viewer = container.__viewer;
       if (!viewer) {
         container.innerHTML = "";
@@ -74,9 +84,19 @@
 
       viewer.addModel(pdbText, "pdb");
       viewer.setStyle({}, { cartoon: { colorscheme: "chain" } });
+      viewer.resize();
       viewer.zoomTo();
       viewer.render();
       viewer.spin(true);
+      window.setTimeout(() => {
+        try {
+          viewer.resize();
+          viewer.zoomTo();
+          viewer.render();
+        } catch (error) {
+          // Keep the last successful render if resize throws.
+        }
+      }, 180);
       container.dataset.structureId = structure.id;
       container.dataset.structureTitle = structure.title;
     } catch (error) {
