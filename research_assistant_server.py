@@ -148,7 +148,9 @@ def build_messages(dataset_key, question, extra_context, history):
         "(2) inferences from the provided context, and "
         "(3) general scientific guidance. "
         "Do not claim experiments were performed unless they appear in the provided context. "
-        "If the user asks something the dataset cannot support, say so clearly and then answer as a reasoned hypothesis."
+        "If the user asks something the dataset cannot support, say so clearly and then answer as a reasoned hypothesis. "
+        "Format answers cleanly for an on-page chat interface: prefer short headings, short paragraphs, and simple bullet or numbered lists. "
+        "Do not use markdown tables, raw HTML tags such as <br>, or code fences unless the user explicitly asks for them."
     )
 
     user_context = {
@@ -200,7 +202,9 @@ def build_chat_messages(dataset_key, question, extra_context, history):
         "Clearly distinguish between facts from the provided ranked dataset, inferences from the provided context, "
         "and general scientific guidance. "
         "Do not claim experiments were performed unless they appear in the provided context. "
-        "If the user asks something the dataset cannot support, say so clearly and answer as a reasoned hypothesis."
+        "If the user asks something the dataset cannot support, say so clearly and answer as a reasoned hypothesis. "
+        "Format answers cleanly for an on-page chat interface: prefer short headings, short paragraphs, and simple bullet or numbered lists. "
+        "Do not use markdown tables, raw HTML tags such as <br>, or code fences unless the user explicitly asks for them."
     )
 
     user_context = {

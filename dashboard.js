@@ -580,22 +580,172 @@
     });
   }
 
-  function formatInlineCode(text) {
-    const fragment = document.createDocumentFragment();
-    const parts = String(text).split(/(`[^`]+`)/g);
-    parts.forEach((part) => {
-      if (!part) {
-        return;
+  function appendInlineMarkdown(container, text) {
+    const source = String(text || "");
+    const tokenRegex = /(`[^`]+`|\*\*[^*]+?\*\*|__[^_]+?__|<br\s*\/?>)/gi;
+    let lastIndex = 0;
+    let match;
+
+    while ((match = tokenRegex.exec(source)) !== null) {
+      if (match.index > lastIndex) {
+        container.append(document.createTextNode(source.slice(lastIndex, match.index)));
       }
-      if (part.startsWith("`") && part.endsWith("`") && part.length >= 2) {
+
+      const token = match[0];
+      if (/^<br\s*\/?>$/i.test(token)) {
+        container.append(document.createElement("br"));
+      } else if ((token.startsWith("**") && token.endsWith("**")) || (token.startsWith("__") && token.endsWith("__"))) {
+        const strong = document.createElement("strong");
+        strong.textContent = token.slice(2, -2);
+        container.append(strong);
+      } else if (token.startsWith("`") && token.endsWith("`")) {
         const code = document.createElement("code");
-        code.textContent = part.slice(1, -1);
-        fragment.append(code);
-      } else {
-        fragment.append(document.createTextNode(part));
+        code.textContent = token.slice(1, -1);
+        container.append(code);
       }
+
+      lastIndex = tokenRegex.lastIndex;
+    }
+
+    if (lastIndex < source.length) {
+      container.append(document.createTextNode(source.slice(lastIndex)));
+    }
+  }
+
+  function isHeadingLine(line) {
+    return /^#{1,6}\s+/.test(line);
+  }
+
+  function isOrderedListLine(line) {
+    return /^\d+\.\s+/.test(line);
+  }
+
+  function isBulletListLine(line) {
+    return /^[-*•]\s+/.test(line);
+  }
+
+  function isTableSeparatorLine(line) {
+    return /^[\s|:-]+$/.test(line.trim()) && line.includes("-");
+  }
+
+  function splitTableRow(line) {
+    return line
+      .trim()
+      .replace(/^\|/, "")
+      .replace(/\|$/, "")
+      .split("|")
+      .map((cell) => cell.trim());
+  }
+
+  function appendTableBlock(container, lines) {
+    if (lines.length < 2 || !lines[0].includes("|") || !isTableSeparatorLine(lines[1])) {
+      return false;
+    }
+
+    const headerCells = splitTableRow(lines[0]);
+    if (!headerCells.length) {
+      return false;
+    }
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "message-table-wrap";
+
+    const table = document.createElement("table");
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+    headerCells.forEach((cell) => {
+      const th = document.createElement("th");
+      appendInlineMarkdown(th, cell);
+      headerRow.append(th);
     });
-    return fragment;
+    thead.append(headerRow);
+    table.append(thead);
+
+    const bodyLines = lines.slice(2).filter(Boolean);
+    if (bodyLines.length) {
+      const tbody = document.createElement("tbody");
+      bodyLines.forEach((line) => {
+        const row = document.createElement("tr");
+        const cells = splitTableRow(line);
+        const paddedCells = headerCells.map((_, index) => cells[index] || "");
+        paddedCells.forEach((cell) => {
+          const td = document.createElement("td");
+          appendInlineMarkdown(td, cell);
+          row.append(td);
+        });
+        tbody.append(row);
+      });
+      table.append(tbody);
+    }
+
+    wrapper.append(table);
+    container.append(wrapper);
+    return true;
+  }
+
+  function appendStructuredLines(container, lines) {
+    let index = 0;
+
+    while (index < lines.length) {
+      const line = lines[index].trim();
+      if (!line) {
+        index += 1;
+        continue;
+      }
+
+      if (isHeadingLine(line)) {
+        const depth = Math.min(4, Math.max(1, (line.match(/^#+/) || ["#"])[0].length));
+        const heading = document.createElement(`h${Math.min(depth + 1, 4)}`);
+        appendInlineMarkdown(heading, line.replace(/^#{1,6}\s+/, "").trim());
+        container.append(heading);
+        index += 1;
+        continue;
+      }
+
+      if (isOrderedListLine(line)) {
+        const ol = document.createElement("ol");
+        while (index < lines.length && isOrderedListLine(lines[index].trim())) {
+          const li = document.createElement("li");
+          appendInlineMarkdown(li, lines[index].trim().replace(/^\d+\.\s+/, ""));
+          ol.append(li);
+          index += 1;
+        }
+        container.append(ol);
+        continue;
+      }
+
+      if (isBulletListLine(line)) {
+        const ul = document.createElement("ul");
+        while (index < lines.length && isBulletListLine(lines[index].trim())) {
+          const li = document.createElement("li");
+          appendInlineMarkdown(li, lines[index].trim().replace(/^[-*•]\s+/, ""));
+          ul.append(li);
+          index += 1;
+        }
+        container.append(ul);
+        continue;
+      }
+
+      const paragraphLines = [];
+      while (index < lines.length) {
+        const current = lines[index].trim();
+        if (!current) {
+          index += 1;
+          break;
+        }
+        if (isHeadingLine(current) || isOrderedListLine(current) || isBulletListLine(current)) {
+          break;
+        }
+        paragraphLines.push(current);
+        index += 1;
+      }
+
+      if (paragraphLines.length) {
+        const paragraph = document.createElement("p");
+        appendInlineMarkdown(paragraph, paragraphLines.join(" "));
+        container.append(paragraph);
+      }
+    }
   }
 
   function appendFormattedBlock(container, block) {
@@ -611,23 +761,12 @@
       return;
     }
 
-    const lines = trimmed.split("\n").map((line) => line.trim()).filter(Boolean);
-    const bulletLike = lines.length > 0 && lines.every((line) => /^[-*•]\s+/.test(line));
-    if (bulletLike) {
-      const ul = document.createElement("ul");
-      lines.forEach((line) => {
-        const li = document.createElement("li");
-        li.append(formatInlineCode(line.replace(/^[-*•]\s+/, "")));
-        ul.append(li);
-      });
-      container.append(ul);
+    const lines = trimmed.split("\n").map((line) => line.trim());
+    if (appendTableBlock(container, lines.filter(Boolean))) {
       return;
     }
 
-    const paragraph = document.createElement("p");
-    const joined = lines.join(" ");
-    paragraph.append(formatInlineCode(joined));
-    container.append(paragraph);
+    appendStructuredLines(container, lines);
   }
 
   function createMessageBody(content) {
