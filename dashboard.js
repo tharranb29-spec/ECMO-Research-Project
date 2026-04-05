@@ -40,6 +40,18 @@
   const assistantModeChip = document.getElementById("assistant-mode-chip");
   const assistantDatasetChip = document.getElementById("assistant-dataset-chip");
   const assistantHistoryChip = document.getElementById("assistant-history-chip");
+  const briefingDatasetValue = document.getElementById("briefing-dataset-value");
+  const briefingDatasetCopy = document.getElementById("briefing-dataset-copy");
+  const briefingDatasetChip = document.getElementById("briefing-dataset-chip");
+  const briefingHitValue = document.getElementById("briefing-hit-value");
+  const briefingHitCopy = document.getElementById("briefing-hit-copy");
+  const briefingHitChip = document.getElementById("briefing-hit-chip");
+  const briefingAssistantValue = document.getElementById("briefing-assistant-value");
+  const briefingAssistantCopy = document.getElementById("briefing-assistant-copy");
+  const briefingAssistantChip = document.getElementById("briefing-assistant-chip");
+  const briefingResearchValue = document.getElementById("briefing-research-value");
+  const briefingResearchCopy = document.getElementById("briefing-research-copy");
+  const briefingResearchChip = document.getElementById("briefing-research-chip");
   const contextInput = document.getElementById("context-input");
   const questionInput = document.getElementById("question-input");
   const askButton = document.getElementById("ask-button");
@@ -119,6 +131,8 @@
       assistantModeChip.classList.remove("primary", "warning");
       assistantModeChip.classList.add(liveAssistant.connected ? "primary" : "warning");
     }
+
+    renderBriefing(getFilteredRows(activeDataset));
   }
 
   function createMetaChip(text) {
@@ -476,6 +490,83 @@
     }
     alert.className = `research-runtime-alert ${tone}`;
     alert.textContent = message;
+  }
+
+  function renderBriefing(rows) {
+    const visibleRows = Array.isArray(rows) ? rows : getFilteredRows(activeDataset);
+    const top = visibleRows[0] || null;
+    const runtime = getAutoResearchRuntime();
+    const status = getAutoResearchStatus();
+
+    if (briefingDatasetValue) {
+      briefingDatasetValue.textContent = datasetLabel(activeDataset);
+    }
+    if (briefingDatasetCopy) {
+      briefingDatasetCopy.textContent = activeSearch
+        ? `${visibleRows.length} candidates match the current filter for "${activeSearch}".`
+        : `${visibleRows.length} visible candidates are currently in scope for review.`;
+    }
+    if (briefingDatasetChip) {
+      briefingDatasetChip.textContent = activeView === "assistant" ? "Assistant workspace" : "Overview workspace";
+    }
+
+    if (briefingHitValue) {
+      briefingHitValue.textContent = top ? top.candidate_name : "No visible candidate";
+    }
+    if (briefingHitCopy) {
+      briefingHitCopy.textContent = top
+        ? `${top.target_receptor} • ${top.modality} • score ${top.predicted_score.toFixed(1)}. Current recommendation: ${top.recommendation.toUpperCase()}.`
+        : "Adjust filters or switch datasets to surface a candidate in the current workspace.";
+    }
+    if (briefingHitChip) {
+      briefingHitChip.textContent = top ? top.recommendation.toUpperCase() : "Awaiting match";
+    }
+
+    const questionCount = histories[activeDataset].filter((item) => item.role === "user").length;
+    if (briefingAssistantValue) {
+      briefingAssistantValue.textContent = liveAssistant.connected
+        ? (liveAssistant.model || liveAssistant.provider || "Live assistant ready")
+        : liveAssistant.checked
+          ? "Fallback mode"
+          : "Checking connection";
+    }
+    if (briefingAssistantCopy) {
+      briefingAssistantCopy.textContent = liveAssistant.connected
+        ? `Connected through ${liveAssistant.provider || "API"}${liveAssistant.model ? ` using ${liveAssistant.model}` : ""}. Suitable for broader reasoning and live discussion support.`
+        : "The dashboard remains usable in local fallback mode, but broader open-ended reasoning is limited until the live model backend is available.";
+    }
+    if (briefingAssistantChip) {
+      briefingAssistantChip.textContent = `${questionCount} turn${questionCount === 1 ? "" : "s"}`;
+    }
+
+    let researchValue = "Waiting";
+    if (!autoResearch.enabled) {
+      researchValue = "Disabled";
+    } else if (runtime.in_progress) {
+      researchValue = "Refreshing now";
+    } else if (runtime.last_error) {
+      researchValue = "Needs attention";
+    } else if (runtime.last_success_at || status.last_updated) {
+      researchValue = "Healthy";
+    }
+    if (briefingResearchValue) {
+      briefingResearchValue.textContent = researchValue;
+    }
+    if (briefingResearchCopy) {
+      const lastSuccess = runtime.last_success_at || status.last_updated;
+      if (!autoResearch.enabled) {
+        briefingResearchCopy.textContent = "Autonomous literature discovery is currently disabled for this dashboard session.";
+      } else if (runtime.last_error) {
+        briefingResearchCopy.textContent = `Last issue: ${runtime.last_error}. The dashboard will retry on the next refresh window or when the live server is reopened.`;
+      } else if (lastSuccess) {
+        briefingResearchCopy.textContent = `${status.lead_count || 0} leads from ${status.article_count || 0} articles. Last successful update ${describeAge(lastSuccess)} with a ${formatInterval(runtime.interval_seconds || autoResearch.intervalSeconds || 3600)} cadence.`;
+      } else {
+        briefingResearchCopy.textContent = "Waiting for the first successful autonomous discovery cycle to populate recent literature leads.";
+      }
+    }
+    if (briefingResearchChip) {
+      briefingResearchChip.textContent = runtime.llm_enabled ? "DeepSeek assisted" : "Heuristic mode";
+    }
   }
 
   function getFilteredRows(datasetKey) {
@@ -857,6 +948,7 @@
 
   function renderAll() {
     const rows = getFilteredRows(activeDataset);
+    renderBriefing(rows);
     renderMeta(rows);
     renderStats(rows);
     renderLeaderboard(rows);
