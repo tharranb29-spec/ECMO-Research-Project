@@ -28,6 +28,19 @@ FEATURE_LABELS = {
     "literature_confidence_score": "strong literature confidence",
 }
 
+TARGET_ALIASES = {
+    "siglec 9": "Siglec-9",
+    "siglec9": "Siglec-9",
+    "siglec-9": "Siglec-9",
+    "sirpa": "SIRPa",
+    "sirpalpha": "SIRPa",
+    "sirp alpha": "SIRPa",
+    "sirpα": "SIRPa",
+    "cd47": "SIRPa",
+    "cd47 sirpa": "SIRPa",
+    "sirpa cd47": "SIRPa",
+}
+
 TARGET_PRIORS = {
     "Siglec-9": {
         "affinity_strength_score": 0.24,
@@ -54,6 +67,21 @@ TARGET_PRIORS = {
 
 def clamp(value, low, high):
     return max(low, min(high, value))
+
+
+def normalize_target_receptor(value):
+    cleaned = str(value or "").strip().replace("α", "alpha")
+    if not cleaned:
+        return cleaned
+    canonical = "".join(ch.lower() if ch.isalnum() else " " for ch in cleaned)
+    canonical = " ".join(canonical.split())
+    if canonical in TARGET_ALIASES:
+        return TARGET_ALIASES[canonical]
+    if "siglec" in canonical and "9" in canonical:
+        return "Siglec-9"
+    if "sirp" in canonical or "cd47" in canonical:
+        return "SIRPa"
+    return cleaned
 
 
 def affinity_um_to_score(affinity_um):
@@ -90,6 +118,7 @@ def load_seed_records(path):
     with open(path, "r", encoding="utf-8") as handle:
         records = json.load(handle)
     for record in records:
+        record["target_receptor"] = normalize_target_receptor(record.get("target_receptor"))
         if record.get("affinity_strength_score") in ("", None):
             record["affinity_strength_score"] = affinity_um_to_score(record.get("affinity_uM"))
     return records
@@ -115,7 +144,7 @@ def load_candidate_csv(path):
             record = {
                 "id": cleaned.get("id") or cleaned["candidate_name"].lower().replace(" ", "_"),
                 "candidate_name": cleaned["candidate_name"],
-                "target_receptor": cleaned["target_receptor"],
+                "target_receptor": normalize_target_receptor(cleaned["target_receptor"]),
                 "modality": cleaned.get("modality", "unknown"),
                 "affinity_uM": affinity_um,
                 "affinity_note": cleaned.get("affinity_note") or "",
@@ -219,7 +248,7 @@ def rank_records(seed_records, candidate_records):
 
     ranked = []
     for record in candidate_records:
-        target = record["target_receptor"]
+        target = normalize_target_receptor(record["target_receptor"])
         if target not in models:
             raise ValueError(f"No trained model available for target '{target}'.")
         model = models[target]

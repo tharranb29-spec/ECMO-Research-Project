@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib import error, parse, request
 
-from ecmo_seed_ranker import load_seed_records, rank_records, write_markdown
+from ecmo_seed_ranker import load_seed_records, normalize_target_receptor, rank_records, write_markdown
 
 
 ROOT = Path(__file__).resolve().parent
@@ -375,7 +375,7 @@ def score_lead(article, candidate_name, target_receptor):
 def build_article_record(article, target_receptor, query):
     return {
         "id": f"{article.get('source', 'SRC')}-{article.get('id', '')}",
-        "target_receptor": target_receptor,
+        "target_receptor": normalize_target_receptor(target_receptor),
         "query": query,
         "title": article.get("title", ""),
         "abstract": article.get("abstractText", ""),
@@ -430,6 +430,9 @@ def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_s
     name = sanitize_candidate_name(candidate_name)
     if not candidate_is_allowed(name, seed_records):
         return None
+    normalized_target = normalize_target_receptor(target_receptor) or normalize_target_receptor(article_record.get("target_receptor"))
+    if normalized_target not in {"Siglec-9", "SIRPa"}:
+        return None
 
     try:
         parsed_score = float(lead_score)
@@ -438,7 +441,7 @@ def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_s
 
     return {
         "candidate_name": name,
-        "target_receptor": target_receptor,
+        "target_receptor": normalized_target,
         "modality_guess": (modality_guess or "literature_lead").strip().lower(),
         "lead_score": max(20, min(95, round(parsed_score))),
         "lead_type": "literature_candidate_lead",
