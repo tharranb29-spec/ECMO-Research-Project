@@ -118,6 +118,7 @@ When the live server is running with `AUTO_RESEARCH_ENABLED=1`, it will:
 
 - search recent literature for Siglec-9 and SIRPa/CD47 ligand-related papers
 - extract literature candidate leads
+- optionally use DeepSeek to improve lead extraction and filter out generic biology terms
 - convert those leads into provisional candidate records
 - score those provisional candidates with the existing ranking model
 - refresh dashboard data in the background
@@ -129,8 +130,20 @@ The dashboard now includes:
 
 - a `Autonomous Discovery` dataset tab
 - an `Autonomous Research Leads` panel
+- autonomous runtime status cards and a manual `Refresh Now` action in the live dashboard
 - `outputs/autonomous_ranking_results.json`
 - `outputs/autonomous_ranking_report.md`
+
+Default cadence:
+
+- `AUTO_RESEARCH_INTERVAL_SECONDS=3600` for hourly refreshes
+
+Useful environment variables:
+
+- `AUTO_RESEARCH_ENABLED=1`
+- `AUTO_RESEARCH_INTERVAL_SECONDS=3600`
+- `AUTO_RESEARCH_LLM_ENABLED=1`
+- `AUTO_RESEARCH_MAX_ARTICLES=12`
 
 ### Using DeepSeek instead
 
@@ -140,6 +153,9 @@ If you want to use DeepSeek for the live assistant, set:
 export AI_PROVIDER="deepseek"
 export DEEPSEEK_API_KEY="your_deepseek_api_key_here"
 export DEEPSEEK_MODEL="deepseek-chat"
+export AUTO_RESEARCH_ENABLED="1"
+export AUTO_RESEARCH_INTERVAL_SECONDS="3600"
+export AUTO_RESEARCH_LLM_ENABLED="1"
 ```
 
 Then start the same server:
@@ -149,6 +165,11 @@ python3 research_assistant_server.py
 ```
 
 The dashboard backend now supports both OpenAI and DeepSeek.
+
+Important hosting note:
+
+- if your host sleeps inactive services, the autonomous updater cannot truly run unattended while the service is asleep
+- the live server now triggers a stale refresh when the dashboard is opened again, so the data can catch up automatically after inactivity
 
 Fastest option:
 

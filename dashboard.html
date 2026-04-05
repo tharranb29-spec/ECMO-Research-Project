@@ -663,6 +663,11 @@
         text-decoration: underline;
       }
 
+      .ghost-button[disabled] {
+        cursor: wait;
+        opacity: 0.65;
+      }
+
       .target-sections,
       .weights-panel,
       .directory-grid {
@@ -758,6 +763,122 @@
         margin: 0;
         font-size: 1.06rem;
         overflow-wrap: anywhere;
+      }
+
+      .research-panel-head {
+        align-items: center;
+      }
+
+      .research-head-actions {
+        display: grid;
+        gap: 10px;
+        justify-items: end;
+      }
+
+      .research-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 8px;
+      }
+
+      .research-chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.9);
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .research-chip.ok {
+        background: rgba(17, 122, 77, 0.10);
+        color: var(--advance);
+        border-color: rgba(17, 122, 77, 0.12);
+      }
+
+      .research-chip.warning {
+        background: rgba(175, 109, 5, 0.10);
+        color: var(--secondary);
+        border-color: rgba(175, 109, 5, 0.12);
+      }
+
+      .research-chip.error {
+        background: rgba(180, 35, 24, 0.10);
+        color: var(--reject);
+        border-color: rgba(180, 35, 24, 0.12);
+      }
+
+      .research-runtime-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        padding: 0 18px 18px;
+      }
+
+      .research-runtime-card {
+        display: grid;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(243,248,255,0.92)),
+          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.04), transparent 26%);
+      }
+
+      .research-runtime-label {
+        color: var(--muted);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .research-runtime-value {
+        font-size: 1.04rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .research-runtime-copy {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+        line-height: 1.5;
+      }
+
+      .research-runtime-alert {
+        margin: 0 18px 18px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(19, 37, 64, 0.08);
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .research-runtime-alert.warning {
+        background: rgba(175, 109, 5, 0.08);
+        border-color: rgba(175, 109, 5, 0.12);
+        color: var(--secondary);
+      }
+
+      .research-runtime-alert.error {
+        background: rgba(180, 35, 24, 0.08);
+        border-color: rgba(180, 35, 24, 0.12);
+        color: var(--reject);
+      }
+
+      .research-runtime-alert.info {
+        background: rgba(20, 93, 242, 0.08);
+        border-color: rgba(20, 93, 242, 0.12);
+        color: var(--accent-strong);
+      }
+
+      .lead-meta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
       }
 
       .assistant-layout {
@@ -1331,6 +1452,10 @@
           grid-template-columns: 1fr;
         }
 
+        .research-runtime-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .mini-row {
           grid-template-columns: 1fr;
         }
@@ -1420,6 +1545,14 @@
 
         .controls-top {
           align-items: stretch;
+        }
+
+        .research-head-actions {
+          justify-items: start;
+        }
+
+        .research-chip-row {
+          justify-content: flex-start;
         }
 
         .toggle-row,
@@ -1567,7 +1700,8 @@
         }
 
         .stats-grid,
-        .directory-grid {
+        .directory-grid,
+        .research-runtime-grid {
           grid-template-columns: 1fr;
         }
 
@@ -1868,12 +2002,17 @@
             </section>
 
             <section class="panel">
-              <div class="panel-head">
+              <div class="panel-head research-panel-head">
                 <div>
                   <h3>Autonomous Research Leads</h3>
-                  <p>Recent literature-derived candidate leads discovered by the background updater.</p>
+                  <p>Recent literature-derived candidate leads discovered by the background updater, with optional DeepSeek-assisted extraction.</p>
+                </div>
+                <div class="research-head-actions">
+                  <div id="research-runtime-chips" class="research-chip-row"></div>
+                  <button id="research-refresh-button" class="ghost-button" type="button">Refresh Now</button>
                 </div>
               </div>
+              <div class="research-runtime-grid" id="research-runtime-grid"></div>
               <div class="target-sections" id="research-leads"></div>
             </section>
           </div>

@@ -5,6 +5,7 @@ import mimetypes
 import os
 import threading
 import time
+from datetime import datetime, timedelta, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -26,7 +27,9 @@ DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 AUTO_RESEARCH_ENABLED = os.environ.get("AUTO_RESEARCH_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
-AUTO_RESEARCH_INTERVAL_SECONDS = int(os.environ.get("AUTO_RESEARCH_INTERVAL_SECONDS", "21600"))
+AUTO_RESEARCH_INTERVAL_SECONDS = int(os.environ.get("AUTO_RESEARCH_INTERVAL_SECONDS", "3600"))
+AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
+AUTO_RESEARCH_RUNTIME_PATH = ROOT / "outputs" / "research_runtime_status.json"
 
 STATIC_FILES = {
     "/": ROOT / "dashboard.html",
@@ -46,6 +49,13 @@ DATASET_PATHS = {
     "autonomous": ROOT / "outputs" / "autonomous_ranking_results.json",
 }
 
+RUNTIME_LOCK = threading.Lock()
+RUNTIME_STATE_GUARD = threading.Lock()
+
+
+def utc_now_iso():
+    return datetime.now(timezone.utc).isoformat()
+
 
 def read_json(path):
     if not path.exists():
@@ -54,18 +64,89 @@ def read_json(path):
         return json.load(handle)
 
 
+def write_json(path, payload):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2, ensure_ascii=False)
+
+
+def parse_iso_datetime(value):
+    if not value:
+        return None
+    try:
+        return datetime.fromisoformat(value)
+    except ValueError:
+        return None
+
+
+def latest_research_status():
+    return read_json(ROOT / "outputs" / "research_status.json") or {}
+
+
+def base_runtime_state():
+    last_success = (latest_research_status() or {}).get("last_updated")
+    next_run = None
+    if last_success:
+        dt = parse_iso_datetime(last_success)
+        if dt is not None:
+            next_run = (dt + timedelta(seconds=AUTO_RESEARCH_INTERVAL_SECONDS)).isoformat()
+    return {
+        "in_progress": False,
+        "last_started_at": None,
+        "last_finished_at": None,
+        "last_success_at": last_success,
+        "last_error": None,
+        "last_trigger": None,
+        "next_run_at": next_run,
+        "interval_seconds": AUTO_RESEARCH_INTERVAL_SECONDS,
+        "llm_enabled": AUTO_RESEARCH_LLM_ENABLED and bool(DEEPSEEK_API_KEY),
+        "llm_provider": "deepseek" if AUTO_RESEARCH_LLM_ENABLED and bool(DEEPSEEK_API_KEY) else None,
+        "auto_research_enabled": AUTO_RESEARCH_ENABLED,
+    }
+
+
+def load_runtime_state():
+    state = base_runtime_state()
+    persisted = read_json(AUTO_RESEARCH_RUNTIME_PATH) or {}
+    if isinstance(persisted, dict):
+        state.update(persisted)
+    return state
+
+
+RUNTIME_STATE = load_runtime_state()
+
+
+def persist_runtime_state():
+    write_json(AUTO_RESEARCH_RUNTIME_PATH, RUNTIME_STATE)
+
+
+def update_runtime_state(**updates):
+    with RUNTIME_STATE_GUARD:
+        RUNTIME_STATE.update(updates)
+        persist_runtime_state()
+        return dict(RUNTIME_STATE)
+
+
+def runtime_state_snapshot():
+    with RUNTIME_STATE_GUARD:
+        snapshot = dict(RUNTIME_STATE)
+    snapshot["interval_seconds"] = AUTO_RESEARCH_INTERVAL_SECONDS
+    snapshot["llm_enabled"] = AUTO_RESEARCH_LLM_ENABLED and bool(DEEPSEEK_API_KEY)
+    snapshot["llm_provider"] = "deepseek" if AUTO_RESEARCH_LLM_ENABLED and bool(DEEPSEEK_API_KEY) else None
+    snapshot["auto_research_enabled"] = AUTO_RESEARCH_ENABLED
+    return snapshot
+
+
 def load_bundle():
     return {
         "config": read_json(ROOT / "dashboard-config.json") or {},
         "seed": read_json(DATASET_PATHS["seed"]),
         "custom": read_json(DATASET_PATHS["custom"]),
         "autonomous": read_json(DATASET_PATHS["autonomous"]),
+        "research_leads": read_json(ROOT / "outputs" / "research_leads.json"),
+        "research_status": latest_research_status(),
+        "research_runtime": runtime_state_snapshot(),
     }
-
-
-def latest_research_status():
-    return read_json(ROOT / "outputs" / "research_status.json") or {}
-
 
 def fetch_pdb_text(pdb_id):
     clean = "".join(ch for ch in (pdb_id or "").upper() if ch.isalnum())
@@ -327,6 +408,39 @@ def call_model(dataset_key, question, extra_context, history):
     return call_openai_responses(dataset_key, question, extra_context, history)
 
 
+def refresh_due_now():
+    status = latest_research_status()
+    last_updated = parse_iso_datetime(status.get("last_updated"))
+    if last_updated is None:
+        return True
+    return (datetime.now(timezone.utc) - last_updated).total_seconds() >= AUTO_RESEARCH_INTERVAL_SECONDS
+
+
+def queue_refresh(reason):
+    with RUNTIME_STATE_GUARD:
+        if RUNTIME_STATE.get("in_progress"):
+            return False
+        RUNTIME_STATE.update(
+            {
+                "in_progress": True,
+                "last_trigger": reason,
+                "last_error": None,
+            }
+        )
+        persist_runtime_state()
+    thread = threading.Thread(target=run_refresh_cycle, args=(reason,), daemon=True, name=f"auto-research-{reason}")
+    thread.start()
+    return True
+
+
+def maybe_schedule_stale_refresh(reason):
+    if not AUTO_RESEARCH_ENABLED:
+        return False
+    if not refresh_due_now():
+        return False
+    return queue_refresh(reason)
+
+
 class Handler(BaseHTTPRequestHandler):
     server_version = "ECMODashboard/0.1"
 
@@ -354,6 +468,7 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
 
         if parsed.path == "/api/status":
+            maybe_schedule_stale_refresh("status-poll")
             self._send_json(
                 {
                     "ok": True,
@@ -362,13 +477,16 @@ class Handler(BaseHTTPRequestHandler):
                     "model": current_model_name(),
                     "reasoning_effort": OPENAI_REASONING_EFFORT if AI_PROVIDER == "openai" else None,
                     "auto_research_enabled": AUTO_RESEARCH_ENABLED,
+                    "auto_research_interval_seconds": AUTO_RESEARCH_INTERVAL_SECONDS,
                     "research_status": latest_research_status(),
+                    "research_runtime": runtime_state_snapshot(),
                     "host": HOST,
                     "port": PORT,
                 }
             )
             return
         if parsed.path == "/api/bundle":
+            maybe_schedule_stale_refresh("bundle-poll")
             self._send_json({"ok": True, **load_bundle()})
             return
         if parsed.path == "/api/structure":
@@ -397,6 +515,22 @@ class Handler(BaseHTTPRequestHandler):
         self._send_file(file_path)
 
     def do_POST(self):
+        if self.path == "/api/research/refresh":
+            if not AUTO_RESEARCH_ENABLED:
+                self._send_json({"ok": False, "error": "Autonomous research is disabled."}, status=HTTPStatus.BAD_REQUEST)
+                return
+            started = queue_refresh("manual")
+            self._send_json(
+                {
+                    "ok": True,
+                    "started": started,
+                    "message": "Manual refresh started." if started else "Refresh already running.",
+                    "research_runtime": runtime_state_snapshot(),
+                    "research_status": latest_research_status(),
+                }
+            )
+            return
+
         if self.path != "/api/chat":
             self.send_error(HTTPStatus.NOT_FOUND, "Not found")
             return
@@ -453,25 +587,58 @@ def main():
         print("\nServer stopped.")
 
 
-def run_refresh_cycle():
+def run_refresh_cycle(reason="scheduled"):
+    if not RUNTIME_LOCK.acquire(blocking=False):
+        return False
+
+    started_at = utc_now_iso()
+    update_runtime_state(
+        in_progress=True,
+        last_started_at=started_at,
+        last_trigger=reason,
+        last_error=None,
+    )
+
     try:
         summary = refresh_research_outputs()
         build_dashboard_bundle_main()
+        finished_at = utc_now_iso()
+        next_run = (datetime.now(timezone.utc) + timedelta(seconds=AUTO_RESEARCH_INTERVAL_SECONDS)).isoformat()
+        update_runtime_state(
+            in_progress=False,
+            last_finished_at=finished_at,
+            last_success_at=summary.get("last_updated"),
+            last_error=None if not summary.get("errors") else " | ".join(summary.get("errors", [])[:3]),
+            next_run_at=next_run,
+        )
         print(
             f"[auto-research] updated leads={summary.get('lead_count', 0)} "
             f"articles={summary.get('article_count', 0)} "
+            f"llm={summary.get('llm_lead_count', 0)} "
             f"at={summary.get('last_updated', '')}"
         )
+        return True
     except Exception as exc:  # noqa: BLE001
+        finished_at = utc_now_iso()
+        next_run = (datetime.now(timezone.utc) + timedelta(seconds=AUTO_RESEARCH_INTERVAL_SECONDS)).isoformat()
+        update_runtime_state(
+            in_progress=False,
+            last_finished_at=finished_at,
+            last_error=str(exc),
+            next_run_at=next_run,
+        )
         print(f"[auto-research] refresh failed: {exc}")
+        return False
+    finally:
+        RUNTIME_LOCK.release()
 
 
 def start_background_updater():
     def loop():
-        run_refresh_cycle()
+        run_refresh_cycle("startup")
         while True:
-            time.sleep(max(300, AUTO_RESEARCH_INTERVAL_SECONDS))
-            run_refresh_cycle()
+            time.sleep(max(60, AUTO_RESEARCH_INTERVAL_SECONDS))
+            run_refresh_cycle("scheduled")
 
     thread = threading.Thread(target=loop, daemon=True, name="auto-research-updater")
     thread.start()

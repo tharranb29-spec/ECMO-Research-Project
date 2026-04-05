@@ -1,18 +1,24 @@
 #!/usr/bin/env python3
 
 import json
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib import parse, request
+from urllib import error, parse, request
 
-from ecmo_seed_ranker import load_seed_records, rank_records, write_json, write_markdown
+from ecmo_seed_ranker import load_seed_records, rank_records, write_markdown
 
 
 ROOT = Path(__file__).resolve().parent
 OUTPUTS = ROOT / "outputs"
 SEED_PATH = ROOT / "data" / "seed_ligands.json"
 EUROPE_PMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
+DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
+DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+AUTO_RESEARCH_MAX_ARTICLES = int(os.environ.get("AUTO_RESEARCH_MAX_ARTICLES", "12"))
+AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
 
 SEARCH_QUERIES = [
     {
@@ -41,6 +47,98 @@ MODALITY_RULES = [
     ("fusion", "fusion_protein"),
 ]
 
+IGNORED_CANDIDATE_TERMS = {
+    "siglec",
+    "siglec 9",
+    "siglec9",
+    "sirpa",
+    "sirpalpha",
+    "cd47",
+    "sting",
+    "cgamp",
+    "nets",
+    "ros",
+    "tnf",
+    "tnf alpha",
+    "il 10",
+    "macrophage",
+    "neutrophil",
+    "tumor",
+    "immune",
+    "immunity",
+    "inflammation",
+    "checkpoint",
+    "ligand",
+    "agonist",
+    "peptide",
+    "protein",
+    "variant",
+    "mimetic",
+    "glycomimetic",
+    "sialoside",
+    "receptor",
+    "construct",
+    "conjugate",
+    "antibody",
+    "fusion protein",
+}
+
+ALLOW_SIGNAL_WORDS = {
+    "peptide",
+    "glycomimetic",
+    "glycopeptide",
+    "glycopolypeptide",
+    "sialoside",
+    "mimetic",
+    "antibody",
+    "protein",
+    "variant",
+    "fusion",
+    "ligand",
+    "ectodomain",
+    "scaffold",
+    "decoy",
+    "construct",
+    "polypeptide",
+    "glycan",
+    "copy",
+    "soluble",
+}
+
+EXACT_BLOCKED_CANDIDATE_TERMS = {
+    "siglec",
+    "siglec 9",
+    "siglec9",
+    "sirpa",
+    "sirpalpha",
+    "cd47",
+    "sting",
+    "cgamp",
+    "ros",
+    "tnf",
+    "tnf alpha",
+    "il 10",
+    "macrophage",
+    "neutrophil",
+    "immune",
+    "immunity",
+    "inflammation",
+    "checkpoint",
+    "ligand",
+    "agonist",
+    "peptide",
+    "protein",
+    "variant",
+    "mimetic",
+    "glycomimetic",
+    "sialoside",
+    "receptor",
+    "construct",
+    "conjugate",
+    "antibody",
+    "fusion protein",
+}
+
 
 def ensure_outputs():
     OUTPUTS.mkdir(parents=True, exist_ok=True)
@@ -64,6 +162,52 @@ def normalize_name(name):
     return re.sub(r"\s+", " ", name.strip())
 
 
+def canonical_key(value):
+    return re.sub(r"[^a-z0-9]+", " ", (value or "").lower()).strip()
+
+
+def sanitize_candidate_name(name):
+    cleaned = normalize_name(
+        str(name or "")
+        .replace("–", "-")
+        .replace("—", "-")
+        .replace("α", "alpha")
+        .replace('"', "")
+        .replace("'", "")
+        .replace("(", " ")
+        .replace(")", " ")
+    )
+    cleaned = re.sub(r"\s+", " ", cleaned).strip(" ,.;:-")
+    return cleaned
+
+
+def candidate_is_allowed(name, seed_records=None):
+    cleaned = sanitize_candidate_name(name)
+    key = canonical_key(cleaned)
+    if seed_records:
+        for record in seed_records:
+            if canonical_key(record.get("candidate_name", "")) == key:
+                return True
+    if len(cleaned) < 3:
+        return False
+    if key in EXACT_BLOCKED_CANDIDATE_TERMS:
+        return False
+    if any(fragment in key for fragment in ["sting", "cgamp", "macrophage", "neutrophil", "inflammation", "immune", "checkpoint", "receptor"]):
+        return False
+    if (key.startswith("anti ") or key.startswith("anti-")) and any(token in key for token in ["sirpa", "sirpalpha", "siglec", "cd47"]):
+        return False
+    generic_tokens = set(key.split())
+    receptor_tokens = {"siglec", "siglec9", "sirpa", "sirpalpha", "cd47"}
+    modality_tokens = {"antibody", "protein", "peptide", "mimetic", "glycomimetic", "ligand", "agonist", "construct", "fusion"}
+    if generic_tokens & receptor_tokens and generic_tokens & modality_tokens and not re.search(r"\d", cleaned):
+        return False
+    has_signal_word = any(word in key for word in ALLOW_SIGNAL_WORDS)
+    looks_like_alias = bool(re.search(r"\d", cleaned)) or bool(re.search(r"[A-Z].*[a-z]|[a-z].*[A-Z]", cleaned))
+    if has_signal_word or looks_like_alias:
+        return True
+    return False
+
+
 def guess_modality(text):
     lowered = text.lower()
     for needle, modality in MODALITY_RULES:
@@ -77,20 +221,80 @@ def extract_candidate_names(text):
     for pattern in NAME_PATTERNS:
         for match in pattern.findall(text):
             name = match if isinstance(match, str) else match[0]
-            name = normalize_name(name)
-            if len(name) < 3:
-                continue
-            if name.lower() in {"siglec", "ligand", "peptide", "agonist", "variant", "cd47", "sirpa"}:
+            name = sanitize_candidate_name(name)
+            if not candidate_is_allowed(name):
                 continue
             candidates.append(name)
     deduped = []
     seen = set()
     for name in candidates:
-        key = name.lower()
+        key = canonical_key(name)
         if key not in seen:
             seen.add(key)
             deduped.append(name)
     return deduped[:6]
+
+
+def extract_seed_matches(text, seed_records):
+    token_set = set(canonical_key(text).split())
+    matches = []
+    seen = set()
+    seed_stop_tokens = {
+        "cd47",
+        "sirpa",
+        "sirpalpha",
+        "siglec",
+        "siglec9",
+        "protein",
+        "ligand",
+        "receptor",
+        "variant",
+        "peptide",
+        "antibody",
+        "mimetic",
+        "glycomimetic",
+        "ectodomain",
+        "wt",
+        "soluble",
+        "construct",
+        "fusion",
+        "human",
+    }
+    for record in seed_records:
+        candidate_name = sanitize_candidate_name(record["candidate_name"])
+        if len(candidate_name) < 4:
+            continue
+        candidate_key = canonical_key(candidate_name)
+        candidate_tokens = [token for token in candidate_key.split() if token]
+        meaningful_tokens = [token for token in candidate_tokens if token not in seed_stop_tokens]
+        exact_match = candidate_key and candidate_key in canonical_key(text)
+        loose_match = bool(meaningful_tokens) and all(token in token_set for token in meaningful_tokens)
+        if exact_match or loose_match:
+            key = canonical_key(candidate_name)
+            if key not in seen and candidate_is_allowed(candidate_name, seed_records):
+                seen.add(key)
+                matches.append(candidate_name)
+    return matches
+
+
+def prioritize_candidate_names(names):
+    ordered = sorted(
+        names,
+        key=lambda name: (-len(canonical_key(name)), canonical_key(name), name.lower()),
+    )
+    kept = []
+    seen = set()
+    for name in ordered:
+        if not candidate_is_allowed(name):
+            continue
+        key = canonical_key(name)
+        if key in seen:
+            continue
+        if any(key != canonical_key(existing) and key in canonical_key(existing) for existing in kept):
+            continue
+        kept.append(name)
+        seen.add(key)
+    return kept
 
 
 def article_link(article):
@@ -99,6 +303,55 @@ def article_link(article):
     if source and article_id:
         return f"https://europepmc.org/article/{source}/{article_id}"
     return ""
+
+
+def deepseek_research_enabled():
+    return bool(DEEPSEEK_API_KEY) and AUTO_RESEARCH_LLM_ENABLED
+
+
+def extract_json_array(text):
+    stripped = (text or "").strip()
+    if not stripped:
+        return []
+    if stripped.startswith("```"):
+        stripped = re.sub(r"^```[a-zA-Z0-9_-]*\s*", "", stripped)
+        stripped = re.sub(r"\s*```$", "", stripped)
+    start = stripped.find("[")
+    end = stripped.rfind("]")
+    if start == -1 or end == -1 or end < start:
+        return []
+    snippet = stripped[start : end + 1]
+    try:
+        parsed = json.loads(snippet)
+    except json.JSONDecodeError:
+        return []
+    return parsed if isinstance(parsed, list) else []
+
+
+def call_deepseek_research(messages, max_tokens=900):
+    payload = {
+        "model": DEEPSEEK_MODEL,
+        "messages": messages,
+        "stream": False,
+        "max_tokens": max_tokens,
+        "temperature": 0.2,
+    }
+    req = request.Request(
+        f"{DEEPSEEK_BASE_URL.rstrip('/')}/chat/completions",
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+        },
+        method="POST",
+    )
+    with request.urlopen(req, timeout=120) as response:
+        parsed = json.loads(response.read().decode("utf-8"))
+    choices = parsed.get("choices") or []
+    if not choices:
+        return []
+    message = choices[0].get("message") or {}
+    return extract_json_array(message.get("content") or "")
 
 
 def score_lead(article, candidate_name, target_receptor):
@@ -114,6 +367,8 @@ def score_lead(article, candidate_name, target_receptor):
         score += 5
     if target_receptor.lower().replace("-", "") in text.replace("-", ""):
         score += 10
+    if any(term in text for term in ["surface", "coating", "interface", "biomaterial", "hemocompat", "blood-contacting"]):
+        score += 4
     return min(score, 92)
 
 
@@ -129,14 +384,20 @@ def build_article_record(article, target_receptor, query):
         "publication_date": article.get("firstPublicationDate") or article.get("pubYear"),
         "doi": article.get("doi", ""),
         "source_url": article_link(article),
+        "article_id": article.get("id", ""),
     }
 
 
-def build_leads_from_article(article_record):
+def build_leads_from_article(article_record, seed_records):
     text = f"{article_record['title']} {article_record['abstract']}"
-    names = extract_candidate_names(text)
+    names = prioritize_candidate_names(extract_seed_matches(text, seed_records) + extract_candidate_names(text))
     leads = []
+    seen = set()
     for name in names:
+        key = canonical_key(name)
+        if key in seen or not candidate_is_allowed(name, seed_records):
+            continue
+        seen.add(key)
         modality = guess_modality(text)
         score = score_lead(article_record, name, article_record["target_receptor"])
         leads.append(
@@ -150,6 +411,8 @@ def build_leads_from_article(article_record):
                 "publication_date": article_record["publication_date"],
                 "source_title": article_record["title"],
                 "source_url": article_record["source_url"],
+                "article_id": article_record.get("article_id"),
+                "source_method": "heuristic",
             }
         )
     return leads
@@ -161,6 +424,87 @@ def classify_known_seed(lead_name, seed_records):
         if record["candidate_name"].lower() == normalized:
             return True
     return False
+
+
+def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_score, rationale, article_record, source_method, seed_records=None):
+    name = sanitize_candidate_name(candidate_name)
+    if not candidate_is_allowed(name, seed_records):
+        return None
+
+    try:
+        parsed_score = float(lead_score)
+    except (TypeError, ValueError):
+        parsed_score = 58.0
+
+    return {
+        "candidate_name": name,
+        "target_receptor": target_receptor,
+        "modality_guess": (modality_guess or "literature_lead").strip().lower(),
+        "lead_score": max(20, min(95, round(parsed_score))),
+        "lead_type": "literature_candidate_lead",
+        "rationale": normalize_name(rationale or f"Recent literature mention in article: {article_record['title']}"),
+        "publication_date": article_record.get("publication_date"),
+        "source_title": article_record.get("title"),
+        "source_url": article_record.get("source_url"),
+        "article_id": article_record.get("article_id"),
+        "source_method": source_method,
+    }
+
+
+def extract_llm_leads(article_records, seed_records):
+    if not deepseek_research_enabled() or not article_records:
+        return []
+
+    compact_articles = [
+        {
+            "article_id": article.get("article_id"),
+            "target_receptor": article.get("target_receptor"),
+            "title": article.get("title"),
+            "abstract": (article.get("abstract") or "")[:1800],
+            "publication_date": article.get("publication_date"),
+            "source_url": article.get("source_url"),
+        }
+        for article in article_records[:AUTO_RESEARCH_MAX_ARTICLES]
+    ]
+
+    system_prompt = (
+        "You extract ECMO-relevant ligand discovery leads from recent paper metadata. "
+        "Return only a JSON array. Each item must include: "
+        "candidate_name, target_receptor, modality_guess, lead_score, article_id, rationale. "
+        "Only include actual candidate ligands, peptides, glycomimetics, receptor-binding proteins, decoys, or antibodies relevant to Siglec-9 or SIRPalpha/CD47 screening. "
+        "Do not include pathways, cargo molecules, signaling proteins, cell types, diseases, assays, or generic terms. "
+        "Ignore names like STING, cGAMP, macrophage, neutrophil, cytokine, immune checkpoint, receptor, ligand, agonist, and similar generic biology terms. "
+        "Prefer candidates explicitly named in the title or abstract. "
+        "lead_score should be 0-100 and reflect how promising the candidate seems for follow-up triage."
+    )
+    user_prompt = json.dumps({"articles": compact_articles}, ensure_ascii=False)
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+
+    extracted = call_deepseek_research(messages, max_tokens=1100)
+    leads = []
+    article_index = {article.get("article_id"): article for article in article_records}
+    for item in extracted:
+        if not isinstance(item, dict):
+            continue
+        article = article_index.get(str(item.get("article_id") or "").strip())
+        if not article:
+            continue
+        lead = sanitize_lead_record(
+            item.get("candidate_name"),
+            item.get("target_receptor") or article.get("target_receptor"),
+            item.get("modality_guess"),
+            item.get("lead_score"),
+            item.get("rationale"),
+            article,
+            "deepseek",
+            seed_records,
+        )
+        if lead:
+            leads.append(lead)
+    return leads
 
 
 def score_feature(base, bump=0.0, low=0.02, high=0.98):
@@ -200,12 +544,14 @@ def build_candidate_from_lead(lead, seed_records):
         "literature_confidence_score": literature_confidence,
         "training_label_score": None,
         "training_label": None,
-        "evidence_summary": f"{lead['rationale']} ({discovery_status.replace('_', ' ')})",
+        "evidence_summary": f"{lead['rationale']} ({discovery_status.replace('_', ' ')}, {lead.get('source_method', 'heuristic')} extraction)",
         "source_urls": [lead["source_url"]] if lead.get("source_url") else [],
         "discovery_status": discovery_status,
         "lead_score": lead["lead_score"],
         "publication_date": lead.get("publication_date"),
         "source_title": lead.get("source_title"),
+        "source_method": lead.get("source_method", "heuristic"),
+        "article_id": lead.get("article_id"),
     }
 
 
@@ -231,16 +577,55 @@ def refresh_research_outputs():
     ensure_outputs()
     seed_records = load_seed_records(SEED_PATH)
     fetched_articles = []
-    discovered_leads = []
+    heuristic_leads = []
+    llm_leads = []
+    errors = []
+    query_results = []
 
     for entry in SEARCH_QUERIES:
-        payload = fetch_europe_pmc_results(entry["query"])
+        query_articles = []
+        try:
+            payload = fetch_europe_pmc_results(entry["query"])
+        except error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", errors="replace")[:200]
+            errors.append(f"{entry['target_receptor']}: Europe PMC HTTP {exc.code} - {detail}")
+            query_results.append({"target_receptor": entry["target_receptor"], "ok": False, "error": f"HTTP {exc.code}"})
+            continue
+        except error.URLError as exc:
+            errors.append(f"{entry['target_receptor']}: Europe PMC network error - {exc.reason}")
+            query_results.append({"target_receptor": entry["target_receptor"], "ok": False, "error": str(exc.reason)})
+            continue
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{entry['target_receptor']}: literature fetch failed - {exc}")
+            query_results.append({"target_receptor": entry["target_receptor"], "ok": False, "error": str(exc)})
+            continue
+
         for result in payload.get("resultList", {}).get("result", []):
             article_record = build_article_record(result, entry["target_receptor"], entry["query"])
             fetched_articles.append(article_record)
-            discovered_leads.extend(build_leads_from_article(article_record))
+            query_articles.append(article_record)
+            heuristic_leads.extend(build_leads_from_article(article_record, seed_records))
 
-    deduped_leads = dedupe_leads(discovered_leads)
+        query_results.append(
+            {
+                "target_receptor": entry["target_receptor"],
+                "ok": True,
+                "article_count": len(query_articles),
+            }
+        )
+
+        if deepseek_research_enabled() and query_articles:
+            try:
+                llm_leads.extend(extract_llm_leads(query_articles, seed_records))
+            except error.HTTPError as exc:
+                detail = exc.read().decode("utf-8", errors="replace")[:200]
+                errors.append(f"{entry['target_receptor']}: DeepSeek HTTP {exc.code} - {detail}")
+            except error.URLError as exc:
+                errors.append(f"{entry['target_receptor']}: DeepSeek network error - {exc.reason}")
+            except Exception as exc:  # noqa: BLE001
+                errors.append(f"{entry['target_receptor']}: DeepSeek extraction failed - {exc}")
+
+    deduped_leads = dedupe_leads(heuristic_leads + llm_leads)
     autonomous_candidates = [build_candidate_from_lead(lead, seed_records) for lead in deduped_leads]
     autonomous_ranking = rank_records(seed_records, autonomous_candidates) if autonomous_candidates else {"models": {}, "metrics": {}, "ranked": []}
     candidate_index = {candidate["id"]: candidate for candidate in autonomous_candidates}
@@ -250,12 +635,20 @@ def refresh_research_outputs():
         row["discovery_status"] = candidate.get("discovery_status")
         row["publication_date"] = candidate.get("publication_date")
         row["source_title"] = candidate.get("source_title")
+        row["source_method"] = candidate.get("source_method")
 
     summary = {
         "last_updated": datetime.now(timezone.utc).isoformat(),
         "article_count": len(fetched_articles),
         "lead_count": len(deduped_leads),
         "autonomous_ranked_count": len(autonomous_ranking.get("ranked", [])),
+        "heuristic_lead_count": len(heuristic_leads),
+        "llm_lead_count": len(llm_leads),
+        "llm_enabled": deepseek_research_enabled(),
+        "llm_provider": "deepseek" if deepseek_research_enabled() else None,
+        "query_results": query_results,
+        "errors": errors,
+        "health": "ok" if not errors else ("warning" if deduped_leads else "error"),
         "queries": SEARCH_QUERIES,
     }
 

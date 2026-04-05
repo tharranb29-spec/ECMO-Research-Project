@@ -13,7 +13,9 @@ services:
       - key: AUTO_RESEARCH_ENABLED
         value: "1"
       - key: AUTO_RESEARCH_INTERVAL_SECONDS
-        value: "21600"
+        value: "3600"
+      - key: AUTO_RESEARCH_LLM_ENABLED
+        value: "1"
       - key: ECMO_DASHBOARD_HOST
         value: "0.0.0.0"
       - key: DEEPSEEK_API_KEY

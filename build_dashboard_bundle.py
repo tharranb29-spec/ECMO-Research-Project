@@ -25,6 +25,7 @@ def main():
         "autonomous": load_json(OUTPUTS / "autonomous_ranking_results.json"),
         "research_leads": load_json(OUTPUTS / "research_leads.json"),
         "research_status": load_json(OUTPUTS / "research_status.json"),
+        "research_runtime": load_json(OUTPUTS / "research_runtime_status.json"),
     }
     serialized = json.dumps(payload, indent=2)
     content = f"window.ECMO_DASHBOARD_DATA = {serialized};\n"

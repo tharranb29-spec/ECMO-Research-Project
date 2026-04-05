@@ -30,6 +30,9 @@
   const targetSections = document.getElementById("target-sections");
   const weightsPanel = document.getElementById("weights-panel");
   const researchLeadsPanel = document.getElementById("research-leads");
+  const researchRuntimeGrid = document.getElementById("research-runtime-grid");
+  const researchRuntimeChips = document.getElementById("research-runtime-chips");
+  const researchRefreshButton = document.getElementById("research-refresh-button");
   const assistantSideHits = document.getElementById("assistant-side-hits");
   const searchInput = document.getElementById("search-input");
   const assistantMessages = document.getElementById("assistant-messages");
@@ -46,6 +49,11 @@
   let activeView = "overview";
   let activeSearch = "";
   const histories = { seed: [], custom: [], autonomous: [] };
+  const autoResearch = {
+    enabled: Boolean((bundle.research_runtime && bundle.research_runtime.auto_research_enabled) || (bundle.research_status && bundle.research_status.auto_research_enabled)),
+    intervalSeconds: 3600,
+    runtime: bundle.research_runtime || null,
+  };
   const liveAssistant = {
     checked: false,
     connected: false,
@@ -53,6 +61,7 @@
     model: null,
   };
   let bundlePollingStarted = false;
+  let autonomousWatchdogStarted = false;
 
   function normalize(text) {
     return (text || "")
@@ -164,6 +173,7 @@
     if (payload.research_status) {
       bundle.research_status = payload.research_status;
     }
+    updateAutoResearchState(payload);
     setBranding();
     renderAll();
     updateAssistantChrome();
@@ -196,6 +206,276 @@
       return value;
     }
     return date.toLocaleString();
+  }
+
+  function formatInterval(seconds) {
+    const numeric = Number(seconds || 0);
+    if (!numeric) {
+      return "n/a";
+    }
+    if (numeric % 3600 === 0) {
+      const hours = numeric / 3600;
+      return `${hours} hour${hours === 1 ? "" : "s"}`;
+    }
+    if (numeric % 60 === 0) {
+      const minutes = numeric / 60;
+      return `${minutes} minute${minutes === 1 ? "" : "s"}`;
+    }
+    return `${numeric} sec`;
+  }
+
+  function canUseLiveEndpoints() {
+    return window.location.protocol !== "file:";
+  }
+
+  function updateAutoResearchState(payload) {
+    if (!payload || typeof payload !== "object") {
+      return;
+    }
+    if (typeof payload.auto_research_enabled === "boolean") {
+      autoResearch.enabled = payload.auto_research_enabled;
+    }
+    if (typeof payload.auto_research_interval_seconds === "number") {
+      autoResearch.intervalSeconds = payload.auto_research_interval_seconds;
+    }
+    if (payload.research_runtime) {
+      autoResearch.runtime = payload.research_runtime;
+    }
+  }
+
+  function getAutoResearchRuntime() {
+    return autoResearch.runtime || bundle.research_runtime || {};
+  }
+
+  function getAutoResearchStatus() {
+    return bundle.research_status || {};
+  }
+
+  function runtimeHealthClass(health) {
+    if (health === "ok") {
+      return "ok";
+    }
+    if (health === "warning") {
+      return "warning";
+    }
+    return "error";
+  }
+
+  function humanizeRuntimeState(runtime) {
+    if (!runtime) {
+      return "Unavailable";
+    }
+    if (runtime.in_progress) {
+      return "Running now";
+    }
+    if (runtime.last_error) {
+      return "Needs attention";
+    }
+    if (runtime.last_success_at) {
+      return "Healthy";
+    }
+    return "Waiting";
+  }
+
+  function describeAge(value) {
+    if (!value) {
+      return "n/a";
+    }
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+    const diff = Math.max(0, Date.now() - date.getTime());
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    if (days > 0) {
+      return `${days} day${days === 1 ? "" : "s"} ago`;
+    }
+    if (hours > 0) {
+      return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    }
+    if (minutes > 0) {
+      return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    }
+    return "just now";
+  }
+
+  function parseDateMs(value) {
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date.getTime();
+  }
+
+  function startAutonomousWatchdog() {
+    if (autonomousWatchdogStarted) {
+      return;
+    }
+    autonomousWatchdogStarted = true;
+
+    const tick = () => {
+      if (!canUseLiveEndpoints()) {
+        return;
+      }
+      const runtime = getAutoResearchRuntime();
+      const status = getAutoResearchStatus();
+      if (!autoResearch.enabled || runtime.in_progress) {
+        return;
+      }
+
+      const lastSuccess = runtime.last_success_at || status.last_updated;
+      const lastSuccessMs = parseDateMs(lastSuccess);
+      if (!lastSuccessMs) {
+        refreshAutonomousResearch();
+        return;
+      }
+
+      const ageMs = Date.now() - lastSuccessMs;
+      const targetMs = Math.max(60, Number(runtime.interval_seconds || autoResearch.intervalSeconds || 3600)) * 1000;
+      if (ageMs >= targetMs && !researchRefreshButton?.disabled) {
+        refreshAutonomousResearch();
+      }
+    };
+
+    tick();
+    setInterval(tick, 300000);
+  }
+
+  function renderResearchRuntime() {
+    if (!researchRuntimeGrid) {
+      return;
+    }
+    clear(researchRuntimeGrid);
+    const runtime = getAutoResearchRuntime();
+    const status = getAutoResearchStatus();
+    const intervalLabel = formatInterval(runtime.interval_seconds || autoResearch.intervalSeconds || 3600);
+    const nextRunLabel = runtime.next_run_at ? formatDate(runtime.next_run_at) : "n/a";
+    const lastSuccessLabel = runtime.last_success_at || status.last_updated || null;
+    const health = status.health || (runtime.last_error ? "error" : runtime.in_progress ? "warning" : "ok");
+    const chips = [
+      { text: autoResearch.enabled ? "Auto research enabled" : "Auto research disabled", health: null },
+      { text: canUseLiveEndpoints() ? "Live sync available" : "Static bundle mode", health: null },
+      { text: runtime.llm_enabled ? "DeepSeek discovery on" : "Heuristic discovery only", health: null },
+      { text: `Refresh every ${intervalLabel}`, health: null },
+      { text: health === "ok" ? "Health ok" : health === "warning" ? "Health warning" : "Health error", health },
+    ];
+
+    if (researchRuntimeChips) {
+      clear(researchRuntimeChips);
+      chips.forEach((chipData) => {
+        const chip = document.createElement("span");
+        chip.className = `research-chip ${chipData.health ? runtimeHealthClass(chipData.health) : ""}`.trim();
+        chip.textContent = chipData.text;
+        researchRuntimeChips.append(chip);
+      });
+    }
+
+    if (researchRefreshButton) {
+      researchRefreshButton.disabled = Boolean(runtime.in_progress) || !autoResearch.enabled || !canUseLiveEndpoints();
+      if (runtime.in_progress) {
+        researchRefreshButton.textContent = "Refreshing...";
+      } else if (!canUseLiveEndpoints()) {
+        researchRefreshButton.textContent = "Run on Live Server";
+      } else {
+        researchRefreshButton.textContent = "Refresh Now";
+      }
+    }
+
+    const cards = [
+      [
+        "Health",
+        humanizeRuntimeState(runtime),
+        runtime.last_error
+          ? runtime.last_error
+          : health === "ok"
+            ? "Autonomous discovery is producing fresh leads and the dashboard should refresh automatically."
+            : health === "warning"
+              ? "A refresh is running or a partial issue was reported. Check the status alert below."
+              : "Autonomous discovery has not produced a clean successful update yet.",
+      ],
+      [
+        "Last update",
+        lastSuccessLabel ? formatDate(lastSuccessLabel) : "No successful update yet",
+        lastSuccessLabel ? describeAge(lastSuccessLabel) : "Waiting for the first successful discovery cycle.",
+      ],
+      [
+        "Next run",
+        nextRunLabel,
+        runtime.in_progress ? "A refresh is already running." : `Scheduled refresh cadence: ${intervalLabel}.`,
+      ],
+      [
+        "Lead counts",
+        `${status.lead_count || 0} leads`,
+        `${status.article_count || 0} articles screened${status.llm_lead_count ? `, ${status.llm_lead_count} DeepSeek leads` : ""}.`,
+      ],
+    ];
+
+    cards.forEach(([label, value, copy]) => {
+      const card = document.createElement("article");
+      card.className = "research-runtime-card";
+      const labelNode = document.createElement("div");
+      labelNode.className = "research-runtime-label";
+      labelNode.textContent = label;
+      const valueNode = document.createElement("div");
+      valueNode.className = "research-runtime-value";
+      valueNode.textContent = value;
+      const copyNode = document.createElement("p");
+      copyNode.className = "research-runtime-copy";
+      copyNode.textContent = copy;
+      card.append(labelNode, valueNode, copyNode);
+      researchRuntimeGrid.append(card);
+    });
+  }
+
+  function renderResearchRuntimeAlert() {
+    const status = getAutoResearchStatus();
+    const runtime = getAutoResearchRuntime();
+    const runtimeState = runtime.last_error
+      ? "error"
+      : runtime.in_progress
+        ? "warning"
+        : status.health === "warning"
+          ? "warning"
+          : "info";
+    let alert = document.querySelector(".research-runtime-alert");
+    if (!alert) {
+      alert = document.createElement("div");
+      alert.className = "research-runtime-alert info";
+      const parent = researchRuntimeGrid ? researchRuntimeGrid.parentElement : null;
+      if (parent) {
+        parent.insertBefore(alert, researchRuntimeGrid.nextSibling);
+      }
+    }
+    alert.className = `research-runtime-alert ${runtimeState}`;
+    const lastUpdate = status.last_updated ? formatDate(status.last_updated) : "n/a";
+    const nextRun = runtime.next_run_at ? formatDate(runtime.next_run_at) : "n/a";
+    const errorText = runtime.last_error || (Array.isArray(status.errors) && status.errors.length ? status.errors[0] : "");
+    const modeText = runtime.llm_enabled
+      ? "DeepSeek-assisted discovery is enabled for literature extraction."
+      : "The updater is running in heuristic mode only.";
+    const hostingText = canUseLiveEndpoints()
+      ? "If your hosting service sleeps idle apps, reopening the dashboard will trigger a catch-up refresh."
+      : "Open the dashboard through the live server to enable automatic refreshes and manual discovery runs.";
+    const stateText = runtime.in_progress
+      ? "A discovery cycle is currently running."
+      : status.health === "warning"
+        ? "The last cycle completed with warnings."
+        : status.health === "error"
+          ? "The last cycle reported an error."
+          : "The last cycle completed cleanly.";
+    alert.textContent = `${stateText} Last successful update: ${lastUpdate}. Next run: ${nextRun}. ${modeText} ${hostingText}${errorText ? ` Latest issue: ${errorText}` : ""}`;
+  }
+
+  function setResearchRuntimeAlert(message, tone = "info") {
+    let alert = document.querySelector(".research-runtime-alert");
+    if (!alert) {
+      renderResearchRuntimeAlert();
+      alert = document.querySelector(".research-runtime-alert");
+    }
+    if (!alert) {
+      return;
+    }
+    alert.className = `research-runtime-alert ${tone}`;
+    alert.textContent = message;
   }
 
   function getFilteredRows(datasetKey) {
@@ -506,12 +786,15 @@
   function renderResearchLeads() {
     clear(researchLeadsPanel);
     const leads = getResearchLeads().slice(0, 8);
-    const researchStatus = getResearchStatus();
+    const researchStatus = getAutoResearchStatus();
+    const runtime = getAutoResearchRuntime();
 
     if (!leads.length) {
       const empty = document.createElement("div");
       empty.className = "empty-state";
-      empty.textContent = "No autonomous research leads have been discovered yet. Start the live server and let the background updater run.";
+      empty.textContent = runtime.in_progress
+        ? "The autonomous discovery loop is running right now. Fresh leads should appear once the refresh completes."
+        : "No autonomous research leads have been discovered yet. Start the live server and let the background updater run.";
       researchLeadsPanel.append(empty);
       return;
     }
@@ -519,7 +802,7 @@
     if (researchStatus.last_updated) {
       const note = document.createElement("div");
       note.className = "empty-state";
-      note.textContent = `Last autonomous research update: ${formatDate(researchStatus.last_updated)}. Leads discovered: ${researchStatus.lead_count || leads.length}.`;
+      note.textContent = `Last autonomous research update: ${formatDate(researchStatus.last_updated || runtime.last_success_at)}. Leads discovered: ${researchStatus.lead_count || leads.length}.`;
       researchLeadsPanel.append(note);
     }
 
@@ -533,6 +816,19 @@
       const list = document.createElement("div");
       list.className = "weight-list";
 
+      const meta = document.createElement("div");
+      meta.className = "lead-meta-row";
+      const statusChip = document.createElement("span");
+      statusChip.className = `research-chip ${lead.source_method === "deepseek" ? "ok" : ""}`.trim();
+      statusChip.textContent = lead.source_method === "deepseek" ? "DeepSeek extracted" : "Heuristic extraction";
+      const discoveryChip = document.createElement("span");
+      discoveryChip.className = `research-chip ${lead.discovery_status === "known_reference" ? "ok" : "warning"}`;
+      discoveryChip.textContent = lead.discovery_status === "known_reference" ? "Known reference" : "New literature lead";
+      const dateChip = document.createElement("span");
+      dateChip.className = "research-chip";
+      dateChip.textContent = lead.publication_date ? formatDate(lead.publication_date) : "No date";
+      meta.append(statusChip, discoveryChip, dateChip);
+
       const rationale = document.createElement("p");
       rationale.className = "candidate-copy";
       rationale.textContent = lead.rationale || "Literature lead discovered by autonomous update.";
@@ -541,7 +837,7 @@
       source.className = "candidate-copy";
       source.textContent = `Source: ${lead.source_title || "Unknown article"}${lead.publication_date ? ` • ${lead.publication_date}` : ""}`;
 
-      list.append(rationale, source);
+      list.append(meta, rationale, source);
       if (lead.source_url) {
         const links = document.createElement("div");
         links.className = "source-list";
@@ -567,6 +863,8 @@
     renderDirectory(rows);
     renderTargetSections(rows);
     renderWeights();
+    renderResearchRuntime();
+    renderResearchRuntimeAlert();
     renderResearchLeads();
     renderAssistantSideHits(rows);
   }
@@ -904,6 +1202,13 @@
         throw new Error("Status endpoint unavailable");
       }
       const payload = await response.json();
+      updateAutoResearchState(payload);
+      if (payload.research_status) {
+        bundle.research_status = payload.research_status;
+      }
+      if (payload.research_runtime) {
+        bundle.research_runtime = payload.research_runtime;
+      }
       liveAssistant.checked = true;
       liveAssistant.connected = Boolean(payload.live_assistant_enabled);
       liveAssistant.provider = payload.provider || null;
@@ -944,7 +1249,67 @@
     }
     bundlePollingStarted = true;
     pollBundle();
-    setInterval(pollBundle, 300000);
+    setInterval(pollBundle, 60000);
+  }
+
+  async function refreshAutonomousResearch() {
+    if (!researchRefreshButton) {
+      return;
+    }
+    if (!canUseLiveEndpoints()) {
+      setResearchRuntimeAlert(
+        "Autonomous discovery refresh requires the live dashboard server. Open the hosted URL or run research_assistant_server.py first.",
+        "warning"
+      );
+      return;
+    }
+    const originalLabel = researchRefreshButton.textContent;
+    researchRefreshButton.disabled = true;
+    researchRefreshButton.textContent = "Refreshing...";
+    try {
+      const response = await fetch("/api/research/refresh", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+      });
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "Manual autonomous refresh failed.");
+      }
+      updateAutoResearchState(payload);
+      if (payload.research_status) {
+        bundle.research_status = payload.research_status;
+      }
+      if (payload.research_runtime) {
+        bundle.research_runtime = payload.research_runtime;
+      }
+      renderAll();
+      setResearchRuntimeAlert(
+        payload.message || "Autonomous discovery refresh triggered.",
+        payload.started ? "info" : "warning"
+      );
+      if (payload.started) {
+        researchRefreshButton.disabled = true;
+        const resetRefreshButton = () => {
+          const runtime = getAutoResearchRuntime();
+          if (runtime.in_progress) {
+            setTimeout(resetRefreshButton, 4000);
+            return;
+          }
+          researchRefreshButton.disabled = false;
+          researchRefreshButton.textContent = originalLabel;
+          pollBundle();
+        };
+        setTimeout(resetRefreshButton, 4000);
+      } else {
+        setTimeout(pollBundle, 4000);
+      }
+    } catch (err) {
+      setResearchRuntimeAlert(`Autonomous refresh could not start: ${err.message}`, "error");
+    } finally {
+      if (!researchRefreshButton.disabled) {
+        researchRefreshButton.textContent = originalLabel;
+      }
+    }
   }
 
   async function askLive(question) {
@@ -1070,6 +1435,10 @@
     openStructureWindowButton.addEventListener("click", openStructureWindow);
   }
 
+  if (researchRefreshButton) {
+    researchRefreshButton.addEventListener("click", refreshAutonomousResearch);
+  }
+
   setBranding();
   if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
     window.ECMOProteinViewer.mountAll();
@@ -1077,5 +1446,8 @@
   renderAll();
   setView("overview");
   updateAssistantChrome();
-  checkLiveAssistant().finally(resetAssistant);
+  checkLiveAssistant().finally(() => {
+    resetAssistant();
+    startAutonomousWatchdog();
+  });
 })();
