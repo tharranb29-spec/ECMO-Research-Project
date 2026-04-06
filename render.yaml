@@ -3,6 +3,7 @@ services:
     name: ecmo-research-dashboard
     env: python
     plan: free
+    healthCheckPath: /api/status
     buildCommand: "python3 ecmo_seed_ranker.py && python3 build_dashboard_bundle.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
@@ -18,5 +19,11 @@ services:
         value: "1"
       - key: ECMO_DASHBOARD_HOST
         value: "0.0.0.0"
+      - key: ECMO_ALLOWED_ORIGINS
+        value: "https://ecmo-research-dashboard.onrender.com"
+      - key: ECMO_BASIC_AUTH_USER
+        sync: false
+      - key: ECMO_BASIC_AUTH_PASSWORD
+        sync: false
       - key: DEEPSEEK_API_KEY
         sync: false
