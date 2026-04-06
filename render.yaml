@@ -25,5 +25,13 @@ services:
         sync: false
       - key: ECMO_BASIC_AUTH_PASSWORD
         sync: false
+      - key: ECMO_APP_LOGIN_USER
+        sync: false
+      - key: ECMO_APP_LOGIN_PASSWORD
+        sync: false
+      - key: ECMO_SESSION_SECRET
+        sync: false
+      - key: ECMO_SESSION_TTL_HOURS
+        value: "24"
       - key: DEEPSEEK_API_KEY
         sync: false

@@ -56,6 +56,7 @@
   const questionInput = document.getElementById("question-input");
   const askButton = document.getElementById("ask-button");
   const openStructureWindowButton = document.getElementById("open-structure-window");
+  const logoutButton = document.getElementById("logout-button");
 
   let activeDataset = datasets.seed ? "seed" : datasets.autonomous ? "autonomous" : datasets.custom ? "custom" : "seed";
   let activeView = "overview";
@@ -71,6 +72,10 @@
     connected: false,
     provider: null,
     model: null,
+  };
+  const authState = {
+    mode: "none",
+    appLoginEnabled: false,
   };
   let bundlePollingStarted = false;
   let autonomousWatchdogStarted = false;
@@ -240,6 +245,40 @@
 
   function canUseLiveEndpoints() {
     return window.location.protocol !== "file:";
+  }
+
+  function currentAppPath() {
+    return `${window.location.pathname || "/"}${window.location.search || ""}`;
+  }
+
+  function redirectToLogin(nextPath) {
+    if (!canUseLiveEndpoints()) {
+      return;
+    }
+    const target = nextPath || currentAppPath();
+    window.location.href = `/login.html?next=${encodeURIComponent(target)}`;
+  }
+
+  function createAuthError() {
+    const error = new Error("Login required.");
+    error.code = "AUTH_REQUIRED";
+    return error;
+  }
+
+  async function fetchWithAuth(input, init, nextPath) {
+    const response = await fetch(input, init);
+    if (response.status === 401) {
+      redirectToLogin(nextPath);
+      throw createAuthError();
+    }
+    return response;
+  }
+
+  function updateAuthChrome() {
+    if (!logoutButton) {
+      return;
+    }
+    logoutButton.hidden = !(authState.appLoginEnabled && canUseLiveEndpoints());
   }
 
   function updateAutoResearchState(payload) {
@@ -1341,6 +1380,10 @@
   async function checkLiveAssistant() {
     try {
       const response = await fetch("/api/status", { headers: { Accept: "application/json" } });
+      if (response.status === 401) {
+        redirectToLogin(currentAppPath());
+        return;
+      }
       if (!response.ok) {
         throw new Error("Status endpoint unavailable");
       }
@@ -1356,6 +1399,9 @@
       liveAssistant.connected = Boolean(payload.live_assistant_enabled);
       liveAssistant.provider = payload.provider || null;
       liveAssistant.model = payload.model || null;
+      authState.appLoginEnabled = Boolean(payload.app_login_enabled);
+      authState.mode = payload.auth_mode || "none";
+      updateAuthChrome();
 
       if (liveAssistant.connected) {
         setAssistantStatus(`Live assistant connected via ${payload.provider || "API"} / ${payload.model}. Broader questions and reasoning over pasted notes are enabled.`, true);
@@ -1365,15 +1411,19 @@
         startBundlePolling();
       }
     } catch (err) {
+      if (err && err.code === "AUTH_REQUIRED") {
+        return;
+      }
       liveAssistant.checked = true;
       liveAssistant.connected = false;
+      updateAuthChrome();
       setAssistantStatus("Static dashboard mode. Run research_assistant_server.py for the full live assistant.", false);
     }
   }
 
   async function pollBundle() {
     try {
-      const response = await fetch("/api/bundle", { headers: { Accept: "application/json" } });
+      const response = await fetchWithAuth("/api/bundle", { headers: { Accept: "application/json" } }, currentAppPath());
       if (!response.ok) {
         return;
       }
@@ -1382,6 +1432,9 @@
         applyBundlePayload(payload);
       }
     } catch (err) {
+      if (err && err.code === "AUTH_REQUIRED") {
+        return;
+      }
       // Ignore polling errors in static mode.
     }
   }
@@ -1410,10 +1463,10 @@
     researchRefreshButton.disabled = true;
     researchRefreshButton.textContent = "Refreshing...";
     try {
-      const response = await fetch("/api/research/refresh", {
+      const response = await fetchWithAuth("/api/research/refresh", {
         method: "POST",
         headers: { Accept: "application/json" },
-      });
+      }, currentAppPath());
       const payload = await response.json();
       if (!response.ok || !payload.ok) {
         throw new Error(payload.error || "Manual autonomous refresh failed.");
@@ -1447,6 +1500,9 @@
         setTimeout(pollBundle, 4000);
       }
     } catch (err) {
+      if (err && err.code === "AUTH_REQUIRED") {
+        return;
+      }
       setResearchRuntimeAlert(`Autonomous refresh could not start: ${err.message}`, "error");
     } finally {
       if (!researchRefreshButton.disabled) {
@@ -1457,7 +1513,7 @@
 
   async function askLive(question) {
     const history = histories[activeDataset];
-    const response = await fetch("/api/chat", {
+    const response = await fetchWithAuth("/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -1466,7 +1522,7 @@
         extra_context: contextInput.value.trim(),
         history,
       }),
-    });
+    }, currentAppPath());
 
     const payload = await response.json();
     if (!response.ok || !payload.ok) {
@@ -1478,6 +1534,26 @@
     }
 
     return payload.answer;
+  }
+
+  async function handleLogout() {
+    if (!canUseLiveEndpoints()) {
+      return;
+    }
+    if (logoutButton) {
+      logoutButton.disabled = true;
+      logoutButton.textContent = "Signing out...";
+    }
+    try {
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+      });
+    } catch (err) {
+      // Ignore network issues here and still redirect to the login page.
+    } finally {
+      redirectToLogin("/");
+    }
   }
 
   async function handleAsk(rawQuestion) {
@@ -1507,6 +1583,10 @@
       addMessage("assistant", answer);
       histories[activeDataset].push({ role: "assistant", content: answer });
     } catch (err) {
+      if (err && err.code === "AUTH_REQUIRED") {
+        pendingMessage.remove();
+        return;
+      }
       pendingMessage.remove();
       const fallback = `${err.message}\n\nFalling back to local dashboard answer:\n\n${localAnswer(question)}`;
       setAssistantStatus("Live assistant request failed. Using local fallback answers.", false);
@@ -1582,7 +1662,12 @@
     researchRefreshButton.addEventListener("click", refreshAutonomousResearch);
   }
 
+  if (logoutButton) {
+    logoutButton.addEventListener("click", handleLogout);
+  }
+
   setBranding();
+  updateAuthChrome();
   if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
     window.ECMOProteinViewer.mountAll();
   }

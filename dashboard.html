@@ -1794,6 +1794,19 @@
         gap: 12px;
       }
 
+      .rail-action-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .logout-button {
+        width: 100%;
+        justify-self: stretch;
+        justify-content: center;
+        text-align: center;
+      }
+
       .rail-meta {
         margin-top: 2px;
       }
@@ -2958,6 +2971,13 @@
             <div class="view-tabs rail-toggle-row">
               <button class="view-tab active" data-view="overview">Overview</button>
               <button class="view-tab" data-view="assistant">Assistant</button>
+            </div>
+          </div>
+
+          <div class="rail-group">
+            <span class="rail-label">Session</span>
+            <div class="rail-action-row">
+              <button id="logout-button" class="ghost-button logout-button" type="button" hidden>Sign Out</button>
             </div>
           </div>
 

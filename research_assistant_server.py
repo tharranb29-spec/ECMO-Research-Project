@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 
 import base64
+import hashlib
 import hmac
 import json
 import mimetypes
 import os
+import secrets
 import threading
 import time
 from collections import defaultdict
@@ -12,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, urlparse
+from urllib.parse import parse_qs, quote, urlparse
 from urllib import error, request
 
 from build_dashboard_bundle import main as build_dashboard_bundle_main
@@ -36,6 +38,8 @@ AUTO_RESEARCH_RUNTIME_PATH = ROOT / "outputs" / "research_runtime_status.json"
 MAX_JSON_BODY_BYTES = int(os.environ.get("ECMO_MAX_JSON_BODY_BYTES", "65536"))
 MAX_QUESTION_CHARS = int(os.environ.get("ECMO_MAX_QUESTION_CHARS", "2000"))
 MAX_EXTRA_CONTEXT_CHARS = int(os.environ.get("ECMO_MAX_EXTRA_CONTEXT_CHARS", "12000"))
+LOGIN_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_LOGIN_RATE_LIMIT_COUNT", "10"))
+LOGIN_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_LOGIN_RATE_LIMIT_WINDOW_SECONDS", "300"))
 CHAT_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_COUNT", "20"))
 CHAT_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_WINDOW_SECONDS", "300"))
 REFRESH_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_REFRESH_RATE_LIMIT_COUNT", "6"))
@@ -48,11 +52,19 @@ ALLOWED_ORIGINS = {
 BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
 BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
 BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
+APP_LOGIN_USER = os.environ.get("ECMO_APP_LOGIN_USER", "").strip()
+APP_LOGIN_PASSWORD = os.environ.get("ECMO_APP_LOGIN_PASSWORD", "")
+APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "")
+APP_SESSION_TTL_HOURS = int(os.environ.get("ECMO_SESSION_TTL_HOURS", "24"))
+APP_LOGIN_ENABLED = bool(APP_LOGIN_USER and APP_LOGIN_PASSWORD and APP_SESSION_SECRET)
+APP_SESSION_COOKIE_NAME = "ecmo_session"
 
 STATIC_FILES = {
     "/": ROOT / "dashboard.html",
     "/dashboard.html": ROOT / "dashboard.html",
     "/dashboard.js": ROOT / "dashboard.js",
+    "/login.html": ROOT / "login.html",
+    "/login.js": ROOT / "login.js",
     "/protein-viewer.js": ROOT / "protein-viewer.js",
     "/structure-showcase.html": ROOT / "structure-showcase.html",
     "/dashboard-data.js": ROOT / "dashboard-data.js",
@@ -486,6 +498,21 @@ def normalized_origin(origin):
     return (origin or "").strip().rstrip("/")
 
 
+def safe_next_path(raw_value):
+    if not raw_value:
+        return "/"
+    parsed = urlparse(raw_value)
+    if parsed.scheme or parsed.netloc:
+        return "/"
+    path = parsed.path or "/"
+    if not path.startswith("/"):
+        return "/"
+    if path == "/login.html":
+        return "/"
+    query = f"?{parsed.query}" if parsed.query else ""
+    return f"{path}{query}"
+
+
 def prune_rate_limit_bucket(entries, window_seconds, now=None):
     cutoff = (now or time.time()) - window_seconds
     while entries and entries[0] < cutoff:
@@ -503,6 +530,57 @@ def rate_limit_check(client_key, bucket_name, limit_count, window_seconds):
             return False, retry_after
         entries.append(now)
     return True, 0
+
+
+def _urlsafe_b64encode(raw_bytes):
+    return base64.urlsafe_b64encode(raw_bytes).decode("ascii").rstrip("=")
+
+
+def _urlsafe_b64decode(encoded):
+    padding = "=" * (-len(encoded) % 4)
+    return base64.urlsafe_b64decode(encoded + padding)
+
+
+def build_app_session_token(username):
+    issued_at = int(time.time())
+    expires_at = issued_at + max(1, APP_SESSION_TTL_HOURS) * 3600
+    payload = {
+        "u": username,
+        "iat": issued_at,
+        "exp": expires_at,
+        "nonce": secrets.token_hex(8),
+    }
+    raw_payload = json.dumps(payload, separators=(",", ":"), ensure_ascii=True).encode("utf-8")
+    secret = APP_SESSION_SECRET.encode("utf-8")
+    signature = hmac.new(secret, raw_payload, hashlib.sha256).digest()
+    return f"{_urlsafe_b64encode(raw_payload)}.{_urlsafe_b64encode(signature)}"
+
+
+def parse_app_session_token(token):
+    if not APP_LOGIN_ENABLED or not token or "." not in token:
+        return None
+    payload_part, signature_part = token.split(".", 1)
+    try:
+        raw_payload = _urlsafe_b64decode(payload_part)
+        provided_signature = _urlsafe_b64decode(signature_part)
+    except Exception:  # noqa: BLE001
+        return None
+
+    expected_signature = hmac.new(APP_SESSION_SECRET.encode("utf-8"), raw_payload, hashlib.sha256).digest()
+    if not hmac.compare_digest(provided_signature, expected_signature):
+        return None
+
+    try:
+        payload = json.loads(raw_payload.decode("utf-8"))
+    except Exception:  # noqa: BLE001
+        return None
+
+    if payload.get("u") != APP_LOGIN_USER:
+        return None
+    exp = payload.get("exp")
+    if not isinstance(exp, int) or exp < int(time.time()):
+        return None
+    return payload
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -547,7 +625,36 @@ class Handler(BaseHTTPRequestHandler):
             return True
         return request_origin in ALLOWED_ORIGINS
 
+    def _request_path(self):
+        return urlparse(self.path).path
+
+    def _is_api_request(self, path=None):
+        return (path or self._request_path()).startswith("/api/")
+
+    def _parse_cookies(self):
+        cookies = {}
+        raw_header = self.headers.get("Cookie", "")
+        for entry in raw_header.split(";"):
+            name, separator, value = entry.strip().partition("=")
+            if separator and name:
+                cookies[name] = value
+        return cookies
+
+    def _app_session_payload(self):
+        if not APP_LOGIN_ENABLED:
+            return None
+        token = self._parse_cookies().get(APP_SESSION_COOKIE_NAME)
+        return parse_app_session_token(token)
+
+    def _is_secure_request(self):
+        proto = (self.headers.get("X-Forwarded-Proto") or "").strip().lower()
+        if proto:
+            return proto == "https"
+        return HOST not in {"127.0.0.1", "localhost"}
+
     def _is_authorized(self):
+        if APP_LOGIN_ENABLED:
+            return self._app_session_payload() is not None
         if not BASIC_AUTH_ENABLED:
             return True
         header = self.headers.get("Authorization", "")
@@ -562,13 +669,52 @@ class Handler(BaseHTTPRequestHandler):
             return False
         return hmac.compare_digest(username, BASIC_AUTH_USER) and hmac.compare_digest(password, BASIC_AUTH_PASSWORD)
 
-    def _send_auth_challenge(self):
+    def _send_redirect(self, location, cookie_value=None, expires=False):
+        self.send_response(HTTPStatus.SEE_OTHER)
+        self.send_header("Location", location)
+        self.send_header("Content-Length", "0")
+        self.send_header("Cache-Control", "no-store")
+        if cookie_value is not None or expires:
+            self.send_header("Set-Cookie", self._build_session_cookie(cookie_value or "", expires=expires))
+        for header_name, header_value in SECURITY_HEADERS.items():
+            self.send_header(header_name, header_value)
+        self.end_headers()
+
+    def _build_session_cookie(self, token, expires=False):
+        parts = [f"{APP_SESSION_COOKIE_NAME}={token}", "Path=/", "HttpOnly", "SameSite=Lax"]
+        if expires:
+            parts.append("Max-Age=0")
+            parts.append("Expires=Thu, 01 Jan 1970 00:00:00 GMT")
+        else:
+            parts.append(f"Max-Age={max(1, APP_SESSION_TTL_HOURS) * 3600}")
+        if self._is_secure_request():
+            parts.append("Secure")
+        return "; ".join(parts)
+
+    def _send_login_required(self, method="GET"):
+        if APP_LOGIN_ENABLED:
+            if self._is_api_request():
+                extra = {"login_required": True, "auth_mode": "app-login"}
+                body = json.dumps({"ok": False, "error": "Login required.", **extra}, ensure_ascii=False).encode("utf-8")
+                self.send_response(HTTPStatus.UNAUTHORIZED)
+                self.send_header("Set-Cookie", self._build_session_cookie("", expires=True))
+                self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
+                self.end_headers()
+                if method != "HEAD":
+                    self.wfile.write(body)
+                return
+
+            next_path = safe_next_path(self.path)
+            self._send_redirect(f"/login.html?next={quote(next_path, safe='')}", expires=True)
+            return
+
         body = json.dumps({"ok": False, "error": "Authentication required."}, ensure_ascii=False).encode("utf-8")
         self.send_response(HTTPStatus.UNAUTHORIZED)
         self.send_header("WWW-Authenticate", 'Basic realm="ECMO Research Dashboard"')
         self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
         self.end_headers()
-        self.wfile.write(body)
+        if method != "HEAD":
+            self.wfile.write(body)
 
     def _cache_control_for_path(self, path):
         if path.startswith("/api/"):
@@ -655,6 +801,8 @@ class Handler(BaseHTTPRequestHandler):
                     "auto_research_interval_seconds": AUTO_RESEARCH_INTERVAL_SECONDS,
                     "research_status": latest_research_status(),
                     "research_runtime": runtime_state_snapshot(),
+                    "app_login_enabled": APP_LOGIN_ENABLED,
+                    "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                 },
                 method=method,
             )
@@ -689,26 +837,84 @@ class Handler(BaseHTTPRequestHandler):
         self._send_file(parsed.path, file_path, method=method)
 
     def do_GET(self):
+        parsed = urlparse(self.path)
+        allowed_paths = {"/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
+        if APP_LOGIN_ENABLED and parsed.path == "/login.html" and self._is_authorized():
+            params = parse_qs(parsed.query or "")
+            self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
+            return
+        if APP_LOGIN_ENABLED and parsed.path in allowed_paths:
+            self._handle_get_like(method="GET")
+            return
         if not self._is_authorized():
-            self._send_auth_challenge()
+            self._send_login_required(method="GET")
             return
         self._handle_get_like(method="GET")
 
     def do_HEAD(self):
+        parsed = urlparse(self.path)
+        allowed_paths = {"/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
+        if APP_LOGIN_ENABLED and parsed.path == "/login.html" and self._is_authorized():
+            params = parse_qs(parsed.query or "")
+            self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
+            return
+        if APP_LOGIN_ENABLED and parsed.path in allowed_paths:
+            self._handle_get_like(method="HEAD")
+            return
         if not self._is_authorized():
-            self.send_response(HTTPStatus.UNAUTHORIZED)
-            self.send_header("WWW-Authenticate", 'Basic realm="ECMO Research Dashboard"')
-            self._send_common_headers(self.path, "application/json; charset=utf-8", 0)
-            self.end_headers()
+            self._send_login_required(method="HEAD")
             return
         self._handle_get_like(method="HEAD")
 
     def do_POST(self):
-        if not self._is_authorized():
-            self._send_auth_challenge()
-            return
         if not self._origin_allowed():
             self._send_error_json(HTTPStatus.FORBIDDEN, "Origin not allowed.")
+            return
+
+        if self.path == "/api/auth/login":
+            if not APP_LOGIN_ENABLED:
+                self._send_error_json(HTTPStatus.BAD_REQUEST, "Custom app login is not enabled.")
+                return
+            if not self._enforce_rate_limit("login", LOGIN_RATE_LIMIT_COUNT, LOGIN_RATE_LIMIT_WINDOW_SECONDS):
+                return
+            try:
+                payload = self._read_json_body()
+            except ValueError as exc:
+                status = HTTPStatus.REQUEST_ENTITY_TOO_LARGE if "too large" in str(exc).lower() else HTTPStatus.BAD_REQUEST
+                self._send_error_json(status, str(exc))
+                return
+
+            username = str(payload.get("username") or "").strip()
+            password = str(payload.get("password") or "")
+            next_path = safe_next_path(payload.get("next") or "/")
+            if not (
+                hmac.compare_digest(username, APP_LOGIN_USER)
+                and hmac.compare_digest(password, APP_LOGIN_PASSWORD)
+            ):
+                self._send_error_json(HTTPStatus.UNAUTHORIZED, "Invalid username or password.", extra={"login_required": True})
+                return
+
+            token = build_app_session_token(username)
+            body = json.dumps({"ok": True, "redirect_to": next_path}, ensure_ascii=False).encode("utf-8")
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Set-Cookie", self._build_session_cookie(token))
+            self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if self.path == "/api/auth/logout":
+            body = json.dumps({"ok": True, "logged_out": True}, ensure_ascii=False).encode("utf-8")
+            self.send_response(HTTPStatus.OK)
+            if APP_LOGIN_ENABLED:
+                self.send_header("Set-Cookie", self._build_session_cookie("", expires=True))
+            self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if not self._is_authorized():
+            self._send_login_required(method="POST")
             return
 
         if self.path == "/api/research/refresh":
