@@ -595,8 +595,14 @@
     viewButtons.forEach((button) => {
       button.classList.toggle("active", button.dataset.view === viewName);
     });
-    overviewView.classList.toggle("active", viewName === "overview");
-    assistantView.classList.toggle("active", viewName === "assistant");
+    const showingOverview = viewName === "overview";
+    const showingAssistant = viewName === "assistant";
+    overviewView.classList.toggle("active", showingOverview);
+    assistantView.classList.toggle("active", showingAssistant);
+    overviewView.hidden = !showingOverview;
+    assistantView.hidden = !showingAssistant;
+    overviewView.setAttribute("aria-hidden", showingOverview ? "false" : "true");
+    assistantView.setAttribute("aria-hidden", showingAssistant ? "false" : "true");
   }
 
   function renderMeta(rows) {
