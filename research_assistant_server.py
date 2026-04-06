@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 
+import base64
+import hmac
 import json
 import mimetypes
 import os
 import threading
 import time
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -30,6 +33,21 @@ AUTO_RESEARCH_ENABLED = os.environ.get("AUTO_RESEARCH_ENABLED", "1").strip().low
 AUTO_RESEARCH_INTERVAL_SECONDS = int(os.environ.get("AUTO_RESEARCH_INTERVAL_SECONDS", "3600"))
 AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
 AUTO_RESEARCH_RUNTIME_PATH = ROOT / "outputs" / "research_runtime_status.json"
+MAX_JSON_BODY_BYTES = int(os.environ.get("ECMO_MAX_JSON_BODY_BYTES", "65536"))
+MAX_QUESTION_CHARS = int(os.environ.get("ECMO_MAX_QUESTION_CHARS", "2000"))
+MAX_EXTRA_CONTEXT_CHARS = int(os.environ.get("ECMO_MAX_EXTRA_CONTEXT_CHARS", "12000"))
+CHAT_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_COUNT", "20"))
+CHAT_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_WINDOW_SECONDS", "300"))
+REFRESH_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_REFRESH_RATE_LIMIT_COUNT", "6"))
+REFRESH_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_REFRESH_RATE_LIMIT_WINDOW_SECONDS", "3600"))
+ALLOWED_ORIGINS = {
+    origin.strip().rstrip("/")
+    for origin in os.environ.get("ECMO_ALLOWED_ORIGINS", "").split(",")
+    if origin.strip()
+}
+BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
+BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
+BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
 
 STATIC_FILES = {
     "/": ROOT / "dashboard.html",
@@ -51,6 +69,29 @@ DATASET_PATHS = {
 
 RUNTIME_LOCK = threading.Lock()
 RUNTIME_STATE_GUARD = threading.Lock()
+RATE_LIMIT_GUARD = threading.Lock()
+RATE_LIMIT_BUCKETS = defaultdict(list)
+
+SECURITY_HEADERS = {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+    "Cross-Origin-Resource-Policy": "same-origin",
+    "Content-Security-Policy": (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; "
+        "img-src 'self' data: https:; "
+        "font-src 'self' data:; "
+        "connect-src 'self'; "
+        "object-src 'none'; "
+        "base-uri 'self'; "
+        "form-action 'self'; "
+        "frame-ancestors 'self'"
+    ),
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+}
 
 
 def utc_now_iso():
@@ -441,30 +482,164 @@ def maybe_schedule_stale_refresh(reason):
     return queue_refresh(reason)
 
 
-class Handler(BaseHTTPRequestHandler):
-    server_version = "ECMODashboard/0.1"
+def normalized_origin(origin):
+    return (origin or "").strip().rstrip("/")
 
-    def _send_json(self, payload, status=HTTPStatus.OK):
-        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
+
+def prune_rate_limit_bucket(entries, window_seconds, now=None):
+    cutoff = (now or time.time()) - window_seconds
+    while entries and entries[0] < cutoff:
+        entries.pop(0)
+
+
+def rate_limit_check(client_key, bucket_name, limit_count, window_seconds):
+    now = time.time()
+    key = f"{bucket_name}:{client_key}"
+    with RATE_LIMIT_GUARD:
+        entries = RATE_LIMIT_BUCKETS[key]
+        prune_rate_limit_bucket(entries, window_seconds, now=now)
+        if len(entries) >= limit_count:
+            retry_after = max(1, int(window_seconds - (now - entries[0])))
+            return False, retry_after
+        entries.append(now)
+    return True, 0
+
+
+class Handler(BaseHTTPRequestHandler):
+    server_version = "ECMODashboard"
+    sys_version = ""
+
+    def version_string(self):
+        return self.server_version
+
+    def _client_ip(self):
+        forwarded = self.headers.get("CF-Connecting-IP") or self.headers.get("X-Forwarded-For") or self.headers.get("X-Real-IP")
+        if forwarded:
+            return forwarded.split(",")[0].strip()
+        if self.client_address:
+            return self.client_address[0]
+        return "unknown"
+
+    def _request_origin(self):
+        origin = self.headers.get("Origin")
+        if origin:
+            return normalized_origin(origin)
+
+        referer = self.headers.get("Referer")
+        if referer:
+            parsed = urlparse(referer)
+            if parsed.scheme and parsed.netloc:
+                return normalized_origin(f"{parsed.scheme}://{parsed.netloc}")
+        return ""
+
+    def _expected_origin(self):
+        host = (self.headers.get("X-Forwarded-Host") or self.headers.get("Host") or "").strip()
+        proto = (self.headers.get("X-Forwarded-Proto") or "http").strip()
+        if not host:
+            return ""
+        return normalized_origin(f"{proto}://{host}")
+
+    def _origin_allowed(self):
+        request_origin = self._request_origin()
+        if not request_origin:
+            return True
+        if request_origin == self._expected_origin():
+            return True
+        return request_origin in ALLOWED_ORIGINS
+
+    def _is_authorized(self):
+        if not BASIC_AUTH_ENABLED:
+            return True
+        header = self.headers.get("Authorization", "")
+        if not header.startswith("Basic "):
+            return False
+        try:
+            decoded = base64.b64decode(header.split(" ", 1)[1]).decode("utf-8")
+        except Exception:  # noqa: BLE001
+            return False
+        username, separator, password = decoded.partition(":")
+        if not separator:
+            return False
+        return hmac.compare_digest(username, BASIC_AUTH_USER) and hmac.compare_digest(password, BASIC_AUTH_PASSWORD)
+
+    def _send_auth_challenge(self):
+        body = json.dumps({"ok": False, "error": "Authentication required."}, ensure_ascii=False).encode("utf-8")
+        self.send_response(HTTPStatus.UNAUTHORIZED)
+        self.send_header("WWW-Authenticate", 'Basic realm="ECMO Research Dashboard"')
+        self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
         self.end_headers()
         self.wfile.write(body)
 
-    def _send_file(self, path):
+    def _cache_control_for_path(self, path):
+        if path.startswith("/api/"):
+            return "no-store"
+        if path in {"/", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
+            return "no-store"
+        return "public, max-age=3600"
+
+    def _send_common_headers(self, path, content_type, content_length):
+        self.send_header("Content-Type", content_type)
+        self.send_header("Content-Length", str(content_length))
+        self.send_header("Cache-Control", self._cache_control_for_path(path))
+        for header_name, header_value in SECURITY_HEADERS.items():
+            self.send_header(header_name, header_value)
+
+    def _send_json(self, payload, status=HTTPStatus.OK, method="GET"):
+        body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        self.send_response(status)
+        self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
+        self.end_headers()
+        if method != "HEAD":
+            self.wfile.write(body)
+
+    def _send_file(self, url_path, path, method="GET"):
         if not path.exists() or not path.is_file():
             self.send_error(HTTPStatus.NOT_FOUND, "File not found")
             return
         body = path.read_bytes()
         mime, _ = mimetypes.guess_type(str(path))
         self.send_response(HTTPStatus.OK)
-        self.send_header("Content-Type", mime or "application/octet-stream")
-        self.send_header("Content-Length", str(len(body)))
+        self._send_common_headers(url_path, mime or "application/octet-stream", len(body))
+        self.end_headers()
+        if method != "HEAD":
+            self.wfile.write(body)
+
+    def _send_error_json(self, status, message, extra=None, method="GET"):
+        payload = {"ok": False, "error": message}
+        if extra:
+            payload.update(extra)
+        self._send_json(payload, status=status, method=method)
+
+    def _read_json_body(self):
+        try:
+            length = int(self.headers.get("Content-Length", "0"))
+        except ValueError:
+            raise ValueError("Invalid Content-Length header.")
+
+        if length <= 0:
+            return {}
+        if length > MAX_JSON_BODY_BYTES:
+            raise ValueError(f"Request body too large. Limit is {MAX_JSON_BODY_BYTES} bytes.")
+
+        raw = self.rfile.read(length).decode("utf-8")
+        try:
+            return json.loads(raw or "{}")
+        except json.JSONDecodeError as exc:
+            raise ValueError("Invalid JSON body.") from exc
+
+    def _enforce_rate_limit(self, bucket_name, limit_count, window_seconds):
+        allowed, retry_after = rate_limit_check(self._client_ip(), bucket_name, limit_count, window_seconds)
+        if allowed:
+            return True
+        body = json.dumps({"ok": False, "error": "Rate limit exceeded."}, ensure_ascii=False).encode("utf-8")
+        self.send_response(HTTPStatus.TOO_MANY_REQUESTS)
+        self.send_header("Retry-After", str(retry_after))
+        self._send_common_headers(self.path, "application/json; charset=utf-8", len(body))
         self.end_headers()
         self.wfile.write(body)
+        return False
 
-    def do_GET(self):
+    def _handle_get_like(self, method="GET"):
         parsed = urlparse(self.path)
 
         if parsed.path == "/api/status":
@@ -480,14 +655,13 @@ class Handler(BaseHTTPRequestHandler):
                     "auto_research_interval_seconds": AUTO_RESEARCH_INTERVAL_SECONDS,
                     "research_status": latest_research_status(),
                     "research_runtime": runtime_state_snapshot(),
-                    "host": HOST,
-                    "port": PORT,
-                }
+                },
+                method=method,
             )
             return
         if parsed.path == "/api/bundle":
             maybe_schedule_stale_refresh("bundle-poll")
-            self._send_json({"ok": True, **load_bundle()})
+            self._send_json({"ok": True, **load_bundle()}, method=method)
             return
         if parsed.path == "/api/structure":
             params = parse_qs(parsed.query or "")
@@ -495,29 +669,53 @@ class Handler(BaseHTTPRequestHandler):
             try:
                 body = fetch_pdb_text(pdb_id).encode("utf-8")
             except ValueError as exc:
-                self._send_json({"ok": False, "error": str(exc)}, status=HTTPStatus.BAD_REQUEST)
+                self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc), method=method)
                 return
             except RuntimeError as exc:
-                self._send_json({"ok": False, "error": str(exc)}, status=HTTPStatus.BAD_GATEWAY)
+                self._send_error_json(HTTPStatus.BAD_GATEWAY, str(exc), method=method)
                 return
 
             self.send_response(HTTPStatus.OK)
-            self.send_header("Content-Type", "chemical/x-pdb; charset=utf-8")
-            self.send_header("Content-Length", str(len(body)))
+            self._send_common_headers(parsed.path, "chemical/x-pdb; charset=utf-8", len(body))
             self.end_headers()
-            self.wfile.write(body)
+            if method != "HEAD":
+                self.wfile.write(body)
             return
 
         file_path = STATIC_FILES.get(parsed.path)
         if file_path is None:
             self.send_error(HTTPStatus.NOT_FOUND, "Not found")
             return
-        self._send_file(file_path)
+        self._send_file(parsed.path, file_path, method=method)
+
+    def do_GET(self):
+        if not self._is_authorized():
+            self._send_auth_challenge()
+            return
+        self._handle_get_like(method="GET")
+
+    def do_HEAD(self):
+        if not self._is_authorized():
+            self.send_response(HTTPStatus.UNAUTHORIZED)
+            self.send_header("WWW-Authenticate", 'Basic realm="ECMO Research Dashboard"')
+            self._send_common_headers(self.path, "application/json; charset=utf-8", 0)
+            self.end_headers()
+            return
+        self._handle_get_like(method="HEAD")
 
     def do_POST(self):
+        if not self._is_authorized():
+            self._send_auth_challenge()
+            return
+        if not self._origin_allowed():
+            self._send_error_json(HTTPStatus.FORBIDDEN, "Origin not allowed.")
+            return
+
         if self.path == "/api/research/refresh":
             if not AUTO_RESEARCH_ENABLED:
-                self._send_json({"ok": False, "error": "Autonomous research is disabled."}, status=HTTPStatus.BAD_REQUEST)
+                self._send_error_json(HTTPStatus.BAD_REQUEST, "Autonomous research is disabled.")
+                return
+            if not self._enforce_rate_limit("refresh", REFRESH_RATE_LIMIT_COUNT, REFRESH_RATE_LIMIT_WINDOW_SECONDS):
                 return
             started = queue_refresh("manual")
             self._send_json(
@@ -535,12 +733,14 @@ class Handler(BaseHTTPRequestHandler):
             self.send_error(HTTPStatus.NOT_FOUND, "Not found")
             return
 
-        length = int(self.headers.get("Content-Length", "0"))
-        raw = self.rfile.read(length).decode("utf-8")
         try:
-            payload = json.loads(raw or "{}")
-        except json.JSONDecodeError:
-            self._send_json({"ok": False, "error": "Invalid JSON body."}, status=HTTPStatus.BAD_REQUEST)
+            payload = self._read_json_body()
+        except ValueError as exc:
+            status = HTTPStatus.REQUEST_ENTITY_TOO_LARGE if "too large" in str(exc).lower() else HTTPStatus.BAD_REQUEST
+            self._send_error_json(status, str(exc))
+            return
+
+        if not self._enforce_rate_limit("chat", CHAT_RATE_LIMIT_COUNT, CHAT_RATE_LIMIT_WINDOW_SECONDS):
             return
 
         dataset_key = payload.get("dataset", "seed")
@@ -550,21 +750,29 @@ class Handler(BaseHTTPRequestHandler):
         extra_context = (payload.get("extra_context") or "").strip()
         history = payload.get("history") or []
 
+        if len(question) > MAX_QUESTION_CHARS:
+            self._send_error_json(HTTPStatus.BAD_REQUEST, f"Question is too long. Limit is {MAX_QUESTION_CHARS} characters.")
+            return
+        if len(extra_context) > MAX_EXTRA_CONTEXT_CHARS:
+            extra_context = extra_context[:MAX_EXTRA_CONTEXT_CHARS]
+        if not isinstance(history, list):
+            history = []
+        history = history[-8:]
+
         if not question:
-            self._send_json({"ok": False, "error": "Question is required."}, status=HTTPStatus.BAD_REQUEST)
+            self._send_error_json(HTTPStatus.BAD_REQUEST, "Question is required.")
             return
 
         try:
             result = call_model(dataset_key, question, extra_context, history)
         except RuntimeError as exc:
-            self._send_json(
-                {
-                    "ok": False,
-                    "error": str(exc),
+            self._send_error_json(
+                HTTPStatus.BAD_GATEWAY,
+                str(exc),
+                extra={
                     "live_assistant_enabled": provider_enabled(),
                     "provider": AI_PROVIDER,
                 },
-                status=HTTPStatus.BAD_GATEWAY,
             )
             return
 

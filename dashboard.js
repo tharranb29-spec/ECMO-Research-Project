@@ -821,18 +821,44 @@
       block.className = "target-block";
       const head = document.createElement("div");
       head.className = `target-head ${receptorClass(target)}`;
-      head.innerHTML = `<div><strong>${target}</strong><div class="mini-exp">${targetRows.length} visible candidate${targetRows.length === 1 ? "" : "s"}</div></div><div class="mini-score">${targetRows[0].predicted_score.toFixed(1)} top score</div>`;
+
+      const left = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = target;
+      const subtitle = document.createElement("div");
+      subtitle.className = "mini-exp";
+      subtitle.textContent = `${targetRows.length} visible candidate${targetRows.length === 1 ? "" : "s"}`;
+      left.append(title, subtitle);
+
+      const score = document.createElement("div");
+      score.className = "mini-score";
+      score.textContent = `${targetRows[0].predicted_score.toFixed(1)} top score`;
+      head.append(left, score);
 
       const list = document.createElement("div");
       list.className = "mini-list";
       targetRows.forEach((row) => {
         const item = document.createElement("div");
         item.className = "mini-row";
-        item.innerHTML = `
-          <div><div class="mini-name">${row.candidate_name}</div><div class="mini-exp">${row.modality}</div></div>
-          <div class="mini-exp">${row.explanation || "No explanation provided."}</div>
-          <div class="mini-score">${row.predicted_score.toFixed(1)}</div>
-        `;
+
+        const nameBlock = document.createElement("div");
+        const name = document.createElement("div");
+        name.className = "mini-name";
+        name.textContent = row.candidate_name;
+        const modality = document.createElement("div");
+        modality.className = "mini-exp";
+        modality.textContent = row.modality;
+        nameBlock.append(name, modality);
+
+        const explanation = document.createElement("div");
+        explanation.className = "mini-exp";
+        explanation.textContent = row.explanation || "No explanation provided.";
+
+        const rowScore = document.createElement("div");
+        rowScore.className = "mini-score";
+        rowScore.textContent = row.predicted_score.toFixed(1);
+
+        item.append(nameBlock, explanation, rowScore);
         list.append(item);
       });
 
@@ -853,7 +879,12 @@
       const head = document.createElement("div");
       head.className = `target-head ${receptorClass(target)}`;
       const mae = data.metrics && typeof data.metrics[target] === "number" ? data.metrics[target].toFixed(1) : "n/a";
-      head.innerHTML = `<strong>${target} Weights</strong><div class="mini-score">Validation error: ${mae} pts</div>`;
+      const title = document.createElement("strong");
+      title.textContent = `${target} Weights`;
+      const score = document.createElement("div");
+      score.className = "mini-score";
+      score.textContent = `Validation error: ${mae} pts`;
+      head.append(title, score);
 
       const list = document.createElement("div");
       list.className = "weight-list";
@@ -864,7 +895,11 @@
           item.className = "weight-item";
           const top = document.createElement("div");
           top.className = "weight-top";
-          top.innerHTML = `<span>${FEATURE_LABELS[feature] || feature}</span><strong>${weight.toFixed(3)}</strong>`;
+          const featureLabel = document.createElement("span");
+          featureLabel.textContent = FEATURE_LABELS[feature] || feature;
+          const weightValue = document.createElement("strong");
+          weightValue.textContent = weight.toFixed(3);
+          top.append(featureLabel, weightValue);
           const bar = document.createElement("div");
           bar.className = "bar";
           const fill = document.createElement("div");
@@ -908,7 +943,17 @@
       block.className = "target-block";
       const head = document.createElement("div");
       head.className = `target-head ${receptorClass(lead.target_receptor)}`;
-      head.innerHTML = `<div><strong>${lead.candidate_name}</strong><div class="mini-exp">${lead.target_receptor} • ${lead.modality_guess}</div></div><div class="mini-score">${lead.lead_score}</div>`;
+      const left = document.createElement("div");
+      const title = document.createElement("strong");
+      title.textContent = lead.candidate_name;
+      const subtitle = document.createElement("div");
+      subtitle.className = "mini-exp";
+      subtitle.textContent = `${lead.target_receptor} • ${lead.modality_guess}`;
+      left.append(title, subtitle);
+      const score = document.createElement("div");
+      score.className = "mini-score";
+      score.textContent = String(lead.lead_score);
+      head.append(left, score);
 
       const list = document.createElement("div");
       list.className = "weight-list";
