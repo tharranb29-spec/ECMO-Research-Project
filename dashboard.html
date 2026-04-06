@@ -6,29 +6,32 @@
     <title>ECMO Research Assistant Dashboard</title>
     <style>
       :root {
-        --bg: #f3f6fb;
+        --bg: #eef3f9;
         --panel: rgba(255, 255, 255, 0.88);
         --panel-strong: #ffffff;
-        --ink: #132540;
-        --muted: #637289;
-        --line: rgba(19, 37, 64, 0.11);
-        --accent: #145df2;
-        --accent-strong: #0c43af;
-        --accent-soft: rgba(20, 93, 242, 0.10);
-        --teal: #0b7f73;
-        --teal-soft: rgba(11, 127, 115, 0.12);
-        --gold: #b97a11;
-        --gold-soft: rgba(185, 122, 17, 0.12);
+        --ink: #10243e;
+        --muted: #5d6b80;
+        --line: rgba(16, 36, 62, 0.11);
+        --accent: #155cf4;
+        --accent-strong: #0c45b4;
+        --accent-soft: rgba(21, 92, 244, 0.10);
+        --teal: #0d8275;
+        --teal-soft: rgba(13, 130, 117, 0.12);
+        --gold: #b88112;
+        --gold-soft: rgba(184, 129, 18, 0.12);
         --rose-soft: rgba(203, 89, 116, 0.10);
-        --ink-soft: rgba(19, 37, 64, 0.05);
+        --ink-soft: rgba(16, 36, 62, 0.05);
         --siglec: #e8f1ff;
-        --sirpa: #e8f8ef;
+        --sirpa: #e7f7ee;
         --advance: #117a4d;
-        --secondary: #af6d05;
+        --secondary: #a96b05;
         --hold: #b45309;
         --reject: #b42318;
-        --shadow: 0 28px 70px rgba(19, 37, 64, 0.12);
-        --shadow-soft: 0 16px 34px rgba(19, 37, 64, 0.08);
+        --shadow: 0 34px 82px rgba(16, 36, 62, 0.12);
+        --shadow-soft: 0 18px 38px rgba(16, 36, 62, 0.08);
+        --radius-xl: 30px;
+        --radius-lg: 22px;
+        --radius-md: 18px;
       }
 
       * {
@@ -37,20 +40,22 @@
 
       html {
         -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
       }
 
       body {
         margin: 0;
+        min-height: 100vh;
         color: var(--ink);
         font-family: Arial, Calibri, sans-serif;
         overflow-x: hidden;
         position: relative;
         isolation: isolate;
         background:
-          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.15), transparent 26%),
-          radial-gradient(circle at 100% 10%, rgba(11, 127, 115, 0.12), transparent 24%),
-          radial-gradient(circle at 50% 100%, rgba(185, 122, 17, 0.08), transparent 28%),
-          linear-gradient(180deg, #fbfcff 0%, #eef3fa 52%, #edf4fb 100%);
+          radial-gradient(circle at 0% 0%, rgba(21, 92, 244, 0.14), transparent 24%),
+          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.10), transparent 22%),
+          radial-gradient(circle at 52% 110%, rgba(184, 129, 18, 0.08), transparent 24%),
+          linear-gradient(180deg, #fafcff 0%, #eef3f9 52%, #e7edf6 100%);
       }
 
       body::before,
@@ -64,18 +69,18 @@
 
       body::before {
         background:
-          radial-gradient(circle at 12% 12%, rgba(20, 93, 242, 0.08), transparent 18%),
-          radial-gradient(circle at 85% 20%, rgba(11, 127, 115, 0.07), transparent 16%),
-          radial-gradient(circle at 65% 88%, rgba(185, 122, 17, 0.06), transparent 18%);
+          radial-gradient(circle at 12% 14%, rgba(21, 92, 244, 0.08), transparent 16%),
+          radial-gradient(circle at 84% 18%, rgba(13, 130, 117, 0.08), transparent 18%),
+          radial-gradient(circle at 68% 88%, rgba(184, 129, 18, 0.06), transparent 18%);
         filter: blur(2px);
       }
 
       body::after {
         background-image:
-          linear-gradient(rgba(19, 37, 64, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(19, 37, 64, 0.03) 1px, transparent 1px);
+          linear-gradient(rgba(16, 36, 62, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(16, 36, 62, 0.03) 1px, transparent 1px);
         background-size: 44px 44px;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 65%);
+        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.12), transparent 70%);
         opacity: 0.55;
       }
 
@@ -84,37 +89,46 @@
         max-width: 100%;
       }
 
+      input,
+      textarea,
+      button {
+        font: inherit;
+      }
+
       .shell {
-        width: min(1380px, calc(100% - 28px));
-        margin: 18px auto 48px;
+        width: min(1520px, calc(100% - 32px));
+        margin: 18px auto 42px;
+        display: grid;
+        gap: 18px;
       }
 
       .masthead {
-        display: grid;
-        gap: 22px;
-        padding: 34px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        border-radius: 36px;
-        background:
-          linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(239, 245, 255, 0.93)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.09), transparent 30%);
-        box-shadow: var(--shadow);
         position: relative;
         overflow: hidden;
-        align-items: center;
+        display: grid;
+        gap: 22px;
+        padding: 30px;
+        border-radius: 36px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.09), transparent 28%);
+        box-shadow: var(--shadow);
       }
 
       .masthead::before {
         content: "";
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.13), transparent 26%),
-          radial-gradient(circle at 0% 100%, rgba(11, 127, 115, 0.08), transparent 24%);
         pointer-events: none;
+        background:
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.11), transparent 24%),
+          radial-gradient(circle at 0% 100%, rgba(13, 130, 117, 0.07), transparent 24%);
       }
 
       .brand-row {
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
@@ -130,20 +144,20 @@
       }
 
       .brand-mark {
-        width: 108px;
-        height: 108px;
-        border-radius: 30px;
+        width: 104px;
+        height: 104px;
+        border-radius: 28px;
         display: grid;
         place-items: center;
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 245, 255, 0.92));
-        box-shadow: 0 18px 38px rgba(20, 93, 242, 0.16);
-        border: 1px solid rgba(20, 93, 242, 0.10);
         overflow: hidden;
+        border: 1px solid rgba(21, 92, 244, 0.12);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 255, 0.92));
+        box-shadow: 0 18px 38px rgba(21, 92, 244, 0.15);
       }
 
       .brand-mark img {
-        width: 90px;
-        height: 90px;
+        width: 86px;
+        height: 86px;
         object-fit: contain;
       }
 
@@ -155,10 +169,11 @@
 
       .brand-eyebrow {
         margin: 0;
-        font-size: 0.8rem;
+        color: var(--accent);
+        font-size: 0.78rem;
+        font-weight: 700;
         letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: var(--accent);
       }
 
       .institution,
@@ -166,16 +181,21 @@
         margin: 0;
       }
 
+      .institution {
+        font-size: 1.06rem;
+        font-weight: 700;
+      }
+
       .program {
         color: var(--muted);
       }
 
       .brand-badge {
-        max-width: 340px;
+        max-width: 360px;
         padding: 18px;
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.88);
-        border: 1px solid rgba(20, 93, 242, 0.11);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(21, 92, 244, 0.10);
         box-shadow: var(--shadow-soft);
         min-width: 0;
       }
@@ -183,21 +203,23 @@
       .brand-badge strong {
         display: block;
         margin-bottom: 8px;
-        font-size: 0.9rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
         color: var(--accent-strong);
+        font-size: 0.86rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
       }
 
       .brand-badge p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.68;
       }
 
       .title-grid {
+        position: relative;
+        z-index: 1;
         display: grid;
-        grid-template-columns: 0.84fr 1.16fr;
+        grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
         gap: 20px;
         align-items: stretch;
       }
@@ -210,9 +232,9 @@
       .title-stack h1 {
         margin: 0;
         font-family: "Times New Roman", Times, serif;
-        font-size: clamp(2rem, 4.25vw, 3.7rem);
+        font-size: clamp(2.1rem, 4.1vw, 4rem);
         line-height: 0.98;
-        letter-spacing: -0.018em;
+        letter-spacing: -0.02em;
         text-wrap: balance;
         overflow-wrap: anywhere;
       }
@@ -220,7 +242,7 @@
       .title-stack h2 {
         margin: 0;
         color: var(--teal);
-        font-size: clamp(0.96rem, 1.35vw, 1.25rem);
+        font-size: clamp(1rem, 1.35vw, 1.28rem);
         line-height: 1.38;
         text-wrap: balance;
         overflow-wrap: anywhere;
@@ -228,42 +250,29 @@
 
       .title-stack p {
         margin: 0;
+        max-width: 62ch;
         color: var(--muted);
-        line-height: 1.58;
-        max-width: 58ch;
-      }
-
-      .insight-card {
-        padding: 24px;
-        border-radius: 28px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        background:
-          linear-gradient(155deg, rgba(255,255,255,0.97), rgba(233, 242, 255, 0.82)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.05), transparent 28%);
-        display: grid;
-        gap: 14px;
-        box-shadow: var(--shadow-soft);
+        line-height: 1.65;
+        font-size: 1.01rem;
       }
 
       .presentation-stage {
         display: grid;
-        gap: 16px;
+        gap: 14px;
         min-width: 0;
         align-content: start;
       }
 
       .structure-card {
         display: grid;
-        grid-template-rows: auto auto auto auto;
         gap: 12px;
-        padding: 20px;
+        padding: 18px;
         border-radius: 28px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        background:
-          linear-gradient(160deg, rgba(255,255,255,0.97), rgba(234, 242, 252, 0.94)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.08), transparent 34%);
-        min-height: 0;
         overflow: hidden;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(235, 243, 253, 0.94)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.08), transparent 28%);
         box-shadow: var(--shadow-soft);
       }
 
@@ -276,44 +285,69 @@
 
       .structure-head h3 {
         margin: 0;
-        font-size: 1rem;
+        color: var(--accent-strong);
+        font-size: 0.98rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--accent-strong);
       }
 
       .structure-head p {
         margin: 6px 0 0;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.55;
       }
 
       .projection-chip {
-        padding: 9px 12px;
+        padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(20, 93, 242, 0.10);
+        background: rgba(21, 92, 244, 0.10);
         color: var(--accent-strong);
         font-size: 0.84rem;
         font-weight: 700;
         white-space: nowrap;
       }
 
+      .structure-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .structure-tab {
+        border: 1px solid rgba(16, 36, 62, 0.1);
+        border-radius: 999px;
+        padding: 9px 12px;
+        background: rgba(255, 255, 255, 0.94);
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+      }
+
+      .structure-tab.active {
+        color: #fff;
+        border-color: transparent;
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        box-shadow: 0 14px 28px rgba(21, 92, 244, 0.2);
+      }
+
       .structure-viewer {
         position: relative;
-        height: clamp(260px, 30vw, 340px);
-        min-height: 260px;
-        border-radius: 24px;
+        min-height: 270px;
+        height: clamp(270px, 30vw, 350px);
         overflow: hidden;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border-radius: 24px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          radial-gradient(circle at 50% 36%, rgba(255,255,255,0.98), rgba(231, 239, 249, 0.90) 58%, rgba(218, 228, 241, 0.76));
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+          radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.99), rgba(232, 239, 249, 0.9) 56%, rgba(220, 229, 242, 0.78));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
       }
 
       .structure-canvas {
         width: 100%;
         height: 100%;
-        min-height: 260px;
+        min-height: 270px;
         display: block;
       }
 
@@ -335,8 +369,8 @@
       .structure-tag {
         padding: 8px 11px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.84);
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         color: var(--muted);
         font-size: 0.84rem;
       }
@@ -344,59 +378,45 @@
       .structure-actions {
         display: grid;
         gap: 10px;
-        align-items: start;
-      }
-
-      .structure-tabs {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-
-      .structure-tab {
-        border: 1px solid rgba(19, 37, 64, 0.10);
-        border-radius: 999px;
-        padding: 9px 12px;
-        background: rgba(255, 255, 255, 0.92);
-        color: var(--muted);
-        font: inherit;
-        font-size: 0.88rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-
-      .structure-tab.active {
-        color: white;
-        border-color: transparent;
-        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-        box-shadow: 0 12px 24px rgba(20, 93, 242, 0.18);
       }
 
       .compact-note {
         margin: 0;
         color: var(--muted);
         font-size: 0.92rem;
-        line-height: 1.5;
+        line-height: 1.58;
       }
 
       .ghost-button {
-        border: 1px solid rgba(20, 93, 242, 0.16);
+        border: 1px solid rgba(21, 92, 244, 0.16);
         border-radius: 999px;
         padding: 11px 15px;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 0.92);
         color: var(--accent-strong);
-        font: inherit;
         font-weight: 700;
         cursor: pointer;
         justify-self: start;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+
+      .insight-card {
+        display: grid;
+        gap: 14px;
+        padding: 22px;
+        border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(155deg, rgba(255, 255, 255, 0.97), rgba(235, 243, 252, 0.84)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.05), transparent 26%);
+        box-shadow: var(--shadow-soft);
       }
 
       .insight-card h3 {
         margin: 0;
-        font-size: 0.98rem;
+        color: var(--accent-strong);
+        font-size: 0.96rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--accent-strong);
       }
 
       .insight-list {
@@ -407,23 +427,27 @@
       .insight-item {
         padding: 12px 14px;
         border-radius: 18px;
-        background: rgba(255, 255, 255, 0.84);
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.88);
         color: var(--muted);
-        line-height: 1.6;
+        line-height: 1.65;
       }
 
       .controls {
+        position: sticky;
+        top: 12px;
+        z-index: 20;
         display: grid;
         gap: 16px;
-        margin-top: 20px;
         padding: 18px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
         border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.94), rgba(241,247,255,0.90)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.07), transparent 26%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(242, 247, 255, 0.88)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.06), transparent 26%);
         box-shadow: var(--shadow-soft);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
       }
 
       .controls-top {
@@ -435,7 +459,8 @@
       }
 
       .toggle-row,
-      .view-tabs {
+      .view-tabs,
+      .quick-prompts {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -443,15 +468,14 @@
 
       .toggle,
       .view-tab {
-        border: 1px solid var(--line);
+        border: 1px solid rgba(16, 36, 62, 0.12);
         border-radius: 999px;
         padding: 11px 16px;
-        background: #fff;
+        background: rgba(255, 255, 255, 0.96);
         color: var(--muted);
-        font: inherit;
         cursor: pointer;
-        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
         white-space: nowrap;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
       }
 
       .toggle:hover,
@@ -464,15 +488,15 @@
       .structure-tab:hover,
       .viewer-tab:hover {
         transform: translateY(-1px);
-        box-shadow: 0 14px 28px rgba(19, 37, 64, 0.08);
+        box-shadow: 0 14px 28px rgba(16, 36, 62, 0.08);
       }
 
       .toggle.active,
       .view-tab.active {
-        color: white;
+        color: #fff;
         border-color: transparent;
         background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-        box-shadow: 0 14px 30px rgba(20, 93, 242, 0.22);
+        box-shadow: 0 14px 30px rgba(21, 92, 244, 0.22);
       }
 
       .meta {
@@ -484,104 +508,24 @@
       .meta-chip {
         padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(19, 37, 64, 0.06);
+        background: rgba(16, 36, 62, 0.06);
         color: var(--muted);
         font-size: 0.92rem;
       }
 
       .search-row {
         display: grid;
-        grid-template-columns: 1fr 340px;
+        grid-template-columns: minmax(0, 1fr) 360px;
         gap: 12px;
-      }
-
-      .briefing-strip {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 18px;
-      }
-
-      .briefing-card {
-        position: relative;
-        display: grid;
-        gap: 10px;
-        padding: 18px 18px 16px;
-        border-radius: 24px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(242,247,255,0.9)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.05), transparent 28%);
-        box-shadow: var(--shadow-soft);
-        overflow: hidden;
-      }
-
-      .briefing-card::before {
-        content: "";
-        position: absolute;
-        inset: 0 auto 0 0;
-        width: 4px;
-        background: linear-gradient(180deg, var(--accent), rgba(20, 93, 242, 0.18));
-      }
-
-      .briefing-card.teal::before {
-        background: linear-gradient(180deg, var(--teal), rgba(11, 127, 115, 0.18));
-      }
-
-      .briefing-card.gold::before {
-        background: linear-gradient(180deg, var(--gold), rgba(185, 122, 17, 0.18));
-      }
-
-      .briefing-card.ink::before {
-        background: linear-gradient(180deg, var(--ink), rgba(19, 37, 64, 0.22));
-      }
-
-      .briefing-label {
-        margin: 0;
-        font-size: 0.76rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-
-      .briefing-value {
-        margin: 0;
-        font-size: 1.28rem;
-        line-height: 1.12;
-        color: var(--ink);
-      }
-
-      .briefing-copy {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.94rem;
-        line-height: 1.55;
-      }
-
-      .briefing-chip {
-        justify-self: start;
-        padding: 7px 11px;
-        border-radius: 999px;
-        background: rgba(19, 37, 64, 0.06);
-        color: var(--muted);
-        font-size: 0.8rem;
-        font-weight: 700;
-      }
-
-      input,
-      textarea,
-      button {
-        font: inherit;
       }
 
       .search-input,
       .question-input,
       .context-input {
         width: 100%;
-        border: 1px solid rgba(19, 37, 64, 0.14);
+        border: 1px solid rgba(16, 36, 62, 0.14);
         border-radius: 18px;
-        background: rgba(255, 255, 255, 0.94);
+        background: rgba(255, 255, 255, 0.96);
         color: var(--ink);
         padding: 14px 16px;
       }
@@ -596,16 +540,89 @@
       .question-input:focus,
       .context-input:focus {
         outline: none;
-        border-color: rgba(20, 93, 242, 0.48);
-        box-shadow: 0 0 0 4px rgba(20, 93, 242, 0.10);
+        border-color: rgba(21, 92, 244, 0.46);
+        box-shadow: 0 0 0 4px rgba(21, 92, 244, 0.10);
       }
 
       .hint {
         padding: 14px 16px;
         border-radius: 18px;
-        background: rgba(11, 127, 115, 0.08);
+        background: rgba(13, 130, 117, 0.08);
         color: var(--teal);
         line-height: 1.6;
+      }
+
+      .briefing-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .briefing-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border-radius: 24px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(243, 247, 253, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.05), transparent 28%);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .briefing-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), rgba(21, 92, 244, 0.18));
+      }
+
+      .briefing-card.teal::before {
+        background: linear-gradient(180deg, var(--teal), rgba(13, 130, 117, 0.18));
+      }
+
+      .briefing-card.gold::before {
+        background: linear-gradient(180deg, var(--gold), rgba(184, 129, 18, 0.18));
+      }
+
+      .briefing-card.ink::before {
+        background: linear-gradient(180deg, var(--ink), rgba(16, 36, 62, 0.22));
+      }
+
+      .briefing-label {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .briefing-value {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1.22rem;
+        line-height: 1.12;
+      }
+
+      .briefing-copy {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+        line-height: 1.58;
+      }
+
+      .briefing-chip {
+        justify-self: start;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(16, 36, 62, 0.06);
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 700;
       }
 
       .view {
@@ -624,47 +641,60 @@
       }
 
       .stat {
-        padding: 22px;
-        border-radius: 24px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(245, 249, 255, 0.92));
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        position: relative;
+        overflow: hidden;
+        padding: 20px 20px 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(245, 249, 255, 0.92));
         box-shadow: var(--shadow-soft);
+      }
+
+      .stat::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), rgba(21, 92, 244, 0.12));
       }
 
       .stat-label {
         margin: 0;
         color: var(--muted);
-        font-size: 0.92rem;
+        font-size: 0.9rem;
       }
 
       .stat-value {
         margin: 10px 0 0;
-        font-size: clamp(1.85rem, 3vw, 2.5rem);
+        font-size: clamp(1.8rem, 3vw, 2.55rem);
         line-height: 1.02;
       }
 
       .overview-grid {
         display: grid;
-        grid-template-columns: 1.08fr 0.92fr;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
         gap: 18px;
         margin-top: 18px;
+        align-items: start;
       }
 
       .overview-stack,
       .assistant-stack {
         display: grid;
         gap: 18px;
+        align-content: start;
       }
 
       .panel {
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        border-radius: 30px;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,249,255,0.90)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.04), transparent 26%);
-        box-shadow: var(--shadow-soft);
-        overflow: hidden;
         position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(245, 249, 255, 0.9)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.04), transparent 24%);
+        box-shadow: var(--shadow-soft);
       }
 
       .panel::before {
@@ -672,7 +702,7 @@
         position: absolute;
         inset: 0;
         pointer-events: none;
-        background: linear-gradient(180deg, rgba(255,255,255,0.2), transparent 28%);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent 28%);
       }
 
       .panel-head {
@@ -680,11 +710,11 @@
         justify-content: space-between;
         gap: 14px;
         align-items: flex-start;
-        padding: 22px 24px 16px;
-        border-bottom: 1px solid rgba(19, 37, 64, 0.08);
+        padding: 20px 22px 16px;
+        border-bottom: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.9), rgba(246,249,255,0.78)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.07), transparent 30%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(246, 249, 255, 0.8)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.07), transparent 30%);
       }
 
       .panel-head h2,
@@ -695,7 +725,7 @@
       .panel-head p {
         margin: 8px 0 0;
         color: var(--muted);
-        line-height: 1.5;
+        line-height: 1.55;
       }
 
       .leaderboard {
@@ -705,22 +735,34 @@
       }
 
       .candidate-card {
+        position: relative;
+        overflow: hidden;
         display: grid;
         gap: 14px;
         padding: 20px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        border-radius: 26px;
-        background: rgba(255, 255, 255, 0.92);
+        border-radius: 24px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.95);
         min-width: 0;
-        box-shadow: 0 12px 28px rgba(19, 37, 64, 0.06);
+        box-shadow: 0 12px 28px rgba(16, 36, 62, 0.06);
+      }
+
+      .candidate-card::before {
+        content: "";
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 4px;
+        background: linear-gradient(180deg, var(--accent), rgba(21, 92, 244, 0.16));
       }
 
       .candidate-card.siglec {
-        background: linear-gradient(180deg, rgba(232, 241, 255, 0.92), rgba(255,255,255,0.98));
+        background:
+          linear-gradient(180deg, rgba(232, 241, 255, 0.96), rgba(255, 255, 255, 0.98));
       }
 
       .candidate-card.sirpa {
-        background: linear-gradient(180deg, rgba(232, 248, 239, 0.92), rgba(255,255,255,0.98));
+        background:
+          linear-gradient(180deg, rgba(231, 247, 238, 0.96), rgba(255, 255, 255, 0.98));
       }
 
       .candidate-top {
@@ -733,7 +775,7 @@
 
       .candidate-title {
         margin: 0;
-        font-size: 1.28rem;
+        font-size: 1.2rem;
         overflow-wrap: anywhere;
       }
 
@@ -743,33 +785,33 @@
       }
 
       .score-block {
-        min-width: 132px;
+        min-width: 136px;
         text-align: right;
       }
 
       .score {
         margin: 0;
-        font-size: 2.25rem;
+        font-size: 2.2rem;
         line-height: 1;
       }
 
       .score-label {
         margin: 8px 0 0;
         color: var(--muted);
-        font-size: 0.92rem;
+        font-size: 0.9rem;
       }
 
       .bar {
-        height: 12px;
-        border-radius: 999px;
-        background: rgba(19, 37, 64, 0.08);
+        height: 10px;
         overflow: hidden;
+        border-radius: 999px;
+        background: rgba(16, 36, 62, 0.08);
       }
 
       .bar-fill {
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(90deg, #22c576, #145df2);
+        background: linear-gradient(90deg, #22c576, #155cf4);
       }
 
       .tag-row,
@@ -787,16 +829,35 @@
         font-weight: 700;
       }
 
-      .advance { background: rgba(17, 122, 77, 0.12); color: var(--advance); }
-      .secondary { background: rgba(175, 109, 5, 0.12); color: var(--secondary); }
-      .hold { background: rgba(180, 83, 9, 0.12); color: var(--hold); }
-      .reject { background: rgba(180, 35, 24, 0.12); color: var(--reject); }
-      .target-tag { background: rgba(19, 37, 64, 0.06); color: var(--ink); }
+      .advance {
+        background: rgba(17, 122, 77, 0.12);
+        color: var(--advance);
+      }
+
+      .secondary {
+        background: rgba(169, 107, 5, 0.12);
+        color: var(--secondary);
+      }
+
+      .hold {
+        background: rgba(180, 83, 9, 0.12);
+        color: var(--hold);
+      }
+
+      .reject {
+        background: rgba(180, 35, 24, 0.12);
+        color: var(--reject);
+      }
+
+      .target-tag {
+        background: rgba(16, 36, 62, 0.06);
+        color: var(--ink);
+      }
 
       .candidate-copy {
         margin: 0;
         color: var(--muted);
-        line-height: 1.56;
+        line-height: 1.58;
       }
 
       .source-list a {
@@ -825,11 +886,11 @@
       .target-block,
       .weight-block,
       .directory-card {
-        border: 1px solid rgba(19, 37, 64, 0.08);
-        border-radius: 24px;
-        background: rgba(255, 255, 255, 0.92);
         overflow: hidden;
-        box-shadow: 0 12px 28px rgba(19, 37, 64, 0.05);
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 12px 28px rgba(16, 36, 62, 0.05);
       }
 
       .target-head,
@@ -842,8 +903,13 @@
         border-bottom: 1px solid var(--line);
       }
 
-      .target-head.siglec { background: var(--siglec); }
-      .target-head.sirpa { background: var(--sirpa); }
+      .target-head.siglec {
+        background: var(--siglec);
+      }
+
+      .target-head.sirpa {
+        background: var(--sirpa);
+      }
 
       .mini-list {
         display: grid;
@@ -851,7 +917,7 @@
 
       .mini-row {
         display: grid;
-        grid-template-columns: 1.05fr 0.95fr 96px;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) 96px;
         gap: 12px;
         padding: 16px 18px;
         border-top: 1px solid var(--line);
@@ -932,8 +998,8 @@
       .research-chip {
         padding: 8px 12px;
         border-radius: 999px;
-        background: rgba(255,255,255,0.9);
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         color: var(--muted);
         font-size: 0.82rem;
         font-weight: 700;
@@ -946,9 +1012,9 @@
       }
 
       .research-chip.warning {
-        background: rgba(175, 109, 5, 0.10);
+        background: rgba(169, 107, 5, 0.10);
         color: var(--secondary);
-        border-color: rgba(175, 109, 5, 0.12);
+        border-color: rgba(169, 107, 5, 0.12);
       }
 
       .research-chip.error {
@@ -969,10 +1035,10 @@
         gap: 8px;
         padding: 16px;
         border-radius: 18px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(243,248,255,0.92)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.04), transparent 26%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(243, 248, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.04), transparent 24%);
       }
 
       .research-runtime-label {
@@ -983,7 +1049,7 @@
       }
 
       .research-runtime-value {
-        font-size: 1.04rem;
+        font-size: 1.02rem;
         font-weight: 700;
         color: var(--ink);
       }
@@ -999,14 +1065,14 @@
         margin: 0 18px 18px;
         padding: 14px 16px;
         border-radius: 18px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         color: var(--muted);
         line-height: 1.55;
       }
 
       .research-runtime-alert.warning {
-        background: rgba(175, 109, 5, 0.08);
-        border-color: rgba(175, 109, 5, 0.12);
+        background: rgba(169, 107, 5, 0.08);
+        border-color: rgba(169, 107, 5, 0.12);
         color: var(--secondary);
       }
 
@@ -1017,8 +1083,8 @@
       }
 
       .research-runtime-alert.info {
-        background: rgba(20, 93, 242, 0.08);
-        border-color: rgba(20, 93, 242, 0.12);
+        background: rgba(21, 92, 244, 0.08);
+        border-color: rgba(21, 92, 244, 0.12);
         color: var(--accent-strong);
       }
 
@@ -1032,6 +1098,7 @@
         display: grid;
         grid-template-columns: minmax(0, 1.22fr) minmax(320px, 0.78fr);
         gap: 20px;
+        align-items: start;
       }
 
       .assistant-shell {
@@ -1039,8 +1106,8 @@
         gap: 16px;
         padding: 20px;
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.92), rgba(239,246,255,0.78)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.06), transparent 28%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(239, 246, 255, 0.8)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.06), transparent 28%);
       }
 
       .assistant-status {
@@ -1052,9 +1119,9 @@
       }
 
       .assistant-status.live {
-        background: rgba(20, 93, 242, 0.10);
+        background: rgba(21, 92, 244, 0.10);
         color: var(--accent-strong);
-        border-color: rgba(20, 93, 242, 0.12);
+        border-color: rgba(21, 92, 244, 0.12);
       }
 
       .assistant-status.fallback {
@@ -1065,7 +1132,7 @@
 
       .assistant-help {
         color: var(--muted);
-        line-height: 1.55;
+        line-height: 1.6;
       }
 
       .assistant-intro {
@@ -1084,10 +1151,10 @@
         gap: 12px;
         padding: 16px;
         border-radius: 24px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.95), rgba(242,247,255,0.92)),
-          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 26%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(242, 247, 255, 0.92)),
+          radial-gradient(circle at 0% 0%, rgba(21, 92, 244, 0.05), transparent 24%);
       }
 
       .assistant-toolbar {
@@ -1105,11 +1172,11 @@
 
       .assistant-title-group h3 {
         margin: 0;
-        font-size: 1.02rem;
+        color: var(--ink);
         font-family: Arial, Calibri, sans-serif;
+        font-size: 1.02rem;
         font-weight: 700;
         letter-spacing: 0.01em;
-        color: var(--ink);
       }
 
       .assistant-title-group p {
@@ -1131,8 +1198,8 @@
         gap: 8px;
         padding: 8px 13px;
         border-radius: 999px;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        background: rgba(255, 255, 255, 0.94);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         color: var(--muted);
         font-size: 0.82rem;
         font-family: Arial, Calibri, sans-serif;
@@ -1145,14 +1212,14 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: rgba(99, 114, 137, 0.42);
+        background: rgba(93, 107, 128, 0.42);
         flex: 0 0 auto;
       }
 
       .assistant-chip.primary {
-        background: rgba(20, 93, 242, 0.08);
+        background: rgba(21, 92, 244, 0.08);
         color: var(--accent-strong);
-        border-color: rgba(20, 93, 242, 0.12);
+        border-color: rgba(21, 92, 244, 0.12);
       }
 
       .assistant-chip.primary::before {
@@ -1160,9 +1227,9 @@
       }
 
       .assistant-chip.warning {
-        background: rgba(185, 122, 17, 0.12);
+        background: rgba(184, 129, 18, 0.12);
         color: var(--hold);
-        border-color: rgba(185, 122, 17, 0.14);
+        border-color: rgba(184, 129, 18, 0.14);
       }
 
       .assistant-chip.warning::before {
@@ -1174,10 +1241,10 @@
         gap: 14px;
         padding: 16px;
         border-radius: 24px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,251,255,0.92)),
-          radial-gradient(circle at 100% 0%, rgba(11, 127, 115, 0.05), transparent 24%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 251, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.05), transparent 24%);
       }
 
       .assistant-composer-head {
@@ -1190,7 +1257,6 @@
 
       .assistant-composer-head strong {
         color: var(--ink);
-        font-family: Arial, Calibri, sans-serif;
         font-weight: 700;
         letter-spacing: 0.01em;
       }
@@ -1200,29 +1266,24 @@
         font-size: 0.92rem;
       }
 
-      .assistant-context-card {
+      .assistant-context-card,
+      .assistant-question-card {
         display: grid;
         gap: 8px;
       }
 
       .assistant-context-card label,
       .assistant-question-card label {
+        color: var(--ink);
         font-size: 0.9rem;
         font-weight: 700;
-        font-family: Arial, Calibri, sans-serif;
         letter-spacing: 0.01em;
-        color: var(--ink);
-      }
-
-      .assistant-question-card {
-        display: grid;
-        gap: 10px;
       }
 
       .assistant-side-panel {
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.97), rgba(243,248,255,0.92)),
-          radial-gradient(circle at 100% 0%, rgba(20, 93, 242, 0.05), transparent 28%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(243, 248, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.05), transparent 28%);
       }
 
       .assistant-side-copy {
@@ -1242,15 +1303,14 @@
         gap: 8px;
         padding: 16px;
         border-radius: 18px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.98), rgba(246,250,255,0.92)),
-          radial-gradient(circle at 100% 0%, rgba(11, 127, 115, 0.04), transparent 28%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 250, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.04), transparent 28%);
       }
 
       .assistant-signal strong {
         font-size: 0.96rem;
-        font-family: Arial, Calibri, sans-serif;
         font-weight: 700;
         color: var(--ink);
         letter-spacing: 0.01em;
@@ -1273,10 +1333,10 @@
         text-align: left;
         padding: 16px 18px;
         border-radius: 20px;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.98), rgba(242,247,255,0.94)),
-          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 26%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 247, 255, 0.94)),
+          radial-gradient(circle at 0% 0%, rgba(21, 92, 244, 0.05), transparent 26%);
         color: var(--ink);
         cursor: pointer;
         transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
@@ -1285,15 +1345,14 @@
       .question-idea:hover,
       .question-idea:focus-visible {
         transform: translateY(-1px);
-        border-color: rgba(20, 93, 242, 0.18);
-        box-shadow: 0 14px 28px rgba(19, 37, 64, 0.08);
+        border-color: rgba(21, 92, 244, 0.18);
+        box-shadow: 0 14px 28px rgba(16, 36, 62, 0.08);
         outline: none;
       }
 
       .question-idea-title {
         font-size: 0.95rem;
         font-weight: 700;
-        font-family: Arial, Calibri, sans-serif;
         letter-spacing: 0.01em;
         color: var(--ink);
       }
@@ -1305,7 +1364,7 @@
 
       .prompt-row {
         display: grid;
-        grid-template-columns: 1fr 120px;
+        grid-template-columns: minmax(0, 1fr) 130px;
         gap: 10px;
       }
 
@@ -1317,19 +1376,19 @@
 
       .ask-button {
         border-radius: 18px;
-        color: white;
+        color: #fff;
         background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-        box-shadow: 0 14px 30px rgba(20, 93, 242, 0.22);
+        box-shadow: 0 14px 30px rgba(21, 92, 244, 0.22);
         font-weight: 700;
       }
 
       .quick-prompts button {
         border-radius: 999px;
         padding: 9px 12px;
-        background: rgba(255,255,255,0.96);
+        background: rgba(255, 255, 255, 0.96);
         color: var(--muted);
         border-color: var(--line);
-        box-shadow: 0 8px 18px rgba(19, 37, 64, 0.05);
+        box-shadow: 0 8px 18px rgba(16, 36, 62, 0.05);
       }
 
       .assistant-messages {
@@ -1350,7 +1409,7 @@
 
       .assistant-messages::-webkit-scrollbar-thumb {
         border-radius: 999px;
-        background: rgba(99, 114, 137, 0.22);
+        background: rgba(93, 107, 128, 0.22);
       }
 
       .message {
@@ -1361,29 +1420,29 @@
         line-height: 1.56;
         max-width: min(86%, 760px);
         overflow-wrap: anywhere;
-        border: 1px solid rgba(19, 37, 64, 0.07);
-        box-shadow: 0 14px 28px rgba(19, 37, 64, 0.07);
+        border: 1px solid rgba(16, 36, 62, 0.07);
+        box-shadow: 0 14px 28px rgba(16, 36, 62, 0.07);
       }
 
       .message.user {
         margin-left: auto;
-        background: linear-gradient(135deg, rgba(20, 93, 242, 0.94), rgba(12, 67, 175, 0.96));
-        color: white;
-        border-color: rgba(20, 93, 242, 0.2);
+        color: #fff;
+        border-color: rgba(21, 92, 244, 0.2);
+        background: linear-gradient(135deg, rgba(21, 92, 244, 0.96), rgba(12, 69, 180, 0.98));
       }
 
       .message.assistant {
         margin-right: auto;
-        background:
-          linear-gradient(180deg, rgba(255,255,255,0.97), rgba(239,248,246,0.94)),
-          radial-gradient(circle at 0% 0%, rgba(11, 127, 115, 0.05), transparent 24%);
         color: var(--ink);
-        border-color: rgba(11, 127, 115, 0.10);
+        border-color: rgba(13, 130, 117, 0.10);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 248, 246, 0.94)),
+          radial-gradient(circle at 0% 0%, rgba(13, 130, 117, 0.05), transparent 24%);
       }
 
       .message.user code {
-        background: rgba(255,255,255,0.18);
-        color: white;
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
       }
 
       .message-meta {
@@ -1413,7 +1472,7 @@
         border-radius: 50%;
         font-size: 0;
         line-height: 0;
-        box-shadow: 0 0 0 4px rgba(19, 37, 64, 0.04);
+        box-shadow: 0 0 0 4px rgba(16, 36, 62, 0.04);
       }
 
       .message.assistant .message-badge {
@@ -1421,18 +1480,18 @@
       }
 
       .message.user .message-badge {
-        background: rgba(255,255,255,0.82);
-        box-shadow: 0 0 0 4px rgba(255,255,255,0.14);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.14);
       }
 
       .message-time {
         font-size: 0.8rem;
-        color: rgba(99, 114, 137, 0.9);
+        color: rgba(93, 107, 128, 0.9);
         font-family: Arial, Calibri, sans-serif;
       }
 
       .message.user .message-time {
-        color: rgba(255,255,255,0.76);
+        color: rgba(255, 255, 255, 0.76);
       }
 
       .message.pending {
@@ -1449,10 +1508,10 @@
       .message-body h3,
       .message-body h4 {
         margin: 0;
+        color: var(--ink);
         font-family: Arial, Calibri, sans-serif;
         font-weight: 700;
         line-height: 1.3;
-        color: var(--ink);
       }
 
       .message-body h1,
@@ -1488,9 +1547,9 @@
 
       .message-table-wrap {
         overflow-x: auto;
-        border: 1px solid rgba(19, 37, 64, 0.08);
+        border: 1px solid rgba(16, 36, 62, 0.08);
         border-radius: 16px;
-        background: rgba(255,255,255,0.8);
+        background: rgba(255, 255, 255, 0.8);
       }
 
       .message-body table {
@@ -1505,12 +1564,12 @@
         padding: 11px 12px;
         text-align: left;
         vertical-align: top;
-        border-bottom: 1px solid rgba(19, 37, 64, 0.08);
+        border-bottom: 1px solid rgba(16, 36, 62, 0.08);
         line-height: 1.55;
       }
 
       .message-body th {
-        background: rgba(20, 93, 242, 0.06);
+        background: rgba(21, 92, 244, 0.06);
         color: var(--accent-strong);
         font-family: Arial, Calibri, sans-serif;
         font-weight: 700;
@@ -1523,7 +1582,7 @@
       .message-body code {
         padding: 1px 6px;
         border-radius: 8px;
-        background: rgba(19, 37, 64, 0.06);
+        background: rgba(16, 36, 62, 0.06);
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         font-size: 0.94em;
       }
@@ -1535,7 +1594,7 @@
         font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
         padding: 12px;
         border-radius: 14px;
-        background: rgba(19, 37, 64, 0.05);
+        background: rgba(16, 36, 62, 0.05);
       }
 
       .typing-dots {
@@ -1549,7 +1608,7 @@
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: rgba(11, 127, 115, 0.38);
+        background: rgba(13, 130, 117, 0.38);
         animation: assistant-pulse 1.2s ease-in-out infinite;
       }
 
@@ -1562,10 +1621,13 @@
       }
 
       @keyframes assistant-pulse {
-        0%, 80%, 100% {
+        0%,
+        80%,
+        100% {
           transform: scale(0.82);
           opacity: 0.45;
         }
+
         40% {
           transform: scale(1);
           opacity: 1;
@@ -1582,28 +1644,1110 @@
         margin-top: 18px;
         padding: 18px 20px;
         border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.06);
         background:
-          linear-gradient(180deg, rgba(255,255,255,0.84), rgba(240,245,252,0.82)),
-          radial-gradient(circle at 0% 0%, rgba(20, 93, 242, 0.05), transparent 22%);
+          linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(240, 245, 252, 0.82)),
+          radial-gradient(circle at 0% 0%, rgba(21, 92, 244, 0.05), transparent 22%);
         color: var(--muted);
         line-height: 1.7;
-        border: 1px solid rgba(19, 37, 64, 0.06);
         box-shadow: var(--shadow-soft);
       }
 
-      @media (max-width: 1180px) {
-        .title-grid,
-        .overview-grid,
-        .assistant-layout,
-        .search-row,
-        .stats-grid,
-        .directory-grid,
-        .briefing-strip {
+      .dashboard-shell {
+        width: min(1560px, calc(100% - 30px));
+        grid-template-columns: minmax(310px, 338px) minmax(0, 1fr);
+        align-items: start;
+      }
+
+      .command-rail {
+        position: sticky;
+        top: 16px;
+        display: grid;
+        gap: 18px;
+        align-self: start;
+      }
+
+      .workspace-canvas {
+        display: grid;
+        gap: 18px;
+        min-width: 0;
+      }
+
+      .rail-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        gap: 18px;
+        padding: 22px;
+        border-radius: 30px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(242, 247, 255, 0.91)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.06), transparent 30%);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .rail-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(140deg, rgba(255, 255, 255, 0.22), transparent 34%),
+          radial-gradient(circle at 0% 100%, rgba(13, 130, 117, 0.04), transparent 22%);
+      }
+
+      .brand-card {
+        gap: 20px;
+      }
+
+      .rail-brand-lockup {
+        align-items: center;
+      }
+
+      .rail-brand-meta {
+        gap: 10px;
+      }
+
+      .brand-abstract {
+        padding: 16px 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 255, 0.9));
+      }
+
+      .brand-abstract p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.64;
+      }
+
+      .brand-focus-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .brand-focus-card {
+        display: grid;
+        gap: 6px;
+        padding: 14px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      .focus-label {
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .brand-focus-card strong {
+        font-size: 0.98rem;
+        line-height: 1.5;
+      }
+
+      .rail-card-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .rail-card-head h3 {
+        margin: 4px 0 0;
+        font-size: 1.08rem;
+      }
+
+      .rail-eyebrow {
+        margin: 0;
+        color: var(--accent);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .rail-group {
+        display: grid;
+        gap: 10px;
+      }
+
+      .rail-label {
+        color: var(--accent-strong);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .rail-toggle-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .rail-search-group {
+        gap: 12px;
+      }
+
+      .rail-meta {
+        margin-top: 2px;
+      }
+
+      .compact-hint {
+        font-size: 0.93rem;
+      }
+
+      .pulse-card {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 255, 0.9)),
+          radial-gradient(circle at 100% 0%, rgba(184, 129, 18, 0.06), transparent 28%);
+      }
+
+      .pulse-stack {
+        display: grid;
+        gap: 12px;
+      }
+
+      .signal-unit {
+        display: grid;
+        gap: 8px;
+        padding: 16px 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 248, 255, 0.9));
+      }
+
+      .signal-topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .signal-label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .signal-chip {
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(16, 36, 62, 0.06);
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+
+      .signal-value {
+        font-size: 1.18rem;
+        line-height: 1.2;
+      }
+
+      .signal-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .protocol-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .protocol-item {
+        padding: 14px 16px;
+        border-radius: 20px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(245, 249, 255, 0.9));
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .hero-stage {
+        padding: 28px;
+        border-radius: 36px;
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 254, 0.9)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.11), transparent 28%),
+          radial-gradient(circle at 0% 100%, rgba(13, 130, 117, 0.07), transparent 24%);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.06fr) minmax(360px, 0.94fr);
+        gap: 20px;
+        align-items: stretch;
+      }
+
+      .hero-kicker-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-chip {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(21, 92, 244, 0.1);
+        color: var(--accent-strong);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .hero-chip.subdued {
+        background: rgba(16, 36, 62, 0.06);
+        color: var(--muted);
+      }
+
+      .hero-program-line {
+        margin: 0;
+        color: var(--accent);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .hero-stage .hero-copy {
+        align-content: start;
+      }
+
+      .hero-stage .hero-copy h1 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp(2.4rem, 4vw, 4.35rem);
+        line-height: 0.95;
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+      }
+
+      .hero-stage .hero-copy h2 {
+        margin: 0;
+        color: var(--teal);
+        font-size: clamp(1rem, 1.28vw, 1.26rem);
+        line-height: 1.46;
+      }
+
+      .hero-summary {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.72;
+        max-width: 66ch;
+      }
+
+      .hero-note-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .hero-note-card {
+        display: grid;
+        gap: 8px;
+        padding: 18px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 255, 0.89));
+      }
+
+      .hero-note-label {
+        color: var(--accent-strong);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .hero-note-card strong {
+        line-height: 1.55;
+      }
+
+      .hero-side-stack {
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .hero-structure-card {
+        height: 100%;
+      }
+
+      .hero-side-card {
+        display: grid;
+        gap: 10px;
+        padding: 22px;
+        border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.97), rgba(238, 244, 253, 0.88)),
+          radial-gradient(circle at 100% 0%, rgba(184, 129, 18, 0.05), transparent 28%);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-side-card h3,
+      .hero-band-head h3 {
+        margin: 0;
+        font-size: 1.12rem;
+      }
+
+      .hero-side-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.62;
+      }
+
+      .hero-band {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px solid rgba(16, 36, 62, 0.08);
+      }
+
+      .hero-band-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-end;
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+        grid-template-areas:
+          "leaderboard targets"
+          "leaderboard weights"
+          "directory research";
+        gap: 18px;
+        align-items: start;
+      }
+
+      .area-leaderboard {
+        grid-area: leaderboard;
+      }
+
+      .area-targets {
+        grid-area: targets;
+      }
+
+      .area-directory {
+        grid-area: directory;
+      }
+
+      .area-weights {
+        grid-area: weights;
+      }
+
+      .area-research {
+        grid-area: research;
+      }
+
+      .research-view {
+        margin-top: 0;
+      }
+
+      .assistant-command-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .assistant-main-panel .assistant-shell {
+        padding: 22px;
+      }
+
+      .assistant-intro-grid {
+        grid-template-columns: minmax(0, 0.64fr) minmax(0, 0.36fr);
+        align-items: stretch;
+      }
+
+      .assistant-help-card {
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(244, 249, 255, 0.88));
+      }
+
+      .assistant-frame-grid {
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        align-items: start;
+      }
+
+      .assistant-side-rail {
+        display: grid;
+        gap: 18px;
+        position: sticky;
+        top: 16px;
+      }
+
+      .dashboard-shell {
+        width: min(1640px, calc(100% - 28px));
+        margin: 18px auto 34px;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .command-rail {
+        position: sticky;
+        top: 16px;
+        display: grid;
+        gap: 16px;
+        align-self: start;
+      }
+
+      .workspace-canvas {
+        display: grid;
+        gap: 18px;
+      }
+
+      .rail-card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        gap: 16px;
+        padding: 20px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(9, 22, 42, 0.98), rgba(15, 33, 58, 0.94)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.2), transparent 34%);
+        box-shadow: 0 28px 54px rgba(7, 18, 37, 0.24);
+        color: #edf3fb;
+      }
+
+      .rail-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 34%),
+          radial-gradient(circle at 0% 100%, rgba(13, 130, 117, 0.16), transparent 26%);
+      }
+
+      .rail-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .rail-brand-lockup {
+        gap: 14px;
+        align-items: center;
+      }
+
+      .rail-brand-meta {
+        gap: 6px;
+      }
+
+      .brand-card .institution {
+        font-size: 1.08rem;
+        color: #f8fbff;
+      }
+
+      .brand-card .program,
+      .brand-abstract p {
+        color: rgba(233, 240, 248, 0.78);
+      }
+
+      .brand-abstract {
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        line-height: 1.65;
+      }
+
+      .brand-abstract p {
+        margin: 0;
+      }
+
+      .brand-focus-grid {
+        display: grid;
+        gap: 10px;
+      }
+
+      .brand-focus-card {
+        display: grid;
+        gap: 6px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .focus-label,
+      .rail-label,
+      .signal-label {
+        color: rgba(233, 240, 248, 0.64);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .rail-card-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .rail-card-head h3 {
+        margin: 4px 0 0;
+        font-size: 1.08rem;
+        color: #f8fbff;
+      }
+
+      .rail-eyebrow {
+        margin: 0;
+        color: rgba(161, 194, 255, 0.92);
+        font-size: 0.74rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .rail-group {
+        display: grid;
+        gap: 10px;
+      }
+
+      .rail-toggle-row {
+        display: grid;
+        gap: 10px;
+      }
+
+      .rail-card .toggle-row,
+      .rail-card .view-tabs {
+        display: grid;
+        gap: 10px;
+      }
+
+      .rail-card .toggle,
+      .rail-card .view-tab {
+        justify-content: flex-start;
+        padding: 13px 15px;
+        border-color: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.06);
+        color: rgba(237, 243, 251, 0.86);
+        box-shadow: none;
+      }
+
+      .rail-card .toggle.active,
+      .rail-card .view-tab.active {
+        background: linear-gradient(135deg, rgba(21, 92, 244, 0.98), rgba(12, 69, 180, 0.98));
+        color: #fff;
+      }
+
+      .rail-search-group {
+        padding-top: 4px;
+      }
+
+      .compact-hint {
+        background: rgba(13, 130, 117, 0.16);
+        color: #dff9f0;
+        border: 1px solid rgba(13, 130, 117, 0.2);
+      }
+
+      .rail-card .search-input {
+        border-color: rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.07);
+        color: #f8fbff;
+      }
+
+      .rail-card .search-input::placeholder {
+        color: rgba(233, 240, 248, 0.48);
+      }
+
+      .rail-meta .meta-chip {
+        background: rgba(255, 255, 255, 0.07);
+        color: rgba(237, 243, 251, 0.8);
+      }
+
+      .pulse-stack {
+        display: grid;
+        gap: 10px;
+      }
+
+      .signal-unit {
+        display: grid;
+        gap: 8px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .signal-topline {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .signal-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.09);
+        color: #eff5ff;
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-align: center;
+        white-space: nowrap;
+      }
+
+      .signal-value {
+        font-size: 1.08rem;
+        line-height: 1.25;
+      }
+
+      .signal-copy {
+        margin: 0;
+        color: rgba(233, 240, 248, 0.76);
+        line-height: 1.58;
+        font-size: 0.92rem;
+      }
+
+      .protocol-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .protocol-item {
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(237, 243, 251, 0.84);
+        line-height: 1.62;
+      }
+
+      .hero-stage {
+        padding: 26px;
+        border-radius: 36px;
+        background:
+          linear-gradient(150deg, rgba(255, 255, 255, 0.97), rgba(242, 248, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.08), transparent 28%);
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(420px, 0.96fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .hero-kicker-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 13px;
+        border-radius: 999px;
+        background: rgba(21, 92, 244, 0.1);
+        color: var(--accent-strong);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .hero-chip.subdued {
+        background: rgba(16, 36, 62, 0.06);
+        color: var(--muted);
+      }
+
+      .hero-program-line {
+        margin: 0;
+        color: var(--accent-strong);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .hero-stage h1 {
+        margin: 0;
+        font-family: "Times New Roman", Times, serif;
+        font-size: clamp(2.7rem, 4.3vw, 4.9rem);
+        line-height: 0.98;
+        letter-spacing: -0.035em;
+        max-width: 13ch;
+        text-wrap: balance;
+      }
+
+      .hero-stage h2 {
+        margin: 0;
+        color: var(--teal);
+        font-size: clamp(1rem, 1.35vw, 1.28rem);
+        line-height: 1.45;
+        max-width: 34ch;
+      }
+
+      .hero-summary {
+        margin: 0;
+        max-width: 64ch;
+        color: var(--muted);
+        line-height: 1.72;
+        font-size: 1rem;
+      }
+
+      .hero-note-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .hero-note-card {
+        display: grid;
+        gap: 8px;
+        padding: 16px 18px;
+        border-radius: 20px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(243, 248, 255, 0.78));
+      }
+
+      .hero-note-label {
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .hero-side-stack {
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .hero-structure-card {
+        padding: 20px;
+        border-radius: 28px;
+      }
+
+      .hero-side-card {
+        padding: 18px 20px;
+        border-radius: 24px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(160deg, rgba(240, 247, 255, 0.96), rgba(255, 255, 255, 0.9)),
+          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.09), transparent 26%);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .hero-side-card h3 {
+        margin: 6px 0 10px;
+        font-size: 1.18rem;
+      }
+
+      .hero-side-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .hero-band {
+        display: grid;
+        gap: 14px;
+        margin-top: 18px;
+        padding: 18px 20px;
+        border-radius: 24px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(241, 246, 255, 0.74)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.07), transparent 26%);
+      }
+
+      .hero-band-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
+        align-items: flex-end;
+      }
+
+      .hero-band-head h3 {
+        margin: 6px 0 0;
+        font-size: 1.18rem;
+      }
+
+      .dashboard-shell .stats-grid {
+        gap: 14px;
+      }
+
+      .dashboard-shell .stat {
+        min-height: 138px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.99), rgba(243, 247, 253, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.06), transparent 28%);
+      }
+
+      .research-view {
+        margin-top: 0;
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr) minmax(330px, 0.82fr);
+        grid-template-areas:
+          "leaders leaders targets"
+          "leaders leaders weights"
+          "directory directory research";
+        gap: 18px;
+        align-items: start;
+      }
+
+      .area-leaderboard {
+        grid-area: leaders;
+      }
+
+      .area-targets {
+        grid-area: targets;
+      }
+
+      .area-directory {
+        grid-area: directory;
+      }
+
+      .area-weights {
+        grid-area: weights;
+      }
+
+      .area-research {
+        grid-area: research;
+      }
+
+      .dashboard-shell .panel {
+        border-radius: 30px;
+        border-color: rgba(16, 36, 62, 0.07);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 249, 255, 0.9)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.05), transparent 26%);
+      }
+
+      .dashboard-shell .panel-head {
+        padding: 20px 22px 16px;
+      }
+
+      .dashboard-shell .panel-head h2,
+      .dashboard-shell .panel-head h3 {
+        font-size: 1.16rem;
+      }
+
+      .dashboard-shell .leaderboard,
+      .dashboard-shell .assistant-shell,
+      .dashboard-shell .target-sections,
+      .dashboard-shell .weights-panel,
+      .dashboard-shell .directory-grid {
+        padding: 18px;
+      }
+
+      .assistant-command-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.18fr) minmax(330px, 0.82fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .assistant-side-rail {
+        display: grid;
+        gap: 18px;
+        position: sticky;
+        top: 16px;
+        align-self: start;
+      }
+
+      .assistant-main-panel .assistant-shell {
+        gap: 18px;
+      }
+
+      .assistant-intro-grid {
+        grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
+        align-items: stretch;
+      }
+
+      .assistant-help-card {
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.88);
+      }
+
+      .assistant-frame-grid {
+        grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
+        align-items: start;
+      }
+
+      .assistant-chat {
+        min-height: 100%;
+      }
+
+      .assistant-messages {
+        min-height: 460px;
+      }
+
+      .assistant-composer {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 247, 255, 0.92)),
+          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.05), transparent 28%);
+      }
+
+      .footer-note {
+        margin-top: 0;
+      }
+
+      @media (max-width: 1460px) {
+        .dashboard-shell {
+          grid-template-columns: 300px minmax(0, 1fr);
+        }
+
+        .hero-grid {
           grid-template-columns: 1fr;
         }
 
-        .research-runtime-grid {
+        .hero-stage h1 {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 1220px) {
+        .dashboard-shell {
+          width: min(100% - 22px, 1560px);
+          grid-template-columns: 1fr;
+        }
+
+        .command-rail {
+          position: static;
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .brand-card,
+        .control-card {
+          grid-column: 1 / -1;
+        }
+
+        .analysis-grid,
+        .assistant-command-grid,
+        .assistant-frame-grid,
+        .assistant-intro-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .analysis-grid {
+          grid-template-areas:
+            "leaders"
+            "targets"
+            "weights"
+            "research"
+            "directory";
+        }
+
+        .assistant-side-rail {
+          position: static;
+        }
+
+        .hero-note-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 820px) {
+        .dashboard-shell {
+          width: min(100% - 16px, 1560px);
+          gap: 14px;
+        }
+
+        .command-rail {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .brand-card,
+        .control-card {
+          grid-column: auto;
+        }
+
+        .rail-card,
+        .hero-stage,
+        .dashboard-shell .panel {
+          padding: 16px;
+          border-radius: 24px;
+        }
+
+        .hero-stage h1 {
+          font-size: clamp(2rem, 11vw, 3.15rem);
+        }
+
+        .hero-stage h2 {
+          font-size: 1rem;
+        }
+
+        .brand-mark {
+          width: 84px;
+          height: 84px;
+          border-radius: 22px;
+        }
+
+        .brand-mark img {
+          width: 68px;
+          height: 68px;
+        }
+
+        .rail-card .toggle-row,
+        .rail-card .view-tabs {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-structure-card {
+          padding: 16px;
+        }
+      }
+
+      @media (max-width: 1280px) {
+        .title-grid,
+        .overview-grid,
+        .assistant-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .search-row {
+          grid-template-columns: 1fr;
+        }
+
+        .briefing-strip,
+        .stats-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .directory-grid,
+        .research-runtime-grid {
+          grid-template-columns: 1fr 1fr;
         }
 
         .mini-row {
@@ -1627,10 +2771,6 @@
 
         .message {
           max-width: 100%;
-        }
-
-        .structure-card {
-          min-height: 0;
         }
       }
 
@@ -1691,6 +2831,10 @@
         .title-stack h2 {
           font-size: 1rem;
           line-height: 1.55;
+        }
+
+        .controls {
+          top: 8px;
         }
 
         .controls-top {
@@ -1828,7 +2972,6 @@
 
         .controls {
           gap: 14px;
-          margin-top: 14px;
           padding: 14px;
           border-radius: 22px;
         }
@@ -1929,7 +3072,7 @@
 
       @media print {
         body {
-          background: white;
+          background: #fff;
         }
 
         .shell {
@@ -1946,251 +3089,429 @@
         .masthead,
         .stat {
           box-shadow: none;
-          background: white;
+          background: #fff;
+        }
+      }
+
+      @media (max-width: 1440px) {
+        .dashboard-shell {
+          grid-template-columns: 1fr;
+        }
+
+        .command-rail,
+        .assistant-side-rail {
+          position: static;
+        }
+      }
+
+      @media (max-width: 1280px) {
+        .hero-grid,
+        .analysis-grid,
+        .assistant-command-grid,
+        .assistant-intro-grid,
+        .assistant-frame-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .analysis-grid {
+          grid-template-areas:
+            "leaderboard"
+            "targets"
+            "weights"
+            "directory"
+            "research";
+        }
+
+        .hero-note-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .dashboard-shell {
+          width: min(100%, calc(100% - 18px));
+        }
+
+        .rail-card,
+        .hero-stage,
+        .assistant-main-panel .assistant-shell {
+          padding: 18px;
+          border-radius: 24px;
+        }
+
+        .hero-stage {
+          gap: 18px;
+        }
+
+        .hero-band {
+          margin-top: 14px;
+          padding-top: 14px;
+        }
+
+        .hero-band-head,
+        .rail-card-head {
+          align-items: stretch;
+        }
+
+        .hero-kicker-row,
+        .rail-toggle-row {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          padding-bottom: 4px;
+          scrollbar-width: none;
+        }
+
+        .hero-kicker-row::-webkit-scrollbar,
+        .rail-toggle-row::-webkit-scrollbar {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .dashboard-shell {
+          width: calc(100% - 12px);
+          margin: 6px auto 20px;
+        }
+
+        .rail-card,
+        .hero-stage,
+        .panel {
+          border-radius: 22px;
+        }
+
+        .hero-stage .hero-copy h1 {
+          font-size: clamp(2rem, 11vw, 3rem);
+        }
+
+        .hero-stage .hero-copy h2,
+        .hero-summary,
+        .protocol-item,
+        .signal-copy,
+        .brand-abstract p {
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+
+        .brand-focus-grid,
+        .pulse-stack,
+        .protocol-list {
+          gap: 10px;
         }
       }
     </style>
   </head>
   <body>
-    <main class="shell">
-      <section class="masthead">
-        <div class="brand-row">
-          <div class="brand-lockup">
+    <main class="shell dashboard-shell">
+      <aside class="command-rail">
+        <section class="rail-card brand-card">
+          <div class="brand-lockup rail-brand-lockup">
             <div class="brand-mark">
               <img id="brand-logo" src="assets/zju-ism-mark.svg" alt="University logo" />
             </div>
-            <div class="brand-meta">
-              <p class="brand-eyebrow">Research Dashboard</p>
+            <div class="brand-meta rail-brand-meta">
+              <p class="brand-eyebrow">ECMO Research Platform</p>
               <p class="institution" id="brand-institution">Zhejiang University International School of Medicine</p>
               <p class="program" id="brand-program">AI-Driven ECMO Interface Research Project</p>
             </div>
           </div>
 
-          <aside class="brand-badge">
-            <strong>Project Use</strong>
+          <div class="brand-abstract">
             <p id="brand-note">Internal project dashboard for group review, candidate triage, and discussion support.</p>
-          </aside>
-        </div>
-
-        <div class="title-grid">
-          <div class="title-stack">
-            <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
-            <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
-            <p>
-              This platform combines ligand ranking, literature monitoring, and a live assistant to support fast ECMO candidate triage for <strong>Siglec-9</strong> and <strong>SIRPalpha</strong> pathways.
-            </p>
           </div>
 
-          <aside class="presentation-stage">
-            <section class="structure-card">
-              <div class="structure-head">
-                <div>
-                  <h3>Projection-Ready Structure View</h3>
-                  <p id="structure-description-main">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+          <div class="brand-focus-grid">
+            <div class="brand-focus-card">
+              <span class="focus-label">Pathways in scope</span>
+              <strong>Siglec-9 and SIRPalpha</strong>
+            </div>
+            <div class="brand-focus-card">
+              <span class="focus-label">Decision frame</span>
+              <strong>Affinity, surface fit, immune effect, hemocompatibility</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="rail-card control-card">
+          <div class="rail-card-head">
+            <div>
+              <p class="rail-eyebrow">Command Center</p>
+              <h3>Workspace Controls</h3>
+            </div>
+          </div>
+
+          <div class="rail-group">
+            <span class="rail-label">Dataset lens</span>
+            <div class="toggle-row rail-toggle-row">
+              <button class="toggle active" data-dataset="seed">Seed Dataset</button>
+              <button class="toggle" data-dataset="custom">Custom Candidates</button>
+              <button class="toggle" data-dataset="autonomous">Autonomous Discovery</button>
+            </div>
+          </div>
+
+          <div class="rail-group">
+            <span class="rail-label">Analysis mode</span>
+            <div class="view-tabs rail-toggle-row">
+              <button class="view-tab active" data-view="overview">Overview</button>
+              <button class="view-tab" data-view="assistant">Assistant</button>
+            </div>
+          </div>
+
+          <div class="rail-group rail-search-group">
+            <label class="rail-label" for="search-input">Query the workspace</label>
+            <input id="search-input" class="search-input" type="text" placeholder="Search by candidate, receptor, modality, or recommendation tier..." />
+            <div class="hint compact-hint">Filter by candidate, pathway, modality, or recommendation tier. Try <strong>pS9L</strong>, <strong>advance</strong>, or <strong>Siglec-9</strong>.</div>
+            <div class="meta rail-meta" id="meta-row"></div>
+          </div>
+        </section>
+
+        <section class="rail-card pulse-card" aria-label="Research pulse">
+          <div class="rail-card-head">
+            <div>
+              <p class="rail-eyebrow">Program Pulse</p>
+              <h3>Live Research Signals</h3>
+            </div>
+          </div>
+
+          <div class="pulse-stack">
+            <article class="signal-unit">
+              <div class="signal-topline">
+                <span class="signal-label">Working dataset</span>
+                <span class="signal-chip" id="briefing-dataset-chip">Ready</span>
+              </div>
+              <strong class="signal-value" id="briefing-dataset-value">Seed dataset</strong>
+              <p class="signal-copy" id="briefing-dataset-copy">Current screening workspace and visible candidate scope.</p>
+            </article>
+
+            <article class="signal-unit">
+              <div class="signal-topline">
+                <span class="signal-label">Priority candidate</span>
+                <span class="signal-chip" id="briefing-hit-chip">Top hit</span>
+              </div>
+              <strong class="signal-value" id="briefing-hit-value">Awaiting data</strong>
+              <p class="signal-copy" id="briefing-hit-copy">Top visible candidate and its current recommendation tier.</p>
+            </article>
+
+            <article class="signal-unit">
+              <div class="signal-topline">
+                <span class="signal-label">Live assistant</span>
+                <span class="signal-chip" id="briefing-assistant-chip">Assistant</span>
+              </div>
+              <strong class="signal-value" id="briefing-assistant-value">Checking connection</strong>
+              <p class="signal-copy" id="briefing-assistant-copy">Live reasoning status and model availability for discussion support.</p>
+            </article>
+
+            <article class="signal-unit">
+              <div class="signal-topline">
+                <span class="signal-label">Autonomous research</span>
+                <span class="signal-chip" id="briefing-research-chip">Discovery loop</span>
+              </div>
+              <strong class="signal-value" id="briefing-research-value">Waiting</strong>
+              <p class="signal-copy" id="briefing-research-copy">Literature discovery cadence, freshness, and current health status.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="rail-card protocol-card">
+          <div class="rail-card-head">
+            <div>
+              <p class="rail-eyebrow">Review Protocol</p>
+              <h3>Recommended Meeting Flow</h3>
+            </div>
+          </div>
+          <div class="protocol-list">
+            <div class="protocol-item">Open with the top-ranked candidates and receptor-specific summaries.</div>
+            <div class="protocol-item">Use the structure viewer as the projection anchor for mechanism discussion.</div>
+            <div class="protocol-item">Shift into the assistant workspace for comparisons, follow-up questions, and experimental planning.</div>
+          </div>
+        </section>
+      </aside>
+
+      <section class="workspace-canvas">
+        <section class="hero-stage panel">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <div class="hero-kicker-row">
+                <span class="hero-chip">Research Command Center</span>
+                <span class="hero-chip subdued">Live ranking, discovery, and structural review</span>
+              </div>
+
+              <p class="hero-program-line">ZJU-ISM biomedical AI workflow for ECMO interface design</p>
+              <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
+              <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
+              <p class="hero-summary">
+                This research environment combines structured ligand ranking, autonomous literature monitoring, and a live reasoning assistant to help the team identify ECMO-surface ligands that are not only high-affinity, but also experimentally actionable and biologically suitable.
+              </p>
+
+              <div class="hero-note-grid">
+                <article class="hero-note-card">
+                  <span class="hero-note-label">Scientific objective</span>
+                  <strong>Prioritize candidates that can engage inhibitory pathways while remaining compatible with ECMO surface engineering.</strong>
+                </article>
+                <article class="hero-note-card">
+                  <span class="hero-note-label">Operational workflow</span>
+                  <strong>Rank candidates, inspect structure, interrogate tradeoffs with the assistant, then refine wet-lab next steps.</strong>
+                </article>
+              </div>
+            </div>
+
+            <div class="hero-side-stack">
+              <section class="structure-card hero-structure-card">
+                <div class="structure-head">
+                  <div>
+                    <h3>Structural Review Window</h3>
+                    <p id="structure-description-main">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+                  </div>
+                  <span id="structure-chip-main" class="projection-chip">PDB 2JJS</span>
                 </div>
-                <span id="structure-chip-main" class="projection-chip">PDB 2JJS</span>
-              </div>
 
-              <div class="structure-tabs" data-structure-switcher>
-                <button
-                  type="button"
-                  class="structure-tab active"
-                  data-structure-target="protein-canvas"
-                  data-chip-target="structure-chip-main"
-                  data-description-target="structure-description-main"
-                  data-note-target="structure-note-main"
-                  data-tag-one-target="structure-tag-1-main"
-                  data-tag-two-target="structure-tag-2-main"
-                  data-tag-three-target="structure-tag-3-main"
-                  data-structure-id="2JJS"
-                  data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                  data-chip-label="PDB 2JJS"
-                  data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
-                  data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
-                  data-tag-one="CD47 ectodomain WT"
-                  data-tag-two="Human CD47-SIRPalpha complex"
-                  data-tag-three="Direct interface structure"
-                >CD47 WT</button>
-                <button
-                  type="button"
-                  class="structure-tab"
-                  data-structure-target="protein-canvas"
-                  data-chip-target="structure-chip-main"
-                  data-description-target="structure-description-main"
-                  data-note-target="structure-note-main"
-                  data-tag-one-target="structure-tag-1-main"
-                  data-tag-two-target="structure-tag-2-main"
-                  data-tag-three-target="structure-tag-3-main"
-                  data-structure-id="2VSC"
-                  data-structure-title="Human CD47 ectodomain scaffold"
-                  data-chip-label="PDB 2VSC"
-                  data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
-                  data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
-                  data-tag-one="CD47 variant N3612 family"
-                  data-tag-two="Human CD47 ectodomain"
-                  data-tag-three="Variant scaffold reference"
-                >CD47 Variant Scaffold</button>
-                <button
-                  type="button"
-                  class="structure-tab"
-                  data-structure-target="protein-canvas"
-                  data-chip-target="structure-chip-main"
-                  data-description-target="structure-description-main"
-                  data-note-target="structure-note-main"
-                  data-tag-one-target="structure-tag-1-main"
-                  data-tag-two-target="structure-tag-2-main"
-                  data-tag-three-target="structure-tag-3-main"
-                  data-structure-id="2WNG"
-                  data-structure-title="Human SIRPalpha ectodomain"
-                  data-chip-label="PDB 2WNG"
-                  data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
-                  data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
-                  data-tag-one="Self peptide 21 aa family"
-                  data-tag-two="Human SIRPalpha receptor"
-                  data-tag-three="Receptor template"
-                >SIRPalpha Receptor</button>
-              </div>
-
-              <div class="structure-viewer">
-                <div
-                  id="protein-canvas"
-                  class="structure-canvas"
-                  data-protein-viewer
-                  data-structure-id="2JJS"
-                  data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                  aria-label="Interactive protein structure viewer"
-                ></div>
-                <div class="structure-overlay">
-                  <span id="structure-tag-1-main" class="structure-tag">CD47 ectodomain WT</span>
-                  <span id="structure-tag-2-main" class="structure-tag">Human CD47-SIRPalpha complex</span>
-                  <span id="structure-tag-3-main" class="structure-tag">Direct interface structure</span>
+                <div class="structure-tabs" data-structure-switcher>
+                  <button
+                    type="button"
+                    class="structure-tab active"
+                    data-structure-target="protein-canvas"
+                    data-chip-target="structure-chip-main"
+                    data-description-target="structure-description-main"
+                    data-note-target="structure-note-main"
+                    data-tag-one-target="structure-tag-1-main"
+                    data-tag-two-target="structure-tag-2-main"
+                    data-tag-three-target="structure-tag-3-main"
+                    data-structure-id="2JJS"
+                    data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                    data-chip-label="PDB 2JJS"
+                    data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
+                    data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
+                    data-tag-one="CD47 ectodomain WT"
+                    data-tag-two="Human CD47-SIRPalpha complex"
+                    data-tag-three="Direct interface structure"
+                  >CD47 WT</button>
+                  <button
+                    type="button"
+                    class="structure-tab"
+                    data-structure-target="protein-canvas"
+                    data-chip-target="structure-chip-main"
+                    data-description-target="structure-description-main"
+                    data-note-target="structure-note-main"
+                    data-tag-one-target="structure-tag-1-main"
+                    data-tag-two-target="structure-tag-2-main"
+                    data-tag-three-target="structure-tag-3-main"
+                    data-structure-id="2VSC"
+                    data-structure-title="Human CD47 ectodomain scaffold"
+                    data-chip-label="PDB 2VSC"
+                    data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
+                    data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
+                    data-tag-one="CD47 variant N3612 family"
+                    data-tag-two="Human CD47 ectodomain"
+                    data-tag-three="Variant scaffold reference"
+                  >CD47 Variant Scaffold</button>
+                  <button
+                    type="button"
+                    class="structure-tab"
+                    data-structure-target="protein-canvas"
+                    data-chip-target="structure-chip-main"
+                    data-description-target="structure-description-main"
+                    data-note-target="structure-note-main"
+                    data-tag-one-target="structure-tag-1-main"
+                    data-tag-two-target="structure-tag-2-main"
+                    data-tag-three-target="structure-tag-3-main"
+                    data-structure-id="2WNG"
+                    data-structure-title="Human SIRPalpha ectodomain"
+                    data-chip-label="PDB 2WNG"
+                    data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
+                    data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
+                    data-tag-one="Self peptide 21 aa family"
+                    data-tag-two="Human SIRPalpha receptor"
+                    data-tag-three="Receptor template"
+                  >SIRPalpha Receptor</button>
                 </div>
-              </div>
 
-              <div class="structure-actions">
-                <p id="structure-note-main" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
-                <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
-              </div>
-            </section>
+                <div class="structure-viewer">
+                  <div
+                    id="protein-canvas"
+                    class="structure-canvas"
+                    data-protein-viewer
+                    data-structure-id="2JJS"
+                    data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                    aria-label="Interactive protein structure viewer"
+                  ></div>
+                  <div class="structure-overlay">
+                    <span id="structure-tag-1-main" class="structure-tag">CD47 ectodomain WT</span>
+                    <span id="structure-tag-2-main" class="structure-tag">Human CD47-SIRPalpha complex</span>
+                    <span id="structure-tag-3-main" class="structure-tag">Direct interface structure</span>
+                  </div>
+                </div>
 
-            <section class="insight-card">
-              <h3>Suggested Meeting Flow</h3>
-              <div class="insight-list">
-                <div class="insight-item">Show top-ranked hits and target summaries first.</div>
-                <div class="insight-item">Use the assistant for direct comparisons and follow-up questions.</div>
-                <div class="insight-item">Keep the structure window open for projection-friendly visual context.</div>
-              </div>
-            </section>
-          </aside>
-        </div>
-      </section>
+                <div class="structure-actions">
+                  <p id="structure-note-main" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
+                  <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
+                </div>
+              </section>
 
-      <section class="controls">
-        <div class="controls-top">
-          <div class="toggle-row">
-            <button class="toggle active" data-dataset="seed">Seed Dataset</button>
-            <button class="toggle" data-dataset="custom">Custom Candidates</button>
-            <button class="toggle" data-dataset="autonomous">Autonomous Discovery</button>
+              <section class="hero-side-card">
+                <p class="rail-eyebrow">Project Thesis</p>
+                <h3>From passive coating to immune-modulating interface</h3>
+                <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
+              </section>
+            </div>
           </div>
 
-          <div class="view-tabs">
-            <button class="view-tab active" data-view="overview">Overview</button>
-            <button class="view-tab" data-view="assistant">Assistant</button>
+          <div class="hero-band">
+            <div class="hero-band-head">
+              <div>
+                <p class="rail-eyebrow">Operational Snapshot</p>
+                <h3>Current model state and visible candidate profile</h3>
+              </div>
+            </div>
+            <div class="stats-grid" id="stats-grid"></div>
           </div>
-        </div>
+        </section>
 
-        <div class="controls-top">
-          <div class="meta" id="meta-row"></div>
-        </div>
-
-        <div class="search-row">
-          <input id="search-input" class="search-input" type="text" placeholder="Search by candidate, receptor, modality, or recommendation tier..." />
-          <div class="hint">Try search terms like <strong>pS9L</strong>, <strong>advance</strong>, <strong>Siglec-9</strong>, or <strong>protein</strong>.</div>
-        </div>
-      </section>
-
-      <section class="briefing-strip" aria-label="Research briefing">
-        <article class="briefing-card">
-          <p class="briefing-label">Working Dataset</p>
-          <h3 class="briefing-value" id="briefing-dataset-value">Seed dataset</h3>
-          <p class="briefing-copy" id="briefing-dataset-copy">Current screening workspace and visible candidate scope.</p>
-          <span class="briefing-chip" id="briefing-dataset-chip">Ready</span>
-        </article>
-
-        <article class="briefing-card teal">
-          <p class="briefing-label">Priority Candidate</p>
-          <h3 class="briefing-value" id="briefing-hit-value">Awaiting data</h3>
-          <p class="briefing-copy" id="briefing-hit-copy">Top visible candidate and its current recommendation tier.</p>
-          <span class="briefing-chip" id="briefing-hit-chip">Top hit</span>
-        </article>
-
-        <article class="briefing-card gold">
-          <p class="briefing-label">Live Assistant</p>
-          <h3 class="briefing-value" id="briefing-assistant-value">Checking connection</h3>
-          <p class="briefing-copy" id="briefing-assistant-copy">Live reasoning status and model availability for discussion support.</p>
-          <span class="briefing-chip" id="briefing-assistant-chip">Assistant</span>
-        </article>
-
-        <article class="briefing-card ink">
-          <p class="briefing-label">Autonomous Research</p>
-          <h3 class="briefing-value" id="briefing-research-value">Waiting</h3>
-          <p class="briefing-copy" id="briefing-research-copy">Literature discovery cadence, freshness, and current health status.</p>
-          <span class="briefing-chip" id="briefing-research-chip">Discovery loop</span>
-        </article>
-      </section>
-
-      <section id="overview-view" class="view active">
-        <div class="stats-grid" id="stats-grid"></div>
-
-        <div class="overview-grid">
-          <div class="overview-stack">
-            <section class="panel">
+        <section id="overview-view" class="view active research-view">
+          <div class="analysis-grid">
+            <section class="panel area-leaderboard">
               <div class="panel-head">
                 <div>
-                  <h2>Top Ranked Candidates</h2>
-                  <p>Presentation-friendly cards for the strongest candidates in the current visible dataset.</p>
+                  <h2>Priority Candidate Board</h2>
+                  <p>High-signal candidate cards intended for decision meetings, triage review, and supervisor presentations.</p>
                 </div>
               </div>
               <div class="leaderboard" id="leaderboard"></div>
             </section>
 
-            <section class="panel">
+            <section class="panel area-targets">
               <div class="panel-head">
                 <div>
-                  <h3>Candidate Directory</h3>
-                  <p>A compact full-list view for quick scanning during discussions.</p>
-                </div>
-              </div>
-              <div class="directory-grid" id="directory-grid"></div>
-            </section>
-          </div>
-
-          <div class="overview-stack">
-            <section class="panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Target Views</h3>
-                  <p>Separate receptor-level summaries for clearer biological interpretation.</p>
+                  <h3>Receptor Pathway Views</h3>
+                  <p>Target-specific summaries that make cross-pathway biological interpretation easier during discussion.</p>
                 </div>
               </div>
               <div class="target-sections" id="target-sections"></div>
             </section>
 
-            <section class="panel">
+            <section class="panel area-directory">
               <div class="panel-head">
                 <div>
-                  <h3>Learned Feature Weights</h3>
-                  <p>What the current rough model emphasizes for each receptor target.</p>
+                  <h3>Candidate Directory</h3>
+                  <p>Broader scan of the current visible set for quick filtering, cross-checking, and meeting follow-up.</p>
+                </div>
+              </div>
+              <div class="directory-grid" id="directory-grid"></div>
+            </section>
+
+            <section class="panel area-weights">
+              <div class="panel-head">
+                <div>
+                  <h3>Model Weighting and Signal Balance</h3>
+                  <p>What the current rough ranking model is emphasizing for each receptor target.</p>
                 </div>
               </div>
               <div class="weights-panel" id="weights-panel"></div>
             </section>
 
-            <section class="panel">
+            <section class="panel area-research">
               <div class="panel-head research-panel-head">
                 <div>
-                  <h3>Autonomous Research Leads</h3>
-                  <p>Recent literature-derived candidate leads discovered by the background updater, with optional DeepSeek-assisted extraction.</p>
+                  <h3>Autonomous Discovery Monitor</h3>
+                  <p>Literature-derived candidate leads, runtime health, and manual refresh controls for the autonomous discovery loop.</p>
                 </div>
                 <div class="research-head-actions">
                   <div id="research-runtime-chips" class="research-chip-row"></div>
@@ -2201,34 +3522,31 @@
               <div class="target-sections" id="research-leads"></div>
             </section>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section id="assistant-view" class="view">
-        <div class="assistant-layout">
-          <div class="assistant-stack">
-            <section class="panel">
+        <section id="assistant-view" class="view research-view">
+          <div class="assistant-command-grid">
+            <section class="panel assistant-main-panel">
               <div class="panel-head">
                 <div>
-                  <h2>Ask The Research Assistant</h2>
-                  <p>Use this full-width workspace for broader questions, candidate comparison, and live reasoning over new pasted inputs.</p>
+                  <h2>Live Research Assistant</h2>
+                  <p>Use the assistant for ranking interpretation, candidate comparison, and reasoning over pasted docking, assay, or meeting notes.</p>
                 </div>
               </div>
               <div class="assistant-shell">
-                <div class="assistant-intro">
+                <div class="assistant-intro assistant-intro-grid">
                   <div id="assistant-status" class="assistant-status fallback">Checking live assistant status...</div>
-
-                  <div class="assistant-help">
-                    Paste new candidate features, docking notes, wet-lab observations, or meeting questions below. The assistant will combine that context with the current ranked dataset when answering.
+                  <div class="assistant-help assistant-help-card">
+                    Bring in new context, compare candidates, or ask for a wet-lab next-step recommendation. The assistant grounds its replies in the active dataset while still reasoning over your pasted notes.
                   </div>
                 </div>
 
-                <div class="assistant-frame">
+                <div class="assistant-frame assistant-frame-grid">
                   <div class="assistant-chat">
                     <div class="assistant-toolbar">
                       <div class="assistant-title-group">
                         <h3>Conversation Workspace</h3>
-                        <p>Use the live assistant for ranking interpretation, candidate comparison, and reasoning over pasted experimental notes.</p>
+                        <p>Structured for live discussion, not just quick prompts.</p>
                       </div>
                       <div class="assistant-chip-row">
                         <span id="assistant-mode-chip" class="assistant-chip primary">Checking connection</span>
@@ -2243,7 +3561,7 @@
                   <div class="assistant-composer">
                     <div class="assistant-composer-head">
                       <strong>Context and question composer</strong>
-                      <span>Optional notes improve ranking-focused reasoning.</span>
+                      <span>Optional experimental detail improves ranking-focused reasoning.</span>
                     </div>
 
                     <div class="assistant-context-card">
@@ -2270,79 +3588,79 @@
                 </div>
               </div>
             </section>
+
+            <div class="assistant-side-rail">
+              <section class="panel assistant-side-panel">
+                <div class="panel-head">
+                  <div>
+                    <h3>Current Top Hits</h3>
+                    <p>Fast reference cards to keep the discussion anchored while the assistant reasons.</p>
+                  </div>
+                </div>
+                <div class="leaderboard" id="assistant-side-hits"></div>
+              </section>
+
+              <section class="panel assistant-side-panel">
+                <div class="panel-head">
+                  <div>
+                    <h3>Assistant Strengths</h3>
+                    <p>What this workspace is best at during supervisor reviews and lab planning.</p>
+                  </div>
+                </div>
+                <div class="leaderboard">
+                  <div class="assistant-signal-grid">
+                    <div class="assistant-signal">
+                      <strong>Compare</strong>
+                      <span>Ask which ligand is stronger and why, then follow up on tradeoffs in affinity, surface fit, or immune effect.</span>
+                    </div>
+                    <div class="assistant-signal">
+                      <strong>Interpret</strong>
+                      <span>Paste docking or assay notes to get a fast narrative explanation that still stays tied to the ranked dataset.</span>
+                    </div>
+                    <div class="assistant-signal">
+                      <strong>Triage</strong>
+                      <span>Use it to identify which candidates deserve synthesis, extra validation, or a hold decision before wet-lab work.</span>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="panel assistant-side-panel">
+                <div class="panel-head">
+                  <div>
+                    <h3>Question Ideas</h3>
+                    <p>Prompt starters that work well in live meetings.</p>
+                  </div>
+                </div>
+                <div class="leaderboard">
+                  <p class="assistant-side-copy">These prompts are designed to accelerate discussion without losing the scientific framing of the ranking workflow.</p>
+                  <div class="question-idea-list">
+                    <button type="button" class="question-idea" data-prompt="Given these docking notes, would this new candidate likely rank above MTTSNeu5Ac?">
+                      <span class="question-idea-title">Ranking from new notes</span>
+                      <span class="question-idea-copy">Use pasted docking or assay context to estimate where a new ligand would sit relative to an existing hit.</span>
+                    </button>
+                    <button type="button" class="question-idea" data-prompt="Why is WT CD47 still competitive even if N3612 has stronger affinity?">
+                      <span class="question-idea-title">Explain a tradeoff</span>
+                      <span class="question-idea-copy">Ask why a candidate remains competitive when another entry appears stronger on one feature alone.</span>
+                    </button>
+                    <button type="button" class="question-idea" data-prompt="What additional wet-lab data would most improve confidence in the current ranking?">
+                      <span class="question-idea-title">Plan the next experiment</span>
+                      <span class="question-idea-copy">Ask what single experiment or readout would most reduce uncertainty in the current ranking.</span>
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
+        </section>
 
-          <div class="assistant-stack">
-            <section class="panel assistant-side-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Current Top Hits</h3>
-                  <p>Fast reference while you’re asking questions.</p>
-                </div>
-              </div>
-              <div class="leaderboard" id="assistant-side-hits"></div>
-            </section>
-
-            <section class="panel assistant-side-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Assistant Strengths</h3>
-                  <p>How this workspace is most useful during meetings and candidate reviews.</p>
-                </div>
-              </div>
-              <div class="leaderboard">
-                <div class="assistant-signal-grid">
-                  <div class="assistant-signal">
-                    <strong>Compare</strong>
-                    <span>Ask which ligand is stronger and why, then follow up on tradeoffs in affinity, surface fit, or immune effect.</span>
-                  </div>
-                  <div class="assistant-signal">
-                    <strong>Interpret</strong>
-                    <span>Paste docking or assay notes to get a fast narrative explanation that still stays tied to the ranked dataset.</span>
-                  </div>
-                  <div class="assistant-signal">
-                    <strong>Triage</strong>
-                    <span>Use it to identify which candidates deserve synthesis, extra validation, or a hold decision before wet-lab work.</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <section class="panel assistant-side-panel">
-              <div class="panel-head">
-                <div>
-                  <h3>Question Ideas</h3>
-                  <p>Examples that work well with the live assistant.</p>
-                </div>
-              </div>
-              <div class="leaderboard">
-                <p class="assistant-side-copy">These buttons drop a well-formed question straight into the live assistant so the team can move quickly during presentations.</p>
-                <div class="question-idea-list">
-                  <button type="button" class="question-idea" data-prompt="Given these docking notes, would this new candidate likely rank above MTTSNeu5Ac?">
-                    <span class="question-idea-title">Ranking from new notes</span>
-                    <span class="question-idea-copy">Use pasted docking or assay context to estimate where a new ligand would sit relative to an existing hit.</span>
-                  </button>
-                  <button type="button" class="question-idea" data-prompt="Why is WT CD47 still competitive even if N3612 has stronger affinity?">
-                    <span class="question-idea-title">Explain a tradeoff</span>
-                    <span class="question-idea-copy">Ask why a candidate remains competitive when another entry appears stronger on one feature alone.</span>
-                  </button>
-                  <button type="button" class="question-idea" data-prompt="What additional wet-lab data would most improve confidence in the current ranking?">
-                    <span class="question-idea-title">Plan the next experiment</span>
-                    <span class="question-idea-copy">Ask what single experiment or readout would most reduce uncertainty in the current ranking.</span>
-                  </button>
-                </div>
-              </div>
-            </section>
-          </div>
+        <div class="footer-note">
+          Workflow:
+          run <code>python3 ecmo_seed_ranker.py</code> or your custom input command,
+          then <code>python3 build_dashboard_bundle.py</code>,
+          then either open <code>dashboard.html</code> for static viewing or run <code>python3 research_assistant_server.py</code> for the full live assistant.
         </div>
       </section>
-
-      <div class="footer-note">
-        Workflow:
-        run <code>python3 ecmo_seed_ranker.py</code> or your custom input command,
-        then <code>python3 build_dashboard_bundle.py</code>,
-        then either open <code>dashboard.html</code> for static viewing or run <code>python3 research_assistant_server.py</code> for the full live assistant.
-      </div>
     </main>
 
     <script src="dashboard-data.js"></script>
