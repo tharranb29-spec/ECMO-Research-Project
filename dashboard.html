@@ -95,6 +95,10 @@
         font: inherit;
       }
 
+      [hidden] {
+        display: none !important;
+      }
+
       .shell {
         width: min(1520px, calc(100% - 32px));
         margin: 18px auto 42px;
@@ -1660,8 +1664,7 @@
       }
 
       .command-rail {
-        position: sticky;
-        top: 16px;
+        position: static;
         display: grid;
         gap: 18px;
         align-self: start;
@@ -2084,32 +2087,22 @@
       .analysis-grid {
         display: grid;
         grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
-        grid-template-areas:
-          "leaderboard targets"
-          "leaderboard weights"
-          "directory research";
         gap: 18px;
         align-items: start;
       }
 
-      .area-leaderboard {
-        grid-area: leaderboard;
-      }
-
-      .area-targets {
-        grid-area: targets;
-      }
-
+      .area-leaderboard,
       .area-directory {
-        grid-area: directory;
+        grid-column: 1;
       }
 
+      .area-targets,
       .area-weights {
-        grid-area: weights;
+        grid-column: 2;
       }
 
       .area-research {
-        grid-area: research;
+        grid-column: 1 / -1;
       }
 
       .research-view {
@@ -2148,8 +2141,6 @@
       .assistant-side-rail {
         display: grid;
         gap: 18px;
-        position: sticky;
-        top: 16px;
       }
 
       .dashboard-shell {
@@ -2161,8 +2152,6 @@
       }
 
       .command-rail {
-        position: sticky;
-        top: 16px;
         display: grid;
         gap: 16px;
         align-self: start;
@@ -2569,35 +2558,18 @@
         margin-top: 0;
       }
 
-      .analysis-grid {
+      .analysis-shell {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr) minmax(330px, 0.82fr);
-        grid-template-areas:
-          "leaders leaders targets"
-          "leaders leaders weights"
-          "directory directory research";
+        grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
         gap: 18px;
         align-items: start;
       }
 
-      .area-leaderboard {
-        grid-area: leaders;
-      }
-
-      .area-targets {
-        grid-area: targets;
-      }
-
-      .area-directory {
-        grid-area: directory;
-      }
-
-      .area-weights {
-        grid-area: weights;
-      }
-
-      .area-research {
-        grid-area: research;
+      .analysis-main-stack,
+      .analysis-side-stack {
+        display: grid;
+        gap: 18px;
+        align-content: start;
       }
 
       .dashboard-shell .panel {
@@ -2635,8 +2607,6 @@
       .assistant-side-rail {
         display: grid;
         gap: 18px;
-        position: sticky;
-        top: 16px;
         align-self: start;
       }
 
@@ -2692,7 +2662,7 @@
 
       @media (max-width: 1280px) {
         .hero-grid,
-        .analysis-grid,
+        .analysis-shell,
         .assistant-command-grid,
         .assistant-intro-grid,
         .assistant-frame-grid {
@@ -2707,15 +2677,6 @@
         .brand-card,
         .control-card {
           grid-column: 1 / -1;
-        }
-
-        .analysis-grid {
-          grid-template-areas:
-            "leaders"
-            "targets"
-            "weights"
-            "research"
-            "directory";
         }
 
         .hero-note-grid {
@@ -2757,7 +2718,9 @@
 
       @media (max-width: 860px) {
         .dashboard-shell {
-          width: min(100%, calc(100% - 18px));
+          width: calc(100% - 16px);
+          margin: 10px auto 22px;
+          gap: 14px;
         }
 
         .command-rail {
@@ -2774,12 +2737,22 @@
         .hero-stage,
         .panel,
         .assistant-main-panel .assistant-shell {
-          padding: 18px;
+          padding: 16px;
           border-radius: 24px;
         }
 
         .hero-stage {
           gap: 18px;
+        }
+
+        .hero-topbar {
+          justify-content: stretch;
+          margin-bottom: 14px;
+        }
+
+        .session-greeting-card {
+          width: 100%;
+          max-width: none;
         }
 
         .hero-band {
@@ -2788,8 +2761,11 @@
         }
 
         .hero-band-head,
+        .panel-head,
+        .structure-head,
         .rail-card-head {
           align-items: stretch;
+          flex-direction: column;
         }
 
         .stats-grid {
@@ -2835,15 +2811,23 @@
 
         .hero-kicker-row,
         .rail-toggle-row {
-          flex-wrap: nowrap;
-          overflow-x: auto;
-          padding-bottom: 4px;
-          scrollbar-width: none;
+          flex-wrap: wrap;
+          overflow: visible;
+          padding-bottom: 0;
         }
 
-        .hero-kicker-row::-webkit-scrollbar,
-        .rail-toggle-row::-webkit-scrollbar {
-          display: none;
+        .rail-toggle-row > .toggle,
+        .rail-toggle-row > .view-tab {
+          flex: 1 1 calc(50% - 8px);
+          text-align: center;
+          justify-content: center;
+        }
+
+        .hero-side-stack,
+        .analysis-main-stack,
+        .analysis-side-stack,
+        .assistant-side-rail {
+          gap: 14px;
         }
       }
 
@@ -2870,6 +2854,23 @@
         .brand-abstract p {
           font-size: 0.95rem;
           line-height: 1.6;
+        }
+
+        .brand-lockup,
+        .rail-brand-lockup {
+          align-items: center;
+          gap: 12px;
+        }
+
+        .brand-mark {
+          width: 82px;
+          height: 82px;
+          border-radius: 22px;
+        }
+
+        .brand-mark img {
+          width: 66px;
+          height: 66px;
         }
 
         .brand-focus-grid,
@@ -2925,6 +2926,13 @@
           border-radius: 18px;
         }
 
+        .rail-toggle-row > .toggle,
+        .rail-toggle-row > .view-tab,
+        .logout-button {
+          flex: 1 1 100%;
+          width: 100%;
+        }
+
         .footer-note {
           padding: 14px;
           border-radius: 18px;
@@ -2967,24 +2975,26 @@
         width: min(100%, 360px);
       }
 
-      .analysis-grid {
+      .analysis-shell {
         display: grid;
-        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+        grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
         gap: 18px;
         align-items: start;
-        grid-template-areas: none;
+      }
+
+      .analysis-main-stack,
+      .analysis-side-stack {
+        display: grid;
+        gap: 18px;
+        align-content: start;
       }
 
       .area-leaderboard,
-      .area-directory {
-        grid-column: 1;
-        grid-area: auto;
-      }
-
+      .area-directory,
       .area-targets,
       .area-weights,
       .area-research {
-        grid-column: 2;
+        grid-column: auto;
         grid-area: auto;
       }
 
@@ -3012,7 +3022,7 @@
         }
 
         .hero-grid,
-        .analysis-grid,
+        .analysis-shell,
         .assistant-command-grid,
         .assistant-intro-grid,
         .assistant-frame-grid {
@@ -3427,61 +3437,65 @@
         </section>
 
         <section id="overview-view" class="view active research-view">
-          <div class="analysis-grid">
-            <section class="panel area-leaderboard">
-              <div class="panel-head">
-                <div>
-                  <h2>Priority Candidate Board</h2>
-                  <p>High-signal candidate cards intended for decision meetings, triage review, and supervisor presentations.</p>
+          <div class="analysis-shell">
+            <div class="analysis-main-stack">
+              <section class="panel area-leaderboard">
+                <div class="panel-head">
+                  <div>
+                    <h2>Priority Candidate Board</h2>
+                    <p>High-signal candidate cards intended for decision meetings, triage review, and supervisor presentations.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="leaderboard" id="leaderboard"></div>
-            </section>
+                <div class="leaderboard" id="leaderboard"></div>
+              </section>
 
-            <section class="panel area-targets">
-              <div class="panel-head">
-                <div>
-                  <h3>Receptor Pathway Views</h3>
-                  <p>Target-specific summaries that make cross-pathway biological interpretation easier during discussion.</p>
+              <section class="panel area-directory">
+                <div class="panel-head">
+                  <div>
+                    <h3>Candidate Directory</h3>
+                    <p>Broader scan of the current visible set for quick filtering, cross-checking, and meeting follow-up.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="target-sections" id="target-sections"></div>
-            </section>
+                <div class="directory-grid" id="directory-grid"></div>
+              </section>
+            </div>
 
-            <section class="panel area-directory">
-              <div class="panel-head">
-                <div>
-                  <h3>Candidate Directory</h3>
-                  <p>Broader scan of the current visible set for quick filtering, cross-checking, and meeting follow-up.</p>
+            <div class="analysis-side-stack">
+              <section class="panel area-targets">
+                <div class="panel-head">
+                  <div>
+                    <h3>Receptor Pathway Views</h3>
+                    <p>Target-specific summaries that make cross-pathway biological interpretation easier during discussion.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="directory-grid" id="directory-grid"></div>
-            </section>
+                <div class="target-sections" id="target-sections"></div>
+              </section>
 
-            <section class="panel area-weights">
-              <div class="panel-head">
-                <div>
-                  <h3>Model Weighting and Signal Balance</h3>
-                  <p>What the current rough ranking model is emphasizing for each receptor target.</p>
+              <section class="panel area-weights">
+                <div class="panel-head">
+                  <div>
+                    <h3>Model Weighting and Signal Balance</h3>
+                    <p>What the current rough ranking model is emphasizing for each receptor target.</p>
+                  </div>
                 </div>
-              </div>
-              <div class="weights-panel" id="weights-panel"></div>
-            </section>
+                <div class="weights-panel" id="weights-panel"></div>
+              </section>
 
-            <section class="panel area-research">
-              <div class="panel-head research-panel-head">
-                <div>
-                  <h3>Autonomous Discovery Monitor</h3>
-                  <p>Literature-derived candidate leads, runtime health, and manual refresh controls for the autonomous discovery loop.</p>
+              <section class="panel area-research">
+                <div class="panel-head research-panel-head">
+                  <div>
+                    <h3>Autonomous Discovery Monitor</h3>
+                    <p>Literature-derived candidate leads, runtime health, and manual refresh controls for the autonomous discovery loop.</p>
+                  </div>
+                  <div class="research-head-actions">
+                    <div id="research-runtime-chips" class="research-chip-row"></div>
+                    <button id="research-refresh-button" class="ghost-button" type="button">Refresh Now</button>
+                  </div>
                 </div>
-                <div class="research-head-actions">
-                  <div id="research-runtime-chips" class="research-chip-row"></div>
-                  <button id="research-refresh-button" class="ghost-button" type="button">Refresh Now</button>
-                </div>
-              </div>
-              <div class="research-runtime-grid" id="research-runtime-grid"></div>
-              <div class="target-sections" id="research-leads"></div>
-            </section>
+                <div class="research-runtime-grid" id="research-runtime-grid"></div>
+                <div class="target-sections" id="research-leads"></div>
+              </section>
+            </div>
           </div>
         </section>
 
