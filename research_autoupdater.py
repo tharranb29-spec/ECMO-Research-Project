@@ -18,18 +18,29 @@ DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 AUTO_RESEARCH_MAX_ARTICLES = int(os.environ.get("AUTO_RESEARCH_MAX_ARTICLES", "12"))
+AUTO_RESEARCH_PAGE_SIZE = int(os.environ.get("AUTO_RESEARCH_PAGE_SIZE", "24"))
 AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
 
 SEARCH_QUERIES = [
     {
         "target_receptor": "Siglec-9",
-        "query": '(Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR agonist OR peptide OR sialoside) sort_date:y',
+        "query": '((Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR glycan OR glycopolypeptide OR glycopeptide OR agonist OR peptide OR sialoside OR sialic OR engineered OR synthetic OR high-affinity)) sort_date:y',
+    },
+    {
+        "target_receptor": "Siglec-9",
+        "query": '((Siglec-9 OR SIGLEC9) AND (pS9L OR pLac OR sLeX OR glycomimetic OR glycopolypeptide OR multivalent OR sialoside)) sort_date:y',
     },
     {
         "target_receptor": "SIRPa",
-        "query": '("SIRPalpha" OR "SIRPa" OR "SIRPα" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist) sort_date:y',
+        "query": '((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist OR bispecific OR antibody OR ectodomain OR decoy OR fusion OR high-affinity OR engineered)) sort_date:y',
+    },
+    {
+        "target_receptor": "SIRPa",
+        "query": '((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (\"self peptide\" OR ectodomain OR N3612 OR CV1 OR TTI-621 OR TTI-622 OR bispecific OR antibody OR decoy)) sort_date:y',
     },
 ]
+
+HISTORY_PATH = OUTPUTS / "research_history.json"
 
 NAME_PATTERNS = [
     re.compile(r"\b(pS9L(?:-sol)?|pLac|sLeX|MTTSNeu5Ac|BTCNeu5Ac|N3612|CV1|TTI-621|TTI-622|AO-176|Self peptide|CD47 ectodomain)\b", re.I),
@@ -139,12 +150,66 @@ EXACT_BLOCKED_CANDIDATE_TERMS = {
     "fusion protein",
 }
 
+TARGET_DISCOVERY_TERMS = {
+    "Siglec-9": {
+        "positive": {
+            "glycomimetic",
+            "glycan",
+            "glycopolypeptide",
+            "glycopeptide",
+            "sialic",
+            "sialoside",
+            "slex",
+            "ps9l",
+            "plac",
+            "engineered",
+            "synthetic",
+            "high-affinity",
+            "agonist",
+            "ligand",
+            "mimetic",
+        },
+        "negative": {
+            "urticaria",
+            "allergic",
+            "crohn",
+            "sepsis",
+            "adjuvant",
+            "rhinitis",
+        },
+    },
+    "SIRPa": {
+        "positive": {
+            "cd47",
+            "self peptide",
+            "self",
+            "ectodomain",
+            "variant",
+            "bispecific",
+            "decoy",
+            "fusion",
+            "antibody",
+            "mimetic",
+            "engineered",
+            "high-affinity",
+            "checkpoint",
+        },
+        "negative": {
+            "tumor microenvironment",
+            "radiotherapy",
+            "microglia",
+            "glioma",
+            "macrophage polarization",
+        },
+    },
+}
+
 
 def ensure_outputs():
     OUTPUTS.mkdir(parents=True, exist_ok=True)
 
 
-def fetch_europe_pmc_results(query, page_size=15):
+def fetch_europe_pmc_results(query, page_size=AUTO_RESEARCH_PAGE_SIZE):
     params = parse.urlencode(
         {
             "query": query,
@@ -305,6 +370,36 @@ def article_link(article):
     return ""
 
 
+def load_history():
+    if not HISTORY_PATH.exists():
+        return {"seen_article_ids": [], "seen_lead_keys": [], "last_updated": None}
+    try:
+        with open(HISTORY_PATH, "r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception:  # noqa: BLE001
+        return {"seen_article_ids": [], "seen_lead_keys": [], "last_updated": None}
+    if not isinstance(payload, dict):
+        return {"seen_article_ids": [], "seen_lead_keys": [], "last_updated": None}
+    payload.setdefault("seen_article_ids", [])
+    payload.setdefault("seen_lead_keys", [])
+    return payload
+
+
+def save_history(payload):
+    with open(HISTORY_PATH, "w", encoding="utf-8") as handle:
+        json.dump(payload, handle, indent=2, ensure_ascii=False)
+
+
+def load_json(path):
+    if not path.exists():
+        return None
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            return json.load(handle)
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def deepseek_research_enabled():
     return bool(DEEPSEEK_API_KEY) and AUTO_RESEARCH_LLM_ENABLED
 
@@ -372,8 +467,43 @@ def score_lead(article, candidate_name, target_receptor):
     return min(score, 92)
 
 
+def article_relevance_score(article_record, seed_records):
+    text = f"{article_record.get('title', '')} {article_record.get('abstract', '')}".lower()
+    title = (article_record.get("title", "") or "").lower()
+    target = normalize_target_receptor(article_record.get("target_receptor"))
+    rules = TARGET_DISCOVERY_TERMS.get(target, {"positive": set(), "negative": set()})
+
+    score = 0
+    if target == "Siglec-9" and ("siglec-9" in text or "siglec9" in text):
+        score += 2
+    if target == "SIRPa" and any(token in text for token in ["sirpalpha", "sirpa", "sirpα", "cd47"]):
+        score += 2
+
+    for token in rules["positive"]:
+        if token in text:
+            score += 2
+        if token in title:
+            score += 1
+
+    for token in rules["negative"]:
+        if token in text:
+            score -= 2
+
+    seed_matches = extract_seed_matches(text, seed_records)
+    candidate_aliases = extract_candidate_names(text)
+    score += min(8, len(seed_matches) * 3)
+    score += min(4, len(candidate_aliases) * 2)
+
+    if "review" in title or "comprehensive review" in title:
+        score -= 3
+    if "case report" in title:
+        score -= 2
+
+    return score
+
+
 def build_article_record(article, target_receptor, query):
-    return {
+    record = {
         "id": f"{article.get('source', 'SRC')}-{article.get('id', '')}",
         "target_receptor": normalize_target_receptor(target_receptor),
         "query": query,
@@ -386,6 +516,7 @@ def build_article_record(article, target_receptor, query):
         "source_url": article_link(article),
         "article_id": article.get("id", ""),
     }
+    return record
 
 
 def build_leads_from_article(article_record, seed_records):
@@ -555,6 +686,7 @@ def build_candidate_from_lead(lead, seed_records):
         "source_title": lead.get("source_title"),
         "source_method": lead.get("source_method", "heuristic"),
         "article_id": lead.get("article_id"),
+        "is_new": bool(lead.get("is_new")),
     }
 
 
@@ -571,6 +703,10 @@ def dedupe_leads(leads):
     return deduped
 
 
+def lead_history_key(lead):
+    return f"{normalize_target_receptor(lead.get('target_receptor'))}|{canonical_key(lead.get('candidate_name', ''))}"
+
+
 def write_json(path, payload):
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, ensure_ascii=False)
@@ -579,7 +715,17 @@ def write_json(path, payload):
 def refresh_research_outputs():
     ensure_outputs()
     seed_records = load_seed_records(SEED_PATH)
+    existing_status = load_json(OUTPUTS / "research_status.json") or {}
+    existing_articles_payload = load_json(OUTPUTS / "research_articles.json") or {}
+    existing_leads_payload = load_json(OUTPUTS / "research_leads.json") or {}
+    existing_autonomous_payload = load_json(OUTPUTS / "autonomous_ranking_results.json") or {}
+    history = load_history()
+    seen_article_ids = set(history.get("seen_article_ids") or [])
+    seen_lead_keys = set(history.get("seen_lead_keys") or [])
     fetched_articles = []
+    relevant_articles = []
+    seen_fetched_article_ids = set()
+    seen_relevant_article_ids = set()
     heuristic_leads = []
     llm_leads = []
     errors = []
@@ -605,21 +751,30 @@ def refresh_research_outputs():
 
         for result in payload.get("resultList", {}).get("result", []):
             article_record = build_article_record(result, entry["target_receptor"], entry["query"])
-            fetched_articles.append(article_record)
+            article_record["relevance_score"] = article_relevance_score(article_record, seed_records)
+            article_key = article_record.get("id") or f"{article_record.get('title', '')}|{article_record.get('publication_date', '')}"
+            if article_key not in seen_fetched_article_ids:
+                fetched_articles.append(article_record)
+                seen_fetched_article_ids.add(article_key)
             query_articles.append(article_record)
-            heuristic_leads.extend(build_leads_from_article(article_record, seed_records))
+            if article_record["relevance_score"] >= 2 and article_key not in seen_relevant_article_ids:
+                relevant_articles.append(article_record)
+                seen_relevant_article_ids.add(article_key)
+                heuristic_leads.extend(build_leads_from_article(article_record, seed_records))
 
         query_results.append(
             {
                 "target_receptor": entry["target_receptor"],
                 "ok": True,
                 "article_count": len(query_articles),
+                "relevant_article_count": sum(1 for article in query_articles if article.get("relevance_score", 0) >= 2),
             }
         )
 
-        if deepseek_research_enabled() and query_articles:
+        llm_query_articles = [article for article in query_articles if article.get("relevance_score", 0) >= 1]
+        if deepseek_research_enabled() and llm_query_articles:
             try:
-                llm_leads.extend(extract_llm_leads(query_articles, seed_records))
+                llm_leads.extend(extract_llm_leads(llm_query_articles, seed_records))
             except error.HTTPError as exc:
                 detail = exc.read().decode("utf-8", errors="replace")[:200]
                 errors.append(f"{entry['target_receptor']}: DeepSeek HTTP {exc.code} - {detail}")
@@ -628,7 +783,13 @@ def refresh_research_outputs():
             except Exception as exc:  # noqa: BLE001
                 errors.append(f"{entry['target_receptor']}: DeepSeek extraction failed - {exc}")
 
+    successful_queries = [result for result in query_results if result.get("ok")]
+
     deduped_leads = dedupe_leads(heuristic_leads + llm_leads)
+    new_articles = [article for article in fetched_articles if article.get("id") not in seen_article_ids]
+    new_leads = [lead for lead in deduped_leads if lead_history_key(lead) not in seen_lead_keys]
+    for lead in deduped_leads:
+        lead["is_new"] = lead_history_key(lead) not in seen_lead_keys
     autonomous_candidates = [build_candidate_from_lead(lead, seed_records) for lead in deduped_leads]
     autonomous_ranking = rank_records(seed_records, autonomous_candidates) if autonomous_candidates else {"models": {}, "metrics": {}, "ranked": []}
     candidate_index = {candidate["id"]: candidate for candidate in autonomous_candidates}
@@ -639,11 +800,49 @@ def refresh_research_outputs():
         row["publication_date"] = candidate.get("publication_date")
         row["source_title"] = candidate.get("source_title")
         row["source_method"] = candidate.get("source_method")
+        row["is_new"] = candidate.get("is_new")
+
+    attempted_at = datetime.now(timezone.utc).isoformat()
+
+    if not successful_queries and errors:
+        cached_articles = existing_articles_payload.get("articles") or []
+        cached_relevant_articles = existing_articles_payload.get("relevant_articles") or []
+        cached_leads = existing_leads_payload.get("leads") or []
+        cached_ranking = existing_autonomous_payload if isinstance(existing_autonomous_payload, dict) else {}
+        summary = {
+            "last_updated": existing_status.get("last_updated"),
+            "last_attempted_at": attempted_at,
+            "last_successful_data_at": existing_status.get("last_updated"),
+            "article_count": existing_status.get("article_count", len(cached_articles)),
+            "relevant_article_count": existing_status.get("relevant_article_count", len(cached_relevant_articles)),
+            "new_article_count": 0,
+            "lead_count": existing_status.get("lead_count", len(cached_leads)),
+            "new_lead_count": 0,
+            "autonomous_ranked_count": len(cached_ranking.get("ranked", [])),
+            "heuristic_lead_count": existing_status.get("heuristic_lead_count", 0),
+            "llm_lead_count": existing_status.get("llm_lead_count", 0),
+            "llm_enabled": deepseek_research_enabled(),
+            "llm_provider": "deepseek" if deepseek_research_enabled() else None,
+            "query_results": query_results,
+            "errors": errors,
+            "health": "warning" if cached_leads or cached_ranking.get("ranked") else "error",
+            "queries": SEARCH_QUERIES,
+            "new_article_titles": [],
+            "new_lead_names": [],
+            "using_cached_results": True,
+        }
+        write_json(OUTPUTS / "research_status.json", summary)
+        return summary
 
     summary = {
-        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "last_updated": attempted_at,
+        "last_attempted_at": attempted_at,
+        "last_successful_data_at": attempted_at,
         "article_count": len(fetched_articles),
+        "relevant_article_count": len(relevant_articles),
+        "new_article_count": len(new_articles),
         "lead_count": len(deduped_leads),
+        "new_lead_count": len(new_leads),
         "autonomous_ranked_count": len(autonomous_ranking.get("ranked", [])),
         "heuristic_lead_count": len(heuristic_leads),
         "llm_lead_count": len(llm_leads),
@@ -653,14 +852,24 @@ def refresh_research_outputs():
         "errors": errors,
         "health": "ok" if not errors else ("warning" if deduped_leads else "error"),
         "queries": SEARCH_QUERIES,
+        "new_article_titles": [article.get("title", "") for article in new_articles[:5]],
+        "new_lead_names": [lead.get("candidate_name", "") for lead in new_leads[:5]],
+        "using_cached_results": False,
     }
 
-    write_json(OUTPUTS / "research_articles.json", {"last_updated": summary["last_updated"], "articles": fetched_articles})
+    write_json(OUTPUTS / "research_articles.json", {"last_updated": summary["last_updated"], "articles": fetched_articles, "relevant_articles": relevant_articles})
     write_json(OUTPUTS / "research_leads.json", {"last_updated": summary["last_updated"], "leads": deduped_leads})
     write_json(OUTPUTS / "autonomous_candidates.json", {"last_updated": summary["last_updated"], "candidates": autonomous_candidates})
     write_json(OUTPUTS / "autonomous_ranking_results.json", autonomous_ranking)
     write_markdown(OUTPUTS / "autonomous_ranking_report.md", autonomous_ranking, "outputs/autonomous_candidates.json")
     write_json(OUTPUTS / "research_status.json", summary)
+    save_history(
+        {
+            "last_updated": summary["last_updated"],
+            "seen_article_ids": [article.get("id") for article in fetched_articles if article.get("id")],
+            "seen_lead_keys": [lead_history_key(lead) for lead in deduped_leads],
+        }
+    )
     return summary
 
 

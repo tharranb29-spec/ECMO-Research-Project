@@ -439,6 +439,9 @@
       { text: canUseLiveEndpoints() ? "Live sync available" : "Static bundle mode", health: null },
       { text: runtime.llm_enabled ? "DeepSeek discovery on" : "Heuristic discovery only", health: null },
       { text: `Refresh every ${intervalLabel}`, health: null },
+      { text: status.using_cached_results ? "Showing cached leads" : "Fresh discovery snapshot", health: status.using_cached_results ? "warning" : "ok" },
+      { text: `${status.new_article_count || 0} new articles`, health: null },
+      { text: `${status.new_lead_count || 0} new leads`, health: null },
       { text: health === "ok" ? "Health ok" : health === "warning" ? "Health warning" : "Health error", health },
     ];
 
@@ -467,8 +470,10 @@
       [
         "Health",
         humanizeRuntimeState(runtime),
-        runtime.last_error
-          ? runtime.last_error
+        status.using_cached_results
+          ? "The latest refresh could not reach the literature endpoints, so the dashboard is preserving the last successful discovery snapshot."
+          : runtime.last_error
+            ? runtime.last_error
           : health === "ok"
             ? "Autonomous discovery is producing fresh leads and the dashboard should refresh automatically."
             : health === "warning"
@@ -476,9 +481,16 @@
               : "Autonomous discovery has not produced a clean successful update yet.",
       ],
       [
-        "Last update",
+        "Last data update",
         lastSuccessLabel ? formatDate(lastSuccessLabel) : "No successful update yet",
-        lastSuccessLabel ? describeAge(lastSuccessLabel) : "Waiting for the first successful discovery cycle.",
+        lastSuccessLabel
+          ? `${describeAge(lastSuccessLabel)}${status.using_cached_results ? " (cached snapshot still active)" : ""}`
+          : "Waiting for the first successful discovery cycle.",
+      ],
+      [
+        "Last attempt",
+        status.last_attempted_at ? formatDate(status.last_attempted_at) : "No refresh attempt yet",
+        status.last_attempted_at ? describeAge(status.last_attempted_at) : "No autonomous refresh attempt has been recorded.",
       ],
       [
         "Next run",
@@ -488,7 +500,18 @@
       [
         "Lead counts",
         `${status.lead_count || 0} leads`,
-        `${status.article_count || 0} articles screened${status.llm_lead_count ? `, ${status.llm_lead_count} DeepSeek leads` : ""}.`,
+        `${status.article_count || 0} articles screened, ${status.relevant_article_count || 0} judged discovery-relevant${status.llm_lead_count ? `, ${status.llm_lead_count} DeepSeek leads` : ""}.`,
+      ],
+      [
+        "What changed",
+        `${status.new_article_count || 0} new articles / ${status.new_lead_count || 0} new leads`,
+        status.new_lead_names && status.new_lead_names.length
+          ? `Newest leads: ${status.new_lead_names.join(", ")}.`
+          : status.using_cached_results
+            ? "The latest attempt fell back to the last successful dataset because live literature retrieval was unavailable."
+          : status.new_article_count
+            ? "Fresh articles were found, but no brand-new candidate lead passed the ranking filters this cycle."
+            : "No newly surfaced articles or candidate leads compared with the previous cycle.",
       ],
     ];
 
@@ -545,7 +568,13 @@
         : status.health === "error"
           ? "The last cycle reported an error."
           : "The last cycle completed cleanly.";
-    alert.textContent = `${stateText} Last successful update: ${lastUpdate}. Next run: ${nextRun}. ${modeText} ${hostingText}${errorText ? ` Latest issue: ${errorText}` : ""}`;
+    const freshnessText = status.new_article_count || status.new_lead_count
+      ? ` It surfaced ${status.new_article_count || 0} new articles and ${status.new_lead_count || 0} new leads in the latest cycle.`
+      : " No brand-new articles or leads were added in the latest cycle.";
+    const cacheText = status.using_cached_results
+      ? ` The dashboard is currently showing the last successful discovery snapshot from ${lastUpdate}.`
+      : "";
+    alert.textContent = `${stateText} Last successful update: ${lastUpdate}. Next run: ${nextRun}. ${modeText}${freshnessText}${cacheText} ${hostingText}${errorText ? ` Latest issue: ${errorText}` : ""}`;
   }
 
   function setResearchRuntimeAlert(message, tone = "info") {
@@ -625,10 +654,12 @@
       const lastSuccess = runtime.last_success_at || status.last_updated;
       if (!autoResearch.enabled) {
         briefingResearchCopy.textContent = "Autonomous literature discovery is currently disabled for this dashboard session.";
+      } else if (status.using_cached_results) {
+        briefingResearchCopy.textContent = `The latest refresh attempt could not reach literature sources, so the dashboard is still showing the last successful discovery snapshot from ${describeAge(lastSuccess)}.`;
       } else if (runtime.last_error) {
         briefingResearchCopy.textContent = `Last issue: ${runtime.last_error}. The dashboard will retry on the next refresh window or when the live server is reopened.`;
       } else if (lastSuccess) {
-        briefingResearchCopy.textContent = `${status.lead_count || 0} leads from ${status.article_count || 0} articles. Last successful update ${describeAge(lastSuccess)} with a ${formatInterval(runtime.interval_seconds || autoResearch.intervalSeconds || 3600)} cadence.`;
+        briefingResearchCopy.textContent = `${status.lead_count || 0} leads from ${status.article_count || 0} articles (${status.new_article_count || 0} new articles, ${status.new_lead_count || 0} new leads this cycle). Last successful update ${describeAge(lastSuccess)} with a ${formatInterval(runtime.interval_seconds || autoResearch.intervalSeconds || 3600)} cadence.`;
       } else {
         briefingResearchCopy.textContent = "Waiting for the first successful autonomous discovery cycle to populate recent literature leads.";
       }
@@ -1003,7 +1034,9 @@
     if (researchStatus.last_updated) {
       const note = document.createElement("div");
       note.className = "empty-state";
-      note.textContent = `Last autonomous research update: ${formatDate(researchStatus.last_updated || runtime.last_success_at)}. Leads discovered: ${researchStatus.lead_count || leads.length}.`;
+      note.textContent = researchStatus.using_cached_results
+        ? `The latest autonomous refresh is using the cached discovery snapshot from ${formatDate(researchStatus.last_updated || runtime.last_success_at)} because the literature endpoints were unavailable during the newest attempt.`
+        : `Last autonomous research update: ${formatDate(researchStatus.last_updated || runtime.last_success_at)}. Leads discovered: ${researchStatus.lead_count || leads.length}. New this cycle: ${researchStatus.new_lead_count || 0} leads from ${researchStatus.new_article_count || 0} newly surfaced articles.`;
       researchLeadsPanel.append(note);
     }
 
@@ -1035,10 +1068,13 @@
       const discoveryChip = document.createElement("span");
       discoveryChip.className = `research-chip ${lead.discovery_status === "known_reference" ? "ok" : "warning"}`;
       discoveryChip.textContent = lead.discovery_status === "known_reference" ? "Known reference" : "New literature lead";
+      const freshnessChip = document.createElement("span");
+      freshnessChip.className = `research-chip ${lead.is_new ? "ok" : ""}`.trim();
+      freshnessChip.textContent = lead.is_new ? "New this cycle" : "Seen previously";
       const dateChip = document.createElement("span");
       dateChip.className = "research-chip";
       dateChip.textContent = lead.publication_date ? formatDate(lead.publication_date) : "No date";
-      meta.append(statusChip, discoveryChip, dateChip);
+      meta.append(statusChip, discoveryChip, freshnessChip, dateChip);
 
       const rationale = document.createElement("p");
       rationale.className = "candidate-copy";
