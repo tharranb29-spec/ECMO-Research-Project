@@ -52,9 +52,9 @@ ALLOWED_ORIGINS = {
 BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
 BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
 BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
-APP_LOGIN_USER = os.environ.get("ECMO_APP_LOGIN_USER", "").strip()
-APP_LOGIN_PASSWORD = os.environ.get("ECMO_APP_LOGIN_PASSWORD", "")
-APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "")
+APP_LOGIN_USER = os.environ.get("ECMO_APP_LOGIN_USER", "").strip() or BASIC_AUTH_USER
+APP_LOGIN_PASSWORD = os.environ.get("ECMO_APP_LOGIN_PASSWORD", "") or BASIC_AUTH_PASSWORD
+APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "") or DEEPSEEK_API_KEY or OPENAI_API_KEY or ""
 APP_SESSION_TTL_HOURS = int(os.environ.get("ECMO_SESSION_TTL_HOURS", "24"))
 APP_LOGIN_ENABLED = bool(APP_LOGIN_USER and APP_LOGIN_PASSWORD and APP_SESSION_SECRET)
 APP_SESSION_COOKIE_NAME = "ecmo_session"
@@ -532,6 +532,28 @@ def rate_limit_check(client_key, bucket_name, limit_count, window_seconds):
     return True, 0
 
 
+def app_login_diagnostics():
+    return {
+        "enabled": APP_LOGIN_ENABLED,
+        "user_present": bool(APP_LOGIN_USER),
+        "password_present": bool(APP_LOGIN_PASSWORD),
+        "session_secret_present": bool(APP_SESSION_SECRET),
+        "using_basic_auth_fallback": bool(
+            not os.environ.get("ECMO_APP_LOGIN_USER", "").strip()
+            and BASIC_AUTH_USER
+            and APP_LOGIN_USER == BASIC_AUTH_USER
+        ) or bool(
+            not os.environ.get("ECMO_APP_LOGIN_PASSWORD", "")
+            and BASIC_AUTH_PASSWORD
+            and APP_LOGIN_PASSWORD == BASIC_AUTH_PASSWORD
+        ),
+        "using_api_key_secret_fallback": bool(
+            not os.environ.get("ECMO_SESSION_SECRET", "")
+            and bool(APP_SESSION_SECRET)
+        ),
+    }
+
+
 def _urlsafe_b64encode(raw_bytes):
     return base64.urlsafe_b64encode(raw_bytes).decode("ascii").rstrip("=")
 
@@ -788,6 +810,16 @@ class Handler(BaseHTTPRequestHandler):
     def _handle_get_like(self, method="GET"):
         parsed = urlparse(self.path)
 
+        if parsed.path == "/healthz":
+            self._send_json(
+                {
+                    "ok": True,
+                    "service": "ecmo-research-dashboard",
+                    "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
+                },
+                method=method,
+            )
+            return
         if parsed.path == "/api/status":
             maybe_schedule_stale_refresh("status-poll")
             self._send_json(
@@ -803,6 +835,7 @@ class Handler(BaseHTTPRequestHandler):
                     "research_runtime": runtime_state_snapshot(),
                     "app_login_enabled": APP_LOGIN_ENABLED,
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
+                    "app_login_diagnostics": app_login_diagnostics(),
                 },
                 method=method,
             )
@@ -838,7 +871,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
-        allowed_paths = {"/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
+        allowed_paths = {"/healthz", "/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
         if APP_LOGIN_ENABLED and parsed.path == "/login.html" and self._is_authorized():
             params = parse_qs(parsed.query or "")
             self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
@@ -853,7 +886,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_HEAD(self):
         parsed = urlparse(self.path)
-        allowed_paths = {"/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
+        allowed_paths = {"/healthz", "/login.html", "/login.js", "/assets/zju-ism-mark.svg"}
         if APP_LOGIN_ENABLED and parsed.path == "/login.html" and self._is_authorized():
             params = parse_qs(parsed.query or "")
             self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
@@ -986,14 +1019,13 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    if AUTO_RESEARCH_ENABLED:
-        start_background_updater()
     server = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f"Serving dashboard at http://{HOST}:{PORT}")
     print(f"Provider: {AI_PROVIDER}")
     print(f"Live assistant model: {current_model_name()}")
     if AUTO_RESEARCH_ENABLED:
         print(f"Auto research updater enabled every {AUTO_RESEARCH_INTERVAL_SECONDS} seconds")
+        start_background_updater()
     print("Press Ctrl+C to stop.")
     try:
         server.serve_forever()
@@ -1049,6 +1081,7 @@ def run_refresh_cycle(reason="scheduled"):
 
 def start_background_updater():
     def loop():
+        time.sleep(5)
         run_refresh_cycle("startup")
         while True:
             time.sleep(max(60, AUTO_RESEARCH_INTERVAL_SECONDS))

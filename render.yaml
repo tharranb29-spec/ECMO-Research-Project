@@ -3,7 +3,7 @@ services:
     name: ecmo-research-dashboard
     env: python
     plan: free
-    healthCheckPath: /api/status
+    healthCheckPath: /healthz
     buildCommand: "python3 ecmo_seed_ranker.py && python3 build_dashboard_bundle.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
