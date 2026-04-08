@@ -2931,6 +2931,196 @@
         }
       }
 
+      /* Final layout overrides to stabilize desktop scroll behavior and mobile rendering. */
+      .dashboard-shell {
+        width: min(1640px, calc(100% - 24px));
+        margin: 16px auto 30px;
+        display: grid;
+        grid-template-columns: 320px minmax(0, 1fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .command-rail,
+      .assistant-side-rail {
+        position: static;
+        top: auto;
+        align-self: start;
+      }
+
+      .workspace-canvas {
+        min-width: 0;
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-stage {
+        display: grid;
+        gap: 18px;
+      }
+
+      .hero-topbar {
+        margin-bottom: 0;
+      }
+
+      .session-greeting-card {
+        width: min(100%, 360px);
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+        gap: 18px;
+        align-items: start;
+        grid-template-areas: none;
+      }
+
+      .area-leaderboard,
+      .area-directory {
+        grid-column: 1;
+        grid-area: auto;
+      }
+
+      .area-targets,
+      .area-weights,
+      .area-research {
+        grid-column: 2;
+        grid-area: auto;
+      }
+
+      .stats-grid,
+      .hero-note-grid {
+        align-items: stretch;
+      }
+
+      @media (max-width: 1280px) {
+        .dashboard-shell {
+          grid-template-columns: 1fr;
+          width: min(100%, calc(100% - 18px));
+          gap: 16px;
+        }
+
+        .command-rail {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .brand-card,
+        .control-card {
+          grid-column: 1 / -1;
+        }
+
+        .hero-grid,
+        .analysis-grid,
+        .assistant-command-grid,
+        .assistant-intro-grid,
+        .assistant-frame-grid {
+          grid-template-columns: 1fr;
+          grid-template-areas: none;
+        }
+
+        .area-leaderboard,
+        .area-directory,
+        .area-targets,
+        .area-weights,
+        .area-research {
+          grid-column: auto;
+          grid-area: auto;
+        }
+      }
+
+      @media (max-width: 860px) {
+        .dashboard-shell {
+          width: calc(100% - 14px);
+          margin: 10px auto 24px;
+          gap: 14px;
+        }
+
+        .command-rail {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .rail-toggle-row,
+        .rail-card .toggle-row,
+        .rail-card .view-tabs {
+          display: flex;
+          gap: 10px;
+        }
+
+        .rail-card,
+        .hero-stage,
+        .panel,
+        .assistant-main-panel .assistant-shell {
+          padding: 16px;
+          border-radius: 22px;
+        }
+
+        .hero-topbar {
+          justify-content: stretch;
+        }
+
+        .session-greeting-card {
+          width: 100%;
+          max-width: none;
+        }
+
+        .hero-kicker-row,
+        .rail-toggle-row {
+          flex-wrap: wrap;
+          overflow: visible;
+          padding-bottom: 0;
+        }
+
+        .hero-note-grid,
+        .stats-grid,
+        .directory-grid,
+        .research-runtime-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .structure-viewer {
+          min-height: 280px;
+          height: 280px;
+        }
+
+        .assistant-messages {
+          min-height: 320px;
+          max-height: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .dashboard-shell {
+          width: calc(100% - 12px);
+          margin: 8px auto 20px;
+        }
+
+        .hero-stage .hero-copy h1 {
+          max-width: none;
+          font-size: clamp(2rem, 10vw, 3rem);
+        }
+
+        .hero-stage .hero-copy h2,
+        .hero-summary {
+          max-width: none;
+        }
+
+        .leaderboard,
+        .assistant-shell,
+        .target-sections,
+        .weights-panel,
+        .directory-grid {
+          padding: 14px;
+          gap: 14px;
+        }
+
+        .panel-head {
+          padding: 18px 16px 14px;
+        }
+      }
+
       @media print {
         body {
           background: #fff;
