@@ -876,7 +876,7 @@ class Handler(BaseHTTPRequestHandler):
             params = parse_qs(parsed.query or "")
             self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
             return
-        if APP_LOGIN_ENABLED and parsed.path in allowed_paths:
+        if parsed.path == "/healthz" or (APP_LOGIN_ENABLED and parsed.path in allowed_paths):
             self._handle_get_like(method="GET")
             return
         if not self._is_authorized():
@@ -891,7 +891,7 @@ class Handler(BaseHTTPRequestHandler):
             params = parse_qs(parsed.query or "")
             self._send_redirect(safe_next_path((params.get("next") or ["/"])[0]))
             return
-        if APP_LOGIN_ENABLED and parsed.path in allowed_paths:
+        if parsed.path == "/healthz" or (APP_LOGIN_ENABLED and parsed.path in allowed_paths):
             self._handle_get_like(method="HEAD")
             return
         if not self._is_authorized():
