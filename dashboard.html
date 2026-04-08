@@ -2951,8 +2951,8 @@
 
       .command-rail,
       .assistant-side-rail {
-        position: static;
-        top: auto;
+        position: relative !important;
+        top: 0 !important;
         align-self: start;
       }
 
@@ -2990,16 +2990,27 @@
       }
 
       .area-leaderboard,
-      .area-directory,
+      .area-directory {
+        grid-column: 1;
+        grid-area: auto;
+      }
+
       .area-targets,
-      .area-weights,
+      .area-weights {
+        grid-column: 2;
+        grid-area: auto;
+      }
+
       .area-research {
-        grid-column: auto;
+        grid-column: 1 / -1;
         grid-area: auto;
       }
 
       .stats-grid,
-      .hero-note-grid {
+      .hero-note-grid,
+      .analysis-shell,
+      .analysis-main-stack,
+      .analysis-side-stack {
         align-items: stretch;
       }
 
@@ -3076,6 +3087,22 @@
           max-width: none;
         }
 
+        .brand-lockup,
+        .rail-brand-lockup {
+          align-items: flex-start;
+        }
+
+        .brand-mark {
+          width: 82px;
+          height: 82px;
+          border-radius: 22px;
+        }
+
+        .brand-mark img {
+          width: 64px;
+          height: 64px;
+        }
+
         .hero-kicker-row,
         .rail-toggle-row {
           flex-wrap: wrap;
@@ -3107,6 +3134,11 @@
           margin: 8px auto 20px;
         }
 
+        .shell {
+          width: calc(100% - 12px);
+          margin: 8px auto 20px;
+        }
+
         .hero-stage .hero-copy h1 {
           max-width: none;
           font-size: clamp(2rem, 10vw, 3rem);
@@ -3128,6 +3160,27 @@
 
         .panel-head {
           padding: 18px 16px 14px;
+        }
+
+        .brand-lockup,
+        .rail-brand-lockup {
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .brand-mark {
+          width: 72px;
+          height: 72px;
+          border-radius: 20px;
+        }
+
+        .brand-mark img {
+          width: 56px;
+          height: 56px;
+        }
+
+        .session-greeting-card strong {
+          font-size: 1.02rem;
         }
       }
 
