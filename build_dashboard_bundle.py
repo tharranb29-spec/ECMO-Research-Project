@@ -23,6 +23,7 @@ def main():
         "seed": load_json(OUTPUTS / "seed_ranking_results.json"),
         "custom": load_json(OUTPUTS / "custom_results.json"),
         "autonomous": load_json(OUTPUTS / "autonomous_ranking_results.json"),
+        "autonomous_promoted": load_json(OUTPUTS / "autonomous_promoted_results.json"),
         "research_leads": load_json(OUTPUTS / "research_leads.json"),
         "research_status": load_json(OUTPUTS / "research_status.json"),
         "research_runtime": load_json(OUTPUTS / "research_runtime_status.json"),

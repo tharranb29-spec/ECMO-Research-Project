@@ -33,6 +33,9 @@
   const researchRuntimeGrid = document.getElementById("research-runtime-grid");
   const researchRuntimeChips = document.getElementById("research-runtime-chips");
   const researchRefreshButton = document.getElementById("research-refresh-button");
+  const promotedOverviewSection = document.getElementById("promoted-overview-section");
+  const promotedCandidateBoard = document.getElementById("promoted-candidate-board");
+  const promotedOverviewCopy = document.getElementById("promoted-overview-copy");
   const assistantSideHits = document.getElementById("assistant-side-hits");
   const searchInput = document.getElementById("search-input");
   const assistantMessages = document.getElementById("assistant-messages");
@@ -190,6 +193,9 @@
       bundle.autonomous = payload.autonomous;
       datasets.autonomous = payload.autonomous;
     }
+    if (payload.autonomous_promoted) {
+      bundle.autonomous_promoted = payload.autonomous_promoted;
+    }
     if (payload.research_leads) {
       bundle.research_leads = payload.research_leads;
     }
@@ -218,6 +224,11 @@
   function getResearchLeads() {
     const payload = bundle.research_leads || {};
     return Array.isArray(payload.leads) ? payload.leads : [];
+  }
+
+  function getPromotedAutonomousRows() {
+    const payload = bundle.autonomous_promoted || {};
+    return Array.isArray(payload.ranked) ? payload.ranked : [];
   }
 
   function formatDate(value) {
@@ -727,6 +738,10 @@
     if (researchStatus.last_updated) {
       metaRow.append(createMetaChip(`Research updated: ${formatDate(researchStatus.last_updated)}`));
     }
+    const promotedCount = getPromotedAutonomousRows().length;
+    if (promotedCount && activeView === "overview") {
+      metaRow.append(createMetaChip(`${promotedCount} autonomous promotion${promotedCount === 1 ? "" : "s"} on main review`));
+    }
   }
 
   function renderStats(rows) {
@@ -794,6 +809,12 @@
 
     const tags = document.createElement("div");
     tags.className = "tag-row";
+    if (row.promoted_to_main_view) {
+      const promotedTag = document.createElement("span");
+      promotedTag.className = "tag advance";
+      promotedTag.textContent = "AUTO PROMOTED";
+      tags.append(promotedTag);
+    }
     const tier = document.createElement("span");
     tier.className = `tag ${scoreClass(row.recommendation)}`;
     tier.textContent = row.recommendation.toUpperCase();
@@ -810,7 +831,14 @@
     evidence.className = "candidate-copy";
     evidence.textContent = row.evidence_summary || "No evidence summary provided.";
 
-    card.append(top, bar, tags, reasoning, evidence);
+    card.append(top, bar, tags);
+    if (row.promotion_reason) {
+      const promotion = document.createElement("p");
+      promotion.className = "candidate-copy";
+      promotion.textContent = row.promotion_reason;
+      card.append(promotion);
+    }
+    card.append(reasoning, evidence);
 
     if (Array.isArray(row.source_urls) && row.source_urls.length) {
       const sources = document.createElement("div");
@@ -1102,8 +1130,31 @@
     });
   }
 
+  function renderPromotedOverview() {
+    if (!promotedOverviewSection || !promotedCandidateBoard) {
+      return;
+    }
+    const promotedRows = getPromotedAutonomousRows();
+    promotedOverviewSection.hidden = !promotedRows.length;
+    clear(promotedCandidateBoard);
+    if (!promotedRows.length) {
+      if (promotedOverviewCopy) {
+        promotedOverviewCopy.textContent = "High-signal candidates elevated by the autonomous literature pipeline for direct review on the main workspace.";
+      }
+      return;
+    }
+    const status = getAutoResearchStatus();
+    if (promotedOverviewCopy) {
+      promotedOverviewCopy.textContent = status.last_updated
+        ? `${promotedRows.length} autonomous candidate${promotedRows.length === 1 ? "" : "s"} currently meet promotion criteria and are surfaced here from the latest discovery snapshot (${formatDate(status.last_updated)}).`
+        : `${promotedRows.length} autonomous candidate${promotedRows.length === 1 ? "" : "s"} are currently promoted into the main review workspace.`;
+    }
+    promotedRows.forEach((row) => populateCandidateCard(promotedCandidateBoard, row));
+  }
+
   function renderAll() {
     const rows = getFilteredRows(activeDataset);
+    renderPromotedOverview();
     renderBriefing(rows);
     renderMeta(rows);
     renderStats(rows);

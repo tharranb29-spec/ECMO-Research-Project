@@ -20,6 +20,9 @@ DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.co
 AUTO_RESEARCH_MAX_ARTICLES = int(os.environ.get("AUTO_RESEARCH_MAX_ARTICLES", "12"))
 AUTO_RESEARCH_PAGE_SIZE = int(os.environ.get("AUTO_RESEARCH_PAGE_SIZE", "24"))
 AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
+AUTO_PROMOTED_MAX = int(os.environ.get("AUTO_PROMOTED_MAX", "4"))
+AUTO_PROMOTED_MAX_PER_TARGET = int(os.environ.get("AUTO_PROMOTED_MAX_PER_TARGET", "2"))
+AUTO_PROMOTED_MIN_SCORE = float(os.environ.get("AUTO_PROMOTED_MIN_SCORE", "65"))
 
 SEARCH_QUERIES = [
     {
@@ -707,6 +710,53 @@ def lead_history_key(lead):
     return f"{normalize_target_receptor(lead.get('target_receptor'))}|{canonical_key(lead.get('candidate_name', ''))}"
 
 
+def select_promoted_candidates(autonomous_ranking, seed_records):
+    ranked_rows = autonomous_ranking.get("ranked", []) if isinstance(autonomous_ranking, dict) else []
+    seed_keys = {
+        canonical_key(record.get("candidate_name", ""))
+        for record in seed_records
+        if canonical_key(record.get("candidate_name", ""))
+    }
+    promoted = []
+    seen_names = set()
+    per_target_counts = {}
+    for row in ranked_rows:
+        candidate_key = canonical_key(row.get("candidate_name", ""))
+        target = normalize_target_receptor(row.get("target_receptor"))
+        recommendation = str(row.get("recommendation", "")).lower()
+        score = float(row.get("predicted_score", 0) or 0)
+        if not candidate_key or candidate_key in seen_names or candidate_key in seed_keys:
+            continue
+        if recommendation not in {"advance", "secondary"} and score < AUTO_PROMOTED_MIN_SCORE:
+            continue
+        if per_target_counts.get(target, 0) >= AUTO_PROMOTED_MAX_PER_TARGET:
+            continue
+        promoted_row = dict(row)
+        promoted_row["promoted_to_main_view"] = True
+        promoted_row["promotion_source"] = "autonomous_discovery"
+        promoted_row["promotion_reason"] = (
+            "Autonomous literature discovery flagged this candidate as strong enough for direct inclusion in the main review workspace."
+        )
+        promoted_row["promotion_rank"] = len(promoted) + 1
+        promoted.append(promoted_row)
+        seen_names.add(candidate_key)
+        per_target_counts[target] = per_target_counts.get(target, 0) + 1
+        if len(promoted) >= AUTO_PROMOTED_MAX:
+            break
+
+    return {
+        "last_updated": datetime.now(timezone.utc).isoformat(),
+        "criteria": {
+            "min_score": AUTO_PROMOTED_MIN_SCORE,
+            "recommendation_tiers": ["advance", "secondary"],
+            "max_candidates": AUTO_PROMOTED_MAX,
+            "max_per_target": AUTO_PROMOTED_MAX_PER_TARGET,
+            "exclude_seed_references": True,
+        },
+        "ranked": promoted,
+    }
+
+
 def write_json(path, payload):
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, ensure_ascii=False)
@@ -719,6 +769,7 @@ def refresh_research_outputs():
     existing_articles_payload = load_json(OUTPUTS / "research_articles.json") or {}
     existing_leads_payload = load_json(OUTPUTS / "research_leads.json") or {}
     existing_autonomous_payload = load_json(OUTPUTS / "autonomous_ranking_results.json") or {}
+    existing_promoted_payload = load_json(OUTPUTS / "autonomous_promoted_results.json") or {}
     history = load_history()
     seen_article_ids = set(history.get("seen_article_ids") or [])
     seen_lead_keys = set(history.get("seen_lead_keys") or [])
@@ -792,6 +843,7 @@ def refresh_research_outputs():
         lead["is_new"] = lead_history_key(lead) not in seen_lead_keys
     autonomous_candidates = [build_candidate_from_lead(lead, seed_records) for lead in deduped_leads]
     autonomous_ranking = rank_records(seed_records, autonomous_candidates) if autonomous_candidates else {"models": {}, "metrics": {}, "ranked": []}
+    promoted_payload = select_promoted_candidates(autonomous_ranking, seed_records)
     candidate_index = {candidate["id"]: candidate for candidate in autonomous_candidates}
     for row in autonomous_ranking.get("ranked", []):
         candidate = candidate_index.get(row["id"], {})
@@ -809,6 +861,7 @@ def refresh_research_outputs():
         cached_relevant_articles = existing_articles_payload.get("relevant_articles") or []
         cached_leads = existing_leads_payload.get("leads") or []
         cached_ranking = existing_autonomous_payload if isinstance(existing_autonomous_payload, dict) else {}
+        cached_promoted = existing_promoted_payload if isinstance(existing_promoted_payload, dict) else {}
         summary = {
             "last_updated": existing_status.get("last_updated"),
             "last_attempted_at": attempted_at,
@@ -819,6 +872,7 @@ def refresh_research_outputs():
             "lead_count": existing_status.get("lead_count", len(cached_leads)),
             "new_lead_count": 0,
             "autonomous_ranked_count": len(cached_ranking.get("ranked", [])),
+            "promoted_count": len(cached_promoted.get("ranked", [])),
             "heuristic_lead_count": existing_status.get("heuristic_lead_count", 0),
             "llm_lead_count": existing_status.get("llm_lead_count", 0),
             "llm_enabled": deepseek_research_enabled(),
@@ -844,6 +898,7 @@ def refresh_research_outputs():
         "lead_count": len(deduped_leads),
         "new_lead_count": len(new_leads),
         "autonomous_ranked_count": len(autonomous_ranking.get("ranked", [])),
+        "promoted_count": len(promoted_payload.get("ranked", [])),
         "heuristic_lead_count": len(heuristic_leads),
         "llm_lead_count": len(llm_leads),
         "llm_enabled": deepseek_research_enabled(),
@@ -861,6 +916,8 @@ def refresh_research_outputs():
     write_json(OUTPUTS / "research_leads.json", {"last_updated": summary["last_updated"], "leads": deduped_leads})
     write_json(OUTPUTS / "autonomous_candidates.json", {"last_updated": summary["last_updated"], "candidates": autonomous_candidates})
     write_json(OUTPUTS / "autonomous_ranking_results.json", autonomous_ranking)
+    promoted_payload["last_updated"] = summary["last_updated"]
+    write_json(OUTPUTS / "autonomous_promoted_results.json", promoted_payload)
     write_markdown(OUTPUTS / "autonomous_ranking_report.md", autonomous_ranking, "outputs/autonomous_candidates.json")
     write_json(OUTPUTS / "research_status.json", summary)
     save_history(

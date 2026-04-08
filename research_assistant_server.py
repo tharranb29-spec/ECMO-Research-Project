@@ -256,6 +256,7 @@ def load_bundle():
         "seed": read_json(DATASET_PATHS["seed"]),
         "custom": read_json(DATASET_PATHS["custom"]),
         "autonomous": read_json(DATASET_PATHS["autonomous"]),
+        "autonomous_promoted": read_json(ROOT / "outputs" / "autonomous_promoted_results.json"),
         "research_leads": read_json(ROOT / "outputs" / "research_leads.json"),
         "research_status": latest_research_status(),
         "research_runtime": runtime_state_snapshot(),
