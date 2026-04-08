@@ -52,11 +52,8 @@ ALLOWED_ORIGINS = {
 BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
 BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
 BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
-APP_LOGIN_USER = os.environ.get("ECMO_APP_LOGIN_USER", "").strip() or BASIC_AUTH_USER
-APP_LOGIN_PASSWORD = os.environ.get("ECMO_APP_LOGIN_PASSWORD", "") or BASIC_AUTH_PASSWORD
 APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "") or DEEPSEEK_API_KEY or OPENAI_API_KEY or ""
 APP_SESSION_TTL_HOURS = int(os.environ.get("ECMO_SESSION_TTL_HOURS", "24"))
-APP_LOGIN_ENABLED = bool(APP_LOGIN_USER and APP_LOGIN_PASSWORD and APP_SESSION_SECRET)
 APP_SESSION_COOKIE_NAME = "ecmo_session"
 
 STATIC_FILES = {
@@ -104,6 +101,69 @@ SECURITY_HEADERS = {
     ),
     "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
 }
+
+
+def normalize_username(username):
+    return str(username or "").strip().lower()
+
+
+def format_display_name(username):
+    cleaned = str(username or "").strip()
+    if not cleaned:
+        return "Research User"
+    return cleaned
+
+
+def register_login_user(target, username, password, display_name=None):
+    canonical_username = str(username or "").strip()
+    if not canonical_username or password is None or password == "":
+        return
+    target[normalize_username(canonical_username)] = {
+        "username": canonical_username,
+        "password": str(password),
+        "display_name": str(display_name or format_display_name(canonical_username)).strip() or canonical_username,
+    }
+
+
+def load_login_users():
+    users = {}
+    raw_json = os.environ.get("ECMO_APP_LOGIN_USERS_JSON", "").strip()
+    if raw_json:
+        try:
+            parsed = json.loads(raw_json)
+            if isinstance(parsed, dict):
+                for username, value in parsed.items():
+                    if isinstance(value, dict):
+                        register_login_user(
+                            users,
+                            username,
+                            value.get("password", ""),
+                            value.get("display_name") or value.get("name"),
+                        )
+                    else:
+                        register_login_user(users, username, value)
+            elif isinstance(parsed, list):
+                for entry in parsed:
+                    if not isinstance(entry, dict):
+                        continue
+                    register_login_user(
+                        users,
+                        entry.get("username", ""),
+                        entry.get("password", ""),
+                        entry.get("display_name") or entry.get("name"),
+                    )
+        except Exception:  # noqa: BLE001
+            pass
+
+    single_user = os.environ.get("ECMO_APP_LOGIN_USER", "").strip() or BASIC_AUTH_USER
+    single_password = os.environ.get("ECMO_APP_LOGIN_PASSWORD", "") or BASIC_AUTH_PASSWORD
+    if single_user and single_password:
+        register_login_user(users, single_user, single_password)
+    return users
+
+
+APP_LOGIN_USERS = load_login_users()
+APP_LOGIN_ENABLED = bool(APP_LOGIN_USERS and APP_SESSION_SECRET)
 
 
 def utc_now_iso():
@@ -535,23 +595,26 @@ def rate_limit_check(client_key, bucket_name, limit_count, window_seconds):
 def app_login_diagnostics():
     return {
         "enabled": APP_LOGIN_ENABLED,
-        "user_present": bool(APP_LOGIN_USER),
-        "password_present": bool(APP_LOGIN_PASSWORD),
+        "user_count": len(APP_LOGIN_USERS),
         "session_secret_present": bool(APP_SESSION_SECRET),
-        "using_basic_auth_fallback": bool(
-            not os.environ.get("ECMO_APP_LOGIN_USER", "").strip()
-            and BASIC_AUTH_USER
-            and APP_LOGIN_USER == BASIC_AUTH_USER
-        ) or bool(
-            not os.environ.get("ECMO_APP_LOGIN_PASSWORD", "")
-            and BASIC_AUTH_PASSWORD
-            and APP_LOGIN_PASSWORD == BASIC_AUTH_PASSWORD
+        "multi_user_config_present": bool(os.environ.get("ECMO_APP_LOGIN_USERS_JSON", "").strip()),
+        "using_single_user_fallback": bool(
+            not os.environ.get("ECMO_APP_LOGIN_USERS_JSON", "").strip()
+            and (
+                os.environ.get("ECMO_APP_LOGIN_USER", "").strip()
+                or os.environ.get("ECMO_APP_LOGIN_PASSWORD", "")
+                or BASIC_AUTH_ENABLED
+            )
         ),
         "using_api_key_secret_fallback": bool(
             not os.environ.get("ECMO_SESSION_SECRET", "")
             and bool(APP_SESSION_SECRET)
         ),
     }
+
+
+def get_login_user_record(username):
+    return APP_LOGIN_USERS.get(normalize_username(username))
 
 
 def _urlsafe_b64encode(raw_bytes):
@@ -597,7 +660,8 @@ def parse_app_session_token(token):
     except Exception:  # noqa: BLE001
         return None
 
-    if payload.get("u") != APP_LOGIN_USER:
+    user_record = get_login_user_record(payload.get("u"))
+    if not user_record:
         return None
     exp = payload.get("exp")
     if not isinstance(exp, int) or exp < int(time.time()):
@@ -667,6 +731,18 @@ class Handler(BaseHTTPRequestHandler):
             return None
         token = self._parse_cookies().get(APP_SESSION_COOKIE_NAME)
         return parse_app_session_token(token)
+
+    def _session_user(self):
+        payload = self._app_session_payload()
+        if not payload:
+            return None
+        record = get_login_user_record(payload.get("u"))
+        if not record:
+            return None
+        return {
+            "username": record["username"],
+            "display_name": record["display_name"],
+        }
 
     def _is_secure_request(self):
         proto = (self.headers.get("X-Forwarded-Proto") or "").strip().lower()
@@ -836,6 +912,7 @@ class Handler(BaseHTTPRequestHandler):
                     "app_login_enabled": APP_LOGIN_ENABLED,
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                     "app_login_diagnostics": app_login_diagnostics(),
+                    "session_user": self._session_user(),
                 },
                 method=method,
             )
@@ -920,14 +997,12 @@ class Handler(BaseHTTPRequestHandler):
             username = str(payload.get("username") or "").strip()
             password = str(payload.get("password") or "")
             next_path = safe_next_path(payload.get("next") or "/")
-            if not (
-                hmac.compare_digest(username, APP_LOGIN_USER)
-                and hmac.compare_digest(password, APP_LOGIN_PASSWORD)
-            ):
+            user_record = get_login_user_record(username)
+            if not user_record or not hmac.compare_digest(password, user_record["password"]):
                 self._send_error_json(HTTPStatus.UNAUTHORIZED, "Invalid username or password.", extra={"login_required": True})
                 return
 
-            token = build_app_session_token(username)
+            token = build_app_session_token(user_record["username"])
             body = json.dumps({"ok": True, "redirect_to": next_path}, ensure_ascii=False).encode("utf-8")
             self.send_response(HTTPStatus.OK)
             self.send_header("Set-Cookie", self._build_session_cookie(token))

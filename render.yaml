@@ -25,6 +25,8 @@ services:
         sync: false
       - key: ECMO_BASIC_AUTH_PASSWORD
         sync: false
+      - key: ECMO_APP_LOGIN_USERS_JSON
+        sync: false
       - key: ECMO_APP_LOGIN_USER
         sync: false
       - key: ECMO_APP_LOGIN_PASSWORD

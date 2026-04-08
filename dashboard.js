@@ -57,6 +57,9 @@
   const askButton = document.getElementById("ask-button");
   const openStructureWindowButton = document.getElementById("open-structure-window");
   const logoutButton = document.getElementById("logout-button");
+  const sessionGreetingCard = document.getElementById("session-greeting-card");
+  const sessionGreetingText = document.getElementById("session-greeting-text");
+  const sessionGreetingSubtext = document.getElementById("session-greeting-subtext");
 
   let activeDataset = datasets.seed ? "seed" : datasets.autonomous ? "autonomous" : datasets.custom ? "custom" : "seed";
   let activeView = "overview";
@@ -76,6 +79,7 @@
   const authState = {
     mode: "none",
     appLoginEnabled: false,
+    sessionUser: null,
   };
   let bundlePollingStarted = false;
   let autonomousWatchdogStarted = false;
@@ -247,6 +251,20 @@
     return window.location.protocol !== "file:";
   }
 
+  function timeGreeting(date) {
+    const hour = (date || new Date()).getHours();
+    if (hour >= 5 && hour < 12) {
+      return "Good morning";
+    }
+    if (hour >= 12 && hour < 18) {
+      return "Good afternoon";
+    }
+    if (hour >= 18 && hour < 23) {
+      return "Good evening";
+    }
+    return "Good night";
+  }
+
   function currentAppPath() {
     return `${window.location.pathname || "/"}${window.location.search || ""}`;
   }
@@ -275,10 +293,22 @@
   }
 
   function updateAuthChrome() {
-    if (!logoutButton) {
+    if (logoutButton) {
+      logoutButton.hidden = !(authState.appLoginEnabled && canUseLiveEndpoints());
+      logoutButton.textContent = authState.sessionUser ? `Sign Out ${authState.sessionUser.display_name || authState.sessionUser.username}` : "Sign Out";
+    }
+
+    if (!sessionGreetingCard || !sessionGreetingText || !sessionGreetingSubtext) {
       return;
     }
-    logoutButton.hidden = !(authState.appLoginEnabled && canUseLiveEndpoints());
+    const visible = Boolean(authState.appLoginEnabled && authState.sessionUser);
+    sessionGreetingCard.hidden = !visible;
+    if (!visible) {
+      return;
+    }
+    const displayName = authState.sessionUser.display_name || authState.sessionUser.username || "Research User";
+    sessionGreetingText.textContent = `${timeGreeting(new Date())}, ${displayName}.`;
+    sessionGreetingSubtext.textContent = `Signed in as ${authState.sessionUser.username} for the ECMO research workspace.`;
   }
 
   function updateAutoResearchState(payload) {
@@ -1401,6 +1431,7 @@
       liveAssistant.model = payload.model || null;
       authState.appLoginEnabled = Boolean(payload.app_login_enabled);
       authState.mode = payload.auth_mode || "none";
+      authState.sessionUser = payload.session_user || null;
       updateAuthChrome();
 
       if (liveAssistant.connected) {
@@ -1416,6 +1447,7 @@
       }
       liveAssistant.checked = true;
       liveAssistant.connected = false;
+      authState.sessionUser = null;
       updateAuthChrome();
       setAssistantStatus("Static dashboard mode. Run research_assistant_server.py for the full live assistant.", false);
     }
