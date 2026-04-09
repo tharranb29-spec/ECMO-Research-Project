@@ -3290,6 +3290,69 @@
         padding-inline: 18px;
       }
 
+      .hero-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .hero-copy {
+        display: grid;
+        gap: 16px;
+        max-width: 1180px;
+        margin: 0 auto;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .hero-brand-row {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 4px;
+      }
+
+      .hero-kicker-row {
+        justify-content: center;
+      }
+
+      .hero-program-line {
+        text-align: center;
+      }
+
+      .hero-stage .hero-copy h1 {
+        max-width: 14ch;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .hero-stage .hero-copy h2,
+      .hero-summary {
+        max-width: 72ch;
+        margin-inline: auto;
+        text-align: center;
+      }
+
+      .hero-note-grid {
+        width: 100%;
+        max-width: 1120px;
+        margin: 6px auto 0;
+        align-items: stretch;
+      }
+
+      .hero-note-card {
+        height: 100%;
+        align-content: start;
+      }
+
+      .hero-note-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.62;
+      }
+
+      .hero-side-stack {
+        display: none;
+      }
+
       .analysis-shell {
         display: grid;
         grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
@@ -3583,21 +3646,17 @@
                     <span class="hero-note-label">Operational workflow</span>
                     <strong>Rank candidates, inspect structure, interrogate tradeoffs with the assistant, then refine wet-lab next steps.</strong>
                   </article>
+                  <article class="hero-note-card">
+                    <span class="hero-note-label">Project Thesis</span>
+                    <strong>From passive coating to immune-modulating interface</strong>
+                    <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
+                  </article>
+                  <article class="hero-note-card">
+                    <span class="hero-note-label">Presentation workflow</span>
+                    <strong>Switch modules as the discussion changes</strong>
+                    <p>Open the Review Board for ranked hits, move into Autonomous Discovery for new leads, use Structure Review for protein context, and keep the Live Assistant for follow-up scientific questions.</p>
+                  </article>
                 </div>
-              </div>
-
-              <div class="hero-side-stack">
-                <section class="hero-side-card">
-                  <p class="rail-eyebrow">Project Thesis</p>
-                  <h3>From passive coating to immune-modulating interface</h3>
-                  <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
-                </section>
-
-                <section class="hero-side-card">
-                  <p class="rail-eyebrow">Presentation Workflow</p>
-                  <h3>Switch modules as the discussion changes</h3>
-                  <p>Open the Review Board for ranked hits, move into Autonomous Discovery for new leads, use Structure Review for protein context, and keep the Live Assistant for follow-up scientific questions.</p>
-                </section>
               </div>
             </div>
 
