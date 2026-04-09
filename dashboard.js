@@ -27,6 +27,7 @@
   const structureView = document.getElementById("structure-view");
   const assistantView = document.getElementById("assistant-view");
   const settingsView = document.getElementById("settings-view");
+  const workspaceTopbar = document.getElementById("workspace-topbar");
   const metaRow = document.getElementById("meta-row");
   const statsGrid = document.getElementById("stats-grid");
   const leaderboard = document.getElementById("leaderboard");
@@ -845,6 +846,10 @@
     viewButtons.forEach((button) => {
       button.classList.toggle("active", button.dataset.view === viewName);
     });
+    if (workspaceTopbar) {
+      workspaceTopbar.hidden = viewName === "home";
+      workspaceTopbar.setAttribute("aria-hidden", viewName === "home" ? "true" : "false");
+    }
     Object.entries(viewPanels).forEach(([name, panel]) => {
       if (!panel) {
         return;
