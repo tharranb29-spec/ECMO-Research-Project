@@ -7,6 +7,8 @@ services:
     buildCommand: "python3 ecmo_seed_ranker.py && python3 build_dashboard_bundle.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.11"
       - key: AI_PROVIDER
         value: deepseek
       - key: DEEPSEEK_MODEL
