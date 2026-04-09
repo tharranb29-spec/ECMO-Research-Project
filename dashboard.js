@@ -21,10 +21,12 @@
   const datasetButtons = Array.from(document.querySelectorAll("[data-dataset]"));
   const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
   const quickPrompts = Array.from(document.querySelectorAll("[data-prompt]"));
+  const homeView = document.getElementById("home-view");
   const overviewView = document.getElementById("overview-view");
   const autonomousView = document.getElementById("autonomous-view");
   const structureView = document.getElementById("structure-view");
   const assistantView = document.getElementById("assistant-view");
+  const settingsView = document.getElementById("settings-view");
   const metaRow = document.getElementById("meta-row");
   const statsGrid = document.getElementById("stats-grid");
   const leaderboard = document.getElementById("leaderboard");
@@ -65,9 +67,16 @@
   const sessionGreetingCard = document.getElementById("session-greeting-card");
   const sessionGreetingText = document.getElementById("session-greeting-text");
   const sessionGreetingSubtext = document.getElementById("session-greeting-subtext");
+  const homeBrandLogo = document.getElementById("home-brand-logo");
+  const homeBrandInstitution = document.getElementById("home-brand-institution");
+  const homeBrandProgram = document.getElementById("home-brand-program");
+  const homeMissionCopy = document.getElementById("home-mission-copy");
+  const settingsSignalGrid = document.getElementById("settings-signal-grid");
+  const settingsAlertBox = document.getElementById("settings-alert-box");
+  const settingsSessionNote = document.getElementById("settings-session-note");
 
   let activeDataset = datasets.seed ? "seed" : datasets.autonomous ? "autonomous" : datasets.custom ? "custom" : "seed";
-  let activeView = "overview";
+  let activeView = "home";
   let activeSearch = "";
   const histories = { seed: [], custom: [], autonomous: [] };
   const autoResearch = {
@@ -90,10 +99,12 @@
   let autonomousWatchdogStarted = false;
 
   const viewPanels = {
+    home: homeView,
     overview: overviewView,
     autonomous: autonomousView,
     structure: structureView,
     assistant: assistantView,
+    settings: settingsView,
   };
 
   function normalize(text) {
@@ -129,6 +140,9 @@
   }
 
   function viewLabel(viewName) {
+    if (viewName === "home") {
+      return "Home";
+    }
     if (viewName === "assistant") {
       return "Live assistant";
     }
@@ -137,6 +151,9 @@
     }
     if (viewName === "structure") {
       return "Structure review";
+    }
+    if (viewName === "settings") {
+      return "Settings";
     }
     return "Review board";
   }
@@ -193,6 +210,19 @@
     if (logo && config.logo_path) {
       logo.src = config.logo_path;
       logo.alt = `${config.institution_name || "University"} logo`;
+    }
+    if (homeBrandLogo && config.logo_path) {
+      homeBrandLogo.src = config.logo_path;
+      homeBrandLogo.alt = `${config.institution_name || "University"} logo`;
+    }
+    if (homeBrandInstitution) {
+      homeBrandInstitution.textContent = config.institution_name || "University Research Group";
+    }
+    if (homeBrandProgram) {
+      homeBrandProgram.textContent = config.program_name || "AI-Driven ECMO Interface Research Project";
+    }
+    if (homeMissionCopy) {
+      homeMissionCopy.textContent = config.mission_statement || "Transform ECMO interface research into a guided decision system that ranks, explains, and continuously discovers immune-modulating ligand candidates suitable for real biomaterial translation.";
     }
   }
 
@@ -702,6 +732,93 @@
     }
   }
 
+  function renderSettingsView() {
+    if (settingsSignalGrid) {
+      clear(settingsSignalGrid);
+      const runtime = getAutoResearchRuntime();
+      const status = getAutoResearchStatus();
+      const sessionUser = authState.sessionUser;
+      const signalCards = [
+        {
+          label: "Session",
+          value: sessionUser ? `${timeGreeting(new Date())}, ${sessionUser.display_name || sessionUser.username}` : "Not identified",
+          copy: sessionUser ? `Signed in as ${sessionUser.username}. Session access is active for the ECMO research workspace.` : "Login identity could not be confirmed in the current browser session.",
+        },
+        {
+          label: "Live Assistant",
+          value: liveAssistant.connected ? (liveAssistant.model || liveAssistant.provider || "Connected") : (liveAssistant.checked ? "Fallback mode" : "Checking"),
+          copy: liveAssistant.connected
+            ? `The discussion assistant is connected through ${liveAssistant.provider || "API"}${liveAssistant.model ? ` using ${liveAssistant.model}` : ""}.`
+            : "The assistant is not currently connected to the live model backend and will answer in local fallback mode.",
+        },
+        {
+          label: "Autonomous Research",
+          value: humanizeRuntimeState(runtime),
+          copy: status.last_updated
+            ? `Last successful discovery snapshot: ${formatDate(status.last_updated)}. Current cadence: ${formatInterval(runtime.interval_seconds || autoResearch.intervalSeconds || 3600)}.`
+            : "No successful autonomous discovery cycle has been recorded yet.",
+        },
+        {
+          label: "Discovery Yield",
+          value: `${status.lead_count || 0} leads`,
+          copy: `${status.article_count || 0} articles screened, ${status.relevant_article_count || 0} considered relevant, ${status.new_lead_count || 0} new leads in the latest cycle.`,
+        },
+      ];
+
+      signalCards.forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "research-runtime-card";
+        const label = document.createElement("div");
+        label.className = "research-runtime-label";
+        label.textContent = item.label;
+        const value = document.createElement("div");
+        value.className = "research-runtime-value";
+        value.textContent = item.value;
+        const copy = document.createElement("p");
+        copy.className = "research-runtime-copy";
+        copy.textContent = item.copy;
+        card.append(label, value, copy);
+        settingsSignalGrid.append(card);
+      });
+    }
+
+    if (settingsAlertBox) {
+      const runtime = getAutoResearchRuntime();
+      const status = getAutoResearchStatus();
+      let tone = "info";
+      if (runtime.last_error || status.health === "error") {
+        tone = "error";
+      } else if (runtime.in_progress || status.health === "warning" || status.using_cached_results) {
+        tone = "warning";
+      }
+      settingsAlertBox.className = `research-runtime-alert ${tone}`;
+      const parts = [];
+      if (runtime.in_progress) {
+        parts.push("A discovery cycle is currently running.");
+      } else if (status.using_cached_results) {
+        parts.push("The latest research refresh fell back to cached discovery results because a live literature source was unavailable.");
+      } else if (runtime.last_error || (status.errors && status.errors.length)) {
+        parts.push(`Latest issue: ${runtime.last_error || status.errors[0]}`);
+      } else {
+        parts.push("No active system issue is currently reported by the live research services.");
+      }
+      if (status.last_updated) {
+        parts.push(`Last successful update: ${formatDate(status.last_updated)}.`);
+      }
+      if (runtime.next_run_at) {
+        parts.push(`Next scheduled refresh: ${formatDate(runtime.next_run_at)}.`);
+      }
+      settingsAlertBox.textContent = parts.join(" ");
+    }
+
+    if (settingsSessionNote) {
+      const promotedCount = getPromotedAutonomousRows().length;
+      settingsSessionNote.textContent = promotedCount
+        ? `${promotedCount} autonomous candidate${promotedCount === 1 ? "" : "s"} are currently promoted into the main review workspace.`
+        : "No autonomous candidates are currently promoted into the main review workspace.";
+    }
+  }
+
   function getFilteredRows(datasetKey) {
     const rows = getRows(datasetKey);
     if (!activeSearch) {
@@ -1189,6 +1306,7 @@
     renderResearchRuntimeAlert();
     renderResearchLeads();
     renderAssistantSideHits(rows);
+    renderSettingsView();
   }
 
   function findCandidateMatches(question) {
@@ -1814,7 +1932,7 @@
     window.ECMOProteinViewer.mountAll();
   }
   renderAll();
-  setView("overview");
+  setView("home");
   updateAssistantChrome();
   checkLiveAssistant().finally(() => {
     resetAssistant();

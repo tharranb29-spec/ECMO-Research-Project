@@ -761,6 +761,13 @@
           linear-gradient(160deg, rgba(64, 58, 95, 0.84), rgba(31, 33, 60, 0.96));
       }
 
+      .module-tab.settings .module-tab-art {
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.08), transparent 24%),
+          radial-gradient(circle at 84% 18%, rgba(255, 134, 134, 0.22), transparent 20%),
+          linear-gradient(160deg, rgba(88, 53, 61, 0.84), rgba(43, 31, 40, 0.96));
+      }
+
       .module-art-label {
         position: relative;
         z-index: 1;
@@ -2136,6 +2143,45 @@
         gap: 10px;
       }
 
+      .hero-brand-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+      }
+
+      .home-brand-mark {
+        display: inline-grid;
+        place-items: center;
+        width: 104px;
+        height: 104px;
+        border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(242, 247, 255, 0.92));
+        box-shadow: var(--shadow-soft);
+      }
+
+      .home-brand-mark img {
+        width: 82px;
+        height: 82px;
+        object-fit: contain;
+      }
+
+      .hero-brand-meta {
+        display: grid;
+        gap: 6px;
+      }
+
+      .hero-brand-meta strong {
+        font-size: 1.1rem;
+        line-height: 1.3;
+      }
+
+      .hero-brand-meta span {
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
       .hero-chip {
         padding: 8px 12px;
         border-radius: 999px;
@@ -3001,6 +3047,20 @@
           padding-bottom: 0;
         }
 
+        .hero-brand-row {
+          align-items: flex-start;
+        }
+
+        .home-brand-mark {
+          width: 88px;
+          height: 88px;
+        }
+
+        .home-brand-mark img {
+          width: 68px;
+          height: 68px;
+        }
+
         .rail-toggle-row > .toggle,
         .rail-toggle-row > .view-tab {
           flex: 1 1 calc(50% - 8px);
@@ -3038,6 +3098,10 @@
 
         .hero-stage .hero-copy h1 {
           font-size: clamp(2rem, 11vw, 3rem);
+        }
+
+        .hero-brand-row {
+          gap: 12px;
         }
 
         .hero-stage .hero-copy h2,
@@ -3452,7 +3516,15 @@
 
           <div class="rail-group">
             <span class="rail-label">Workspace modules</span>
-            <div class="hint compact-hint">Use the module cards in the main canvas to switch between Review Board, Autonomous Discovery, Structure Review, and the Live Assistant.</div>
+            <div class="view-tabs rail-toggle-row">
+              <button class="view-tab active" data-view="home">Home</button>
+              <button class="view-tab" data-view="overview">Review</button>
+              <button class="view-tab" data-view="autonomous">Discovery</button>
+              <button class="view-tab" data-view="structure">Structure</button>
+              <button class="view-tab" data-view="assistant">Assistant</button>
+              <button class="view-tab" data-view="settings">Settings</button>
+            </div>
+            <div class="hint compact-hint">Use the home screen for the project overview, then switch into focused workspaces for review, discovery, structure, live discussion, and settings.</div>
           </div>
 
           <div class="rail-group">
@@ -3533,76 +3605,87 @@
       </aside>
 
       <section class="workspace-canvas">
-        <section class="hero-stage panel">
-          <div class="hero-topbar">
-            <div id="session-greeting-card" class="session-greeting-card" hidden>
-              <span class="session-greeting-label">Team Session</span>
-              <strong id="session-greeting-text">Good morning, Research User.</strong>
-              <p id="session-greeting-subtext">Signed into the ECMO research workspace.</p>
-            </div>
-          </div>
-
-          <div class="hero-grid">
-            <div class="hero-copy">
-              <div class="hero-kicker-row">
-                <span class="hero-chip">Research Command Center</span>
-                <span class="hero-chip subdued">Live ranking, discovery, and structural review</span>
-              </div>
-
-              <p class="hero-program-line">ZJU-ISM biomedical AI workflow for ECMO interface design</p>
-              <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
-              <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
-              <p class="hero-summary">
-                This research environment combines structured ligand ranking, autonomous literature monitoring, and a live reasoning assistant to help the team identify ECMO-surface ligands that are not only high-affinity, but also experimentally actionable and biologically suitable.
-              </p>
-
-              <div class="hero-note-grid">
-                <article class="hero-note-card">
-                  <span class="hero-note-label">Scientific objective</span>
-                  <strong>Prioritize candidates that can engage inhibitory pathways while remaining compatible with ECMO surface engineering.</strong>
-                </article>
-                <article class="hero-note-card">
-                  <span class="hero-note-label">Operational workflow</span>
-                  <strong>Rank candidates, inspect structure, interrogate tradeoffs with the assistant, then refine wet-lab next steps.</strong>
-                </article>
+        <section id="home-view" class="view active research-view">
+          <section class="hero-stage panel">
+            <div class="hero-topbar">
+              <div id="session-greeting-card" class="session-greeting-card" hidden>
+                <span class="session-greeting-label">Team Session</span>
+                <strong id="session-greeting-text">Good morning, Research User.</strong>
+                <p id="session-greeting-subtext">Signed into the ECMO research workspace.</p>
               </div>
             </div>
 
-            <div class="hero-side-stack">
-              <section class="hero-side-card">
-                <p class="rail-eyebrow">Project Thesis</p>
-                <h3>From passive coating to immune-modulating interface</h3>
-                <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
-              </section>
+            <div class="hero-grid">
+              <div class="hero-copy">
+                <div class="hero-brand-row">
+                  <div class="home-brand-mark">
+                    <img id="home-brand-logo" src="assets/zju-ism-mark.svg" alt="University logo" />
+                  </div>
+                  <div class="hero-brand-meta">
+                    <strong id="home-brand-institution">Zhejiang University International School of Medicine</strong>
+                    <span id="home-brand-program">AI-Driven ECMO Interface Research Project</span>
+                  </div>
+                </div>
 
-              <section class="hero-side-card">
-                <p class="rail-eyebrow">Presentation Workflow</p>
-                <h3>Switch modules as the discussion changes</h3>
-                <p>Open the Review Board for ranked hits, move into Autonomous Discovery for new leads, use Structure Review for protein context, and keep the Live Assistant for follow-up scientific questions.</p>
-              </section>
+                <div class="hero-kicker-row">
+                  <span class="hero-chip">Research Command Center</span>
+                  <span class="hero-chip subdued">Live ranking, discovery, structural review, and supervisor presentation support</span>
+                </div>
+
+                <p class="hero-program-line">ZJU-ISM biomedical AI workflow for ECMO interface design</p>
+                <h1 id="brand-english">AI-Driven Discovery of High-Affinity Ligands for Developing Bio-inspired ECMO Interfaces Capable of Immune Phenotypic Reprogramming</h1>
+                <h2 id="brand-chinese">人工智能驱动的高亲和力配体筛选及其介导的ECMO仿生界面免疫重塑研究</h2>
+                <p class="hero-summary">
+                  This research environment combines structured ligand ranking, autonomous literature monitoring, and a live reasoning assistant to help the team identify ECMO-surface ligands that are not only high-affinity, but also experimentally actionable and biologically suitable.
+                </p>
+
+                <div class="hero-note-grid">
+                  <article class="hero-note-card">
+                    <span class="hero-note-label">Mission of the Project</span>
+                    <strong id="home-mission-copy">Transform ECMO interface research into a guided decision system that ranks, explains, and continuously discovers immune-modulating ligand candidates suitable for real biomaterial translation.</strong>
+                  </article>
+                  <article class="hero-note-card">
+                    <span class="hero-note-label">Operational workflow</span>
+                    <strong>Rank candidates, inspect structure, interrogate tradeoffs with the assistant, then refine wet-lab next steps.</strong>
+                  </article>
+                </div>
+              </div>
+
+              <div class="hero-side-stack">
+                <section class="hero-side-card">
+                  <p class="rail-eyebrow">Project Thesis</p>
+                  <h3>From passive coating to immune-modulating interface</h3>
+                  <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
+                </section>
+
+                <section class="hero-side-card">
+                  <p class="rail-eyebrow">Presentation Workflow</p>
+                  <h3>Switch modules as the discussion changes</h3>
+                  <p>Open the Review Board for ranked hits, move into Autonomous Discovery for new leads, use Structure Review for protein context, and keep the Live Assistant for follow-up scientific questions.</p>
+                </section>
+              </div>
             </div>
-          </div>
 
-          <div class="hero-band">
-            <div class="hero-band-head">
+            <div class="hero-band">
+              <div class="hero-band-head">
+                <div>
+                  <p class="rail-eyebrow">Operational Snapshot</p>
+                  <h3>Current model state and visible candidate profile</h3>
+                </div>
+              </div>
+              <div class="stats-grid" id="stats-grid"></div>
+            </div>
+          </section>
+
+          <section class="panel module-stage">
+            <div class="module-stage-head">
               <div>
-                <p class="rail-eyebrow">Operational Snapshot</p>
-                <h3>Current model state and visible candidate profile</h3>
+                <h2>Research Workspaces</h2>
+                <p>Start here after login, then open the workspace that matches the type of discussion you want to have with your team or supervisor.</p>
               </div>
             </div>
-            <div class="stats-grid" id="stats-grid"></div>
-          </div>
-        </section>
-
-        <section class="panel module-stage">
-          <div class="module-stage-head">
-            <div>
-              <h2>Presentation Modules</h2>
-              <p>Open each major part of the ECMO research platform in its own dedicated workspace so the dashboard reads cleanly during supervisor and group presentations.</p>
-            </div>
-          </div>
-          <div class="module-tabs">
-            <button class="module-tab review active" type="button" data-view="overview">
+            <div class="module-tabs">
+              <button class="module-tab review" type="button" data-view="overview">
               <div class="module-tab-art">
                 <span class="module-art-label">Review Board</span>
                 <span class="module-art-glyph">01</span>
@@ -3614,7 +3697,7 @@
               </div>
             </button>
 
-            <button class="module-tab autonomous" type="button" data-view="autonomous">
+              <button class="module-tab autonomous" type="button" data-view="autonomous">
               <div class="module-tab-art">
                 <span class="module-art-label">Discovery Loop</span>
                 <span class="module-art-glyph">02</span>
@@ -3626,7 +3709,7 @@
               </div>
             </button>
 
-            <button class="module-tab structure" type="button" data-view="structure">
+              <button class="module-tab structure" type="button" data-view="structure">
               <div class="module-tab-art">
                 <span class="module-art-label">Structural Context</span>
                 <span class="module-art-glyph">03</span>
@@ -3638,7 +3721,7 @@
               </div>
             </button>
 
-            <button class="module-tab assistant" type="button" data-view="assistant">
+              <button class="module-tab assistant" type="button" data-view="assistant">
               <div class="module-tab-art">
                 <span class="module-art-label">Reasoning Support</span>
                 <span class="module-art-glyph">04</span>
@@ -3648,11 +3731,24 @@
                 <p class="module-tab-desc">Separate discussion workspace for project questions, candidate comparisons, and experimental planning.</p>
                 <span class="module-tab-meta">Interactive research dialogue</span>
               </div>
-            </button>
-          </div>
+              </button>
+
+              <button class="module-tab settings" type="button" data-view="settings">
+                <div class="module-tab-art">
+                  <span class="module-art-label">System Signals</span>
+                  <span class="module-art-glyph">05</span>
+                </div>
+                <div class="module-tab-copy">
+                  <h3 class="module-tab-title">Settings and Status</h3>
+                  <p class="module-tab-desc">Dedicated system page for live research signals, current service health, and alerts if something goes wrong.</p>
+                  <span class="module-tab-meta">Operations and reliability</span>
+                </div>
+              </button>
+            </div>
+          </section>
         </section>
 
-        <section id="overview-view" class="view active research-view">
+        <section id="overview-view" class="view research-view" hidden>
           <section id="promoted-overview-section" class="panel" hidden>
             <div class="panel-head">
               <div>
@@ -3968,6 +4064,44 @@
                       <span class="question-idea-title">Plan the next experiment</span>
                       <span class="question-idea-copy">Ask what single experiment or readout would most reduce uncertainty in the current ranking.</span>
                     </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section id="settings-view" class="view research-view" hidden>
+          <div class="analysis-shell">
+            <div class="analysis-main-stack">
+              <section class="panel">
+                <div class="panel-head">
+                  <div>
+                    <h2>Settings and Live Research Signals</h2>
+                    <p>Use this workspace to check service health, autonomous discovery freshness, session state, and system alerts before meetings or demonstrations.</p>
+                  </div>
+                </div>
+                <div class="research-runtime-grid" id="settings-signal-grid"></div>
+                <div id="settings-alert-box" class="research-runtime-alert info">System status will appear here once the dashboard has checked the live services.</div>
+              </section>
+            </div>
+
+            <div class="analysis-side-stack">
+              <section class="panel">
+                <div class="panel-head">
+                  <div>
+                    <h3>Session and Operations</h3>
+                    <p>Quick notes about the current team session and how the autonomous system is feeding the main review workflow.</p>
+                  </div>
+                </div>
+                <div class="target-sections">
+                  <div class="directory-card">
+                    <h4 class="directory-title">Current session</h4>
+                    <p id="settings-session-note" class="candidate-copy">Session details will appear here after login and status checks complete.</p>
+                  </div>
+                  <div class="directory-card">
+                    <h4 class="directory-title">What this page is for</h4>
+                    <p class="candidate-copy">This module is the reliability layer of the site. It is the best place to check whether live assistant access, autonomous discovery, and promoted-candidate flow are all healthy before presenting.</p>
                   </div>
                 </div>
               </section>
