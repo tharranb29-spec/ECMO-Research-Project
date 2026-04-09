@@ -359,7 +359,7 @@
   function updateAuthChrome() {
     if (logoutButton) {
       logoutButton.hidden = !(authState.appLoginEnabled && canUseLiveEndpoints());
-      logoutButton.textContent = authState.sessionUser ? `Sign Out ${authState.sessionUser.display_name || authState.sessionUser.username}` : "Sign Out";
+      logoutButton.textContent = "Sign Out";
     }
 
     if (!sessionGreetingCard || !sessionGreetingText || !sessionGreetingSubtext) {
