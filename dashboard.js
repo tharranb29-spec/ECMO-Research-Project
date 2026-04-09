@@ -22,6 +22,8 @@
   const viewButtons = Array.from(document.querySelectorAll("[data-view]"));
   const quickPrompts = Array.from(document.querySelectorAll("[data-prompt]"));
   const overviewView = document.getElementById("overview-view");
+  const autonomousView = document.getElementById("autonomous-view");
+  const structureView = document.getElementById("structure-view");
   const assistantView = document.getElementById("assistant-view");
   const metaRow = document.getElementById("meta-row");
   const statsGrid = document.getElementById("stats-grid");
@@ -87,6 +89,13 @@
   let bundlePollingStarted = false;
   let autonomousWatchdogStarted = false;
 
+  const viewPanels = {
+    overview: overviewView,
+    autonomous: autonomousView,
+    structure: structureView,
+    assistant: assistantView,
+  };
+
   function normalize(text) {
     return (text || "")
       .toLowerCase()
@@ -117,6 +126,19 @@
       return "Autonomous discovery";
     }
     return "Seed dataset";
+  }
+
+  function viewLabel(viewName) {
+    if (viewName === "assistant") {
+      return "Live assistant";
+    }
+    if (viewName === "autonomous") {
+      return "Autonomous discovery";
+    }
+    if (viewName === "structure") {
+      return "Structure review";
+    }
+    return "Review board";
   }
 
   function createTimestampLabel() {
@@ -616,7 +638,7 @@
         : `${visibleRows.length} visible candidates are currently in scope for review.`;
     }
     if (briefingDatasetChip) {
-      briefingDatasetChip.textContent = activeView === "assistant" ? "Assistant workspace" : "Overview workspace";
+      briefingDatasetChip.textContent = viewLabel(activeView);
     }
 
     if (briefingHitValue) {
@@ -706,14 +728,15 @@
     viewButtons.forEach((button) => {
       button.classList.toggle("active", button.dataset.view === viewName);
     });
-    const showingOverview = viewName === "overview";
-    const showingAssistant = viewName === "assistant";
-    overviewView.classList.toggle("active", showingOverview);
-    assistantView.classList.toggle("active", showingAssistant);
-    overviewView.hidden = !showingOverview;
-    assistantView.hidden = !showingAssistant;
-    overviewView.setAttribute("aria-hidden", showingOverview ? "false" : "true");
-    assistantView.setAttribute("aria-hidden", showingAssistant ? "false" : "true");
+    Object.entries(viewPanels).forEach(([name, panel]) => {
+      if (!panel) {
+        return;
+      }
+      const showing = name === viewName;
+      panel.classList.toggle("active", showing);
+      panel.hidden = !showing;
+      panel.setAttribute("aria-hidden", showing ? "false" : "true");
+    });
   }
 
   function renderMeta(rows) {

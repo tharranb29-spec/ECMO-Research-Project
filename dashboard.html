@@ -638,6 +638,186 @@
         display: block;
       }
 
+      .module-stage {
+        display: grid;
+        gap: 18px;
+        padding: 22px;
+      }
+
+      .module-stage-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: end;
+      }
+
+      .module-stage-head h2 {
+        margin: 0;
+      }
+
+      .module-stage-head p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .module-tabs {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .module-tab {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        padding: 0;
+        appearance: none;
+        border: 1px solid rgba(16, 36, 62, 0.12);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(23, 34, 57, 0.98), rgba(29, 42, 67, 0.98));
+        color: #f7fbff;
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+        box-shadow: 0 22px 48px rgba(16, 36, 62, 0.18);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .module-tab:hover,
+      .module-tab:focus-visible {
+        transform: translateY(-2px);
+        border-color: rgba(121, 161, 255, 0.36);
+        box-shadow: 0 26px 54px rgba(16, 36, 62, 0.24);
+        outline: none;
+      }
+
+      .module-tab.active {
+        border-color: rgba(121, 161, 255, 0.44);
+        box-shadow: 0 28px 56px rgba(21, 92, 244, 0.24);
+      }
+
+      .module-tab-art {
+        position: relative;
+        min-height: 136px;
+        padding: 16px 18px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.12), transparent 24%),
+          radial-gradient(circle at 80% 18%, rgba(126, 173, 255, 0.18), transparent 18%),
+          linear-gradient(160deg, rgba(52, 77, 118, 0.78), rgba(28, 39, 61, 0.96));
+      }
+
+      .module-tab-art::before,
+      .module-tab-art::after {
+        content: "";
+        position: absolute;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.07);
+        backdrop-filter: blur(2px);
+      }
+
+      .module-tab-art::before {
+        inset: auto 24px 18px 24px;
+        height: 44px;
+      }
+
+      .module-tab-art::after {
+        width: 138px;
+        height: 74px;
+        left: 50%;
+        bottom: 34px;
+        transform: translateX(-50%);
+      }
+
+      .module-tab.review .module-tab-art {
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.1), transparent 24%),
+          radial-gradient(circle at 84% 18%, rgba(121, 161, 255, 0.24), transparent 18%),
+          linear-gradient(160deg, rgba(52, 77, 118, 0.82), rgba(28, 39, 61, 0.96));
+      }
+
+      .module-tab.autonomous .module-tab-art {
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.08), transparent 24%),
+          radial-gradient(circle at 84% 18%, rgba(80, 214, 176, 0.22), transparent 20%),
+          linear-gradient(160deg, rgba(34, 72, 84, 0.84), rgba(20, 40, 53, 0.96));
+      }
+
+      .module-tab.structure .module-tab-art {
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.08), transparent 24%),
+          radial-gradient(circle at 84% 18%, rgba(243, 194, 88, 0.22), transparent 20%),
+          linear-gradient(160deg, rgba(72, 63, 92, 0.82), rgba(34, 34, 58, 0.96));
+      }
+
+      .module-tab.assistant .module-tab-art {
+        background:
+          radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.08), transparent 24%),
+          radial-gradient(circle at 84% 18%, rgba(120, 110, 245, 0.24), transparent 20%),
+          linear-gradient(160deg, rgba(64, 58, 95, 0.84), rgba(31, 33, 60, 0.96));
+      }
+
+      .module-art-label {
+        position: relative;
+        z-index: 1;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .module-art-glyph {
+        position: relative;
+        z-index: 1;
+        align-self: end;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(11, 18, 34, 0.24);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      .module-tab-copy {
+        display: grid;
+        gap: 10px;
+        padding: 18px 20px 20px;
+      }
+
+      .module-tab-title {
+        margin: 0;
+        color: #ffffff;
+        font-size: 1.18rem;
+        line-height: 1.22;
+      }
+
+      .module-tab-desc {
+        margin: 0;
+        color: rgba(226, 235, 248, 0.82);
+        line-height: 1.58;
+        font-size: 0.95rem;
+      }
+
+      .module-tab-meta {
+        color: rgba(173, 190, 214, 0.84);
+        font-size: 0.82rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
       .stats-grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -2772,6 +2952,11 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .module-stage-head {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
         .directory-grid,
         .research-runtime-grid {
           grid-template-columns: 1fr;
@@ -2841,6 +3026,14 @@
         .hero-stage,
         .panel {
           border-radius: 22px;
+        }
+
+        .module-stage {
+          padding: 16px;
+        }
+
+        .module-tab-art {
+          min-height: 110px;
         }
 
         .hero-stage .hero-copy h1 {
@@ -3258,11 +3451,8 @@
           </div>
 
           <div class="rail-group">
-            <span class="rail-label">Analysis mode</span>
-            <div class="view-tabs rail-toggle-row">
-              <button class="view-tab active" data-view="overview">Overview</button>
-              <button class="view-tab" data-view="assistant">Assistant</button>
-            </div>
+            <span class="rail-label">Workspace modules</span>
+            <div class="hint compact-hint">Use the module cards in the main canvas to switch between Review Board, Autonomous Discovery, Structure Review, and the Live Assistant.</div>
           </div>
 
           <div class="rail-group">
@@ -3379,10 +3569,171 @@
             </div>
 
             <div class="hero-side-stack">
-              <section class="structure-card hero-structure-card">
+              <section class="hero-side-card">
+                <p class="rail-eyebrow">Project Thesis</p>
+                <h3>From passive coating to immune-modulating interface</h3>
+                <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
+              </section>
+
+              <section class="hero-side-card">
+                <p class="rail-eyebrow">Presentation Workflow</p>
+                <h3>Switch modules as the discussion changes</h3>
+                <p>Open the Review Board for ranked hits, move into Autonomous Discovery for new leads, use Structure Review for protein context, and keep the Live Assistant for follow-up scientific questions.</p>
+              </section>
+            </div>
+          </div>
+
+          <div class="hero-band">
+            <div class="hero-band-head">
+              <div>
+                <p class="rail-eyebrow">Operational Snapshot</p>
+                <h3>Current model state and visible candidate profile</h3>
+              </div>
+            </div>
+            <div class="stats-grid" id="stats-grid"></div>
+          </div>
+        </section>
+
+        <section class="panel module-stage">
+          <div class="module-stage-head">
+            <div>
+              <h2>Presentation Modules</h2>
+              <p>Open each major part of the ECMO research platform in its own dedicated workspace so the dashboard reads cleanly during supervisor and group presentations.</p>
+            </div>
+          </div>
+          <div class="module-tabs">
+            <button class="module-tab review active" type="button" data-view="overview">
+              <div class="module-tab-art">
+                <span class="module-art-label">Review Board</span>
+                <span class="module-art-glyph">01</span>
+              </div>
+              <div class="module-tab-copy">
+                <h3 class="module-tab-title">Candidate Ranking Workspace</h3>
+                <p class="module-tab-desc">Focused view for ranked candidates, receptor pathway summaries, and model weighting signals.</p>
+                <span class="module-tab-meta">Primary decision surface</span>
+              </div>
+            </button>
+
+            <button class="module-tab autonomous" type="button" data-view="autonomous">
+              <div class="module-tab-art">
+                <span class="module-art-label">Discovery Loop</span>
+                <span class="module-art-glyph">02</span>
+              </div>
+              <div class="module-tab-copy">
+                <h3 class="module-tab-title">Autonomous Discovery Monitor</h3>
+                <p class="module-tab-desc">Separate monitoring view for literature refresh status, new leads, and promoted autonomous candidates.</p>
+                <span class="module-tab-meta">Background research intelligence</span>
+              </div>
+            </button>
+
+            <button class="module-tab structure" type="button" data-view="structure">
+              <div class="module-tab-art">
+                <span class="module-art-label">Structural Context</span>
+                <span class="module-art-glyph">03</span>
+              </div>
+              <div class="module-tab-copy">
+                <h3 class="module-tab-title">Structure Review Studio</h3>
+                <p class="module-tab-desc">Dedicated protein viewer area for real PDB structures tied to selected candidate families.</p>
+                <span class="module-tab-meta">Projection-friendly mechanistic view</span>
+              </div>
+            </button>
+
+            <button class="module-tab assistant" type="button" data-view="assistant">
+              <div class="module-tab-art">
+                <span class="module-art-label">Reasoning Support</span>
+                <span class="module-art-glyph">04</span>
+              </div>
+              <div class="module-tab-copy">
+                <h3 class="module-tab-title">Live Assistant Console</h3>
+                <p class="module-tab-desc">Separate discussion workspace for project questions, candidate comparisons, and experimental planning.</p>
+                <span class="module-tab-meta">Interactive research dialogue</span>
+              </div>
+            </button>
+          </div>
+        </section>
+
+        <section id="overview-view" class="view active research-view">
+          <section id="promoted-overview-section" class="panel" hidden>
+            <div class="panel-head">
+              <div>
+                <h2>Autonomous Promotions to Main Review</h2>
+                <p id="promoted-overview-copy">High-signal candidates elevated by the autonomous literature pipeline for direct review on the main workspace.</p>
+              </div>
+            </div>
+            <div id="promoted-candidate-board" class="leaderboard"></div>
+          </section>
+
+          <div class="analysis-shell">
+            <div class="analysis-main-stack">
+              <section class="panel area-leaderboard">
+                <div class="panel-head">
+                  <div>
+                    <h2>Priority Candidate Board</h2>
+                    <p>High-signal candidate cards intended for decision meetings, triage review, and supervisor presentations.</p>
+                  </div>
+                </div>
+                <div class="leaderboard" id="leaderboard"></div>
+              </section>
+
+              <section class="panel area-directory">
+                <div class="panel-head">
+                  <div>
+                    <h3>Candidate Directory</h3>
+                    <p>Broader scan of the current visible set for quick filtering, cross-checking, and meeting follow-up.</p>
+                  </div>
+                </div>
+                <div class="directory-grid" id="directory-grid"></div>
+              </section>
+            </div>
+
+            <div class="analysis-side-stack">
+              <section class="panel area-targets">
+                <div class="panel-head">
+                  <div>
+                    <h3>Receptor Pathway Views</h3>
+                    <p>Target-specific summaries that make cross-pathway biological interpretation easier during discussion.</p>
+                  </div>
+                </div>
+                <div class="target-sections" id="target-sections"></div>
+              </section>
+
+              <section class="panel area-weights">
+                <div class="panel-head">
+                  <div>
+                    <h3>Model Weighting and Signal Balance</h3>
+                    <p>What the current rough ranking model is emphasizing for each receptor target.</p>
+                  </div>
+                </div>
+                <div class="weights-panel" id="weights-panel"></div>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section id="autonomous-view" class="view research-view" hidden>
+          <section class="panel">
+            <div class="panel-head research-panel-head">
+              <div>
+                <h2>Autonomous Discovery Monitor</h2>
+                <p>Separate monitoring view for literature-derived candidate leads, runtime health, refresh controls, and research-system transparency.</p>
+              </div>
+              <div class="research-head-actions">
+                <div id="research-runtime-chips" class="research-chip-row"></div>
+                <button id="research-refresh-button" class="ghost-button" type="button">Refresh Now</button>
+              </div>
+            </div>
+            <div class="research-runtime-grid" id="research-runtime-grid"></div>
+            <div class="target-sections" id="research-leads"></div>
+          </section>
+        </section>
+
+        <section id="structure-view" class="view research-view" hidden>
+          <div class="analysis-shell">
+            <div class="analysis-main-stack">
+              <section class="structure-card panel">
                 <div class="structure-head">
                   <div>
-                    <h3>Structural Review Window</h3>
+                    <h2>Structure Review Studio</h2>
                     <p id="structure-description-main">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
                   </div>
                   <span id="structure-chip-main" class="projection-chip">PDB 2JJS</span>
@@ -3469,94 +3820,26 @@
                   <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
                 </div>
               </section>
-
-              <section class="hero-side-card">
-                <p class="rail-eyebrow">Project Thesis</p>
-                <h3>From passive coating to immune-modulating interface</h3>
-                <p>Use this dashboard to move from literature-backed candidates to a tighter shortlist that can be discussed mechanistically and validated experimentally.</p>
-              </section>
-            </div>
-          </div>
-
-          <div class="hero-band">
-            <div class="hero-band-head">
-              <div>
-                <p class="rail-eyebrow">Operational Snapshot</p>
-                <h3>Current model state and visible candidate profile</h3>
-              </div>
-            </div>
-            <div class="stats-grid" id="stats-grid"></div>
-          </div>
-        </section>
-
-        <section id="overview-view" class="view active research-view">
-          <section id="promoted-overview-section" class="panel" hidden>
-            <div class="panel-head">
-              <div>
-                <h2>Autonomous Promotions to Main Review</h2>
-                <p id="promoted-overview-copy">High-signal candidates elevated by the autonomous literature pipeline for direct review on the main workspace.</p>
-              </div>
-            </div>
-            <div id="promoted-candidate-board" class="leaderboard"></div>
-          </section>
-
-          <div class="analysis-shell">
-            <div class="analysis-main-stack">
-              <section class="panel area-leaderboard">
-                <div class="panel-head">
-                  <div>
-                    <h2>Priority Candidate Board</h2>
-                    <p>High-signal candidate cards intended for decision meetings, triage review, and supervisor presentations.</p>
-                  </div>
-                </div>
-                <div class="leaderboard" id="leaderboard"></div>
-              </section>
-
-              <section class="panel area-directory">
-                <div class="panel-head">
-                  <div>
-                    <h3>Candidate Directory</h3>
-                    <p>Broader scan of the current visible set for quick filtering, cross-checking, and meeting follow-up.</p>
-                  </div>
-                </div>
-                <div class="directory-grid" id="directory-grid"></div>
-              </section>
             </div>
 
             <div class="analysis-side-stack">
-              <section class="panel area-targets">
+              <section class="panel">
                 <div class="panel-head">
                   <div>
-                    <h3>Receptor Pathway Views</h3>
-                    <p>Target-specific summaries that make cross-pathway biological interpretation easier during discussion.</p>
+                    <h3>How to Use This View</h3>
+                    <p>Use the structure module when you want to explain why a candidate family remains interesting mechanistically, not only numerically.</p>
                   </div>
                 </div>
-                <div class="target-sections" id="target-sections"></div>
-              </section>
-
-              <section class="panel area-weights">
-                <div class="panel-head">
-                  <div>
-                    <h3>Model Weighting and Signal Balance</h3>
-                    <p>What the current rough ranking model is emphasizing for each receptor target.</p>
+                <div class="target-sections">
+                  <div class="directory-card">
+                    <h4 class="directory-title">Supervisor discussion prompts</h4>
+                    <p class="candidate-copy">Show the receptor-binding interface first, then connect the structural scaffold to affinity, immune signaling logic, and ECMO-surface translation.</p>
+                  </div>
+                  <div class="directory-card">
+                    <h4 class="directory-title">Recommended use case</h4>
+                    <p class="candidate-copy">This module is best for projection mode, mechanistic storytelling, and linking ranked candidates back to actual protein structure examples.</p>
                   </div>
                 </div>
-                <div class="weights-panel" id="weights-panel"></div>
-              </section>
-
-              <section class="panel area-research">
-                <div class="panel-head research-panel-head">
-                  <div>
-                    <h3>Autonomous Discovery Monitor</h3>
-                    <p>Literature-derived candidate leads, runtime health, and manual refresh controls for the autonomous discovery loop.</p>
-                  </div>
-                  <div class="research-head-actions">
-                    <div id="research-runtime-chips" class="research-chip-row"></div>
-                    <button id="research-refresh-button" class="ghost-button" type="button">Refresh Now</button>
-                  </div>
-                </div>
-                <div class="research-runtime-grid" id="research-runtime-grid"></div>
-                <div class="target-sections" id="research-leads"></div>
               </section>
             </div>
           </div>
