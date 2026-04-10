@@ -14,15 +14,45 @@ ROOT = Path(__file__).resolve().parent
 OUTPUTS = ROOT / "outputs"
 SEED_PATH = ROOT / "data" / "seed_ligands.json"
 EUROPE_PMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+
+
+def env_text(name, default=""):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return str(value)
+
+
+def env_bool(name, default=False):
+    raw = env_text(name, "1" if default else "0").strip().lower()
+    return raw not in {"0", "false", "no", "off", ""}
+
+
+def env_int(name, default):
+    raw = env_text(name, str(default)).strip()
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return default
+
+
+def env_float(name, default):
+    raw = env_text(name, str(default)).strip()
+    try:
+        return float(raw)
+    except (TypeError, ValueError):
+        return default
+
+
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-AUTO_RESEARCH_MAX_ARTICLES = int(os.environ.get("AUTO_RESEARCH_MAX_ARTICLES", "12"))
-AUTO_RESEARCH_PAGE_SIZE = int(os.environ.get("AUTO_RESEARCH_PAGE_SIZE", "24"))
-AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
-AUTO_PROMOTED_MAX = int(os.environ.get("AUTO_PROMOTED_MAX", "4"))
-AUTO_PROMOTED_MAX_PER_TARGET = int(os.environ.get("AUTO_PROMOTED_MAX_PER_TARGET", "2"))
-AUTO_PROMOTED_MIN_SCORE = float(os.environ.get("AUTO_PROMOTED_MIN_SCORE", "65"))
+AUTO_RESEARCH_MAX_ARTICLES = env_int("AUTO_RESEARCH_MAX_ARTICLES", 12)
+AUTO_RESEARCH_PAGE_SIZE = env_int("AUTO_RESEARCH_PAGE_SIZE", 24)
+AUTO_RESEARCH_LLM_ENABLED = env_bool("AUTO_RESEARCH_LLM_ENABLED", True)
+AUTO_PROMOTED_MAX = env_int("AUTO_PROMOTED_MAX", 4)
+AUTO_PROMOTED_MAX_PER_TARGET = env_int("AUTO_PROMOTED_MAX_PER_TARGET", 2)
+AUTO_PROMOTED_MIN_SCORE = env_float("AUTO_PROMOTED_MIN_SCORE", 65.0)
 
 SEARCH_QUERIES = [
     {

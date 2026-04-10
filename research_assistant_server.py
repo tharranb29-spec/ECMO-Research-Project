@@ -22,8 +22,30 @@ from research_autoupdater import refresh_research_outputs
 
 
 ROOT = Path(__file__).resolve().parent
+
+
+def env_text(name, default=""):
+    value = os.environ.get(name)
+    if value is None:
+        return default
+    return str(value)
+
+
+def env_bool(name, default=False):
+    raw = env_text(name, "1" if default else "0").strip().lower()
+    return raw not in {"0", "false", "no", "off", ""}
+
+
+def env_int(name, default):
+    raw = env_text(name, str(default)).strip()
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return default
+
+
 HOST = os.environ.get("ECMO_DASHBOARD_HOST", "127.0.0.1")
-PORT = int(os.environ.get("PORT") or os.environ.get("ECMO_DASHBOARD_PORT", "8765"))
+PORT = env_int("PORT", env_int("ECMO_DASHBOARD_PORT", 8765))
 AI_PROVIDER = os.environ.get("AI_PROVIDER", "openai").strip().lower()
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4-mini")
@@ -31,19 +53,19 @@ OPENAI_REASONING_EFFORT = os.environ.get("OPENAI_REASONING_EFFORT", "medium")
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
-AUTO_RESEARCH_ENABLED = os.environ.get("AUTO_RESEARCH_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
-AUTO_RESEARCH_INTERVAL_SECONDS = int(os.environ.get("AUTO_RESEARCH_INTERVAL_SECONDS", "3600"))
-AUTO_RESEARCH_LLM_ENABLED = os.environ.get("AUTO_RESEARCH_LLM_ENABLED", "1").strip().lower() not in {"0", "false", "no"}
+AUTO_RESEARCH_ENABLED = env_bool("AUTO_RESEARCH_ENABLED", True)
+AUTO_RESEARCH_INTERVAL_SECONDS = env_int("AUTO_RESEARCH_INTERVAL_SECONDS", 3600)
+AUTO_RESEARCH_LLM_ENABLED = env_bool("AUTO_RESEARCH_LLM_ENABLED", True)
 AUTO_RESEARCH_RUNTIME_PATH = ROOT / "outputs" / "research_runtime_status.json"
-MAX_JSON_BODY_BYTES = int(os.environ.get("ECMO_MAX_JSON_BODY_BYTES", "65536"))
-MAX_QUESTION_CHARS = int(os.environ.get("ECMO_MAX_QUESTION_CHARS", "2000"))
-MAX_EXTRA_CONTEXT_CHARS = int(os.environ.get("ECMO_MAX_EXTRA_CONTEXT_CHARS", "12000"))
-LOGIN_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_LOGIN_RATE_LIMIT_COUNT", "10"))
-LOGIN_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_LOGIN_RATE_LIMIT_WINDOW_SECONDS", "300"))
-CHAT_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_COUNT", "20"))
-CHAT_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_CHAT_RATE_LIMIT_WINDOW_SECONDS", "300"))
-REFRESH_RATE_LIMIT_COUNT = int(os.environ.get("ECMO_REFRESH_RATE_LIMIT_COUNT", "6"))
-REFRESH_RATE_LIMIT_WINDOW_SECONDS = int(os.environ.get("ECMO_REFRESH_RATE_LIMIT_WINDOW_SECONDS", "3600"))
+MAX_JSON_BODY_BYTES = env_int("ECMO_MAX_JSON_BODY_BYTES", 65536)
+MAX_QUESTION_CHARS = env_int("ECMO_MAX_QUESTION_CHARS", 2000)
+MAX_EXTRA_CONTEXT_CHARS = env_int("ECMO_MAX_EXTRA_CONTEXT_CHARS", 12000)
+LOGIN_RATE_LIMIT_COUNT = env_int("ECMO_LOGIN_RATE_LIMIT_COUNT", 10)
+LOGIN_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_LOGIN_RATE_LIMIT_WINDOW_SECONDS", 300)
+CHAT_RATE_LIMIT_COUNT = env_int("ECMO_CHAT_RATE_LIMIT_COUNT", 20)
+CHAT_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_CHAT_RATE_LIMIT_WINDOW_SECONDS", 300)
+REFRESH_RATE_LIMIT_COUNT = env_int("ECMO_REFRESH_RATE_LIMIT_COUNT", 6)
+REFRESH_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_REFRESH_RATE_LIMIT_WINDOW_SECONDS", 3600)
 ALLOWED_ORIGINS = {
     origin.strip().rstrip("/")
     for origin in os.environ.get("ECMO_ALLOWED_ORIGINS", "").split(",")
@@ -53,7 +75,7 @@ BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
 BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
 BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
 APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "") or DEEPSEEK_API_KEY or OPENAI_API_KEY or ""
-APP_SESSION_TTL_HOURS = int(os.environ.get("ECMO_SESSION_TTL_HOURS", "24"))
+APP_SESSION_TTL_HOURS = env_int("ECMO_SESSION_TTL_HOURS", 24)
 APP_SESSION_COOKIE_NAME = "ecmo_session"
 
 STATIC_FILES = {
