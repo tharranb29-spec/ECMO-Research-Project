@@ -2093,8 +2093,8 @@
 
       .workspace-topbar {
         display: grid;
-        gap: 16px;
-        padding: 20px 22px;
+        gap: 14px;
+        padding: 18px 20px;
         border-radius: 28px;
         border: 1px solid rgba(16, 36, 62, 0.08);
         background:
@@ -2109,31 +2109,82 @@
 
       .workspace-bar-grid {
         display: grid;
-        grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr);
-        gap: 18px;
+        gap: 14px;
         align-items: start;
       }
 
       .workspace-bar-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+      }
+
+      .workspace-bar-copy {
         display: grid;
-        gap: 8px;
+        gap: 6px;
+        max-width: 720px;
       }
 
       .workspace-bar-head h2 {
         margin: 0;
-        font-size: 1.45rem;
+        font-size: 1.3rem;
       }
 
       .workspace-bar-head p {
         margin: 0;
         color: var(--muted);
-        line-height: 1.62;
+        line-height: 1.58;
       }
 
       .workspace-bar-controls,
-      .workspace-bar-search {
+      .workspace-bar-search,
+      .workspace-control-block {
         display: grid;
-        gap: 14px;
+        gap: 10px;
+      }
+
+      .workspace-topbar .rail-label {
+        font-size: 0.74rem;
+        letter-spacing: 0.16em;
+      }
+
+      .workspace-topbar .view-tabs,
+      .workspace-topbar .toggle-row {
+        gap: 12px;
+      }
+
+      .workspace-topbar .view-tab,
+      .workspace-topbar .toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 10px 16px;
+        border-radius: 16px;
+        font-size: 0.98rem;
+        font-weight: 600;
+        box-shadow: none;
+      }
+
+      .workspace-home-link {
+        min-width: 150px;
+        padding-inline: 18px;
+      }
+
+      .workspace-bar-search .hint {
+        margin-top: 2px;
+        padding: 12px 14px;
+        border-radius: 16px;
+      }
+
+      .workspace-bar-search .meta {
+        gap: 8px;
+      }
+
+      .workspace-bar-search .meta-chip {
+        padding: 7px 11px;
+        font-size: 0.86rem;
       }
 
       .hero-stage {
@@ -3476,6 +3527,15 @@
           justify-content: stretch;
         }
 
+        .workspace-bar-head {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .workspace-home-link {
+          width: 100%;
+        }
+
         .session-action-row {
           width: 100%;
           justify-content: stretch;
@@ -3571,6 +3631,11 @@
         .session-greeting-card .logout-button {
           width: 100%;
         }
+
+        .workspace-topbar .view-tab,
+        .workspace-topbar .toggle {
+          width: 100%;
+        }
       }
 
       @media print {
@@ -3605,16 +3670,18 @@
         <section id="workspace-topbar" class="workspace-topbar" hidden>
           <div class="workspace-bar-grid">
             <div class="workspace-bar-head">
-              <p class="rail-eyebrow">Workspace Navigator</p>
-              <h2>Focused Research Modules</h2>
-              <p>Home stays minimal after login. Once you move into a working module, use this compact bar to switch workspaces, change datasets, and query the current candidate set.</p>
+              <div class="workspace-bar-copy">
+                <p class="rail-eyebrow">Workspace Navigator</p>
+                <h2>Focused Research Modules</h2>
+                <p>Switch between research workspaces, change the active dataset, or return to the home screen from here.</p>
+              </div>
+              <button class="view-tab workspace-home-link" data-view="home">Return Home</button>
             </div>
 
             <div class="workspace-bar-controls">
-              <div class="rail-group">
+              <div class="workspace-control-block">
                 <span class="rail-label">Workspace modules</span>
                 <div class="view-tabs rail-toggle-row">
-                  <button class="view-tab" data-view="home">Home</button>
                   <button class="view-tab" data-view="overview">Review</button>
                   <button class="view-tab" data-view="autonomous">Discovery</button>
                   <button class="view-tab" data-view="structure">Structure</button>
@@ -3623,7 +3690,7 @@
                 </div>
               </div>
 
-              <div class="rail-group">
+              <div class="workspace-control-block">
                 <span class="rail-label">Dataset lens</span>
                 <div class="toggle-row rail-toggle-row">
                   <button class="toggle active" data-dataset="seed">Seed Dataset</button>
