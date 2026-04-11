@@ -706,11 +706,11 @@
 
       .module-tab-art {
         position: relative;
-        min-height: 136px;
-        padding: 16px 18px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
+        min-height: 168px;
+        padding: 16px 18px 18px;
+        display: grid;
+        align-content: space-between;
+        gap: 14px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         background:
           radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.12), transparent 24%),
@@ -773,6 +773,65 @@
           radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.08), transparent 24%),
           radial-gradient(circle at 84% 18%, rgba(255, 134, 134, 0.22), transparent 20%),
           linear-gradient(160deg, rgba(88, 53, 61, 0.84), rgba(43, 31, 40, 0.96));
+      }
+
+      .module-art-top {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .module-art-visual {
+        position: relative;
+        z-index: 1;
+        min-height: 86px;
+        padding: 12px 14px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .module-art-visual::before {
+        content: "";
+        position: absolute;
+        inset: auto 18px 14px 18px;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0.06));
+      }
+
+      .module-art-visual svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .module-art-fill {
+        fill: rgba(255, 255, 255, 0.14);
+      }
+
+      .module-art-soft {
+        fill: rgba(255, 255, 255, 0.08);
+      }
+
+      .module-art-line {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.86);
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .module-art-line.soft {
+        stroke: rgba(255, 255, 255, 0.5);
+        stroke-width: 1.6;
+      }
+
+      .module-art-dot {
+        fill: rgba(255, 255, 255, 0.94);
       }
 
       .module-art-label {
@@ -3793,57 +3852,122 @@
             </div>
             <div class="module-tabs">
               <button class="module-tab review" type="button" data-view="overview">
-              <div class="module-tab-art">
-                <span class="module-art-label">Review Board</span>
-                <span class="module-art-glyph">01</span>
-              </div>
-              <div class="module-tab-copy">
-                <h3 class="module-tab-title">Candidate Ranking Workspace</h3>
-                <p class="module-tab-desc">Focused view for ranked candidates, receptor pathway summaries, and model weighting signals.</p>
-                <span class="module-tab-meta">Primary decision surface</span>
-              </div>
-            </button>
+                <div class="module-tab-art">
+                  <div class="module-art-top">
+                    <span class="module-art-label">Review Board</span>
+                    <span class="module-art-glyph">01</span>
+                  </div>
+                  <div class="module-art-visual" aria-hidden="true">
+                    <svg viewBox="0 0 220 92" role="presentation">
+                      <rect class="module-art-soft" x="10" y="16" rx="10" ry="10" width="64" height="44"></rect>
+                      <rect class="module-art-fill" x="86" y="12" rx="12" ry="12" width="124" height="52"></rect>
+                      <path class="module-art-line" d="M26 56 L54 42 L82 48 L112 28 L148 36 L188 18"></path>
+                      <path class="module-art-line soft" d="M20 68 H194"></path>
+                      <circle class="module-art-dot" cx="112" cy="28" r="4"></circle>
+                      <path class="module-art-line soft" d="M150 46 l10 10 22-24"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="module-tab-copy">
+                  <h3 class="module-tab-title">Candidate Ranking Workspace</h3>
+                  <p class="module-tab-desc">Focused view for ranked candidates, receptor pathway summaries, and model weighting signals.</p>
+                  <span class="module-tab-meta">Primary decision surface</span>
+                </div>
+              </button>
 
               <button class="module-tab autonomous" type="button" data-view="autonomous">
-              <div class="module-tab-art">
-                <span class="module-art-label">Discovery Loop</span>
-                <span class="module-art-glyph">02</span>
-              </div>
-              <div class="module-tab-copy">
-                <h3 class="module-tab-title">Autonomous Discovery Monitor</h3>
-                <p class="module-tab-desc">Separate monitoring view for literature refresh status, new leads, and promoted autonomous candidates.</p>
-                <span class="module-tab-meta">Background research intelligence</span>
-              </div>
-            </button>
+                <div class="module-tab-art">
+                  <div class="module-art-top">
+                    <span class="module-art-label">Discovery Loop</span>
+                    <span class="module-art-glyph">02</span>
+                  </div>
+                  <div class="module-art-visual" aria-hidden="true">
+                    <svg viewBox="0 0 220 92" role="presentation">
+                      <circle class="module-art-soft" cx="48" cy="44" r="22"></circle>
+                      <circle class="module-art-fill" cx="128" cy="30" r="18"></circle>
+                      <circle class="module-art-soft" cx="176" cy="54" r="24"></circle>
+                      <path class="module-art-line soft" d="M48 44 C76 18, 108 18, 128 30"></path>
+                      <path class="module-art-line soft" d="M128 30 C152 42, 160 48, 176 54"></path>
+                      <path class="module-art-line" d="M32 58 C64 72, 108 74, 188 40"></path>
+                      <circle class="module-art-dot" cx="48" cy="44" r="4"></circle>
+                      <circle class="module-art-dot" cx="128" cy="30" r="4"></circle>
+                      <circle class="module-art-dot" cx="176" cy="54" r="4"></circle>
+                    </svg>
+                  </div>
+                </div>
+                <div class="module-tab-copy">
+                  <h3 class="module-tab-title">Autonomous Discovery Monitor</h3>
+                  <p class="module-tab-desc">Separate monitoring view for literature refresh status, new leads, and promoted autonomous candidates.</p>
+                  <span class="module-tab-meta">Background research intelligence</span>
+                </div>
+              </button>
 
               <button class="module-tab structure" type="button" data-view="structure">
-              <div class="module-tab-art">
-                <span class="module-art-label">Structural Context</span>
-                <span class="module-art-glyph">03</span>
-              </div>
-              <div class="module-tab-copy">
-                <h3 class="module-tab-title">Structure Review Studio</h3>
-                <p class="module-tab-desc">Dedicated protein viewer area for real PDB structures tied to selected candidate families.</p>
-                <span class="module-tab-meta">Projection-friendly mechanistic view</span>
-              </div>
-            </button>
+                <div class="module-tab-art">
+                  <div class="module-art-top">
+                    <span class="module-art-label">Structural Context</span>
+                    <span class="module-art-glyph">03</span>
+                  </div>
+                  <div class="module-art-visual" aria-hidden="true">
+                    <svg viewBox="0 0 220 92" role="presentation">
+                      <rect class="module-art-soft" x="12" y="18" rx="14" ry="14" width="54" height="46"></rect>
+                      <path class="module-art-line" d="M88 22 C66 34, 68 60, 94 70 C120 80, 144 54, 132 34 C120 16, 94 12, 88 22"></path>
+                      <path class="module-art-line" d="M134 18 C110 34, 110 60, 140 72 C166 82, 190 58, 176 36 C162 16, 140 10, 134 18"></path>
+                      <path class="module-art-line soft" d="M92 28 C118 40, 118 52, 138 64"></path>
+                      <circle class="module-art-dot" cx="90" cy="23" r="3.6"></circle>
+                      <circle class="module-art-dot" cx="176" cy="36" r="3.6"></circle>
+                    </svg>
+                  </div>
+                </div>
+                <div class="module-tab-copy">
+                  <h3 class="module-tab-title">Structure Review Studio</h3>
+                  <p class="module-tab-desc">Dedicated protein viewer area for real PDB structures tied to selected candidate families.</p>
+                  <span class="module-tab-meta">Projection-friendly mechanistic view</span>
+                </div>
+              </button>
 
               <button class="module-tab assistant" type="button" data-view="assistant">
-              <div class="module-tab-art">
-                <span class="module-art-label">Reasoning Support</span>
-                <span class="module-art-glyph">04</span>
-              </div>
-              <div class="module-tab-copy">
-                <h3 class="module-tab-title">Live Assistant Console</h3>
-                <p class="module-tab-desc">Separate discussion workspace for project questions, candidate comparisons, and experimental planning.</p>
-                <span class="module-tab-meta">Interactive research dialogue</span>
-              </div>
+                <div class="module-tab-art">
+                  <div class="module-art-top">
+                    <span class="module-art-label">Reasoning Support</span>
+                    <span class="module-art-glyph">04</span>
+                  </div>
+                  <div class="module-art-visual" aria-hidden="true">
+                    <svg viewBox="0 0 220 92" role="presentation">
+                      <rect class="module-art-fill" x="18" y="18" rx="16" ry="16" width="82" height="46"></rect>
+                      <path class="module-art-soft" d="M40 64 L46 78 L60 64 Z"></path>
+                      <rect class="module-art-soft" x="120" y="30" rx="16" ry="16" width="76" height="40"></rect>
+                      <path class="module-art-fill" d="M158 70 L150 82 L142 70 Z"></path>
+                      <path class="module-art-line soft" d="M38 34 H78"></path>
+                      <path class="module-art-line soft" d="M38 46 H68"></path>
+                      <path class="module-art-line" d="M128 48 H182"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div class="module-tab-copy">
+                  <h3 class="module-tab-title">Live Assistant Console</h3>
+                  <p class="module-tab-desc">Separate discussion workspace for project questions, candidate comparisons, and experimental planning.</p>
+                  <span class="module-tab-meta">Interactive research dialogue</span>
+                </div>
               </button>
 
               <button class="module-tab settings" type="button" data-view="settings">
                 <div class="module-tab-art">
-                  <span class="module-art-label">System Signals</span>
-                  <span class="module-art-glyph">05</span>
+                  <div class="module-art-top">
+                    <span class="module-art-label">System Signals</span>
+                    <span class="module-art-glyph">05</span>
+                  </div>
+                  <div class="module-art-visual" aria-hidden="true">
+                    <svg viewBox="0 0 220 92" role="presentation">
+                      <rect class="module-art-soft" x="18" y="18" rx="12" ry="12" width="42" height="52"></rect>
+                      <path class="module-art-line" d="M82 30 H190"></path>
+                      <path class="module-art-line" d="M82 46 H168"></path>
+                      <path class="module-art-line" d="M82 62 H184"></path>
+                      <circle class="module-art-dot" cx="126" cy="30" r="5"></circle>
+                      <circle class="module-art-dot" cx="148" cy="46" r="5"></circle>
+                      <circle class="module-art-dot" cx="116" cy="62" r="5"></circle>
+                    </svg>
+                  </div>
                 </div>
                 <div class="module-tab-copy">
                   <h3 class="module-tab-title">Settings and Status</h3>
