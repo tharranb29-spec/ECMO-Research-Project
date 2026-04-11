@@ -391,6 +391,96 @@
         gap: 10px;
       }
 
+      body.structure-fullscreen-active {
+        overflow: hidden;
+      }
+
+      .structure-fullscreen {
+        position: fixed;
+        inset: 0;
+        z-index: 160;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: rgba(7, 14, 28, 0.48);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+
+      .structure-fullscreen[hidden] {
+        display: none;
+      }
+
+      .structure-fullscreen-backdrop {
+        position: absolute;
+        inset: 0;
+      }
+
+      .structure-fullscreen-panel {
+        position: relative;
+        z-index: 1;
+        width: min(1240px, 100%);
+        max-height: calc(100vh - 48px);
+        display: grid;
+        gap: 18px;
+        padding: 24px;
+        overflow: auto;
+        border-radius: 32px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(239, 245, 253, 0.94)),
+          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.07), transparent 28%);
+        box-shadow: 0 30px 80px rgba(7, 14, 28, 0.24);
+      }
+
+      .structure-fullscreen-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .structure-fullscreen-head h2 {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.5rem, 2vw, 2rem);
+      }
+
+      .structure-fullscreen-head p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .structure-fullscreen-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .structure-fullscreen-stage {
+        position: relative;
+        min-height: min(72vh, 760px);
+        height: min(72vh, 760px);
+        overflow: hidden;
+        border-radius: 28px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.99), rgba(232, 239, 249, 0.9) 56%, rgba(220, 229, 242, 0.78));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+      }
+
+      .structure-canvas.fullscreen {
+        min-height: min(72vh, 760px);
+      }
+
+      .structure-fullscreen-foot {
+        display: grid;
+        gap: 12px;
+      }
+
       .compact-note {
         margin: 0;
         color: var(--muted);
@@ -3236,6 +3326,22 @@
           border-radius: 20px;
         }
 
+        .structure-fullscreen {
+          padding: 14px;
+        }
+
+        .structure-fullscreen-panel {
+          max-height: calc(100vh - 28px);
+          padding: 18px;
+          border-radius: 26px;
+        }
+
+        .structure-fullscreen-stage,
+        .structure-canvas.fullscreen {
+          min-height: min(58vh, 560px);
+          height: min(58vh, 560px);
+        }
+
         .hero-kicker-row,
         .rail-toggle-row {
           flex-wrap: wrap;
@@ -3631,6 +3737,28 @@
         .structure-viewer {
           min-height: 280px;
           height: 280px;
+        }
+
+        .structure-fullscreen-head {
+          display: grid;
+          gap: 12px;
+        }
+
+        .structure-fullscreen-controls {
+          width: 100%;
+        }
+
+        .structure-fullscreen-controls .ghost-button,
+        .structure-fullscreen-controls .projection-chip {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .structure-fullscreen-stage,
+        .structure-canvas.fullscreen {
+          min-height: min(50vh, 420px);
+          height: min(50vh, 420px);
         }
 
         .assistant-messages {
@@ -4144,7 +4272,7 @@
 
                 <div class="structure-actions">
                   <p id="structure-note-main" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
-                  <button id="open-structure-window" class="ghost-button" type="button">Open Structure Window</button>
+                  <button id="open-structure-window" class="ghost-button" type="button">Open Full Screen</button>
                 </div>
               </section>
             </div>
@@ -4171,6 +4299,103 @@
             </div>
           </div>
         </section>
+
+        <div id="structure-fullscreen" class="structure-fullscreen" hidden aria-hidden="true">
+          <div class="structure-fullscreen-backdrop" data-close-structure-fullscreen></div>
+          <section class="structure-fullscreen-panel" role="dialog" aria-modal="true" aria-labelledby="structure-fullscreen-title">
+            <div class="structure-fullscreen-head">
+              <div>
+                <p class="rail-eyebrow">Expanded Structure View</p>
+                <h2 id="structure-fullscreen-title">Structure Review Studio</h2>
+                <p id="structure-description-full">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+              </div>
+              <div class="structure-fullscreen-controls">
+                <span id="structure-chip-full" class="projection-chip">PDB 2JJS</span>
+                <button id="close-structure-fullscreen" class="ghost-button" type="button">Close Full Screen</button>
+              </div>
+            </div>
+
+            <div class="structure-tabs" data-structure-switcher>
+              <button
+                type="button"
+                class="structure-tab active"
+                data-structure-target="protein-canvas-full"
+                data-chip-target="structure-chip-full"
+                data-description-target="structure-description-full"
+                data-note-target="structure-note-full"
+                data-tag-one-target="structure-tag-1-full"
+                data-tag-two-target="structure-tag-2-full"
+                data-tag-three-target="structure-tag-3-full"
+                data-structure-id="2JJS"
+                data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                data-chip-label="PDB 2JJS"
+                data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
+                data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
+                data-tag-one="CD47 ectodomain WT"
+                data-tag-two="Human CD47-SIRPalpha complex"
+                data-tag-three="Direct interface structure"
+              >CD47 WT</button>
+              <button
+                type="button"
+                class="structure-tab"
+                data-structure-target="protein-canvas-full"
+                data-chip-target="structure-chip-full"
+                data-description-target="structure-description-full"
+                data-note-target="structure-note-full"
+                data-tag-one-target="structure-tag-1-full"
+                data-tag-two-target="structure-tag-2-full"
+                data-tag-three-target="structure-tag-3-full"
+                data-structure-id="2VSC"
+                data-structure-title="Human CD47 ectodomain scaffold"
+                data-chip-label="PDB 2VSC"
+                data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
+                data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
+                data-tag-one="CD47 variant N3612 family"
+                data-tag-two="Human CD47 ectodomain"
+                data-tag-three="Variant scaffold reference"
+              >CD47 Variant Scaffold</button>
+              <button
+                type="button"
+                class="structure-tab"
+                data-structure-target="protein-canvas-full"
+                data-chip-target="structure-chip-full"
+                data-description-target="structure-description-full"
+                data-note-target="structure-note-full"
+                data-tag-one-target="structure-tag-1-full"
+                data-tag-two-target="structure-tag-2-full"
+                data-tag-three-target="structure-tag-3-full"
+                data-structure-id="2WNG"
+                data-structure-title="Human SIRPalpha ectodomain"
+                data-chip-label="PDB 2WNG"
+                data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
+                data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
+                data-tag-one="Self peptide 21 aa family"
+                data-tag-two="Human SIRPalpha receptor"
+                data-tag-three="Receptor template"
+              >SIRPalpha Receptor</button>
+            </div>
+
+            <div class="structure-fullscreen-stage">
+              <div
+                id="protein-canvas-full"
+                class="structure-canvas fullscreen"
+                data-protein-viewer
+                data-structure-id="2JJS"
+                data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
+                aria-label="Interactive protein structure viewer in full screen"
+              ></div>
+              <div class="structure-overlay">
+                <span id="structure-tag-1-full" class="structure-tag">CD47 ectodomain WT</span>
+                <span id="structure-tag-2-full" class="structure-tag">Human CD47-SIRPalpha complex</span>
+                <span id="structure-tag-3-full" class="structure-tag">Direct interface structure</span>
+              </div>
+            </div>
+
+            <div class="structure-fullscreen-foot">
+              <p id="structure-note-full" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
+            </div>
+          </section>
+        </div>
 
         <section id="assistant-view" class="view research-view" hidden>
           <div class="assistant-command-grid">

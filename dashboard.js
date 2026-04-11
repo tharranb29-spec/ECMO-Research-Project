@@ -64,6 +64,9 @@
   const questionInput = document.getElementById("question-input");
   const askButton = document.getElementById("ask-button");
   const openStructureWindowButton = document.getElementById("open-structure-window");
+  const structureFullscreen = document.getElementById("structure-fullscreen");
+  const closeStructureFullscreenButton = document.getElementById("close-structure-fullscreen");
+  const structureFullscreenBackdrop = structureFullscreen ? structureFullscreen.querySelector("[data-close-structure-fullscreen]") : null;
   const logoutButton = document.getElementById("logout-button");
   const sessionGreetingCard = document.getElementById("session-greeting-card");
   const sessionGreetingText = document.getElementById("session-greeting-text");
@@ -98,6 +101,7 @@
   };
   let bundlePollingStarted = false;
   let autonomousWatchdogStarted = false;
+  let syncingStructureTabs = false;
 
   const viewPanels = {
     home: homeView,
@@ -1879,11 +1883,110 @@
   }
 
   function openStructureWindow() {
-    const showcaseUrl = window.location.protocol === "file:" ? "structure-showcase.html" : "/structure-showcase.html";
-    const features = "popup=yes,width=1280,height=820,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes";
-    const popup = window.open(showcaseUrl, "ecmo-structure-showcase", features);
-    if (!popup) {
+    if (!structureFullscreen) {
+      const showcaseUrl = window.location.protocol === "file:" ? "structure-showcase.html" : "/structure-showcase.html";
       window.location.href = showcaseUrl;
+      return;
+    }
+
+    structureFullscreen.hidden = false;
+    structureFullscreen.setAttribute("aria-hidden", "false");
+    document.body.classList.add("structure-fullscreen-active");
+    syncStructureFullscreen();
+
+    window.requestAnimationFrame(() => {
+      if (closeStructureFullscreenButton) {
+        closeStructureFullscreenButton.focus();
+      }
+    });
+  }
+
+  function closeStructureFullscreen() {
+    if (!structureFullscreen) {
+      return;
+    }
+    structureFullscreen.hidden = true;
+    structureFullscreen.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("structure-fullscreen-active");
+    if (openStructureWindowButton) {
+      openStructureWindowButton.focus();
+    }
+  }
+
+  function getActiveStructureTab(scope) {
+    if (!scope) {
+      return null;
+    }
+    return scope.querySelector(".structure-tabs .structure-tab.active") || scope.querySelector(".structure-tabs .structure-tab");
+  }
+
+  function mirrorStructureSelection(sourceButton, scope) {
+    if (!sourceButton || !scope) {
+      return;
+    }
+    const targetButton = scope.querySelector(`.structure-tabs .structure-tab[data-structure-id="${sourceButton.dataset.structureId}"]`);
+    if (targetButton && !targetButton.classList.contains("active")) {
+      syncingStructureTabs = true;
+      targetButton.click();
+      syncingStructureTabs = false;
+    }
+  }
+
+  function syncStructureFullscreen() {
+    const mainButton = getActiveStructureTab(structureView);
+    if (!mainButton || !structureFullscreen) {
+      return;
+    }
+
+    const syncAction = () => {
+      const targetButton = structureFullscreen.querySelector(`.structure-tabs .structure-tab[data-structure-id="${mainButton.dataset.structureId}"]`);
+      if (targetButton) {
+        syncingStructureTabs = true;
+        targetButton.click();
+        syncingStructureTabs = false;
+      }
+      if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
+        window.ECMOProteinViewer.mountAll();
+      }
+    };
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(syncAction);
+    });
+  }
+
+  function bindStructureMirroring() {
+    const mainTabs = structureView ? Array.from(structureView.querySelectorAll(".structure-tabs .structure-tab")) : [];
+    const fullTabs = structureFullscreen ? Array.from(structureFullscreen.querySelectorAll(".structure-tabs .structure-tab")) : [];
+
+    mainTabs.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (syncingStructureTabs || !structureFullscreen || structureFullscreen.hidden) {
+          return;
+        }
+        mirrorStructureSelection(button, structureFullscreen);
+      });
+    });
+
+    fullTabs.forEach((button) => {
+      button.addEventListener("click", () => {
+        if (syncingStructureTabs) {
+          return;
+        }
+        mirrorStructureSelection(button, structureView);
+      });
+    });
+  }
+
+  function bindStructureFullscreen() {
+    if (openStructureWindowButton) {
+      openStructureWindowButton.addEventListener("click", openStructureWindow);
+    }
+    if (closeStructureFullscreenButton) {
+      closeStructureFullscreenButton.addEventListener("click", closeStructureFullscreen);
+    }
+    if (structureFullscreenBackdrop) {
+      structureFullscreenBackdrop.addEventListener("click", closeStructureFullscreen);
     }
   }
 
@@ -1919,9 +2022,8 @@
     }
   });
 
-  if (openStructureWindowButton) {
-    openStructureWindowButton.addEventListener("click", openStructureWindow);
-  }
+  bindStructureFullscreen();
+  bindStructureMirroring();
 
   if (researchRefreshButton) {
     researchRefreshButton.addEventListener("click", refreshAutonomousResearch);
@@ -1930,6 +2032,12 @@
   if (logoutButton) {
     logoutButton.addEventListener("click", handleLogout);
   }
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && structureFullscreen && !structureFullscreen.hidden) {
+      closeStructureFullscreen();
+    }
+  });
 
   setBranding();
   updateAuthChrome();
