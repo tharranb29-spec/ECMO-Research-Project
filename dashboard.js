@@ -921,14 +921,153 @@
     });
   }
 
-  function populateCandidateCard(container, row) {
+  function pickTopCandidate(rows, matcher) {
+    return rows.find((row) => matcher(normalize(row.target_receptor || "")));
+  }
+
+  function formatStructureRecommendation(value) {
+    const recommendation = String(value || "hold").toUpperCase();
+    return recommendation === "ADVANCE" ? "ADVANCE" : recommendation;
+  }
+
+  function buildStructurePreset(kind, row, fallbackRow) {
+    const source = row || fallbackRow || null;
+    const candidateName = source ? source.candidate_name : kind === "champion" ? "Top AI Candidate" : kind === "siglec" ? "Siglec-9 Lead" : "SIRPalpha Lead";
+    const targetReceptor = source ? source.target_receptor : kind === "siglec" ? "Siglec-9" : kind === "sirpa" ? "SIRPa" : "Lead pathway";
+    const recommendation = formatStructureRecommendation(source ? source.recommendation : "advance");
+    const scoreValue = source && typeof source.predicted_score === "number" ? source.predicted_score.toFixed(1) : "0.0";
+
+    const interactionSummary = normalize(targetReceptor).includes("siglec")
+      ? "Predicted inhibitory engagement aligned with Siglec-9 signaling and calmer neutrophil activation."
+      : normalize(targetReceptor).includes("sirp") || normalize(targetReceptor).includes("cd47")
+        ? "Predicted checkpoint-style engagement aligned with SIRPalpha immune calming."
+        : "Predicted receptor-matched inhibitory interaction beyond a generic control coating.";
+
+    if (kind === "champion") {
+      return {
+        id: "champion",
+        buttonLabel: "#1 Champion",
+        title: `${candidateName} compared with heparin control`,
+        chipLabel: "Champion vs Heparin",
+        description: `Primary comparator view showing the No.1 AI-ranked ligand, ${candidateName}, against a heparin coating control.`,
+        note: `The left lane is the heparin control. The right lane is ${candidateName}, currently the top-ranked ${targetReceptor} candidate with a score of ${scoreValue}. ${interactionSummary}`,
+        tagOne: "#1 AI Champion",
+        tagTwo: "Heparin control comparator",
+        tagThree: `${targetReceptor} interaction lane`,
+        candidateName,
+        targetReceptor,
+        candidateScore: scoreValue,
+        recommendation,
+        controlLabel: "Heparin Coating",
+        badgeLabel: "No.1 Champion",
+      };
+    }
+
+    if (kind === "siglec") {
+      return {
+        id: "siglec",
+        buttonLabel: "Siglec-9 Lead",
+        title: `${candidateName} compared with heparin control`,
+        chipLabel: "Siglec-9 vs Heparin",
+        description: `Siglec-9 comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
+        note: `This lane compares heparin with ${candidateName}, the leading Siglec-9 candidate. Score ${scoreValue}. ${interactionSummary}`,
+        tagOne: candidateName,
+        tagTwo: "Heparin control comparator",
+        tagThree: "Siglec-9 signaling lane",
+        candidateName,
+        targetReceptor,
+        candidateScore: scoreValue,
+        recommendation,
+        controlLabel: "Heparin Coating",
+        badgeLabel: "Pathway Lead",
+      };
+    }
+
+    return {
+      id: "sirpa",
+      buttonLabel: "SIRPalpha Lead",
+      title: `${candidateName} compared with heparin control`,
+      chipLabel: "SIRPalpha vs Heparin",
+      description: `SIRPalpha comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
+      note: `This lane compares heparin with ${candidateName}, the leading SIRPalpha candidate. Score ${scoreValue}. ${interactionSummary}`,
+      tagOne: candidateName,
+      tagTwo: "Heparin control comparator",
+      tagThree: "SIRPalpha signaling lane",
+      candidateName,
+      targetReceptor,
+      candidateScore: scoreValue,
+      recommendation,
+      controlLabel: "Heparin Coating",
+      badgeLabel: "Pathway Lead",
+    };
+  }
+
+  function applyStructurePreset(button, preset) {
+    if (!button || !preset) {
+      return;
+    }
+    button.textContent = preset.buttonLabel;
+    button.dataset.structureId = preset.id;
+    button.dataset.structureTitle = preset.title;
+    button.dataset.chipLabel = preset.chipLabel;
+    button.dataset.description = preset.description;
+    button.dataset.note = preset.note;
+    button.dataset.tagOne = preset.tagOne;
+    button.dataset.tagTwo = preset.tagTwo;
+    button.dataset.tagThree = preset.tagThree;
+    button.dataset.candidateName = preset.candidateName;
+    button.dataset.targetReceptor = preset.targetReceptor;
+    button.dataset.candidateScore = preset.candidateScore;
+    button.dataset.recommendation = preset.recommendation;
+    button.dataset.controlLabel = preset.controlLabel;
+    button.dataset.badgeLabel = preset.badgeLabel;
+  }
+
+  function renderStructureComparators(rows) {
+    const sourceRows = rows.length ? rows : getRows(activeDataset);
+    const fallbackRow = sourceRows[0] || null;
+    const presets = [
+      buildStructurePreset("champion", fallbackRow, fallbackRow),
+      buildStructurePreset("siglec", pickTopCandidate(sourceRows, (target) => target.includes("siglec")), fallbackRow),
+      buildStructurePreset("sirpa", pickTopCandidate(sourceRows, (target) => target.includes("sirp") || target.includes("cd47")), fallbackRow),
+    ];
+
+    [structureView, structureFullscreen].forEach((scope) => {
+      if (!scope) {
+        return;
+      }
+      const buttons = Array.from(scope.querySelectorAll(".structure-tabs .structure-tab"));
+      buttons.forEach((button, index) => applyStructurePreset(button, presets[index]));
+    });
+
+    const activeMainButton = structureView ? getActiveStructureTab(structureView) : null;
+    if (activeMainButton) {
+      activeMainButton.click();
+    }
+  }
+
+  function populateCandidateCard(container, row, options = {}) {
     const card = document.createElement("article");
     card.className = `candidate-card ${receptorClass(row.target_receptor)}`;
+    if (options.champion) {
+      card.classList.add("champion-card");
+    }
 
     const top = document.createElement("div");
     top.className = "candidate-top";
 
     const left = document.createElement("div");
+    if (options.champion) {
+      const banner = document.createElement("div");
+      banner.className = "candidate-rank-banner";
+      const number = document.createElement("span");
+      number.className = "candidate-rank-number";
+      number.textContent = `#${options.rankIndex || 1}`;
+      const text = document.createElement("span");
+      text.textContent = options.bannerLabel || "Champion Candidate";
+      banner.append(number, text);
+      left.append(banner);
+    }
     const title = document.createElement("h3");
     title.className = "candidate-title";
     title.textContent = row.candidate_name;
@@ -1016,7 +1155,13 @@
       leaderboard.append(empty);
       return;
     }
-    topRows.forEach((row) => populateCandidateCard(leaderboard, row));
+    topRows.forEach((row, index) =>
+      populateCandidateCard(leaderboard, row, {
+        champion: index === 0,
+        rankIndex: index + 1,
+        bannerLabel: index === 0 ? "Top Priority" : "Ranked Candidate",
+      })
+    );
   }
 
   function renderAssistantSideHits(rows) {
@@ -1029,7 +1174,13 @@
       assistantSideHits.append(empty);
       return;
     }
-    topRows.forEach((row) => populateCandidateCard(assistantSideHits, row));
+    topRows.forEach((row, index) =>
+      populateCandidateCard(assistantSideHits, row, {
+        champion: index === 0,
+        rankIndex: index + 1,
+        bannerLabel: index === 0 ? "Leading Hit" : "Supporting Hit",
+      })
+    );
   }
 
   function renderDirectory(rows) {
@@ -1298,7 +1449,13 @@
         ? `${promotedRows.length} autonomous candidate${promotedRows.length === 1 ? "" : "s"} currently meet promotion criteria and are surfaced here from the latest discovery snapshot (${formatDate(status.last_updated)}).`
         : `${promotedRows.length} autonomous candidate${promotedRows.length === 1 ? "" : "s"} are currently promoted into the main review workspace.`;
     }
-    promotedRows.forEach((row) => populateCandidateCard(promotedCandidateBoard, row));
+    promotedRows.forEach((row, index) =>
+      populateCandidateCard(promotedCandidateBoard, row, {
+        champion: index === 0,
+        rankIndex: index + 1,
+        bannerLabel: index === 0 ? "Promoted Lead" : "Promoted Candidate",
+      })
+    );
   }
 
   function renderAll() {
@@ -1311,6 +1468,7 @@
     renderDirectory(rows);
     renderTargetSections(rows);
     renderWeights();
+    renderStructureComparators(rows);
     renderResearchRuntime();
     renderResearchRuntimeAlert();
     renderResearchLeads();

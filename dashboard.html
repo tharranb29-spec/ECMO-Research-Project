@@ -1094,6 +1094,16 @@
         box-shadow: 0 12px 28px rgba(16, 36, 62, 0.06);
       }
 
+      .candidate-card.champion-card {
+        border-color: rgba(225, 164, 44, 0.28);
+        box-shadow:
+          0 20px 44px rgba(225, 164, 44, 0.16),
+          0 12px 28px rgba(16, 36, 62, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 250, 240, 0.98), rgba(255, 255, 255, 0.98)),
+          radial-gradient(circle at 100% 0%, rgba(225, 164, 44, 0.12), transparent 26%);
+      }
+
       .candidate-card::before {
         content: "";
         position: absolute;
@@ -1118,6 +1128,35 @@
         justify-content: space-between;
         gap: 14px;
         align-items: flex-start;
+      }
+
+      .candidate-rank-banner {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(225, 164, 44, 0.18), rgba(255, 240, 204, 0.88));
+        color: #9a6400;
+        border: 1px solid rgba(225, 164, 44, 0.22);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .candidate-rank-number {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 28px;
+        height: 28px;
+        padding: 0 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.76);
+        color: #8f5c00;
+        font-size: 0.92rem;
+        font-weight: 800;
       }
 
       .candidate-title {
@@ -4049,8 +4088,8 @@
                 </div>
                 <div class="module-tab-copy">
                   <h3 class="module-tab-title">Structure Review Studio</h3>
-                  <p class="module-tab-desc">Dedicated protein viewer area for real PDB structures tied to selected candidate families.</p>
-                  <span class="module-tab-meta">Projection-friendly mechanistic view</span>
+                  <p class="module-tab-desc">Comparator view for AI-selected ligands versus heparin control, designed for mechanistic supervisor discussion.</p>
+                  <span class="module-tab-meta">Projection-friendly interaction view</span>
                 </div>
               </button>
 
@@ -4189,9 +4228,9 @@
                 <div class="structure-head">
                   <div>
                     <h2>Structure Review Studio</h2>
-                    <p id="structure-description-main">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+                    <p id="structure-description-main">Comparator view showing the AI-selected ligand against a heparin coating control in the same ECMO interaction window.</p>
                   </div>
-                  <span id="structure-chip-main" class="projection-chip">PDB 2JJS</span>
+                  <span id="structure-chip-main" class="projection-chip">AI vs Heparin Control</span>
                 </div>
 
                 <div class="structure-tabs" data-structure-switcher>
@@ -4205,15 +4244,21 @@
                     data-tag-one-target="structure-tag-1-main"
                     data-tag-two-target="structure-tag-2-main"
                     data-tag-three-target="structure-tag-3-main"
-                    data-structure-id="2JJS"
-                    data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                    data-chip-label="PDB 2JJS"
-                    data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
-                    data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
-                    data-tag-one="CD47 ectodomain WT"
-                    data-tag-two="Human CD47-SIRPalpha complex"
-                    data-tag-three="Direct interface structure"
-                  >CD47 WT</button>
+                    data-structure-id="champion"
+                    data-structure-title="AI champion compared with heparin control"
+                    data-chip-label="Champion vs Heparin"
+                    data-description="Primary comparator view showing the No.1 AI-ranked ligand against a heparin coating control."
+                    data-note="Use this comparator to explain why the top AI candidate is being advanced beyond a standard heparin-like control surface."
+                    data-tag-one="#1 AI Champion"
+                    data-tag-two="Heparin control comparator"
+                    data-tag-three="Immune-interface interaction view"
+                    data-candidate-name="Top AI Candidate"
+                    data-target-receptor="Lead pathway"
+                    data-candidate-score="0.0"
+                    data-recommendation="advance"
+                    data-control-label="Heparin Coating"
+                    data-badge-label="No.1 Champion"
+                  >#1 Champion</button>
                   <button
                     type="button"
                     class="structure-tab"
@@ -4224,15 +4269,21 @@
                     data-tag-one-target="structure-tag-1-main"
                     data-tag-two-target="structure-tag-2-main"
                     data-tag-three-target="structure-tag-3-main"
-                    data-structure-id="2VSC"
-                    data-structure-title="Human CD47 ectodomain scaffold"
-                    data-chip-label="PDB 2VSC"
-                    data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
-                    data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
-                    data-tag-one="CD47 variant N3612 family"
-                    data-tag-two="Human CD47 ectodomain"
-                    data-tag-three="Variant scaffold reference"
-                  >CD47 Variant Scaffold</button>
+                    data-structure-id="siglec"
+                    data-structure-title="Siglec-9 AI ligand compared with heparin control"
+                    data-chip-label="Siglec-9 vs Heparin"
+                    data-description="Siglec-9-focused comparator showing how the leading AI ligand differs from a heparin coating control."
+                    data-note="Use this view to discuss receptor-matched inhibitory engagement, especially for neutrophil-facing Siglec-9 candidate logic."
+                    data-tag-one="Siglec-9 lead"
+                    data-tag-two="Heparin control comparator"
+                    data-tag-three="ROS / NETs suppression logic"
+                    data-candidate-name="Siglec-9 Lead"
+                    data-target-receptor="Siglec-9"
+                    data-candidate-score="0.0"
+                    data-recommendation="advance"
+                    data-control-label="Heparin Coating"
+                    data-badge-label="Pathway Lead"
+                  >Siglec-9 Lead</button>
                   <button
                     type="button"
                     class="structure-tab"
@@ -4243,15 +4294,21 @@
                     data-tag-one-target="structure-tag-1-main"
                     data-tag-two-target="structure-tag-2-main"
                     data-tag-three-target="structure-tag-3-main"
-                    data-structure-id="2WNG"
-                    data-structure-title="Human SIRPalpha ectodomain"
-                    data-chip-label="PDB 2WNG"
-                    data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
-                    data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
-                    data-tag-one="Self peptide 21 aa family"
-                    data-tag-two="Human SIRPalpha receptor"
-                    data-tag-three="Receptor template"
-                  >SIRPalpha Receptor</button>
+                    data-structure-id="sirpa"
+                    data-structure-title="SIRPalpha AI ligand compared with heparin control"
+                    data-chip-label="SIRPalpha vs Heparin"
+                    data-description="SIRPalpha-focused comparator showing how the leading AI ligand differs from a heparin coating control."
+                    data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface."
+                    data-tag-one="SIRPalpha lead"
+                    data-tag-two="Heparin control comparator"
+                    data-tag-three="Checkpoint signaling logic"
+                    data-candidate-name="SIRPalpha Lead"
+                    data-target-receptor="SIRPa"
+                    data-candidate-score="0.0"
+                    data-recommendation="advance"
+                    data-control-label="Heparin Coating"
+                    data-badge-label="Pathway Lead"
+                  >SIRPalpha Lead</button>
                 </div>
 
                 <div class="structure-viewer">
@@ -4259,19 +4316,25 @@
                     id="protein-canvas"
                     class="structure-canvas"
                     data-protein-viewer
-                    data-structure-id="2JJS"
-                    data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                    aria-label="Interactive protein structure viewer"
+                    data-structure-id="champion"
+                    data-structure-title="AI champion compared with heparin control"
+                    data-candidate-name="Top AI Candidate"
+                    data-target-receptor="Lead pathway"
+                    data-candidate-score="0.0"
+                    data-recommendation="advance"
+                    data-control-label="Heparin Coating"
+                    data-badge-label="No.1 Champion"
+                    aria-label="Ligand interaction comparator"
                   ></div>
                   <div class="structure-overlay">
-                    <span id="structure-tag-1-main" class="structure-tag">CD47 ectodomain WT</span>
-                    <span id="structure-tag-2-main" class="structure-tag">Human CD47-SIRPalpha complex</span>
-                    <span id="structure-tag-3-main" class="structure-tag">Direct interface structure</span>
+                    <span id="structure-tag-1-main" class="structure-tag">#1 AI Champion</span>
+                    <span id="structure-tag-2-main" class="structure-tag">Heparin control comparator</span>
+                    <span id="structure-tag-3-main" class="structure-tag">Immune-interface interaction view</span>
                   </div>
                 </div>
 
                 <div class="structure-actions">
-                  <p id="structure-note-main" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
+                  <p id="structure-note-main" class="compact-note">This panel compares the AI-selected ligand against a heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
                   <button id="open-structure-window" class="ghost-button" type="button">Open Full Screen</button>
                 </div>
               </section>
@@ -4288,11 +4351,11 @@
                 <div class="target-sections">
                   <div class="directory-card">
                     <h4 class="directory-title">Supervisor discussion prompts</h4>
-                    <p class="candidate-copy">Show the receptor-binding interface first, then connect the structural scaffold to affinity, immune signaling logic, and ECMO-surface translation.</p>
+                    <p class="candidate-copy">Start with the heparin control on the left, then contrast it with the AI-selected ligand on the right so the specificity and immune-modulating logic are easy to explain.</p>
                   </div>
                   <div class="directory-card">
                     <h4 class="directory-title">Recommended use case</h4>
-                    <p class="candidate-copy">This module is best for projection mode, mechanistic storytelling, and linking ranked candidates back to actual protein structure examples.</p>
+                    <p class="candidate-copy">This module is best for projection mode, mechanistic storytelling, and showing why the AI shortlist differs from a generic control coating strategy.</p>
                   </div>
                 </div>
               </section>
@@ -4307,10 +4370,10 @@
               <div>
                 <p class="rail-eyebrow">Expanded Structure View</p>
                 <h2 id="structure-fullscreen-title">Structure Review Studio</h2>
-                <p id="structure-description-full">Real structural example from the ranked candidate set: human CD47 bound to SIRPalpha.</p>
+                <p id="structure-description-full">Comparator view showing the AI-selected ligand against a heparin coating control in the same ECMO interaction window.</p>
               </div>
               <div class="structure-fullscreen-controls">
-                <span id="structure-chip-full" class="projection-chip">PDB 2JJS</span>
+                <span id="structure-chip-full" class="projection-chip">AI vs Heparin Control</span>
                 <button id="close-structure-fullscreen" class="ghost-button" type="button">Close Full Screen</button>
               </div>
             </div>
@@ -4326,15 +4389,21 @@
                 data-tag-one-target="structure-tag-1-full"
                 data-tag-two-target="structure-tag-2-full"
                 data-tag-three-target="structure-tag-3-full"
-                data-structure-id="2JJS"
-                data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                data-chip-label="PDB 2JJS"
-                data-description="Real interface complex for the ranked candidate CD47 ectodomain WT with human SIRPalpha."
-                data-note="This view shows the direct receptor-ligand interface used as the main structural reference for WT CD47-based candidate selection."
-                data-tag-one="CD47 ectodomain WT"
-                data-tag-two="Human CD47-SIRPalpha complex"
-                data-tag-three="Direct interface structure"
-              >CD47 WT</button>
+                data-structure-id="champion"
+                data-structure-title="AI champion compared with heparin control"
+                data-chip-label="Champion vs Heparin"
+                data-description="Primary comparator view showing the No.1 AI-ranked ligand against a heparin coating control."
+                data-note="Use this comparator to explain why the top AI candidate is being advanced beyond a standard heparin-like control surface."
+                data-tag-one="#1 AI Champion"
+                data-tag-two="Heparin control comparator"
+                data-tag-three="Immune-interface interaction view"
+                data-candidate-name="Top AI Candidate"
+                data-target-receptor="Lead pathway"
+                data-candidate-score="0.0"
+                data-recommendation="advance"
+                data-control-label="Heparin Coating"
+                data-badge-label="No.1 Champion"
+              >#1 Champion</button>
               <button
                 type="button"
                 class="structure-tab"
@@ -4345,15 +4414,21 @@
                 data-tag-one-target="structure-tag-1-full"
                 data-tag-two-target="structure-tag-2-full"
                 data-tag-three-target="structure-tag-3-full"
-                data-structure-id="2VSC"
-                data-structure-title="Human CD47 ectodomain scaffold"
-                data-chip-label="PDB 2VSC"
-                data-description="Structural scaffold for engineered CD47-family candidates such as the higher-affinity N3612 variant."
-                data-note="This ectodomain-only view is useful for discussing how engineered CD47 variants retain the same binding scaffold while modifying interface behavior."
-                data-tag-one="CD47 variant N3612 family"
-                data-tag-two="Human CD47 ectodomain"
-                data-tag-three="Variant scaffold reference"
-              >CD47 Variant Scaffold</button>
+                data-structure-id="siglec"
+                data-structure-title="Siglec-9 AI ligand compared with heparin control"
+                data-chip-label="Siglec-9 vs Heparin"
+                data-description="Siglec-9-focused comparator showing how the leading AI ligand differs from a heparin coating control."
+                data-note="Use this view to discuss receptor-matched inhibitory engagement, especially for neutrophil-facing Siglec-9 candidate logic."
+                data-tag-one="Siglec-9 lead"
+                data-tag-two="Heparin control comparator"
+                data-tag-three="ROS / NETs suppression logic"
+                data-candidate-name="Siglec-9 Lead"
+                data-target-receptor="Siglec-9"
+                data-candidate-score="0.0"
+                data-recommendation="advance"
+                data-control-label="Heparin Coating"
+                data-badge-label="Pathway Lead"
+              >Siglec-9 Lead</button>
               <button
                 type="button"
                 class="structure-tab"
@@ -4364,15 +4439,21 @@
                 data-tag-one-target="structure-tag-1-full"
                 data-tag-two-target="structure-tag-2-full"
                 data-tag-three-target="structure-tag-3-full"
-                data-structure-id="2WNG"
-                data-structure-title="Human SIRPalpha ectodomain"
-                data-chip-label="PDB 2WNG"
-                data-description="Receptor-focused structural reference for SIRPalpha-directed candidates including Self peptide derivatives."
-                data-note="This receptor view helps explain why compact CD47-derived peptides and mimetic designs are evaluated against the same SIRPalpha binding surface."
-                data-tag-one="Self peptide 21 aa family"
-                data-tag-two="Human SIRPalpha receptor"
-                data-tag-three="Receptor template"
-              >SIRPalpha Receptor</button>
+                data-structure-id="sirpa"
+                data-structure-title="SIRPalpha AI ligand compared with heparin control"
+                data-chip-label="SIRPalpha vs Heparin"
+                data-description="SIRPalpha-focused comparator showing how the leading AI ligand differs from a heparin coating control."
+                data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface."
+                data-tag-one="SIRPalpha lead"
+                data-tag-two="Heparin control comparator"
+                data-tag-three="Checkpoint signaling logic"
+                data-candidate-name="SIRPalpha Lead"
+                data-target-receptor="SIRPa"
+                data-candidate-score="0.0"
+                data-recommendation="advance"
+                data-control-label="Heparin Coating"
+                data-badge-label="Pathway Lead"
+              >SIRPalpha Lead</button>
             </div>
 
             <div class="structure-fullscreen-stage">
@@ -4380,19 +4461,25 @@
                 id="protein-canvas-full"
                 class="structure-canvas fullscreen"
                 data-protein-viewer
-                data-structure-id="2JJS"
-                data-structure-title="CD47 ectodomain WT bound to SIRPalpha"
-                aria-label="Interactive protein structure viewer in full screen"
+                data-structure-id="champion"
+                data-structure-title="AI champion compared with heparin control"
+                data-candidate-name="Top AI Candidate"
+                data-target-receptor="Lead pathway"
+                data-candidate-score="0.0"
+                data-recommendation="advance"
+                data-control-label="Heparin Coating"
+                data-badge-label="No.1 Champion"
+                aria-label="Ligand interaction comparator in full screen"
               ></div>
               <div class="structure-overlay">
-                <span id="structure-tag-1-full" class="structure-tag">CD47 ectodomain WT</span>
-                <span id="structure-tag-2-full" class="structure-tag">Human CD47-SIRPalpha complex</span>
-                <span id="structure-tag-3-full" class="structure-tag">Direct interface structure</span>
+                <span id="structure-tag-1-full" class="structure-tag">#1 AI Champion</span>
+                <span id="structure-tag-2-full" class="structure-tag">Heparin control comparator</span>
+                <span id="structure-tag-3-full" class="structure-tag">Immune-interface interaction view</span>
               </div>
             </div>
 
             <div class="structure-fullscreen-foot">
-              <p id="structure-note-full" class="compact-note">This panel now shows a real receptor-ligand complex relevant to the candidate ranking workflow.</p>
+              <p id="structure-note-full" class="compact-note">This panel compares the AI-selected ligand against a heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
             </div>
           </section>
         </div>
