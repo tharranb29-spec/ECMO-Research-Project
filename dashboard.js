@@ -930,12 +930,30 @@
     return recommendation === "ADVANCE" ? "ADVANCE" : recommendation;
   }
 
+  function getStructureReference(kind, targetReceptor) {
+    const target = normalize(targetReceptor || "");
+    if (kind === "siglec" || target.includes("siglec")) {
+      return {
+        pdbId: "1OD9",
+        chipLabel: "PDB 1OD9 • Siglec-family proxy",
+        referenceNote: "Representative Siglec-family glycan-bound structure used as the 3D context for the control-vs-AI comparison.",
+      };
+    }
+
+    return {
+      pdbId: "2JJS",
+      chipLabel: "PDB 2JJS • CD47-SIRPalpha complex",
+      referenceNote: "CD47-SIRPalpha interface structure used as the 3D context for the control-vs-AI comparison.",
+    };
+  }
+
   function buildStructurePreset(kind, row, fallbackRow) {
     const source = row || fallbackRow || null;
     const candidateName = source ? source.candidate_name : kind === "champion" ? "Top AI Candidate" : kind === "siglec" ? "Siglec-9 Lead" : "SIRPalpha Lead";
     const targetReceptor = source ? source.target_receptor : kind === "siglec" ? "Siglec-9" : kind === "sirpa" ? "SIRPa" : "Lead pathway";
     const recommendation = formatStructureRecommendation(source ? source.recommendation : "advance");
     const scoreValue = source && typeof source.predicted_score === "number" ? source.predicted_score.toFixed(1) : "0.0";
+    const reference = getStructureReference(kind, targetReceptor);
 
     const interactionSummary = normalize(targetReceptor).includes("siglec")
       ? "Predicted inhibitory engagement aligned with Siglec-9 signaling and calmer neutrophil activation."
@@ -948,18 +966,19 @@
         id: "champion",
         buttonLabel: "#1 Champion",
         title: `${candidateName} compared with heparin control`,
-        chipLabel: "Champion vs Heparin",
-        description: `Primary comparator view showing the No.1 AI-ranked ligand, ${candidateName}, against a heparin coating control.`,
-        note: `The left lane is the heparin control. The right lane is ${candidateName}, currently the top-ranked ${targetReceptor} candidate with a score of ${scoreValue}. ${interactionSummary}`,
+        chipLabel: reference.chipLabel,
+        description: `Primary 3D protein comparator showing the No.1 AI-ranked ligand, ${candidateName}, against a heparin coating control.`,
+        note: `The left lane is the heparin control. The right lane is ${candidateName}, currently the top-ranked ${targetReceptor} candidate with a score of ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
         tagOne: "#1 AI Champion",
         tagTwo: "Heparin control comparator",
-        tagThree: `${targetReceptor} interaction lane`,
+        tagThree: "3D interaction overlay",
         candidateName,
         targetReceptor,
         candidateScore: scoreValue,
         recommendation,
         controlLabel: "Heparin Coating",
         badgeLabel: "No.1 Champion",
+        structurePdbId: reference.pdbId,
       };
     }
 
@@ -968,18 +987,19 @@
         id: "siglec",
         buttonLabel: "Siglec-9 Lead",
         title: `${candidateName} compared with heparin control`,
-        chipLabel: "Siglec-9 vs Heparin",
-        description: `Siglec-9 comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
-        note: `This lane compares heparin with ${candidateName}, the leading Siglec-9 candidate. Score ${scoreValue}. ${interactionSummary}`,
+        chipLabel: reference.chipLabel,
+        description: `Siglec-9-focused 3D protein comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
+        note: `This lane compares heparin with ${candidateName}, the leading Siglec-9 candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
         tagOne: candidateName,
         tagTwo: "Heparin control comparator",
-        tagThree: "Siglec-9 signaling lane",
+        tagThree: "3D interaction overlay",
         candidateName,
         targetReceptor,
         candidateScore: scoreValue,
         recommendation,
         controlLabel: "Heparin Coating",
         badgeLabel: "Pathway Lead",
+        structurePdbId: reference.pdbId,
       };
     }
 
@@ -987,18 +1007,19 @@
       id: "sirpa",
       buttonLabel: "SIRPalpha Lead",
       title: `${candidateName} compared with heparin control`,
-      chipLabel: "SIRPalpha vs Heparin",
-      description: `SIRPalpha comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
-      note: `This lane compares heparin with ${candidateName}, the leading SIRPalpha candidate. Score ${scoreValue}. ${interactionSummary}`,
+      chipLabel: reference.chipLabel,
+      description: `SIRPalpha-focused 3D protein comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
+      note: `This lane compares heparin with ${candidateName}, the leading SIRPalpha candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
       tagOne: candidateName,
       tagTwo: "Heparin control comparator",
-      tagThree: "SIRPalpha signaling lane",
+      tagThree: "3D interaction overlay",
       candidateName,
       targetReceptor,
       candidateScore: scoreValue,
       recommendation,
       controlLabel: "Heparin Coating",
       badgeLabel: "Pathway Lead",
+      structurePdbId: reference.pdbId,
     };
   }
 
@@ -1021,6 +1042,7 @@
     button.dataset.recommendation = preset.recommendation;
     button.dataset.controlLabel = preset.controlLabel;
     button.dataset.badgeLabel = preset.badgeLabel;
+    button.dataset.structurePdbId = preset.structurePdbId;
   }
 
   function renderStructureComparators(rows) {

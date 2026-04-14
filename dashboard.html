@@ -362,6 +362,119 @@
         display: block;
       }
 
+      .comparison-viewer-shell {
+        height: 100%;
+        display: grid;
+        grid-template-rows: minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .comparison-protein-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        min-height: 0;
+      }
+
+      .comparison-protein-pane {
+        display: grid;
+        grid-template-rows: auto auto minmax(0, 1fr);
+        gap: 10px;
+        min-height: 0;
+        padding: 12px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.64);
+      }
+
+      .comparison-protein-pane.control {
+        background: linear-gradient(180deg, rgba(245, 249, 255, 0.92), rgba(233, 241, 252, 0.88));
+      }
+
+      .comparison-protein-pane.candidate {
+        background: linear-gradient(180deg, rgba(245, 251, 248, 0.96), rgba(237, 247, 243, 0.88));
+      }
+
+      .comparison-pane-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(16, 36, 62, 0.08);
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .comparison-pane-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1.02rem;
+      }
+
+      .comparison-pane-copy {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
+      .comparison-pane-viewer {
+        min-height: 188px;
+        height: 100%;
+        border-radius: 18px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.99), rgba(236, 242, 250, 0.94) 56%, rgba(221, 230, 243, 0.82));
+        overflow: hidden;
+      }
+
+      .comparison-pane-viewer .viewer-host {
+        width: 100%;
+        height: 100%;
+        min-height: 188px;
+      }
+
+      .comparison-insight-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .comparison-insight-card {
+        display: grid;
+        gap: 6px;
+        padding: 12px 14px;
+        border-radius: 18px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background: rgba(255, 255, 255, 0.84);
+      }
+
+      .comparison-insight-label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .comparison-insight-card strong {
+        color: var(--ink);
+      }
+
+      .comparison-insight-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.88rem;
+        line-height: 1.5;
+      }
+
       .structure-canvas iframe {
         width: 100%;
         height: 100%;
@@ -3365,6 +3478,16 @@
           border-radius: 20px;
         }
 
+        .comparison-protein-grid,
+        .comparison-insight-row {
+          grid-template-columns: 1fr;
+        }
+
+        .comparison-pane-viewer,
+        .comparison-pane-viewer .viewer-host {
+          min-height: 180px;
+        }
+
         .structure-fullscreen {
           padding: 14px;
         }
@@ -3778,6 +3901,15 @@
           height: 280px;
         }
 
+        .comparison-viewer-shell {
+          padding: 10px;
+        }
+
+        .comparison-pane-viewer,
+        .comparison-pane-viewer .viewer-host {
+          min-height: 168px;
+        }
+
         .structure-fullscreen-head {
           display: grid;
           gap: 12px;
@@ -4088,8 +4220,8 @@
                 </div>
                 <div class="module-tab-copy">
                   <h3 class="module-tab-title">Structure Review Studio</h3>
-                  <p class="module-tab-desc">Comparator view for AI-selected ligands versus heparin control, designed for mechanistic supervisor discussion.</p>
-                  <span class="module-tab-meta">Projection-friendly interaction view</span>
+                  <p class="module-tab-desc">Real 3D protein viewer with AI-ligand and heparin-control interaction overlays for mechanistic supervisor discussion.</p>
+                  <span class="module-tab-meta">Projection-friendly 3D interaction view</span>
                 </div>
               </button>
 
@@ -4228,9 +4360,9 @@
                 <div class="structure-head">
                   <div>
                     <h2>Structure Review Studio</h2>
-                    <p id="structure-description-main">Comparator view showing the AI-selected ligand against a heparin coating control in the same ECMO interaction window.</p>
+                    <p id="structure-description-main">Real 3D protein model with side-by-side interaction overlays showing the AI-selected ligand against a heparin coating control.</p>
                   </div>
-                  <span id="structure-chip-main" class="projection-chip">AI vs Heparin Control</span>
+                  <span id="structure-chip-main" class="projection-chip">3D Protein Comparator</span>
                 </div>
 
                 <div class="structure-tabs" data-structure-switcher>
@@ -4247,11 +4379,11 @@
                     data-structure-id="champion"
                     data-structure-title="AI champion compared with heparin control"
                     data-chip-label="Champion vs Heparin"
-                    data-description="Primary comparator view showing the No.1 AI-ranked ligand against a heparin coating control."
-                    data-note="Use this comparator to explain why the top AI candidate is being advanced beyond a standard heparin-like control surface."
+                    data-description="Primary 3D protein comparator showing the No.1 AI-ranked ligand against a heparin coating control."
+                    data-note="This view keeps the real protein model in place while overlaying an AI-ligand interaction hotspot and a heparin-control hotspot for direct comparison."
                     data-tag-one="#1 AI Champion"
                     data-tag-two="Heparin control comparator"
-                    data-tag-three="Immune-interface interaction view"
+                    data-tag-three="3D interaction overlay"
                     data-candidate-name="Top AI Candidate"
                     data-target-receptor="Lead pathway"
                     data-candidate-score="0.0"
@@ -4272,8 +4404,8 @@
                     data-structure-id="siglec"
                     data-structure-title="Siglec-9 AI ligand compared with heparin control"
                     data-chip-label="Siglec-9 vs Heparin"
-                    data-description="Siglec-9-focused comparator showing how the leading AI ligand differs from a heparin coating control."
-                    data-note="Use this view to discuss receptor-matched inhibitory engagement, especially for neutrophil-facing Siglec-9 candidate logic."
+                    data-description="Siglec-9-focused 3D protein comparator showing how the leading AI ligand differs from a heparin coating control."
+                    data-note="Use this view to discuss receptor-matched inhibitory engagement while keeping the real protein pocket visible underneath the interaction overlays."
                     data-tag-one="Siglec-9 lead"
                     data-tag-two="Heparin control comparator"
                     data-tag-three="ROS / NETs suppression logic"
@@ -4297,8 +4429,8 @@
                     data-structure-id="sirpa"
                     data-structure-title="SIRPalpha AI ligand compared with heparin control"
                     data-chip-label="SIRPalpha vs Heparin"
-                    data-description="SIRPalpha-focused comparator showing how the leading AI ligand differs from a heparin coating control."
-                    data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface."
+                    data-description="SIRPalpha-focused 3D protein comparator showing how the leading AI ligand differs from a heparin coating control."
+                    data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface while preserving the actual protein complex."
                     data-tag-one="SIRPalpha lead"
                     data-tag-two="Heparin control comparator"
                     data-tag-three="Checkpoint signaling logic"
@@ -4324,17 +4456,17 @@
                     data-recommendation="advance"
                     data-control-label="Heparin Coating"
                     data-badge-label="No.1 Champion"
-                    aria-label="Ligand interaction comparator"
+                    aria-label="3D protein interaction comparator"
                   ></div>
                   <div class="structure-overlay">
                     <span id="structure-tag-1-main" class="structure-tag">#1 AI Champion</span>
                     <span id="structure-tag-2-main" class="structure-tag">Heparin control comparator</span>
-                    <span id="structure-tag-3-main" class="structure-tag">Immune-interface interaction view</span>
+                    <span id="structure-tag-3-main" class="structure-tag">3D interaction overlay</span>
                   </div>
                 </div>
 
                 <div class="structure-actions">
-                  <p id="structure-note-main" class="compact-note">This panel compares the AI-selected ligand against a heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
+                  <p id="structure-note-main" class="compact-note">This panel uses a real 3D protein model and adds interaction overlays for the AI-selected ligand and the heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
                   <button id="open-structure-window" class="ghost-button" type="button">Open Full Screen</button>
                 </div>
               </section>
@@ -4351,11 +4483,11 @@
                 <div class="target-sections">
                   <div class="directory-card">
                     <h4 class="directory-title">Supervisor discussion prompts</h4>
-                    <p class="candidate-copy">Start with the heparin control on the left, then contrast it with the AI-selected ligand on the right so the specificity and immune-modulating logic are easy to explain.</p>
+                    <p class="candidate-copy">Start with the real protein model, point out the heparin control hotspot, then contrast it with the AI-selected ligand hotspot so the specificity and immune-modulating logic are easy to explain.</p>
                   </div>
                   <div class="directory-card">
                     <h4 class="directory-title">Recommended use case</h4>
-                    <p class="candidate-copy">This module is best for projection mode, mechanistic storytelling, and showing why the AI shortlist differs from a generic control coating strategy.</p>
+                    <p class="candidate-copy">This module is best for projection mode, mechanistic storytelling, and showing why the AI shortlist differs from a generic control coating strategy while keeping the actual protein context visible.</p>
                   </div>
                 </div>
               </section>
@@ -4370,10 +4502,10 @@
               <div>
                 <p class="rail-eyebrow">Expanded Structure View</p>
                 <h2 id="structure-fullscreen-title">Structure Review Studio</h2>
-                <p id="structure-description-full">Comparator view showing the AI-selected ligand against a heparin coating control in the same ECMO interaction window.</p>
+                <p id="structure-description-full">Real 3D protein model with side-by-side interaction overlays showing the AI-selected ligand against a heparin coating control.</p>
               </div>
               <div class="structure-fullscreen-controls">
-                <span id="structure-chip-full" class="projection-chip">AI vs Heparin Control</span>
+                <span id="structure-chip-full" class="projection-chip">3D Protein Comparator</span>
                 <button id="close-structure-fullscreen" class="ghost-button" type="button">Close Full Screen</button>
               </div>
             </div>
@@ -4392,11 +4524,11 @@
                 data-structure-id="champion"
                 data-structure-title="AI champion compared with heparin control"
                 data-chip-label="Champion vs Heparin"
-                data-description="Primary comparator view showing the No.1 AI-ranked ligand against a heparin coating control."
-                data-note="Use this comparator to explain why the top AI candidate is being advanced beyond a standard heparin-like control surface."
+                data-description="Primary 3D protein comparator showing the No.1 AI-ranked ligand against a heparin coating control."
+                data-note="This view keeps the real protein model in place while overlaying an AI-ligand interaction hotspot and a heparin-control hotspot for direct comparison."
                 data-tag-one="#1 AI Champion"
                 data-tag-two="Heparin control comparator"
-                data-tag-three="Immune-interface interaction view"
+                data-tag-three="3D interaction overlay"
                 data-candidate-name="Top AI Candidate"
                 data-target-receptor="Lead pathway"
                 data-candidate-score="0.0"
@@ -4417,8 +4549,8 @@
                 data-structure-id="siglec"
                 data-structure-title="Siglec-9 AI ligand compared with heparin control"
                 data-chip-label="Siglec-9 vs Heparin"
-                data-description="Siglec-9-focused comparator showing how the leading AI ligand differs from a heparin coating control."
-                data-note="Use this view to discuss receptor-matched inhibitory engagement, especially for neutrophil-facing Siglec-9 candidate logic."
+                data-description="Siglec-9-focused 3D protein comparator showing how the leading AI ligand differs from a heparin coating control."
+                data-note="Use this view to discuss receptor-matched inhibitory engagement while keeping the real protein pocket visible underneath the interaction overlays."
                 data-tag-one="Siglec-9 lead"
                 data-tag-two="Heparin control comparator"
                 data-tag-three="ROS / NETs suppression logic"
@@ -4442,8 +4574,8 @@
                 data-structure-id="sirpa"
                 data-structure-title="SIRPalpha AI ligand compared with heparin control"
                 data-chip-label="SIRPalpha vs Heparin"
-                data-description="SIRPalpha-focused comparator showing how the leading AI ligand differs from a heparin coating control."
-                data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface."
+                data-description="SIRPalpha-focused 3D protein comparator showing how the leading AI ligand differs from a heparin coating control."
+                data-note="Use this view to explain checkpoint-style immune calming versus a generic anticoagulant control surface while preserving the actual protein complex."
                 data-tag-one="SIRPalpha lead"
                 data-tag-two="Heparin control comparator"
                 data-tag-three="Checkpoint signaling logic"
@@ -4469,17 +4601,17 @@
                 data-recommendation="advance"
                 data-control-label="Heparin Coating"
                 data-badge-label="No.1 Champion"
-                aria-label="Ligand interaction comparator in full screen"
+                aria-label="3D protein interaction comparator in full screen"
               ></div>
               <div class="structure-overlay">
                 <span id="structure-tag-1-full" class="structure-tag">#1 AI Champion</span>
                 <span id="structure-tag-2-full" class="structure-tag">Heparin control comparator</span>
-                <span id="structure-tag-3-full" class="structure-tag">Immune-interface interaction view</span>
+                <span id="structure-tag-3-full" class="structure-tag">3D interaction overlay</span>
               </div>
             </div>
 
             <div class="structure-fullscreen-foot">
-              <p id="structure-note-full" class="compact-note">This panel compares the AI-selected ligand against a heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
+              <p id="structure-note-full" class="compact-note">This panel uses a real 3D protein model and adds interaction overlays for the AI-selected ligand and the heparin control so you can explain specificity, inhibitory engagement, and why the AI shortlist is different from a generic coating baseline.</p>
             </div>
           </section>
         </div>
