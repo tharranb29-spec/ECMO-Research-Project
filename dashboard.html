@@ -344,10 +344,10 @@
       }
 
       .structure-viewer {
-        position: relative;
-        min-height: 270px;
-        height: clamp(270px, 30vw, 350px);
-        overflow: hidden;
+        display: grid;
+        gap: 12px;
+        padding: 14px;
+        overflow: visible;
         border-radius: 24px;
         border: 1px solid rgba(16, 36, 62, 0.08);
         background:
@@ -357,9 +357,11 @@
 
       .structure-canvas {
         width: 100%;
-        height: 100%;
-        min-height: 270px;
+        min-height: clamp(440px, 46vw, 620px);
+        height: clamp(440px, 46vw, 620px);
         display: block;
+        border-radius: 20px;
+        overflow: hidden;
       }
 
       .comparison-viewer-shell {
@@ -382,6 +384,7 @@
         grid-template-rows: auto auto minmax(0, 1fr);
         gap: 10px;
         min-height: 0;
+        align-content: start;
         padding: 12px;
         border-radius: 22px;
         border: 1px solid rgba(16, 36, 62, 0.08);
@@ -426,8 +429,9 @@
       }
 
       .comparison-pane-viewer {
-        min-height: 188px;
-        height: 100%;
+        position: relative;
+        min-height: 248px;
+        height: 248px;
         border-radius: 18px;
         border: 1px solid rgba(16, 36, 62, 0.08);
         background:
@@ -436,9 +440,19 @@
       }
 
       .comparison-pane-viewer .viewer-host {
+        position: relative;
         width: 100%;
         height: 100%;
-        min-height: 188px;
+        min-height: 248px;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .comparison-pane-viewer .viewer-host canvas,
+      .comparison-pane-viewer .viewer-host svg {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
       }
 
       .comparison-insight-row {
@@ -483,8 +497,6 @@
       }
 
       .structure-overlay {
-        position: absolute;
-        inset: auto 14px 14px 14px;
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
@@ -501,7 +513,9 @@
 
       .structure-actions {
         display: grid;
-        gap: 10px;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: start;
       }
 
       body.structure-fullscreen-active {
@@ -574,10 +588,11 @@
       }
 
       .structure-fullscreen-stage {
-        position: relative;
-        min-height: min(72vh, 760px);
-        height: min(72vh, 760px);
-        overflow: hidden;
+        display: grid;
+        gap: 12px;
+        min-height: 0;
+        overflow: visible;
+        padding: 16px;
         border-radius: 28px;
         border: 1px solid rgba(16, 36, 62, 0.08);
         background:
@@ -586,7 +601,8 @@
       }
 
       .structure-canvas.fullscreen {
-        min-height: min(72vh, 760px);
+        min-height: min(60vh, 760px);
+        height: min(60vh, 760px);
       }
 
       .structure-fullscreen-foot {
@@ -3473,9 +3489,12 @@
         }
 
         .structure-viewer {
-          min-height: 300px;
-          height: 300px;
           border-radius: 20px;
+        }
+
+        .structure-canvas {
+          min-height: 520px;
+          height: 520px;
         }
 
         .comparison-protein-grid,
@@ -3485,11 +3504,16 @@
 
         .comparison-pane-viewer,
         .comparison-pane-viewer .viewer-host {
-          min-height: 180px;
+          min-height: 210px;
+          height: 210px;
         }
 
         .structure-fullscreen {
           padding: 14px;
+        }
+
+        .structure-actions {
+          grid-template-columns: 1fr;
         }
 
         .structure-fullscreen-panel {
@@ -3500,8 +3524,8 @@
 
         .structure-fullscreen-stage,
         .structure-canvas.fullscreen {
-          min-height: min(58vh, 560px);
-          height: min(58vh, 560px);
+          min-height: min(62vh, 620px);
+          height: min(62vh, 620px);
         }
 
         .hero-kicker-row,
@@ -3897,8 +3921,7 @@
         }
 
         .structure-viewer {
-          min-height: 280px;
-          height: 280px;
+          padding: 12px;
         }
 
         .comparison-viewer-shell {
@@ -3907,7 +3930,8 @@
 
         .comparison-pane-viewer,
         .comparison-pane-viewer .viewer-host {
-          min-height: 168px;
+          min-height: 190px;
+          height: 190px;
         }
 
         .structure-fullscreen-head {
@@ -3928,8 +3952,8 @@
 
         .structure-fullscreen-stage,
         .structure-canvas.fullscreen {
-          min-height: min(50vh, 420px);
-          height: min(50vh, 420px);
+          min-height: min(56vh, 500px);
+          height: min(56vh, 500px);
         }
 
         .assistant-messages {
@@ -3966,6 +3990,11 @@
         .hero-stage .hero-copy h2,
         .hero-summary {
           max-width: none;
+        }
+
+        .structure-canvas {
+          min-height: 460px;
+          height: 460px;
         }
 
         .workspace-topbar,
