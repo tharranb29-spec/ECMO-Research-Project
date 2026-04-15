@@ -372,6 +372,68 @@
         padding: 14px;
       }
 
+      .combined-viewer-shell {
+        height: 100%;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .combined-stage-head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+      }
+
+      .combined-stage-copy {
+        display: grid;
+        gap: 6px;
+      }
+
+      .combined-stage-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1.04rem;
+      }
+
+      .combined-stage-note {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.55;
+        max-width: 68ch;
+      }
+
+      .combined-pane-viewer {
+        position: relative;
+        min-height: 340px;
+        height: 340px;
+        border-radius: 22px;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        background:
+          radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.99), rgba(236, 242, 250, 0.94) 56%, rgba(221, 230, 243, 0.82));
+        overflow: hidden;
+      }
+
+      .combined-pane-viewer .viewer-host {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 340px;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .combined-pane-viewer .viewer-host canvas,
+      .combined-pane-viewer .viewer-host svg {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
       .comparison-protein-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3503,7 +3565,9 @@
         }
 
         .comparison-pane-viewer,
-        .comparison-pane-viewer .viewer-host {
+        .comparison-pane-viewer .viewer-host,
+        .combined-pane-viewer,
+        .combined-pane-viewer .viewer-host {
           min-height: 210px;
           height: 210px;
         }
@@ -3929,7 +3993,9 @@
         }
 
         .comparison-pane-viewer,
-        .comparison-pane-viewer .viewer-host {
+        .comparison-pane-viewer .viewer-host,
+        .combined-pane-viewer,
+        .combined-pane-viewer .viewer-host {
           min-height: 190px;
           height: 190px;
         }
@@ -4488,6 +4554,38 @@
                     data-control-label="Heparin Coating"
                     data-badge-label="Pathway Lead"
                   >SIRPalpha Lead</button>
+                  <button
+                    type="button"
+                    class="structure-tab"
+                    data-structure-target="protein-canvas"
+                    data-chip-target="structure-chip-main"
+                    data-description-target="structure-description-main"
+                    data-note-target="structure-note-main"
+                    data-tag-one-target="structure-tag-1-main"
+                    data-tag-two-target="structure-tag-2-main"
+                    data-tag-three-target="structure-tag-3-main"
+                    data-structure-id="combined"
+                    data-view-mode="combined"
+                    data-structure-title="Heparin and Siglec lead in one 3D scene"
+                    data-chip-label="Combined 2G5R + 1FQ9"
+                    data-description="Single-scene 3D co-visualization of the Siglec-side AI lead and the heparin control reference."
+                    data-note="This tab shows the heparin control reference and the Siglec-family candidate reference together in one 3D scene. It is a conceptual co-visualization for discussion, not an experimentally validated co-complex."
+                    data-tag-one="pS9L + Heparin"
+                    data-tag-two="Combined 3D scene"
+                    data-tag-three="Conceptual co-visualization"
+                    data-candidate-pdb-id="2G5R"
+                    data-control-pdb-id="1FQ9"
+                    data-candidate-reference-label="PDB 2G5R • Siglec-family ligand proxy"
+                    data-control-reference-label="PDB 1FQ9 • Heparin control reference"
+                    data-candidate-legend="Human Siglec-family sialoside complex"
+                    data-control-legend="Human FGF2-FGFR1-heparin complex"
+                    data-candidate-name="Siglec-9 Lead"
+                    data-target-receptor="Siglec-9"
+                    data-candidate-score="0.0"
+                    data-recommendation="advance"
+                    data-control-label="Heparin Control"
+                    data-badge-label="Combined View"
+                  >Combined View</button>
                 </div>
 
                 <div class="structure-viewer">
@@ -4657,6 +4755,38 @@
                 data-control-label="Heparin Coating"
                 data-badge-label="Pathway Lead"
               >SIRPalpha Lead</button>
+              <button
+                type="button"
+                class="structure-tab"
+                data-structure-target="protein-canvas-full"
+                data-chip-target="structure-chip-full"
+                data-description-target="structure-description-full"
+                data-note-target="structure-note-full"
+                data-tag-one-target="structure-tag-1-full"
+                data-tag-two-target="structure-tag-2-full"
+                data-tag-three-target="structure-tag-3-full"
+                data-structure-id="combined"
+                data-view-mode="combined"
+                data-structure-title="Heparin and Siglec lead in one 3D scene"
+                data-chip-label="Combined 2G5R + 1FQ9"
+                data-description="Single-scene 3D co-visualization of the Siglec-side AI lead and the heparin control reference."
+                data-note="This tab shows the heparin control reference and the Siglec-family candidate reference together in one 3D scene. It is a conceptual co-visualization for discussion, not an experimentally validated co-complex."
+                data-tag-one="pS9L + Heparin"
+                data-tag-two="Combined 3D scene"
+                data-tag-three="Conceptual co-visualization"
+                data-candidate-pdb-id="2G5R"
+                data-control-pdb-id="1FQ9"
+                data-candidate-reference-label="PDB 2G5R • Siglec-family ligand proxy"
+                data-control-reference-label="PDB 1FQ9 • Heparin control reference"
+                data-candidate-legend="Human Siglec-family sialoside complex"
+                data-control-legend="Human FGF2-FGFR1-heparin complex"
+                data-candidate-name="Siglec-9 Lead"
+                data-target-receptor="Siglec-9"
+                data-candidate-score="0.0"
+                data-recommendation="advance"
+                data-control-label="Heparin Control"
+                data-badge-label="Combined View"
+              >Combined View</button>
             </div>
 
             <div class="structure-fullscreen-stage">

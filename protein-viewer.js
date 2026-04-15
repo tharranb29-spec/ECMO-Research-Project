@@ -7,6 +7,7 @@
 
   const DEFAULT_STRUCTURE = {
     id: "champion",
+    viewMode: "dual",
     title: "AI champion compared with heparin control",
     candidatePdbId: "2JJS",
     candidateReferenceLabel: "CD47-SIRPalpha interface",
@@ -27,6 +28,12 @@
       candidateLegend: "Checkpoint interface reference",
     },
     siglec: {
+      candidatePdbId: "2G5R",
+      candidateReferenceLabel: "Human Siglec-family ligand-bound proxy",
+      candidateLegend: "Siglec-family structural proxy",
+    },
+    combined: {
+      viewMode: "combined",
       candidatePdbId: "2G5R",
       candidateReferenceLabel: "Human Siglec-family ligand-bound proxy",
       candidateLegend: "Siglec-family structural proxy",
@@ -114,6 +121,7 @@
       ...CONTROL_REFERENCE,
       ...structure,
       id: structureId,
+      viewMode: structure.viewMode || container.dataset.viewMode || libraryEntry.viewMode || DEFAULT_STRUCTURE.viewMode,
       targetReceptor,
       candidatePdbId:
         structure.candidatePdbId ||
@@ -211,6 +219,39 @@
     };
   }
 
+  function buildCombinedLayout(container, structure) {
+    container.innerHTML = `
+      <div class="combined-viewer-shell">
+        <div class="combined-stage-head">
+          <div class="combined-stage-copy">
+            <h4 class="combined-stage-title">${escapeHtml(structure.candidateName)} + ${escapeHtml(structure.controlLabel)}</h4>
+            <p class="combined-stage-note">Single-scene co-visualization of the Siglec-side AI lead and the heparin control reference. This is a conceptual comparison view for discussion, not an experimentally resolved shared complex.</p>
+          </div>
+          <span class="comparison-pane-label">Combined Scene</span>
+        </div>
+        <div class="combined-pane-viewer">
+          <div class="viewer-host" data-viewer-role="combined"></div>
+        </div>
+        <div class="comparison-insight-row">
+          <article class="comparison-insight-card">
+            <span class="comparison-insight-label">Control Reference</span>
+            <strong>${escapeHtml(structure.controlReferenceLabel)}</strong>
+            <p>The heparin-containing control reference is shown in blue to anchor the ECMO baseline comparison.</p>
+          </article>
+          <article class="comparison-insight-card">
+            <span class="comparison-insight-label">Candidate Reference</span>
+            <strong>${escapeHtml(structure.candidateReferenceLabel)}</strong>
+            <p>The Siglec-side candidate reference is shown in green so the interaction logic can be discussed in one shared scene.</p>
+          </article>
+        </div>
+      </div>
+    `;
+
+    return {
+      combinedHost: container.querySelector('[data-viewer-role="combined"]'),
+    };
+  }
+
   function getAtoms(model, selection = {}) {
     if (!model || typeof model.selectedAtoms !== "function") {
       return [];
@@ -252,6 +293,14 @@
   function proteinCenter(model) {
     const atoms = getAtoms(model, {});
     return centerOfAtoms(atoms);
+  }
+
+  function shiftModel(model, dx, dy, dz) {
+    getAtoms(model, {}).forEach((atom) => {
+      atom.x += dx;
+      atom.y += dy;
+      atom.z += dz;
+    });
   }
 
   function viewerPalette(structure, mode) {
@@ -329,6 +378,86 @@
       viewer.zoomTo();
     }
     viewer.zoom(0.92);
+    viewer.render();
+  }
+
+  function applyCombinedViewerStyle(viewer, controlPdbText, candidatePdbText, structure) {
+    viewer.clear();
+
+    const controlModel = viewer.addModel(controlPdbText, "pdb");
+    const candidateModel = viewer.addModel(candidatePdbText, "pdb");
+
+    const controlCenter = proteinCenter(controlModel);
+    const candidateCenter = proteinCenter(candidateModel);
+
+    shiftModel(controlModel, -24 - controlCenter.x, -controlCenter.y, -controlCenter.z);
+    shiftModel(candidateModel, 24 - candidateCenter.x, -candidateCenter.y, -candidateCenter.z);
+
+    if (typeof controlModel.setStyle === "function") {
+      controlModel.setStyle({}, { cartoon: { color: "#7fa2d6", opacity: 0.94 } });
+      controlModel.setStyle(
+        { hetflag: true },
+        {
+          stick: { color: "#3d83f6", radius: 0.22, opacity: 0.95 },
+          sphere: { color: "#3d83f6", radius: 0.28, opacity: 0.7 },
+        }
+      );
+    }
+
+    if (typeof candidateModel.setStyle === "function") {
+      candidateModel.setStyle({}, { cartoon: { colorscheme: "chain", opacity: 0.96 } });
+      candidateModel.setStyle(
+        { hetflag: true },
+        {
+          stick: { color: "#13a97b", radius: 0.22, opacity: 0.95 },
+          sphere: { color: "#13a97b", radius: 0.28, opacity: 0.7 },
+        }
+      );
+    }
+
+    viewer.addLabel(structure.controlLabel, {
+      position: proteinCenter(controlModel),
+      backgroundColor: "rgba(61,131,246,0.84)",
+      fontColor: "#ffffff",
+      fontSize: 13,
+      padding: 6,
+      borderRadius: 8,
+      inFront: true,
+      showBackground: true,
+    });
+
+    viewer.addLabel(structure.candidateName, {
+      position: proteinCenter(candidateModel),
+      backgroundColor: "rgba(19,169,123,0.84)",
+      fontColor: "#ffffff",
+      fontSize: 13,
+      padding: 6,
+      borderRadius: 8,
+      inFront: true,
+      showBackground: true,
+    });
+
+    viewer.addArrow({
+      start: { x: -6, y: 0, z: 0 },
+      end: { x: 6, y: 0, z: 0 },
+      radius: 0.22,
+      color: "#7788a3",
+      mid: 0.7,
+    });
+
+    viewer.addLabel("Conceptual comparison", {
+      position: { x: 0, y: 5, z: 0 },
+      backgroundColor: "rgba(16,36,62,0.76)",
+      fontColor: "#ffffff",
+      fontSize: 12,
+      padding: 5,
+      borderRadius: 8,
+      inFront: true,
+      showBackground: true,
+    });
+
+    viewer.zoomTo();
+    viewer.zoom(0.95);
     viewer.render();
   }
 
@@ -416,43 +545,72 @@
       container.style.display = "";
       container.style.placeItems = "";
       container.style.padding = "";
-      const refs = buildComparisonLayout(container, resolved);
-      const ready = (await waitForRenderableSize(refs.controlHost)) && (await waitForRenderableSize(refs.candidateHost));
-      if (!ready) {
-        container.__proteinViewerMounted = false;
-        return;
+      if (resolved.viewMode === "combined") {
+        const refs = buildCombinedLayout(container, resolved);
+        const ready = await waitForRenderableSize(refs.combinedHost);
+        if (!ready) {
+          container.__proteinViewerMounted = false;
+          return;
+        }
+
+        const combinedViewer = window.$3Dmol.createViewer(refs.combinedHost, {
+          backgroundColor: "white",
+          antialias: true,
+        });
+
+        applyCombinedViewerStyle(combinedViewer, controlPdbText, candidatePdbText, resolved);
+        refs.combinedViewer = combinedViewer;
+        container.__comparisonRefs = refs;
+
+        window.setTimeout(() => {
+          try {
+            combinedViewer.resize();
+            combinedViewer.render();
+          } catch (error) {
+            // Keep the last successful render if resize throws.
+          }
+        }, 220);
+      } else {
+        const refs = buildComparisonLayout(container, resolved);
+        const ready = (await waitForRenderableSize(refs.controlHost)) && (await waitForRenderableSize(refs.candidateHost));
+        if (!ready) {
+          container.__proteinViewerMounted = false;
+          return;
+        }
+
+        const controlViewer = window.$3Dmol.createViewer(refs.controlHost, {
+          backgroundColor: "white",
+          antialias: true,
+        });
+
+        const candidateViewer = window.$3Dmol.createViewer(refs.candidateHost, {
+          backgroundColor: "white",
+          antialias: true,
+        });
+
+        applyViewerStyle(controlViewer, controlPdbText, resolved, "control");
+        applyViewerStyle(candidateViewer, candidatePdbText, resolved, "candidate");
+
+        refs.controlViewer = controlViewer;
+        refs.candidateViewer = candidateViewer;
+        container.__comparisonRefs = refs;
+
+        window.setTimeout(() => {
+          try {
+            controlViewer.resize();
+            controlViewer.render();
+            candidateViewer.resize();
+            candidateViewer.render();
+          } catch (error) {
+            // Keep the last successful render if resize throws.
+          }
+        }, 220);
       }
 
-      const controlViewer = window.$3Dmol.createViewer(refs.controlHost, {
-        backgroundColor: "white",
-        antialias: true,
-      });
-
-      const candidateViewer = window.$3Dmol.createViewer(refs.candidateHost, {
-        backgroundColor: "white",
-        antialias: true,
-      });
-
-      applyViewerStyle(controlViewer, controlPdbText, resolved, "control");
-      applyViewerStyle(candidateViewer, candidatePdbText, resolved, "candidate");
-
-      refs.controlViewer = controlViewer;
-      refs.candidateViewer = candidateViewer;
-      container.__comparisonRefs = refs;
       container.__proteinViewerMounted = true;
 
-      window.setTimeout(() => {
-        try {
-          controlViewer.resize();
-          controlViewer.render();
-          candidateViewer.resize();
-          candidateViewer.render();
-        } catch (error) {
-          // Keep the last successful render if resize throws.
-        }
-      }, 220);
-
       container.dataset.structureId = resolved.id;
+      container.dataset.viewMode = resolved.viewMode;
       container.dataset.candidatePdbId = resolved.candidatePdbId;
       container.dataset.controlPdbId = resolved.controlPdbId;
       container.dataset.candidateName = resolved.candidateName;
@@ -482,6 +640,7 @@
     try {
       await renderStructure(container, {
         id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
+        viewMode: container.dataset.viewMode || DEFAULT_STRUCTURE.viewMode,
         title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
         candidatePdbId: container.dataset.candidatePdbId || container.dataset.structurePdbId || DEFAULT_STRUCTURE.candidatePdbId,
         controlPdbId: container.dataset.controlPdbId || CONTROL_REFERENCE.controlPdbId,
@@ -520,6 +679,7 @@
 
     const structure = {
       id: button.dataset.structureId || DEFAULT_STRUCTURE.id,
+      viewMode: button.dataset.viewMode || container.dataset.viewMode || DEFAULT_STRUCTURE.viewMode,
       title: button.dataset.structureTitle || DEFAULT_STRUCTURE.title,
       candidatePdbId:
         button.dataset.candidatePdbId ||

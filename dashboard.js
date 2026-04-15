@@ -942,7 +942,7 @@
       controlLegend: "Human FGF2-FGFR1-heparin complex",
     };
 
-    if (kind === "siglec" || target.includes("siglec")) {
+    if (kind === "siglec" || kind === "combined" || target.includes("siglec")) {
       return {
         ...controlReference,
         candidatePdbId: "2G5R",
@@ -967,8 +967,20 @@
 
   function buildStructurePreset(kind, row, fallbackRow) {
     const source = row || fallbackRow || null;
-    const candidateName = source ? source.candidate_name : kind === "champion" ? "Top AI Candidate" : kind === "siglec" ? "Siglec-9 Lead" : "SIRPalpha Lead";
-    const targetReceptor = source ? source.target_receptor : kind === "siglec" ? "Siglec-9" : kind === "sirpa" ? "SIRPa" : "Lead pathway";
+    const candidateName = source
+      ? source.candidate_name
+      : kind === "champion"
+        ? "Top AI Candidate"
+        : kind === "siglec" || kind === "combined"
+          ? "Siglec-9 Lead"
+          : "SIRPalpha Lead";
+    const targetReceptor = source
+      ? source.target_receptor
+      : kind === "siglec" || kind === "combined"
+        ? "Siglec-9"
+        : kind === "sirpa"
+          ? "SIRPa"
+          : "Lead pathway";
     const recommendation = formatStructureRecommendation(source ? source.recommendation : "advance");
     const scoreValue = source && typeof source.predicted_score === "number" ? source.predicted_score.toFixed(1) : "0.0";
     const reference = getStructureReference(kind, targetReceptor);
@@ -1008,6 +1020,7 @@
     if (kind === "siglec") {
       return {
         id: "siglec",
+        viewMode: "dual",
         buttonLabel: "Siglec-9 Lead",
         title: `${candidateName} compared with heparin control`,
         chipLabel: reference.chipLabel,
@@ -1031,8 +1044,36 @@
       };
     }
 
+    if (kind === "combined") {
+      return {
+        id: "combined",
+        viewMode: "combined",
+        buttonLabel: "Combined View",
+        title: `${candidateName} and heparin in one 3D scene`,
+        chipLabel: `Combined ${reference.candidatePdbId} + ${reference.controlPdbId}`,
+        description: `Single-scene 3D co-visualization of ${candidateName} with the heparin control reference for presentation discussion.`,
+        note: `This scene places ${candidateName} and the heparin control reference together in one 3D viewport. Score ${scoreValue}. ${interactionSummary} This is a comparative co-visualization for discussion and not an experimentally resolved shared folding complex.`,
+        tagOne: `${candidateName} + Heparin`,
+        tagTwo: "Combined 3D scene",
+        tagThree: "Conceptual co-visualization",
+        candidateName,
+        targetReceptor,
+        candidateScore: scoreValue,
+        recommendation,
+        controlLabel: "Heparin Control",
+        badgeLabel: "Combined View",
+        candidatePdbId: reference.candidatePdbId,
+        controlPdbId: reference.controlPdbId,
+        candidateReferenceLabel: reference.candidateReferenceLabel,
+        controlReferenceLabel: reference.controlReferenceLabel,
+        candidateLegend: reference.candidateLegend,
+        controlLegend: reference.controlLegend,
+      };
+    }
+
     return {
       id: "sirpa",
+      viewMode: "dual",
       buttonLabel: "SIRPalpha Lead",
       title: `${candidateName} compared with heparin control`,
       chipLabel: reference.chipLabel,
@@ -1075,6 +1116,7 @@
     button.dataset.recommendation = preset.recommendation;
     button.dataset.controlLabel = preset.controlLabel;
     button.dataset.badgeLabel = preset.badgeLabel;
+    button.dataset.viewMode = preset.viewMode || "dual";
     button.dataset.structurePdbId = preset.candidatePdbId;
     button.dataset.candidatePdbId = preset.candidatePdbId;
     button.dataset.controlPdbId = preset.controlPdbId;
@@ -1091,6 +1133,7 @@
       buildStructurePreset("champion", fallbackRow, fallbackRow),
       buildStructurePreset("siglec", pickTopCandidate(sourceRows, (target) => target.includes("siglec")), fallbackRow),
       buildStructurePreset("sirpa", pickTopCandidate(sourceRows, (target) => target.includes("sirp") || target.includes("cd47")), fallbackRow),
+      buildStructurePreset("combined", pickTopCandidate(sourceRows, (target) => target.includes("siglec")), fallbackRow),
     ];
 
     [structureView, structureFullscreen].forEach((scope) => {
