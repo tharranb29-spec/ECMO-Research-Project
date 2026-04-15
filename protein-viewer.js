@@ -525,6 +525,8 @@
 
   async function renderStructure(container, structure) {
     const resolved = resolveStructure(structure, container);
+    container.classList.toggle("combined-mode", resolved.viewMode === "combined");
+    container.classList.toggle("dual-mode", resolved.viewMode !== "combined");
 
     if (!window.$3Dmol || typeof window.$3Dmol.createViewer !== "function") {
       fallbackMarkup(container, resolved, "The local 3D viewer library did not load.");

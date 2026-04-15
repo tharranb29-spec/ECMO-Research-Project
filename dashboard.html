@@ -365,7 +365,7 @@
       }
 
       .comparison-viewer-shell {
-        height: 100%;
+        height: auto;
         display: grid;
         grid-template-rows: minmax(0, 1fr) auto;
         gap: 12px;
@@ -438,6 +438,7 @@
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
+        align-items: start;
         min-height: 0;
       }
 
@@ -652,8 +653,9 @@
       .structure-fullscreen-stage {
         display: grid;
         gap: 12px;
+        align-items: start;
         min-height: 0;
-        overflow: visible;
+        overflow: auto;
         padding: 16px;
         border-radius: 28px;
         border: 1px solid rgba(16, 36, 62, 0.08);
@@ -663,8 +665,26 @@
       }
 
       .structure-canvas.fullscreen {
-        min-height: min(60vh, 760px);
-        height: min(60vh, 760px);
+        min-height: 0;
+        height: auto;
+      }
+
+      .structure-canvas.dual-mode {
+        min-height: 620px;
+      }
+
+      .structure-canvas.combined-mode {
+        min-height: 420px;
+        height: 420px;
+      }
+
+      .structure-canvas.fullscreen.dual-mode {
+        min-height: 760px;
+      }
+
+      .structure-canvas.fullscreen.combined-mode {
+        min-height: 540px;
+        height: 540px;
       }
 
       .structure-fullscreen-foot {
@@ -3588,8 +3608,17 @@
 
         .structure-fullscreen-stage,
         .structure-canvas.fullscreen {
-          min-height: min(62vh, 620px);
-          height: min(62vh, 620px);
+          min-height: 0;
+          height: auto;
+        }
+
+        .structure-canvas.fullscreen.dual-mode {
+          min-height: 680px;
+        }
+
+        .structure-canvas.fullscreen.combined-mode {
+          min-height: 500px;
+          height: 500px;
         }
 
         .hero-kicker-row,
@@ -4018,8 +4047,17 @@
 
         .structure-fullscreen-stage,
         .structure-canvas.fullscreen {
-          min-height: min(56vh, 500px);
-          height: min(56vh, 500px);
+          min-height: 0;
+          height: auto;
+        }
+
+        .structure-canvas.fullscreen.dual-mode {
+          min-height: 620px;
+        }
+
+        .structure-canvas.fullscreen.combined-mode {
+          min-height: 440px;
+          height: 440px;
         }
 
         .assistant-messages {
