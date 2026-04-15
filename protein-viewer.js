@@ -1,24 +1,56 @@
 (function () {
+  const CONTROL_REFERENCE = {
+    controlPdbId: "1FQ9",
+    controlReferenceLabel: "Human FGF2-FGFR1-heparin complex",
+    controlLegend: "Heparin control reference",
+  };
+
   const DEFAULT_STRUCTURE = {
     id: "champion",
-    pdbId: "2JJS",
     title: "AI champion compared with heparin control",
+    candidatePdbId: "2JJS",
+    candidateReferenceLabel: "CD47-SIRPalpha interface",
+    candidateLegend: "Checkpoint interface reference",
     candidateName: "Top AI Candidate",
     targetReceptor: "Lead pathway",
     candidateScore: "0.0",
     recommendation: "ADVANCE",
-    controlLabel: "Heparin Coating",
+    controlLabel: "Heparin Control",
     badgeLabel: "No.1 Champion",
+    ...CONTROL_REFERENCE,
   };
 
   const STRUCTURE_LIBRARY = {
-    champion: { pdbId: "2JJS", referenceLabel: "CD47-SIRPalpha interface reference" },
-    siglec: { pdbId: "1OD9", referenceLabel: "Representative Siglec-family glycan-bound reference" },
-    sirpa: { pdbId: "2JJS", referenceLabel: "CD47-SIRPalpha interface reference" },
-    "2JJS": { pdbId: "2JJS", referenceLabel: "CD47-SIRPalpha interface reference" },
-    "2VSC": { pdbId: "2VSC", referenceLabel: "CD47 ectodomain scaffold reference" },
-    "2WNG": { pdbId: "2WNG", referenceLabel: "SIRPalpha ectodomain reference" },
-    "1OD9": { pdbId: "1OD9", referenceLabel: "Representative Siglec-family glycan-bound reference" },
+    champion: {
+      candidatePdbId: "2JJS",
+      candidateReferenceLabel: "CD47-SIRPalpha interface",
+      candidateLegend: "Checkpoint interface reference",
+    },
+    siglec: {
+      candidatePdbId: "2G5R",
+      candidateReferenceLabel: "Human Siglec-family ligand-bound proxy",
+      candidateLegend: "Siglec-family structural proxy",
+    },
+    sirpa: {
+      candidatePdbId: "2JJS",
+      candidateReferenceLabel: "CD47-SIRPalpha interface",
+      candidateLegend: "Checkpoint interface reference",
+    },
+    "2JJS": {
+      candidatePdbId: "2JJS",
+      candidateReferenceLabel: "CD47-SIRPalpha interface",
+      candidateLegend: "Checkpoint interface reference",
+    },
+    "2G5R": {
+      candidatePdbId: "2G5R",
+      candidateReferenceLabel: "Human Siglec-family ligand-bound proxy",
+      candidateLegend: "Siglec-family structural proxy",
+    },
+    "1FQ9": {
+      controlPdbId: "1FQ9",
+      controlReferenceLabel: "Human FGF2-FGFR1-heparin complex",
+      controlLegend: "Heparin control reference",
+    },
   };
 
   function afterLayout() {
@@ -49,24 +81,83 @@
       .replace(/'/g, "&#39;");
   }
 
+  function hasRenderableSize(element) {
+    if (!element) {
+      return false;
+    }
+    const rect = element.getBoundingClientRect();
+    return rect.width > 80 && rect.height > 80;
+  }
+
+  async function waitForRenderableSize(element, attempts = 10) {
+    for (let index = 0; index < attempts; index += 1) {
+      await afterLayout();
+      if (hasRenderableSize(element)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function resolveStructure(structure, container) {
-    const libraryEntry = STRUCTURE_LIBRARY[structure.id] || STRUCTURE_LIBRARY[structure.pdbId] || {};
-    const targetReceptor = normalizeTarget(structure.targetReceptor || container.dataset.targetReceptor || DEFAULT_STRUCTURE.targetReceptor);
-    const fallbackLibrary = targetReceptor === "Siglec-9" ? STRUCTURE_LIBRARY.siglec : STRUCTURE_LIBRARY.sirpa;
+    const structureId = structure.id || container.dataset.structureId || DEFAULT_STRUCTURE.id;
+    const libraryEntry = STRUCTURE_LIBRARY[structureId] || STRUCTURE_LIBRARY[structure.candidatePdbId] || {};
+    const targetReceptor = normalizeTarget(
+      structure.targetReceptor || container.dataset.targetReceptor || DEFAULT_STRUCTURE.targetReceptor
+    );
+    const targetLibrary = targetReceptor === "Siglec-9" ? STRUCTURE_LIBRARY.siglec : STRUCTURE_LIBRARY.sirpa;
 
     return {
       ...DEFAULT_STRUCTURE,
-      ...fallbackLibrary,
+      ...targetLibrary,
       ...libraryEntry,
+      ...CONTROL_REFERENCE,
       ...structure,
-      pdbId: structure.pdbId || container.dataset.structurePdbId || libraryEntry.pdbId || fallbackLibrary.pdbId || DEFAULT_STRUCTURE.pdbId,
+      id: structureId,
       targetReceptor,
+      candidatePdbId:
+        structure.candidatePdbId ||
+        container.dataset.candidatePdbId ||
+        container.dataset.structurePdbId ||
+        libraryEntry.candidatePdbId ||
+        targetLibrary.candidatePdbId ||
+        DEFAULT_STRUCTURE.candidatePdbId,
+      controlPdbId:
+        structure.controlPdbId ||
+        container.dataset.controlPdbId ||
+        libraryEntry.controlPdbId ||
+        CONTROL_REFERENCE.controlPdbId,
+      candidateReferenceLabel:
+        structure.candidateReferenceLabel ||
+        container.dataset.candidateReferenceLabel ||
+        libraryEntry.candidateReferenceLabel ||
+        targetLibrary.candidateReferenceLabel ||
+        DEFAULT_STRUCTURE.candidateReferenceLabel,
+      controlReferenceLabel:
+        structure.controlReferenceLabel ||
+        container.dataset.controlReferenceLabel ||
+        libraryEntry.controlReferenceLabel ||
+        CONTROL_REFERENCE.controlReferenceLabel,
+      candidateLegend:
+        structure.candidateLegend ||
+        container.dataset.candidateLegend ||
+        libraryEntry.candidateLegend ||
+        targetLibrary.candidateLegend ||
+        DEFAULT_STRUCTURE.candidateLegend,
+      controlLegend:
+        structure.controlLegend ||
+        container.dataset.controlLegend ||
+        libraryEntry.controlLegend ||
+        CONTROL_REFERENCE.controlLegend,
       candidateName: structure.candidateName || container.dataset.candidateName || DEFAULT_STRUCTURE.candidateName,
-      candidateScore: String(structure.candidateScore || container.dataset.candidateScore || DEFAULT_STRUCTURE.candidateScore),
-      recommendation: String(structure.recommendation || container.dataset.recommendation || DEFAULT_STRUCTURE.recommendation).toUpperCase(),
+      candidateScore: String(
+        structure.candidateScore || container.dataset.candidateScore || DEFAULT_STRUCTURE.candidateScore
+      ),
+      recommendation: String(
+        structure.recommendation || container.dataset.recommendation || DEFAULT_STRUCTURE.recommendation
+      ).toUpperCase(),
       controlLabel: structure.controlLabel || container.dataset.controlLabel || DEFAULT_STRUCTURE.controlLabel,
       badgeLabel: structure.badgeLabel || container.dataset.badgeLabel || DEFAULT_STRUCTURE.badgeLabel,
-      referenceLabel: structure.referenceLabel || container.dataset.referenceLabel || libraryEntry.referenceLabel || fallbackLibrary.referenceLabel || "Protein reference",
     };
   }
 
@@ -75,10 +166,12 @@
       <div class="comparison-viewer-shell">
         <div class="comparison-protein-grid">
           <section class="comparison-protein-pane control">
-            <span class="comparison-pane-label">Control</span>
+            <span class="comparison-pane-label">Control Lane</span>
             <div>
               <h4 class="comparison-pane-title">${escapeHtml(structure.controlLabel)}</h4>
-              <p class="comparison-pane-copy">Real 3D protein scaffold shown with a muted control interaction overlay for baseline comparison.</p>
+              <p class="comparison-pane-copy">${escapeHtml(structure.controlLegend)} • PDB ${escapeHtml(
+                structure.controlPdbId
+              )}</p>
             </div>
             <div class="comparison-pane-viewer">
               <div class="viewer-host" data-viewer-role="control"></div>
@@ -88,7 +181,9 @@
             <span class="comparison-pane-label">${escapeHtml(structure.badgeLabel)}</span>
             <div>
               <h4 class="comparison-pane-title">${escapeHtml(structure.candidateName)}</h4>
-              <p class="comparison-pane-copy">${escapeHtml(structure.targetReceptor)} pathway view • score ${escapeHtml(structure.candidateScore)} • ${escapeHtml(structure.recommendation)}</p>
+              <p class="comparison-pane-copy">${escapeHtml(structure.targetReceptor)} pathway • score ${escapeHtml(
+                structure.candidateScore
+              )} • ${escapeHtml(structure.recommendation)} • PDB ${escapeHtml(structure.candidatePdbId)}</p>
             </div>
             <div class="comparison-pane-viewer">
               <div class="viewer-host" data-viewer-role="candidate"></div>
@@ -97,14 +192,14 @@
         </div>
         <div class="comparison-insight-row">
           <article class="comparison-insight-card">
-            <span class="comparison-insight-label">Control Interpretation</span>
-            <strong>Heparin benchmark</strong>
-            <p>Used as the baseline non-specific coating comparator rather than a target-matched inhibitory ligand.</p>
+            <span class="comparison-insight-label">Heparin Control</span>
+            <strong>${escapeHtml(structure.controlReferenceLabel)}</strong>
+            <p>Real heparin-bound structural reference used as the ECMO control comparator in this discussion view.</p>
           </article>
           <article class="comparison-insight-card">
-            <span class="comparison-insight-label">3D Protein Reference</span>
-            <strong>${escapeHtml(structure.referenceLabel)}</strong>
-            <p>The model stays interactive so you can rotate the protein while discussing the control-versus-AI interaction hotspots.</p>
+            <span class="comparison-insight-label">AI Lead Reference</span>
+            <strong>${escapeHtml(structure.candidateReferenceLabel)}</strong>
+            <p>Real 3D candidate-side protein context used to explain why the AI-selected ligand differs from heparin control behavior.</p>
           </article>
         </div>
       </div>
@@ -116,148 +211,124 @@
     };
   }
 
-  function getAtoms(model) {
+  function getAtoms(model, selection = {}) {
     if (!model || typeof model.selectedAtoms !== "function") {
       return [];
     }
-    return model.selectedAtoms({});
+    return model.selectedAtoms(selection);
   }
 
-  function computeAnchorPoints(model, targetReceptor) {
-    const atoms = getAtoms(model);
-    if (!atoms.length) {
+  function centerOfAtoms(atoms) {
+    if (!atoms || !atoms.length) {
+      return { x: 0, y: 0, z: 0 };
+    }
+    const totals = atoms.reduce(
+      (acc, atom) => {
+        acc.x += atom.x;
+        acc.y += atom.y;
+        acc.z += atom.z;
+        return acc;
+      },
+      { x: 0, y: 0, z: 0 }
+    );
+    return {
+      x: totals.x / atoms.length,
+      y: totals.y / atoms.length,
+      z: totals.z / atoms.length,
+    };
+  }
+
+  function ligandSelection(model) {
+    const hetAtoms = getAtoms(model, { hetflag: true });
+    if (hetAtoms.length) {
       return {
-        center: { x: 0, y: 0, z: 0 },
-        control: { x: -18, y: 12, z: 8 },
-        candidate: { x: 18, y: -10, z: -8 },
-        controlAnchor: { x: -6, y: 2, z: 0 },
-        candidateAnchor: { x: 6, y: -2, z: 0 },
+        selection: { hetflag: true },
+        atoms: hetAtoms,
       };
     }
-
-    let minX = Infinity;
-    let maxX = -Infinity;
-    let minY = Infinity;
-    let maxY = -Infinity;
-    let minZ = Infinity;
-    let maxZ = -Infinity;
-    let sumX = 0;
-    let sumY = 0;
-    let sumZ = 0;
-
-    atoms.forEach((atom) => {
-      minX = Math.min(minX, atom.x);
-      maxX = Math.max(maxX, atom.x);
-      minY = Math.min(minY, atom.y);
-      maxY = Math.max(maxY, atom.y);
-      minZ = Math.min(minZ, atom.z);
-      maxZ = Math.max(maxZ, atom.z);
-      sumX += atom.x;
-      sumY += atom.y;
-      sumZ += atom.z;
-    });
-
-    const center = {
-      x: sumX / atoms.length,
-      y: sumY / atoms.length,
-      z: sumZ / atoms.length,
-    };
-
-    const spanX = Math.max(18, maxX - minX);
-    const spanY = Math.max(18, maxY - minY);
-    const spanZ = Math.max(18, maxZ - minZ);
-    const isSiglec = normalizeTarget(targetReceptor) === "Siglec-9";
-
-    return {
-      center,
-      control: {
-        x: center.x - spanX * 0.34,
-        y: center.y + spanY * (isSiglec ? 0.12 : 0.16),
-        z: center.z + spanZ * 0.12,
-      },
-      candidate: {
-        x: center.x + spanX * 0.28,
-        y: center.y - spanY * (isSiglec ? 0.18 : 0.12),
-        z: center.z - spanZ * 0.08,
-      },
-      controlAnchor: {
-        x: center.x - spanX * 0.08,
-        y: center.y + spanY * 0.04,
-        z: center.z,
-      },
-      candidateAnchor: {
-        x: center.x + spanX * 0.08,
-        y: center.y - spanY * 0.04,
-        z: center.z,
-      },
-    };
+    return null;
   }
 
-  function addInteractionShapes(viewer, points, mode, structure) {
-    const colors = mode === "control"
-      ? { primary: "#4a95ff", secondary: "#7fb8ff", labelBg: "rgba(74,149,255,0.82)" }
-      : normalizeTarget(structure.targetReceptor) === "Siglec-9"
-        ? { primary: "#1f73ff", secondary: "#4ed3b0", labelBg: "rgba(31,115,255,0.82)" }
-        : { primary: "#1b8f5a", secondary: "#f0bf4e", labelBg: "rgba(27,143,90,0.82)" };
+  function proteinCenter(model) {
+    const atoms = getAtoms(model, {});
+    return centerOfAtoms(atoms);
+  }
 
-    const hotspot = mode === "control" ? points.control : points.candidate;
-    const anchor = mode === "control" ? points.controlAnchor : points.candidateAnchor;
-
-    viewer.addSphere({
-      center: hotspot,
-      radius: 2.6,
-      color: colors.secondary,
-      opacity: 0.62,
-    });
-
-    viewer.addArrow({
-      start: hotspot,
-      end: anchor,
-      radius: 0.22,
-      color: colors.primary,
-      mid: 0.7,
-    });
-
-    viewer.addLabel(
-      mode === "control" ? "Heparin control" : structure.candidateName,
-      {
-        position: hotspot,
-        backgroundColor: colors.labelBg,
-        fontColor: "#ffffff",
-        fontSize: 13,
-        padding: 6,
-        borderRadius: 8,
-        inFront: true,
-        showBackground: true,
-      }
-    );
+  function viewerPalette(structure, mode) {
+    if (mode === "control") {
+      return {
+        cartoon: "#8aa3c7",
+        ligand: "#3d83f6",
+        surface: "#d9e7fb",
+        labelBackground: "rgba(61,131,246,0.84)",
+      };
+    }
+    if (normalizeTarget(structure.targetReceptor) === "Siglec-9") {
+      return {
+        cartoon: "chain",
+        ligand: "#13a97b",
+        surface: "#d8f2ea",
+        labelBackground: "rgba(19,169,123,0.84)",
+      };
+    }
+    return {
+      cartoon: "chain",
+      ligand: "#d79a1f",
+      surface: "#f7ecd0",
+      labelBackground: "rgba(215,154,31,0.84)",
+    };
   }
 
   function applyViewerStyle(viewer, pdbText, structure, mode) {
     viewer.clear();
     const model = viewer.addModel(pdbText, "pdb");
+    const palette = viewerPalette(structure, mode);
 
-    if (mode === "control") {
-      viewer.setStyle({}, { cartoon: { color: "#8ea3bf", opacity: 0.88 } });
-      viewer.setStyle({ hetflag: true }, { stick: { color: "#4a95ff", radius: 0.18, opacity: 0.55 } });
-      try {
-        viewer.addSurface(window.$3Dmol.SurfaceType.VDW, { color: "#d7e5fa", opacity: 0.06 }, {});
-      } catch (error) {
-        // Surface rendering is optional; keep the model visible if this fails.
-      }
+    if (palette.cartoon === "chain") {
+      viewer.setStyle({}, { cartoon: { colorscheme: "chain", opacity: 0.95 } });
     } else {
-      viewer.setStyle({}, { cartoon: { colorscheme: "chain" } });
-      viewer.setStyle({ hetflag: true }, { stick: { color: "#f28a2e", radius: 0.22, opacity: 0.9 } });
-      try {
-        viewer.addSurface(window.$3Dmol.SurfaceType.VDW, { color: "#cfe9dc", opacity: 0.05 }, {});
-      } catch (error) {
-        // Surface rendering is optional; keep the model visible if this fails.
-      }
+      viewer.setStyle({}, { cartoon: { color: palette.cartoon, opacity: 0.92 } });
     }
 
-    const points = computeAnchorPoints(model, structure.targetReceptor);
-    addInteractionShapes(viewer, points, mode, structure);
-    viewer.zoomTo();
+    const ligand = ligandSelection(model);
+    if (ligand) {
+      viewer.setStyle(
+        ligand.selection,
+        {
+          stick: { color: palette.ligand, radius: 0.22, opacity: 0.98 },
+          sphere: { color: palette.ligand, radius: 0.28, opacity: 0.72 },
+        }
+      );
+    }
+
+    try {
+      viewer.addSurface(
+        window.$3Dmol.SurfaceType.VDW,
+        { color: palette.surface, opacity: 0.08 },
+        {}
+      );
+    } catch (error) {
+      // Surface rendering is optional; keep the 3D model visible if it fails.
+    }
+
+    const labelPosition = ligand ? centerOfAtoms(ligand.atoms) : proteinCenter(model);
+    viewer.addLabel(mode === "control" ? structure.controlLabel : structure.candidateName, {
+      position: labelPosition,
+      backgroundColor: palette.labelBackground,
+      fontColor: "#ffffff",
+      fontSize: 13,
+      padding: 6,
+      borderRadius: 8,
+      inFront: true,
+      showBackground: true,
+    });
+
+    if (ligand) {
+      viewer.zoomTo(ligand.selection);
+    } else {
+      viewer.zoomTo();
+    }
+    viewer.zoom(0.92);
     viewer.render();
   }
 
@@ -268,10 +339,10 @@
     container.style.padding = "24px";
 
     const card = document.createElement("div");
-    card.style.maxWidth = "520px";
+    card.style.maxWidth = "620px";
     card.style.padding = "18px";
     card.style.borderRadius = "18px";
-    card.style.background = "rgba(255,255,255,0.82)";
+    card.style.background = "rgba(255,255,255,0.84)";
     card.style.border = "1px solid rgba(19, 37, 64, 0.08)";
     card.style.color = "#5e6f88";
     card.style.fontFamily = "Calibri, Arial, sans-serif";
@@ -285,17 +356,27 @@
 
     const body = document.createElement("p");
     body.style.margin = "0 0 10px";
-    body.textContent = detail || `Unable to render the live 3D protein model for ${structure.pdbId} right now.`;
+    body.textContent = detail || `Unable to render the live 3D protein model for ${structure.candidatePdbId}.`;
 
-    const link = document.createElement("a");
-    link.href = `https://www.rcsb.org/structure/${structure.pdbId}`;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    link.textContent = `Open PDB ${structure.pdbId} on RCSB`;
-    link.style.color = "#0c43af";
-    link.style.fontWeight = "700";
+    const controlLink = document.createElement("a");
+    controlLink.href = `https://www.rcsb.org/structure/${structure.controlPdbId}`;
+    controlLink.target = "_blank";
+    controlLink.rel = "noreferrer";
+    controlLink.textContent = `Open heparin control reference (${structure.controlPdbId})`;
+    controlLink.style.color = "#0c43af";
+    controlLink.style.fontWeight = "700";
+    controlLink.style.display = "block";
+    controlLink.style.marginBottom = "8px";
 
-    card.append(title, body, link);
+    const candidateLink = document.createElement("a");
+    candidateLink.href = `https://www.rcsb.org/structure/${structure.candidatePdbId}`;
+    candidateLink.target = "_blank";
+    candidateLink.rel = "noreferrer";
+    candidateLink.textContent = `Open AI candidate reference (${structure.candidatePdbId})`;
+    candidateLink.style.color = "#0c43af";
+    candidateLink.style.fontWeight = "700";
+
+    card.append(title, body, controlLink, candidateLink);
     container.append(card);
   }
 
@@ -321,11 +402,26 @@
       return;
     }
 
-    try {
-      const pdbText = await fetchPdbText(resolved.pdbId);
-      const refs = buildComparisonLayout(container, resolved);
+    if (!hasRenderableSize(container)) {
+      container.__proteinViewerMounted = false;
+      return;
+    }
 
-      await afterLayout();
+    try {
+      const [controlPdbText, candidatePdbText] = await Promise.all([
+        fetchPdbText(resolved.controlPdbId),
+        fetchPdbText(resolved.candidatePdbId),
+      ]);
+
+      container.style.display = "";
+      container.style.placeItems = "";
+      container.style.padding = "";
+      const refs = buildComparisonLayout(container, resolved);
+      const ready = (await waitForRenderableSize(refs.controlHost)) && (await waitForRenderableSize(refs.candidateHost));
+      if (!ready) {
+        container.__proteinViewerMounted = false;
+        return;
+      }
 
       const controlViewer = window.$3Dmol.createViewer(refs.controlHost, {
         backgroundColor: "white",
@@ -337,68 +433,81 @@
         antialias: true,
       });
 
-      applyViewerStyle(controlViewer, pdbText, resolved, "control");
-      applyViewerStyle(candidateViewer, pdbText, resolved, "candidate");
+      applyViewerStyle(controlViewer, controlPdbText, resolved, "control");
+      applyViewerStyle(candidateViewer, candidatePdbText, resolved, "candidate");
 
       refs.controlViewer = controlViewer;
       refs.candidateViewer = candidateViewer;
       container.__comparisonRefs = refs;
+      container.__proteinViewerMounted = true;
 
       window.setTimeout(() => {
         try {
           controlViewer.resize();
-          controlViewer.zoomTo();
           controlViewer.render();
           candidateViewer.resize();
-          candidateViewer.zoomTo();
           candidateViewer.render();
         } catch (error) {
           // Keep the last successful render if resize throws.
         }
-      }, 180);
+      }, 220);
 
       container.dataset.structureId = resolved.id;
-      container.dataset.structurePdbId = resolved.pdbId;
-      container.dataset.structureTitle = resolved.title;
+      container.dataset.candidatePdbId = resolved.candidatePdbId;
+      container.dataset.controlPdbId = resolved.controlPdbId;
       container.dataset.candidateName = resolved.candidateName;
       container.dataset.targetReceptor = resolved.targetReceptor;
       container.dataset.candidateScore = resolved.candidateScore;
       container.dataset.recommendation = resolved.recommendation;
       container.dataset.controlLabel = resolved.controlLabel;
       container.dataset.badgeLabel = resolved.badgeLabel;
-      container.dataset.referenceLabel = resolved.referenceLabel;
+      container.dataset.candidateReferenceLabel = resolved.candidateReferenceLabel;
+      container.dataset.controlReferenceLabel = resolved.controlReferenceLabel;
+      container.dataset.candidateLegend = resolved.candidateLegend;
+      container.dataset.controlLegend = resolved.controlLegend;
     } catch (error) {
+      container.__proteinViewerMounted = false;
       fallbackMarkup(container, resolved, error.message);
     }
   }
 
   async function mount(container) {
-    if (!container || container.__proteinViewerMounted) {
+    if (!container || container.__proteinViewerBusy || container.__proteinViewerMounted) {
       return;
     }
-    container.__proteinViewerMounted = true;
-
-    await renderStructure(container, {
-      id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
-      pdbId: container.dataset.structurePdbId || DEFAULT_STRUCTURE.pdbId,
-      title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
-      candidateName: container.dataset.candidateName || DEFAULT_STRUCTURE.candidateName,
-      targetReceptor: container.dataset.targetReceptor || DEFAULT_STRUCTURE.targetReceptor,
-      candidateScore: container.dataset.candidateScore || DEFAULT_STRUCTURE.candidateScore,
-      recommendation: container.dataset.recommendation || DEFAULT_STRUCTURE.recommendation,
-      controlLabel: container.dataset.controlLabel || DEFAULT_STRUCTURE.controlLabel,
-      badgeLabel: container.dataset.badgeLabel || DEFAULT_STRUCTURE.badgeLabel,
-      referenceLabel: container.dataset.referenceLabel || "",
-    });
+    if (!hasRenderableSize(container)) {
+      return;
+    }
+    container.__proteinViewerBusy = true;
+    try {
+      await renderStructure(container, {
+        id: container.dataset.structureId || DEFAULT_STRUCTURE.id,
+        title: container.dataset.structureTitle || DEFAULT_STRUCTURE.title,
+        candidatePdbId: container.dataset.candidatePdbId || container.dataset.structurePdbId || DEFAULT_STRUCTURE.candidatePdbId,
+        controlPdbId: container.dataset.controlPdbId || CONTROL_REFERENCE.controlPdbId,
+        candidateName: container.dataset.candidateName || DEFAULT_STRUCTURE.candidateName,
+        targetReceptor: container.dataset.targetReceptor || DEFAULT_STRUCTURE.targetReceptor,
+        candidateScore: container.dataset.candidateScore || DEFAULT_STRUCTURE.candidateScore,
+        recommendation: container.dataset.recommendation || DEFAULT_STRUCTURE.recommendation,
+        controlLabel: container.dataset.controlLabel || DEFAULT_STRUCTURE.controlLabel,
+        badgeLabel: container.dataset.badgeLabel || DEFAULT_STRUCTURE.badgeLabel,
+        candidateReferenceLabel: container.dataset.candidateReferenceLabel || DEFAULT_STRUCTURE.candidateReferenceLabel,
+        controlReferenceLabel: container.dataset.controlReferenceLabel || CONTROL_REFERENCE.controlReferenceLabel,
+        candidateLegend: container.dataset.candidateLegend || DEFAULT_STRUCTURE.candidateLegend,
+        controlLegend: container.dataset.controlLegend || CONTROL_REFERENCE.controlLegend,
+      });
+    } finally {
+      container.__proteinViewerBusy = false;
+    }
   }
 
   function updateTextTarget(id, value) {
     if (!id || !value) {
       return;
     }
-    const el = document.getElementById(id);
-    if (el) {
-      el.textContent = value;
+    const element = document.getElementById(id);
+    if (element) {
+      element.textContent = value;
     }
   }
 
@@ -411,14 +520,29 @@
 
     const structure = {
       id: button.dataset.structureId || DEFAULT_STRUCTURE.id,
-      pdbId: button.dataset.structurePdbId || container.dataset.structurePdbId || DEFAULT_STRUCTURE.pdbId,
       title: button.dataset.structureTitle || DEFAULT_STRUCTURE.title,
+      candidatePdbId:
+        button.dataset.candidatePdbId ||
+        button.dataset.structurePdbId ||
+        container.dataset.candidatePdbId ||
+        DEFAULT_STRUCTURE.candidatePdbId,
+      controlPdbId: button.dataset.controlPdbId || container.dataset.controlPdbId || CONTROL_REFERENCE.controlPdbId,
       candidateName: button.dataset.candidateName || container.dataset.candidateName || DEFAULT_STRUCTURE.candidateName,
       targetReceptor: button.dataset.targetReceptor || container.dataset.targetReceptor || DEFAULT_STRUCTURE.targetReceptor,
       candidateScore: button.dataset.candidateScore || container.dataset.candidateScore || DEFAULT_STRUCTURE.candidateScore,
       recommendation: button.dataset.recommendation || container.dataset.recommendation || DEFAULT_STRUCTURE.recommendation,
       controlLabel: button.dataset.controlLabel || container.dataset.controlLabel || DEFAULT_STRUCTURE.controlLabel,
       badgeLabel: button.dataset.badgeLabel || container.dataset.badgeLabel || DEFAULT_STRUCTURE.badgeLabel,
+      candidateReferenceLabel:
+        button.dataset.candidateReferenceLabel ||
+        container.dataset.candidateReferenceLabel ||
+        DEFAULT_STRUCTURE.candidateReferenceLabel,
+      controlReferenceLabel:
+        button.dataset.controlReferenceLabel ||
+        container.dataset.controlReferenceLabel ||
+        CONTROL_REFERENCE.controlReferenceLabel,
+      candidateLegend: button.dataset.candidateLegend || container.dataset.candidateLegend || DEFAULT_STRUCTURE.candidateLegend,
+      controlLegend: button.dataset.controlLegend || container.dataset.controlLegend || CONTROL_REFERENCE.controlLegend,
     };
 
     renderStructure(container, structure);
@@ -456,5 +580,15 @@
     mountSwitchers();
   }
 
-  window.ECMOProteinViewer = { mount, mountAll, renderStructure };
+  function refreshVisible() {
+    document.querySelectorAll("[data-protein-viewer]").forEach((element) => {
+      if (!hasRenderableSize(element)) {
+        return;
+      }
+      element.__proteinViewerMounted = false;
+      mount(element);
+    });
+  }
+
+  window.ECMOProteinViewer = { mount, mountAll, renderStructure, refreshVisible };
 })();

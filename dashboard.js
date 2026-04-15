@@ -863,6 +863,10 @@
       panel.hidden = !showing;
       panel.setAttribute("aria-hidden", showing ? "false" : "true");
     });
+
+    if (viewName === "structure") {
+      refreshStructureScope(structureView);
+    }
   }
 
   function renderMeta(rows) {
@@ -932,18 +936,32 @@
 
   function getStructureReference(kind, targetReceptor) {
     const target = normalize(targetReceptor || "");
+    const controlReference = {
+      controlPdbId: "1FQ9",
+      controlReferenceLabel: "PDB 1FQ9 • Heparin control reference",
+      controlLegend: "Human FGF2-FGFR1-heparin complex",
+    };
+
     if (kind === "siglec" || target.includes("siglec")) {
       return {
-        pdbId: "1OD9",
-        chipLabel: "PDB 1OD9 • Siglec-family proxy",
-        referenceNote: "Representative Siglec-family glycan-bound structure used as the 3D context for the control-vs-AI comparison.",
+        ...controlReference,
+        candidatePdbId: "2G5R",
+        chipLabel: "AI 2G5R • Ctrl 1FQ9",
+        candidateReferenceLabel: "PDB 2G5R • Siglec-family ligand proxy",
+        candidateLegend: "Human Siglec-family sialoside complex",
+        referenceNote:
+          "The AI lane uses the human Siglec-family ligand-bound structure 2G5R as a structural proxy for the Siglec-9 lead, while the control lane uses the real heparin-containing complex 1FQ9.",
       };
     }
 
     return {
-      pdbId: "2JJS",
-      chipLabel: "PDB 2JJS • CD47-SIRPalpha complex",
-      referenceNote: "CD47-SIRPalpha interface structure used as the 3D context for the control-vs-AI comparison.",
+      ...controlReference,
+      candidatePdbId: "2JJS",
+      chipLabel: "AI 2JJS • Ctrl 1FQ9",
+      candidateReferenceLabel: "PDB 2JJS • CD47-SIRPalpha complex",
+      candidateLegend: "Human checkpoint interface complex",
+      referenceNote:
+        "The AI lane uses the real CD47-SIRPalpha complex 2JJS, while the control lane uses the real heparin-containing complex 1FQ9.",
     };
   }
 
@@ -967,18 +985,23 @@
         buttonLabel: "#1 Champion",
         title: `${candidateName} compared with heparin control`,
         chipLabel: reference.chipLabel,
-        description: `Primary 3D protein comparator showing the No.1 AI-ranked ligand, ${candidateName}, against a heparin coating control.`,
-        note: `The left lane is the heparin control. The right lane is ${candidateName}, currently the top-ranked ${targetReceptor} candidate with a score of ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
+        description: `Dual 3D protein view showing the No.1 AI-ranked ligand, ${candidateName}, against a real heparin control reference.`,
+        note: `The left lane is a real heparin control structure (${reference.controlPdbId}). The right lane is ${candidateName}, currently the top-ranked ${targetReceptor} candidate with a score of ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
         tagOne: "#1 AI Champion",
-        tagTwo: "Heparin control comparator",
-        tagThree: "3D interaction overlay",
+        tagTwo: "Heparin 3D control lane",
+        tagThree: "Dual real-structure view",
         candidateName,
         targetReceptor,
         candidateScore: scoreValue,
         recommendation,
         controlLabel: "Heparin Coating",
         badgeLabel: "No.1 Champion",
-        structurePdbId: reference.pdbId,
+        candidatePdbId: reference.candidatePdbId,
+        controlPdbId: reference.controlPdbId,
+        candidateReferenceLabel: reference.candidateReferenceLabel,
+        controlReferenceLabel: reference.controlReferenceLabel,
+        candidateLegend: reference.candidateLegend,
+        controlLegend: reference.controlLegend,
       };
     }
 
@@ -988,18 +1011,23 @@
         buttonLabel: "Siglec-9 Lead",
         title: `${candidateName} compared with heparin control`,
         chipLabel: reference.chipLabel,
-        description: `Siglec-9-focused 3D protein comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
-        note: `This lane compares heparin with ${candidateName}, the leading Siglec-9 candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
+        description: `Siglec-9-focused dual 3D protein view showing how ${candidateName} differs from a real heparin control reference.`,
+        note: `This lane compares a real heparin control structure (${reference.controlPdbId}) with ${candidateName}, the leading Siglec-9 candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
         tagOne: candidateName,
-        tagTwo: "Heparin control comparator",
-        tagThree: "3D interaction overlay",
+        tagTwo: "Heparin 3D control lane",
+        tagThree: "Siglec-family structural proxy",
         candidateName,
         targetReceptor,
         candidateScore: scoreValue,
         recommendation,
         controlLabel: "Heparin Coating",
         badgeLabel: "Pathway Lead",
-        structurePdbId: reference.pdbId,
+        candidatePdbId: reference.candidatePdbId,
+        controlPdbId: reference.controlPdbId,
+        candidateReferenceLabel: reference.candidateReferenceLabel,
+        controlReferenceLabel: reference.controlReferenceLabel,
+        candidateLegend: reference.candidateLegend,
+        controlLegend: reference.controlLegend,
       };
     }
 
@@ -1008,18 +1036,23 @@
       buttonLabel: "SIRPalpha Lead",
       title: `${candidateName} compared with heparin control`,
       chipLabel: reference.chipLabel,
-      description: `SIRPalpha-focused 3D protein comparator showing how ${candidateName} differs from a heparin coating control on the ECMO surface.`,
-      note: `This lane compares heparin with ${candidateName}, the leading SIRPalpha candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
+      description: `SIRPalpha-focused dual 3D protein view showing how ${candidateName} differs from a real heparin control reference.`,
+      note: `This lane compares a real heparin control structure (${reference.controlPdbId}) with ${candidateName}, the leading SIRPalpha candidate. Score ${scoreValue}. ${interactionSummary} ${reference.referenceNote}`,
       tagOne: candidateName,
-      tagTwo: "Heparin control comparator",
-      tagThree: "3D interaction overlay",
+      tagTwo: "Heparin 3D control lane",
+      tagThree: "Checkpoint complex view",
       candidateName,
       targetReceptor,
       candidateScore: scoreValue,
       recommendation,
       controlLabel: "Heparin Coating",
       badgeLabel: "Pathway Lead",
-      structurePdbId: reference.pdbId,
+      candidatePdbId: reference.candidatePdbId,
+      controlPdbId: reference.controlPdbId,
+      candidateReferenceLabel: reference.candidateReferenceLabel,
+      controlReferenceLabel: reference.controlReferenceLabel,
+      candidateLegend: reference.candidateLegend,
+      controlLegend: reference.controlLegend,
     };
   }
 
@@ -1042,7 +1075,13 @@
     button.dataset.recommendation = preset.recommendation;
     button.dataset.controlLabel = preset.controlLabel;
     button.dataset.badgeLabel = preset.badgeLabel;
-    button.dataset.structurePdbId = preset.structurePdbId;
+    button.dataset.structurePdbId = preset.candidatePdbId;
+    button.dataset.candidatePdbId = preset.candidatePdbId;
+    button.dataset.controlPdbId = preset.controlPdbId;
+    button.dataset.candidateReferenceLabel = preset.candidateReferenceLabel;
+    button.dataset.controlReferenceLabel = preset.controlReferenceLabel;
+    button.dataset.candidateLegend = preset.candidateLegend;
+    button.dataset.controlLegend = preset.controlLegend;
   }
 
   function renderStructureComparators(rows) {
@@ -1062,10 +1101,8 @@
       buttons.forEach((button, index) => applyStructurePreset(button, presets[index]));
     });
 
-    const activeMainButton = structureView ? getActiveStructureTab(structureView) : null;
-    if (activeMainButton) {
-      activeMainButton.click();
-    }
+    refreshStructureScope(structureView);
+    refreshStructureScope(structureFullscreen);
   }
 
   function populateCandidateCard(container, row, options = {}) {
@@ -2100,6 +2137,25 @@
     return scope.querySelector(".structure-tabs .structure-tab.active") || scope.querySelector(".structure-tabs .structure-tab");
   }
 
+  function refreshStructureScope(scope) {
+    if (!scope || scope.hidden) {
+      return;
+    }
+    const activeButton = getActiveStructureTab(scope);
+    if (!activeButton) {
+      return;
+    }
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        activeButton.click();
+        if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
+          window.ECMOProteinViewer.mountAll();
+        }
+      });
+    });
+  }
+
   function mirrorStructureSelection(sourceButton, scope) {
     if (!sourceButton || !scope) {
       return;
@@ -2125,9 +2181,7 @@
         targetButton.click();
         syncingStructureTabs = false;
       }
-      if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
-        window.ECMOProteinViewer.mountAll();
-      }
+      refreshStructureScope(structureFullscreen);
     };
 
     window.requestAnimationFrame(() => {
@@ -2221,11 +2275,8 @@
 
   setBranding();
   updateAuthChrome();
-  if (window.ECMOProteinViewer && typeof window.ECMOProteinViewer.mountAll === "function") {
-    window.ECMOProteinViewer.mountAll();
-  }
-  renderAll();
   setView("home");
+  renderAll();
   updateAssistantChrome();
   checkLiveAssistant().finally(() => {
     resetAssistant();
