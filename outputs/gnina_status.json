@@ -1,0 +1,23 @@
+{
+  "last_updated": "2026-08-23T16:32:23.799873+00:00",
+  "started_at": "2026-08-23T16:32:23.799632+00:00",
+  "mode": "prototype",
+  "simulated": true,
+  "scientific_status": "workflow_demonstration_only",
+  "target_validation_ready": false,
+  "validation_status": "partial_validation",
+  "candidate_count": 4,
+  "completed_count": 0,
+  "status_counts": {
+    "unsupported_modality": 4
+  },
+  "protocol": {
+    "gnina_version": "1.3.x",
+    "run_count": 5,
+    "cnn_scoring": "rescore",
+    "cnn_score_min": 0.5,
+    "tie_z": 1.96,
+    "exhaustiveness": 8,
+    "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+  }
+}

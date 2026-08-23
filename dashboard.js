@@ -38,6 +38,11 @@
   const researchRuntimeGrid = document.getElementById("research-runtime-grid");
   const researchRuntimeChips = document.getElementById("research-runtime-chips");
   const researchRefreshButton = document.getElementById("research-refresh-button");
+  const gninaStatusChips = document.getElementById("gnina-status-chips");
+  const gninaSummaryGrid = document.getElementById("gnina-summary-grid");
+  const gninaDemoNotice = document.getElementById("gnina-demo-notice");
+  const gninaResultsPanel = document.getElementById("gnina-results");
+  const gninaRunButton = document.getElementById("gnina-run-button");
   const promotedOverviewSection = document.getElementById("promoted-overview-section");
   const promotedCandidateBoard = document.getElementById("promoted-candidate-board");
   const promotedOverviewCopy = document.getElementById("promoted-overview-copy");
@@ -259,6 +264,15 @@
     if (payload.research_status) {
       bundle.research_status = payload.research_status;
     }
+    if (payload.gnina_results) {
+      bundle.gnina_results = payload.gnina_results;
+    }
+    if (payload.gnina_status) {
+      bundle.gnina_status = payload.gnina_status;
+    }
+    if (payload.gnina_validation) {
+      bundle.gnina_validation = payload.gnina_validation;
+    }
     updateAutoResearchState(payload);
     setBranding();
     renderAll();
@@ -286,6 +300,19 @@
   function getPromotedAutonomousRows() {
     const payload = bundle.autonomous_promoted || {};
     return Array.isArray(payload.ranked) ? payload.ranked : [];
+  }
+
+  function getGninaResults() {
+    const payload = bundle.gnina_results || {};
+    return Array.isArray(payload.results) ? payload.results : [];
+  }
+
+  function getGninaStatus() {
+    return bundle.gnina_status || bundle.gnina_results || {};
+  }
+
+  function getGninaValidation() {
+    return bundle.gnina_validation || {};
   }
 
   function formatDate(value) {
@@ -1185,7 +1212,7 @@
     score.textContent = row.predicted_score.toFixed(1);
     const label = document.createElement("p");
     label.className = "score-label";
-    label.textContent = row.recommendation.toUpperCase();
+    label.textContent = "SUITABILITY • " + row.recommendation.toUpperCase();
     scoreBlock.append(score, label);
 
     top.append(left, scoreBlock);
@@ -1202,7 +1229,7 @@
     if (row.promoted_to_main_view) {
       const promotedTag = document.createElement("span");
       promotedTag.className = "tag advance";
-      promotedTag.textContent = "AUTO PROMOTED";
+      promotedTag.textContent = row.promotion_source === "gnina_benchmark_review" ? "GNINA BENCHMARK" : "AUTO PROMOTED";
       tags.append(promotedTag);
     }
     const tier = document.createElement("span");
@@ -1222,6 +1249,33 @@
     evidence.textContent = row.evidence_summary || "No evidence summary provided.";
 
     card.append(top, bar, tags);
+    if (row.gnina) {
+      const docking = row.gnina;
+      const dockingEvidence = document.createElement("div");
+      dockingEvidence.className = "gnina-inline-evidence";
+      const evidenceItems = docking.status === "completed"
+        ? [
+            ["GNINA target rank", docking.gnina_rank ? "#" + docking.gnina_rank : "Unranked"],
+            ["Minimized affinity", formatDockingMetric(docking.minimized_affinity_mean_kcal_mol, docking.minimized_affinity_sd_kcal_mol, 2, "kcal/mol")],
+            ["Pose confidence", docking.cnn_score_mean === null || docking.cnn_score_mean === undefined ? "Not available" : Number(docking.cnn_score_mean).toFixed(3)],
+          ]
+        : [
+            ["GNINA status", String(docking.status || "pending").replaceAll("_", " ")],
+            ["Structure gate", docking.dockability || "Review required"],
+            ["Next step", "Prepare verified ligand structure"],
+          ];
+      evidenceItems.forEach(([evidenceLabel, evidenceValue]) => {
+        const metric = document.createElement("div");
+        metric.className = "gnina-metric";
+        const metricLabel = document.createElement("span");
+        metricLabel.textContent = evidenceLabel;
+        const metricValue = document.createElement("strong");
+        metricValue.textContent = evidenceValue;
+        metric.append(metricLabel, metricValue);
+        dockingEvidence.append(metric);
+      });
+      card.append(dockingEvidence);
+    }
     if (row.promotion_reason) {
       const promotion = document.createElement("p");
       promotion.className = "candidate-copy";
@@ -1445,6 +1499,173 @@
     });
   }
 
+  function addRuntimeCard(container, labelText, valueText, copyText) {
+    const card = document.createElement("article");
+    card.className = "research-runtime-card";
+    const label = document.createElement("div");
+    label.className = "research-runtime-label";
+    label.textContent = labelText;
+    const value = document.createElement("div");
+    value.className = "research-runtime-value";
+    value.textContent = valueText;
+    const copy = document.createElement("p");
+    copy.className = "research-runtime-copy";
+    copy.textContent = copyText;
+    card.append(label, value, copy);
+    container.append(card);
+  }
+
+  function formatDockingMetric(mean, sd, digits, suffix) {
+    if (mean === null || mean === undefined) {
+      return "Not available";
+    }
+    const meanText = Number(mean).toFixed(digits);
+    const sdText = sd === null || sd === undefined ? null : Number(sd).toFixed(digits);
+    return `${meanText}${sdText !== null ? ` ± ${sdText}` : ""}${suffix ? ` ${suffix}` : ""}`;
+  }
+
+  function renderGninaPipeline() {
+    if (!gninaSummaryGrid || !gninaResultsPanel) {
+      return;
+    }
+    const status = getGninaStatus();
+    const results = getGninaResults();
+    const mode = status.mode || "not configured";
+    const simulated = Boolean(status.simulated);
+    const protocol = status.protocol || {};
+    const validation = getGninaValidation();
+    const validationBenchmarks = Array.isArray(validation.benchmarks) ? validation.benchmarks : [];
+    const passedBenchmark = validationBenchmarks.find((item) => item.status === "passed");
+    const directAssets = validation.direct_target_assets || {};
+    const completedCount = Number(status.completed_count || 0);
+    const posePassCount = results.filter((item) => item.status === "completed" && item.pose_quality_status === "pass").length;
+
+    clear(gninaStatusChips);
+    [
+      { text: mode === "prototype" ? "Prototype simulation" : `GNINA ${mode}`, tone: simulated ? "warning" : "ok" },
+      { text: `${protocol.run_count || 5} seeded runs`, tone: null },
+      { text: `${completedCount} docked`, tone: completedCount ? "ok" : "warning" },
+      { text: `${posePassCount} pose-gate passes`, tone: posePassCount ? "ok" : "warning" },
+      { text: passedBenchmark ? "Engine benchmark passed" : "Validation pending", tone: passedBenchmark ? "ok" : "warning" },
+      {
+        text: directAssets.ranking_unlocked
+          ? "Siglec-9 target unlocked"
+          : `Siglec-9 assets ${Number(directAssets.verified_ligand_count || 0)}/${Number(directAssets.required_ligand_count || 2)}`,
+        tone: directAssets.ranking_unlocked ? "ok" : "warning",
+      },
+    ].forEach((item) => {
+      const chip = document.createElement("span");
+      chip.className = `research-chip ${item.tone || ""}`.trim();
+      chip.textContent = item.text;
+      gninaStatusChips.append(chip);
+    });
+
+    clear(gninaSummaryGrid);
+    addRuntimeCard(gninaSummaryGrid, "Execution mode", simulated ? "Prototype only" : mode, simulated ? "Deterministic simulated values demonstrate the data flow; they are not scientific GNINA predictions." : "Results were produced by the configured local GNINA execution adapter.");
+    addRuntimeCard(gninaSummaryGrid, "Docking queue", `${status.candidate_count || 0} candidates`, `${completedCount} completed; ${Math.max(0, Number(status.candidate_count || 0) - completedCount)} await structure review or another docking method.`);
+    addRuntimeCard(gninaSummaryGrid, "Pose quality gate", `CNNscore ≥ ${Number(protocol.cnn_score_min || 0.5).toFixed(2)}`, "CNNscore is used for pose confidence, not as a binding-affinity unit.");
+    addRuntimeCard(gninaSummaryGrid, "Ranking protocol", "Affinity + uncertainty", "Within each receptor, passing poses rank by mean minimized affinity; uncertainty groups prevent overclaiming small differences.");
+    addRuntimeCard(
+      gninaSummaryGrid,
+      "Validation gate",
+      passedBenchmark ? "Siglec-family benchmark passed" : "Pending",
+      validation.scope_statement || "A target-specific validation record has not been generated yet."
+    );
+    addRuntimeCard(
+      gninaSummaryGrid,
+      "Direct Siglec-9 assets",
+      directAssets.ranking_unlocked
+        ? "Target ranking unlocked"
+        : `Provisional receptor · ${Number(directAssets.verified_ligand_count || 0)}/${Number(directAssets.required_ligand_count || 2)} ligands verified`,
+      directAssets.ranking_unlocked
+        ? "The direct-target provenance and validation requirements are complete."
+        : (directAssets.blocking_reasons || []).join(" ") || "Verified receptor and ligand assets remain required."
+    );
+
+    if (gninaDemoNotice) {
+      gninaDemoNotice.hidden = false;
+      gninaDemoNotice.textContent = simulated
+        ? "Team-demo mode: the workflow, queue, five-run aggregation, uncertainty handling, and dashboard handoff are operational. Numerical docking outputs are simulated and must not be reported as experimental or real GNINA evidence. Switch GNINA_MODE to local only after validated receptor and ligand structures are prepared."
+        : "Computational prediction notice: GNINA outputs support prioritization only. Receptor preparation, protonation, docking-box definition, benchmark controls, and wet-lab validation remain required before biological conclusions.";
+    }
+
+    clear(gninaResultsPanel);
+    if (!results.length) {
+      const empty = document.createElement("div");
+      empty.className = "empty-state";
+      empty.textContent = "No candidates are in the GNINA queue yet. Refresh autonomous literature discovery, then run the docking pipeline.";
+      gninaResultsPanel.append(empty);
+    } else {
+      results
+        .slice()
+        .sort((a, b) => (a.target_receptor || "").localeCompare(b.target_receptor || "") || Number(a.gnina_rank || 999) - Number(b.gnina_rank || 999))
+        .forEach((result) => {
+          const card = document.createElement("article");
+          card.className = "gnina-result-card";
+          const head = document.createElement("div");
+          head.className = "gnina-result-head";
+          const titleWrap = document.createElement("div");
+          const eyebrow = document.createElement("div");
+          eyebrow.className = "research-runtime-label";
+          eyebrow.textContent = `${result.target_receptor || "Unknown target"} • ${result.modality || "Unknown modality"}`;
+          const title = document.createElement("h3");
+          title.textContent = result.candidate_name || "Unnamed candidate";
+          titleWrap.append(eyebrow, title);
+          head.append(titleWrap);
+          if (result.gnina_rank) {
+            const rank = document.createElement("div");
+            rank.className = "gnina-rank";
+            rank.textContent = `#${result.gnina_rank}`;
+            rank.title = "Target-specific GNINA rank";
+            head.append(rank);
+          }
+          card.append(head);
+
+          const tags = document.createElement("div");
+          tags.className = "lead-meta-row";
+          const state = document.createElement("span");
+          state.className = `research-chip ${result.status === "completed" ? "ok" : "warning"}`;
+          state.textContent = result.status === "completed" ? (result.simulated ? "SIMULATED RESULT" : "GNINA COMPLETE") : String(result.status || "pending").replaceAll("_", " ").toUpperCase();
+          const pose = document.createElement("span");
+          pose.className = `research-chip ${result.pose_quality_status === "pass" ? "ok" : "warning"}`;
+          pose.textContent = result.pose_quality_status ? `Pose gate: ${result.pose_quality_status}` : "Pose gate: not run";
+          tags.append(state, pose);
+          card.append(tags);
+
+          if (result.status === "completed") {
+            const metrics = document.createElement("div");
+            metrics.className = "gnina-metric-grid";
+            [
+              ["Minimized affinity", formatDockingMetric(result.minimized_affinity_mean_kcal_mol, result.minimized_affinity_sd_kcal_mol, 2, "kcal/mol")],
+              ["CNNscore", formatDockingMetric(result.cnn_score_mean, result.cnn_score_sd, 3, "")],
+              ["CNNaffinity", formatDockingMetric(result.cnn_affinity_mean_pk, result.cnn_affinity_sd_pk, 2, "pK")],
+            ].forEach(([labelText, valueText]) => {
+              const metric = document.createElement("div");
+              metric.className = "gnina-metric";
+              const label = document.createElement("span");
+              label.textContent = labelText;
+              const value = document.createElement("strong");
+              value.textContent = valueText;
+              metric.append(label, value);
+              metrics.append(metric);
+            });
+            card.append(metrics);
+          } else {
+            const reason = document.createElement("p");
+            reason.className = "candidate-copy";
+            reason.textContent = result.dockability_reason || result.error || "This candidate is not ready for GNINA.";
+            card.append(reason);
+          }
+          gninaResultsPanel.append(card);
+        });
+    }
+
+    if (gninaRunButton) {
+      gninaRunButton.disabled = !canUseLiveEndpoints();
+      gninaRunButton.textContent = canUseLiveEndpoints() ? "Run Docking Pipeline" : "Run on Live Server";
+    }
+  }
+
   function renderResearchLeads() {
     clear(researchLeadsPanel);
     const leads = getResearchLeads().slice(0, 8);
@@ -1555,7 +1776,7 @@
       populateCandidateCard(promotedCandidateBoard, row, {
         champion: index === 0,
         rankIndex: index + 1,
-        bannerLabel: index === 0 ? "Promoted Lead" : "Promoted Candidate",
+        bannerLabel: row.promotion_source === "gnina_benchmark_review" ? "Docking Benchmark" : index === 0 ? "Promoted Lead" : "Promoted Candidate",
       })
     );
   }
@@ -1574,6 +1795,7 @@
     renderResearchRuntime();
     renderResearchRuntimeAlert();
     renderResearchLeads();
+    renderGninaPipeline();
     renderAssistantSideHits(rows);
     renderSettingsView();
   }
@@ -1977,6 +2199,55 @@
     setInterval(pollBundle, 60000);
   }
 
+  async function runGninaPipeline() {
+    if (!gninaRunButton || !canUseLiveEndpoints()) {
+      return;
+    }
+    const originalLabel = gninaRunButton.textContent;
+    gninaRunButton.disabled = true;
+    gninaRunButton.textContent = "Starting pipeline...";
+    try {
+      const response = await fetchWithAuth("/api/docking/run", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+      }, currentAppPath());
+      const payload = await response.json();
+      if (!response.ok || !payload.ok) {
+        throw new Error(payload.error || "GNINA pipeline could not start.");
+      }
+      gninaRunButton.textContent = payload.started ? "Docking in progress..." : "Pipeline already running";
+      let checks = 0;
+      const watch = async () => {
+        checks += 1;
+        const statusResponse = await fetchWithAuth("/api/docking/status", {
+          headers: { Accept: "application/json" },
+        }, currentAppPath());
+        const statusPayload = await statusResponse.json();
+        if (statusPayload.gnina_status) {
+          bundle.gnina_status = statusPayload.gnina_status;
+        }
+        if (statusPayload.in_progress && checks < 40) {
+          window.setTimeout(watch, 1500);
+          return;
+        }
+        await pollBundle();
+        gninaRunButton.disabled = false;
+        gninaRunButton.textContent = originalLabel;
+      };
+      window.setTimeout(watch, 1000);
+    } catch (err) {
+      if (err && err.code === "AUTH_REQUIRED") {
+        return;
+      }
+      gninaRunButton.disabled = false;
+      gninaRunButton.textContent = originalLabel;
+      if (gninaDemoNotice) {
+        gninaDemoNotice.hidden = false;
+        gninaDemoNotice.textContent = "Docking pipeline issue: " + err.message;
+      }
+    }
+  }
+
   async function refreshAutonomousResearch() {
     if (!researchRefreshButton) {
       return;
@@ -2304,6 +2575,10 @@
 
   if (researchRefreshButton) {
     researchRefreshButton.addEventListener("click", refreshAutonomousResearch);
+  }
+
+  if (gninaRunButton) {
+    gninaRunButton.addEventListener("click", runGninaPipeline);
   }
 
   if (logoutButton) {

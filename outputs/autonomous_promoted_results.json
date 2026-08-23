@@ -1,0 +1,16 @@
+{
+  "last_updated": "2026-08-23T16:32:23.800645+00:00",
+  "criteria": {
+    "min_score": 65.0,
+    "recommendation_tiers": [
+      "advance",
+      "secondary"
+    ],
+    "max_candidates": 4,
+    "max_per_target": 2,
+    "exclude_seed_references": true,
+    "allow_known_reference_as_labeled_gnina_benchmark": true,
+    "gnina_pose_gate_when_available": true
+  },
+  "ranked": []
+}

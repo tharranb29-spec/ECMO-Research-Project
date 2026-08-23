@@ -1,0 +1,78 @@
+{
+  "last_updated": "2026-08-23T16:25:06.776265+00:00",
+  "schema_version": 1,
+  "direct_siglec9_gate": {
+    "status": "receptor_reconstruction_pending_ligand_coordinates",
+    "ranking_unlocked": false,
+    "receptor": {
+      "target": "human Siglec-9 V-set domain",
+      "uniprot_accession": "Q9Y336",
+      "source_type": "AlphaFold DB reconstruction candidate",
+      "source_model": "AF-Q9Y336-F1-model_v6",
+      "source_url": "https://alphafold.ebi.ac.uk/files/AF-Q9Y336-F1-model_v6.pdb",
+      "source_model_created": "2025-08-01",
+      "paper_domain_span": "18-144",
+      "paper_model_note": "The published study used AlphaFold and RoseTTAFold models; these exact author coordinate files were not deposited with the article.",
+      "sequence_variant": "canonical wild-type Q9Y336",
+      "study_construct_note": "The NMR construct reported in the supporting information carried C36S; this reconstruction retains canonical C36 and therefore is not study-identical.",
+      "local_source_path": "docking_inputs/siglec9/AF-Q9Y336-F1-model_v6.pdb",
+      "local_cropped_path": "docking_inputs/siglec9/siglec9_vset_18-144_raw.pdb",
+      "local_prepared_path": "docking_inputs/siglec9/siglec9_vset_18-144_ph7.4.pdb",
+      "local_pqr_path": "docking_inputs/siglec9/siglec9_vset_18-144_ph7.4.pqr",
+      "prepared_pdb_sha256": "845851ee194cb9fcb5c16a05555e1ddd3f11916c09b95b76cdc0625ac11a84c9",
+      "prepared_pqr_sha256": "a0c843fdc81a2df0d937542a310ebaa1aa5702d83b0c71ff2ed88f2a555698d4",
+      "preparation_protocol": "PDB2PQR 3.6.2; AMBER naming; PROPKA pH 7.4; hydrogen-bond optimization",
+      "source_sha256": "d3bf9016050056a6adb5a4ca923317ad301f511e059066f854a154bcc464c9d9",
+      "audit": {
+        "residue_span": "18-144",
+        "atom_count": 1026,
+        "mean_plddt": 90.83,
+        "minimum_plddt": 39.22,
+        "residue_36": "CYS",
+        "p53_omega_degrees": -6.12,
+        "p53_state": "cis",
+        "sha256": "bab0342c4ca6c52412952691adde73e117288b70038b71e87b4028338f559469"
+      },
+      "review_status": "provisional_reconstruction"
+    },
+    "ligands": [
+      {
+        "name": "BTCNeu5Ac",
+        "chemical_description": "5-N-[(1-benzhydryl-1H-1,2,3-triazol-4-yl)methyl carbamate]-Neu5Ac alpha(2-6)Gal beta(1-4)GlcNAc",
+        "published_itc_kd_micromolar": {
+          "value": 19.5,
+          "sd": 1.3
+        },
+        "coordinate_status": "missing_verified_3d_coordinates",
+        "review_status": "blocked"
+      },
+      {
+        "name": "MTTSNeu5Ac",
+        "chemical_description": "9N-[5-(2-methylthiazol-4-yl)thiophene sulfonamide]-Neu5Ac alpha(2-6)Gal beta(1-4)GlcNAc",
+        "published_itc_kd_micromolar": {
+          "value": 9.6,
+          "sd": 0.8
+        },
+        "coordinate_status": "missing_verified_3d_coordinates",
+        "review_status": "blocked"
+      }
+    ],
+    "evidence": {
+      "primary_article_doi": "10.1021/acschembio.3c00664",
+      "primary_article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10877568/",
+      "published_modeling_method": "NMR-guided manual placement followed by five independent 500 ns AMBER MD trajectories",
+      "published_template": "PDB 7QUI Siglec-8/NSANeu5Ac",
+      "required_contact_checks": [
+        "R120-carboxylate salt bridge",
+        "W128 Neu5Ac stacking",
+        "N129 glycerol-chain hydrogen bonding"
+      ]
+    },
+    "blocking_reasons": [
+      "Exact author Siglec-9 model coordinates are not deposited with the article.",
+      "The available AlphaFold reconstruction is canonical WT, while the reported NMR construct carried C36S.",
+      "Verified stereochemically complete BTCNeu5Ac and MTTSNeu5Ac 3D files are not yet available locally.",
+      "NMR/MD interaction constraints have not yet been reproduced on this reconstruction."
+    ]
+  }
+}

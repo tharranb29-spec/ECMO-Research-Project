@@ -1,0 +1,65 @@
+{
+  "last_updated": "2026-08-23T16:32:23.799873+00:00",
+  "started_at": "2026-08-23T16:32:23.799632+00:00",
+  "mode": "prototype",
+  "simulated": true,
+  "scientific_status": "workflow_demonstration_only",
+  "target_validation_ready": false,
+  "validation_status": "partial_validation",
+  "candidate_count": 4,
+  "completed_count": 0,
+  "status_counts": {
+    "unsupported_modality": 4
+  },
+  "protocol": {
+    "gnina_version": "1.3.x",
+    "run_count": 5,
+    "cnn_scoring": "rescore",
+    "cnn_score_min": 0.5,
+    "tie_z": 1.96,
+    "exhaustiveness": 8,
+    "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+  },
+  "results": [
+    {
+      "candidate_id": "auto_siglec-7_siglec9",
+      "candidate_name": "Siglec-7",
+      "target_receptor": "Siglec-9",
+      "modality": "antibody",
+      "dockability": "unsupported_modality",
+      "dockability_reason": "antibody requires peptide or protein docking rather than GNINA.",
+      "status": "unsupported_modality",
+      "simulated": false
+    },
+    {
+      "candidate_id": "auto_cd40_sirpa",
+      "candidate_name": "CD40",
+      "target_receptor": "SIRPa",
+      "modality": "protein",
+      "dockability": "unsupported_modality",
+      "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+      "status": "unsupported_modality",
+      "simulated": false
+    },
+    {
+      "candidate_id": "auto_fc-fusion_sirpa",
+      "candidate_name": "Fc-fusion",
+      "target_receptor": "SIRPa",
+      "modality": "protein",
+      "dockability": "unsupported_modality",
+      "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+      "status": "unsupported_modality",
+      "simulated": false
+    },
+    {
+      "candidate_id": "auto_plac_siglec9",
+      "candidate_name": "pLac",
+      "target_receptor": "Siglec-9",
+      "modality": "glycopolypeptide_control",
+      "dockability": "unsupported_modality",
+      "dockability_reason": "glycopolypeptide_control requires peptide or protein docking rather than GNINA.",
+      "status": "unsupported_modality",
+      "simulated": false
+    }
+  ]
+}

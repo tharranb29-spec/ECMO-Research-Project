@@ -2,3 +2,11 @@
 outputs/dashboard-server.log
 outputs/dashboard-server.pid
 outputs/structures/
+outputs/docking/
+docking_inputs/**/*.pdb
+docking_inputs/**/*.pdbqt
+docking_inputs/**/*.sdf
+docking_inputs/**/*.mol2
+.venv-pdb2pqr/
+docking_inputs/**/*.pqr
+docking_inputs/**/*.log

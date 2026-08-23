@@ -1,16 +1,61 @@
 {
-  "last_updated": "2026-04-02T05:37:22.467771+00:00",
+  "last_updated": "2026-04-15T06:50:34.791895+00:00",
   "leads": [
     {
-      "candidate_name": "STING",
-      "target_receptor": "SIRPa",
+      "candidate_name": "Siglec-7",
+      "target_receptor": "Siglec-9",
       "modality_guess": "antibody",
-      "lead_score": 50,
+      "lead_score": 74,
       "lead_type": "literature_candidate_lead",
-      "rationale": "Recent literature mention in article: Dual-Functional Anti-SIRPα-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
-      "publication_date": "2026-04-01",
-      "source_title": "Dual-Functional Anti-SIRPα-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
-      "source_url": "https://europepmc.org/article/MED/41918375"
+      "rationale": "Recent literature mention in article: Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+      "publication_date": "2026-04-10",
+      "source_title": "Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+      "source_url": "https://europepmc.org/article/MED/41961075",
+      "article_id": "41961075",
+      "source_method": "heuristic",
+      "is_new": true
+    },
+    {
+      "candidate_name": "CD40",
+      "target_receptor": "SIRPa",
+      "modality_guess": "protein",
+      "lead_score": 67,
+      "lead_type": "literature_candidate_lead",
+      "rationale": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "publication_date": "2026-04-08",
+      "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "source_url": "https://europepmc.org/article/MED/41951722",
+      "article_id": "41951722",
+      "source_method": "heuristic",
+      "is_new": false
+    },
+    {
+      "candidate_name": "Fc-fusion",
+      "target_receptor": "SIRPa",
+      "modality_guess": "protein",
+      "lead_score": 67,
+      "lead_type": "literature_candidate_lead",
+      "rationale": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "publication_date": "2026-04-08",
+      "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "source_url": "https://europepmc.org/article/MED/41951722",
+      "article_id": "41951722",
+      "source_method": "heuristic",
+      "is_new": false
+    },
+    {
+      "candidate_name": "pLac",
+      "target_receptor": "Siglec-9",
+      "modality_guess": "literature_lead",
+      "lead_score": 60,
+      "lead_type": "literature_candidate_lead",
+      "rationale": "Recent literature mention in article: Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+      "publication_date": "2026-03-27",
+      "source_title": "Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+      "source_url": "https://europepmc.org/article/MED/41891831",
+      "article_id": "41891831",
+      "source_method": "heuristic",
+      "is_new": true
     }
   ]
 }

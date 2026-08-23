@@ -1,0 +1,13 @@
+{
+  "in_progress": false,
+  "last_started_at": "2026-04-15T10:34:51.286711+00:00",
+  "last_finished_at": "2026-04-15T10:34:51.356551+00:00",
+  "last_success_at": "2026-04-15T06:50:34.791895+00:00",
+  "last_error": "Siglec-9: Europe PMC network error - [Errno 61] Connection refused | Siglec-9: Europe PMC network error - [Errno 61] Connection refused | SIRPa: Europe PMC network error - [Errno 61] Connection refused",
+  "last_trigger": "scheduled",
+  "next_run_at": "2026-04-15T11:34:51.356556+00:00",
+  "interval_seconds": 3600,
+  "llm_enabled": false,
+  "llm_provider": null,
+  "auto_research_enabled": true
+}

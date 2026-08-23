@@ -18,6 +18,7 @@ from urllib.parse import parse_qs, quote, urlparse
 from urllib import error, request
 
 from build_dashboard_bundle import main as build_dashboard_bundle_main
+from gnina_pipeline import refresh_existing_outputs
 from research_autoupdater import refresh_research_outputs
 
 
@@ -99,6 +100,7 @@ DATASET_PATHS = {
 }
 
 RUNTIME_LOCK = threading.Lock()
+DOCKING_RUNTIME_LOCK = threading.Lock()
 RUNTIME_STATE_GUARD = threading.Lock()
 RATE_LIMIT_GUARD = threading.Lock()
 RATE_LIMIT_BUCKETS = defaultdict(list)
@@ -282,6 +284,9 @@ def load_bundle():
         "research_leads": read_json(ROOT / "outputs" / "research_leads.json"),
         "research_status": latest_research_status(),
         "research_runtime": runtime_state_snapshot(),
+        "gnina_results": read_json(ROOT / "outputs" / "gnina_results.json"),
+        "gnina_status": read_json(ROOT / "outputs" / "gnina_status.json"),
+        "gnina_validation": read_json(ROOT / "outputs" / "gnina_validation.json"),
     }
 
 def fetch_pdb_text(pdb_id):
@@ -575,6 +580,32 @@ def maybe_schedule_stale_refresh(reason):
     if not refresh_due_now():
         return False
     return queue_refresh(reason)
+
+
+def run_docking_cycle(reason="manual"):
+    if not DOCKING_RUNTIME_LOCK.acquire(blocking=False):
+        return False
+    try:
+        payload = refresh_existing_outputs()
+        build_dashboard_bundle_main()
+        print(
+            f"[gnina] mode={payload.get('mode')} completed={payload.get('completed_count', 0)} "
+            f"candidates={payload.get('candidate_count', 0)} trigger={reason}"
+        )
+        return True
+    except Exception as exc:  # noqa: BLE001
+        print(f"[gnina] execution failed: {exc}")
+        return False
+    finally:
+        DOCKING_RUNTIME_LOCK.release()
+
+
+def queue_docking_cycle(reason="manual"):
+    if DOCKING_RUNTIME_LOCK.locked():
+        return False
+    thread = threading.Thread(target=run_docking_cycle, args=(reason,), daemon=True, name=f"gnina-{reason}")
+    thread.start()
+    return True
 
 
 def normalized_origin(origin):
@@ -944,6 +975,22 @@ class Handler(BaseHTTPRequestHandler):
             maybe_schedule_stale_refresh("bundle-poll")
             self._send_json({"ok": True, **load_bundle()}, method=method)
             return
+        if parsed.path == "/api/docking/status":
+            self._send_json(
+                {
+                    "ok": True,
+                    "in_progress": DOCKING_RUNTIME_LOCK.locked(),
+                    "gnina_status": read_json(ROOT / "outputs" / "gnina_status.json") or {},
+                },
+                method=method,
+            )
+            return
+        if parsed.path == "/api/docking/results":
+            self._send_json(
+                {"ok": True, "gnina_results": read_json(ROOT / "outputs" / "gnina_results.json") or {}},
+                method=method,
+            )
+            return
         if parsed.path == "/api/structure":
             params = parse_qs(parsed.query or "")
             pdb_id = (params.get("pdb") or ["2JJS"])[0]
@@ -1062,6 +1109,20 @@ class Handler(BaseHTTPRequestHandler):
                     "message": "Manual refresh started." if started else "Refresh already running.",
                     "research_runtime": runtime_state_snapshot(),
                     "research_status": latest_research_status(),
+                }
+            )
+            return
+
+        if self.path == "/api/docking/run":
+            if not self._enforce_rate_limit("refresh", REFRESH_RATE_LIMIT_COUNT, REFRESH_RATE_LIMIT_WINDOW_SECONDS):
+                return
+            started = queue_docking_cycle("manual")
+            self._send_json(
+                {
+                    "ok": True,
+                    "started": started,
+                    "message": "GNINA pipeline started." if started else "GNINA pipeline is already running.",
+                    "gnina_status": read_json(ROOT / "outputs" / "gnina_status.json") or {},
                 }
             )
             return

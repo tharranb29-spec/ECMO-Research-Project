@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     healthCheckPath: /healthz
-    buildCommand: "python3 ecmo_seed_ranker.py && python3 build_dashboard_bundle.py"
+    buildCommand: "python3 ecmo_seed_ranker.py && python3 gnina_pipeline.py --from-existing --mode prototype && python3 build_dashboard_bundle.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
       - key: PYTHON_VERSION
@@ -21,6 +21,14 @@ services:
         value: "1"
       - key: AUTO_RESEARCH_PAGE_SIZE
         value: "24"
+      - key: GNINA_MODE
+        value: prototype
+      - key: GNINA_RUN_COUNT
+        value: "5"
+      - key: GNINA_CNN_SCORE_MIN
+        value: "0.50"
+      - key: GNINA_VERSION_LABEL
+        value: prototype-adapter
       - key: ECMO_DASHBOARD_HOST
         value: "0.0.0.0"
       - key: ECMO_ALLOWED_ORIGINS

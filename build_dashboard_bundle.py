@@ -27,6 +27,9 @@ def main():
         "research_leads": load_json(OUTPUTS / "research_leads.json"),
         "research_status": load_json(OUTPUTS / "research_status.json"),
         "research_runtime": load_json(OUTPUTS / "research_runtime_status.json"),
+        "gnina_results": load_json(OUTPUTS / "gnina_results.json"),
+        "gnina_status": load_json(OUTPUTS / "gnina_status.json"),
+        "gnina_validation": load_json(OUTPUTS / "gnina_validation.json"),
     }
     serialized = json.dumps(payload, indent=2)
     content = f"window.ECMO_DASHBOARD_DATA = {serialized};\n"

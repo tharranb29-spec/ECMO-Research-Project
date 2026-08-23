@@ -277,36 +277,550 @@ window.ECMO_DASHBOARD_DATA = {
       }
     ]
   },
-  "autonomous": null,
+  "autonomous": {
+    "models": {
+      "SIRPa": {
+        "target": "SIRPa",
+        "weights": {
+          "affinity_strength_score": 0.254708824320116,
+          "specificity_score": 0.13269691413328458,
+          "functional_immunomodulation_score": 0.23022402110011048,
+          "surface_validation_score": 0.21753723624916155,
+          "conjugation_feasibility_score": 0.08463987031559307,
+          "hemocompatibility_proxy_score": 0.12864026167921436,
+          "multivalency_or_clustering_score": 0.06428910706740609,
+          "literature_confidence_score": 0.03217814748238371
+        },
+        "bias": -0.13953793572110645
+      },
+      "Siglec-9": {
+        "target": "Siglec-9",
+        "weights": {
+          "affinity_strength_score": 0.26616100464879733,
+          "specificity_score": 0.15030057723321946,
+          "functional_immunomodulation_score": 0.2677794043498648,
+          "surface_validation_score": 0.13860946260794435,
+          "conjugation_feasibility_score": 0.09769491421795652,
+          "hemocompatibility_proxy_score": 0.0870282695253188,
+          "multivalency_or_clustering_score": 0.0889993512669093,
+          "literature_confidence_score": 0.03494726250474451
+        },
+        "bias": -0.0393956478312162
+      }
+    },
+    "metrics": {
+      "SIRPa": 4.480099706564318,
+      "Siglec-9": 8.364828687179712
+    },
+    "ranked": [
+      {
+        "id": "auto_cd40_sirpa",
+        "candidate_name": "CD40",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "predicted_score": 44.0,
+        "recommendation": "reject",
+        "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+        "evidence_summary": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)",
+        "source_urls": [
+          "https://europepmc.org/article/MED/41951722"
+        ],
+        "lead_score": 67,
+        "discovery_status": "new_literature_lead",
+        "publication_date": "2026-04-08",
+        "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "source_method": "heuristic",
+        "is_new": false,
+        "translational_suitability_score": 44.0,
+        "gnina": {
+          "candidate_id": "auto_cd40_sirpa",
+          "candidate_name": "CD40",
+          "target_receptor": "SIRPa",
+          "modality": "protein",
+          "dockability": "unsupported_modality",
+          "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+          "status": "unsupported_modality",
+          "simulated": false
+        },
+        "gnina_rank": null,
+        "ranking_basis": "gnina_not_scored"
+      },
+      {
+        "id": "auto_fc-fusion_sirpa",
+        "candidate_name": "Fc-fusion",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "predicted_score": 44.0,
+        "recommendation": "reject",
+        "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+        "evidence_summary": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)",
+        "source_urls": [
+          "https://europepmc.org/article/MED/41951722"
+        ],
+        "lead_score": 67,
+        "discovery_status": "new_literature_lead",
+        "publication_date": "2026-04-08",
+        "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "source_method": "heuristic",
+        "is_new": false,
+        "translational_suitability_score": 44.0,
+        "gnina": {
+          "candidate_id": "auto_fc-fusion_sirpa",
+          "candidate_name": "Fc-fusion",
+          "target_receptor": "SIRPa",
+          "modality": "protein",
+          "dockability": "unsupported_modality",
+          "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+          "status": "unsupported_modality",
+          "simulated": false
+        },
+        "gnina_rank": null,
+        "ranking_basis": "gnina_not_scored"
+      },
+      {
+        "id": "auto_siglec-7_siglec9",
+        "candidate_name": "Siglec-7",
+        "target_receptor": "Siglec-9",
+        "modality": "antibody",
+        "predicted_score": 57.2,
+        "recommendation": "hold",
+        "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+        "evidence_summary": "Recent literature mention in article: Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma. (new literature lead, heuristic extraction)",
+        "source_urls": [
+          "https://europepmc.org/article/MED/41961075"
+        ],
+        "lead_score": 74,
+        "discovery_status": "new_literature_lead",
+        "publication_date": "2026-04-10",
+        "source_title": "Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+        "source_method": "heuristic",
+        "is_new": true,
+        "translational_suitability_score": 57.2,
+        "gnina": {
+          "candidate_id": "auto_siglec-7_siglec9",
+          "candidate_name": "Siglec-7",
+          "target_receptor": "Siglec-9",
+          "modality": "antibody",
+          "dockability": "unsupported_modality",
+          "dockability_reason": "antibody requires peptide or protein docking rather than GNINA.",
+          "status": "unsupported_modality",
+          "simulated": false
+        },
+        "gnina_rank": null,
+        "ranking_basis": "gnina_not_scored"
+      },
+      {
+        "id": "auto_plac_siglec9",
+        "candidate_name": "pLac",
+        "target_receptor": "Siglec-9",
+        "modality": "literature_lead",
+        "predicted_score": 49.8,
+        "recommendation": "reject",
+        "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+        "evidence_summary": "Recent literature mention in article: Nociceptor neurons control pollution-mediated neutrophilic asthma. (known reference, heuristic extraction)",
+        "source_urls": [
+          "https://europepmc.org/article/MED/41891831"
+        ],
+        "lead_score": 60,
+        "discovery_status": "known_reference",
+        "publication_date": "2026-03-27",
+        "source_title": "Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+        "source_method": "heuristic",
+        "is_new": true,
+        "translational_suitability_score": 49.8,
+        "gnina": {
+          "candidate_id": "auto_plac_siglec9",
+          "candidate_name": "pLac",
+          "target_receptor": "Siglec-9",
+          "modality": "glycopolypeptide_control",
+          "dockability": "unsupported_modality",
+          "dockability_reason": "glycopolypeptide_control requires peptide or protein docking rather than GNINA.",
+          "status": "unsupported_modality",
+          "simulated": false
+        },
+        "gnina_rank": null,
+        "ranking_basis": "gnina_not_scored"
+      }
+    ],
+    "docking_summary": {
+      "last_updated": "2026-08-23T16:32:23.799873+00:00",
+      "mode": "prototype",
+      "simulated": true,
+      "completed_count": 0,
+      "candidate_count": 4,
+      "protocol": {
+        "gnina_version": "1.3.x",
+        "run_count": 5,
+        "cnn_scoring": "rescore",
+        "cnn_score_min": 0.5,
+        "tie_z": 1.96,
+        "exhaustiveness": 8,
+        "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+      }
+    }
+  },
+  "autonomous_promoted": {
+    "last_updated": "2026-08-23T16:32:23.800645+00:00",
+    "criteria": {
+      "min_score": 65.0,
+      "recommendation_tiers": [
+        "advance",
+        "secondary"
+      ],
+      "max_candidates": 4,
+      "max_per_target": 2,
+      "exclude_seed_references": true,
+      "allow_known_reference_as_labeled_gnina_benchmark": true,
+      "gnina_pose_gate_when_available": true
+    },
+    "ranked": []
+  },
   "research_leads": {
-    "last_updated": "2026-04-02T05:37:22.467771+00:00",
+    "last_updated": "2026-04-15T06:50:34.791895+00:00",
     "leads": [
       {
-        "candidate_name": "STING",
-        "target_receptor": "SIRPa",
+        "candidate_name": "Siglec-7",
+        "target_receptor": "Siglec-9",
         "modality_guess": "antibody",
-        "lead_score": 50,
+        "lead_score": 74,
         "lead_type": "literature_candidate_lead",
-        "rationale": "Recent literature mention in article: Dual-Functional Anti-SIRP\u03b1-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
-        "publication_date": "2026-04-01",
-        "source_title": "Dual-Functional Anti-SIRP\u03b1-cGAMP Conjugate Reprograms the Tumor Immune Microenvironment and Enhances Antitumor Immunity.",
-        "source_url": "https://europepmc.org/article/MED/41918375"
+        "rationale": "Recent literature mention in article: Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+        "publication_date": "2026-04-10",
+        "source_title": "Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+        "source_url": "https://europepmc.org/article/MED/41961075",
+        "article_id": "41961075",
+        "source_method": "heuristic",
+        "is_new": true
+      },
+      {
+        "candidate_name": "CD40",
+        "target_receptor": "SIRPa",
+        "modality_guess": "protein",
+        "lead_score": 67,
+        "lead_type": "literature_candidate_lead",
+        "rationale": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "publication_date": "2026-04-08",
+        "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "source_url": "https://europepmc.org/article/MED/41951722",
+        "article_id": "41951722",
+        "source_method": "heuristic",
+        "is_new": false
+      },
+      {
+        "candidate_name": "Fc-fusion",
+        "target_receptor": "SIRPa",
+        "modality_guess": "protein",
+        "lead_score": 67,
+        "lead_type": "literature_candidate_lead",
+        "rationale": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "publication_date": "2026-04-08",
+        "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+        "source_url": "https://europepmc.org/article/MED/41951722",
+        "article_id": "41951722",
+        "source_method": "heuristic",
+        "is_new": false
+      },
+      {
+        "candidate_name": "pLac",
+        "target_receptor": "Siglec-9",
+        "modality_guess": "literature_lead",
+        "lead_score": 60,
+        "lead_type": "literature_candidate_lead",
+        "rationale": "Recent literature mention in article: Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+        "publication_date": "2026-03-27",
+        "source_title": "Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+        "source_url": "https://europepmc.org/article/MED/41891831",
+        "article_id": "41891831",
+        "source_method": "heuristic",
+        "is_new": true
       }
     ]
   },
   "research_status": {
-    "last_updated": "2026-04-02T05:37:22.467771+00:00",
-    "article_count": 30,
-    "lead_count": 1,
-    "queries": [
+    "last_updated": "2026-04-15T06:50:34.791895+00:00",
+    "last_attempted_at": "2026-04-15T10:34:51.353154+00:00",
+    "last_successful_data_at": "2026-04-15T06:50:34.791895+00:00",
+    "article_count": 77,
+    "relevant_article_count": 41,
+    "new_article_count": 0,
+    "lead_count": 4,
+    "new_lead_count": 0,
+    "autonomous_ranked_count": 4,
+    "promoted_count": 0,
+    "heuristic_lead_count": 4,
+    "llm_lead_count": 0,
+    "llm_enabled": false,
+    "llm_provider": null,
+    "query_results": [
       {
         "target_receptor": "Siglec-9",
-        "query": "(Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR agonist OR peptide OR sialoside) sort_date:y"
+        "ok": false,
+        "error": "[Errno 61] Connection refused"
+      },
+      {
+        "target_receptor": "Siglec-9",
+        "ok": false,
+        "error": "[Errno 61] Connection refused"
       },
       {
         "target_receptor": "SIRPa",
-        "query": "(\"SIRPalpha\" OR \"SIRPa\" OR \"SIRP\u03b1\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist) sort_date:y"
+        "ok": false,
+        "error": "[Errno 61] Connection refused"
+      },
+      {
+        "target_receptor": "SIRPa",
+        "ok": false,
+        "error": "[Errno 61] Connection refused"
+      }
+    ],
+    "errors": [
+      "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
+      "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
+      "SIRPa: Europe PMC network error - [Errno 61] Connection refused",
+      "SIRPa: Europe PMC network error - [Errno 61] Connection refused"
+    ],
+    "health": "warning",
+    "queries": [
+      {
+        "target_receptor": "Siglec-9",
+        "query": "((Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR glycan OR glycopolypeptide OR glycopeptide OR agonist OR peptide OR sialoside OR sialic OR engineered OR synthetic OR high-affinity)) sort_date:y"
+      },
+      {
+        "target_receptor": "Siglec-9",
+        "query": "((Siglec-9 OR SIGLEC9) AND (pS9L OR pLac OR sLeX OR glycomimetic OR glycopolypeptide OR multivalent OR sialoside)) sort_date:y"
+      },
+      {
+        "target_receptor": "SIRPa",
+        "query": "((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRP\u03b1\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist OR bispecific OR antibody OR ectodomain OR decoy OR fusion OR high-affinity OR engineered)) sort_date:y"
+      },
+      {
+        "target_receptor": "SIRPa",
+        "query": "((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRP\u03b1\" OR CD47) AND (\"self peptide\" OR ectodomain OR N3612 OR CV1 OR TTI-621 OR TTI-622 OR bispecific OR antibody OR decoy)) sort_date:y"
+      }
+    ],
+    "new_article_titles": [],
+    "new_lead_names": [],
+    "using_cached_results": true
+  },
+  "research_runtime": {
+    "in_progress": false,
+    "last_started_at": "2026-04-15T10:34:51.286711+00:00",
+    "last_finished_at": "2026-04-15T10:34:51.356551+00:00",
+    "last_success_at": "2026-04-15T06:50:34.791895+00:00",
+    "last_error": "Siglec-9: Europe PMC network error - [Errno 61] Connection refused | Siglec-9: Europe PMC network error - [Errno 61] Connection refused | SIRPa: Europe PMC network error - [Errno 61] Connection refused",
+    "last_trigger": "scheduled",
+    "next_run_at": "2026-04-15T11:34:51.356556+00:00",
+    "interval_seconds": 3600,
+    "llm_enabled": false,
+    "llm_provider": null,
+    "auto_research_enabled": true
+  },
+  "gnina_results": {
+    "last_updated": "2026-08-23T16:32:23.799873+00:00",
+    "started_at": "2026-08-23T16:32:23.799632+00:00",
+    "mode": "prototype",
+    "simulated": true,
+    "scientific_status": "workflow_demonstration_only",
+    "target_validation_ready": false,
+    "validation_status": "partial_validation",
+    "candidate_count": 4,
+    "completed_count": 0,
+    "status_counts": {
+      "unsupported_modality": 4
+    },
+    "protocol": {
+      "gnina_version": "1.3.x",
+      "run_count": 5,
+      "cnn_scoring": "rescore",
+      "cnn_score_min": 0.5,
+      "tie_z": 1.96,
+      "exhaustiveness": 8,
+      "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+    },
+    "results": [
+      {
+        "candidate_id": "auto_siglec-7_siglec9",
+        "candidate_name": "Siglec-7",
+        "target_receptor": "Siglec-9",
+        "modality": "antibody",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "antibody requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      {
+        "candidate_id": "auto_cd40_sirpa",
+        "candidate_name": "CD40",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      {
+        "candidate_id": "auto_fc-fusion_sirpa",
+        "candidate_name": "Fc-fusion",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      {
+        "candidate_id": "auto_plac_siglec9",
+        "candidate_name": "pLac",
+        "target_receptor": "Siglec-9",
+        "modality": "glycopolypeptide_control",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "glycopolypeptide_control requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
       }
     ]
+  },
+  "gnina_status": {
+    "last_updated": "2026-08-23T16:32:23.799873+00:00",
+    "started_at": "2026-08-23T16:32:23.799632+00:00",
+    "mode": "prototype",
+    "simulated": true,
+    "scientific_status": "workflow_demonstration_only",
+    "target_validation_ready": false,
+    "validation_status": "partial_validation",
+    "candidate_count": 4,
+    "completed_count": 0,
+    "status_counts": {
+      "unsupported_modality": 4
+    },
+    "protocol": {
+      "gnina_version": "1.3.x",
+      "run_count": 5,
+      "cnn_scoring": "rescore",
+      "cnn_score_min": 0.5,
+      "tie_z": 1.96,
+      "exhaustiveness": 8,
+      "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+    }
+  },
+  "gnina_validation": {
+    "last_updated": "2026-08-23T16:25:06.777124+00:00",
+    "overall_status": "partial_validation",
+    "dashboard_real_ranking_ready": false,
+    "scope_statement": "GNINA CPU execution and Siglec-family pose recovery are validated; direct Siglec-9 receptor/candidate validation remains pending.",
+    "acceptance_criteria": {
+      "top_pose_rmsd_angstrom_lt": 2.0,
+      "required_seed_passes": 5,
+      "required_seed_count": 5
+    },
+    "benchmarks": [
+      {
+        "benchmark_id": "2G5R_NXD",
+        "target": "human Siglec-7 N-terminal domain",
+        "ligand": "NXD (oxamido-Neu5Ac)",
+        "pdb_id": "2G5R",
+        "role": "Siglec-family engine and pose-recovery benchmark",
+        "status": "passed",
+        "seed_count": 5,
+        "seed_pass_count": 5,
+        "top_pose_rmsd_angstrom": {
+          "mean": 1.2695,
+          "sd": 0.4929,
+          "min": 0.5339,
+          "max": 1.8931
+        },
+        "minimized_affinity_kcal_mol": {
+          "mean": -4.8415,
+          "sd": 0.5725,
+          "min": -5.4372,
+          "max": -4.1891
+        },
+        "cnn_score": {
+          "mean": 0.7246,
+          "sd": 0.1283,
+          "min": 0.6239,
+          "max": 0.9392
+        },
+        "cnn_affinity_pk": {
+          "mean": 3.4475,
+          "sd": 0.2108,
+          "min": 3.2765,
+          "max": 3.7225
+        },
+        "runs": [
+          {
+            "seed": 1,
+            "top_pose_rmsd_angstrom": 1.14812,
+            "minimized_affinity_kcal_mol": -4.18908,
+            "cnn_score": 0.7446916699,
+            "cnn_affinity_pk": 3.7224500179
+          },
+          {
+            "seed": 2,
+            "top_pose_rmsd_angstrom": 1.3882,
+            "minimized_affinity_kcal_mol": -5.33212,
+            "cnn_score": 0.6239173412,
+            "cnn_affinity_pk": 3.2765071392
+          },
+          {
+            "seed": 3,
+            "top_pose_rmsd_angstrom": 0.533935,
+            "minimized_affinity_kcal_mol": -4.93733,
+            "cnn_score": 0.93924582,
+            "cnn_affinity_pk": 3.6277987957
+          },
+          {
+            "seed": 4,
+            "top_pose_rmsd_angstrom": 1.89308,
+            "minimized_affinity_kcal_mol": -4.31186,
+            "cnn_score": 0.6692456007,
+            "cnn_affinity_pk": 3.3067016602
+          },
+          {
+            "seed": 5,
+            "top_pose_rmsd_angstrom": 1.38411,
+            "minimized_affinity_kcal_mol": -5.4372,
+            "cnn_score": 0.6457861066,
+            "cnn_affinity_pk": 3.303855896
+          }
+        ]
+      },
+      {
+        "benchmark_id": "7QUI_F9I",
+        "target": "human Siglec-8 N-terminal domain",
+        "ligand": "F9I sulfonamide sialoside analogue",
+        "pdb_id": "7QUI",
+        "role": "flexible glycomimetic challenge benchmark",
+        "status": "needs_protocol_review",
+        "seed_count": 1,
+        "best_observed_rmsd_angstrom": 2.66899,
+        "note": "Neither the baseline nor tighter-box trial met the predefined <2.0 A full-ligand RMSD criterion. Do not tune retrospectively to claim a pass."
+      }
+    ],
+    "next_gate": {
+      "name": "direct_siglec9_validation",
+      "status": "in_progress_blocked_on_verified_ligand_coordinates",
+      "requirements": [
+        "Reviewed Siglec-9 receptor model matching the published modeling strategy",
+        "Verified BTCNeu5Ac and MTTSNeu5Ac structures with provenance",
+        "Five-seed docking with uncertainty reporting",
+        "Comparison with published affinity and interaction evidence"
+      ]
+    },
+    "direct_target_assets": {
+      "registry_path": "docking_inputs/structure_registry.json",
+      "status": "receptor_reconstruction_pending_ligand_coordinates",
+      "ranking_unlocked": false,
+      "receptor_review_status": "provisional_reconstruction",
+      "receptor_p53_state": "cis",
+      "verified_ligand_count": 0,
+      "required_ligand_count": 2,
+      "blocking_reasons": [
+        "Exact author Siglec-9 model coordinates are not deposited with the article.",
+        "The available AlphaFold reconstruction is canonical WT, while the reported NMR construct carried C36S.",
+        "Verified stereochemically complete BTCNeu5Ac and MTTSNeu5Ac 3D files are not yet available locally.",
+        "NMR/MD interaction constraints have not yet been reproduced on this reconstruction."
+      ]
+    }
   }
 };

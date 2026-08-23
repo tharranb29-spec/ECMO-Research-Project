@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+PROJECT_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
+IMAGE=$GNINA_DOCKER_IMAGE
+if [ -z "$IMAGE" ]; then
+  IMAGE=gnina/gnina:v1.3.3
+fi
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Docker is not installed or is not on PATH." >&2
+  exit 127
+fi
+
+exec docker run --rm   --platform linux/amd64   --volume "$PROJECT_ROOT:$PROJECT_ROOT"   --workdir "$PROJECT_ROOT"   --entrypoint /usr/local/bin/gnina   "$IMAGE" --no_gpu "$@"

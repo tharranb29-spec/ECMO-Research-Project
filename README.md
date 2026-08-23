@@ -261,3 +261,36 @@ The strongest next improvement would be to add your own assay table with:
 - final expert decision
 
 Once you have 30 to 100 internally consistent records, we can upgrade this into a much better ranking system.
+
+
+## GNINA docking prototype
+
+The autonomous discovery workspace now demonstrates this pipeline:
+
+1. Europe PMC literature search finds recent candidate leads.
+2. DeepSeek can assist with candidate extraction, but it is instructed not to invent chemical structures.
+3. A modality and structure gate routes GNINA-compatible small molecules and glycomimetics into docking.
+4. Five seeded runs are aggregated as mean plus standard deviation for minimized affinity, CNNscore, and CNNaffinity.
+5. CNNscore acts as a pose-quality gate. Passing candidates rank within each receptor by mean minimized affinity with uncertainty groups.
+6. The existing 0-100 model remains a separate translational suitability score and is not presented as binding affinity.
+7. Promoted candidates, including their docking evidence, are synchronized into the main review workspace.
+
+GNINA_MODE=prototype is the safe team-demo default. Its numerical outputs are deterministic simulations and are visibly labeled as non-scientific. They prove that the queue, aggregation, ranking, API, and dashboard handoff work end to end.
+
+For real GNINA execution on a Linux worker, set GNINA_MODE=local, install a pinned GNINA binary, and configure prepared target files:
+
+- GNINA_BINARY
+- GNINA_RECEPTOR_SIGLEC_9
+- GNINA_AUTOBOX_SIGLEC_9
+- GNINA_RECEPTOR_SIRPA
+- GNINA_AUTOBOX_SIRPA
+
+Each eligible candidate must also have a verified prepared SDF path in ligand_sdf_path. Proteins, antibodies, and large peptides are deliberately not scored by GNINA; they require a suitable protein or peptide docking workflow.
+
+Run the current prototype manually:
+
+    python3 gnina_pipeline.py --from-existing --mode prototype
+    python3 build_dashboard_bundle.py
+    python3 research_assistant_server.py
+
+The dashboard's Autonomous Discovery workspace includes a Run Docking Pipeline button for the same server-side flow.

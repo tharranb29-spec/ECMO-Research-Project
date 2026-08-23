@@ -1,0 +1,182 @@
+{
+  "models": {
+    "SIRPa": {
+      "target": "SIRPa",
+      "weights": {
+        "affinity_strength_score": 0.254708824320116,
+        "specificity_score": 0.13269691413328458,
+        "functional_immunomodulation_score": 0.23022402110011048,
+        "surface_validation_score": 0.21753723624916155,
+        "conjugation_feasibility_score": 0.08463987031559307,
+        "hemocompatibility_proxy_score": 0.12864026167921436,
+        "multivalency_or_clustering_score": 0.06428910706740609,
+        "literature_confidence_score": 0.03217814748238371
+      },
+      "bias": -0.13953793572110645
+    },
+    "Siglec-9": {
+      "target": "Siglec-9",
+      "weights": {
+        "affinity_strength_score": 0.26616100464879733,
+        "specificity_score": 0.15030057723321946,
+        "functional_immunomodulation_score": 0.2677794043498648,
+        "surface_validation_score": 0.13860946260794435,
+        "conjugation_feasibility_score": 0.09769491421795652,
+        "hemocompatibility_proxy_score": 0.0870282695253188,
+        "multivalency_or_clustering_score": 0.0889993512669093,
+        "literature_confidence_score": 0.03494726250474451
+      },
+      "bias": -0.0393956478312162
+    }
+  },
+  "metrics": {
+    "SIRPa": 4.480099706564318,
+    "Siglec-9": 8.364828687179712
+  },
+  "ranked": [
+    {
+      "id": "auto_cd40_sirpa",
+      "candidate_name": "CD40",
+      "target_receptor": "SIRPa",
+      "modality": "protein",
+      "predicted_score": 44.0,
+      "recommendation": "reject",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/41951722"
+      ],
+      "lead_score": 67,
+      "discovery_status": "new_literature_lead",
+      "publication_date": "2026-04-08",
+      "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "source_method": "heuristic",
+      "is_new": false,
+      "translational_suitability_score": 44.0,
+      "gnina": {
+        "candidate_id": "auto_cd40_sirpa",
+        "candidate_name": "CD40",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      "gnina_rank": null,
+      "ranking_basis": "gnina_not_scored"
+    },
+    {
+      "id": "auto_fc-fusion_sirpa",
+      "candidate_name": "Fc-fusion",
+      "target_receptor": "SIRPa",
+      "modality": "protein",
+      "predicted_score": 44.0,
+      "recommendation": "reject",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/41951722"
+      ],
+      "lead_score": 67,
+      "discovery_status": "new_literature_lead",
+      "publication_date": "2026-04-08",
+      "source_title": "Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer.",
+      "source_method": "heuristic",
+      "is_new": false,
+      "translational_suitability_score": 44.0,
+      "gnina": {
+        "candidate_id": "auto_fc-fusion_sirpa",
+        "candidate_name": "Fc-fusion",
+        "target_receptor": "SIRPa",
+        "modality": "protein",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "protein requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      "gnina_rank": null,
+      "ranking_basis": "gnina_not_scored"
+    },
+    {
+      "id": "auto_siglec-7_siglec9",
+      "candidate_name": "Siglec-7",
+      "target_receptor": "Siglec-9",
+      "modality": "antibody",
+      "predicted_score": 57.2,
+      "recommendation": "hold",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma. (new literature lead, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/41961075"
+      ],
+      "lead_score": 74,
+      "discovery_status": "new_literature_lead",
+      "publication_date": "2026-04-10",
+      "source_title": "Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma.",
+      "source_method": "heuristic",
+      "is_new": true,
+      "translational_suitability_score": 57.2,
+      "gnina": {
+        "candidate_id": "auto_siglec-7_siglec9",
+        "candidate_name": "Siglec-7",
+        "target_receptor": "Siglec-9",
+        "modality": "antibody",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "antibody requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      "gnina_rank": null,
+      "ranking_basis": "gnina_not_scored"
+    },
+    {
+      "id": "auto_plac_siglec9",
+      "candidate_name": "pLac",
+      "target_receptor": "Siglec-9",
+      "modality": "literature_lead",
+      "predicted_score": 49.8,
+      "recommendation": "reject",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Nociceptor neurons control pollution-mediated neutrophilic asthma. (known reference, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/41891831"
+      ],
+      "lead_score": 60,
+      "discovery_status": "known_reference",
+      "publication_date": "2026-03-27",
+      "source_title": "Nociceptor neurons control pollution-mediated neutrophilic asthma.",
+      "source_method": "heuristic",
+      "is_new": true,
+      "translational_suitability_score": 49.8,
+      "gnina": {
+        "candidate_id": "auto_plac_siglec9",
+        "candidate_name": "pLac",
+        "target_receptor": "Siglec-9",
+        "modality": "glycopolypeptide_control",
+        "dockability": "unsupported_modality",
+        "dockability_reason": "glycopolypeptide_control requires peptide or protein docking rather than GNINA.",
+        "status": "unsupported_modality",
+        "simulated": false
+      },
+      "gnina_rank": null,
+      "ranking_basis": "gnina_not_scored"
+    }
+  ],
+  "docking_summary": {
+    "last_updated": "2026-08-23T16:32:23.799873+00:00",
+    "mode": "prototype",
+    "simulated": true,
+    "completed_count": 0,
+    "candidate_count": 4,
+    "protocol": {
+      "gnina_version": "1.3.x",
+      "run_count": 5,
+      "cnn_scoring": "rescore",
+      "cnn_score_min": 0.5,
+      "tie_z": 1.96,
+      "exhaustiveness": 8,
+      "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+    }
+  }
+}

@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib import error, parse, request
 
 from ecmo_seed_ranker import load_seed_records, normalize_target_receptor, rank_records, write_markdown
+from gnina_pipeline import attach_docking_evidence, run_docking_pipeline
 
 
 ROOT = Path(__file__).resolve().parent
@@ -590,7 +591,19 @@ def classify_known_seed(lead_name, seed_records):
     return False
 
 
-def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_score, rationale, article_record, source_method, seed_records=None):
+def sanitize_lead_record(
+    candidate_name,
+    target_receptor,
+    modality_guess,
+    lead_score,
+    rationale,
+    article_record,
+    source_method,
+    seed_records=None,
+    canonical_smiles=None,
+    structure_source=None,
+    functional_direction=None,
+):
     name = sanitize_candidate_name(candidate_name)
     if not candidate_is_allowed(name, seed_records):
         return None
@@ -603,6 +616,7 @@ def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_s
     except (TypeError, ValueError):
         parsed_score = 58.0
 
+    smiles = str(canonical_smiles or "").strip()
     return {
         "candidate_name": name,
         "target_receptor": normalized_target,
@@ -615,6 +629,10 @@ def sanitize_lead_record(candidate_name, target_receptor, modality_guess, lead_s
         "source_url": article_record.get("source_url"),
         "article_id": article_record.get("article_id"),
         "source_method": source_method,
+        "canonical_smiles": smiles or None,
+        "structure_source": str(structure_source or "").strip() or None,
+        "structure_status": "unverified_llm_structure" if smiles else "awaiting_verified_structure",
+        "functional_direction": str(functional_direction or "unknown").strip().lower(),
     }
 
 
@@ -638,6 +656,9 @@ def extract_llm_leads(article_records, seed_records):
         "You extract ECMO-relevant ligand discovery leads from recent paper metadata. "
         "Return only a JSON array. Each item must include: "
         "candidate_name, target_receptor, modality_guess, lead_score, article_id, rationale. "
+        "Optional fields are canonical_smiles, structure_source, and functional_direction. "
+        "Only provide canonical_smiles when the exact structure is explicitly supported by the supplied paper metadata; never invent one. "
+        "functional_direction must be agonist, antagonist, binding_only, or unknown. "
         "Only include actual candidate ligands, peptides, glycomimetics, receptor-binding proteins, decoys, or antibodies relevant to Siglec-9 or SIRPalpha/CD47 screening. "
         "Do not include pathways, cargo molecules, signaling proteins, cell types, diseases, assays, or generic terms. "
         "Ignore names like STING, cGAMP, macrophage, neutrophil, cytokine, immune checkpoint, receptor, ligand, agonist, and similar generic biology terms. "
@@ -668,6 +689,9 @@ def extract_llm_leads(article_records, seed_records):
             article,
             "deepseek",
             seed_records,
+            item.get("canonical_smiles"),
+            item.get("structure_source"),
+            item.get("functional_direction"),
         )
         if lead:
             leads.append(lead)
@@ -682,12 +706,21 @@ def build_candidate_from_lead(lead, seed_records):
     text = f"{lead.get('source_title', '')} {lead.get('rationale', '')}".lower()
     normalized_name = lead["candidate_name"].strip().lower().replace(" ", "_")
     lead_strength = lead["lead_score"] / 100.0
+    known_seed = next(
+        (
+            record
+            for record in seed_records
+            if canonical_key(record.get("candidate_name", "")) == canonical_key(lead.get("candidate_name", ""))
+        ),
+        None,
+    )
+    modality = (known_seed or {}).get("modality") or lead["modality_guess"]
 
     affinity = score_feature(0.34 + lead_strength * 0.40, 0.08 if "high-affinity" in text or "high affinity" in text else 0.0)
     specificity = score_feature(0.40 + lead_strength * 0.34, 0.10 if lead["target_receptor"].lower().replace("-", "") in text.replace("-", "") else 0.0)
     functional = score_feature(0.20 + lead_strength * 0.38, 0.10 if any(word in text for word in ["immune", "inhibit", "inflammatory", "netosis", "macrophage"]) else 0.0)
     surface = score_feature(0.18 + lead_strength * 0.20, 0.10 if any(word in text for word in ["surface", "material", "coating", "biomaterial", "interface"]) else 0.0)
-    conjugation = score_feature(0.38 + (0.18 if lead["modality_guess"] in {"peptide", "glycomimetic"} else 0.04))
+    conjugation = score_feature(0.38 + (0.18 if modality in {"peptide", "glycomimetic"} else 0.04))
     hemocompatibility = score_feature(0.36 + lead_strength * 0.22, 0.10 if any(word in text for word in ["blood", "platelet", "hemocompat", "thrombo", "hemolysis"]) else 0.0)
     clustering = score_feature(0.22 + lead_strength * 0.16, 0.18 if "multivalent" in text or "cluster" in text or "poly" in text else 0.0)
     literature_confidence = score_feature(0.45 + lead_strength * 0.42)
@@ -698,7 +731,7 @@ def build_candidate_from_lead(lead, seed_records):
         "id": f"auto_{normalized_name}_{lead['target_receptor'].lower().replace('-', '')}",
         "candidate_name": lead["candidate_name"],
         "target_receptor": lead["target_receptor"],
-        "modality": lead["modality_guess"],
+        "modality": modality,
         "affinity_uM": None,
         "affinity_note": "Provisional feature estimate derived from recent literature lead, not a measured KD.",
         "affinity_strength_score": affinity,
@@ -720,6 +753,11 @@ def build_candidate_from_lead(lead, seed_records):
         "source_method": lead.get("source_method", "heuristic"),
         "article_id": lead.get("article_id"),
         "is_new": bool(lead.get("is_new")),
+        "canonical_smiles": lead.get("canonical_smiles"),
+        "structure_source": lead.get("structure_source"),
+        "structure_status": lead.get("structure_status", "awaiting_verified_structure"),
+        "functional_direction": lead.get("functional_direction", "unknown"),
+        "source_batch": lead.get("article_id") or "autonomous-current",
     }
 
 
@@ -755,17 +793,37 @@ def select_promoted_candidates(autonomous_ranking, seed_records):
         target = normalize_target_receptor(row.get("target_receptor"))
         recommendation = str(row.get("recommendation", "")).lower()
         score = float(row.get("predicted_score", 0) or 0)
-        if not candidate_key or candidate_key in seen_names or candidate_key in seed_keys:
+        docking = row.get("gnina") or {}
+        docking_completed = docking.get("status") == "completed"
+        docking_pass = docking_completed and docking.get("pose_quality_status") == "pass"
+        benchmark_review = docking_pass and candidate_key in seed_keys
+        if docking_completed and not docking_pass:
             continue
-        if recommendation not in {"advance", "secondary"} and score < AUTO_PROMOTED_MIN_SCORE:
+        if not candidate_key or candidate_key in seen_names:
+            continue
+        if candidate_key in seed_keys and not benchmark_review:
+            continue
+        if recommendation not in {"advance", "secondary"} and score < AUTO_PROMOTED_MIN_SCORE and not docking_pass:
             continue
         if per_target_counts.get(target, 0) >= AUTO_PROMOTED_MAX_PER_TARGET:
             continue
         promoted_row = dict(row)
         promoted_row["promoted_to_main_view"] = True
-        promoted_row["promotion_source"] = "autonomous_discovery"
+        promoted_row["promotion_source"] = (
+            "gnina_benchmark_review"
+            if benchmark_review
+            else "autonomous_discovery_with_gnina"
+            if docking_completed
+            else "autonomous_discovery"
+        )
         promoted_row["promotion_reason"] = (
-            "Autonomous literature discovery flagged this candidate as strong enough for direct inclusion in the main review workspace."
+            "Known reference surfaced by the autonomous search and promoted as a GNINA workflow benchmark. "
+            "Its prototype docking pose passed the current gate, but this is not a novel discovery or an experimental advance decision."
+            if benchmark_review
+            else "Autonomous literature discovery surfaced this candidate, the translational suitability model passed it for review, "
+            "and the GNINA pose-quality gate passed in the current prototype workflow."
+            if docking_completed
+            else "Autonomous literature discovery flagged this candidate for review; verified structure preparation is still required before real GNINA docking."
         )
         promoted_row["promotion_rank"] = len(promoted) + 1
         promoted.append(promoted_row)
@@ -782,6 +840,8 @@ def select_promoted_candidates(autonomous_ranking, seed_records):
             "max_candidates": AUTO_PROMOTED_MAX,
             "max_per_target": AUTO_PROMOTED_MAX_PER_TARGET,
             "exclude_seed_references": True,
+            "allow_known_reference_as_labeled_gnina_benchmark": True,
+            "gnina_pose_gate_when_available": True,
         },
         "ranked": promoted,
     }
@@ -873,6 +933,8 @@ def refresh_research_outputs():
         lead["is_new"] = lead_history_key(lead) not in seen_lead_keys
     autonomous_candidates = [build_candidate_from_lead(lead, seed_records) for lead in deduped_leads]
     autonomous_ranking = rank_records(seed_records, autonomous_candidates) if autonomous_candidates else {"models": {}, "metrics": {}, "ranked": []}
+    docking_payload = run_docking_pipeline(autonomous_candidates)
+    autonomous_ranking = attach_docking_evidence(autonomous_ranking, docking_payload)
     promoted_payload = select_promoted_candidates(autonomous_ranking, seed_records)
     candidate_index = {candidate["id"]: candidate for candidate in autonomous_candidates}
     for row in autonomous_ranking.get("ranked", []):
@@ -903,6 +965,8 @@ def refresh_research_outputs():
             "new_lead_count": 0,
             "autonomous_ranked_count": len(cached_ranking.get("ranked", [])),
             "promoted_count": len(cached_promoted.get("ranked", [])),
+            "gnina_mode": existing_status.get("gnina_mode"),
+            "gnina_completed_count": existing_status.get("gnina_completed_count", 0),
             "heuristic_lead_count": existing_status.get("heuristic_lead_count", 0),
             "llm_lead_count": existing_status.get("llm_lead_count", 0),
             "llm_enabled": deepseek_research_enabled(),
@@ -929,6 +993,10 @@ def refresh_research_outputs():
         "new_lead_count": len(new_leads),
         "autonomous_ranked_count": len(autonomous_ranking.get("ranked", [])),
         "promoted_count": len(promoted_payload.get("ranked", [])),
+        "gnina_mode": docking_payload.get("mode"),
+        "gnina_simulated": docking_payload.get("simulated"),
+        "gnina_completed_count": docking_payload.get("completed_count", 0),
+        "gnina_candidate_count": docking_payload.get("candidate_count", 0),
         "heuristic_lead_count": len(heuristic_leads),
         "llm_lead_count": len(llm_leads),
         "llm_enabled": deepseek_research_enabled(),

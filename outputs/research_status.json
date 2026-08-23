@@ -1,15 +1,66 @@
 {
-  "last_updated": "2026-04-02T05:37:22.467771+00:00",
-  "article_count": 30,
-  "lead_count": 1,
-  "queries": [
+  "last_updated": "2026-04-15T06:50:34.791895+00:00",
+  "last_attempted_at": "2026-04-15T10:34:51.353154+00:00",
+  "last_successful_data_at": "2026-04-15T06:50:34.791895+00:00",
+  "article_count": 77,
+  "relevant_article_count": 41,
+  "new_article_count": 0,
+  "lead_count": 4,
+  "new_lead_count": 0,
+  "autonomous_ranked_count": 4,
+  "promoted_count": 0,
+  "heuristic_lead_count": 4,
+  "llm_lead_count": 0,
+  "llm_enabled": false,
+  "llm_provider": null,
+  "query_results": [
     {
       "target_receptor": "Siglec-9",
-      "query": "(Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR agonist OR peptide OR sialoside) sort_date:y"
+      "ok": false,
+      "error": "[Errno 61] Connection refused"
+    },
+    {
+      "target_receptor": "Siglec-9",
+      "ok": false,
+      "error": "[Errno 61] Connection refused"
     },
     {
       "target_receptor": "SIRPa",
-      "query": "(\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist) sort_date:y"
+      "ok": false,
+      "error": "[Errno 61] Connection refused"
+    },
+    {
+      "target_receptor": "SIRPa",
+      "ok": false,
+      "error": "[Errno 61] Connection refused"
     }
-  ]
+  ],
+  "errors": [
+    "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
+    "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
+    "SIRPa: Europe PMC network error - [Errno 61] Connection refused",
+    "SIRPa: Europe PMC network error - [Errno 61] Connection refused"
+  ],
+  "health": "warning",
+  "queries": [
+    {
+      "target_receptor": "Siglec-9",
+      "query": "((Siglec-9 OR SIGLEC9) AND (ligand OR glycomimetic OR glycan OR glycopolypeptide OR glycopeptide OR agonist OR peptide OR sialoside OR sialic OR engineered OR synthetic OR high-affinity)) sort_date:y"
+    },
+    {
+      "target_receptor": "Siglec-9",
+      "query": "((Siglec-9 OR SIGLEC9) AND (pS9L OR pLac OR sLeX OR glycomimetic OR glycopolypeptide OR multivalent OR sialoside)) sort_date:y"
+    },
+    {
+      "target_receptor": "SIRPa",
+      "query": "((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (ligand OR mimetic OR peptide OR variant OR agonist OR bispecific OR antibody OR ectodomain OR decoy OR fusion OR high-affinity OR engineered)) sort_date:y"
+    },
+    {
+      "target_receptor": "SIRPa",
+      "query": "((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (\"self peptide\" OR ectodomain OR N3612 OR CV1 OR TTI-621 OR TTI-622 OR bispecific OR antibody OR decoy)) sort_date:y"
+    }
+  ],
+  "new_article_titles": [],
+  "new_lead_names": [],
+  "using_cached_results": true
 }
