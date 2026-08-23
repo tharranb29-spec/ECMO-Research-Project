@@ -945,6 +945,8 @@ class Handler(BaseHTTPRequestHandler):
                 {
                     "ok": True,
                     "service": "ecmo-research-dashboard",
+                    "release": "gnina-validation-v1",
+                    "git_commit": os.environ.get("RENDER_GIT_COMMIT") or "local",
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                 },
                 method=method,
