@@ -1,6 +1,7 @@
 import unittest
 
 from gnina_pipeline import (
+    assign_uncertainty_ranks,
     candidate_dockability,
     experimental_pkd,
     run_docking_pipeline,
@@ -64,6 +65,37 @@ class GninaPipelineTests(unittest.TestCase):
         status, reason = candidate_dockability(self.candidate, mode="local")
         self.assertEqual(status, "awaiting_structure")
         self.assertIn("SDF", reason)
+
+    def test_comparative_order_is_retained_when_pose_gate_blocks_validated_rank(self):
+        results = [
+            {
+                "candidate_name": "weaker",
+                "target_receptor": "Siglec-9",
+                "status": "completed",
+                "pose_quality_status": "review",
+                "minimized_affinity_mean_kcal_mol": -6.1,
+                "cnn_score_mean": 0.4,
+                "run_count": 5,
+            },
+            {
+                "candidate_name": "stronger",
+                "target_receptor": "Siglec-9",
+                "status": "completed",
+                "pose_quality_status": "review",
+                "minimized_affinity_mean_kcal_mol": -7.0,
+                "cnn_score_mean": 0.3,
+                "run_count": 5,
+            },
+        ]
+
+        assign_uncertainty_ranks(results)
+
+        stronger = next(item for item in results if item["candidate_name"] == "stronger")
+        weaker = next(item for item in results if item["candidate_name"] == "weaker")
+        self.assertEqual(stronger["comparative_affinity_rank"], 1)
+        self.assertEqual(weaker["comparative_affinity_rank"], 2)
+        self.assertNotIn("gnina_rank", stronger)
+        self.assertNotIn("gnina_rank", weaker)
 
 
 if __name__ == "__main__":

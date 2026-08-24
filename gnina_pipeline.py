@@ -176,18 +176,27 @@ def target_protocol(candidate):
     target_key = re.sub(r"[^A-Z0-9]+", "_", str(candidate.get("target_receptor") or "").upper()).strip("_")
     receptor = candidate.get("receptor_path") or env_text(f"GNINA_RECEPTOR_{target_key}")
     autobox = candidate.get("autobox_ligand_path") or env_text(f"GNINA_AUTOBOX_{target_key}")
-    return receptor, autobox
+    box_center = candidate.get("box_center")
+    box_size = candidate.get("box_size")
+    return receptor, autobox, box_center, box_size
 
 
 def real_gnina_runs(candidate, run_count=GNINA_RUN_COUNT):
-    receptor, autobox = target_protocol(candidate)
+    receptor, autobox, box_center, box_size = target_protocol(candidate)
     ligand = str(resolve_project_path(candidate["ligand_sdf_path"]).resolve())
     receptor_path = resolve_project_path(receptor) if receptor else None
-    autobox_path = resolve_project_path(autobox) if autobox else None
+    autobox_path = resolve_project_path(autobox) if autobox and "REPLACE_" not in str(autobox) else None
     if not receptor_path or not receptor_path.exists():
         raise ValueError(f"No prepared receptor is configured for {candidate.get('target_receptor')}.")
-    if not autobox_path or not autobox_path.exists():
-        raise ValueError(f"No validated autobox reference ligand is configured for {candidate.get('target_receptor')}.")
+    has_explicit_box = (
+        isinstance(box_center, (list, tuple))
+        and len(box_center) == 3
+        and isinstance(box_size, (int, float, list, tuple))
+    )
+    if not autobox_path and not has_explicit_box:
+        raise ValueError(f"No validated autobox ligand or explicit binding box is configured for {candidate.get('target_receptor')}.")
+    if autobox_path and not autobox_path.exists():
+        raise ValueError(f"The configured autobox reference ligand does not exist for {candidate.get('target_receptor')}.")
 
     candidate_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("id") or candidate.get("candidate_name") or "candidate").lower()).strip("-")
     candidate_dir = DOCKING_OUTPUTS / candidate_slug
@@ -195,14 +204,29 @@ def real_gnina_runs(candidate, run_count=GNINA_RUN_COUNT):
     runs = []
     for seed in range(GNINA_SEED_BASE, GNINA_SEED_BASE + run_count):
         output_path = candidate_dir / f"seed-{seed}.sdf"
+        binary = GNINA_BINARY
+        if os.sep in binary and not Path(binary).is_absolute():
+            binary = str((ROOT / binary).resolve())
         command = [
-            GNINA_BINARY,
+            binary,
             "-r",
             str(receptor_path.resolve()),
             "-l",
             ligand,
-            "--autobox_ligand",
-            str(autobox_path.resolve()),
+        ]
+        if autobox_path:
+            command.extend(["--autobox_ligand", str(autobox_path.resolve())])
+        else:
+            sizes = list(box_size) if isinstance(box_size, (list, tuple)) else [box_size] * 3
+            command.extend([
+                "--center_x", str(float(box_center[0])),
+                "--center_y", str(float(box_center[1])),
+                "--center_z", str(float(box_center[2])),
+                "--size_x", str(float(sizes[0])),
+                "--size_y", str(float(sizes[1])),
+                "--size_z", str(float(sizes[2])),
+            ])
+        command.extend([
             "--seed",
             str(seed),
             "--exhaustiveness",
@@ -213,7 +237,7 @@ def real_gnina_runs(candidate, run_count=GNINA_RUN_COUNT):
             "1",
             "-o",
             str(output_path),
-        ]
+        ])
         completed = subprocess.run(
             command,
             cwd=str(candidate_dir),
@@ -385,6 +409,10 @@ def aggregate_candidate(candidate, runs, mode):
         "runs": runs,
         "functional_direction": candidate.get("functional_direction") or "unknown",
         "structure_status": candidate.get("structure_status") or ("prototype_unverified" if mode == "prototype" else "prepared"),
+        "structure_provenance": candidate.get("structure_provenance"),
+        "structure_source_url": candidate.get("structure_source_url"),
+        "structure_sha256": candidate.get("structure_sha256"),
+        "candidate_role": candidate.get("candidate_role"),
     }
 
 
@@ -397,6 +425,23 @@ def standard_error_difference(first, second):
 
 
 def assign_uncertainty_ranks(results):
+    # Preserve a transparent raw-score ordering even when the pose-quality gate
+    # blocks candidates from receiving a target-specific GNINA rank.
+    comparative_by_target = {}
+    for result in results:
+        if result.get("status") != "completed":
+            continue
+        comparative_by_target.setdefault(result.get("target_receptor") or "Unknown", []).append(result)
+    for target_results in comparative_by_target.values():
+        target_results.sort(
+            key=lambda item: (
+                float(item.get("minimized_affinity_mean_kcal_mol") or 999),
+                -float(item.get("cnn_score_mean") or 0),
+            )
+        )
+        for index, result in enumerate(target_results, start=1):
+            result["comparative_affinity_rank"] = index
+
     by_target = {}
     for result in results:
         if result.get("status") != "completed" or result.get("pose_quality_status") != "pass":
@@ -612,6 +657,8 @@ def load_batch_manifest(path):
         row.setdefault("target_receptor", receptor.get("target"))
         row.setdefault("receptor_path", receptor.get("prepared_path"))
         row.setdefault("autobox_ligand_path", receptor.get("autobox_reference_ligand_path"))
+        row.setdefault("box_center", receptor.get("box_center"))
+        row.setdefault("box_size", receptor.get("box_size"))
         prepared.append(row)
     return prepared
 
@@ -623,7 +670,8 @@ def main():
     parser.add_argument("--manifest", help="Process a reviewed five-ligand batch manifest.")
     args = parser.parse_args()
     if args.manifest:
-        payload = run_docking_pipeline(load_batch_manifest(args.manifest), mode=args.mode)
+        payload = run_docking_pipeline(load_batch_manifest(args.manifest), mode=args.mode, persist=False)
+        write_json(OUTPUTS / "gnina_bridge_results.json", payload)
     else:
         payload = refresh_existing_outputs(mode=args.mode)
     print(json.dumps({key: payload.get(key) for key in ["mode", "simulated", "candidate_count", "completed_count", "status_counts"]}, indent=2))

@@ -285,6 +285,7 @@ def load_bundle():
         "research_status": latest_research_status(),
         "research_runtime": runtime_state_snapshot(),
         "gnina_results": read_json(ROOT / "outputs" / "gnina_results.json"),
+        "gnina_bridge_results": read_json(ROOT / "outputs" / "gnina_bridge_results.json"),
         "gnina_status": read_json(ROOT / "outputs" / "gnina_status.json"),
         "gnina_validation": read_json(ROOT / "outputs" / "gnina_validation.json"),
     }

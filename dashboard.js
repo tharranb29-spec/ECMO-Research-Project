@@ -44,6 +44,9 @@
   const gninaExperimentalValidation = document.getElementById("gnina-experimental-validation");
   const gninaResultsPanel = document.getElementById("gnina-results");
   const gninaRunButton = document.getElementById("gnina-run-button");
+  const gninaBridgeOverviewSection = document.getElementById("gnina-bridge-overview-section");
+  const gninaBridgeOverviewBoard = document.getElementById("gnina-bridge-overview-board");
+  const gninaBridgeOverviewCopy = document.getElementById("gnina-bridge-overview-copy");
   const promotedOverviewSection = document.getElementById("promoted-overview-section");
   const promotedCandidateBoard = document.getElementById("promoted-candidate-board");
   const promotedOverviewCopy = document.getElementById("promoted-overview-copy");
@@ -303,13 +306,22 @@
     return Array.isArray(payload.ranked) ? payload.ranked : [];
   }
 
+  function getGninaDisplayPayload() {
+    const bridge = bundle.gnina_bridge_results || {};
+    if (!bridge.simulated && Number(bridge.completed_count || 0) > 0) {
+      return bridge;
+    }
+    return bundle.gnina_results || {};
+  }
+
   function getGninaResults() {
-    const payload = bundle.gnina_results || {};
+    const payload = getGninaDisplayPayload();
     return Array.isArray(payload.results) ? payload.results : [];
   }
 
   function getGninaStatus() {
-    return bundle.gnina_status || bundle.gnina_results || {};
+    const bridge = getGninaDisplayPayload();
+    return bridge && Object.keys(bridge).length ? bridge : (bundle.gnina_status || {});
   }
 
   function getGninaValidation() {
@@ -1623,6 +1635,7 @@
       { text: `${protocol.run_count || 5} seeded runs`, tone: null },
       { text: `${completedCount} docked`, tone: completedCount ? "ok" : "warning" },
       { text: `${posePassCount} pose-gate passes`, tone: posePassCount ? "ok" : "warning" },
+      { text: !simulated && completedCount === 5 ? "Five-ligand bridge complete" : "Bridge batch pending", tone: !simulated && completedCount === 5 ? "ok" : "warning" },
       { text: passedBenchmark ? "Engine benchmark passed" : "Validation pending", tone: passedBenchmark ? "ok" : "warning" },
       {
         text: directAssets.ranking_unlocked
@@ -1677,7 +1690,9 @@
     } else {
       results
         .slice()
-        .sort((a, b) => (a.target_receptor || "").localeCompare(b.target_receptor || "") || Number(a.gnina_rank || 999) - Number(b.gnina_rank || 999))
+        .sort((a, b) => (a.target_receptor || "").localeCompare(b.target_receptor || "")
+          || Number(a.gnina_rank || a.comparative_affinity_rank || 999)
+            - Number(b.gnina_rank || b.comparative_affinity_rank || 999))
         .forEach((result) => {
           const card = document.createElement("article");
           card.className = "gnina-result-card";
@@ -1691,11 +1706,14 @@
           title.textContent = result.candidate_name || "Unnamed candidate";
           titleWrap.append(eyebrow, title);
           head.append(titleWrap);
-          if (result.gnina_rank) {
+          const displayRank = result.gnina_rank || result.comparative_affinity_rank;
+          if (displayRank) {
             const rank = document.createElement("div");
-            rank.className = "gnina-rank";
-            rank.textContent = `#${result.gnina_rank}`;
-            rank.title = "Target-specific GNINA rank";
+            rank.className = `gnina-rank ${result.gnina_rank ? "" : "preliminary"}`.trim();
+            rank.textContent = `#${displayRank}`;
+            rank.title = result.gnina_rank
+              ? "Target-specific GNINA rank"
+              : "Preliminary mean-affinity order; pose-quality gate not passed";
             head.append(rank);
           }
           card.append(head);
@@ -1860,8 +1878,86 @@
     );
   }
 
+  function renderGninaBridgeOverview() {
+    if (!gninaBridgeOverviewSection || !gninaBridgeOverviewBoard) {
+      return;
+    }
+    const payload = bundle.gnina_bridge_results || {};
+    const results = Array.isArray(payload.results)
+      ? payload.results.filter((item) => item.status === "completed")
+      : [];
+    gninaBridgeOverviewSection.hidden = !results.length || Boolean(payload.simulated);
+    clear(gninaBridgeOverviewBoard);
+    if (!results.length || payload.simulated) {
+      return;
+    }
+    const ordered = results.slice().sort((a, b) =>
+      Number(a.comparative_affinity_rank || 999) - Number(b.comparative_affinity_rank || 999)
+    );
+    const passing = ordered.filter((item) => item.pose_quality_status === "pass").length;
+    if (gninaBridgeOverviewCopy) {
+      gninaBridgeOverviewCopy.textContent = `${ordered.length} reviewed structures completed five seeded GNINA runs. ${passing} passed the CNN pose-quality gate; preliminary order below is based on mean minimized affinity and is not an experimental affinity rank.`;
+    }
+    ordered.forEach((result) => {
+      const card = document.createElement("article");
+      card.className = "gnina-bridge-overview-card";
+
+      const head = document.createElement("div");
+      head.className = "gnina-result-head";
+      const titleWrap = document.createElement("div");
+      const eyebrow = document.createElement("span");
+      eyebrow.className = "research-runtime-label";
+      eyebrow.textContent = result.candidate_role
+        ? String(result.candidate_role).replaceAll("_", " ")
+        : "Reviewed ligand structure";
+      const title = document.createElement("h3");
+      title.textContent = result.candidate_name || "Unnamed candidate";
+      titleWrap.append(eyebrow, title);
+      const rank = document.createElement("div");
+      rank.className = "gnina-rank preliminary";
+      rank.textContent = `#${result.comparative_affinity_rank || "-"}`;
+      rank.title = "Preliminary order by mean minimized affinity; not a validated rank";
+      head.append(titleWrap, rank);
+
+      const metrics = document.createElement("div");
+      metrics.className = "gnina-metric-grid";
+      [
+        ["Affinity", formatDockingMetric(result.minimized_affinity_mean_kcal_mol, result.minimized_affinity_sd_kcal_mol, 2, "kcal/mol")],
+        ["CNNscore", formatDockingMetric(result.cnn_score_mean, result.cnn_score_sd, 3, "")],
+        ["CNNaffinity", formatDockingMetric(result.cnn_affinity_mean_pk, result.cnn_affinity_sd_pk, 2, "pK")],
+      ].forEach(([labelText, valueText]) => {
+        const metric = document.createElement("div");
+        metric.className = "gnina-metric";
+        const label = document.createElement("span");
+        label.textContent = labelText;
+        const value = document.createElement("strong");
+        value.textContent = valueText;
+        metric.append(label, value);
+        metrics.append(metric);
+      });
+
+      const footer = document.createElement("div");
+      footer.className = "lead-meta-row";
+      const state = document.createElement("span");
+      state.className = `research-chip ${result.pose_quality_status === "pass" ? "ok" : "warning"}`;
+      state.textContent = result.pose_quality_status === "pass" ? "Pose gate passed" : "Pose review required";
+      const source = document.createElement(result.structure_source_url ? "a" : "span");
+      source.className = "research-chip";
+      source.textContent = "Verified coordinate source";
+      if (result.structure_source_url) {
+        source.href = result.structure_source_url;
+        source.target = "_blank";
+        source.rel = "noreferrer";
+      }
+      footer.append(state, source);
+      card.append(head, metrics, footer);
+      gninaBridgeOverviewBoard.append(card);
+    });
+  }
+
   function renderAll() {
     const rows = getFilteredRows(activeDataset);
+    renderGninaBridgeOverview();
     renderPromotedOverview();
     renderBriefing(rows);
     renderMeta(rows);

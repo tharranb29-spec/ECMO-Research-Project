@@ -14,6 +14,7 @@ from gnina_pipeline import attach_docking_evidence, run_docking_pipeline
 ROOT = Path(__file__).resolve().parent
 OUTPUTS = ROOT / "outputs"
 SEED_PATH = ROOT / "data" / "seed_ligands.json"
+STRUCTURE_CATALOG_PATH = ROOT / "docking_inputs" / "ligand_structure_catalog.json"
 EUROPE_PMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 
 
@@ -77,7 +78,7 @@ SEARCH_QUERIES = [
 HISTORY_PATH = OUTPUTS / "research_history.json"
 
 NAME_PATTERNS = [
-    re.compile(r"\b(pS9L(?:-sol)?|pLac|sLeX|MTTSNeu5Ac|BTCNeu5Ac|N3612|CV1|TTI-621|TTI-622|AO-176|Self peptide|CD47 ectodomain)\b", re.I),
+    re.compile(r"\b(pS9L(?:-sol)?|pLac|sLeX|3SLN|6SLN|Neu5Ac|6['′-]?sulfo[- ]sLeX|MTTSNeu5Ac|BTCNeu5Ac|N3612|CV1|TTI-621|TTI-622|AO-176|Self peptide|CD47 ectodomain)\b", re.I),
     re.compile(r"\b([A-Z][A-Za-z0-9-]{2,24})\s+(?:peptide|ligand|glycomimetic|agonist|mimetic|variant)\b"),
     re.compile(r"\b(?:peptide|ligand|glycomimetic|agonist|mimetic|variant)\s+([A-Z][A-Za-z0-9-]{2,24})\b"),
 ]
@@ -583,6 +584,19 @@ def build_leads_from_article(article_record, seed_records):
     return leads
 
 
+def resolve_verified_structure(candidate_name, target_receptor):
+    payload = load_json(STRUCTURE_CATALOG_PATH) or {}
+    candidate_key = canonical_key(candidate_name)
+    target = normalize_target_receptor(target_receptor)
+    for entry in payload.get("entries", []):
+        if normalize_target_receptor(entry.get("target_receptor")) != target:
+            continue
+        aliases = [entry.get("canonical_name")] + list(entry.get("aliases") or [])
+        if any(canonical_key(alias) == candidate_key for alias in aliases if alias):
+            return dict(entry.get("candidate_fields") or {})
+    return None
+
+
 def classify_known_seed(lead_name, seed_records):
     normalized = lead_name.lower()
     for record in seed_records:
@@ -714,7 +728,8 @@ def build_candidate_from_lead(lead, seed_records):
         ),
         None,
     )
-    modality = (known_seed or {}).get("modality") or lead["modality_guess"]
+    verified_structure = resolve_verified_structure(lead["candidate_name"], lead["target_receptor"])
+    modality = (verified_structure or {}).get("modality") or (known_seed or {}).get("modality") or lead["modality_guess"]
 
     affinity = score_feature(0.34 + lead_strength * 0.40, 0.08 if "high-affinity" in text or "high affinity" in text else 0.0)
     specificity = score_feature(0.40 + lead_strength * 0.34, 0.10 if lead["target_receptor"].lower().replace("-", "") in text.replace("-", "") else 0.0)
@@ -755,9 +770,18 @@ def build_candidate_from_lead(lead, seed_records):
         "is_new": bool(lead.get("is_new")),
         "canonical_smiles": lead.get("canonical_smiles"),
         "structure_source": lead.get("structure_source"),
-        "structure_status": lead.get("structure_status", "awaiting_verified_structure"),
         "functional_direction": lead.get("functional_direction", "unknown"),
         "source_batch": lead.get("article_id") or "autonomous-current",
+        "ligand_sdf_path": (verified_structure or {}).get("ligand_sdf_path"),
+        "approved_for_docking": (verified_structure or {}).get("approved_for_docking"),
+        "receptor_path": "docking_inputs/siglec9/siglec9_vset_18-144_ph7.4.pdb" if verified_structure else None,
+        "box_center": [22.5, 9.8, -36.0] if verified_structure else None,
+        "box_size": [30.0, 30.0, 30.0] if verified_structure else None,
+        "structure_status": (verified_structure or {}).get("structure_status") or lead.get("structure_status", "awaiting_verified_structure"),
+        "structure_provenance": (verified_structure or {}).get("structure_provenance"),
+        "structure_source_url": (verified_structure or {}).get("structure_source_url"),
+        "structure_sha256": (verified_structure or {}).get("structure_sha256"),
+        "candidate_role": (verified_structure or {}).get("candidate_role"),
     }
 
 

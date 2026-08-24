@@ -28,6 +28,7 @@ def main():
         "research_status": load_json(OUTPUTS / "research_status.json"),
         "research_runtime": load_json(OUTPUTS / "research_runtime_status.json"),
         "gnina_results": load_json(OUTPUTS / "gnina_results.json"),
+        "gnina_bridge_results": load_json(OUTPUTS / "gnina_bridge_results.json"),
         "gnina_status": load_json(OUTPUTS / "gnina_status.json"),
         "gnina_validation": load_json(OUTPUTS / "gnina_validation.json"),
     }

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "purpose": "Verified five-ligand Siglec-9 GNINA bridge batch",
+  "scientific_status": "comparative_docking_bridge_not_experimental_affinity_validation",
+  "scientific_warning": "These structures have authoritative chemical or experimental coordinate provenance, but they are not Siglec-9 co-crystal poses. GNINA scores are computational prioritization evidence only.",
+  "receptor": {
+    "target": "Siglec-9",
+    "prepared_path": "docking_inputs/siglec9/siglec9_vset_18-144_ph7.4.pdb",
+    "review_status": "provisional_alphafold_reconstruction",
+    "box_center": [
+      22.5,
+      9.8,
+      -36.0
+    ],
+    "box_size": [
+      30.0,
+      30.0,
+      30.0
+    ],
+    "box_definition": "30 A cube centered on the conserved R120/W128/N129 sialic-acid recognition region in AF-Q9Y336-F1 residues 18-144."
+  },
+  "protocol": {
+    "gnina_version": "1.3.3",
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "exhaustiveness": 64,
+    "num_modes": 1,
+    "cnn_scoring": "rescore"
+  },
+  "candidates": [
+    {
+      "id": "bridge_neu5ac_siglec9",
+      "candidate_name": "Neu5Ac",
+      "target_receptor": "Siglec-9",
+      "modality": "sialoside",
+      "ligand_sdf_path": "docking_inputs/siglec9/Neu5Ac.sdf",
+      "structure_status": "verified_experimental_coordinates",
+      "structure_provenance": "RCSB CCD SIA ideal coordinates",
+      "structure_source_url": "https://www.rcsb.org/ligand/SIA",
+      "structure_sha256": "24c952771a239f5ff652dd4b962efb1f0b7f011fcc1a73c8ac6fdd431ff25773",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": null,
+      "experimental_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10877568/",
+      "experimental_affinity_note": "The cited Siglec-9 study supports binding or comparative recognition but does not provide a complete exact-Kd set for this five-member bridge batch.",
+      "functional_direction": "binding_only",
+      "candidate_role": "minimal_sialic_acid_control",
+      "approved_for_docking": true
+    },
+    {
+      "id": "bridge_3sln_siglec9",
+      "candidate_name": "3SLN",
+      "target_receptor": "Siglec-9",
+      "modality": "glycan",
+      "ligand_sdf_path": "docking_inputs/siglec9/3SLN.sdf",
+      "structure_status": "verified_experimental_coordinates",
+      "structure_provenance": "RCSB PDB 5BNP, BIRD PRD_900067 experimental coordinates",
+      "structure_source_url": "https://www.rcsb.org/ligand/PRD_900067",
+      "structure_sha256": "3e7e620d12bab3ba1eadd17bb420faf5644a2fa528f32a74bb53b9d195f0b45f",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": null,
+      "experimental_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10877568/",
+      "experimental_affinity_note": "The cited Siglec-9 study supports binding or comparative recognition but does not provide a complete exact-Kd set for this five-member bridge batch.",
+      "functional_direction": "binding_only",
+      "candidate_role": "natural_siglec9_ligand",
+      "approved_for_docking": true
+    },
+    {
+      "id": "bridge_6sln_siglec9",
+      "candidate_name": "6SLN",
+      "target_receptor": "Siglec-9",
+      "modality": "glycan",
+      "ligand_sdf_path": "docking_inputs/siglec9/6SLN.sdf",
+      "structure_status": "verified_experimental_coordinates",
+      "structure_provenance": "RCSB PDB 5BNO, BIRD PRD_900046 experimental coordinates",
+      "structure_source_url": "https://www.rcsb.org/ligand/PRD_900046",
+      "structure_sha256": "bfe867f53be58d924789d362ce6320147dd0fb4778acee7b5f2a2b2be51cf511",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": null,
+      "experimental_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10877568/",
+      "experimental_affinity_note": "The cited Siglec-9 study supports binding or comparative recognition but does not provide a complete exact-Kd set for this five-member bridge batch.",
+      "functional_direction": "binding_only",
+      "candidate_role": "natural_siglec9_ligand",
+      "approved_for_docking": true
+    },
+    {
+      "id": "bridge_slex_siglec9",
+      "candidate_name": "sLeX",
+      "target_receptor": "Siglec-9",
+      "modality": "glycan",
+      "ligand_sdf_path": "docking_inputs/siglec9/sLeX.sdf",
+      "structure_status": "verified_experimental_coordinates",
+      "structure_provenance": "RCSB PDB 5AJC, BIRD PRD_900122 experimental coordinates",
+      "structure_source_url": "https://www.rcsb.org/ligand/PRD_900122",
+      "structure_sha256": "6f1b42c7e6a02b8ce60bb2386082bbe5371402020d8c134d487c6c2a3c0857bd",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": null,
+      "experimental_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10877568/",
+      "experimental_affinity_note": "The cited Siglec-9 study supports binding or comparative recognition but does not provide a complete exact-Kd set for this five-member bridge batch.",
+      "functional_direction": "binding_only",
+      "candidate_role": "natural_siglec9_ligand",
+      "approved_for_docking": true
+    },
+    {
+      "id": "bridge_6prime_sulfo_slex_siglec9",
+      "candidate_name": "6prime-sulfo-sLeX",
+      "target_receptor": "Siglec-9",
+      "modality": "glycan",
+      "ligand_sdf_path": "docking_inputs/siglec9/6prime_sulfo_sLeX.sdf",
+      "structure_status": "verified_experimental_coordinates",
+      "structure_provenance": "RCSB PDB 2N7B experimental NMR coordinates, model 1",
+      "structure_source_url": "https://www.rcsb.org/structure/2N7B",
+      "structure_sha256": "73acbbd12d5ac8d5eed5cc3990e77fb8aa923ef6b8f46c9e913f596178f74613",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": null,
+      "experimental_source": "https://doi.org/10.1073/pnas.1602214113",
+      "experimental_affinity_note": "The cited Siglec-9 study supports binding or comparative recognition but does not provide a complete exact-Kd set for this five-member bridge batch.",
+      "functional_direction": "binding_only",
+      "candidate_role": "related_siglec_specificity_control",
+      "approved_for_docking": true
+    }
+  ]
+}
