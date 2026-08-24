@@ -9,6 +9,7 @@ and receptor/autobox files and invokes a local Linux GNINA binary.
 
 import argparse
 import hashlib
+import itertools
 import json
 import math
 import os
@@ -51,6 +52,7 @@ GNINA_EXHAUSTIVENESS = max(1, env_int("GNINA_EXHAUSTIVENESS", 8))
 GNINA_TIMEOUT_SECONDS = max(30, env_int("GNINA_TIMEOUT_SECONDS", 900))
 GNINA_CNN_SCORE_MIN = env_float("GNINA_CNN_SCORE_MIN", 0.50)
 GNINA_TIE_Z = env_float("GNINA_TIE_Z", 1.96)
+GNINA_SEED_BASE = env_int("GNINA_SEED_BASE", 42)
 
 SUPPORTED_MODALITIES = {
     "small_molecule",
@@ -94,9 +96,16 @@ def stable_unit_interval(*parts):
     return int.from_bytes(digest[:8], "big") / float(2**64 - 1)
 
 
+def resolve_project_path(value):
+    path = Path(str(value)).expanduser()
+    return path if path.is_absolute() else ROOT / path
+
+
 def candidate_dockability(candidate, mode=None):
     selected_mode = (mode or GNINA_MODE).lower()
     modality = str(candidate.get("modality") or candidate.get("modality_guess") or "literature_lead").lower()
+    if candidate.get("approved_for_docking") is False:
+        return "review_required", "Candidate is not approved for real docking in the batch manifest."
     if modality in UNSUPPORTED_MODALITIES:
         return "unsupported_modality", f"{modality} requires peptide or protein docking rather than GNINA."
     if modality not in SUPPORTED_MODALITIES:
@@ -106,7 +115,7 @@ def candidate_dockability(candidate, mode=None):
     ligand_path = candidate.get("ligand_sdf_path")
     if not ligand_path:
         return "awaiting_structure", "A verified, prepared ligand SDF is required for real GNINA execution."
-    if not Path(ligand_path).expanduser().exists():
+    if not resolve_project_path(ligand_path).exists():
         return "awaiting_structure", "The configured ligand SDF path does not exist."
     return "dockable", "Prepared ligand structure is available."
 
@@ -120,7 +129,7 @@ def prototype_runs(candidate, run_count=GNINA_RUN_COUNT):
     base_cnnscore = 0.48 + (0.45 * stable_unit_interval(candidate_id, target, "pose"))
     base_cnnaffinity = 4.8 + (2.5 * stable_unit_interval(candidate_id, target, "pK"))
     runs = []
-    for seed in range(1, run_count + 1):
+    for seed in range(GNINA_SEED_BASE, GNINA_SEED_BASE + run_count):
         affinity_jitter = (stable_unit_interval(candidate_id, seed, "affinity") - 0.5) * 0.34
         score_jitter = (stable_unit_interval(candidate_id, seed, "score") - 0.5) * 0.08
         pk_jitter = (stable_unit_interval(candidate_id, seed, "pk") - 0.5) * 0.24
@@ -165,39 +174,43 @@ def parse_gnina_sdf_properties(path):
 
 def target_protocol(candidate):
     target_key = re.sub(r"[^A-Z0-9]+", "_", str(candidate.get("target_receptor") or "").upper()).strip("_")
-    receptor = env_text(f"GNINA_RECEPTOR_{target_key}")
-    autobox = env_text(f"GNINA_AUTOBOX_{target_key}")
+    receptor = candidate.get("receptor_path") or env_text(f"GNINA_RECEPTOR_{target_key}")
+    autobox = candidate.get("autobox_ligand_path") or env_text(f"GNINA_AUTOBOX_{target_key}")
     return receptor, autobox
 
 
 def real_gnina_runs(candidate, run_count=GNINA_RUN_COUNT):
     receptor, autobox = target_protocol(candidate)
-    ligand = str(Path(candidate["ligand_sdf_path"]).expanduser().resolve())
-    if not receptor or not Path(receptor).expanduser().exists():
+    ligand = str(resolve_project_path(candidate["ligand_sdf_path"]).resolve())
+    receptor_path = resolve_project_path(receptor) if receptor else None
+    autobox_path = resolve_project_path(autobox) if autobox else None
+    if not receptor_path or not receptor_path.exists():
         raise ValueError(f"No prepared receptor is configured for {candidate.get('target_receptor')}.")
-    if not autobox or not Path(autobox).expanduser().exists():
-        raise ValueError(f"No autobox reference ligand is configured for {candidate.get('target_receptor')}.")
+    if not autobox_path or not autobox_path.exists():
+        raise ValueError(f"No validated autobox reference ligand is configured for {candidate.get('target_receptor')}.")
 
     candidate_slug = re.sub(r"[^a-z0-9]+", "-", str(candidate.get("id") or candidate.get("candidate_name") or "candidate").lower()).strip("-")
     candidate_dir = DOCKING_OUTPUTS / candidate_slug
     candidate_dir.mkdir(parents=True, exist_ok=True)
     runs = []
-    for seed in range(1, run_count + 1):
+    for seed in range(GNINA_SEED_BASE, GNINA_SEED_BASE + run_count):
         output_path = candidate_dir / f"seed-{seed}.sdf"
         command = [
             GNINA_BINARY,
             "-r",
-            str(Path(receptor).expanduser().resolve()),
+            str(receptor_path.resolve()),
             "-l",
             ligand,
             "--autobox_ligand",
-            str(Path(autobox).expanduser().resolve()),
+            str(autobox_path.resolve()),
             "--seed",
             str(seed),
             "--exhaustiveness",
             str(GNINA_EXHAUSTIVENESS),
             "--cnn_scoring",
             "rescore",
+            "--num_modes",
+            "1",
             "-o",
             str(output_path),
         ]
@@ -230,6 +243,121 @@ def mean_sd(values):
     if not values:
         return None, None
     return statistics.mean(values), statistics.stdev(values) if len(values) > 1 else 0.0
+
+
+KD_UNIT_TO_MOLAR = {"m": 1.0, "mm": 1e-3, "um": 1e-6, "µm": 1e-6, "nm": 1e-9, "pm": 1e-12}
+
+
+def experimental_pkd(candidate):
+    """Return pKd from an explicitly unit-labelled experimental value."""
+    direct = candidate.get("experimental_pkd")
+    if direct is not None:
+        try:
+            return float(direct)
+        except (TypeError, ValueError):
+            return None
+    value = candidate.get("experimental_kd_value")
+    unit = str(candidate.get("experimental_kd_unit") or "").strip().lower().replace("μ", "µ")
+    try:
+        kd_molar = float(value) * KD_UNIT_TO_MOLAR[unit]
+    except (TypeError, ValueError, KeyError):
+        return None
+    return -math.log10(kd_molar) if kd_molar > 0 else None
+
+
+def tied_ranks(values):
+    order = sorted(range(len(values)), key=lambda index: values[index])
+    ranks = [0.0] * len(values)
+    cursor = 0
+    while cursor < len(order):
+        end = cursor + 1
+        while end < len(order) and values[order[end]] == values[order[cursor]]:
+            end += 1
+        average_rank = ((cursor + 1) + end) / 2.0
+        for position in range(cursor, end):
+            ranks[order[position]] = average_rank
+        cursor = end
+    return ranks
+
+
+def pearson(values_x, values_y):
+    mean_x = statistics.mean(values_x)
+    mean_y = statistics.mean(values_y)
+    numerator = sum((x - mean_x) * (y - mean_y) for x, y in zip(values_x, values_y))
+    denominator = math.sqrt(sum((x - mean_x) ** 2 for x in values_x) * sum((y - mean_y) ** 2 for y in values_y))
+    return numerator / denominator if denominator else None
+
+
+def spearman_with_exact_p(values_x, values_y):
+    if len(values_x) < 3 or len(values_x) != len(values_y):
+        return None, None
+    ranks_x = tied_ranks(values_x)
+    ranks_y = tied_ranks(values_y)
+    rho = pearson(ranks_x, ranks_y)
+    if rho is None:
+        return None, None
+    p_value = None
+    if len(values_x) <= 8:
+        extreme = 0
+        total = 0
+        for permuted in itertools.permutations(ranks_y):
+            permuted_rho = pearson(ranks_x, permuted)
+            if permuted_rho is not None and abs(permuted_rho) >= abs(rho) - 1e-12:
+                extreme += 1
+            total += 1
+        p_value = extreme / total if total else None
+    return rho, p_value
+
+
+def build_experimental_validation(candidates, results):
+    candidate_index = {candidate.get("id"): candidate for candidate in candidates if candidate.get("id")}
+    pairs = []
+    for result in results:
+        if result.get("status") != "completed" or result.get("simulated"):
+            continue
+        candidate = candidate_index.get(result.get("candidate_id"), {})
+        pkd = experimental_pkd(candidate)
+        if pkd is None:
+            continue
+        pairs.append({
+            "candidate_id": result.get("candidate_id"),
+            "candidate_name": result.get("candidate_name"),
+            "experimental_pkd": round(pkd, 4),
+            "experimental_kd_value": candidate.get("experimental_kd_value"),
+            "experimental_kd_unit": candidate.get("experimental_kd_unit"),
+            "minimized_affinity_kcal_mol": result.get("minimized_affinity_mean_kcal_mol"),
+            "cnn_score": result.get("cnn_score_mean"),
+            "cnn_affinity_pk": result.get("cnn_affinity_mean_pk"),
+            "experimental_source": candidate.get("experimental_source"),
+        })
+
+    metric_specs = [
+        ("negated_minimized_affinity", "-minimized affinity vs pKd", "minimized_affinity_kcal_mol", -1.0),
+        ("cnn_affinity", "CNNaffinity vs pKd", "cnn_affinity_pk", 1.0),
+        ("cnn_score", "CNNscore vs pKd (diagnostic only)", "cnn_score", 1.0),
+    ]
+    correlations = []
+    for metric_id, label, field, multiplier in metric_specs:
+        matched = [pair for pair in pairs if pair.get(field) is not None]
+        rho, p_value = spearman_with_exact_p(
+            [float(pair[field]) * multiplier for pair in matched],
+            [float(pair["experimental_pkd"]) for pair in matched],
+        )
+        correlations.append({
+            "metric": metric_id,
+            "label": label,
+            "n": len(matched),
+            "spearman_rho": round(rho, 4) if rho is not None else None,
+            "exact_two_sided_p": round(p_value, 6) if p_value is not None else None,
+        })
+    return {
+        "status": "exploratory_complete" if len(pairs) >= 3 else "awaiting_matched_experimental_data",
+        "matched_candidate_count": len(pairs),
+        "minimum_for_correlation": 3,
+        "pairs": pairs,
+        "correlations": correlations,
+        "interpretation": "Exploratory rank validation only; five compounds are insufficient for a general performance claim.",
+    }
 
 
 def aggregate_candidate(candidate, runs, mode):
@@ -356,9 +484,12 @@ def run_docking_pipeline(candidates, mode=None, run_count=None, persist=True):
         "candidate_count": len(candidates),
         "completed_count": len(completed),
         "status_counts": status_counts,
+        "experimental_validation": build_experimental_validation(candidates, results),
         "protocol": {
             "gnina_version": GNINA_VERSION_LABEL,
             "run_count": selected_run_count,
+            "seed_start": GNINA_SEED_BASE,
+            "num_modes": 1,
             "cnn_scoring": "rescore",
             "cnn_score_min": GNINA_CNN_SCORE_MIN,
             "tie_z": GNINA_TIE_Z,
@@ -384,6 +515,7 @@ def run_docking_pipeline(candidates, mode=None, run_count=None, persist=True):
                     "candidate_count",
                     "completed_count",
                     "status_counts",
+                    "experimental_validation",
                     "protocol",
                 ]
             },
@@ -467,12 +599,33 @@ def refresh_existing_outputs(mode=None):
     return docking_payload
 
 
+def load_batch_manifest(path):
+    manifest_path = resolve_project_path(path)
+    payload = read_json(manifest_path, {}) or {}
+    receptor = payload.get("receptor") or {}
+    candidates = payload.get("candidates") or []
+    if not isinstance(candidates, list):
+        raise ValueError("Batch manifest candidates must be a list.")
+    prepared = []
+    for candidate in candidates:
+        row = dict(candidate)
+        row.setdefault("target_receptor", receptor.get("target"))
+        row.setdefault("receptor_path", receptor.get("prepared_path"))
+        row.setdefault("autobox_ligand_path", receptor.get("autobox_reference_ligand_path"))
+        prepared.append(row)
+    return prepared
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run the ECMO GNINA docking evidence pipeline.")
     parser.add_argument("--mode", choices=["prototype", "local", "disabled"], default=None)
     parser.add_argument("--from-existing", action="store_true", help="Process outputs/autonomous_candidates.json.")
+    parser.add_argument("--manifest", help="Process a reviewed five-ligand batch manifest.")
     args = parser.parse_args()
-    payload = refresh_existing_outputs(mode=args.mode)
+    if args.manifest:
+        payload = run_docking_pipeline(load_batch_manifest(args.manifest), mode=args.mode)
+    else:
+        payload = refresh_existing_outputs(mode=args.mode)
     print(json.dumps({key: payload.get(key) for key in ["mode", "simulated", "candidate_count", "completed_count", "status_counts"]}, indent=2))
 
 

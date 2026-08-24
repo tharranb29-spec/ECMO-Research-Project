@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "purpose": "Five-ligand Siglec-9 GNINA validation batch",
+  "scientific_warning": "Replace every placeholder with a verified structure, experimental Kd, unit, and source. Do not run or publish placeholder records.",
+  "receptor": {
+    "target": "Siglec-9",
+    "prepared_path": "docking_inputs/siglec9/siglec9_vset_18-144_ph7.4.pdb",
+    "review_status": "provisional_reconstruction",
+    "autobox_reference_ligand_path": "REPLACE_WITH_VALIDATED_BOUND_OR_DOCKED_REFERENCE_LIGAND.sdf"
+  },
+  "protocol": {
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "exhaustiveness": 64,
+    "num_modes": 1,
+    "cnn_scoring": "rescore"
+  },
+  "candidates": [
+    {
+      "id": "sig9_validation_1",
+      "candidate_name": "REPLACE_WITH_VERIFIED_NAME",
+      "target_receptor": "Siglec-9",
+      "modality": "REPLACE_WITH_APPROVED_GNINA_MODALITY",
+      "ligand_sdf_path": "docking_inputs/siglec9/REPLACE_LIGAND_1.sdf",
+      "structure_provenance": "REPLACE_WITH_DATABASE_OR_AUTHOR_SOURCE",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": "nM",
+      "experimental_source": "REPLACE_WITH_DOI_OR_DATASET_REFERENCE",
+      "approved_for_docking": false
+    },
+    {
+      "id": "sig9_validation_2",
+      "candidate_name": "REPLACE_WITH_VERIFIED_NAME",
+      "target_receptor": "Siglec-9",
+      "modality": "REPLACE_WITH_APPROVED_GNINA_MODALITY",
+      "ligand_sdf_path": "docking_inputs/siglec9/REPLACE_LIGAND_2.sdf",
+      "structure_provenance": "REPLACE_WITH_DATABASE_OR_AUTHOR_SOURCE",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": "nM",
+      "experimental_source": "REPLACE_WITH_DOI_OR_DATASET_REFERENCE",
+      "approved_for_docking": false
+    },
+    {
+      "id": "sig9_validation_3",
+      "candidate_name": "REPLACE_WITH_VERIFIED_NAME",
+      "target_receptor": "Siglec-9",
+      "modality": "REPLACE_WITH_APPROVED_GNINA_MODALITY",
+      "ligand_sdf_path": "docking_inputs/siglec9/REPLACE_LIGAND_3.sdf",
+      "structure_provenance": "REPLACE_WITH_DATABASE_OR_AUTHOR_SOURCE",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": "nM",
+      "experimental_source": "REPLACE_WITH_DOI_OR_DATASET_REFERENCE",
+      "approved_for_docking": false
+    },
+    {
+      "id": "sig9_validation_4",
+      "candidate_name": "REPLACE_WITH_VERIFIED_NAME",
+      "target_receptor": "Siglec-9",
+      "modality": "REPLACE_WITH_APPROVED_GNINA_MODALITY",
+      "ligand_sdf_path": "docking_inputs/siglec9/REPLACE_LIGAND_4.sdf",
+      "structure_provenance": "REPLACE_WITH_DATABASE_OR_AUTHOR_SOURCE",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": "nM",
+      "experimental_source": "REPLACE_WITH_DOI_OR_DATASET_REFERENCE",
+      "approved_for_docking": false
+    },
+    {
+      "id": "sig9_validation_5",
+      "candidate_name": "REPLACE_WITH_VERIFIED_NAME",
+      "target_receptor": "Siglec-9",
+      "modality": "REPLACE_WITH_APPROVED_GNINA_MODALITY",
+      "ligand_sdf_path": "docking_inputs/siglec9/REPLACE_LIGAND_5.sdf",
+      "structure_provenance": "REPLACE_WITH_DATABASE_OR_AUTHOR_SOURCE",
+      "experimental_kd_value": null,
+      "experimental_kd_unit": "nM",
+      "experimental_source": "REPLACE_WITH_DOI_OR_DATASET_REFERENCE",
+      "approved_for_docking": false
+    }
+  ]
+}

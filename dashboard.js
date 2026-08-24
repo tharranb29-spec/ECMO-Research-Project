@@ -41,6 +41,7 @@
   const gninaStatusChips = document.getElementById("gnina-status-chips");
   const gninaSummaryGrid = document.getElementById("gnina-summary-grid");
   const gninaDemoNotice = document.getElementById("gnina-demo-notice");
+  const gninaExperimentalValidation = document.getElementById("gnina-experimental-validation");
   const gninaResultsPanel = document.getElementById("gnina-results");
   const gninaRunButton = document.getElementById("gnina-run-button");
   const promotedOverviewSection = document.getElementById("promoted-overview-section");
@@ -1524,6 +1525,82 @@
     return `${meanText}${sdText !== null ? ` ± ${sdText}` : ""}${suffix ? ` ${suffix}` : ""}`;
   }
 
+  function renderGninaExperimentalValidation(validation) {
+    if (!gninaExperimentalValidation) {
+      return;
+    }
+    clear(gninaExperimentalValidation);
+    const title = document.createElement("h3");
+    title.textContent = "Experimental affinity cross-check";
+    const copy = document.createElement("p");
+    const pairs = Array.isArray(validation && validation.pairs) ? validation.pairs : [];
+    copy.className = "candidate-copy";
+    copy.textContent = pairs.length
+      ? "GNINA outputs are shown beside unit-normalized experimental pKd values. Correlations are exploratory and do not replace wet-lab validation."
+      : "Waiting for verified ligand SDF files and unit-labelled experimental Kd values. Prototype scores are intentionally excluded from correlation.";
+    gninaExperimentalValidation.append(title, copy);
+
+    const summary = document.createElement("div");
+    summary.className = "gnina-validation-summary";
+    const correlations = Array.isArray(validation && validation.correlations) ? validation.correlations : [];
+    correlations.forEach((item) => {
+      const rho = item.spearman_rho === null || item.spearman_rho === undefined ? "Pending" : Number(item.spearman_rho).toFixed(3);
+      const pValue = item.exact_two_sided_p === null || item.exact_two_sided_p === undefined ? "p pending" : "exact p " + Number(item.exact_two_sided_p).toFixed(4);
+      const card = document.createElement("div");
+      card.className = "gnina-metric";
+      const label = document.createElement("span");
+      label.textContent = item.label || item.metric;
+      const value = document.createElement("strong");
+      value.textContent = rho === "Pending" ? rho : "ρ " + rho;
+      const detail = document.createElement("span");
+      detail.textContent = "n " + Number(item.n || 0) + " • " + pValue;
+      card.append(label, value, detail);
+      summary.append(card);
+    });
+    if (correlations.length) {
+      gninaExperimentalValidation.append(summary);
+    }
+
+    if (!pairs.length) {
+      return;
+    }
+    const wrap = document.createElement("div");
+    wrap.className = "gnina-validation-table-wrap";
+    const table = document.createElement("table");
+    table.className = "gnina-validation-table";
+    const head = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    ["Candidate", "Experimental pKd", "Kd", "Min affinity", "CNNscore", "CNNaffinity"].forEach((text) => {
+      const cell = document.createElement("th");
+      cell.textContent = text;
+      headRow.append(cell);
+    });
+    head.append(headRow);
+    const body = document.createElement("tbody");
+    pairs.forEach((pair) => {
+      const row = document.createElement("tr");
+      [
+        pair.candidate_name || pair.candidate_id,
+        Number(pair.experimental_pkd).toFixed(3),
+        pair.experimental_kd_value === null || pair.experimental_kd_value === undefined
+          ? "pKd supplied directly"
+          : pair.experimental_kd_value + " " + (pair.experimental_kd_unit || ""),
+        Number(pair.minimized_affinity_kcal_mol).toFixed(2) + " kcal/mol",
+        Number(pair.cnn_score).toFixed(3),
+        pair.cnn_affinity_pk === null || pair.cnn_affinity_pk === undefined ? "Not available" : Number(pair.cnn_affinity_pk).toFixed(2) + " pK",
+      ].forEach((text) => {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+        row.append(cell);
+      });
+      body.append(row);
+    });
+    table.append(head, body);
+    wrap.append(table);
+    gninaExperimentalValidation.append(wrap);
+  }
+
+
   function renderGninaPipeline() {
     if (!gninaSummaryGrid || !gninaResultsPanel) {
       return;
@@ -1588,6 +1665,8 @@
         ? "Team-demo mode: the workflow, queue, five-run aggregation, uncertainty handling, and dashboard handoff are operational. Numerical docking outputs are simulated and must not be reported as experimental or real GNINA evidence. Switch GNINA_MODE to local only after validated receptor and ligand structures are prepared."
         : "Computational prediction notice: GNINA outputs support prioritization only. Receptor preparation, protonation, docking-box definition, benchmark controls, and wet-lab validation remain required before biological conclusions.";
     }
+
+    renderGninaExperimentalValidation(status.experimental_validation || {});
 
     clear(gninaResultsPanel);
     if (!results.length) {

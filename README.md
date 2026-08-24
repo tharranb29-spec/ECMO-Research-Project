@@ -294,3 +294,24 @@ Run the current prototype manually:
     python3 research_assistant_server.py
 
 The dashboard's Autonomous Discovery workspace includes a Run Docking Pipeline button for the same server-side flow.
+
+### Five-ligand experimental validation batch
+
+Use docking_inputs/siglec9/five_ligand_batch.template.json as the intake schema. For every ligand, replace the placeholder name and path, record the exact structure provenance, add the experimental Kd with its unit and source, and set approved_for_docking to true only after stereochemistry and protonation review.
+
+The teammate's draft command must not use the receptor as --autobox_ligand: GNINA expects a ligand pose or reference ligand for that option. This project also does not use gnina --prepare_receptor, because that option is absent from the pinned GNINA 1.3.3 CLI. Receptor preparation and binding-site validation are separate provenance-controlled steps. If pS9L denotes the full glycopolypeptide rather than a defined small glycan or glycomimetic fragment, it must remain outside this small-molecule GNINA route.
+
+Run the reviewed batch on the Mac Studio with Docker Desktop active:
+
+    GNINA_BINARY=./scripts/gnina-docker \
+    GNINA_MODE=local \
+    GNINA_EXHAUSTIVENESS=64 \
+    GNINA_RUN_COUNT=5 \
+    GNINA_SEED_BASE=42 \
+    python3 gnina_pipeline.py --manifest docking_inputs/siglec9/five_ligand_batch.json --mode local
+
+Then rebuild the static dashboard data:
+
+    python3 build_dashboard_bundle.py
+
+The dashboard reports minimized affinity in kcal/mol, CNNscore as pose confidence, and CNNaffinity in pK units as separate quantities. Experimental Kd values are converted to pKd before an exploratory Spearman comparison. Prototype values are excluded automatically, and a five-compound analysis must not be presented as general model validation.

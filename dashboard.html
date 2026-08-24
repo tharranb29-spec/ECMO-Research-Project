@@ -1706,6 +1706,56 @@
         line-height: 1.55;
       }
 
+      .gnina-validation-block {
+        display: grid;
+        gap: 14px;
+        margin: 0 18px 18px;
+        padding: 18px;
+        border: 1px solid rgba(16, 36, 62, 0.09);
+        border-radius: 20px;
+        background: linear-gradient(145deg, rgba(238, 247, 255, 0.96), rgba(240, 250, 245, 0.94));
+      }
+
+      .gnina-validation-block h3,
+      .gnina-validation-block p {
+        margin: 0;
+      }
+
+      .gnina-validation-summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .gnina-validation-table-wrap {
+        overflow-x: auto;
+        border: 1px solid rgba(16, 36, 62, 0.08);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.84);
+      }
+
+      .gnina-validation-table {
+        width: 100%;
+        min-width: 760px;
+        border-collapse: collapse;
+        font-size: 0.84rem;
+      }
+
+      .gnina-validation-table th,
+      .gnina-validation-table td {
+        padding: 11px 12px;
+        border-bottom: 1px solid rgba(16, 36, 62, 0.07);
+        text-align: left;
+        white-space: nowrap;
+      }
+
+      .gnina-validation-table th {
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
       .gnina-results-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1794,7 +1844,8 @@
 
       @media (max-width: 720px) {
         .gnina-metric-grid,
-        .gnina-inline-evidence {
+        .gnina-inline-evidence,
+        .gnina-validation-summary {
           grid-template-columns: 1fr;
         }
       }
@@ -4606,6 +4657,7 @@
             </div>
             <div id="gnina-summary-grid" class="research-runtime-grid"></div>
             <div id="gnina-demo-notice" class="gnina-demo-notice"></div>
+            <section id="gnina-experimental-validation" class="gnina-validation-block" aria-live="polite"></section>
             <div id="gnina-results" class="gnina-results-grid"></div>
           </section>
         </section>

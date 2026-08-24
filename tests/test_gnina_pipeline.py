@@ -1,6 +1,11 @@
 import unittest
 
-from gnina_pipeline import candidate_dockability, run_docking_pipeline
+from gnina_pipeline import (
+    candidate_dockability,
+    experimental_pkd,
+    run_docking_pipeline,
+    spearman_with_exact_p,
+)
 
 
 class GninaPipelineTests(unittest.TestCase):
@@ -27,6 +32,33 @@ class GninaPipelineTests(unittest.TestCase):
         payload = run_docking_pipeline([protein], mode="prototype", persist=False)
         self.assertEqual(payload["completed_count"], 0)
         self.assertEqual(payload["results"][0]["status"], "unsupported_modality")
+
+    def test_experimental_kd_is_normalized_to_pkd(self):
+        self.assertAlmostEqual(experimental_pkd({"experimental_kd_value": 100, "experimental_kd_unit": "nM"}), 7.0)
+        self.assertIsNone(experimental_pkd({"experimental_kd_value": 100, "experimental_kd_unit": ""}))
+
+    def test_spearman_reports_perfect_rank_agreement(self):
+        rho, p_value = spearman_with_exact_p([1, 2, 3, 4, 5], [10, 20, 30, 40, 50])
+        self.assertAlmostEqual(rho, 1.0)
+        self.assertAlmostEqual(p_value, 2 / 120)
+
+    def test_simulated_results_are_excluded_from_experimental_validation(self):
+        payload = run_docking_pipeline(
+            [{**self.candidate, "experimental_kd_value": 100, "experimental_kd_unit": "nM"}],
+            mode="prototype",
+            persist=False,
+        )
+        validation = payload["experimental_validation"]
+        self.assertEqual(validation["matched_candidate_count"], 0)
+        self.assertEqual(validation["status"], "awaiting_matched_experimental_data")
+
+    def test_unapproved_manifest_candidate_is_blocked(self):
+        status, reason = candidate_dockability(
+            {**self.candidate, "ligand_sdf_path": "candidate.sdf", "approved_for_docking": False},
+            mode="local",
+        )
+        self.assertEqual(status, "review_required")
+        self.assertIn("not approved", reason)
 
     def test_real_mode_requires_verified_prepared_structure(self):
         status, reason = candidate_dockability(self.candidate, mode="local")

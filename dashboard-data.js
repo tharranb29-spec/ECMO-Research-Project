@@ -443,7 +443,7 @@ window.ECMO_DASHBOARD_DATA = {
       }
     ],
     "docking_summary": {
-      "last_updated": "2026-08-23T16:32:23.799873+00:00",
+      "last_updated": "2026-08-24T08:36:07.722767+00:00",
       "mode": "prototype",
       "simulated": true,
       "completed_count": 0,
@@ -451,6 +451,8 @@ window.ECMO_DASHBOARD_DATA = {
       "protocol": {
         "gnina_version": "1.3.x",
         "run_count": 5,
+        "seed_start": 42,
+        "num_modes": 1,
         "cnn_scoring": "rescore",
         "cnn_score_min": 0.5,
         "tie_z": 1.96,
@@ -460,7 +462,7 @@ window.ECMO_DASHBOARD_DATA = {
     }
   },
   "autonomous_promoted": {
-    "last_updated": "2026-08-23T16:32:23.800645+00:00",
+    "last_updated": "2026-08-24T08:36:07.725833+00:00",
     "criteria": {
       "min_score": 65.0,
       "recommendation_tiers": [
@@ -616,8 +618,8 @@ window.ECMO_DASHBOARD_DATA = {
     "auto_research_enabled": true
   },
   "gnina_results": {
-    "last_updated": "2026-08-23T16:32:23.799873+00:00",
-    "started_at": "2026-08-23T16:32:23.799632+00:00",
+    "last_updated": "2026-08-24T08:36:07.722767+00:00",
+    "started_at": "2026-08-24T08:36:07.722168+00:00",
     "mode": "prototype",
     "simulated": true,
     "scientific_status": "workflow_demonstration_only",
@@ -628,9 +630,41 @@ window.ECMO_DASHBOARD_DATA = {
     "status_counts": {
       "unsupported_modality": 4
     },
+    "experimental_validation": {
+      "status": "awaiting_matched_experimental_data",
+      "matched_candidate_count": 0,
+      "minimum_for_correlation": 3,
+      "pairs": [],
+      "correlations": [
+        {
+          "metric": "negated_minimized_affinity",
+          "label": "-minimized affinity vs pKd",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        },
+        {
+          "metric": "cnn_affinity",
+          "label": "CNNaffinity vs pKd",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        },
+        {
+          "metric": "cnn_score",
+          "label": "CNNscore vs pKd (diagnostic only)",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        }
+      ],
+      "interpretation": "Exploratory rank validation only; five compounds are insufficient for a general performance claim."
+    },
     "protocol": {
       "gnina_version": "1.3.x",
       "run_count": 5,
+      "seed_start": 42,
+      "num_modes": 1,
       "cnn_scoring": "rescore",
       "cnn_score_min": 0.5,
       "tie_z": 1.96,
@@ -681,8 +715,8 @@ window.ECMO_DASHBOARD_DATA = {
     ]
   },
   "gnina_status": {
-    "last_updated": "2026-08-23T16:32:23.799873+00:00",
-    "started_at": "2026-08-23T16:32:23.799632+00:00",
+    "last_updated": "2026-08-24T08:36:07.722767+00:00",
+    "started_at": "2026-08-24T08:36:07.722168+00:00",
     "mode": "prototype",
     "simulated": true,
     "scientific_status": "workflow_demonstration_only",
@@ -693,9 +727,41 @@ window.ECMO_DASHBOARD_DATA = {
     "status_counts": {
       "unsupported_modality": 4
     },
+    "experimental_validation": {
+      "status": "awaiting_matched_experimental_data",
+      "matched_candidate_count": 0,
+      "minimum_for_correlation": 3,
+      "pairs": [],
+      "correlations": [
+        {
+          "metric": "negated_minimized_affinity",
+          "label": "-minimized affinity vs pKd",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        },
+        {
+          "metric": "cnn_affinity",
+          "label": "CNNaffinity vs pKd",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        },
+        {
+          "metric": "cnn_score",
+          "label": "CNNscore vs pKd (diagnostic only)",
+          "n": 0,
+          "spearman_rho": null,
+          "exact_two_sided_p": null
+        }
+      ],
+      "interpretation": "Exploratory rank validation only; five compounds are insufficient for a general performance claim."
+    },
     "protocol": {
       "gnina_version": "1.3.x",
       "run_count": 5,
+      "seed_start": 42,
+      "num_modes": 1,
       "cnn_scoring": "rescore",
       "cnn_score_min": 0.5,
       "tie_z": 1.96,
