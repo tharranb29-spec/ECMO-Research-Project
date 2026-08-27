@@ -4,7 +4,10 @@ services:
     env: python
     plan: free
     healthCheckPath: /healthz
-    buildCommand: "python3 ecmo_seed_ranker.py && python3 gnina_pipeline.py --from-existing --mode prototype && python3 build_dashboard_bundle.py"
+    # Scientific outputs are generated and reviewed before deployment. Render
+    # only packages committed artifacts; it must not replace real GNINA results
+    # with prototype scores during a production build.
+    buildCommand: "python3 build_dashboard_bundle.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
       - key: PYTHON_VERSION
