@@ -1,56 +1,80 @@
 {
-  "last_updated": "2026-08-24T16:13:32.208142+00:00",
+  "last_updated": "2026-08-27T12:15:26.926036+00:00",
   "started_at": "2026-08-24T14:39:22.757173+00:00",
   "mode": "local",
   "simulated": false,
   "scientific_status": "computational_prediction_unvalidated_target",
   "target_validation_ready": false,
   "validation_status": "partial_validation",
-  "candidate_count": 5,
-  "completed_count": 5,
+  "candidate_count": 7,
+  "completed_count": 7,
   "status_counts": {
-    "completed": 5
+    "completed": 7
   },
   "experimental_validation": {
     "status": "awaiting_matched_experimental_data",
-    "matched_candidate_count": 0,
+    "matched_candidate_count": 2,
     "minimum_for_correlation": 3,
-    "pairs": [],
+    "pairs": [
+      {
+        "candidate_id": "bridge_btcneu5ac_siglec9",
+        "candidate_name": "BTCNeu5Ac",
+        "experimental_pkd": 4.71,
+        "experimental_kd_value": 19.5,
+        "experimental_kd_unit": "um",
+        "minimized_affinity_kcal_mol": -7.502,
+        "cnn_score": 0.2714,
+        "cnn_affinity_pk": 5.005,
+        "experimental_source": "https://doi.org/10.1021/acschembio.3c00664"
+      },
+      {
+        "candidate_id": "bridge_mttsneu5ac_siglec9",
+        "candidate_name": "MTTSNeu5Ac",
+        "experimental_pkd": 5.0177,
+        "experimental_kd_value": 9.6,
+        "experimental_kd_unit": "um",
+        "minimized_affinity_kcal_mol": -7.475,
+        "cnn_score": 0.6195,
+        "cnn_affinity_pk": 6.253,
+        "experimental_source": "https://doi.org/10.1021/acschembio.3c00664"
+      }
+    ],
     "correlations": [
       {
         "metric": "negated_minimized_affinity",
         "label": "-minimized affinity vs pKd",
-        "n": 0,
+        "n": 2,
         "spearman_rho": null,
         "exact_two_sided_p": null
       },
       {
         "metric": "cnn_affinity",
         "label": "CNNaffinity vs pKd",
-        "n": 0,
+        "n": 2,
         "spearman_rho": null,
         "exact_two_sided_p": null
       },
       {
         "metric": "cnn_score",
         "label": "CNNscore vs pKd (diagnostic only)",
-        "n": 0,
+        "n": 2,
         "spearman_rho": null,
         "exact_two_sided_p": null
       }
     ],
-    "interpretation": "Exploratory rank validation only; five compounds are insufficient for a general performance claim."
+    "interpretation": "Exploratory rank validation only; this small matched set is insufficient for a general performance claim."
   },
   "protocol": {
     "gnina_version": "1.3.x",
-    "run_count": 5,
+    "run_count": "1-5",
     "seed_start": 42,
     "num_modes": 1,
     "cnn_scoring": "rescore",
     "cnn_score_min": 0.5,
     "tie_z": 1.96,
     "exhaustiveness": 64,
-    "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties"
+    "ranking_rule": "pose-quality gate, then mean minimized affinity; CNNscore breaks unresolved ties",
+    "run_count_note": "Existing controls use seeds 42-46; BTCNeu5Ac and MTTSNeu5Ac use the teammate-specified seed-42 cross-check."
   },
   "results": [
     {
@@ -126,7 +150,7 @@
       "structure_source_url": "https://www.rcsb.org/ligand/SIA",
       "structure_sha256": "24c952771a239f5ff652dd4b962efb1f0b7f011fcc1a73c8ac6fdd431ff25773",
       "candidate_role": "minimal_sialic_acid_control",
-      "comparative_affinity_rank": 5
+      "comparative_affinity_rank": 7
     },
     {
       "candidate_id": "bridge_3sln_siglec9",
@@ -201,7 +225,7 @@
       "structure_source_url": "https://www.rcsb.org/ligand/PRD_900067",
       "structure_sha256": "3e7e620d12bab3ba1eadd17bb420faf5644a2fa528f32a74bb53b9d195f0b45f",
       "candidate_role": "natural_siglec9_ligand",
-      "comparative_affinity_rank": 4
+      "comparative_affinity_rank": 6
     },
     {
       "candidate_id": "bridge_6sln_siglec9",
@@ -276,7 +300,7 @@
       "structure_source_url": "https://www.rcsb.org/ligand/PRD_900046",
       "structure_sha256": "bfe867f53be58d924789d362ce6320147dd0fb4778acee7b5f2a2b2be51cf511",
       "candidate_role": "natural_siglec9_ligand",
-      "comparative_affinity_rank": 3
+      "comparative_affinity_rank": 5
     },
     {
       "candidate_id": "bridge_slex_siglec9",
@@ -351,7 +375,7 @@
       "structure_source_url": "https://www.rcsb.org/ligand/PRD_900122",
       "structure_sha256": "6f1b42c7e6a02b8ce60bb2386082bbe5371402020d8c134d487c6c2a3c0857bd",
       "candidate_role": "natural_siglec9_ligand",
-      "comparative_affinity_rank": 1
+      "comparative_affinity_rank": 3
     },
     {
       "candidate_id": "bridge_6prime_sulfo_slex_siglec9",
@@ -426,7 +450,88 @@
       "structure_source_url": "https://www.rcsb.org/structure/2N7B",
       "structure_sha256": "73acbbd12d5ac8d5eed5cc3990e77fb8aa923ef6b8f46c9e913f596178f74613",
       "candidate_role": "related_siglec_specificity_control",
-      "comparative_affinity_rank": 2
+      "comparative_affinity_rank": 4
+    },
+    {
+      "candidate_id": "bridge_btcneu5ac_siglec9",
+      "candidate_name": "BTCNeu5Ac",
+      "target_receptor": "Siglec-9",
+      "modality": "glycomimetic",
+      "dockability": "dockable",
+      "dockability_reason": "Reviewed local receptor and literature-reconstructed ligand coordinates are available; chemistry review remains pending.",
+      "source_batch": "autonomous-current",
+      "execution_mode": "local",
+      "simulated": false,
+      "run_count": 1,
+      "minimized_affinity_mean_kcal_mol": -7.502,
+      "minimized_affinity_sd_kcal_mol": 0.0,
+      "cnn_score_mean": 0.2714,
+      "cnn_score_sd": 0.0,
+      "cnn_affinity_mean_pk": 5.005,
+      "cnn_affinity_sd_pk": 0.0,
+      "pose_quality_status": "review",
+      "pose_quality_threshold": 0.5,
+      "runs": [
+        {
+          "seed": 42,
+          "minimized_affinity_kcal_mol": -7.50182,
+          "cnn_score": 0.2714019716,
+          "cnn_affinity_pk": 5.005012989,
+          "pose_path": "outputs/docking/bridge-btcneu5ac-siglec9/seed-42.sdf",
+          "execution_mode": "local",
+          "simulated": false
+        }
+      ],
+      "functional_direction": "binding_only",
+      "structure_status": "literature_reconstructed_pending_chemistry_review",
+      "structure_provenance": "Reconstructed from the published BTCNeu5Ac chemical definition using the coordinate-sourced 6SLN scaffold; 3D coordinates generated with Open Babel 3.1.1",
+      "structure_source_url": "https://doi.org/10.1021/acschembio.3c00664",
+      "structure_sha256": "e5503c295aee25b04371b4fc98495bdc7d0689e555ded921efd60f0a969bf475",
+      "candidate_role": "published_high_affinity_glycomimetic_reconstructed",
+      "status": "completed",
+      "comparative_affinity_rank": 1
+    },
+    {
+      "candidate_id": "bridge_mttsneu5ac_siglec9",
+      "candidate_name": "MTTSNeu5Ac",
+      "target_receptor": "Siglec-9",
+      "modality": "glycomimetic",
+      "dockability": "dockable",
+      "dockability_reason": "Reviewed local receptor and literature-reconstructed ligand coordinates are available; chemistry review remains pending.",
+      "source_batch": "autonomous-current",
+      "execution_mode": "local",
+      "simulated": false,
+      "run_count": 1,
+      "minimized_affinity_mean_kcal_mol": -7.475,
+      "minimized_affinity_sd_kcal_mol": 0.0,
+      "cnn_score_mean": 0.6195,
+      "cnn_score_sd": 0.0,
+      "cnn_affinity_mean_pk": 6.253,
+      "cnn_affinity_sd_pk": 0.0,
+      "pose_quality_status": "pass",
+      "pose_quality_threshold": 0.5,
+      "runs": [
+        {
+          "seed": 42,
+          "minimized_affinity_kcal_mol": -7.4751,
+          "cnn_score": 0.6195462942,
+          "cnn_affinity_pk": 6.2530593872,
+          "pose_path": "outputs/docking/bridge-mttsneu5ac-siglec9/seed-42.sdf",
+          "execution_mode": "local",
+          "simulated": false
+        }
+      ],
+      "functional_direction": "binding_only",
+      "structure_status": "literature_reconstructed_pending_chemistry_review",
+      "structure_provenance": "Reconstructed from the published MTTSNeu5Ac chemical definition using the coordinate-sourced 6SLN scaffold; 3D coordinates generated with Open Babel 3.1.1",
+      "structure_source_url": "https://doi.org/10.1021/acschembio.3c00664",
+      "structure_sha256": "ae2a08dee2595552e1e88e0812181242e752dc61580f94f43c42631f8c49a5d3",
+      "candidate_role": "published_high_affinity_glycomimetic_reconstructed",
+      "status": "completed",
+      "comparative_affinity_rank": 2,
+      "gnina_rank": 1,
+      "uncertainty_group": 1,
+      "tied_with_previous": false
     }
   ]
 }

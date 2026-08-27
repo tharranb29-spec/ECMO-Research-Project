@@ -89,6 +89,7 @@ def write_json(path, payload):
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as handle:
         json.dump(payload, handle, indent=2, ensure_ascii=False)
+        handle.write("\n")
 
 
 def stable_unit_interval(*parts):
@@ -380,7 +381,7 @@ def build_experimental_validation(candidates, results):
         "minimum_for_correlation": 3,
         "pairs": pairs,
         "correlations": correlations,
-        "interpretation": "Exploratory rank validation only; five compounds are insufficient for a general performance claim.",
+        "interpretation": "Exploratory rank validation only; this small matched set is insufficient for a general performance claim.",
     }
 
 

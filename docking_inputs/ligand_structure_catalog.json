@@ -143,6 +143,62 @@
         "candidate_role": "related_siglec_specificity_control",
         "approved_for_docking": true
       }
+    },
+    {
+      "canonical_name": "BTCNeu5Ac",
+      "aliases": [
+        "BTCNeu5Ac",
+        "BTC-Neu5Ac",
+        "BTC Neu5Ac"
+      ],
+      "target_receptor": "Siglec-9",
+      "candidate_fields": {
+        "id": "bridge_btcneu5ac_siglec9",
+        "candidate_name": "BTCNeu5Ac",
+        "target_receptor": "Siglec-9",
+        "modality": "glycomimetic",
+        "ligand_sdf_path": "docking_inputs/siglec9/BTCNeu5Ac.sdf",
+        "structure_status": "literature_reconstructed_pending_chemistry_review",
+        "structure_provenance": "Reconstructed from the published BTCNeu5Ac chemical definition using the coordinate-sourced 6SLN scaffold; 3D coordinates generated with Open Babel 3.1.1",
+        "structure_source_url": "https://doi.org/10.1021/acschembio.3c00664",
+        "structure_sha256": "e5503c295aee25b04371b4fc98495bdc7d0689e555ded921efd60f0a969bf475",
+        "experimental_kd_value": 19.5,
+        "experimental_kd_unit": "um",
+        "experimental_kd_sd": 1.3,
+        "experimental_source": "https://doi.org/10.1021/acschembio.3c00664",
+        "experimental_affinity_note": "Published ITC Kd for Siglec-9. This experimental value is not a GNINA score and is used only as an external cross-check.",
+        "functional_direction": "binding_only",
+        "candidate_role": "published_high_affinity_glycomimetic_reconstructed",
+        "approved_for_docking": true
+      }
+    },
+    {
+      "canonical_name": "MTTSNeu5Ac",
+      "aliases": [
+        "MTTSNeu5Ac",
+        "MTTS-Neu5Ac",
+        "MTTS Neu5Ac"
+      ],
+      "target_receptor": "Siglec-9",
+      "candidate_fields": {
+        "id": "bridge_mttsneu5ac_siglec9",
+        "candidate_name": "MTTSNeu5Ac",
+        "target_receptor": "Siglec-9",
+        "modality": "glycomimetic",
+        "ligand_sdf_path": "docking_inputs/siglec9/MTTSNeu5Ac.sdf",
+        "structure_status": "literature_reconstructed_pending_chemistry_review",
+        "structure_provenance": "Reconstructed from the published MTTSNeu5Ac chemical definition using the coordinate-sourced 6SLN scaffold; 3D coordinates generated with Open Babel 3.1.1",
+        "structure_source_url": "https://doi.org/10.1021/acschembio.3c00664",
+        "structure_sha256": "ae2a08dee2595552e1e88e0812181242e752dc61580f94f43c42631f8c49a5d3",
+        "experimental_kd_value": 9.6,
+        "experimental_kd_unit": "um",
+        "experimental_kd_sd": 0.8,
+        "experimental_source": "https://doi.org/10.1021/acschembio.3c00664",
+        "experimental_affinity_note": "Published ITC Kd for Siglec-9. This experimental value is not a GNINA score and is used only as an external cross-check.",
+        "functional_direction": "binding_only",
+        "candidate_role": "published_high_affinity_glycomimetic_reconstructed",
+        "approved_for_docking": true
+      }
     }
   ]
 }

@@ -1582,7 +1582,7 @@
     table.className = "gnina-validation-table";
     const head = document.createElement("thead");
     const headRow = document.createElement("tr");
-    ["Candidate", "Experimental pKd", "Kd", "Min affinity", "CNNscore", "CNNaffinity"].forEach((text) => {
+    ["Candidate", "Experimental pKd", "Kd", "Min affinity", "CNNscore", "CNNaffinity", "CNN delta pK", "CNN Kd fold error"].forEach((text) => {
       const cell = document.createElement("th");
       cell.textContent = text;
       headRow.append(cell);
@@ -1600,6 +1600,8 @@
         Number(pair.minimized_affinity_kcal_mol).toFixed(2) + " kcal/mol",
         Number(pair.cnn_score).toFixed(3),
         pair.cnn_affinity_pk === null || pair.cnn_affinity_pk === undefined ? "Not available" : Number(pair.cnn_affinity_pk).toFixed(2) + " pK",
+        pair.cnn_affinity_pk === null || pair.cnn_affinity_pk === undefined ? "Not available" : (Number(pair.cnn_affinity_pk) - Number(pair.experimental_pkd)).toFixed(2) + " pK",
+        pair.cnn_affinity_pk === null || pair.cnn_affinity_pk === undefined ? "Not available" : Math.pow(10, Math.abs(Number(pair.cnn_affinity_pk) - Number(pair.experimental_pkd))).toFixed(2) + "x",
       ].forEach((text) => {
         const cell = document.createElement("td");
         cell.textContent = text;
@@ -1736,6 +1738,7 @@
               ["Minimized affinity", formatDockingMetric(result.minimized_affinity_mean_kcal_mol, result.minimized_affinity_sd_kcal_mol, 2, "kcal/mol")],
               ["CNNscore", formatDockingMetric(result.cnn_score_mean, result.cnn_score_sd, 3, "")],
               ["CNNaffinity", formatDockingMetric(result.cnn_affinity_mean_pk, result.cnn_affinity_sd_pk, 2, "pK")],
+              ["Runs", String(result.run_count || 0)],
             ].forEach(([labelText, valueText]) => {
               const metric = document.createElement("div");
               metric.className = "gnina-metric";
@@ -1896,7 +1899,7 @@
     );
     const passing = ordered.filter((item) => item.pose_quality_status === "pass").length;
     if (gninaBridgeOverviewCopy) {
-      gninaBridgeOverviewCopy.textContent = `${ordered.length} reviewed structures completed five seeded GNINA runs. ${passing} passed the CNN pose-quality gate; preliminary order below is based on mean minimized affinity and is not an experimental affinity rank.`;
+      gninaBridgeOverviewCopy.textContent = `${ordered.length} ligands completed controlled GNINA runs, including literature-reconstructed glycomimetics. ${passing} passed the CNN pose-quality gate; preliminary order below is based on mean minimized affinity and is not an experimental affinity rank.`;
     }
     ordered.forEach((result) => {
       const card = document.createElement("article");
@@ -1925,6 +1928,7 @@
         ["Affinity", formatDockingMetric(result.minimized_affinity_mean_kcal_mol, result.minimized_affinity_sd_kcal_mol, 2, "kcal/mol")],
         ["CNNscore", formatDockingMetric(result.cnn_score_mean, result.cnn_score_sd, 3, "")],
         ["CNNaffinity", formatDockingMetric(result.cnn_affinity_mean_pk, result.cnn_affinity_sd_pk, 2, "pK")],
+        ["Runs", String(result.run_count || 0)],
       ].forEach(([labelText, valueText]) => {
         const metric = document.createElement("div");
         metric.className = "gnina-metric";
@@ -1943,13 +1947,20 @@
       state.textContent = result.pose_quality_status === "pass" ? "Pose gate passed" : "Pose review required";
       const source = document.createElement(result.structure_source_url ? "a" : "span");
       source.className = "research-chip";
-      source.textContent = "Verified coordinate source";
+      const reconstructed = String(result.structure_status || "").includes("reconstructed");
+      source.textContent = reconstructed ? "Literature reconstruction source" : "Verified coordinate source";
       if (result.structure_source_url) {
         source.href = result.structure_source_url;
         source.target = "_blank";
         source.rel = "noreferrer";
       }
       footer.append(state, source);
+      if (reconstructed) {
+        const review = document.createElement("span");
+        review.className = "research-chip warning";
+        review.textContent = "Chemistry review pending";
+        footer.append(review);
+      }
       card.append(head, metrics, footer);
       gninaBridgeOverviewBoard.append(card);
     });

@@ -132,7 +132,7 @@ def update_registry(source_path, cropped_path, audit):
     prepared_pdb = cropped_path.with_name("siglec9_vset_18-144_ph7.4.pdb")
     prepared_pqr = cropped_path.with_name("siglec9_vset_18-144_ph7.4.pqr")
     registry["direct_siglec9_gate"] = {
-        "status": "receptor_reconstruction_pending_ligand_coordinates",
+        "status": "reconstructed_ligand_coordinates_pending_independent_review",
         "ranking_unlocked": False,
         "receptor": {
             "target": "human Siglec-9 V-set domain",
@@ -161,15 +161,21 @@ def update_registry(source_path, cropped_path, audit):
                 "name": "BTCNeu5Ac",
                 "chemical_description": "5-N-[(1-benzhydryl-1H-1,2,3-triazol-4-yl)methyl carbamate]-Neu5Ac alpha(2-6)Gal beta(1-4)GlcNAc",
                 "published_itc_kd_micromolar": {"value": 19.5, "sd": 1.3},
-                "coordinate_status": "missing_verified_3d_coordinates",
-                "review_status": "blocked",
+                "coordinate_status": "literature_reconstructed_3d_coordinates",
+                "review_status": "provisional_pending_carbohydrate_chemist_review",
+                "local_path": "docking_inputs/siglec9/BTCNeu5Ac.sdf",
+                "sha256": "e5503c295aee25b04371b4fc98495bdc7d0689e555ded921efd60f0a969bf475",
+                "molecular_formula": "C40H53N5O20",
             },
             {
                 "name": "MTTSNeu5Ac",
                 "chemical_description": "9N-[5-(2-methylthiazol-4-yl)thiophene sulfonamide]-Neu5Ac alpha(2-6)Gal beta(1-4)GlcNAc",
                 "published_itc_kd_micromolar": {"value": 9.6, "sd": 0.8},
-                "coordinate_status": "missing_verified_3d_coordinates",
-                "review_status": "blocked",
+                "coordinate_status": "literature_reconstructed_3d_coordinates",
+                "review_status": "provisional_pending_carbohydrate_chemist_review",
+                "local_path": "docking_inputs/siglec9/MTTSNeu5Ac.sdf",
+                "sha256": "ae2a08dee2595552e1e88e0812181242e752dc61580f94f43c42631f8c49a5d3",
+                "molecular_formula": "C33H48N4O20S3",
             },
         ],
         "evidence": {
@@ -182,7 +188,7 @@ def update_registry(source_path, cropped_path, audit):
         "blocking_reasons": [
             "Exact author Siglec-9 model coordinates are not deposited with the article.",
             "The available AlphaFold reconstruction is canonical WT, while the reported NMR construct carried C36S.",
-            "Verified stereochemically complete BTCNeu5Ac and MTTSNeu5Ac 3D files are not yet available locally.",
+            "BTCNeu5Ac and MTTSNeu5Ac are literature-reconstructed rather than author-deposited coordinates and still require independent carbohydrate-chemistry review.",
             "NMR/MD interaction constraints have not yet been reproduced on this reconstruction.",
         ],
     }
@@ -201,11 +207,18 @@ def update_validation(registry):
         "receptor_review_status": gate["receptor"]["review_status"],
         "receptor_p53_state": gate["receptor"]["audit"]["p53_state"],
         "verified_ligand_count": sum(item["review_status"] == "verified" for item in gate["ligands"]),
+        "reconstructed_ligand_count": sum("reconstructed" in item.get("coordinate_status", "") for item in gate["ligands"]),
         "required_ligand_count": len(gate["ligands"]),
         "blocking_reasons": gate["blocking_reasons"],
     }
     next_gate = validation.setdefault("next_gate", {})
-    next_gate["status"] = "in_progress_blocked_on_verified_ligand_coordinates"
+    next_gate["status"] = "in_progress_pending_independent_chemistry_and_interaction_review"
+    next_gate["requirements"] = [
+        "Independent carbohydrate-chemistry review of reconstructed BTCNeu5Ac and MTTSNeu5Ac structures",
+        "Reproduction of the published Siglec-9 interaction constraints",
+        "Matched multi-seed docking after chemistry sign-off",
+        "Comparison with published affinity and interaction evidence",
+    ]
     write_json(VALIDATION_PATH, validation)
 
 

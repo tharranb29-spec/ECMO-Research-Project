@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-23T16:25:06.777124+00:00",
+  "last_updated": "2026-08-27T12:20:36.760733+00:00",
   "overall_status": "partial_validation",
   "dashboard_real_ranking_ready": false,
   "scope_statement": "GNINA CPU execution and Siglec-family pose recovery are validated; direct Siglec-9 receptor/candidate validation remains pending.",
@@ -94,26 +94,27 @@
   ],
   "next_gate": {
     "name": "direct_siglec9_validation",
-    "status": "in_progress_blocked_on_verified_ligand_coordinates",
+    "status": "in_progress_pending_independent_chemistry_and_interaction_review",
     "requirements": [
-      "Reviewed Siglec-9 receptor model matching the published modeling strategy",
-      "Verified BTCNeu5Ac and MTTSNeu5Ac structures with provenance",
-      "Five-seed docking with uncertainty reporting",
+      "Independent carbohydrate-chemistry review of reconstructed BTCNeu5Ac and MTTSNeu5Ac structures",
+      "Reproduction of the published Siglec-9 interaction constraints",
+      "Matched multi-seed docking after chemistry sign-off",
       "Comparison with published affinity and interaction evidence"
     ]
   },
   "direct_target_assets": {
     "registry_path": "docking_inputs/structure_registry.json",
-    "status": "receptor_reconstruction_pending_ligand_coordinates",
+    "status": "reconstructed_ligand_coordinates_pending_independent_review",
     "ranking_unlocked": false,
     "receptor_review_status": "provisional_reconstruction",
     "receptor_p53_state": "cis",
     "verified_ligand_count": 0,
+    "reconstructed_ligand_count": 2,
     "required_ligand_count": 2,
     "blocking_reasons": [
       "Exact author Siglec-9 model coordinates are not deposited with the article.",
       "The available AlphaFold reconstruction is canonical WT, while the reported NMR construct carried C36S.",
-      "Verified stereochemically complete BTCNeu5Ac and MTTSNeu5Ac 3D files are not yet available locally.",
+      "BTCNeu5Ac and MTTSNeu5Ac are literature-reconstructed rather than author-deposited coordinates and still require independent carbohydrate-chemistry review.",
       "NMR/MD interaction constraints have not yet been reproduced on this reconstruction."
     ]
   }
