@@ -271,6 +271,9 @@
     if (payload.gnina_results) {
       bundle.gnina_results = payload.gnina_results;
     }
+    if (payload.gnina_bridge_results) {
+      bundle.gnina_bridge_results = payload.gnina_bridge_results;
+    }
     if (payload.gnina_status) {
       bundle.gnina_status = payload.gnina_status;
     }
@@ -281,6 +284,7 @@
     setBranding();
     renderAll();
     updateAssistantChrome();
+    window.dispatchEvent(new CustomEvent("ecmo:bundle-updated"));
   }
 
   function getData(datasetKey) {

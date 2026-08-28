@@ -4340,6 +4340,45 @@
           background: #fff;
         }
       }
+      .evidence-command-panel { position: relative; overflow: hidden; padding: 26px; border-radius: 30px; color: #f7fbff; background: radial-gradient(circle at 92% 8%, rgba(43,207,178,.22), transparent 28%), radial-gradient(circle at 4% 96%, rgba(184,129,18,.18), transparent 30%), linear-gradient(135deg,#0d213b 0%,#15375a 58%,#0c4f59 100%); box-shadow: 0 28px 62px rgba(16,36,62,.2); }
+      .evidence-command-head { display:flex; justify-content:space-between; gap:22px; align-items:flex-start; }
+      .evidence-command-head h2 { margin:5px 0 0; font-size:clamp(1.7rem,3vw,2.45rem); }
+      .evidence-command-head p { max-width:78ch; margin:10px 0 0; color:rgba(239,247,255,.78); line-height:1.6; }
+      .evidence-state-badge { flex:0 0 auto; padding:10px 14px; border:1px solid rgba(255,255,255,.22); border-radius:999px; color:#fff4ce; background:rgba(184,129,18,.2); font-weight:700; }
+      .evidence-decision-lanes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:22px; }
+      .evidence-decision-card { min-width:0; padding:18px; border:1px solid rgba(255,255,255,.13); border-radius:22px; background:rgba(255,255,255,.08); backdrop-filter:blur(12px); }
+      .evidence-decision-card.teal { border-top:3px solid #4ed6be; } .evidence-decision-card.gold { border-top:3px solid #efbf57; } .evidence-decision-card.navy { border-top:3px solid #80aaff; }
+      .evidence-card-label,.evidence-mini-label { color:rgba(232,241,251,.7); font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; }
+      .evidence-decision-card h3 { margin:9px 0 0; color:#fff; font-size:1.28rem; }
+      .evidence-decision-card strong { display:block; margin-top:10px; color:#dff8f1; font-size:1.05rem; }
+      .evidence-decision-card p { margin:8px 0 0; color:rgba(239,247,255,.72); line-height:1.48; }
+      .evidence-summary-strip { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px; margin-top:16px; overflow:hidden; border:1px solid rgba(255,255,255,.12); border-radius:18px; background:rgba(255,255,255,.1); }
+      .evidence-summary-metric { padding:14px 16px; background:rgba(7,25,44,.3); }
+      .evidence-summary-metric strong { display:block; margin-top:3px; color:#fff; font-size:1.32rem; }
+      .evidence-scope-note { margin-top:16px; padding:13px 16px; border-left:3px solid #efbf57; border-radius:8px 16px 16px 8px; color:rgba(250,252,255,.86); background:rgba(4,16,31,.28); line-height:1.55; }
+      .evidence-workbench-panel { overflow:visible; }
+      .evidence-tab-shell { padding:18px; }
+      .evidence-tabs { display:flex; gap:8px; overflow-x:auto; padding:4px 4px 12px; scrollbar-width:thin; }
+      .evidence-tab { flex:0 0 auto; padding:10px 15px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:#fff; font-weight:700; cursor:pointer; }
+      .evidence-tab.active { color:#fff; border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--accent-strong)); box-shadow:0 10px 22px rgba(21,92,244,.2); }
+      .evidence-tab-panel { padding-top:6px; }
+      .evidence-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+      .evidence-detail-card,.evidence-policy-card,.evidence-next-gate { min-width:0; padding:18px; border:1px solid var(--line); border-radius:20px; background:linear-gradient(180deg,#fff,#f6f9fd); }
+      .evidence-detail-card h3 { margin:8px 0 0; } .evidence-detail-card p { margin:8px 0 0; color:var(--muted); line-height:1.5; } .evidence-detail-card .evidence-mini-label { color:var(--accent-strong); }
+      .evidence-detail-metrics { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; margin-top:14px; }
+      .evidence-detail-metric { padding:10px; border-radius:13px; background:var(--ink-soft); }
+      .evidence-detail-metric span { display:block; color:var(--muted); font-size:.78rem; } .evidence-detail-metric strong { display:block; margin-top:3px; overflow-wrap:anywhere; }
+      .evidence-policy-card { margin-bottom:14px; border-left:4px solid var(--gold); background:linear-gradient(135deg,#fffaf0,#fff); }
+      .evidence-policy-card h3 { margin:0; } .evidence-policy-card p { margin:8px 0 0; color:var(--muted); line-height:1.55; }
+      .evidence-table-wrap { overflow-x:auto; border:1px solid var(--line); border-radius:18px; background:#fff; }
+      .evidence-table { width:100%; min-width:860px; border-collapse:collapse; }
+      .evidence-table th,.evidence-table td { padding:12px 14px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+      .evidence-table th { color:var(--muted); background:#f4f7fb; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; }
+      .evidence-status { display:inline-flex; padding:6px 9px; border-radius:999px; font-size:.78rem; font-weight:700; }
+      .evidence-status.ok { color:#087052; background:rgba(13,130,117,.12); } .evidence-status.warning { color:#9a6500; background:rgba(184,129,18,.14); } .evidence-status.blocked { color:#a2342c; background:rgba(180,35,24,.1); }
+      .evidence-next-gate { margin-top:14px; color:#fff; border:0; background:linear-gradient(135deg,#143455,#0d7168); }
+      @media (max-width:1050px) { .evidence-decision-lanes,.evidence-card-grid { grid-template-columns:1fr 1fr; } .evidence-summary-strip { grid-template-columns:1fr 1fr; } }
+      @media (max-width:680px) { .evidence-command-panel { padding:19px; border-radius:23px; } .evidence-command-head { flex-direction:column; } .evidence-decision-lanes,.evidence-card-grid,.evidence-summary-strip { grid-template-columns:1fr; } .evidence-tab-shell { padding:12px; } }
     </style>
   </head>
   <body>
@@ -4599,6 +4638,19 @@
         </section>
 
         <section id="overview-view" class="view research-view" hidden>
+          <section class="evidence-command-panel" aria-labelledby="evidence-command-title">
+            <div class="evidence-command-head">
+              <div>
+                <span class="section-kicker">SUPERVISOR EVIDENCE BRIEF</span>
+                <h2 id="evidence-command-title">What the computational model supports today</h2>
+                <p>Decision support is separated from biological proof. Raw docking order, pose confidence, experimental matches, and unresolved validation gates are shown independently.</p>
+              </div>
+              <span class="evidence-state-badge">Pre-experimental</span>
+            </div>
+            <div id="evidence-decision-lanes" class="evidence-decision-lanes"></div>
+            <div id="evidence-summary-strip" class="evidence-summary-strip"></div>
+            <div id="evidence-scope-note" class="evidence-scope-note"></div>
+          </section>
           <section id="gnina-bridge-overview-section" class="panel" hidden>
             <div class="panel-head">
               <div>
@@ -4684,6 +4736,30 @@
             <div class="target-sections" id="research-leads"></div>
           </section>
 
+          <section class="panel evidence-workbench-panel">
+            <div class="panel-head research-panel-head">
+              <div>
+                <span class="section-kicker">EVIDENCE CONTROL CENTER</span>
+                <h2>Docking Evidence Workbench</h2>
+                <p>Inspect benchmark recovery, seed-level quality control, protocol provenance, autonomous lead gates, and wet-lab handoff readiness without combining unlike scores.</p>
+              </div>
+              <span id="evidence-workbench-status" class="research-chip warning">Validation in progress</span>
+            </div>
+            <div class="evidence-tab-shell">
+              <div class="evidence-tabs" role="tablist" aria-label="Docking evidence views">
+                <button class="evidence-tab active" type="button" data-evidence-tab="benchmark" role="tab" aria-selected="true">Benchmark</button>
+                <button class="evidence-tab" type="button" data-evidence-tab="qc" role="tab" aria-selected="false">Run QC</button>
+                <button class="evidence-tab" type="button" data-evidence-tab="provenance" role="tab" aria-selected="false">Protocol &amp; provenance</button>
+                <button class="evidence-tab" type="button" data-evidence-tab="discovery" role="tab" aria-selected="false">Discovery gates</button>
+                <button class="evidence-tab" type="button" data-evidence-tab="handoff" role="tab" aria-selected="false">Lab handoff</button>
+              </div>
+              <section class="evidence-tab-panel active" data-evidence-panel="benchmark" role="tabpanel"><div id="evidence-benchmark-board" class="evidence-card-grid"></div></section>
+              <section class="evidence-tab-panel" data-evidence-panel="qc" role="tabpanel" hidden><div id="evidence-qc-policy" class="evidence-policy-card"></div><div id="evidence-qc-table" class="evidence-table-wrap"></div></section>
+              <section class="evidence-tab-panel" data-evidence-panel="provenance" role="tabpanel" hidden><div id="evidence-provenance-board" class="evidence-card-grid"></div></section>
+              <section class="evidence-tab-panel" data-evidence-panel="discovery" role="tabpanel" hidden><div id="evidence-discovery-board" class="evidence-card-grid"></div></section>
+              <section class="evidence-tab-panel" data-evidence-panel="handoff" role="tabpanel" hidden><div id="evidence-handoff-board" class="evidence-card-grid"></div><div id="evidence-next-gate" class="evidence-next-gate"></div></section>
+            </div>
+          </section>
           <section class="panel gnina-panel">
             <div class="panel-head research-panel-head">
               <div>
@@ -5258,5 +5334,6 @@
     <script src="assets/3Dmol-min.js"></script>
     <script src="protein-viewer.js"></script>
     <script src="dashboard.js"></script>
+    <script src="evidence-dashboard.js"></script>
   </body>
 </html>

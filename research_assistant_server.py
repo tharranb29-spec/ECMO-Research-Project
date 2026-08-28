@@ -83,6 +83,7 @@ STATIC_FILES = {
     "/": ROOT / "dashboard.html",
     "/dashboard.html": ROOT / "dashboard.html",
     "/dashboard.js": ROOT / "dashboard.js",
+    "/evidence-dashboard.js": ROOT / "evidence-dashboard.js",
     "/login.html": ROOT / "login.html",
     "/login.js": ROOT / "login.js",
     "/protein-viewer.js": ROOT / "protein-viewer.js",
@@ -872,7 +873,7 @@ class Handler(BaseHTTPRequestHandler):
     def _cache_control_for_path(self, path):
         if path.startswith("/api/"):
             return "no-store"
-        if path in {"/", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
+        if path in {"/", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/evidence-dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
             return "no-store"
         return "public, max-age=3600"
 
