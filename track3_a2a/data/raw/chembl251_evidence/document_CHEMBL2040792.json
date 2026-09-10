@@ -1,0 +1,24 @@
+{
+  "abstract": "In silico screening of a collection of 1584 academic compounds identified a small molecule hit for the human adenosine A(2A) receptor (pK(i) = 6.2) containing a novel chromene scaffold (3a). To explore the structure-activity relationships of this new chemical series for adenosine receptors, a focused library of 43 2H-chromene-3-carboxamide derivatives was synthesized and tested in radioligand binding assays at human adenosine A(1), A(2A), A(2B) and A(3) receptors. The series was found to be enriched with bioactive compounds for adenosine receptors, with 14 molecules showing submicromolar affinity (pK(i) \u2265 6.0) for at least one adenosine receptor subtype. These results provide evidence that the chromene scaffold, a core structure present in natural products from a wide variety of plants, vegetables, and fruits, constitutes a valuable source for novel therapeutic agents.",
+  "authors": "Areias F, Costa M, Castro M, Brea J, Gregori-Puigjan\u00e9 E, Proen\u00e7a MF, Mestres J, Loza MI.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_15",
+    "creation_date": "2013-01-23"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2040792",
+  "doi": "10.1016/j.ejmech.2012.05.009",
+  "doi_chembl": null,
+  "first_page": "303",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "310",
+  "patent_id": null,
+  "pubmed_id": 22677030,
+  "src_id": 1,
+  "title": "New chromene scaffolds for adenosine A(2A) receptors: synthesis, pharmacology and structure-activity relationships.",
+  "volume": "54",
+  "year": 2012
+}

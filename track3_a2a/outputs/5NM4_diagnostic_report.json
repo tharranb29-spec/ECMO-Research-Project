@@ -1,0 +1,86 @@
+{
+  "status": "pass",
+  "validity": "valid_secondary_diagnostic",
+  "role": "independent_inactive_structure_diagnostic_not_primary_gate",
+  "primary_4EIY_result_preserved": true,
+  "source": {
+    "pdb_id": "5NM4",
+    "resolution_angstrom": 1.7,
+    "source_pdb_sha256": "fc1a1e9ae2d334170e2442e648e5ea9ffd28c70c666d30a3001115216b3dc179",
+    "source_ligand_sha256": "83b5652f86ee38f775d8cf09560cd50bea86e98e2690c4bcc4448845127d7a1e"
+  },
+  "sequence_mapping": {
+    "method": "PDB DBREF segments mapped to UniProt P29274",
+    "segments": [
+      "PDB 11-217 -> UniProt 2-208",
+      "PDB 324-422 -> UniProt 219-317"
+    ]
+  },
+  "alignment": {
+    "reference": "4EIY",
+    "common_tm_ca_count": 232,
+    "post_alignment_rmsd_angstrom": 0.2751
+  },
+  "redocking": {
+    "case_id": "5NM4-diagnostic",
+    "status": "pass",
+    "valid_run_count": 5,
+    "failed_run_count": 0,
+    "passing_pose_count": 4,
+    "median_rmsd_angstrom": 1.7177,
+    "mean_rmsd_angstrom": 1.7332,
+    "runs": [
+      {
+        "seed": 42,
+        "status": "valid",
+        "rmsd_angstrom": 1.9105,
+        "minimized_affinity_kcal_mol": -8.5922,
+        "cnn_score": 0.8011,
+        "cnn_affinity_pk": 6.9438,
+        "pose_path": "outputs/redocking/5NM4-diagnostic/seed-42.sdf",
+        "log_path": "outputs/redocking/5NM4-diagnostic/seed-42.log"
+      },
+      {
+        "seed": 43,
+        "status": "valid",
+        "rmsd_angstrom": 3.1987,
+        "minimized_affinity_kcal_mol": -8.2173,
+        "cnn_score": 0.7145,
+        "cnn_affinity_pk": 7.2504,
+        "pose_path": "outputs/redocking/5NM4-diagnostic/seed-43.sdf",
+        "log_path": "outputs/redocking/5NM4-diagnostic/seed-43.log"
+      },
+      {
+        "seed": 44,
+        "status": "valid",
+        "rmsd_angstrom": 0.9377,
+        "minimized_affinity_kcal_mol": -9.1617,
+        "cnn_score": 0.933,
+        "cnn_affinity_pk": 7.0636,
+        "pose_path": "outputs/redocking/5NM4-diagnostic/seed-44.sdf",
+        "log_path": "outputs/redocking/5NM4-diagnostic/seed-44.log"
+      },
+      {
+        "seed": 45,
+        "status": "valid",
+        "rmsd_angstrom": 0.9012,
+        "minimized_affinity_kcal_mol": -9.146,
+        "cnn_score": 0.9482,
+        "cnn_affinity_pk": 7.1204,
+        "pose_path": "outputs/redocking/5NM4-diagnostic/seed-45.sdf",
+        "log_path": "outputs/redocking/5NM4-diagnostic/seed-45.log"
+      },
+      {
+        "seed": 46,
+        "status": "valid",
+        "rmsd_angstrom": 1.7177,
+        "minimized_affinity_kcal_mol": -8.7025,
+        "cnn_score": 0.8876,
+        "cnn_affinity_pk": 6.7255,
+        "pose_path": "outputs/redocking/5NM4-diagnostic/seed-46.sdf",
+        "log_path": "outputs/redocking/5NM4-diagnostic/seed-46.log"
+      }
+    ]
+  },
+  "interpretation_rule": "Assess transferability of pose selection only. Do not replace the registered 4EIY endpoint based on favorable performance."
+}

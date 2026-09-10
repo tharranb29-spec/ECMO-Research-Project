@@ -1,0 +1,24 @@
+{
+  "abstract": "Structures of G protein-coupled receptors (GPCRs) have a proven utility in the discovery of new antagonists and inverse agonists modulating signaling of this important family of clinical targets. Applicability of active-state GPCR structures to virtual screening and rational optimization of agonists, however, remains to be assessed. In this study of adenosine 5' derivatives, we evaluated the performance of an agonist-bound A(2A) adenosine receptor (AR) structure in retrieval of known agonists and then employed the structure to screen for new fragments optimally fitting the corresponding subpocket. Biochemical and functional assays demonstrate high affinity of new derivatives that include polar heterocycles. The binding models also explain modest selectivity gain for some substituents toward the closely related A(1)AR subtype and the modified agonist efficacy of some of these ligands. The study suggests further applicability of in silico fragment screening to rational lead optimization in GPCRs.",
+  "authors": "Tosh DK, Phan K, Gao ZG, Gakh AA, Xu F, Deflorian F, Abagyan R, Stevens RC, Jacobson KA, Katritch V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_15",
+    "creation_date": "2013-01-23"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2069206",
+  "doi": "10.1021/jm300095s",
+  "doi_chembl": null,
+  "first_page": "4297",
+  "issue": "9",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4308",
+  "patent_id": null,
+  "pubmed_id": 22486652,
+  "src_id": 1,
+  "title": "Optimization of adenosine 5'-carboxamide derivatives as adenosine receptor agonists using structure-based ligand design and fragment screening.",
+  "volume": "55",
+  "year": 2012
+}

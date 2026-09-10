@@ -1,47 +1,50 @@
 {
-  "last_updated": "2026-04-15T06:50:34.791895+00:00",
-  "last_attempted_at": "2026-04-15T10:34:51.353154+00:00",
-  "last_successful_data_at": "2026-04-15T06:50:34.791895+00:00",
-  "article_count": 77,
-  "relevant_article_count": 41,
-  "new_article_count": 0,
-  "lead_count": 4,
-  "new_lead_count": 0,
-  "autonomous_ranked_count": 4,
-  "promoted_count": 0,
-  "heuristic_lead_count": 4,
+  "last_updated": "2026-09-10T17:13:04.910201+00:00",
+  "last_attempted_at": "2026-09-10T17:13:04.910201+00:00",
+  "last_successful_data_at": "2026-09-10T17:13:04.910201+00:00",
+  "article_count": 76,
+  "relevant_article_count": 39,
+  "new_article_count": 22,
+  "lead_count": 7,
+  "new_lead_count": 4,
+  "autonomous_ranked_count": 7,
+  "promoted_count": 2,
+  "gnina_mode": "prototype",
+  "gnina_simulated": true,
+  "gnina_completed_count": 2,
+  "gnina_candidate_count": 7,
+  "heuristic_lead_count": 10,
   "llm_lead_count": 0,
   "llm_enabled": false,
   "llm_provider": null,
   "query_results": [
     {
       "target_receptor": "Siglec-9",
-      "ok": false,
-      "error": "[Errno 61] Connection refused"
+      "ok": true,
+      "article_count": 24,
+      "relevant_article_count": 10
     },
     {
       "target_receptor": "Siglec-9",
-      "ok": false,
-      "error": "[Errno 61] Connection refused"
+      "ok": true,
+      "article_count": 24,
+      "relevant_article_count": 14
     },
     {
       "target_receptor": "SIRPa",
-      "ok": false,
-      "error": "[Errno 61] Connection refused"
+      "ok": true,
+      "article_count": 24,
+      "relevant_article_count": 17
     },
     {
       "target_receptor": "SIRPa",
-      "ok": false,
-      "error": "[Errno 61] Connection refused"
+      "ok": true,
+      "article_count": 24,
+      "relevant_article_count": 11
     }
   ],
-  "errors": [
-    "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
-    "Siglec-9: Europe PMC network error - [Errno 61] Connection refused",
-    "SIRPa: Europe PMC network error - [Errno 61] Connection refused",
-    "SIRPa: Europe PMC network error - [Errno 61] Connection refused"
-  ],
-  "health": "warning",
+  "errors": [],
+  "health": "ok",
   "queries": [
     {
       "target_receptor": "Siglec-9",
@@ -60,7 +63,18 @@
       "query": "((\"SIRPalpha\" OR \"SIRPa\" OR \"SIRPα\" OR CD47) AND (\"self peptide\" OR ectodomain OR N3612 OR CV1 OR TTI-621 OR TTI-622 OR bispecific OR antibody OR decoy)) sort_date:y"
     }
   ],
-  "new_article_titles": [],
-  "new_lead_names": [],
-  "using_cached_results": true
+  "new_article_titles": [
+    "Defined O-acetylated Neu5Ac substrates reveal position-specific preferences of gut bacterial sialidases.",
+    "Profiling Siglec-7 and Siglec-9 ligands across the LuCaP PDX series: Implications for glyco-immune checkpoint inhibition in advanced prostate cancer",
+    "Neutrophil-derived apoptotic bodies function as decoy signals to preserve bone integrity during infectious osteomyelitis.",
+    "The Relationship Between Eosinophilic Esophagitis and Laryngeal Manifestations: Pathophysiology, Clinical Overlap, and Diagnostic Challenges.",
+    "Human biomarker navigator."
+  ],
+  "new_lead_names": [
+    "Delta",
+    "N-expressing",
+    "SARS-CoV-2",
+    "Neu5Ac"
+  ],
+  "using_cached_results": false
 }

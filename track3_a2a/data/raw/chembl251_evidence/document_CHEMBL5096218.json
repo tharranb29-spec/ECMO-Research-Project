@@ -1,0 +1,24 @@
+{
+  "abstract": "A series of benzyloxy and phenoxy derivatives of the adenosine receptor agonists <i>N</i><sup>6</sup>-cyclopentyl adenosine (CPA) and <i>N</i><sup>6</sup>-cyclopentyl 5'-<i>N</i>-ethylcarboxamidoadenosine (CP-NECA) were synthesized, and their potency and selectivity were assessed. We observed that the most potent were the compounds with a halogen in the <i>meta</i> position on the aromatic ring of the benzyloxy- or phenoxycyclopentyl substituent. In general, the NECA-based compounds displayed greater A<sub>1</sub>R selectivity than the adenosine-based compounds, with <i>N</i><sup>6</sup>-2-(3-bromobenzyloxy)cyclopentyl-NECA and <i>N</i><sup>6</sup>-2-(3-methoxyphenoxy)cyclopentyl-NECA showing \u223c1500-fold improved A<sub>1</sub>R selectivity compared to NECA. In addition, we quantified the compounds' affinity and kinetics of binding at both human and rat A<sub>1</sub>R using a NanoBRET binding assay and found that the halogen substituent in the benzyloxy- or phenoxycyclopentyl moiety seems to confer high affinity for the A<sub>1</sub>R. Molecular modeling studies suggested a hydrophobic subpocket as contributing to the A<sub>1</sub>R selectivity displayed. We believe that the identified selective potent A<sub>1</sub>R agonists are valuable tool compounds for adenosine receptor research.",
+  "authors": "Preti B, Suchankova A, Deganutti G, Leuenberger M, Barkan K, Manulak I, Huang X, Carvalho S, Ladds G, Lochner M.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5096218",
+  "doi": "10.1021/acs.jmedchem.2c01414",
+  "doi_chembl": null,
+  "first_page": "14864",
+  "issue": "21.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "14890",
+  "patent_id": null,
+  "pubmed_id": 36270633,
+  "src_id": 1,
+  "title": "Discovery and Structure-Activity Relationship Studies of Novel Adenosine A<sub>1</sub> Receptor-Selective Agonists.",
+  "volume": "65",
+  "year": 2022
+}

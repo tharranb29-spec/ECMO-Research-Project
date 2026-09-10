@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-24T08:36:07.725833+00:00",
+  "last_updated": "2026-09-10T17:13:04.910201+00:00",
   "criteria": {
     "min_score": 65.0,
     "recommendation_tiers": [
@@ -12,5 +12,202 @@
     "allow_known_reference_as_labeled_gnina_benchmark": true,
     "gnina_pose_gate_when_available": true
   },
-  "ranked": []
+  "ranked": [
+    {
+      "id": "auto_pd1_sirpa",
+      "candidate_name": "PD1",
+      "target_receptor": "SIRPa",
+      "modality": "literature_lead",
+      "predicted_score": 41.7,
+      "recommendation": "reject",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Unveiling the immune microenvironment in sinonasal intestinal type adenocarcinoma: new arguments for immunotherapy. (new literature lead, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/42689729"
+      ],
+      "translational_suitability_score": 41.7,
+      "gnina": {
+        "candidate_id": "auto_pd1_sirpa",
+        "candidate_name": "PD1",
+        "target_receptor": "SIRPa",
+        "modality": "literature_lead",
+        "dockability": "prototype_eligible",
+        "dockability_reason": "Eligible for a visibly simulated end-to-end workflow demonstration.",
+        "source_batch": "42689729",
+        "execution_mode": "prototype",
+        "simulated": true,
+        "run_count": 5,
+        "minimized_affinity_mean_kcal_mol": -8.376,
+        "minimized_affinity_sd_kcal_mol": 0.132,
+        "cnn_score_mean": 0.5109,
+        "cnn_score_sd": 0.0231,
+        "cnn_affinity_mean_pk": 6.587,
+        "cnn_affinity_sd_pk": 0.06,
+        "pose_quality_status": "pass",
+        "pose_quality_threshold": 0.5,
+        "runs": [
+          {
+            "seed": 42,
+            "minimized_affinity_kcal_mol": -8.501,
+            "cnn_score": 0.5279,
+            "cnn_affinity_pk": 6.597,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 43,
+            "minimized_affinity_kcal_mol": -8.539,
+            "cnn_score": 0.5024,
+            "cnn_affinity_pk": 6.565,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 44,
+            "minimized_affinity_kcal_mol": -8.285,
+            "cnn_score": 0.54,
+            "cnn_affinity_pk": 6.603,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 45,
+            "minimized_affinity_kcal_mol": -8.27,
+            "cnn_score": 0.5023,
+            "cnn_affinity_pk": 6.668,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 46,
+            "minimized_affinity_kcal_mol": -8.286,
+            "cnn_score": 0.4817,
+            "cnn_affinity_pk": 6.504,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          }
+        ],
+        "functional_direction": "unknown",
+        "structure_status": "awaiting_verified_structure",
+        "structure_provenance": null,
+        "structure_source_url": null,
+        "structure_sha256": null,
+        "candidate_role": null,
+        "status": "completed",
+        "comparative_affinity_rank": 1,
+        "gnina_rank": 1,
+        "uncertainty_group": 1,
+        "tied_with_previous": false
+      },
+      "gnina_rank": 1,
+      "ranking_basis": "gnina_b2_prototype",
+      "promoted_to_main_view": true,
+      "promotion_source": "autonomous_discovery_with_gnina",
+      "promotion_reason": "Autonomous literature discovery surfaced this candidate, the translational suitability model passed it for review, and the GNINA pose-quality gate passed in the current prototype workflow.",
+      "promotion_rank": 1
+    },
+    {
+      "id": "auto_neu5ac_siglec9",
+      "candidate_name": "Neu5Ac",
+      "target_receptor": "Siglec-9",
+      "modality": "sialoside",
+      "predicted_score": 49.8,
+      "recommendation": "reject",
+      "explanation": "strong affinity evidence, strong immunomodulation evidence, good target specificity.",
+      "evidence_summary": "Recent literature mention in article: Defined O-acetylated Neu5Ac substrates reveal position-specific preferences of gut bacterial sialidases. (new literature lead, heuristic extraction)",
+      "source_urls": [
+        "https://europepmc.org/article/MED/42708333"
+      ],
+      "translational_suitability_score": 49.8,
+      "gnina": {
+        "candidate_id": "auto_neu5ac_siglec9",
+        "candidate_name": "Neu5Ac",
+        "target_receptor": "Siglec-9",
+        "modality": "sialoside",
+        "dockability": "prototype_eligible",
+        "dockability_reason": "Eligible for a visibly simulated end-to-end workflow demonstration.",
+        "source_batch": "42708333",
+        "execution_mode": "prototype",
+        "simulated": true,
+        "run_count": 5,
+        "minimized_affinity_mean_kcal_mol": -5.986,
+        "minimized_affinity_sd_kcal_mol": 0.117,
+        "cnn_score_mean": 0.5126,
+        "cnn_score_sd": 0.0243,
+        "cnn_affinity_mean_pk": 4.9,
+        "cnn_affinity_sd_pk": 0.06,
+        "pose_quality_status": "pass",
+        "pose_quality_threshold": 0.5,
+        "runs": [
+          {
+            "seed": 42,
+            "minimized_affinity_kcal_mol": -5.863,
+            "cnn_score": 0.5208,
+            "cnn_affinity_pk": 4.942,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 43,
+            "minimized_affinity_kcal_mol": -6.162,
+            "cnn_score": 0.4876,
+            "cnn_affinity_pk": 4.959,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 44,
+            "minimized_affinity_kcal_mol": -6.034,
+            "cnn_score": 0.534,
+            "cnn_affinity_pk": 4.808,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 45,
+            "minimized_affinity_kcal_mol": -5.915,
+            "cnn_score": 0.4858,
+            "cnn_affinity_pk": 4.915,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          },
+          {
+            "seed": 46,
+            "minimized_affinity_kcal_mol": -5.957,
+            "cnn_score": 0.5349,
+            "cnn_affinity_pk": 4.874,
+            "pose_path": null,
+            "execution_mode": "prototype",
+            "simulated": true
+          }
+        ],
+        "functional_direction": "unknown",
+        "structure_status": "verified_experimental_coordinates",
+        "structure_provenance": "RCSB CCD SIA ideal coordinates",
+        "structure_source_url": "https://www.rcsb.org/ligand/SIA",
+        "structure_sha256": "24c952771a239f5ff652dd4b962efb1f0b7f011fcc1a73c8ac6fdd431ff25773",
+        "candidate_role": "minimal_sialic_acid_control",
+        "status": "completed",
+        "comparative_affinity_rank": 1,
+        "gnina_rank": 1,
+        "uncertainty_group": 1,
+        "tied_with_previous": false
+      },
+      "gnina_rank": 1,
+      "ranking_basis": "gnina_b2_prototype",
+      "promoted_to_main_view": true,
+      "promotion_source": "autonomous_discovery_with_gnina",
+      "promotion_reason": "Autonomous literature discovery surfaced this candidate, the translational suitability model passed it for review, and the GNINA pose-quality gate passed in the current prototype workflow.",
+      "promotion_rank": 2
+    }
+  ]
 }

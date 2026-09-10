@@ -1,0 +1,24 @@
+{
+  "abstract": "The blockade of A<sub>2A</sub> adenosine receptor (A<sub>2A</sub>AR) activates immunostimulatory response through regulating signaling in tumor microenvironment. Thus, A<sub>2A</sub>AR has been proposed as a promising target for cancer immunotherapy. In this work, we designed a new series of benzo[4,5]imidazo[1,2-<i>a</i>]pyrazin-1-amine derivatives bearing an amide substitution at 3-position to obtain potent antitumor antagonist <i>in vivo</i>. The structure-activity relationship studies were performed by molecular modeling and radioactive assay. The <i>in vitro</i> anticancer activities were evaluated by 3',5'-cyclic adenosine monophosphate (cAMP) functional and T cell activation assay. The most potent compound <b>12o\u00b72HCl</b> showed much higher affinity toward A<sub>2A</sub>AR (<i>K</i><sub>i</sub> = 0.08 nM) and exhibited more significant <i>in vitro</i> immunostimulatory anticancer activity than clinical antagonist AZD4635. More importantly, <b>12o\u00b72HCl</b> significantly inhibited the growth of triple-negative breast cancer by reversing immunosuppressive tumor microenvironment in the xenograft mouse model without severe toxicity at the testing dose. These results make <b>12o\u00b72HCl</b> a promising immunotherapy anticancer drug candidate.",
+  "authors": "Liu S, Ding W, Huang W, Zhang Z, Guo Y, Zhang Q, Wu L, Li Y, Qin R, Li J, Shi T, Zhang X, Lei J, Hu W.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5143715",
+  "doi": "10.1021/acs.jmedchem.2c00101",
+  "doi_chembl": null,
+  "first_page": "8933",
+  "issue": "13.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "8947",
+  "patent_id": null,
+  "pubmed_id": 35714367,
+  "src_id": 1,
+  "title": "Discovery of Novel Benzo[4,5]imidazo[1,2-<i>a</i>]pyrazin-1-amine-3-amide-one Derivatives as Anticancer Human A<sub>2A</sub> Adenosine Receptor Antagonists.",
+  "volume": "65",
+  "year": 2022
+}

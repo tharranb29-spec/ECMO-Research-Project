@@ -1,0 +1,24 @@
+{
+  "abstract": "In this report, the design and synthesis of a series of pyrimidine based adenosine A(2A) antagonists are described. The strategy and outcome of expanding SAR exploration to attenuate hERG and improve selectivity over A(1) are discussed. Compound 33 exhibited excellent potency, selectivity over A(1), and reduced hERG liability.",
+  "authors": "Moorjani M, Zhang X, Chen Y, Lin E, Rueter JK, Gross RS, Lanier MC, Tellew JE, Williams JP, Lechner SM, Malany S, Santos M, Ekhlassi P, Castro-Palomino JC, Crespo MI, Prat M, Gual S, D\u00edaz JL, Saunders J, Slee DH.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1142297",
+  "doi": "10.1016/j.bmcl.2008.01.036",
+  "doi_chembl": null,
+  "first_page": "1269",
+  "issue": "4",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "1273",
+  "patent_id": null,
+  "pubmed_id": 18249540,
+  "src_id": 1,
+  "title": "2,6-Diaryl-4-phenacylaminopyrimidines as potent and selective adenosine A(2A) antagonists with reduced hERG liability.",
+  "volume": "18",
+  "year": 2008
+}

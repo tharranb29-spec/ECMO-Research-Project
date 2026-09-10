@@ -1,0 +1,48 @@
+{
+  "created_at": "2026-09-04T14:20:38.810547+00:00",
+  "target_chembl_id": "CHEMBL251",
+  "api_query": {
+    "assay_type": "F",
+    "page_size": 1000
+  },
+  "reported_activity_count": 2258,
+  "retrieved_activity_count": 2258,
+  "unique_molecule_count_with_smiles": 1591,
+  "training_eligible_count": 0,
+  "provisional_functional_class_counts": {
+    "agonist": 330,
+    "ambiguous": 103,
+    "antagonist": 835,
+    "inverse_agonist": 6,
+    "partial_agonist": 17,
+    "unknown": 300
+  },
+  "classification_signal_counts": {
+    "assay_description_rule": 1762,
+    "unresolved": 496
+  },
+  "molecules_with_conflicting_signals": 103,
+  "raw_pages": [
+    {
+      "path": "data/raw/chembl251_functional/activities_offset_0.json",
+      "sha256": "c8f2d4761262530ee043d71d57d9f20f20d3131a6d1ab98361aefec66141720a",
+      "activity_count": 1000
+    },
+    {
+      "path": "data/raw/chembl251_functional/activities_offset_1000.json",
+      "sha256": "832063a275816eaa67e601cdd068ddf5accc8fff399961ed238a657d212bb30e",
+      "activity_count": 1000
+    },
+    {
+      "path": "data/raw/chembl251_functional/activities_offset_2000.json",
+      "sha256": "87f323021aeea8b3e6de640b33c3aeea9ce691e092107de4d3fa8efff7ac469b",
+      "activity_count": 258
+    }
+  ],
+  "next_actions": [
+    "Standardize structures and collapse salt, tautomer, and stereochemical duplicates.",
+    "Audit assay descriptions and action_type consistency at molecule level.",
+    "Verify agonist and antagonist labels against functional assay publications.",
+    "Assign benchmark and locked-holdout partitions only after scaffold analysis."
+  ]
+}

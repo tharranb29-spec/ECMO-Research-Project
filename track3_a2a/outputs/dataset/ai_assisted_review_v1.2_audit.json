@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-09-06T12:49:39.836488+00:00",
+  "plan_record_count": 220,
+  "activity_row_count": 341,
+  "official_document_count": 77,
+  "official_assay_count": 120,
+  "recommendation_counts": {
+    "needs_primary_source_review": 4,
+    "provisional_accept_agonist": 64,
+    "provisional_accept_antagonist": 151,
+    "reject_or_resolve": 1
+  },
+  "recommended_tier_counts": {
+    "excluded": 1,
+    "tier_1": 215,
+    "unresolved": 4
+  },
+  "recommendation_confidence_counts": {
+    "high": 10,
+    "low": 5,
+    "moderate": 205
+  },
+  "records_with_warnings": 5,
+  "human_validation_claimed": false,
+  "training_eligible_count": 0,
+  "next_gate": "targeted human confirmation or explicitly provisional computational-only partition"
+}

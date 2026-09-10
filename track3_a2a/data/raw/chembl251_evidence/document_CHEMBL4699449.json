@@ -1,0 +1,24 @@
+{
+  "abstract": "Currently, the most promising therapeutic modality for cancer treatment is the blockade of immune checkpoint pathways, which has revolutionized cancer therapy in the past 15 years. Strategies targeting and modulating adenosine A receptor (AR), an emerging alternative immune checkpoint, have shown the potential to produce significant therapeutic effects. In this review, we describe the immunosuppressive activities of AR and AR in the tumor microenvironment (TME), followed by a summary and discussion of the structure-activity relationship (SAR) of the AR (and dual AR/AR) antagonists that have been experimentally confirmed to exert oncoimmunological effects. This review also provides an update on the compounds under clinical evaluation and insights into the ligand binding modes of the receptor.",
+  "authors": "Yu F,Zhu C,Xie Q,Wang Y",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_30",
+    "creation_date": "2022-02-22"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4699449",
+  "doi": "10.1021/acs.jmedchem.0c00237",
+  "doi_chembl": null,
+  "first_page": "12196",
+  "issue": "21",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "12212",
+  "patent_id": null,
+  "pubmed_id": 32667814,
+  "src_id": 1,
+  "title": "Adenosine A Receptor Antagonists for Cancer Immunotherapy.",
+  "volume": "63",
+  "year": 2020
+}

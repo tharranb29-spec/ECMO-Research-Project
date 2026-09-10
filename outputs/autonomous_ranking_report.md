@@ -11,20 +11,29 @@ This report comes from a small literature-seeded ranking prototype. It is useful
 
 ## SIRPa
 
-- `CD40`: 44.0 (reject)
+- `PD1`: 41.7 (reject)
   Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
-  Evidence: Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)
-- `Fc-fusion`: 44.0 (reject)
+  Evidence: Recent literature mention in article: Unveiling the immune microenvironment in sinonasal intestinal type adenocarcinoma: new arguments for immunotherapy. (new literature lead, heuristic extraction)
+- `pLac`: 37.7 (reject)
   Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
-  Evidence: Recent literature mention in article: Phase Ib trial of SL-172154, a bispecific CD47 inhibitor and CD40 agonist Fc-fusion protein, in combination with mirvetuximab soravtansine or pegylated liposomal doxorubicin in patients with platinum-resistant ovarian cancer. (new literature lead, heuristic extraction)
+  Evidence: Recent literature mention in article: Pretransfusion testing interference profile of IMC-002: A novel anti-CD47 monoclonal antibody engineered for minimized red cell binding. (known reference, heuristic extraction)
 ## Siglec-9
 
-- `Siglec-7`: 57.2 (hold)
+- `Neu5Ac`: 49.8 (reject)
   Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
-  Evidence: Recent literature mention in article: Targeting ST3GAL1 to downregulate ligands for the glycoimmune checkpoint Siglec-7 and reverse immune escape in hepatocellular carcinoma. (new literature lead, heuristic extraction)
-- `pLac`: 49.8 (reject)
+  Evidence: Recent literature mention in article: Defined O-acetylated Neu5Ac substrates reveal position-specific preferences of gut bacterial sialidases. (new literature lead, heuristic extraction)
+- `Delta`: 54.9 (hold)
   Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
-  Evidence: Recent literature mention in article: Nociceptor neurons control pollution-mediated neutrophilic asthma. (known reference, heuristic extraction)
+  Evidence: Recent literature mention in article: SARS-CoV-2 nucleocapsid induces hyperinflammation and vascular leakage through the Toll-like receptor signaling axis in macrophages. (new literature lead, heuristic extraction)
+- `N-expressing`: 54.9 (hold)
+  Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
+  Evidence: Recent literature mention in article: SARS-CoV-2 nucleocapsid induces hyperinflammation and vascular leakage through the Toll-like receptor signaling axis in macrophages. (new literature lead, heuristic extraction)
+- `SARS-CoV-2`: 54.9 (hold)
+  Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
+  Evidence: Recent literature mention in article: SARS-CoV-2 nucleocapsid induces hyperinflammation and vascular leakage through the Toll-like receptor signaling axis in macrophages. (new literature lead, heuristic extraction)
+- `pLac`: 52.5 (hold)
+  Reasoning: strong affinity evidence, strong immunomodulation evidence, good target specificity.
+  Evidence: Recent literature mention in article: Molecular innate immune programs of tumor-associated macrophages in immune checkpoint blockade resistance: a staged framework from suppressive circuitry to translational bottlenecks. (known reference, heuristic extraction)
 
 ## Learned Weights
 

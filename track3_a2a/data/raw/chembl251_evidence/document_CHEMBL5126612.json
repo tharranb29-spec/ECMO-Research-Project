@@ -1,0 +1,24 @@
+{
+  "abstract": "Modulators of the G protein-coupled A<sub>2A</sub> adenosine receptor (A<sub>2A</sub>AR) have been considered promising agents to treat Parkinson's disease, inflammation, cancer, and central nervous system disorders. Herein, we demonstrate that a thiophene modification at the C8 position in the common adenine scaffold converted an A<sub>2A</sub>AR agonist into an antagonist. We synthesized and characterized a novel A<sub>2A</sub>AR antagonist, <b>2</b> (LJ-4517), with <i>K</i><sub>i</sub> = 18.3 nM. X-ray crystallographic structures of <b>2</b> in complex with two thermostabilized A<sub>2A</sub>AR constructs were solved at 2.05 and 2.80 \u00c5 resolutions. In contrast to A<sub>2A</sub>AR agonists, which simultaneously interact with both Ser277<sup>7.42</sup> and His278<sup>7.43</sup>, <b>2</b> only transiently contacts His278<sup>7.43</sup>, which can be direct or water-mediated. The <i>n</i>-hexynyl group of <b>2</b> extends into an A<sub>2A</sub>AR exosite. Structural analysis revealed that the introduced thiophene modification restricted receptor conformational rearrangements required for subsequent activation. This approach can expand the repertoire of adenosine receptor antagonists that can be designed based on available agonist scaffolds.",
+  "authors": "Shiriaeva A, Park D, Kim G, Lee Y, Hou X, Jarhad DB, Kim G, Yu J, Hyun YE, Kim W, Gao ZG, Jacobson KA, Han GW, Stevens RC, Jeong LS, Choi S, Cherezov V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5126612",
+  "doi": "10.1021/acs.jmedchem.2c00462",
+  "doi_chembl": null,
+  "first_page": "11648",
+  "issue": "17.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "11657",
+  "patent_id": null,
+  "pubmed_id": 35977382,
+  "src_id": 1,
+  "title": "GPCR Agonist-to-Antagonist Conversion: Enabling the Design of Nucleoside Functional Switches for the A<sub>2A</sub> Adenosine Receptor.",
+  "volume": "65",
+  "year": 2022
+}

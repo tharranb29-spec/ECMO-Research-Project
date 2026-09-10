@@ -1,0 +1,24 @@
+{
+  "abstract": "Growing evidence has suggested a role in targeting the adenosine A2A receptor for the treatment of Parkinson's disease. The literature compounds KW 6002 (2) and ZM 241385 (5) were used as a starting point from which a series of novel ligands targeting the adenosine A2A receptor were synthesized and tested in a recombinant human adenosine A2A receptor functional assay. In order to further explore these molecules, we investigated the biological effects of assorted linkers attached to different positions on selected adenosine A2A receptor antagonists, and assessed their potential binding modes using molecular docking studies. The results suggest that linking from the phenolic oxygen of selected adenosine A2A receptor antagonists is relatively well tolerated due to the extension towards extracellular space, and leads to the potential of attaching further functionality from this position.",
+  "authors": "J\u00f6rg M, Shonberg J, Mak FS, Miller ND, Yuriev E, Scammells PJ, Capuano B.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_18",
+    "creation_date": "2014-03-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2380258",
+  "doi": "10.1016/j.bmcl.2013.03.070",
+  "doi_chembl": null,
+  "first_page": "3427",
+  "issue": "11",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "3433",
+  "patent_id": null,
+  "pubmed_id": 23602401,
+  "src_id": 1,
+  "title": "Novel adenosine A(2A) receptor ligands: a synthetic, functional and computational investigation of selected literature adenosine A(2A) receptor antagonists for extending into extracellular space.",
+  "volume": "23",
+  "year": 2013
+}

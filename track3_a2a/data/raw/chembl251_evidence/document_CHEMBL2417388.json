@@ -1,0 +1,24 @@
+{
+  "abstract": "Novel 2-thioxothiazole derivatives (6-19) as potential adenosine A2A receptor (A2AR) antagonists were synthesized. The strong interaction of the compounds (6-19) with A2AR in docking study was confirmed by high binding affinity with human A2AR expressed in HEK293T cells using radioligand-binding assay. The compound 19 demonstrated very high selectivity for A2AR as compared to standard A2AR antagonist SCH58261. Decrease in A2AR-coupled release of endogenous cAMP in treated HEK293T cells demonstrated in vitro A2AR antagonist potential of the compound 19. Attenuation in haloperidol-induced impairment (catalepsy) in Swiss albino male mice pre-treated with compound 19 is evocative to explore its prospective in therapy of PD.",
+  "authors": "Mishra CB, Sharma D, Prakash A, Kumari N, Kumar N, Luthra PM.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_18",
+    "creation_date": "2014-03-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2417388",
+  "doi": "10.1016/j.bmc.2013.07.005",
+  "doi_chembl": null,
+  "first_page": "6077",
+  "issue": "19",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "6083",
+  "patent_id": null,
+  "pubmed_id": 23953686,
+  "src_id": 1,
+  "title": "Design and synthesis of (4E)-4-(4-substitutedbenzylideneamino)-3-substituted-2,3-dihydro-2-thioxothiazole-5-carbonitrile as novel A2A receptor antagonists.",
+  "volume": "21",
+  "year": 2013
+}

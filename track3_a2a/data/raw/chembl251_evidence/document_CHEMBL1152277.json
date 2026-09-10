@@ -1,0 +1,24 @@
+{
+  "abstract": "4-Acetylamino-2-(3,5-dimethylpyrazol-1-yl)-pyrimidines bearing substituted pyridyl groups as C-6 substituents were prepared as selective adenosine hA2A receptor antagonists for the treatment of Parkinson's disease. The 5-methoxy-3-pyridyl derivative 6g (hA2A Ki 2.3 nM, hA1 Ki 190 nM) was orally active at 3 mg/kg in a rat HIC model but exposure was poor in nonrodent species, presumably due to poor aqueous solubility. Follow-on compound 16a (hA2A Ki 0.83 nM, hA1 Ki 130 nM), bearing a 6-(morpholin-4-yl)-2-pyridyl substituent at C-6, had improved solubility and was orally efficacious (3 mg/kg, HIC) but showed time-dependent cytochrome P450 3A4 inhibition, possibly related to morpholine ring metabolism. Compound 16j (hA2A Ki 0.44 nM, hA1 Ki 80 nM), bearing a 6-(4-methoxypiperidin-1-yl)-2-pyridyl substituent at C-6, was sparingly soluble but had good oral exposure in rodent and nonrodent species, had no cytochrome P450 or human ether-a-go-go related gene channel issues, and was orally efficacious at 1 mg/kg in HIC and at 3 mg/kg for potentiation of l-dopa-induced contralateral rotations in 6-hydroxydopamine-lesioned rats.",
+  "authors": "Zhang X, Tellew JE, Luo Z, Moorjani M, Lin E, Lanier MC, Chen Y, Williams JP, Saunders J, Lechner SM, Markison S, Joswig T, Petroski R, Piercey J, Kargo W, Malany S, Santos M, Gross RS, Wen J, Jalali K, O'Brien Z, Stotz CE, Crespo MI, D\u00edaz JL, Slee DH.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_2",
+    "creation_date": "2009-11-30"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1152277",
+  "doi": "10.1021/jm800851u",
+  "doi_chembl": null,
+  "first_page": "7099",
+  "issue": "22",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "7110",
+  "patent_id": null,
+  "pubmed_id": 18947224,
+  "src_id": 1,
+  "title": "Lead optimization of 4-acetylamino-2-(3,5-dimethylpyrazol-1-yl)-6-pyridylpyrimidines as A2A adenosine receptor antagonists for the treatment of Parkinson's disease.",
+  "volume": "51",
+  "year": 2008
+}

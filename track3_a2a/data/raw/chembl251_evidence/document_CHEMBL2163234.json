@@ -1,0 +1,24 @@
+{
+  "abstract": "The design and characterization of two, dual adenosine A(2A)/A(1) receptor antagonists in several animal models of Parkinson's disease is described. Compound 1 was previously reported as a potential treatment for Parkinson's disease. Further characterization of 1 revealed that it was metabolized to reactive intermediates that caused the genotoxicity of 1 in the Ames and mouse lymphoma L51784 assays. The identification of the metabolites enabled the preparation of two optimized compounds 13 and 14 that were devoid of the metabolic liabilities associated with 1. Compounds 13 and 14 are potent dual A(2A)/A(1) receptor antagonists that have excellent activity, after oral administration, across a number of animal models of Parkinson's disease including mouse and rat models of haloperidol-induced catalepsy, mouse and rat models of reserpine-induced akinesia, and the rat 6-hydroxydopamine (6-OHDA) lesion model of drug-induced rotation.",
+  "authors": "Shook BC, Rassnick S, Wallace N, Crooke J, Ault M, Chakravarty D, Barbay JK, Wang A, Powell MT, Leonard K, Alford V, Scannevin RH, Carroll K, Lampron L, Westover L, Lim HK, Russell R, Branum S, Wells KM, Damon S, Youells S, Li X, Beauchamp DA, Rhodes K, Jackson PF.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_16",
+    "creation_date": "2013-05-07"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2163234",
+  "doi": "10.1021/jm201640m",
+  "doi_chembl": null,
+  "first_page": "1402",
+  "issue": "3",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "1417",
+  "patent_id": null,
+  "pubmed_id": 22239465,
+  "src_id": 1,
+  "title": "Design and characterization of optimized adenosine A\u2082A/A\u2081 receptor antagonists for the treatment of Parkinson's disease.",
+  "volume": "55",
+  "year": 2012
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T15:02:33.421554+00:00",
+  "specification_id": "a2a-conformation-associated-cnn-signal-v1.3.1",
+  "analysis_status": "one_time_locked_holdout_evaluation_complete",
+  "freeze_manifest_sha256": "39e78626268f1fc7d17e52f03d4fa3d730d9b770a58b3b133fe1a4a2bd7ff234",
+  "holdout_accessed": true,
+  "holdout_record_count": 40,
+  "holdout_agonists": 13,
+  "holdout_antagonists": 27,
+  "development_fitted_chemistry_variance_explained": 0.9485333335614485,
+  "primary_confirmatory_endpoint": {
+    "observed_coefficient": 1.0477268836180138,
+    "alternative": "greater_than_zero",
+    "resamples": 10000,
+    "exceedances": 818,
+    "one_sided_p_value": 0.08189181081891811,
+    "success": false
+  },
+  "mandatory_sensitivity": {
+    "pose_quality_correlation_d_pk_d_cnnscore": 0.7334213127947362,
+    "joint_model_standardized_d_pk_coefficient": -115.4480335903875,
+    "joint_model_standardized_d_cnnscore_coefficient": 280.8736040233806,
+    "force_field_d_affinity": {
+      "observed_coefficient": 0.0019354589034221033,
+      "alternative": "greater_than_zero",
+      "resamples": 2000,
+      "exceedances": 1038,
+      "one_sided_p_value": 0.519240379810095
+    },
+    "predictive_AB_vs_E": {
+      "claim_status": "descriptive_only",
+      "roc_auc_AB": 0.9886039886039886,
+      "roc_auc_E": 0.9857549857549858,
+      "delta_E_minus_AB": -0.002849002849002802
+    }
+  },
+  "interpretation_boundary": "A positive holdout result supports a conformation-associated CNN scoring signal, not biological efficacy; external or experimental validation remains required.",
+  "human_validation_claimed": false,
+  "biological_efficacy_claimed": false
+}

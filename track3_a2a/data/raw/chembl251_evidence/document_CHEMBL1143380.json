@@ -1,0 +1,24 @@
+{
+  "abstract": "In the present article, we report on a strategy to improve the physical properties of a series of small molecule human adenosine 2A (hA2A) antagonists. One of the aromatic rings typical of this series of antagonists is replaced with a series of aliphatic groups, with the aim of disrupting crystal packing of the molecule to lower the melting point and in turn to improve the solubility. Herein, we describe the SAR of a new series of water-soluble 2,4,6-trisubstituted pyrimidines where R1 is an aromatic heterocycle, R2 is a short-chain alkyl amide, and the typical R3 aromatic heterocyclic substituent is replaced with an aliphatic amino substituent. This approach significantly enhanced aqueous solubility and lowered the log P of the system to provide molecules without significant hERG or CYP liabilities and robust in vivo efficacy.",
+  "authors": "Lanier MC, Moorjani M, Luo Z, Chen Y, Lin E, Tellew JE, Zhang X, Williams JP, Gross RS, Lechner SM, Markison S, Joswig T, Kargo W, Piercey J, Santos M, Malany S, Zhao M, Petroski R, Crespo MI, D\u00edaz JL, Saunders J, Wen J, O'Brien Z, Jalali K, Madan A, Slee DH.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_2",
+    "creation_date": "2009-11-30"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1143380",
+  "doi": "10.1021/jm800908d",
+  "doi_chembl": null,
+  "first_page": "709",
+  "issue": "3",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "717",
+  "patent_id": null,
+  "pubmed_id": 19140664,
+  "src_id": 1,
+  "title": "N-[6-amino-2-(heteroaryl)pyrimidin-4-yl]acetamides as A2A receptor antagonists with improved drug like properties and in vivo efficacy.",
+  "volume": "52",
+  "year": 2009
+}

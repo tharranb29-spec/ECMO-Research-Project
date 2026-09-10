@@ -1,0 +1,24 @@
+{
+  "abstract": "Adenosine receptors (ARs) are members of the G protein-coupled receptor (GPCR) superfamily and have shown much promise as therapeutic targets. We have used an agonist-bound A2AAR X-ray crystallographic structure to design a chemically reactive agonist for site-specific chemical modification of the receptor. To further explore and chemically engineer its binding cavity, a 2-nitrophenyl active ester was attached through an elongated chain at adenine C2 position. This general structure was designed for irreversible transfer of a terminal acyl group to a nucleophilic amino group on the A2AAR. Preincubation with several O-acyl derivatives prevented radioligand binding that was not regenerated upon extensive washing. In silico receptor docking suggested two lysine residues (second extracellular loop) as potential target sites for an O-acetyl derivative (MRS5854, 3a), and site-directed mutagenesis indicated that K153 but not K150 is essential. Similarly, a butyl azide for click reaction was incorporated in the active ester moiety (3b). These promising results indicate a stable, covalent modification of the receptor by several reactive adenosine derivatives, which could be chemical tools for future imaging, structural probing, and drug discovery. Thus, structure-based ligand design has guided the site-specific modification of a GPCR.",
+  "authors": "Moss SM, Jayasekara PS, Paoletta S, Gao ZG, Jacobson KA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_21",
+    "creation_date": "2016-02-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3352600",
+  "doi": "10.1021/ml5002486",
+  "doi_chembl": null,
+  "first_page": "1043",
+  "issue": "9",
+  "journal": "ACS Med Chem Lett",
+  "journal_full_title": "ACS medicinal chemistry letters.",
+  "last_page": "1048",
+  "patent_id": null,
+  "pubmed_id": 25221664,
+  "src_id": 1,
+  "title": "Structure-Based Design of Reactive Nucleosides for Site-Specific Modification of the A2A Adenosine Receptor.",
+  "volume": "5",
+  "year": 2014
+}

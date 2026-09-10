@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-conformation-associated-cnn-signal-v1.3",
+  "status": "frozen_candidate_before_formal_review_completion_and_holdout_access",
+  "scope": "confirm development-stage d_pk direction on a formally reviewed untouched holdout",
+  "not_claimed": [
+    "improved agonist-versus-antagonist prediction",
+    "experimental binding affinity",
+    "causal receptor activation",
+    "CNNaffinity-specific mechanism independent of pose quality"
+  ],
+  "population": {
+    "target": "human ADORA2A",
+    "labels": "tier_1 direct functional agonist versus antagonist only",
+    "minimum_distinct_reviewers_per_record": 2,
+    "disagreements": "named adjudication required",
+    "minimum_holdout_agonists": 10
+  },
+  "structures": {
+    "inactive_primary": "5NM4",
+    "active_like_primary": "2YDO",
+    "4EIY": "failed pose-selection sensitivity retained as a limitation; no production features"
+  },
+  "model": {
+    "formula": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk + d_pk",
+    "chemistry_descriptors": [
+      "clogp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "tpsa",
+      "heavy_atom_count",
+      "qed"
+    ],
+    "pca_components": 3,
+    "continuous_standardization": "z_score fitted on development and applied unchanged to holdout",
+    "estimator": "unpenalized unweighted logistic regression",
+    "m_pk": "mean CNNaffinity across 5NM4 and 2YDO",
+    "d_pk": "CNNaffinity(2YDO) - CNNaffinity(5NM4)"
+  },
+  "confirmatory_endpoint": {
+    "parameter": "standardized coefficient of d_pk",
+    "direction": "positive",
+    "test": "one-sided label permutation within the locked holdout",
+    "alpha": 0.05,
+    "resamples": 10000,
+    "success": "coefficient > 0 and one-sided permutation p <= 0.05"
+  },
+  "mandatory_sensitivity": {
+    "joint_model": "add d_cnnscore to quantify pose-quality entanglement",
+    "interpretation_if_d_pk_not_independent": "conformation-associated CNN composite signal only",
+    "force_field_d_affinity": "report as negative comparator",
+    "predictive_AB_vs_E": "report descriptively; no predictive-improvement claim"
+  },
+  "holdout_rules": {
+    "rebuild_after_formal_review": true,
+    "zero_generic_scaffold_overlap": true,
+    "hash_manifest_before_scoring": true,
+    "evaluate_once": true,
+    "no_threshold_or_feature_changes_after_unblinding": true
+  },
+  "promotion_rule": "A positive holdout result supports a conformation-associated CNN scoring signal, not biological efficacy; external or experimental validation remains required."
+}

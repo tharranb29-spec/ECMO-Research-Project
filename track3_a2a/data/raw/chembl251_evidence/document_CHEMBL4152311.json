@@ -1,0 +1,24 @@
+{
+  "abstract": "This paper describes the synthesis and characterization of N5-(hetero)arylalkyl-substituted-thiazolo [5,4-d]pyrimidine-5,7-diamine derivatives (4-19) as novel human (h) A2A adenosine receptor (AR) inverse agonists. Competition binding and cyclic AMP assays indicate that the examined compounds behave as hA2A AR inverse agonists showing binding affinity values in the nanomolar or subnanomolar range. Notably, compounds 4, 5, 6 and 11 showed two affinity values for the hA2A ARs with the highest (KH) falling in the femtomolar range and the lowest (KL) of the nanomolar order. In addition, in cyclic AMP assays, compounds 4, 5, 6 and 11 exhibited potency (IC50) values in the picomolar range. This study has confirmed that 2-(2-furanyl)thiazolo [5,4-d]pyrimidine-5,7-diamine-based derivatives represent a unique new class of hA2A AR inverse agonists.",
+  "authors": "Varano F, Catarzi D, Vincenzi F, Falsini M, Pasquini S, Borea PA, Colotta V, Varani K.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4152311",
+  "doi": "10.1016/j.ejmech.2018.06.020",
+  "doi_chembl": null,
+  "first_page": "552",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "561",
+  "patent_id": null,
+  "pubmed_id": 29909340,
+  "src_id": 1,
+  "title": "Structure-activity relationship studies and pharmacological characterization of N5-heteroarylalkyl-substituted-2-(2-furanyl)thiazolo[5,4-d]pyrimidine-5,7-diamine-based derivatives as inverse agonists at human A2A adenosine receptor.",
+  "volume": "155",
+  "year": 2018
+}

@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-09-06T13:13:23.271821+00:00",
+  "included_record_count": 215,
+  "excluded_record_count": 5,
+  "included_class_counts": {
+    "agonist": 64,
+    "antagonist": 151
+  },
+  "partition_counts": {
+    "provisional_development": 172,
+    "provisional_locked_holdout": 43
+  },
+  "class_partition_counts": {
+    "provisional_development:agonist": 51,
+    "provisional_development:antagonist": 121,
+    "provisional_locked_holdout:agonist": 13,
+    "provisional_locked_holdout:antagonist": 30
+  },
+  "development_scaffold_count": 168,
+  "locked_holdout_scaffold_count": 43,
+  "scaffold_overlap_count": 0,
+  "human_validation_claimed": false,
+  "final_training_eligible_count": 0,
+  "next_gate": "prepare 3D ligand states and run versioned provisional dual-state GNINA docking"
+}

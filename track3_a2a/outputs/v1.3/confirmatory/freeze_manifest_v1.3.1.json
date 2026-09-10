@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T15:01:26.855107+00:00",
+  "specification_id": "a2a-conformation-associated-cnn-signal-v1.3.1",
+  "status": "frozen_before_first_and_only_holdout_evaluation",
+  "source_hashes": {
+    "confirmatory_spec": "990733775fec766e6bda8a8f5d4f06be064c79ef654636ec381a6dbc017e40bc",
+    "feature_matrix": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+    "partition_manifest": "c87a21b8569e92c0a17c49f5add32341803110fd4f37342444ffc60f68fdd0f8",
+    "feature_audit": "faec1e992bb5ebf34849d48d3a88b000a18e07b5614ecb91a3ba1c324878f213",
+    "holdout_runner": "f77bc4513f8bac0c6179a0acaa77c85c0d9de2669796d20298bdf6a1f68bbee3",
+    "predictive_model_config_v1.2": "a84771e2b1cf6e7b2c605f29d7ec6534e8eda1e17c07a8c3f7a612449a614550"
+  },
+  "development": {
+    "record_count": 163,
+    "class_counts": {
+      "agonist": 50,
+      "antagonist": 113
+    }
+  },
+  "locked_holdout": {
+    "record_count": 40,
+    "class_counts": {
+      "agonist": 13,
+      "antagonist": 27
+    },
+    "outcomes_used_for_model_selection": false
+  },
+  "locked_method": {
+    "formula": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk + d_pk",
+    "chemistry_descriptors": [
+      "clogp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "tpsa",
+      "heavy_atom_count",
+      "qed"
+    ],
+    "pca_components": 3,
+    "estimator": "unpenalized unweighted logistic regression",
+    "endpoint": {
+      "parameter": "standardized coefficient of d_pk",
+      "direction": "positive",
+      "test": "one-sided label permutation within the rebuilt locked holdout",
+      "alpha": 0.05,
+      "resamples": 10000,
+      "success": "coefficient > 0 and one-sided permutation p <= 0.05"
+    },
+    "predictive_sensitivity": {
+      "models": "reuse frozen v1.2 AB and E feature definitions and ridge-logistic settings",
+      "training_population": "v1.3 development partition only",
+      "evaluation_population": "v1.3 locked holdout only",
+      "metric": "ROC AUC and E minus AB",
+      "claim_status": "descriptive only"
+    }
+  },
+  "software": {
+    "numpy": "2.5.2",
+    "scikit_learn": "1.7.2"
+  },
+  "human_validation_claimed": false,
+  "next_gate": "run the hash-verified v1.3.1 holdout evaluator exactly once without changing this manifest"
+}

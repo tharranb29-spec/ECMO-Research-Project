@@ -1,0 +1,24 @@
+{
+  "abstract": "The adenosine A1 receptor (A1AR) is a potential novel therapeutic target for myocardial ischemia-reperfusion injury. However, to date, clinical translation of prototypical A1AR agonists has been hindered due to dose limiting adverse effects. Recently, we demonstrated that the biased bitopic agonist 1, consisting of an adenosine pharmacophore linked to an allosteric moiety, could stimulate cardioprotective A1AR signaling in the absence of unwanted bradycardia. Therefore, this study aimed to investigate the structure-activity relationship of compound 1 biased agonism. A series of novel derivatives of 1 were synthesized and pharmacologically profiled. Modifications were made to the orthosteric adenosine pharmacophore, linker, and allosteric 2-amino-3-benzoylthiophene pharmacophore to probe the structure-activity relationships, particularly in terms of biased signaling, as well as A1AR activity and subtype selectivity. Collectively, our findings demonstrate that the allosteric moiety, particularly the 4-(trifluoromethyl)phenyl substituent of the thiophene scaffold, is important in conferring bitopic ligand bias at the A1AR.",
+  "authors": "Aurelio L, Baltos JA, Ford L, Nguyen ATN, J\u00f6rg M, Devine SM, Valant C, White PJ, Christopoulos A, May LT, Scammells PJ.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_25",
+    "creation_date": "2018-12-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4043287",
+  "doi": "10.1021/acs.jmedchem.8b00047",
+  "doi_chembl": null,
+  "first_page": "2087",
+  "issue": "5",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "2103",
+  "patent_id": null,
+  "pubmed_id": 29446948,
+  "src_id": 1,
+  "title": "A Structure-Activity Relationship Study of Bitopic N6-Substituted Adenosine Derivatives as Biased Adenosine A1 Receptor Agonists.",
+  "volume": "61",
+  "year": 2018
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "\"Click chemistry\" was explored to synthesize two series of 2-(1,2,3-triazolyl)adenosine derivatives (1-14). Binding affinity at the human A(1), A(2A), and A(3)ARs (adenosine receptors) and relative efficacy at the A(3)AR were determined. Some triazol-1-yl analogues showed A(3)AR affinity in the low nanomolar range, a high ratio of A(3)/A(2A) selectivity, and a moderate-to-high A(3)/A(1) ratio. The 1,2,3-triazol-4-yl regiomers typically showed decreased A(3)AR affinity. Sterically demanding groups at the adenine C2 position tended to reduce relative A(3)AR efficacy. Thus, several 5'-OH derivatives appeared to be selective A(3)AR antagonists, i.e., 10, with 260-fold binding selectivity in comparison to the A(1)AR and displaying a characteristic docking mode in an A(3)AR model. The corresponding 5'-ethyluronamide analogues generally showed increased A(3)AR affinity and behaved as full agonists, i.e., 17, with 910-fold A(3)/A(1) selectivity. Thus, N(6)-substituted 2-(1,2,3-triazolyl)adenosine analogues constitute a novel class of highly potent and selective nucleoside-based A(3)AR antagonists, partial agonists, and agonists.",
+  "authors": "Cosyn L, Palaniappan KK, Kim SK, Duong HT, Gao ZG, Jacobson KA, Van Calenbergh S.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1137298",
+  "doi": "10.1021/jm0608208",
+  "doi_chembl": null,
+  "first_page": "7373",
+  "issue": "25",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "7383",
+  "patent_id": null,
+  "pubmed_id": 17149867,
+  "src_id": 1,
+  "title": "2-triazole-substituted adenosines: a new class of selective A3 adenosine receptor agonists, partial agonists, and antagonists.",
+  "volume": "49",
+  "year": 2006
+}

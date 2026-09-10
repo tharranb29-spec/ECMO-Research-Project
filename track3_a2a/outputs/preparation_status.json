@@ -1,0 +1,70 @@
+{
+  "protocol_id": "a2a-dual-state-v1.0",
+  "stage": "redocking_gate_failed",
+  "redocking_gate_passed": false,
+  "production_screening_unlocked": false,
+  "source_checksums_verified": true,
+  "source_checksums": {
+    "inactive_pdb": "2a1f198ec341f82e7cc1d8ab6e43ae5438d8c03631e329e4c0bc9f423f795b95",
+    "active_pdb": "47752abf2452db20bf6b4c39182e19216e0d723107ba016699c840728cf4b711",
+    "inactive_ligand": "beea8f1f23c323a65cecdefaaa3e3cc5f23f27f7b4fc470d34e69ffe845585df",
+    "active_ligand": "763f3c6179c8d03f1cab51565d7551ab2fe51f914497ea6927525d550b4853c0"
+  },
+  "alignment": {
+    "reference": "4EIY",
+    "mobile": "2YDO",
+    "common_tm_ca_count": 239,
+    "post_alignment_rmsd_angstrom": 1.8018,
+    "rotation_matrix": [
+      [
+        0.62041633,
+        -0.40816837,
+        -0.66968811
+      ],
+      [
+        -0.54948618,
+        -0.83550279,
+        0.00017263
+      ],
+      [
+        -0.55959674,
+        0.36787726,
+        -0.74264245
+      ]
+    ],
+    "translation": [
+      8.6389,
+      7.5784,
+      -18.641
+    ]
+  },
+  "shared_box": {
+    "center": [
+      -0.4715,
+      8.935,
+      17.159
+    ],
+    "size": [
+      16.075,
+      27.042,
+      17.236
+    ],
+    "padding_angstrom": 6.0,
+    "aligned_adenosine_inside": true
+  },
+  "prepared_assets": {
+    "inactive_receptor_pdb": "docking_inputs/receptors/4EIY_inactive_aligned.pdb",
+    "active_like_receptor_pdb": "docking_inputs/receptors/2YDO_active_like_aligned.pdb",
+    "inactive_reference_ligand_sdf": "docking_inputs/ligands/4EIY_ZMA_crystal.sdf",
+    "active_like_reference_ligand_sdf": "docking_inputs/ligands/2YDO_ADN_crystal_aligned.sdf"
+  },
+  "next_gate": "review receptor preparation and docking setup",
+  "receptor_preparation": {
+    "tool": "PDB2PQR",
+    "version": "3.6.2",
+    "force_field": "AMBER",
+    "ph": 7.4,
+    "hydrogen_bond_optimization": true,
+    "gnina_prepare_receptor_supported": false
+  }
+}

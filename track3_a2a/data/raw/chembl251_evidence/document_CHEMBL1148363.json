@@ -1,0 +1,24 @@
+{
+  "abstract": "The adenosine A(2B) receptor is the least well characterized of the four known adenosine receptor subtypes because of the absence of potent, selective agonists. Here, we present five non-adenosine agonists. Among them, 2-amino-4-(4-hydroxyphenyl)-6-(1H-imidazol-2-ylmethylsulfanyl)pyridine-3,5-dicarbonitrile, 17, LUF5834, is a high-efficacy partial agonist with EC(50) = 12 nM and 45-fold selectivity over the adenosine A(3) receptor but lacking selectivity versus the A(1) and A(2A) subtypes. Compound 18, LUF5835, the 3-hydroxyphenyl analogue, is a full agonist with EC(50) = 10 nM.",
+  "authors": "Beukers MW, Chang LC, von Frijtag Drabbe K\u00fcnzel JK, Mulder-Krieger T, Spanjersberg RF, Brussee J, IJzerman AP.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1148363",
+  "doi": "10.1021/jm049947s",
+  "doi_chembl": null,
+  "first_page": "3707",
+  "issue": "15",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3709",
+  "patent_id": null,
+  "pubmed_id": 15239649,
+  "src_id": 1,
+  "title": "New, non-adenosine, high-potency agonists for the human adenosine A2B receptor with an improved selectivity profile compared to the reference agonist N-ethylcarboxamidoadenosine.",
+  "volume": "47",
+  "year": 2004
+}

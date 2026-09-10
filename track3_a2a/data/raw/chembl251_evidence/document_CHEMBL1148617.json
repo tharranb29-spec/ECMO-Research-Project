@@ -1,0 +1,24 @@
+{
+  "abstract": "Over two hundred 1-, 3-, 8-, and 9-substituted-9-deazaxanthines were prepared and evaluated for their binding affinity at the recombinant human adenosine receptors, in particular at the hA(2B) and hA(2A) subtypes. Several ligands endowed with sub-micromolar to low nanomolar binding affinity at hA(2B) receptors, good selectivity over hA(2A) and hA(3), but a relatively poor selectivity over hA(1) were obtained. Good antagonistic potencies and efficacies, with pA(2) values close to the corresponding pK(i)s, were observed in functional assays in vitro performed on a selected series of compounds. 1,3-Dimethyl-8-phenoxy-(N-p-halogenophenyl)-acetamido-9-deazaxanthine derivatives appeared as the most interesting leads, some of them showing outstanding hA(2B) affinities, high selectivity over hA(2A) and hA(3), but low selectivity over hA(1). Structure-affinity relationships suggested that the binding potency at the hA(2B) receptor was mainly modulated by the steric (lipophilic) properties of the substituents at positions 1 and 3 and by the electronic and lipophilic characteristics of the substituents at position 8. A comparison among affinity and selectivity profiles of 9-deazaxanthines with the corresponding xanthines suggested some possible differences in their binding mode.",
+  "authors": "Carotti A, Cadavid MI, Centeno NB, Esteve C, Loza MI, Martinez A, Nieto R, Ravi\u00f1a E, Sanz F, Segarra V, Sotelo E, Stefanachi A, Vidal B.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1148617",
+  "doi": "10.1021/jm0506221",
+  "doi_chembl": null,
+  "first_page": "282",
+  "issue": "1",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "299",
+  "patent_id": null,
+  "pubmed_id": 16392813,
+  "src_id": 1,
+  "title": "Design, synthesis, and structure-activity relationships of 1-,3-,8-, and 9-substituted-9-deazaxanthines at the human A2B adenosine receptor.",
+  "volume": "49",
+  "year": 2006
+}

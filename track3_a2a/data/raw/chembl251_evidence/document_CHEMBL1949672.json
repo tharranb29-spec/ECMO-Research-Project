@@ -1,0 +1,24 @@
+{
+  "abstract": "Molecular modeling of agonist binding to the human A(2A) adenosine receptor (AR) was assessed and extended in light of crystallographic structures. Heterocyclic adenine nitrogens of cocrystallized agonist overlaid corresponding positions of the heterocyclic base of a bound triazolotriazine antagonist, and ribose moiety was coordinated in a hydrophilic region, as previously predicted based on modeling using the inactive receptor. Automatic agonist docking of 20 known potent nucleoside agonists to agonist-bound A(2A)AR crystallographic structures predicted new stabilizing protein interactions to provide a structural basis for previous empirical structure activity relationships consistent with previous mutagenesis results. We predicted binding of novel C2 terminal amino acid conjugates of A(2A)AR agonist CGS21680 and used these models to interpret effects on binding affinity of newly synthesized agonists. d-Amino acid conjugates were generally more potent than l-stereoisomers and free terminal carboxylates more potent than corresponding methyl esters. Amino acid moieties were coordinated close to extracellular loops 2 and 3. Thus, molecular modeling is useful in probing ligand recognition and rational design of GPCR-targeting compounds with specific pharmacological profiles.",
+  "authors": "Deflorian F, Kumar TS, Phan K, Gao ZG, Xu F, Wu H, Katritch V, Stevens RC, Jacobson KA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_14",
+    "creation_date": "2012-06-27"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1949672",
+  "doi": "10.1021/jm201461q",
+  "doi_chembl": null,
+  "first_page": "538",
+  "issue": "1",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "552",
+  "patent_id": null,
+  "pubmed_id": 22104008,
+  "src_id": 1,
+  "title": "Evaluation of molecular modeling of agonist binding in light of the crystallographic structure of an agonist-bound A\u2082A adenosine receptor.",
+  "volume": "55",
+  "year": 2012
+}

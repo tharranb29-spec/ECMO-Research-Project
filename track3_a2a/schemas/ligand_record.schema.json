@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ecmo-research-dashboard.local/schemas/a2a-ligand-record-v1.json",
+  "title": "A2A ligand evidence record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_id",
+    "molecule_name",
+    "canonical_smiles",
+    "dataset_partition",
+    "evidence_status",
+    "functional_class"
+  ],
+  "properties": {
+    "record_id": {"type": "string", "minLength": 1},
+    "molecule_name": {"type": "string", "minLength": 1},
+    "chembl_id": {"type": ["string", "null"]},
+    "canonical_smiles": {"type": "string", "minLength": 1},
+    "standardized_smiles": {"type": ["string", "null"]},
+    "inchikey": {"type": ["string", "null"]},
+    "dataset_partition": {
+      "enum": ["benchmark", "locked_holdout", "prospective", "quarantine"]
+    },
+    "functional_class": {
+      "enum": ["agonist", "antagonist", "inverse_agonist", "partial_agonist", "unknown", "ambiguous"]
+    },
+    "primary_binary_label": {"type": ["integer", "null"], "enum": [0, 1, null]},
+    "evidence_status": {
+      "enum": ["verified_functional", "binding_only", "llm_proposed", "ambiguous", "rejected"]
+    },
+    "assay_type": {"type": ["string", "null"]},
+    "assay_readout": {"type": ["string", "null"]},
+    "activity_relation": {"type": ["string", "null"]},
+    "activity_value": {"type": ["number", "null"]},
+    "activity_unit": {"type": ["string", "null"]},
+    "source_type": {"type": ["string", "null"]},
+    "source_id": {"type": ["string", "null"]},
+    "source_url": {"type": ["string", "null"], "format": "uri"},
+    "source_passage": {"type": ["string", "null"]},
+    "label_rationale": {"type": ["string", "null"]},
+    "reviewed_by": {"type": ["string", "null"]},
+    "reviewed_at": {"type": ["string", "null"], "format": "date-time"},
+    "parent_record_id": {"type": ["string", "null"]},
+    "ingested_at": {"type": ["string", "null"], "format": "date-time"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"evidence_status": {"const": "verified_functional"}}},
+      "then": {
+        "required": ["assay_type", "source_id", "source_url", "label_rationale", "reviewed_by"]
+      }
+    },
+    {
+      "if": {"properties": {"dataset_partition": {"const": "prospective"}}},
+      "then": {"properties": {"functional_class": {"const": "unknown"}, "primary_binary_label": {"const": null}}}
+    }
+  ]
+}
+

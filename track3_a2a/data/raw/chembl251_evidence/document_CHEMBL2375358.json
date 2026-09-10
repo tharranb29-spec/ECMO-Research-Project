@@ -1,0 +1,24 @@
+{
+  "abstract": "A novel series of benzyl substituted thieno[2,3-d]pyrimidines were identified as potent A2A receptor antagonists. Several five- and six-membered heterocyclic replacements for the optimized methylfuran were explored. Select compounds effectively reverse catalepsy in mice when dosed orally.",
+  "authors": "Shook BC, Chakravarty D, Barbay JK, Wang A, Leonard K, Alford V, Powell MT, Rassnick S, Scannevin RH, Carroll K, Wallace N, Crooke J, Ault M, Lampron L, Westover L, Rhodes K, Jackson PF.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_18",
+    "creation_date": "2014-03-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2375358",
+  "doi": "10.1016/j.bmcl.2013.02.078",
+  "doi_chembl": null,
+  "first_page": "2688",
+  "issue": "9",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "2691",
+  "patent_id": null,
+  "pubmed_id": 23522563,
+  "src_id": 1,
+  "title": "Substituted thieno[2,3-d]pyrimidines as adenosine A2A receptor antagonists.",
+  "volume": "23",
+  "year": 2013
+}

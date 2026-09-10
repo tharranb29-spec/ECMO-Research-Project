@@ -1,0 +1,37 @@
+{
+  "created_at": "2026-09-10T12:57:45.687575+00:00",
+  "specification_id": "a2a-computational-curation-v1.3",
+  "amendment_status": "prospective_amendment_before_new_label_admission_and_holdout_access",
+  "source_hashes": {
+    "config": "b57888fb1379a3971f0d8b4e7a604c4c6f9a00ebeae9d784fbc2862ed1b829c4",
+    "frozen_plan_v1.2": "85aa30f9c2ee76c5cfe0530dce5ba4a1f203d9ba1dd70efed2ab1aeaf4ceb9ea",
+    "evidence_packet": "0dfd133a0ecce7e5835d5bfe2ee5dae6ea5ad6d35d2617c6c1999b084d55a711",
+    "standardized_structures": "ace1a1abc33ee83d97642df275035942044bcdb454cef951752e0863b15723f2",
+    "raw_activity_snapshot": "244ad73210922157d6d02d99a514256e56c1961d2b8d36ed3b693beb4b74fa62"
+  },
+  "plan_record_count": 220,
+  "decision_record_count": 220,
+  "decision_counts": {
+    "accept_agonist": 64,
+    "accept_antagonist": 140,
+    "needs_full_text": 4,
+    "quarantine_excluded_function": 11,
+    "reject_context": 1
+  },
+  "accepted_record_count": 204,
+  "accepted_class_counts": {
+    "agonist": 64,
+    "antagonist": 140
+  },
+  "quarantined_or_rejected_count": 16,
+  "raw_excluded_function_record_count": 11,
+  "raw_excluded_function_classes": {
+    "inverse_agonist": 24
+  },
+  "human_approval_required": false,
+  "human_validation_claimed": false,
+  "label_admission_uses_auc": false,
+  "label_admission_uses_scaffold_agreement": false,
+  "training_eligible_count": 0,
+  "next_gate": "rebuild and hash scaffold-separated development and untouched holdout manifests from accepted computational labels"
+}

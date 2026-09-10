@@ -1,0 +1,24 @@
+{
+  "abstract": "Multivalent ligands are promising pharmacological tools that may be more efficacious for several diseases than highly selective single-target drugs. A combined therapy using dopaminergic agonists and adenosinergic antagonists is currently being evaluated for the treatment of Parkinson's disease. [(a) Kanda, T.; et al. Exp. Neurol. 2000, 162, 321-327. (b) Jenner, P. Expert Opin. Invest. Drugs 2005, 14, 729-738. (c) Kase, H.; et al. Neurology 2003, 61 (Suppl 6), S97-S100.] Here we prepared dual ligands acting on adenosine and dopamine receptors by applying a combinatorial approach based on the ergolene privileged structure. The potency and efficacy of these novel compounds were determined by radioligand binding studies and intracellular cAMP production assays in cells expressing adenosine and dopamine receptors. Selected compounds displayed dual dopamine agonist and adenosine antagonist activity. Molecules with this pharmacological profile are potentially useful for studying dopamine-adenosine cross-talk in the central nervous system and for testing the therapeutic potential of multivalent drugs for Parkinson's disease.",
+  "authors": "Vendrell M, Angulo E, Casad\u00f3 V, Lluis C, Franco R, Albericio F, Royo M.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1145382",
+  "doi": "10.1021/jm060947x",
+  "doi_chembl": null,
+  "first_page": "3062",
+  "issue": "13",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3069",
+  "patent_id": null,
+  "pubmed_id": 17539620,
+  "src_id": 1,
+  "title": "Novel ergopeptides as dual ligands for adenosine and dopamine receptors.",
+  "volume": "50",
+  "year": 2007
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "We have recently reported a series of 2-furoyl-benzoxazoles as potential A2A adenosine receptor (A2AR) antagonists. Two hits were identified with interesting pharmacokinetic properties but were find to bind the hA2AR receptor in the micromolar-range. Herein, in order to enhance affinity toward the hA2AR, we explored the C5- and C7-position of hits 1 and 2 based on docking studies. These modifications led to compounds with nanomolar-range affinity (e.g. 6a, Ki\u00a0=\u00a040\u00a0nM) and high antagonist activity (e.g. 6a, IC50\u00a0=\u00a070.6\u00a0nM). Selected compounds also exhibited interesting in\u00a0vitro DMPK (Drug Metabolism and Pharmacokinetics) properties including high solubility and low cytotoxicity. Therefore, the benzoxazole ring appears as a highly effective scaffold for the design of new A2A antagonists.",
+  "authors": "Duroux R, Agouridas L, Renault N, El Bakali J, Furman C, Melnyk P, Yous S.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4251607",
+  "doi": "10.1016/j.ejmech.2017.12.007",
+  "doi_chembl": null,
+  "first_page": "151",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "163",
+  "patent_id": null,
+  "pubmed_id": 29268131,
+  "src_id": 1,
+  "title": "Antagonists of the adenosine A2A receptor based on a 2-arylbenzoxazole scaffold: Investigation of the C5- and C7-positions to enhance affinity.",
+  "volume": "144",
+  "year": 2018
+}

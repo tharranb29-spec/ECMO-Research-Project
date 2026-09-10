@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T13:08:35.650328+00:00",
+  "protocol_id": "a2a-feature-construction-v1.3",
+  "source_hashes": {
+    "docking_report": "e7a25166a13def1c793e401c3f71f3fe859fbb22acbf5c1d870bcf2a77104d97",
+    "partitions": "c87a21b8569e92c0a17c49f5add32341803110fd4f37342444ffc60f68fdd0f8",
+    "evidence_review": "ea585972993a331d1f3bd44b5b0d2bd96027a3eb5d2c4605f1c3c07eb955b755",
+    "standardized_chemistry": "ace1a1abc33ee83d97642df275035942044bcdb454cef951752e0863b15723f2"
+  },
+  "feature_matrix_sha256": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+  "output_row_count": 203,
+  "development_row_count": 163,
+  "locked_holdout_row_count": 40,
+  "class_counts": {
+    "agonist": 63,
+    "antagonist": 140
+  },
+  "partition_class_counts": {
+    "development:agonist": 50,
+    "development:antagonist": 113,
+    "locked_holdout:agonist": 13,
+    "locked_holdout:antagonist": 27
+  },
+  "missing_metadata_ids": [],
+  "excluded_by_computational_curation_ids": [
+    "CHEMBL113",
+    "CHEMBL113142",
+    "CHEMBL240624",
+    "CHEMBL273094",
+    "CHEMBL3904408",
+    "CHEMBL4125975",
+    "CHEMBL4126427",
+    "CHEMBL4127213",
+    "CHEMBL4159215",
+    "CHEMBL4167557",
+    "CHEMBL431770"
+  ],
+  "accepted_without_valid_docking_ids": [
+    "CHEMBL3414942"
+  ],
+  "pose_quality": {
+    "agonist": {
+      "molecule_count": 63,
+      "molecules_with_any_soft_flag": 31,
+      "inactive_5NM4": {
+        "flagged_seed_count": 63,
+        "seed_count": 189,
+        "flag_rate": 0.333333
+      },
+      "active_like_2YDO": {
+        "flagged_seed_count": 27,
+        "seed_count": 189,
+        "flag_rate": 0.142857
+      },
+      "all_receptors": {
+        "flagged_seed_count": 90,
+        "seed_count": 378,
+        "flag_rate": 0.238095
+      }
+    },
+    "antagonist": {
+      "molecule_count": 140,
+      "molecules_with_any_soft_flag": 9,
+      "inactive_5NM4": {
+        "flagged_seed_count": 11,
+        "seed_count": 420,
+        "flag_rate": 0.02619
+      },
+      "active_like_2YDO": {
+        "flagged_seed_count": 11,
+        "seed_count": 420,
+        "flag_rate": 0.02619
+      },
+      "all_receptors": {
+        "flagged_seed_count": 22,
+        "seed_count": 840,
+        "flag_rate": 0.02619
+      }
+    }
+  },
+  "hard_filter_sensitivity_not_primary": {
+    "agonist": {
+      "unfiltered": 63,
+      "all_six_seeds_pass": 32,
+      "at_least_two_passing_seeds_per_receptor": 42,
+      "at_least_one_passing_seed_per_receptor": 49
+    },
+    "antagonist": {
+      "unfiltered": 140,
+      "all_six_seeds_pass": 131,
+      "at_least_two_passing_seeds_per_receptor": 135,
+      "at_least_one_passing_seed_per_receptor": 137
+    }
+  },
+  "scaffold_overlap_count": 0,
+  "label_status": "computationally_adjudicated_functional",
+  "human_approval_required": false,
+  "human_validation_claimed": false,
+  "holdout_accessed": false,
+  "next_gate": "freeze development-only model settings, then perform one confirmatory evaluation on the locked holdout"
+}

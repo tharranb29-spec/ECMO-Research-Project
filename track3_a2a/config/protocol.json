@@ -1,0 +1,62 @@
+{
+  "protocol_id": "a2a-dual-state-v1.0",
+  "status": "frozen_before_results",
+  "target": {
+    "name": "human adenosine A2A receptor",
+    "gene": "ADORA2A",
+    "uniprot": "P29274",
+    "target_class": "class A GPCR"
+  },
+  "task": "agonist_vs_antagonist_functional_classification_after_binding_identification",
+  "structures": {
+    "inactive": {
+      "pdb_id": "4EIY",
+      "ligand_code": "ZMA",
+      "ligand_name": "ZM241385",
+      "chain": "A",
+      "ligand_auth_seq_id": 2401,
+      "source_sha256": "2a1f198ec341f82e7cc1d8ab6e43ae5438d8c03631e329e4c0bc9f423f795b95",
+      "ligand_sha256": "beea8f1f23c323a65cecdefaaa3e3cc5f23f27f7b4fc470d34e69ffe845585df"
+    },
+    "active_like": {
+      "pdb_id": "2YDO",
+      "ligand_code": "ADN",
+      "ligand_name": "adenosine",
+      "chain": "A",
+      "ligand_auth_seq_id": 400,
+      "state_note": "agonist-bound intermediate-active thermostabilized receptor",
+      "source_sha256": "47752abf2452db20bf6b4c39182e19216e0d723107ba016699c840728cf4b711",
+      "ligand_sha256": "763f3c6179c8d03f1cab51565d7551ab2fe51f914497ea6927525d550b4853c0"
+    }
+  },
+  "alignment": {
+    "reference": "4EIY",
+    "mobile": "2YDO",
+    "atom_selection": "common receptor C-alpha atoms in declared TM ranges",
+    "tm_ranges": [[6, 66], [73, 108], [117, 142], [167, 211], [224, 259], [266, 311]]
+  },
+  "box": {
+    "reference_ligand": "4EIY:ZMA:A:2401",
+    "padding_angstrom": 6.0,
+    "same_dimensions_for_both_states": true
+  },
+  "gnina": {
+    "docker_image": "gnina/gnina:v1.3.3",
+    "exhaustiveness": 8,
+    "seeds": [42, 43, 44, 45, 46],
+    "num_modes": 1,
+    "cnn_scoring": "rescore",
+    "primary_seed_aggregation": "median_valid_runs",
+    "zero_affinity_policy": "failed_run_not_binding_measurement"
+  },
+  "redocking_gate": {
+    "rmsd_type": "symmetry_aware_heavy_atom",
+    "rmsd_threshold_angstrom": 2.0,
+    "minimum_passing_seeds": 4,
+    "median_rmsd_must_pass": true
+  },
+  "primary_endpoint": "paired_scaffold_split_auc_model_D_minus_model_C",
+  "autonomous_update_mode": "shadow_quarantine_only",
+  "production_screening_unlocked": false
+}
+

@@ -1,0 +1,41 @@
+{
+  "created_at": "2026-09-10T13:03:20.300590+00:00",
+  "specification_id": "a2a-computational-partitions-v1.3",
+  "manifest_sha256": "c87a21b8569e92c0a17c49f5add32341803110fd4f37342444ffc60f68fdd0f8",
+  "accepted_record_count": 204,
+  "partition_counts": {
+    "development": 164,
+    "locked_holdout": 40
+  },
+  "class_partition_counts": {
+    "development:agonist": 51,
+    "development:antagonist": 113,
+    "locked_holdout:agonist": 13,
+    "locked_holdout:antagonist": 27
+  },
+  "development_training_eligible_count": 163,
+  "holdout_evaluation_eligible_count": 40,
+  "missing_docking_ids": [
+    "CHEMBL3414942"
+  ],
+  "development_scaffold_count": 160,
+  "locked_holdout_scaffold_count": 40,
+  "scaffold_overlap_count": 0,
+  "membership_preserved_from_v1.2": true,
+  "removed_from_frozen_population_count": 11,
+  "removed_from_frozen_population_ids": [
+    "CHEMBL113",
+    "CHEMBL113142",
+    "CHEMBL240624",
+    "CHEMBL273094",
+    "CHEMBL3904408",
+    "CHEMBL4125975",
+    "CHEMBL4126427",
+    "CHEMBL4127213",
+    "CHEMBL4159215",
+    "CHEMBL4167557",
+    "CHEMBL431770"
+  ],
+  "human_validation_claimed": false,
+  "next_gate": "build the v1.3 computational feature matrix without accessing holdout outcomes"
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "",
+  "authors": "Devine SM, May LT, Scammells PJ",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_19",
+    "creation_date": "2014-07-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3132785",
+  "doi": "10.1039/C3MD00364G",
+  "doi_chembl": null,
+  "first_page": "192",
+  "issue": "2",
+  "journal": "Medchemcomm",
+  "journal_full_title": null,
+  "last_page": "196",
+  "patent_id": null,
+  "pubmed_id": null,
+  "src_id": 1,
+  "title": "Design, synthesis and evaluation of N6-substituted 2-aminoadenosine-5-N-methylcarboxamides as A3 adenosine receptor agonists",
+  "volume": "5",
+  "year": 2014
+}

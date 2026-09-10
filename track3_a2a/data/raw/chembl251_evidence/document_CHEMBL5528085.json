@@ -1,0 +1,24 @@
+{
+  "abstract": "Aberrantly elevated adenosine in the tumor microenvironment exerts its immunosuppressive functions through adenosine receptors A<sub>2A</sub>R and A<sub>2B</sub>R. Antagonism of A<sub>2A</sub>R and A<sub>2B</sub>R has the potential to suppress tumor growth. Herein, we report a systemic assessment of the effects of an indole modification at position 4, 5, 6, or 7 on both A<sub>2A</sub>R/A<sub>2B</sub>R activity and selectivity of novel 2-aminopyrimidine compounds. Substituting indole at the 4-/5-position produced potent A<sub>2A</sub>R/A<sub>2B</sub>R dual antagonism, whereas the 6-position of indole substitution gave highly selective A<sub>2B</sub>R antagonism. Molecular dynamics simulation showed that the 5-cyano compound <b>7ai</b> had a lower binding free energy than the 6-cyano compound <b>7aj</b> due to water-bridged hydrogen bond interactions with E169 or F168 in A<sub>2A</sub>R. Of note, dual A<sub>2A</sub>R/A<sub>2B</sub>R antagonism by compound <b>7ai</b> can profoundly promote the activation and cytotoxic function of T cells. This work provided a strategy for obtaining novel dual A<sub>2A</sub>R/A<sub>2B</sub>R or A<sub>2B</sub>R antagonists by fine-tuning structural modification.",
+  "authors": "Wang H, Yang X, Li Y, Ze S, Feng B, Weng Y, Gao A, Song G, Liu M, Xie Q, Wang Y, Lu W.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_36",
+    "creation_date": "2025-07-28"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5528085",
+  "doi": "10.1021/acs.jmedchem.4c00250",
+  "doi_chembl": null,
+  "first_page": "5075",
+  "issue": "6",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5092",
+  "patent_id": null,
+  "pubmed_id": 38483150,
+  "src_id": 1,
+  "title": "Subtle Structural Changes across the Boundary between A<sub>2A</sub>R/A<sub>2B</sub>R Dual Antagonism and A<sub>2B</sub>R Antagonism: A Novel Class of 2-Aminopyrimidine-Based Derivatives.",
+  "volume": "67",
+  "year": 2024
+}

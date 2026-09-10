@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "protocol_id": "a2a-model-evaluation-v1.2",
+  "status": "frozen_before_first_step4_model_run",
+  "run_mode": "provisional_development_only",
+  "input": "outputs/v1.2/docking_clean.csv",
+  "development_partition": "provisional_development",
+  "locked_holdout_partition": "provisional_locked_holdout",
+  "locked_holdout_policy": "do_not_load_or_score_in_step4",
+  "positive_class": "agonist",
+  "models": {
+    "A": ["ECFP4"],
+    "B": ["physicochemical_descriptors"],
+    "AB": ["ECFP4", "physicochemical_descriptors"],
+    "C": ["inactive_5NM4_GNINA_CNN"],
+    "D": ["dual_state_orthogonal_GNINA_CNN"],
+    "E": ["ECFP4", "physicochemical_descriptors", "dual_state_orthogonal_GNINA_CNN"]
+  },
+  "fingerprint": {
+    "type": "Morgan",
+    "radius": 2,
+    "bits": 2048,
+    "use_chirality": true
+  },
+  "estimator": {
+    "type": "logistic_regression",
+    "penalty": "l2",
+    "C": 1.0,
+    "class_weight": "balanced",
+    "solver": "liblinear",
+    "max_iter": 5000,
+    "classification_threshold": 0.5
+  },
+  "validation": {
+    "splitter": "StratifiedGroupKFold",
+    "group": "generic_murcko_scaffold_smiles",
+    "folds": 5,
+    "repeats": 10,
+    "random_seed": 20260909,
+    "bootstrap_resamples": 2000,
+    "confidence_level": 0.95
+  },
+  "primary_comparison": "ROC_AUC(E) - ROC_AUC(AB)",
+  "secondary_comparison": "ROC_AUC(D) - ROC_AUC(C)",
+  "admission_tolerance": {
+    "minimum_model_E_ROC_AUC": 0.70,
+    "minimum_model_E_agonist_sensitivity": 0.60,
+    "minimum_primary_delta_auc": 0.02,
+    "minimum_primary_delta_ci_lower": -0.01,
+    "minimum_secondary_delta_auc": 0.02,
+    "minimum_secondary_delta_ci_lower": -0.01,
+    "interpretation": "Exploratory development admission only; formal promotion also requires completed record-level dual review and a single locked-holdout evaluation."
+  },
+  "review_gate": {
+    "current_status": "team_confirmation_reported_but_record_level_fields_blank",
+    "required_for_formal_promotion": [
+      "two distinct named reviewers per record",
+      "matching class and evidence tier or named adjudication",
+      "reviewed manifest hash"
+    ]
+  }
+}

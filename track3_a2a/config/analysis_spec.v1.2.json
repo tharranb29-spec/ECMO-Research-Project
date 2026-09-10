@@ -1,0 +1,71 @@
+{
+  "specification_id": "a2a-functional-classification-v1.2",
+  "status": "frozen_before_label_review_and_model_results",
+  "target": {
+    "name": "human adenosine A2A receptor",
+    "gene": "ADORA2A",
+    "uniprot": "P29274",
+    "chembl_id": "CHEMBL251"
+  },
+  "endpoint": {
+    "primary": "agonist_vs_antagonist",
+    "positive_class": "agonist",
+    "not_claimed": ["biased_agonism", "experimental_affinity_prediction", "molecular_dynamics"]
+  },
+  "structures": {
+    "primary_inactive": "5NM4",
+    "primary_active_like": "2YDO",
+    "inactive_sensitivity": "4EIY"
+  },
+  "label_tiers": {
+    "tier_1": {
+      "criterion": "direct human A2A functional assay with interpretable agonist or antagonist direction",
+      "use": "primary_analysis"
+    },
+    "tier_2": {
+      "criterion": "unambiguous functional assignment in a primary source but insufficient machine-readable direct assay detail",
+      "use": "predeclared_sensitivity_analysis_only"
+    },
+    "excluded": ["binding_only", "partial_agonist", "inverse_agonist", "ambiguous", "wrong_context", "unresolved"]
+  },
+  "planned_reviewed_dataset": {
+    "total": 220,
+    "agonists": 65,
+    "antagonists": 155,
+    "minimum_reviewers": 2,
+    "adjudication_required_for_disagreement": true
+  },
+  "docking_features": {
+    "x_inactive": "median valid GNINA affinity for 5NM4",
+    "x_active": "median valid GNINA affinity for 2YDO",
+    "m_affinity": "(x_active + x_inactive) / 2",
+    "d_affinity": "x_active - x_inactive",
+    "d_affinity_per_heavy_atom": "d_affinity / heavy_atom_count",
+    "cnn_parameterization": "state mean and state difference; do not combine both raw state columns with their exact difference"
+  },
+  "models": {
+    "A": "ECFP4 fingerprint only",
+    "B": "physicochemical descriptors only",
+    "AB": "ECFP4 plus physicochemical descriptors",
+    "C": "single-state 5NM4 GNINA and CNN features",
+    "D": "dual-state orthogonal mean/difference GNINA and CNN features",
+    "E": "AB plus D"
+  },
+  "comparisons": {
+    "primary": "paired scaffold-split AUC(E) - AUC(AB)",
+    "secondary": "paired scaffold-split AUC(D) - AUC(C)",
+    "coefficient_test": "coefficient and confidence interval for d_affinity in a full-rank mean/difference parameterization"
+  },
+  "evaluation": {
+    "headline_split": "scaffold_grouped",
+    "random_split": "optimistic_comparison_only",
+    "primary_metric": "ROC_AUC",
+    "companion_metrics": ["PR_AUC", "balanced_accuracy", "MCC", "sensitivity", "specificity", "Brier_score", "calibration"],
+    "admission_tolerance": "not_frozen_until_reviewed_class_and_scaffold_counts_are_known"
+  },
+  "autonomous_updates": {
+    "mode": "shadow_quarantine",
+    "llm_can_admit_training_labels": false,
+    "automatic_model_promotion": false
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "Syntheses and physicochemical properties of N-cycloalkyl-substituted imidazo-, pyrimido- and 1,3-diazepino[2,1-f]purinediones are described. These derivatives were synthesized by cyclization of 7-halogenoalkyl-8-bromo-1,3-dimethylxanthine derivatives with aminocycloalkanes. The obtained compounds (1-33) were evaluated for their affinity to rat adenosine A(1) and A(2A) receptors. Selected compounds were additionally investigated for affinity to the human A(1), A(2A), A(2B) and A(3) receptor subtypes. The results of the radioligand binding assays at adenosine A(1) and A(2A) receptors showed that most of the compounds exhibited adenosine A(2A) receptor affinity at micromolar or submicromolar concentrations; an annelated pyrimidine ring was beneficial for A(2A) affinity. The most potent A(2A) ligands of the present series were compounds 6 (K(i) 0.33 \u03bcM rat A(2A), 0.31 \u03bcM human A(2A)), 8 (K(i) 0.98 \u03bcM rat A(2A), 0.42 \u03bcM human A(2A)) and 15 (K(i) 0.24 \u03bcM rat A(2A), 0.61 \u03bcM human A(2A)) with the latter one showing high A(2A) selectivity. In NaCl shift assay, 15 was shown to be an antagonist at A(2A) receptors. This result was confirmed for the best compounds 6, 8, 15 in cAMP accumulation studies. A 3D-QSAR equation with a good predicting power (q(2) = 0.88) for A(2A) AR affinity was obtained. The compounds were evaluated in vivo as anticonvulsants in MES and ScMet tests and examined for neurotoxicity in mice (i.p.). Most of them showed anticonvulsant activity in chemically induced seizures; among them the diazepinopurinediones were the best (e.g. 31) showing protection in both tests on short time symptoms, without signs of neurotoxicity. Five compounds, 8, 17, 20, 29, and 31, exhibited anticonvulsant activity after peroral application in rats. Structure-activity relationships are discussed including the analysis of lipophilic and spatial properties. The new compounds, which contain a basic nitrogen atom and can therefore be protonated, may be good starting points for obtaining A(2A) antagonists with good water-solubility.",
+  "authors": "Drabczy\u0144ska A, Yuzlenko O, K\u00f6se M, Paskaleva M, Schiedel AC, Karolak-Wojciechowska J, Handzlik J, Karcz T, Kuder K, M\u00fcller CE, Kie\u0107-Kononowicz K.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_16",
+    "creation_date": "2013-05-07"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2150901",
+  "doi": "10.1016/j.ejmech.2011.05.023",
+  "doi_chembl": null,
+  "first_page": "3590",
+  "issue": "9",
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "3607",
+  "patent_id": null,
+  "pubmed_id": 21664729,
+  "src_id": 1,
+  "title": "Synthesis and biological activity of tricyclic cycloalkylimidazo-, pyrimido- and diazepinopurinediones.",
+  "volume": "46",
+  "year": 2011
+}

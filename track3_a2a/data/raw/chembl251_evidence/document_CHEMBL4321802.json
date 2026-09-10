@@ -1,0 +1,24 @@
+{
+  "abstract": "New 8-amino-6-aryl-1,2,4-triazolo[4,3-<i>a</i>]pyrazin-3-ones were designed to obtain dual antioxidant-human A<sub>2A</sub> adenosine receptor (hA<sub>2A</sub> AR) antagonists. Two sets of compounds were synthesized, the first featuring phenol rings at the 6-position, the second bearing the lipoyl and 4-hydroxy-3,5-di-<i>tert</i>but-benzoyl residues appended by different linkers on the 6-phenyl ring. Several new triazolopyrazines (<b>1-21</b>) were potent and selective hA<sub>2A</sub> AR antagonists (<i>K</i><sub>i</sub> = 0.17-54.5 nM). Compounds <b>11</b>, <b>15</b>, and <b>21</b>, featuring antioxidant moieties, and compound <b>12</b>, lacking the antioxidant functionality, reduced oxaliplatin-induced toxicity in microglia cells, the most active being the lipoyl-derivative <b>15</b> and the (4-hydroxy-3,5-di-<i>tert</i>-butyl)benzoyl-analogue <b>21</b> which were effective in reducing the oxygen free radical level. The lipoyl-derivative <b>15</b> was also able to revert oxaliplatin-induced neuropathy in the mouse. In vivo efficacy of <b>15</b> makes it a promising neuroprotective agent in oxidative stress-related diseases.",
+  "authors": "Falsini M, Catarzi D, Varano F, Ceni C, Dal Ben D, Marucci G, Buccioni M, Volpini R, Di Cesare Mannelli L, Lucarini E, Ghelardini C, Bartolucci G, Menicatti M, Colotta V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_28",
+    "creation_date": "2021-01-15"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4321802",
+  "doi": "10.1021/acs.jmedchem.9b00778",
+  "doi_chembl": null,
+  "first_page": "8511",
+  "issue": "18",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "8531",
+  "patent_id": null,
+  "pubmed_id": 31453698,
+  "src_id": 1,
+  "title": "Antioxidant-Conjugated 1,2,4-Triazolo[4,3-<i>a</i>]pyrazin-3-one Derivatives: Highly Potent and Selective Human A<sub>2A</sub> Adenosine Receptor Antagonists Possessing Protective Efficacy in Neuropathic Pain.",
+  "volume": "62",
+  "year": 2019
+}

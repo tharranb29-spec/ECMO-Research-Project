@@ -1,0 +1,27 @@
+{
+  "created_at": "2026-09-04T14:49:00.698678+00:00",
+  "raw_activity_rows": 2258,
+  "readout_class_counts": {
+    "binding_only": 24,
+    "functional": 1734,
+    "unresolved": 500
+  },
+  "standardized_molecule_count": 1591,
+  "molecules_queued_for_human_review": 938,
+  "queue_class_counts": {
+    "agonist": 277,
+    "antagonist": 661
+  },
+  "queue_evidence_strength_counts": {
+    "high": 19,
+    "initial": 800,
+    "medium": 119
+  },
+  "excluded_molecule_counts": {
+    "conflicting_functional_labels": 67,
+    "no_classifiable_functional_readout": 586
+  },
+  "training_eligible_count": 0,
+  "important_note": "Property filters are prospective-screening descriptors and do not determine retrospective benchmark eligibility.",
+  "admission_rule": "A reviewer must confirm a functional readout, agonist/antagonist direction, source document, and absence of context conflict."
+}

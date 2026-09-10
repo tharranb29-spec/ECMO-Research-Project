@@ -1,0 +1,24 @@
+{
+  "abstract": "Novel thiazolotriazolopyrimidine derivatives (23-33) designed as potential adenosine A(2A) receptor (A(2A)R) antagonists were synthesized. Molecular docking studies revealed that all compounds (23-33) exhibited strong interaction with A(2A)R. The strong interaction of the compounds (23-33) with A(2A)R in silico was confirmed by their high binding affinity with human A(2A)R stably expressed in HEK293 cells using radioligand-binding assay. The compounds 24-26 demonstrated substantial binding affinity and selectivity for A(2A)R as compared to SCH58261, a standard A(2A)R antagonist. Decrease in A(2A)R-coupled release of endogenous cAMP in treated HEK293 cells demonstrated in vitro A(2A)R antagonist potential of the compounds 24-26. Attenuation in haloperidol-induced motor impairments (catalepsy and akinesia) in Swiss albino male mice pre-treated with compounds 24-26 further supports their role in the alleviation of PD symptoms.",
+  "authors": "Mishra CB, Barodia SK, Prakash A, Senthil Kumar JB, Luthra PM.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_6",
+    "creation_date": "2010-08-27"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1156165",
+  "doi": "10.1016/j.bmc.2010.02.048",
+  "doi_chembl": null,
+  "first_page": "2491",
+  "issue": "7",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "2500",
+  "patent_id": null,
+  "pubmed_id": 20303771,
+  "src_id": 1,
+  "title": "Novel 8-(furan-2-yl)-3-substituted thiazolo [5,4-e][1,2,4] triazolo[1,5-c] pyrimidine-2(3H)-thione derivatives as potential adenosine A(2A) receptor antagonists.",
+  "volume": "18",
+  "year": 2010
+}

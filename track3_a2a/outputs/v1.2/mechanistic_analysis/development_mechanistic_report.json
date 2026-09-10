@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T09:43:23.871136+00:00",
+  "protocol_id": "a2a-mechanistic-analysis-v1.2-exploratory",
+  "interpretation": "independent implementation of a teammate-proposed exploratory analysis; not a confirmatory primary endpoint",
+  "formal_confirmatory_claim": false,
+  "formal_label_review_gate_passed": false,
+  "locked_holdout_accessed": false,
+  "source_hashes": {
+    "config": "aaf71e26e56e22da05ce356ab84c032774d1824c6fc8900e72bc98439c8a4a2a",
+    "feature_matrix": "4e7ca973af12ad6fecb86d9c4563d5070faa62be4c21565939ba37ad286eddb6"
+  },
+  "software": {
+    "numpy": "2.5.2",
+    "scikit_learn": "1.7.2"
+  },
+  "dataset": {
+    "molecule_count": 171,
+    "agonists": 50,
+    "antagonists": 121
+  },
+  "main_exploratory_model": {
+    "chemistry_pc_count": 3,
+    "chemistry_variance_explained": 0.9448714660623619,
+    "standardized_d_pk_coefficient": 1.0885619287528843,
+    "bootstrap_95_interval": {
+      "resamples": 5000,
+      "median": 1.2470352108934457,
+      "lower": 0.3684123768419284,
+      "upper": 3.362992327124807
+    },
+    "permutation": {
+      "observed_coefficient": 1.0885619287528843,
+      "resamples": 10000,
+      "two_sided_p_value": 9.999000099990002e-05
+    }
+  },
+  "leave_one_out_sign_stability": {
+    "refits": 171,
+    "positive_sign_count": 171,
+    "positive_sign_fraction": 1.0,
+    "minimum_coefficient": 0.9633457869687684,
+    "maximum_coefficient": 1.4654757779141194
+  },
+  "pc_count_sensitivity": [
+    {
+      "chemistry_pc_count": 1,
+      "chemistry_variance_explained": 0.7187707233353903,
+      "d_pk_coefficient": 1.5706363119737072,
+      "permutation_p_value": 0.0004997501249375312
+    },
+    {
+      "chemistry_pc_count": 2,
+      "chemistry_variance_explained": 0.8844081482479748,
+      "d_pk_coefficient": 1.3287892142741602,
+      "permutation_p_value": 0.0004997501249375312
+    },
+    {
+      "chemistry_pc_count": 3,
+      "chemistry_variance_explained": 0.9448714660623619,
+      "d_pk_coefficient": 1.0885619287528843,
+      "permutation_p_value": 0.0004997501249375312
+    },
+    {
+      "chemistry_pc_count": 4,
+      "chemistry_variance_explained": 0.9713126376221788,
+      "d_pk_coefficient": 0.8283808205527492,
+      "permutation_p_value": 0.0014992503748125937
+    },
+    {
+      "chemistry_pc_count": 5,
+      "chemistry_variance_explained": 0.9916155523285815,
+      "d_pk_coefficient": 0.8787398059860948,
+      "permutation_p_value": 0.0004997501249375312
+    },
+    {
+      "chemistry_pc_count": 6,
+      "chemistry_variance_explained": 0.9963926532921159,
+      "d_pk_coefficient": 0.8955972393668951,
+      "permutation_p_value": 0.001999000499750125
+    }
+  ],
+  "force_field_d_affinity_comparator": {
+    "standardized_coefficient": -0.2856003411585591,
+    "permutation": {
+      "observed_coefficient": -0.2856003411585591,
+      "resamples": 2000,
+      "two_sided_p_value": 0.14842578710644677
+    }
+  },
+  "pose_quality_entanglement": {
+    "pearson_correlation_d_pk_d_cnnscore": 0.7928683432761277,
+    "joint_model": {
+      "inference": "conditional Wald inference from the joint unpenalized logistic model",
+      "d_pk": {
+        "coefficient": 0.2091836574217999,
+        "standard_error": 0.6349145614151944,
+        "wald_95_interval": [
+          -1.0352260162120253,
+          1.4535933310556253
+        ],
+        "two_sided_wald_p": 0.7418024216418411
+      },
+      "d_cnnscore": {
+        "coefficient": 1.2703546130612484,
+        "standard_error": 0.6503660982134666,
+        "wald_95_interval": [
+          -0.0043395162029855605,
+          2.5450487423254824
+        ],
+        "two_sided_wald_p": 0.05078505655855235
+      }
+    }
+  },
+  "descriptor_redundancy": {
+    "pearson_correlation_molecular_weight_heavy_atom_count": 0.9958504577286574,
+    "retained": "heavy_atom_count",
+    "dropped": "molecular_weight"
+  },
+  "exploratory_robustness_checks": {
+    "bootstrap_interval_excludes_zero": true,
+    "permutation_p_within_limit": true,
+    "leave_one_out_sign_stable": true,
+    "pc_1_to_6_positive": true
+  },
+  "exploratory_robustness_checks_passed": true,
+  "limitations": [
+    "d_pk was selected after development results were observed",
+    "CNNaffinity is a learned docking score rather than experimental affinity",
+    "record-level dual-review fields remain incomplete",
+    "pose-quality entanglement may explain part of the signal"
+  ],
+  "next_gate": "complete formal record-level dual review, freeze a prospective v1.3 hypothesis, then evaluate once on untouched data"
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "A 2A adenosine receptor antagonists usually have bi- or tricyclic N aromatic systems with varying substitution patterns to achieve desired receptor affinity and selectivity. Using a pharmacophore model designed by overlap of nonxanthine type of previously known A 2A antagonists, we synthesized a new class of compounds having a 2-amino nicotinonitrile core moiety. From our data, we conclude that the presence of at least one furan group rather than phenyl is beneficial for high affinity on the A 2A adenosine receptor. Compounds 39 (LUF6050) and 44 (LUF6080) of the series had K i values of 1.4 and 1.0 nM, respectively, with reasonable selectivity toward the other adenosine receptor subtypes, A 1, A 2B, and A 3. The high affinity of 44 was corroborated in a cAMP second messenger assay, yielding subnanomolar potency for this compound.",
+  "authors": "Mantri M, de Graaf O, van Veldhoven J, G\u00f6bly\u00f6s A, von Frijtag Drabbe K\u00fcnzel JK, Mulder-Krieger T, Link R, de Vries H, Beukers MW, Brussee J, Ijzerman AP.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_2",
+    "creation_date": "2009-11-30"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1155896",
+  "doi": "10.1021/jm701594y",
+  "doi_chembl": null,
+  "first_page": "4449",
+  "issue": "15",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4455",
+  "patent_id": null,
+  "pubmed_id": 18637670,
+  "src_id": 1,
+  "title": "2-Amino-6-furan-2-yl-4-substituted nicotinonitriles as A2A adenosine receptor antagonists.",
+  "volume": "51",
+  "year": 2008
+}

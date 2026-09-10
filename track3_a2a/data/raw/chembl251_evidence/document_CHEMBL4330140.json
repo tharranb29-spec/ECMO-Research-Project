@@ -1,0 +1,24 @@
+{
+  "abstract": "This paper describes the synthesis of novel 7-amino-thiazolo[5,4-d]pyrimidines bearing different substituents at positions 2, 5 and 7 of the thiazolopyrimidine scaffold. The synthesized compounds 2-27 were evaluated in radioligand binding (A<sub>1</sub>, A<sub>2A</sub> and A<sub>3</sub>) and adenylyl cyclase activity (A<sub>2B</sub> and A<sub>2A</sub>) assays, in order to evaluate their affinity and potency at human adenosine receptor subtypes. The current study allowed us to support that affinity and selectivity of 7-amino-thiazolo[5,4-d]pyrimidine derivatives towards the adenosine receptor subtypes can be modulated by the nature of the groups attached at positions 2, 5 and 7 of the bicyclic scaffold. To rationalize the hypothetical binding mode of the newly synthesized compounds, we also performed docking calculations in human A<sub>2A</sub>, A<sub>1</sub> and A<sub>3</sub> structures.",
+  "authors": "Varano F, Catarzi D, Falsini M, Dal Ben D, Buccioni M, Marucci G, Volpini R, Colotta V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_28",
+    "creation_date": "2021-01-15"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4330140",
+  "doi": "10.1016/j.bmcl.2018.12.062",
+  "doi_chembl": null,
+  "first_page": "563",
+  "issue": "4",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "569",
+  "patent_id": null,
+  "pubmed_id": 30638876,
+  "src_id": 1,
+  "title": "Novel human adenosine receptor antagonists based on the 7-amino-thiazolo[5,4-d]pyrimidine scaffold. Structural investigations at the 2-, 5- and 7-positions to enhance affinity and tune selectivity.",
+  "volume": "29",
+  "year": 2019
+}

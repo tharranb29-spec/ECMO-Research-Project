@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "created_at": "2026-09-06T12:05:21.009669+00:00",
+  "specification_id": "a2a-functional-classification-v1.2",
+  "dataset_partition": "reviewed_unpartitioned",
+  "training_eligible_count": 0,
+  "records": []
+}

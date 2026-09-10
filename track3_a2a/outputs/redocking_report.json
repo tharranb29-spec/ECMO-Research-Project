@@ -1,0 +1,138 @@
+{
+  "protocol_id": "a2a-dual-state-v1.0",
+  "gate": "cognate_redocking",
+  "status": "fail",
+  "production_screening_unlocked": false,
+  "interpretation": "Pose-recovery validation only; no biological efficacy or affinity claim.",
+  "acceptance_rule": {
+    "rmsd_type": "symmetry_aware_heavy_atom",
+    "rmsd_threshold_angstrom": 2.0,
+    "minimum_passing_seeds": 4,
+    "median_rmsd_must_pass": true
+  },
+  "cases": [
+    {
+      "case_id": "4EIY",
+      "status": "fail",
+      "valid_run_count": 5,
+      "failed_run_count": 0,
+      "passing_pose_count": 2,
+      "median_rmsd_angstrom": 3.0894,
+      "mean_rmsd_angstrom": 2.3951,
+      "runs": [
+        {
+          "seed": 42,
+          "status": "valid",
+          "rmsd_angstrom": 0.8008,
+          "minimized_affinity_kcal_mol": -9.0623,
+          "cnn_score": 0.8393,
+          "cnn_affinity_pk": 6.7335,
+          "pose_path": "outputs/redocking/4EIY/seed-42.sdf",
+          "log_path": "outputs/redocking/4EIY/seed-42.log"
+        },
+        {
+          "seed": 43,
+          "status": "valid",
+          "rmsd_angstrom": 3.2451,
+          "minimized_affinity_kcal_mol": -8.4776,
+          "cnn_score": 0.7994,
+          "cnn_affinity_pk": 7.3291,
+          "pose_path": "outputs/redocking/4EIY/seed-43.sdf",
+          "log_path": "outputs/redocking/4EIY/seed-43.log"
+        },
+        {
+          "seed": 44,
+          "status": "valid",
+          "rmsd_angstrom": 3.0941,
+          "minimized_affinity_kcal_mol": -9.1445,
+          "cnn_score": 0.9635,
+          "cnn_affinity_pk": 7.6606,
+          "pose_path": "outputs/redocking/4EIY/seed-44.sdf",
+          "log_path": "outputs/redocking/4EIY/seed-44.log"
+        },
+        {
+          "seed": 45,
+          "status": "valid",
+          "rmsd_angstrom": 3.0894,
+          "minimized_affinity_kcal_mol": -9.017,
+          "cnn_score": 0.963,
+          "cnn_affinity_pk": 7.6603,
+          "pose_path": "outputs/redocking/4EIY/seed-45.sdf",
+          "log_path": "outputs/redocking/4EIY/seed-45.log"
+        },
+        {
+          "seed": 46,
+          "status": "valid",
+          "rmsd_angstrom": 1.746,
+          "minimized_affinity_kcal_mol": -8.3974,
+          "cnn_score": 0.8066,
+          "cnn_affinity_pk": 6.5189,
+          "pose_path": "outputs/redocking/4EIY/seed-46.sdf",
+          "log_path": "outputs/redocking/4EIY/seed-46.log"
+        }
+      ]
+    },
+    {
+      "case_id": "2YDO",
+      "status": "pass",
+      "valid_run_count": 5,
+      "failed_run_count": 0,
+      "passing_pose_count": 5,
+      "median_rmsd_angstrom": 0.4894,
+      "mean_rmsd_angstrom": 0.4896,
+      "runs": [
+        {
+          "seed": 42,
+          "status": "valid",
+          "rmsd_angstrom": 0.4894,
+          "minimized_affinity_kcal_mol": -8.4216,
+          "cnn_score": 0.9625,
+          "cnn_affinity_pk": 6.5966,
+          "pose_path": "outputs/redocking/2YDO/seed-42.sdf",
+          "log_path": "outputs/redocking/2YDO/seed-42.log"
+        },
+        {
+          "seed": 43,
+          "status": "valid",
+          "rmsd_angstrom": 0.4876,
+          "minimized_affinity_kcal_mol": -8.424,
+          "cnn_score": 0.96,
+          "cnn_affinity_pk": 6.5825,
+          "pose_path": "outputs/redocking/2YDO/seed-43.sdf",
+          "log_path": "outputs/redocking/2YDO/seed-43.log"
+        },
+        {
+          "seed": 44,
+          "status": "valid",
+          "rmsd_angstrom": 0.49,
+          "minimized_affinity_kcal_mol": -8.4144,
+          "cnn_score": 0.9597,
+          "cnn_affinity_pk": 6.5894,
+          "pose_path": "outputs/redocking/2YDO/seed-44.sdf",
+          "log_path": "outputs/redocking/2YDO/seed-44.log"
+        },
+        {
+          "seed": 45,
+          "status": "valid",
+          "rmsd_angstrom": 0.492,
+          "minimized_affinity_kcal_mol": -8.4246,
+          "cnn_score": 0.9613,
+          "cnn_affinity_pk": 6.5996,
+          "pose_path": "outputs/redocking/2YDO/seed-45.sdf",
+          "log_path": "outputs/redocking/2YDO/seed-45.log"
+        },
+        {
+          "seed": 46,
+          "status": "valid",
+          "rmsd_angstrom": 0.4891,
+          "minimized_affinity_kcal_mol": -8.4203,
+          "cnn_score": 0.9613,
+          "cnn_affinity_pk": 6.5966,
+          "pose_path": "outputs/redocking/2YDO/seed-46.sdf",
+          "log_path": "outputs/redocking/2YDO/seed-46.log"
+        }
+      ]
+    }
+  ],
+  "next_gate": "review receptor preparation and docking setup"
+}

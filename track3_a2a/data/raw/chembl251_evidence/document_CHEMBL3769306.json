@@ -1,0 +1,24 @@
+{
+  "abstract": "Glaucoma, a heterogeneous ocular disorder affecting \u223c60 million people worldwide, is characterized by painless neurodegeneration of retinal ganglion cells (RGCs), resulting in irreversible vision loss. Available therapies, which decrease the common causal risk factor of elevated intraocular pressure, delay, but cannot prevent, RGC death and blindness. Notably, it is changes in the anterior segment of the eye, particularly in the drainage of aqueous humor fluid, which are believed to bring about changes in pressure. Thus, it is primarily this region whose properties are manipulated in current and emerging therapies for glaucoma. Here, we focus on the challenges associated with developing treatments, review the available experimental methods to evaluate the therapeutic potential of new drugs, describe the development and evaluation of emerging Rho-kinase inhibitors and adenosine receptor ligands that offer the potential to improve aqueous humor outflow and protect RGCs simultaneously, and present new targets and approaches on the horizon.",
+  "authors": "Donegan RK, Lieberman RL.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_23",
+    "creation_date": "2017-05-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3769306",
+  "doi": "10.1021/acs.jmedchem.5b00828",
+  "doi_chembl": null,
+  "first_page": "788",
+  "issue": "3",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "809",
+  "patent_id": null,
+  "pubmed_id": 26356532,
+  "src_id": 1,
+  "title": "Discovery of Molecular Therapeutics for Glaucoma: Challenges, Successes, and Promising Directions.",
+  "volume": "59",
+  "year": 2016
+}

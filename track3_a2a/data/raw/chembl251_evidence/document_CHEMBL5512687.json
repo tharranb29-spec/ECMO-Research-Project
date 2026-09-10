@@ -1,0 +1,24 @@
+{
+  "abstract": "Building on the preceding structural analysis and a structure-activity relationship (SAR) of 8-aryl-2-hexynyl nucleoside hA<sub>2A</sub>AR antagonist <b>2a</b>, we strategically inverted C2/C8 substituents and eliminated the ribose moiety. These modifications aimed to mitigate potential steric interactions between ribose and adenosine receptors. The SAR findings indicated that such inversions significantly modulated hA<sub>3</sub>AR binding affinities depending on the type of ribose, whereas removal of ribose altered the functional efficacy via hA<sub>2A</sub>AR. Among the synthesized derivatives, 2-aryl-8-hexynyl adenine <b>4a</b> demonstrated the highest selectivity for hA<sub>2A</sub>AR (<i>K</i><sub><i>i</i>,hA2A</sub> = 5.0 \u00b1 0.5 nM, <i>K</i><sub><i>i</i>,hA3</sub>/<i>K</i><sub><i>i</i>,hA2A</sub> = 86) and effectively blocked cAMP production and restored IL-2 secretion in PBMCs. Favorable pharmacokinetic properties and a notable enhancement of anticancer effects in combination with an mAb immune checkpoint blockade were observed upon oral administration of <b>4a</b>. These findings establish <b>4a</b> as a viable immune-oncology therapeutic candidate.",
+  "authors": "Kim G, Jarhad DB, Lee G, Kim G, Hou X, Yu J, Lee CS, Warnick E, Gao ZG, Ahn SY, Kwak D, Park K, Lee SD, Park TU, Jung SY, Lee JH, Choi JR, Kim M, Kim D, Kim B, Jacobson KA, Jeong LS.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_36",
+    "creation_date": "2025-07-28"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5512687",
+  "doi": "10.1021/acs.jmedchem.4c01003",
+  "doi_chembl": null,
+  "first_page": "10490",
+  "issue": "12",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "10507",
+  "patent_id": null,
+  "pubmed_id": 38845345,
+  "src_id": 1,
+  "title": "Structural Modification and Biological Evaluation of 2,8-Disubstituted Adenine and Its Nucleosides as A&lt;sub&gt;2A&lt;/sub&gt; Adenosine Receptor Antagonists: Exploring the Roles of Ribose at Adenosine Receptors.",
+  "volume": "67",
+  "year": 2024
+}

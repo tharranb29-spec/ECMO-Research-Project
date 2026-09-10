@@ -1,0 +1,24 @@
+{
+  "abstract": "In this study a new set of thiazolo[5,4-d]pyrimidine derivatives was synthesized. These derivatives bear different substituents at positions 2 and 5 of the thiazolopyrimidine core while maintaining a free amino group at position-7. The new compounds were tested for their affinity and potency at human (h) A1, A2A, A2B and A3 adenosine receptors expressed in CHO cells. The results reveal that the higher affinity of these new set of thiazolopyrimidines is toward the hA1 and hA2A adenosine receptors subtypes and is tuned by the substitution pattern at both the 2 and 5 positions of the thiazolopyrimidine nucleus. Functional studies evidenced that the compounds behaved as dual A1/A2A antagonists/inverse agonists. Compound 3, bearing a 5-((2-methoxyphenyl) methylamino) group and a phenyl moiety at position 2, displayed the highest affinity (hA1 Ki\u202f=\u202f10.2\u202fnM; hA2A Ki\u202f=\u202f4.72\u202fnM) and behaved as a potent A1/A2A antagonist/inverse agonist (hA1 IC50\u202f=\u202f13.4\u202fnM; hA2A IC50\u202f=\u202f5.34\u202fnM).",
+  "authors": "Varano F, Catarzi D, Falsini M, Vincenzi F, Pasquini S, Varani K, Colotta V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4118252",
+  "doi": "10.1016/j.bmc.2018.05.048",
+  "doi_chembl": null,
+  "first_page": "3688",
+  "issue": "12",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "3695",
+  "patent_id": null,
+  "pubmed_id": 29880250,
+  "src_id": 1,
+  "title": "Identification of novel thiazolo[5,4-d]pyrimidine derivatives as human A1 and A2A adenosine receptor antagonists/inverse agonists.",
+  "volume": "26",
+  "year": 2018
+}

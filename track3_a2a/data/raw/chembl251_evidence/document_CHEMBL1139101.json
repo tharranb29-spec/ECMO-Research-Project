@@ -1,0 +1,24 @@
+{
+  "abstract": "Antagonism of the adenosine A2A receptor offers great promise in the treatment of Parkinson's disease. Employing the known pyrazolo[4,3-e]-1,2,4-triazolo[1,5-c]pyrimidine A2A antagonist SCH 58261 as a starting point, we identified the potent and selective (vs. A1) antagonist 11h, orally active in the rat haloperidol-induced catalepsy model. We further optimized this lead to the methoxyethoxyethyl ether 12a (SCH 420814), which shows broad selectivity, good pharmacokinetic properties, and excellent in vivo activity.",
+  "authors": "Neustadt BR, Hao J, Lindo N, Greenlee WJ, Stamford AW, Tulshian D, Ongini E, Hunter J, Monopoli A, Bertorelli R, Foster C, Arik L, Lachowicz J, Ng K, Feng KI.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1139101",
+  "doi": "10.1016/j.bmcl.2006.11.083",
+  "doi_chembl": null,
+  "first_page": "1376",
+  "issue": "5",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "1380",
+  "patent_id": null,
+  "pubmed_id": 17236762,
+  "src_id": 1,
+  "title": "Potent, selective, and orally active adenosine A2A receptor antagonists: arylpiperazine derivatives of pyrazolo[4,3-e]-1,2,4-triazolo[1,5-c]pyrimidines.",
+  "volume": "17",
+  "year": 2007
+}

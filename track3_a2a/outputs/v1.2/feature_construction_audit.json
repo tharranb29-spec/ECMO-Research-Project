@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-09T09:49:43.876734+00:00",
+  "protocol_id": "a2a-feature-construction-v1.2",
+  "human_validation_claimed": false,
+  "training_eligible_count": 0,
+  "source_hashes": {
+    "docking_report": "e7a25166a13def1c793e401c3f71f3fe859fbb22acbf5c1d870bcf2a77104d97",
+    "partitions": "a0739de1a5e638c996dd42dd495ff54b4a64cac6703f751422f155e78472785d",
+    "evidence_review": "7d2bb3889686c54c680bc25c70f4094e10132457401330680b4d07bf84bbb08e",
+    "standardized_chemistry": "ace1a1abc33ee83d97642df275035942044bcdb454cef951752e0863b15723f2"
+  },
+  "feature_matrix_sha256": "4e7ca973af12ad6fecb86d9c4563d5070faa62be4c21565939ba37ad286eddb6",
+  "input_docked_molecule_count": 214,
+  "output_row_count": 214,
+  "missing_metadata_ids": [],
+  "class_counts": {
+    "agonist": 63,
+    "antagonist": 151
+  },
+  "partition_counts": {
+    "provisional_development": 171,
+    "provisional_locked_holdout": 43
+  },
+  "class_partition_counts": {
+    "provisional_development:agonist": 50,
+    "provisional_development:antagonist": 121,
+    "provisional_locked_holdout:agonist": 13,
+    "provisional_locked_holdout:antagonist": 30
+  },
+  "evidence_tier_counts": {
+    "tier_1": 214
+  },
+  "pose_quality_policy": {
+    "cnnscore_flag_threshold": 0.3,
+    "comparison": "less_than_or_equal",
+    "primary_behavior": "soft_flag_retain_row",
+    "hard_filter": "sensitivity_analysis_only"
+  },
+  "pose_quality_by_provisional_class": {
+    "agonist": {
+      "molecule_count": 63,
+      "molecules_with_any_soft_flag": 31,
+      "inactive_5NM4": {
+        "flagged_seed_count": 63,
+        "seed_count": 189,
+        "flag_rate": 0.333333
+      },
+      "active_like_2YDO": {
+        "flagged_seed_count": 27,
+        "seed_count": 189,
+        "flag_rate": 0.142857
+      },
+      "all_receptors": {
+        "flagged_seed_count": 90,
+        "seed_count": 378,
+        "flag_rate": 0.238095
+      }
+    },
+    "antagonist": {
+      "molecule_count": 151,
+      "molecules_with_any_soft_flag": 9,
+      "inactive_5NM4": {
+        "flagged_seed_count": 11,
+        "seed_count": 453,
+        "flag_rate": 0.024283
+      },
+      "active_like_2YDO": {
+        "flagged_seed_count": 11,
+        "seed_count": 453,
+        "flag_rate": 0.024283
+      },
+      "all_receptors": {
+        "flagged_seed_count": 22,
+        "seed_count": 906,
+        "flag_rate": 0.024283
+      }
+    }
+  },
+  "hard_filter_sensitivity_not_primary": {
+    "agonist": {
+      "unfiltered": 63,
+      "all_six_seeds_pass": 32,
+      "at_least_two_passing_seeds_per_receptor": 42,
+      "at_least_one_passing_seed_per_receptor": 49
+    },
+    "antagonist": {
+      "unfiltered": 151,
+      "all_six_seeds_pass": 142,
+      "at_least_two_passing_seeds_per_receptor": 146,
+      "at_least_one_passing_seed_per_receptor": 148
+    }
+  },
+  "scaffold_summary": {
+    "agonist": {
+      "unique_generic_scaffolds": 62,
+      "singleton_scaffolds": 61,
+      "largest_scaffold_group": 2
+    },
+    "antagonist": {
+      "unique_generic_scaffolds": 149,
+      "singleton_scaffolds": 148,
+      "largest_scaffold_group": 3
+    }
+  },
+  "partition_scaffold_overlap": [],
+  "orthogonal_feature_definitions": {
+    "m_affinity_kcal_mol": "(x_active_like_2YDO + x_inactive_5NM4) / 2",
+    "d_affinity_kcal_mol": "x_active_like_2YDO - x_inactive_5NM4",
+    "d_affinity_per_heavy_atom": "d_affinity_kcal_mol / heavy_atom_count",
+    "m_cnnscore": "(active_like_2YDO_median_cnnscore + inactive_5NM4_median_cnnscore) / 2",
+    "d_cnnscore": "active_like_2YDO_median_cnnscore - inactive_5NM4_median_cnnscore"
+  },
+  "primary_matrix_status": "provisional_computational_only",
+  "next_gate": "independent label review and scaffold audit before model fitting"
+}

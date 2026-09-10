@@ -1,0 +1,24 @@
+{
+  "abstract": "A pyrazolo[4,3-e][1,2,4]triazolo[1,5-c]pyrimidin-5-amine antagonist of the A2A adenosine receptor (AR) was functionalized as amine congeners, fluorescent conjugates and a sulfonate, and the A2AAR binding modes were predicted computationally. The optimal n-butyl spacer was incorporated into the following A2AAR-selective (Ki, nM) conjugates: BODIPY630/650 derivative 11 (MRS7396, 24.6) and AlexaFluor488 derivative 12 (MRS7416, 30.3). Flow cytometry of 12 in hA2AAR-expressing HEK-293 cells displayed saturable binding (low nonspecific) and inhibition by known A2AAR antagonists. Water-soluble sulfonate 13 was a highly potent (Ki = 6.2 nM) and selective A2AAR antagonist based on binding and functional assays. Docking and molecular dynamics simulations predicted the regions of interaction of the distal portions of these chain-extended ligands with the A2AAR. The BODIPY630/650 fluorophore of 11 was buried in a hydrophobic interhelical (TM1/TM7) region, while AlexaFluor488 of 12 associated with the hydrophilic extracellular loops. In conclusion, we have identified novel high affinity antagonist probes for A2AAR drug discovery and characterization.",
+  "authors": "Duroux R, Ciancetta A, Mannes P, Yu J, Boyapati S, Gizewski E, Yous S, Ciruela F, Auchampach JA, Gao ZG, Jacobson KA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4261547",
+  "doi": "10.1039/C7MD00247E",
+  "doi_chembl": null,
+  "first_page": "1659",
+  "issue": "8",
+  "journal": "Medchemcomm",
+  "journal_full_title": null,
+  "last_page": "1667",
+  "patent_id": null,
+  "pubmed_id": 29250307,
+  "src_id": 1,
+  "title": "Bitopic fluorescent antagonists of the A2A adenosine receptor based on pyrazolo[4,3-e][1,2,4]triazolo[1,5-c]pyrimidin-5-amine functionalized congeners.",
+  "volume": "8",
+  "year": 2017
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "Blockade of A2A adenosine receptors (A2AARs) and inhibition of monoamine oxidase B (MAO-B) in the brain are considered attractive strategies for the treatment of neurodegenerative diseases such as Parkinson's disease (PD). In the present study, benzothiazinones, e.g., 2-(3-chlorophenoxy)-N-(4-oxo-4H-3,1-benzothiazin-2-yl)acetamide (13), were identified as a novel class of potent MAO-B inhibitors (IC50 human MAO-B: 1.63 nM). Benzothiazinones with large substituents in the 2-position, e.g., methoxycinnamoylamino, phenylbutyrylamino, or chlorobenzylpiperazinylbenzamido residues (14, 17, 27, and 28), showed high affinity and selectivity for A2AARs (Ki human A2AAR: 39.5-69.5 nM). By optimizing benzothiazinones for both targets, the first potent, dual-acting A2AAR/MAO-B inhibitors with a nonxanthine structure were developed. The best derivative was N-(4-oxo-4H-3,1-benzothiazin-2-yl)-4-phenylbutanamide (17, Ki human A2A, 39.5 nM; IC50 human MAO-B, 34.9 nM; selective versus other AR subtypes and MAO-A), which inhibited A2AAR-induced cAMP accumulation and showed competitive, reversible MAO-B inhibition. The new compounds may be useful tools for validating the A2AAR/MAO-B dual target approach in PD.",
+  "authors": "St\u00f6ssel A, Schlenk M, Hinz S, K\u00fcppers P, Heer J, G\u00fctschow M, M\u00fcller CE.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_18",
+    "creation_date": "2014-03-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2380255",
+  "doi": "10.1021/jm400336x",
+  "doi_chembl": null,
+  "first_page": "4580",
+  "issue": "11",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4596",
+  "patent_id": null,
+  "pubmed_id": 23631427,
+  "src_id": 1,
+  "title": "Dual targeting of adenosine A(2A) receptors and monoamine oxidase B by 4H-3,1-benzothiazin-4-ones.",
+  "volume": "56",
+  "year": 2013
+}

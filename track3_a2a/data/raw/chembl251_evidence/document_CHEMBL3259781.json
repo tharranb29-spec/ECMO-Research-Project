@@ -1,0 +1,24 @@
+{
+  "abstract": "The adenosine A2A receptor is a G-protein-coupled receptor (GPCR) that has been extensively studied during the past few decades because it offers numerous possibilities for therapeutic applications. Herein we describe adenosine A2A receptor distribution, signaling pathways, pharmacology, and molecular structure, followed by a summary and SAR discussion of the most relevant series of adenosine A2A agonists and antagonists. This review also provides an update of the A2A ligands that are undergoing or have undergone clinical studies, including the two currently marketed agonists adenosine and regadenoson.",
+  "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_20",
+    "creation_date": "2015-01-14"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3259781",
+  "doi": "10.1021/jm4011669",
+  "doi_chembl": null,
+  "first_page": "3623",
+  "issue": "9",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3650",
+  "patent_id": null,
+  "pubmed_id": 24164628,
+  "src_id": 1,
+  "title": "Adenosine A2A receptor as a drug discovery target.",
+  "volume": "57",
+  "year": 2014
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "Previously we have described a novel series of potent and selective A 2A receptor antagonists (e.g., 1) with excellent aqueous solubility. While these compounds are efficacious A 2A antagonists in vivo, the presence of an unsubstituted furyl moiety was a cause of some concern. In order to avoid the potential metabolic liabilities that could arise from an unsubstituted furyl moiety, an optimization effort was undertaken with the aim of replacing the unsubstituted furan with a more metabolically stable group while maintaining potency and selectivity. Herein, we describe the synthesis and SAR of a range of novel heterocyclic systems and the successful identification of a replacement for the unsubstituted furan moiety with a methylfuran or thiazole moiety while maintaining potency and selectivity.",
+  "authors": "Slee DH, Chen Y, Zhang X, Moorjani M, Lanier MC, Lin E, Rueter JK, Williams JP, Lechner SM, Markison S, Malany S, Santos M, Gross RS, Jalali K, Sai Y, Zuo Z, Yang C, Castro-Palomino JC, Crespo MI, Prat M, Gual S, D\u00edaz JL, Saunders J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1142326",
+  "doi": "10.1021/jm701185v",
+  "doi_chembl": null,
+  "first_page": "1719",
+  "issue": "6",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "1729",
+  "patent_id": null,
+  "pubmed_id": 18307292,
+  "src_id": 1,
+  "title": "2-Amino-N-pyrimidin-4-ylacetamides as A2A receptor antagonists: 1. Structure-activity relationships and optimization of heterocyclic substituents.",
+  "volume": "51",
+  "year": 2008
+}

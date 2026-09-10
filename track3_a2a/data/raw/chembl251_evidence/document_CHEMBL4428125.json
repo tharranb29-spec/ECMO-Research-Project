@@ -1,0 +1,24 @@
+{
+  "abstract": "Multitarget approaches, i.e., addressing two or more targets simultaneously with a therapeutic agent, are hypothesized to offer additive therapeutic benefit for the treatment of neurodegenerative diseases. Validated targets for the treatment of Parkinson's disease are, among others, the A<sub>2A</sub> adenosine receptor (AR) and the enzyme monoamine oxidase B (MAO-B). Additional blockade of brain A<sub>1</sub> ARs may also be beneficial. We recently described 8-benzyl-substituted tetrahydropyrazino[2,1-f]purinediones as a new lead structure for the development of such multi-target drugs. We have now designed a new series of tetrahydropyrazino[2,1-f]purinediones to extensively explore their structure-activity-relationships. Several compounds blocked human and rat A<sub>1</sub> and A<sub>2A</sub>ARs at similar concentrations representing dual A<sub>1</sub>/A<sub>2A</sub> antagonists with high selectivity versus the other AR subtypes. Among the best dual A<sub>1</sub>/A<sub>2A</sub>AR antagonists were 8-(3-(4-chlorophenyl)propyl)-1,3-dimethyl-6,7,8,9-tetrahydropyrazino[2,1-f]purine-2,4(1H,3H)-dione (41, K<sub>i</sub> human A<sub>1</sub>: 65.5nM, A<sub>2A</sub>: 230nM; K<sub>i</sub> rat A<sub>1</sub>: 352nM, A<sub>2A</sub>: 316nM) and 1,3-dimethyl-8-((2-(thiophen-2-yl)thiazol-4-yl)methyl)-6,7,8,9-tetrahydropyrazino[2,1-f]purine-2,4(1H,3H)-dione (57, K<sub>i</sub> human A<sub>1</sub>: 642nM, A<sub>2A</sub>: 203nM; K<sub>i</sub> rat A<sub>1</sub>: 166nM, A<sub>2A</sub>: 121nM). Compound 57 was found to be well water-soluble (0.7mg/mL) at a physiological pH value of 7.4. One of the new compounds showed triple-target inhibition: (R)-1,3-dimethyl-8-(2,1,3,4-tetrahydronaphthalen-1-yl)-6,7,8,9-tetrahydropyrazino[2,1-f]purine-2,4(1H,3H)-dione (49) was about equipotent at A<sub>1</sub> and A<sub>2A</sub>ARs and at MAO-B (K<sub>i</sub> human A<sub>1</sub>: 393nM, human A<sub>2A</sub>: 595nM, IC<sub>50</sub> human MAO-B: 210nM) thus allowing future in vivo explorations of the intended multi-target approach.",
+  "authors": "Brunschweiger A, Koch P, Schlenk M, Rafehi M, Radjainia H, K\u00fcppers P, Hinz S, Pineda F, Wiese M, Hockemeyer J, Heer J, Denonne F, M\u00fcller CE.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_28",
+    "creation_date": "2021-01-15"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4428125",
+  "doi": "10.1016/j.bmc.2016.09.003",
+  "doi_chembl": null,
+  "first_page": "5462",
+  "issue": "21",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "5480",
+  "patent_id": null,
+  "pubmed_id": 27658798,
+  "src_id": 1,
+  "title": "8-Substituted 1,3-dimethyltetrahydropyrazino[2,1-f]purinediones: Water-soluble adenosine receptor antagonists and monoamine oxidase B inhibitors.",
+  "volume": "24",
+  "year": 2016
+}

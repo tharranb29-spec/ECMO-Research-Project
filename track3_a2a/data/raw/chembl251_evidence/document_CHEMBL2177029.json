@@ -1,0 +1,24 @@
+{
+  "abstract": "",
+  "authors": "Baraldi PG, Preti D, Borea PA, Varani K.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_16",
+    "creation_date": "2013-05-07"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2177029",
+  "doi": "10.1021/jm300087j",
+  "doi_chembl": null,
+  "first_page": "5676",
+  "issue": "12",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5703",
+  "patent_id": null,
+  "pubmed_id": 22468757,
+  "src_id": 1,
+  "title": "Medicinal chemistry of A\u2083 adenosine receptor modulators: pharmacological activities and therapeutic implications.",
+  "volume": "55",
+  "year": 2012
+}

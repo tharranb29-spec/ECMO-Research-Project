@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-conformation-associated-cnn-signal-v1.3.1",
+  "status": "prospective_amendment_before_rebuilt_holdout_access",
+  "supersedes_for_future_analysis": "a2a-conformation-associated-cnn-signal-v1.3",
+  "preservation_rule": "The original v1.3 specification and all v1.2 results remain unchanged and reportable.",
+  "population": {
+    "target": "human ADORA2A",
+    "labels": "tier_1 computationally curated direct functional agonist versus antagonist",
+    "curation_specification": "a2a-computational-curation-v1.3",
+    "human_approval_required": false,
+    "human_validation_claimed": false,
+    "minimum_holdout_agonists": 10
+  },
+  "model": {
+    "formula": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk + d_pk",
+    "chemistry_descriptors": [
+      "clogp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "tpsa",
+      "heavy_atom_count",
+      "qed"
+    ],
+    "pca_components": 3,
+    "continuous_standardization": "z_score fitted on development and applied unchanged to holdout",
+    "estimator": "unpenalized unweighted logistic regression",
+    "m_pk": "mean CNNaffinity across 5NM4 and 2YDO",
+    "d_pk": "CNNaffinity(2YDO) - CNNaffinity(5NM4)"
+  },
+  "confirmatory_endpoint": {
+    "parameter": "standardized coefficient of d_pk",
+    "direction": "positive",
+    "test": "one-sided label permutation within the rebuilt locked holdout",
+    "alpha": 0.05,
+    "resamples": 10000,
+    "success": "coefficient > 0 and one-sided permutation p <= 0.05"
+  },
+  "mandatory_sensitivity": {
+    "joint_model": "add d_cnnscore to quantify pose-quality entanglement",
+    "interpretation_if_d_pk_not_independent": "conformation-associated CNN composite signal only",
+    "force_field_d_affinity": "report as negative comparator",
+    "predictive_AB_vs_E": "report descriptively; no predictive-improvement claim"
+  },
+  "predictive_sensitivity": {
+    "models": "reuse frozen v1.2 AB and E feature definitions and ridge-logistic settings",
+    "training_population": "v1.3 development partition only",
+    "evaluation_population": "v1.3 locked holdout only",
+    "metric": "ROC AUC and E minus AB",
+    "claim_status": "descriptive only"
+  },
+  "holdout_rules": {
+    "rebuild_after_computational_curation": true,
+    "zero_generic_scaffold_overlap": true,
+    "hash_manifest_before_scoring": true,
+    "evaluate_once": true,
+    "no_threshold_or_feature_changes_after_unblinding": true
+  },
+  "gate_separation": {
+    "label_admission": "primary evidence rules in a2a-computational-curation-v1.3",
+    "model_promotion": "confirmatory endpoint and uncertainty rules in this specification",
+    "auc_cannot_admit_or_reject_individual_labels": true
+  },
+  "outputs": {
+    "freeze_manifest": "outputs/v1.3/confirmatory/freeze_manifest_v1.3.1.json",
+    "holdout_report": "outputs/v1.3/confirmatory/holdout_report_v1.3.1.json",
+    "holdout_predictions": "outputs/v1.3/confirmatory/holdout_predictions_v1.3.1.csv"
+  },
+  "promotion_rule": "A positive holdout result supports a conformation-associated CNN scoring signal, not biological efficacy; external or experimental validation remains required."
+}

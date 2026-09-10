@@ -1,0 +1,24 @@
+{
+  "abstract": "Adenosine A2A receptor (A2AAdoR) antagonism is a nondopaminergic approach to Parkinson's disease treatment that is under development. Earlier we had reported the therapeutic potential of 7-methoxy-4-morpholino-benzothiazole derivatives as A2AAdoR antagonists. We herein described a novel series of [1,2,4]triazolo[5,1-f]purin-2-one derivatives that displays functional antagonism of the A2A receptor with a high degree of selectivity over A1, A2B, and A3 receptors. Compounds from this new scaffold resulted in the discovery of highly potent, selective, stable, and moderate brain penetrating compound 33. Compound 33 endowed with satisfactory in vitro and in vivo pharmacokinetics properties. Compound 33 demonstrated robust oral efficacies in two commonly used models of Parkinson's disease (haloperidol-induced catalepsy and 6-OHDA lesioned rat models) and depression (TST and FST mice models).",
+  "authors": "Basu S, Barawkar DA, Ramdas V, Naykodi M, Shejul YD, Patel M, Thorat S, Panmand A, Kashinath K, Bonagiri R, Prasad V, Bhat G, Quraishi A, Chaudhary S, Magdum A, Meru AV, Ghosh I, Bhamidipati RK, Raje AA, Madgula VLM, De S, Rouduri SR, Palle VP, Chugh A, Hariharan N, Mookhtiar KA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4190330",
+  "doi": "10.1021/acsmedchemlett.7b00175",
+  "doi_chembl": null,
+  "first_page": "835",
+  "issue": "8",
+  "journal": "ACS Med Chem Lett",
+  "journal_full_title": "ACS medicinal chemistry letters.",
+  "last_page": "840",
+  "patent_id": null,
+  "pubmed_id": 28835798,
+  "src_id": 1,
+  "title": "Discovery of Potent and Selective A2A Antagonists with Efficacy in Animal Models of Parkinson's Disease and Depression.",
+  "volume": "8",
+  "year": 2017
+}

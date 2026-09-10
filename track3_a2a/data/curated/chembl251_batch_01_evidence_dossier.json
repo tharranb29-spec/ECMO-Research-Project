@@ -1,0 +1,2622 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-05T13:40:31.200295+00:00",
+  "curation_batch": 1,
+  "record_count": 19,
+  "training_eligible_count": 0,
+  "records": [
+    {
+      "chembl_id": "CHEMBL113142",
+      "molecule_name": "ZM-241385",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL2380258",
+          "document_type": "PUBLICATION",
+          "title": "Novel adenosine A(2A) receptor ligands: a synthetic, functional and computational investigation of selected literature adenosine A(2A) receptor antagonists for extending into extracellular space.",
+          "authors": "J\u00f6rg M, Shonberg J, Mak FS, Miller ND, Yuriev E, Scammells PJ, Capuano B.",
+          "journal": "Bioorganic & medicinal chemistry letters.",
+          "year": 2013,
+          "doi": "10.1016/j.bmcl.2013.03.070",
+          "pubmed_id": 23602401,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2380258",
+          "doi_url": "https://doi.org/10.1016/j.bmcl.2013.03.070",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/23602401/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3877301",
+          "document_type": "PUBLICATION",
+          "title": "Design, Synthesis, and Pharmacological Characterization of 2-(2-Furanyl)thiazolo[5,4-d]pyrimidine-5,7-diamine Derivatives: New Highly Potent A2A Adenosine Receptor Inverse Agonists with Antinociceptive Activity.",
+          "authors": "Varano F, Catarzi D, Vincenzi F, Betti M, Falsini M, Ravani A, Borea PA, Colotta V, Varani K.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2016,
+          "doi": "10.1021/acs.jmedchem.6b01068",
+          "pubmed_id": 27933962,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3877301",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.6b01068",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/27933962/"
+        },
+        {
+          "document_chembl_id": "CHEMBL4152311",
+          "document_type": "PUBLICATION",
+          "title": "Structure-activity relationship studies and pharmacological characterization of N5-heteroarylalkyl-substituted-2-(2-furanyl)thiazolo[5,4-d]pyrimidine-5,7-diamine-based derivatives as inverse agonists at human A2A adenosine receptor.",
+          "authors": "Varano F, Catarzi D, Vincenzi F, Falsini M, Pasquini S, Borea PA, Colotta V, Varani K.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2018,
+          "doi": "10.1016/j.ejmech.2018.06.020",
+          "pubmed_id": 29909340,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4152311",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2018.06.020",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29909340/"
+        },
+        {
+          "document_chembl_id": "CHEMBL4251607",
+          "document_type": "PUBLICATION",
+          "title": "Antagonists of the adenosine A2A receptor based on a 2-arylbenzoxazole scaffold: Investigation of the C5- and C7-positions to enhance affinity.",
+          "authors": "Duroux R, Agouridas L, Renault N, El Bakali J, Furman C, Melnyk P, Yous S.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2018,
+          "doi": "10.1016/j.ejmech.2017.12.007",
+          "pubmed_id": 29268131,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4251607",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2017.12.007",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29268131/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5614411",
+          "document_type": "PUBLICATION",
+          "title": "Exploring novel A<sub>2A</sub>AR antagonists: Design, synthesis, and evaluation of 2,6,9-trisubstituted purine derivatives as promising antifibrotic agents.",
+          "authors": "Sun J, Kim S, Park S, Hwang S, Sheen N, Kim S, Kwon Y, Ryu JS.",
+          "journal": "Bioorganic & medicinal chemistry.",
+          "year": 2024,
+          "doi": "10.1016/j.bmc.2024.117881",
+          "pubmed_id": 39178585,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5614411",
+          "doi_url": "https://doi.org/10.1016/j.bmc.2024.117881",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/39178585/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL2384072",
+          "assay_type": "F",
+          "description": "Antagonist activity at recombinant human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production after 60 mins",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2384072"
+        },
+        {
+          "assay_chembl_id": "CHEMBL2384073",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as cAMP level by cell based assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2384073"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3878910",
+          "assay_type": "F",
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3878910"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3878911",
+          "assay_type": "F",
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3878911"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4156076",
+          "assay_type": "F",
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4156076"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4253810",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cell membranes assessed as inhibition of CGS241680-induced [35S]GTPgammaS binding preincubated for 10 mins followed by CGS241680 addition by TopCount scintillation counting method",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4253810"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5616314",
+          "assay_type": "F",
+          "description": "Antagonist activity at human Adenosine receptor A2a transfected in HEK293 cells co-expressing CRE-luciferase plasmid assessed as reduction in CRE promoter activity by measuring effective concentration incubated for 18 hrs by luciferase based CRE reporter assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5616314"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 13300508,
+          "assay_chembl_id": "CHEMBL2384072",
+          "document_chembl_id": "CHEMBL2380258",
+          "document_journal": "Bioorg Med Chem Lett",
+          "document_year": 2013,
+          "description": "Antagonist activity at recombinant human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production after 60 mins",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "42.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.38",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 13300517,
+          "assay_chembl_id": "CHEMBL2384072",
+          "document_chembl_id": "CHEMBL2380258",
+          "document_journal": "Bioorg Med Chem Lett",
+          "document_year": 2013,
+          "description": "Antagonist activity at recombinant human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production after 60 mins",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "41.69",
+          "standard_units": "nM",
+          "pchembl_value": "7.38",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 13300533,
+          "assay_chembl_id": "CHEMBL2384073",
+          "document_chembl_id": "CHEMBL2380258",
+          "document_journal": "Bioorg Med Chem Lett",
+          "document_year": 2013,
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as cAMP level by cell based assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "1.6",
+          "standard_units": "nM",
+          "pchembl_value": "8.80",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 16853876,
+          "assay_chembl_id": "CHEMBL3878910",
+          "document_chembl_id": "CHEMBL3877301",
+          "document_journal": "J Med Chem",
+          "document_year": 2016,
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "0.678",
+          "standard_units": "nM",
+          "pchembl_value": "9.17",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 16853885,
+          "assay_chembl_id": "CHEMBL3878911",
+          "document_chembl_id": "CHEMBL3877301",
+          "document_journal": "J Med Chem",
+          "document_year": 2016,
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method relative to control",
+          "standard_type": "Emax",
+          "standard_relation": "=",
+          "standard_value": "123.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18433954,
+          "assay_chembl_id": "CHEMBL4156076",
+          "document_chembl_id": "CHEMBL4152311",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2018,
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method",
+          "standard_type": "Emax",
+          "standard_relation": "=",
+          "standard_value": "121.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18434034,
+          "assay_chembl_id": "CHEMBL4156076",
+          "document_chembl_id": "CHEMBL4152311",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2018,
+          "description": "Antagonist activity against human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS21680-stimulated cAMP accumulation measured after 150 mins in presence of [3H]cAMP by scintillation counting method",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "0.83",
+          "standard_units": "nM",
+          "pchembl_value": "9.08",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18694877,
+          "assay_chembl_id": "CHEMBL4253810",
+          "document_chembl_id": "CHEMBL4251607",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2018,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cell membranes assessed as inhibition of CGS241680-induced [35S]GTPgammaS binding preincubated for 10 mins followed by CGS241680 addition by TopCount scintillation counting method",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "80.8",
+          "standard_units": "nM",
+          "pchembl_value": "7.09",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 26125711,
+          "assay_chembl_id": "CHEMBL5616314",
+          "document_chembl_id": "CHEMBL5614411",
+          "document_journal": "Bioorg Med Chem",
+          "document_year": 2024,
+          "description": "Antagonist activity at human Adenosine receptor A2a transfected in HEK293 cells co-expressing CRE-luciferase plasmid assessed as reduction in CRE promoter activity by measuring effective concentration incubated for 18 hrs by luciferase based CRE reporter assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "4330.0",
+          "standard_units": "nM",
+          "pchembl_value": "5.36",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL477",
+      "molecule_name": "ADENOSINE",
+      "proposed_class": "agonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL1177799",
+          "document_type": "PUBLICATION",
+          "title": "4-Substituted-7-N-alkyl-N-acetyl 2-aminobenzothiazole amides: drug-like and non-xanthine based A2B adenosine receptor antagonists.",
+          "authors": "Cheung AW, Brinkman J, Firooznia F, Flohr A, Grimsby J, Gubler ML, Guertin K, Hamid R, Marcopulos N, Norcross RD, Qi L, Ramsey G, Tan J, Wen Y, Sarabu R.",
+          "journal": "Bioorganic & medicinal chemistry letters.",
+          "year": 2010,
+          "doi": "10.1016/j.bmcl.2010.05.056",
+          "pubmed_id": 20541935,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL1177799",
+          "doi_url": "https://doi.org/10.1016/j.bmcl.2010.05.056",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/20541935/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3769306",
+          "document_type": "PUBLICATION",
+          "title": "Discovery of Molecular Therapeutics for Glaucoma: Challenges, Successes, and Promising Directions.",
+          "authors": "Donegan RK, Lieberman RL.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2016,
+          "doi": "10.1021/acs.jmedchem.5b00828",
+          "pubmed_id": 26356532,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3769306",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.5b00828",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/26356532/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5096218",
+          "document_type": "PUBLICATION",
+          "title": "Discovery and Structure-Activity Relationship Studies of Novel Adenosine A<sub>1</sub> Receptor-Selective Agonists.",
+          "authors": "Preti B, Suchankova A, Deganutti G, Leuenberger M, Barkan K, Manulak I, Huang X, Carvalho S, Ladds G, Lochner M.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1021/acs.jmedchem.2c01414",
+          "pubmed_id": 36270633,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5096218",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.2c01414",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/36270633/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL1175311",
+          "assay_type": "F",
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO cells assessed as increase of intracellular calcium level",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL1175311"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267337",
+          "assay_type": "F",
+          "description": "Agonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267337"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3772099",
+          "assay_type": "F",
+          "description": "Agonist activity at human adenosine A2A receptor transfected in CHO cells assessed as changes in cAMP formation in the presence of nitrobenzylthioinosine",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3772099"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5099262",
+          "assay_type": "F",
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO-K1 cells assessed as inhibition of forskolin-induced cAMP accumulation incubated for 30 mins by LANCE ultra assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO-K1",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5099262"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5099263",
+          "assay_type": "F",
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO-K1 cells assessed as inhibition of forskolin-induced cAMP accumulation by measuring maximal efficacy incubated for 30 mins by LANCE ultra assay relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO-K1",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5099263"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 3352047,
+          "assay_chembl_id": "CHEMBL1175311",
+          "document_chembl_id": "CHEMBL1177799",
+          "document_journal": "Bioorg Med Chem Lett",
+          "document_year": 2010,
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO cells assessed as increase of intracellular calcium level",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "700.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.16",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14644272,
+          "assay_chembl_id": "CHEMBL3267337",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Agonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "700.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.16",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 16493405,
+          "assay_chembl_id": "CHEMBL3772099",
+          "document_chembl_id": "CHEMBL3769306",
+          "document_journal": "J Med Chem",
+          "document_year": 2016,
+          "description": "Agonist activity at human adenosine A2A receptor transfected in CHO cells assessed as changes in cAMP formation in the presence of nitrobenzylthioinosine",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "730.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.14",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24669211,
+          "assay_chembl_id": "CHEMBL5099262",
+          "document_chembl_id": "CHEMBL5096218",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO-K1 cells assessed as inhibition of forskolin-induced cAMP accumulation incubated for 30 mins by LANCE ultra assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "25.12",
+          "standard_units": "nM",
+          "pchembl_value": "7.60",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24669238,
+          "assay_chembl_id": "CHEMBL5099263",
+          "document_chembl_id": "CHEMBL5096218",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Agonist activity at human adenosine A2A receptor expressed in CHO-K1 cells assessed as inhibition of forskolin-induced cAMP accumulation by measuring maximal efficacy incubated for 30 mins by LANCE ultra assay relative to control",
+          "standard_type": "Emax",
+          "standard_relation": "=",
+          "standard_value": "21.53",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL4297184",
+      "molecule_name": "CIFORADENANT",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL4699449",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A Receptor Antagonists for Cancer Immunotherapy.",
+          "authors": "Yu F,Zhu C,Xie Q,Wang Y",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2020,
+          "doi": "10.1021/acs.jmedchem.0c00237",
+          "pubmed_id": 32667814,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4699449",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.0c00237",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/32667814/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5046288",
+          "document_type": "PUBLICATION",
+          "title": "Design, Synthesis, and Bioevaluation of 2-Aminopteridin-7(8<i>H</i>)-one Derivatives as Novel Potent Adenosine A<sub>2A</sub> Receptor Antagonists for Cancer Immunotherapy.",
+          "authors": "Yu F, Zhu C, Ze S, Wang H, Yang X, Liu M, Xie Q, Lu W, Wang Y.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1021/acs.jmedchem.1c02199",
+          "pubmed_id": 35212542,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5046288",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.1c02199",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35212542/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5380829",
+          "document_type": "PUBLICATION",
+          "title": "Discovery of Pyridinone Derivatives as Potent, Selective, and Orally Bioavailable Adenosine A<sub>2A</sub> Receptor Antagonists for Cancer Immunotherapy.",
+          "authors": "Zhu C, Ze S, Zhou R, Yang X, Wang H, Chai X, Fang M, Liu M, Wang Y, Lu W, Xie Q.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2023,
+          "doi": "10.1021/acs.jmedchem.2c01860",
+          "pubmed_id": 36951370,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5380829",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.2c01860",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/36951370/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL4701023",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine 2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP by immunoassay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4701023"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4701024",
+          "assay_type": "F",
+          "description": "Antagonist activity at adenosine 2A receptor in human T cells assessed as inhibition of cAMP incubated for 10 mins by Eu-cAMP tracer based TR-FRET assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "T cell",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4701024"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5049262",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in cAMP production incubated for 60 mins by ultra LANCE cAMP detection assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5049262"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5049266",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in NECA-induced cAMP production incubated for 20 mins in presence of 40 nM NECA by ultra LANCE cAMP detection assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5049266"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5049267",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in NECA-induced cAMP production incubated for 20 mins in presence of 1 uM NECA by ultra LANCE cAMP detection assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5049267"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5383591",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation at 1 uM pretreated for 30 mins followed by NECA induction by GloSensor assay relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5383591"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5383592",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation at 10 uM pretreated for 30 mins followed by NECA induction by GloSensor assay relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5383592"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5383593",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation pretreated for 30 mins followed by NECA induction by GloSensor assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5383593"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 22757002,
+          "assay_chembl_id": "CHEMBL4701023",
+          "document_chembl_id": "CHEMBL4699449",
+          "document_journal": "J Med Chem",
+          "document_year": 2020,
+          "description": "Antagonist activity at human adenosine 2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP by immunoassay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "17.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.77",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 22757003,
+          "assay_chembl_id": "CHEMBL4701024",
+          "document_chembl_id": "CHEMBL4699449",
+          "document_journal": "J Med Chem",
+          "document_year": 2020,
+          "description": "Antagonist activity at adenosine 2A receptor in human T cells assessed as inhibition of cAMP incubated for 10 mins by Eu-cAMP tracer based TR-FRET assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "70.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.16",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24422750,
+          "assay_chembl_id": "CHEMBL5049262",
+          "document_chembl_id": "CHEMBL5046288",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in cAMP production incubated for 60 mins by ultra LANCE cAMP detection assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "86.5",
+          "standard_units": "nM",
+          "pchembl_value": "7.06",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24422800,
+          "assay_chembl_id": "CHEMBL5049266",
+          "document_chembl_id": "CHEMBL5046288",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in NECA-induced cAMP production incubated for 20 mins in presence of 40 nM NECA by ultra LANCE cAMP detection assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "86.5",
+          "standard_units": "nM",
+          "pchembl_value": "7.06",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24422802,
+          "assay_chembl_id": "CHEMBL5049267",
+          "document_chembl_id": "CHEMBL5046288",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human A2aR expressed in HEK293 cells assessed as reduction in NECA-induced cAMP production incubated for 20 mins in presence of 1 uM NECA by ultra LANCE cAMP detection assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "3353.0",
+          "standard_units": "nM",
+          "pchembl_value": "5.47",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 25695789,
+          "assay_chembl_id": "CHEMBL5383591",
+          "document_chembl_id": "CHEMBL5380829",
+          "document_journal": "J Med Chem",
+          "document_year": 2023,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation at 1 uM pretreated for 30 mins followed by NECA induction by GloSensor assay relative to control",
+          "standard_type": "Activity",
+          "standard_relation": "=",
+          "standard_value": "100.6",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 25695809,
+          "assay_chembl_id": "CHEMBL5383592",
+          "document_chembl_id": "CHEMBL5380829",
+          "document_journal": "J Med Chem",
+          "document_year": 2023,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation at 10 uM pretreated for 30 mins followed by NECA induction by GloSensor assay relative to control",
+          "standard_type": "Activity",
+          "standard_relation": "=",
+          "standard_value": "105.2",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 25695818,
+          "assay_chembl_id": "CHEMBL5383593",
+          "document_chembl_id": "CHEMBL5380829",
+          "document_journal": "J Med Chem",
+          "document_year": 2023,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation pretreated for 30 mins followed by NECA induction by GloSensor assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "80.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.10",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL5203469",
+      "molecule_name": "CHEMBL5203469",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL5126612",
+          "document_type": "PUBLICATION",
+          "title": "GPCR Agonist-to-Antagonist Conversion: Enabling the Design of Nucleoside Functional Switches for the A<sub>2A</sub> Adenosine Receptor.",
+          "authors": "Shiriaeva A, Park D, Kim G, Lee Y, Hou X, Jarhad DB, Kim G, Yu J, Hyun YE, Kim W, Gao ZG, Jacobson KA, Han GW, Stevens RC, Jeong LS, Choi S, Cherezov V.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1021/acs.jmedchem.2c00462",
+          "pubmed_id": 35977382,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5126612",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.2c00462",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35977382/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5365430",
+          "document_type": "PUBLICATION",
+          "title": "Structure-Activity Relationship of Truncated 2,8-Disubstituted-Adenosine Derivatives as Dual A<sub>2A</sub>/A<sub>3</sub> Adenosine Receptor Antagonists and Their Cancer Immunotherapeutic Activity.",
+          "authors": "Kim G, Hou X, Byun WS, Kim G, Jarhad DB, Lee G, Hyun YE, Yu J, Lee CS, Qu S, Warnick E, Gao ZG, Kim JY, Ji S, Shin H, Choi JR, Jacobson KA, Lee HW, Lee SK, Jeong LS.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2023,
+          "doi": "10.1021/acs.jmedchem.3c00806",
+          "pubmed_id": 37603705,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5365430",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.3c00806",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/37603705/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL5130200",
+          "assay_type": "F",
+          "description": "Antagonist activity at wild type human A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins by by alpha screen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5130200"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5130202",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2AAR H278A mutant A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins by alpha screen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5130202"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5130204",
+          "assay_type": "F",
+          "description": "Antagonist activity at wild type human A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation by measuring fold shift at 300 nM preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins alpha screen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5130204"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5130206",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2AAR H278A mutant A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation by measuring fold shift at 300 nM preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins alpha screen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5130206"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5366393",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2AAR expressed in CHO cells assessed as residual cAMP level at 10 uM preincubated for 15 mins followed by NECA addition measured after 15 mins by EIA assay relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5366393"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 24783522,
+          "assay_chembl_id": "CHEMBL5130200",
+          "document_chembl_id": "CHEMBL5126612",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at wild type human A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins by by alpha screen assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "0.9",
+          "standard_units": "nM",
+          "pchembl_value": "9.05",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24783524,
+          "assay_chembl_id": "CHEMBL5130202",
+          "document_chembl_id": "CHEMBL5126612",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human A2AAR H278A mutant A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins by alpha screen assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "109.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.96",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24783526,
+          "assay_chembl_id": "CHEMBL5130204",
+          "document_chembl_id": "CHEMBL5126612",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at wild type human A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation by measuring fold shift at 300 nM preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins alpha screen assay",
+          "standard_type": "FC",
+          "standard_relation": "=",
+          "standard_value": "28.6",
+          "standard_units": null,
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24783528,
+          "assay_chembl_id": "CHEMBL5130206",
+          "document_chembl_id": "CHEMBL5126612",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human A2AAR H278A mutant A2AAR expressed in CHO cells assessed as inhibition of CGS21680-induced cAMP accumulation by measuring fold shift at 300 nM preincubated for 20 mins followed by CGS21680 addition and measured after 20 mins alpha screen assay",
+          "standard_type": "FC",
+          "standard_relation": "=",
+          "standard_value": "26.2",
+          "standard_units": null,
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 25633769,
+          "assay_chembl_id": "CHEMBL5366393",
+          "document_chembl_id": "CHEMBL5365430",
+          "document_journal": "J Med Chem",
+          "document_year": 2023,
+          "description": "Antagonist activity at human A2AAR expressed in CHO cells assessed as residual cAMP level at 10 uM preincubated for 15 mins followed by NECA addition measured after 15 mins by EIA assay relative to control",
+          "standard_type": "Activity",
+          "standard_relation": "=",
+          "standard_value": "0.8",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL4104819",
+      "molecule_name": "CHEMBL4104819",
+      "proposed_class": "agonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL4043287",
+          "document_type": "PUBLICATION",
+          "title": "A Structure-Activity Relationship Study of Bitopic N6-Substituted Adenosine Derivatives as Biased Adenosine A1 Receptor Agonists.",
+          "authors": "Aurelio L, Baltos JA, Ford L, Nguyen ATN, J\u00f6rg M, Devine SM, Valant C, White PJ, Christopoulos A, May LT, Scammells PJ.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2018,
+          "doi": "10.1021/acs.jmedchem.8b00047",
+          "pubmed_id": 29446948,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4043287",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.8b00047",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/29446948/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5120905",
+          "document_type": "PUBLICATION",
+          "title": "Examining the Role of the Linker in Bitopic <i>N</i><sup>6</sup>-Substituted Adenosine Derivatives Acting as Biased Adenosine A<sub>1</sub> Receptor Agonists.",
+          "authors": "Awalt JK, Nguyen ATN, Fyfe TJ, Thai BS, White PJ, Christopoulos A, J\u00f6rg M, May LT, Scammells PJ.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1021/acs.jmedchem.2c00320",
+          "pubmed_id": 35729775,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5120905",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.2c00320",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/35729775/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL4048590",
+          "assay_type": "F",
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4048590"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4048591",
+          "assay_type": "F",
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay relative to control",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4048591"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4048592",
+          "assay_type": "F",
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation by measuring agonist transduction coefficient preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4048592"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5124853",
+          "assay_type": "F",
+          "description": "Agonist activity at human A2A receptor expressed in Flp-In-CHO cells assessed as cAMP accumulation incubated for 30 mins by LANCE cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "Flp-In-CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5124853"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 18224815,
+          "assay_chembl_id": "CHEMBL4048590",
+          "document_chembl_id": "CHEMBL4043287",
+          "document_journal": "J Med Chem",
+          "document_year": 2018,
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "2290.87",
+          "standard_units": "nM",
+          "pchembl_value": "5.64",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18224832,
+          "assay_chembl_id": "CHEMBL4048591",
+          "document_chembl_id": "CHEMBL4043287",
+          "document_journal": "J Med Chem",
+          "document_year": 2018,
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay relative to control",
+          "standard_type": "Emax",
+          "standard_relation": "=",
+          "standard_value": "109.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18224849,
+          "assay_chembl_id": "CHEMBL4048592",
+          "document_chembl_id": "CHEMBL4043287",
+          "document_journal": "J Med Chem",
+          "document_year": 2018,
+          "description": "Agonist activity at human A2A-AR expressed in FlpIn-CHO cells assessed as inhibition of forskolin-stimulated cAMP accumulation by measuring agonist transduction coefficient preincubated for 40 mins followed by forskolin addition measured after 30 mins by Alphascreen assay",
+          "standard_type": "log(activity)",
+          "standard_relation": "=",
+          "standard_value": "5.67",
+          "standard_units": null,
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24764951,
+          "assay_chembl_id": "CHEMBL5124853",
+          "document_chembl_id": "CHEMBL5120905",
+          "document_journal": "J Med Chem",
+          "document_year": 2022,
+          "description": "Agonist activity at human A2A receptor expressed in Flp-In-CHO cells assessed as cAMP accumulation incubated for 30 mins by LANCE cAMP assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "389.05",
+          "standard_units": "nM",
+          "pchembl_value": "6.41",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3414940",
+      "molecule_name": "CHEMBL3414940",
+      "proposed_class": "agonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3414438",
+          "document_type": "PUBLICATION",
+          "title": "5'-C-Ethyl-tetrazolyl-N(6)-substituted adenosine and 2-chloro-adenosine derivatives as highly potent dual acting A1 adenosine receptor agonists and A3 adenosine receptor antagonists.",
+          "authors": "Petrelli R, Torquati I, Kachler S, Luongo L, Maione S, Franchetti P, Grifantini M, Novellino E, Lavecchia A, Klotz KN, Cappellacci L.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2015,
+          "doi": "10.1021/acs.jmedchem.5b00074",
+          "pubmed_id": 25699637,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3414438",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.5b00074",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/25699637/"
+        },
+        {
+          "document_chembl_id": "CHEMBL4049451",
+          "document_type": "PUBLICATION",
+          "title": "Exploring the Role of N6-Substituents in Potent Dual Acting 5'-C-Ethyltetrazolyladenosine Derivatives: Synthesis, Binding, Functional Assays, and Antinociceptive Effects in Mice \u2207.",
+          "authors": "Petrelli R, Scortichini M, Kachler S, Boccella S, Cerchia C, Torquati I, Del Bello F, Salvemini D, Novellino E, Luongo L, Maione S, Jacobson KA, Lavecchia A, Klotz KN, Cappellacci L.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2017,
+          "doi": "10.1021/acs.jmedchem.7b00291",
+          "pubmed_id": 28447789,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4049451",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.7b00291",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28447789/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3420494",
+          "assay_type": "F",
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3420494"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4052151",
+          "assay_type": "F",
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity by [alpha-32P]ATP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4052151"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4052156",
+          "assay_type": "F",
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity relative to NECA",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4052156"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 15208847,
+          "assay_chembl_id": "CHEMBL3420494",
+          "document_chembl_id": "CHEMBL3414438",
+          "document_journal": "J Med Chem",
+          "document_year": 2015,
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "9.75",
+          "standard_units": "nM",
+          "pchembl_value": "8.01",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 15208901,
+          "assay_chembl_id": "CHEMBL3420494",
+          "document_chembl_id": "CHEMBL3414438",
+          "document_journal": "J Med Chem",
+          "document_year": 2015,
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "standard_type": "Efficacy",
+          "standard_relation": ">=",
+          "standard_value": "90.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18240281,
+          "assay_chembl_id": "CHEMBL4052151",
+          "document_chembl_id": "CHEMBL4049451",
+          "document_journal": "J Med Chem",
+          "document_year": 2017,
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity by [alpha-32P]ATP assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "21.6",
+          "standard_units": "nM",
+          "pchembl_value": "7.67",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18240351,
+          "assay_chembl_id": "CHEMBL4052156",
+          "document_chembl_id": "CHEMBL4049451",
+          "document_journal": "J Med Chem",
+          "document_year": 2017,
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity relative to NECA",
+          "standard_type": "Efficacy",
+          "standard_relation": ">=",
+          "standard_value": "90.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3414941",
+      "molecule_name": "CHEMBL3414941",
+      "proposed_class": "agonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3414438",
+          "document_type": "PUBLICATION",
+          "title": "5'-C-Ethyl-tetrazolyl-N(6)-substituted adenosine and 2-chloro-adenosine derivatives as highly potent dual acting A1 adenosine receptor agonists and A3 adenosine receptor antagonists.",
+          "authors": "Petrelli R, Torquati I, Kachler S, Luongo L, Maione S, Franchetti P, Grifantini M, Novellino E, Lavecchia A, Klotz KN, Cappellacci L.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2015,
+          "doi": "10.1021/acs.jmedchem.5b00074",
+          "pubmed_id": 25699637,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3414438",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.5b00074",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/25699637/"
+        },
+        {
+          "document_chembl_id": "CHEMBL4049451",
+          "document_type": "PUBLICATION",
+          "title": "Exploring the Role of N6-Substituents in Potent Dual Acting 5'-C-Ethyltetrazolyladenosine Derivatives: Synthesis, Binding, Functional Assays, and Antinociceptive Effects in Mice \u2207.",
+          "authors": "Petrelli R, Scortichini M, Kachler S, Boccella S, Cerchia C, Torquati I, Del Bello F, Salvemini D, Novellino E, Luongo L, Maione S, Jacobson KA, Lavecchia A, Klotz KN, Cappellacci L.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2017,
+          "doi": "10.1021/acs.jmedchem.7b00291",
+          "pubmed_id": 28447789,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4049451",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.7b00291",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28447789/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3420494",
+          "assay_type": "F",
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3420494"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4052151",
+          "assay_type": "F",
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity by [alpha-32P]ATP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4052151"
+        },
+        {
+          "assay_chembl_id": "CHEMBL4052156",
+          "assay_type": "F",
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity relative to NECA",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4052156"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 15208848,
+          "assay_chembl_id": "CHEMBL3420494",
+          "document_chembl_id": "CHEMBL3414438",
+          "document_journal": "J Med Chem",
+          "document_year": 2015,
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "5.31",
+          "standard_units": "nM",
+          "pchembl_value": "8.28",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 15208902,
+          "assay_chembl_id": "CHEMBL3420494",
+          "document_chembl_id": "CHEMBL3414438",
+          "document_journal": "J Med Chem",
+          "document_year": 2015,
+          "description": "Agonist activity at human recombinant adenosine A2A receptor transfected in CHO cells assessed as induction of adenylyl cyclase activity",
+          "standard_type": "Efficacy",
+          "standard_relation": ">=",
+          "standard_value": "90.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18240282,
+          "assay_chembl_id": "CHEMBL4052151",
+          "document_chembl_id": "CHEMBL4049451",
+          "document_journal": "J Med Chem",
+          "document_year": 2017,
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity by [alpha-32P]ATP assay",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "21.5",
+          "standard_units": "nM",
+          "pchembl_value": "7.67",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 18240352,
+          "assay_chembl_id": "CHEMBL4052156",
+          "document_chembl_id": "CHEMBL4049451",
+          "document_journal": "J Med Chem",
+          "document_year": 2017,
+          "description": "Agonist activity at recombinant human adenosine A2A receptor expressed in CHO cell membranes assessed as stimulation of adenylyl cyclase activity relative to NECA",
+          "standard_type": "Efficacy",
+          "standard_relation": ">=",
+          "standard_value": "90.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL186113",
+      "molecule_name": "GW-328267",
+      "proposed_class": "agonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL2177029",
+          "document_type": "PUBLICATION",
+          "title": "Medicinal chemistry of A\u2083 adenosine receptor modulators: pharmacological activities and therapeutic implications.",
+          "authors": "Baraldi PG, Preti D, Borea PA, Varani K.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2012,
+          "doi": "10.1021/jm300087j",
+          "pubmed_id": 22468757,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2177029",
+          "doi_url": "https://doi.org/10.1021/jm300087j",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22468757/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL2187058",
+          "assay_type": "F",
+          "description": "Agonist activity at human recombinant adenosine A2A receptor expressed in CHO cells assessed as induction of cyclic AMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2187058"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267365",
+          "assay_type": "F",
+          "description": "Agonist activity at adenosine receptor A2a (unknown origin) assessed as cAMP formation",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267365"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267366",
+          "assay_type": "F",
+          "description": "Agonist activity at adenosine receptor A2a (unknown origin) assessed as maximal cAMP formation relative to NECA",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267366"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 12139290,
+          "assay_chembl_id": "CHEMBL2187058",
+          "document_chembl_id": "CHEMBL2177029",
+          "document_journal": "J Med Chem",
+          "document_year": 2012,
+          "description": "Agonist activity at human recombinant adenosine A2A receptor expressed in CHO cells assessed as induction of cyclic AMP production",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "1.0",
+          "standard_units": "nM",
+          "pchembl_value": "9.00",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645775,
+          "assay_chembl_id": "CHEMBL3267365",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Agonist activity at adenosine receptor A2a (unknown origin) assessed as cAMP formation",
+          "standard_type": "EC50",
+          "standard_relation": "=",
+          "standard_value": "9.0",
+          "standard_units": "nM",
+          "pchembl_value": "8.05",
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645776,
+          "assay_chembl_id": "CHEMBL3267366",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Agonist activity at adenosine receptor A2a (unknown origin) assessed as maximal cAMP formation relative to NECA",
+          "standard_type": "Emax",
+          "standard_relation": "=",
+          "standard_value": "78.0",
+          "standard_units": "%",
+          "pchembl_value": null,
+          "proposed_functional_class": "agonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL1087189",
+      "molecule_name": "CHEMBL1087189",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL2163234",
+          "document_type": "PUBLICATION",
+          "title": "Design and characterization of optimized adenosine A\u2082A/A\u2081 receptor antagonists for the treatment of Parkinson's disease.",
+          "authors": "Shook BC, Rassnick S, Wallace N, Crooke J, Ault M, Chakravarty D, Barbay JK, Wang A, Powell MT, Leonard K, Alford V, Scannevin RH, Carroll K, Lampron L, Westover L, Lim HK, Russell R, Branum S, Wells KM, Damon S, Youells S, Li X, Beauchamp DA, Rhodes K, Jackson PF.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2012,
+          "doi": "10.1021/jm201640m",
+          "pubmed_id": 22239465,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2163234",
+          "doi_url": "https://doi.org/10.1021/jm201640m",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22239465/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL2167687",
+          "assay_type": "F",
+          "description": "Antagonist activity at human Adenosine receptor A2a assessed as inhibition of cAMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2167687"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267347",
+          "assay_type": "F",
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267347"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 12084390,
+          "assay_chembl_id": "CHEMBL2167687",
+          "document_chembl_id": "CHEMBL2163234",
+          "document_journal": "J Med Chem",
+          "document_year": 2012,
+          "description": "Antagonist activity at human Adenosine receptor A2a assessed as inhibition of cAMP production",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "4.1",
+          "standard_units": "nM",
+          "pchembl_value": "8.39",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645591,
+          "assay_chembl_id": "CHEMBL3267347",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "4.1",
+          "standard_units": "nM",
+          "pchembl_value": "8.39",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL1095488",
+      "molecule_name": "CHEMBL1095488",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL2163234",
+          "document_type": "PUBLICATION",
+          "title": "Design and characterization of optimized adenosine A\u2082A/A\u2081 receptor antagonists for the treatment of Parkinson's disease.",
+          "authors": "Shook BC, Rassnick S, Wallace N, Crooke J, Ault M, Chakravarty D, Barbay JK, Wang A, Powell MT, Leonard K, Alford V, Scannevin RH, Carroll K, Lampron L, Westover L, Lim HK, Russell R, Branum S, Wells KM, Damon S, Youells S, Li X, Beauchamp DA, Rhodes K, Jackson PF.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2012,
+          "doi": "10.1021/jm201640m",
+          "pubmed_id": 22239465,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2163234",
+          "doi_url": "https://doi.org/10.1021/jm201640m",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/22239465/"
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL2167687",
+          "assay_type": "F",
+          "description": "Antagonist activity at human Adenosine receptor A2a assessed as inhibition of cAMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2167687"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267347",
+          "assay_type": "F",
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267347"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 12084381,
+          "assay_chembl_id": "CHEMBL2167687",
+          "document_chembl_id": "CHEMBL2163234",
+          "document_journal": "J Med Chem",
+          "document_year": 2012,
+          "description": "Antagonist activity at human Adenosine receptor A2a assessed as inhibition of cAMP production",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "6.5",
+          "standard_units": "nM",
+          "pchembl_value": "8.19",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645592,
+          "assay_chembl_id": "CHEMBL3267347",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "6.5",
+          "standard_units": "nM",
+          "pchembl_value": "8.19",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL17127",
+      "molecule_name": "SCH-58261",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL1156165",
+          "document_type": "PUBLICATION",
+          "title": "Novel 8-(furan-2-yl)-3-substituted thiazolo [5,4-e][1,2,4] triazolo[1,5-c] pyrimidine-2(3H)-thione derivatives as potential adenosine A(2A) receptor antagonists.",
+          "authors": "Mishra CB, Barodia SK, Prakash A, Senthil Kumar JB, Luthra PM.",
+          "journal": "Bioorganic & medicinal chemistry.",
+          "year": 2010,
+          "doi": "10.1016/j.bmc.2010.02.048",
+          "pubmed_id": 20303771,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL1156165",
+          "doi_url": "https://doi.org/10.1016/j.bmc.2010.02.048",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/20303771/"
+        },
+        {
+          "document_chembl_id": "CHEMBL2417388",
+          "document_type": "PUBLICATION",
+          "title": "Design and synthesis of (4E)-4-(4-substitutedbenzylideneamino)-3-substituted-2,3-dihydro-2-thioxothiazole-5-carbonitrile as novel A2A receptor antagonists.",
+          "authors": "Mishra CB, Sharma D, Prakash A, Kumari N, Kumar N, Luthra PM.",
+          "journal": "Bioorganic & medicinal chemistry.",
+          "year": 2013,
+          "doi": "10.1016/j.bmc.2013.07.005",
+          "pubmed_id": 23953686,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2417388",
+          "doi_url": "https://doi.org/10.1016/j.bmc.2013.07.005",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/23953686/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL1105453",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced intracellular cAMP accumulation at 100 nM after 24 hrs (Rvb= 0.40 pmol/ml)",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL1105453"
+        },
+        {
+          "assay_chembl_id": "CHEMBL2422903",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2A receptor expressed in HEK293 cells assessed as decrease in NECA-induced cAMP release at 1 uM after 15 mins",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2422903"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 3243758,
+          "assay_chembl_id": "CHEMBL1105453",
+          "document_chembl_id": "CHEMBL1156165",
+          "document_journal": "Bioorg Med Chem",
+          "document_year": 2010,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced intracellular cAMP accumulation at 100 nM after 24 hrs (Rvb= 0.40 pmol/ml)",
+          "standard_type": "Activity",
+          "standard_relation": "=",
+          "standard_value": "0.25",
+          "standard_units": "pmol/ml",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 13418936,
+          "assay_chembl_id": "CHEMBL2422903",
+          "document_chembl_id": "CHEMBL2417388",
+          "document_journal": "Bioorg Med Chem",
+          "document_year": 2013,
+          "description": "Antagonist activity at human A2A receptor expressed in HEK293 cells assessed as decrease in NECA-induced cAMP release at 1 uM after 15 mins",
+          "standard_type": "Activity",
+          "standard_relation": "=",
+          "standard_value": "0.55",
+          "standard_units": "pmol/ml",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL197669",
+      "molecule_name": "ST1535",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL2380258",
+          "document_type": "PUBLICATION",
+          "title": "Novel adenosine A(2A) receptor ligands: a synthetic, functional and computational investigation of selected literature adenosine A(2A) receptor antagonists for extending into extracellular space.",
+          "authors": "J\u00f6rg M, Shonberg J, Mak FS, Miller ND, Yuriev E, Scammells PJ, Capuano B.",
+          "journal": "Bioorganic & medicinal chemistry letters.",
+          "year": 2013,
+          "doi": "10.1016/j.bmcl.2013.03.070",
+          "pubmed_id": 23602401,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2380258",
+          "doi_url": "https://doi.org/10.1016/j.bmcl.2013.03.070",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/23602401/"
+        },
+        {
+          "document_chembl_id": "CHEMBL2396554",
+          "document_type": "PUBLICATION",
+          "title": "Synthesis and biological evaluation of metabolites of 2-n-butyl-9-methyl-8-[1,2,3]triazol-2-yl-9H-purin-6-ylamine (ST1535), a potent antagonist of the A2A adenosine receptor for the treatment of Parkinson's disease.",
+          "authors": "Piersanti G, Bartoccini F, Lucarini S, Cabri W, Stasi MA, Riccioni T, Borsini F, Tarzia G, Minetti P.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2013,
+          "doi": "10.1021/jm400491x",
+          "pubmed_id": 23789814,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL2396554",
+          "doi_url": "https://doi.org/10.1021/jm400491x",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/23789814/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL2384073",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as cAMP level by cell based assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2384073"
+        },
+        {
+          "assay_chembl_id": "CHEMBL2401083",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation incubated for 10 mins prior to NECA addition",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL2401083"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 13300521,
+          "assay_chembl_id": "CHEMBL2384073",
+          "document_chembl_id": "CHEMBL2380258",
+          "document_journal": "Bioorg Med Chem Lett",
+          "document_year": 2013,
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as cAMP level by cell based assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "6.6",
+          "standard_units": "nM",
+          "pchembl_value": "8.18",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 13356853,
+          "assay_chembl_id": "CHEMBL2401083",
+          "document_chembl_id": "CHEMBL2396554",
+          "document_journal": "J Med Chem",
+          "document_year": 2013,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in HEK293 cells assessed as inhibition of NECA-induced cAMP accumulation incubated for 10 mins prior to NECA addition",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "430.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.37",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3222055",
+      "molecule_name": "CHEMBL3222055",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3217453",
+          "document_type": "PUBLICATION",
+          "title": "Aminomethyl substituted thieno[2,3-d]pyrimidines as adenosine A2A receptor antagonists",
+          "authors": "Shook BC, Charavarty D, Barbay JK, Wang A, Leonard K, Alford V, Powell M, Beauchamp DA, Rassnick S, Scannevin R, Carroll K, Wallace N, Crooke J, Ault M, Lampron L, Westover L, Rhodes K, Jackson PF",
+          "journal": "Medchemcomm",
+          "year": 2011,
+          "doi": "10.1039/C1MD00082A",
+          "pubmed_id": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3217453",
+          "doi_url": "https://doi.org/10.1039/C1MD00082A",
+          "pubmed_url": null
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3223903",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO-K1",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3223903"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267347",
+          "assay_type": "F",
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267347"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 14552518,
+          "assay_chembl_id": "CHEMBL3223903",
+          "document_chembl_id": "CHEMBL3217453",
+          "document_journal": "Medchemcomm",
+          "document_year": 2011,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "29.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.54",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645594,
+          "assay_chembl_id": "CHEMBL3267347",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "29.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.54",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3222061",
+      "molecule_name": "CHEMBL3222061",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3217453",
+          "document_type": "PUBLICATION",
+          "title": "Aminomethyl substituted thieno[2,3-d]pyrimidines as adenosine A2A receptor antagonists",
+          "authors": "Shook BC, Charavarty D, Barbay JK, Wang A, Leonard K, Alford V, Powell M, Beauchamp DA, Rassnick S, Scannevin R, Carroll K, Wallace N, Crooke J, Ault M, Lampron L, Westover L, Rhodes K, Jackson PF",
+          "journal": "Medchemcomm",
+          "year": 2011,
+          "doi": "10.1039/C1MD00082A",
+          "pubmed_id": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3217453",
+          "doi_url": "https://doi.org/10.1039/C1MD00082A",
+          "pubmed_url": null
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3223903",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO-K1",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3223903"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267347",
+          "assay_type": "F",
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267347"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 14552496,
+          "assay_chembl_id": "CHEMBL3223903",
+          "document_chembl_id": "CHEMBL3217453",
+          "document_journal": "Medchemcomm",
+          "document_year": 2011,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "6.6",
+          "standard_units": "nM",
+          "pchembl_value": "8.18",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645595,
+          "assay_chembl_id": "CHEMBL3267347",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "6.6",
+          "standard_units": "nM",
+          "pchembl_value": "8.18",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3222062",
+      "molecule_name": "CHEMBL3222062",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3217453",
+          "document_type": "PUBLICATION",
+          "title": "Aminomethyl substituted thieno[2,3-d]pyrimidines as adenosine A2A receptor antagonists",
+          "authors": "Shook BC, Charavarty D, Barbay JK, Wang A, Leonard K, Alford V, Powell M, Beauchamp DA, Rassnick S, Scannevin R, Carroll K, Wallace N, Crooke J, Ault M, Lampron L, Westover L, Rhodes K, Jackson PF",
+          "journal": "Medchemcomm",
+          "year": 2011,
+          "doi": "10.1039/C1MD00082A",
+          "pubmed_id": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3217453",
+          "doi_url": "https://doi.org/10.1039/C1MD00082A",
+          "pubmed_url": null
+        },
+        {
+          "document_chembl_id": "CHEMBL3259781",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine A2A receptor as a drug discovery target.",
+          "authors": "de Lera Ruiz M, Lim YH, Zheng J.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1021/jm4011669",
+          "pubmed_id": 24164628,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3259781",
+          "doi_url": "https://doi.org/10.1021/jm4011669",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/24164628/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3223903",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO-K1",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3223903"
+        },
+        {
+          "assay_chembl_id": "CHEMBL3267347",
+          "assay_type": "F",
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3267347"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 14552494,
+          "assay_chembl_id": "CHEMBL3223903",
+          "document_chembl_id": "CHEMBL3217453",
+          "document_journal": "Medchemcomm",
+          "document_year": 2011,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO-K1 cells preincubated for 15 mins before NECA addition measured after 5.5 to 6 hrs by beta-galactosidase reporter gene assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "5.3",
+          "standard_units": "nM",
+          "pchembl_value": "8.28",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 14645596,
+          "assay_chembl_id": "CHEMBL3267347",
+          "document_chembl_id": "CHEMBL3259781",
+          "document_journal": "J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human recombinant adenosine receptor A2a by cAMP assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "5.3",
+          "standard_units": "nM",
+          "pchembl_value": "8.28",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL3317574",
+      "molecule_name": "CHEMBL3317574",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL3352340",
+          "document_type": "PUBLICATION",
+          "title": "7-Amino-2-phenylpyrazolo[4,3-d]pyrimidine derivatives: structural investigations at the 5-position to target human A\u2081 and A(2A) adenosine receptors. Molecular modeling and pharmacological studies.",
+          "authors": "Squarcialupi L, Colotta V, Catarzi D, Varano F, Betti M, Varani K, Vincenzi F, Borea PA, Porta N, Ciancetta A, Moro S.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2014,
+          "doi": "10.1016/j.ejmech.2014.07.060",
+          "pubmed_id": 25063944,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL3352340",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2014.07.060",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/25063944/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5126505",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine receptor antagonists: Recent advances and therapeutic perspective.",
+          "authors": "Saini A, Patel R, Gaba S, Singh G, Gupta GD, Monga V.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1016/j.ejmech.2021.113907",
+          "pubmed_id": 34695776,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5126505",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2021.113907",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/34695776/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL3379793",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-stimulated cAMP level by scintillation counting analysis",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL3379793"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5126857",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production measured by scintillation counter assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5126857"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 15029631,
+          "assay_chembl_id": "CHEMBL3379793",
+          "document_chembl_id": "CHEMBL3352340",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2014,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-stimulated cAMP level by scintillation counting analysis",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "423.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.37",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24772467,
+          "assay_chembl_id": "CHEMBL5126857",
+          "document_chembl_id": "CHEMBL5126505",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production measured by scintillation counter assay",
+          "standard_type": "Ki",
+          "standard_relation": "=",
+          "standard_value": "423.0",
+          "standard_units": "nM",
+          "pchembl_value": "6.37",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL4064795",
+      "molecule_name": "CHEMBL4064795",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL4011624",
+          "document_type": "PUBLICATION",
+          "title": "The 1,2,4-Triazolo[4,3-a]pyrazin-3-one as a Versatile Scaffold for the Design of Potent Adenosine Human Receptor Antagonists. Structural Investigations to Target the A2A Receptor Subtype.",
+          "authors": "Falsini M, Squarcialupi L, Catarzi D, Varano F, Betti M, Dal Ben D, Marucci G, Buccioni M, Volpini R, De Vita T, Cavalli A, Colotta V.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2017,
+          "doi": "10.1021/acs.jmedchem.7b00457",
+          "pubmed_id": 28590753,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4011624",
+          "doi_url": "https://doi.org/10.1021/acs.jmedchem.7b00457",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/28590753/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5126505",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine receptor antagonists: Recent advances and therapeutic perspective.",
+          "authors": "Saini A, Patel R, Gaba S, Singh G, Gupta GD, Monga V.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1016/j.ejmech.2021.113907",
+          "pubmed_id": 34695776,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5126505",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2021.113907",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/34695776/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL4012875",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine receptor A2A expressed in CHO cell membranes assessed as inhibition of NECA-induced increase of cAMP accumulation preincubated for 10 mins followed by NECA addition measured after 10 mins by GloSensor cAMP assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4012875"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5126863",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5126863"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 18059396,
+          "assay_chembl_id": "CHEMBL4012875",
+          "document_chembl_id": "CHEMBL4011624",
+          "document_journal": "J Med Chem",
+          "document_year": 2017,
+          "description": "Antagonist activity at human adenosine receptor A2A expressed in CHO cell membranes assessed as inhibition of NECA-induced increase of cAMP accumulation preincubated for 10 mins followed by NECA addition measured after 10 mins by GloSensor cAMP assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "98.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.01",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24772482,
+          "assay_chembl_id": "CHEMBL5126863",
+          "document_chembl_id": "CHEMBL5126505",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of NECA-induced cAMP production",
+          "standard_type": "IC50",
+          "standard_relation": ">",
+          "standard_value": "30000.0",
+          "standard_units": "nM",
+          "pchembl_value": null,
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL458242",
+      "molecule_name": "CHEMBL458242",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL1143380",
+          "document_type": "PUBLICATION",
+          "title": "N-[6-amino-2-(heteroaryl)pyrimidin-4-yl]acetamides as A2A receptor antagonists with improved drug like properties and in vivo efficacy.",
+          "authors": "Lanier MC, Moorjani M, Luo Z, Chen Y, Lin E, Tellew JE, Zhang X, Williams JP, Gross RS, Lechner SM, Markison S, Joswig T, Kargo W, Piercey J, Santos M, Malany S, Zhao M, Petroski R, Crespo MI, D\u00edaz JL, Saunders J, Wen J, O'Brien Z, Jalali K, Madan A, Slee DH.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2009,
+          "doi": "10.1021/jm800908d",
+          "pubmed_id": 19140664,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL1143380",
+          "doi_url": "https://doi.org/10.1021/jm800908d",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/19140664/"
+        },
+        {
+          "document_chembl_id": "CHEMBL1152277",
+          "document_type": "PUBLICATION",
+          "title": "Lead optimization of 4-acetylamino-2-(3,5-dimethylpyrazol-1-yl)-6-pyridylpyrimidines as A2A adenosine receptor antagonists for the treatment of Parkinson's disease.",
+          "authors": "Zhang X, Tellew JE, Luo Z, Moorjani M, Lin E, Lanier MC, Chen Y, Williams JP, Saunders J, Lechner SM, Markison S, Joswig T, Petroski R, Piercey J, Kargo W, Malany S, Santos M, Gross RS, Wen J, Jalali K, O'Brien Z, Stotz CE, Crespo MI, D\u00edaz JL, Slee DH.",
+          "journal": "Journal of medicinal chemistry.",
+          "year": 2008,
+          "doi": "10.1021/jm800851u",
+          "pubmed_id": 18947224,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL1152277",
+          "doi_url": "https://doi.org/10.1021/jm800851u",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/18947224/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL950440",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS-21680-induced cAMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "CHO",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL950440"
+        },
+        {
+          "assay_chembl_id": "CHEMBL987749",
+          "assay_type": "F",
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as inhibition of CGS-21680-stimulated cAMP production",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": null,
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL987749"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 2399563,
+          "assay_chembl_id": "CHEMBL950440",
+          "document_chembl_id": "CHEMBL1152277",
+          "document_journal": "J Med Chem",
+          "document_year": 2008,
+          "description": "Antagonist activity at human adenosine A2A receptor expressed in CHO cells assessed as inhibition of CGS-21680-induced cAMP production",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "57.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.24",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 2501570,
+          "assay_chembl_id": "CHEMBL987749",
+          "document_chembl_id": "CHEMBL1143380",
+          "document_journal": "J Med Chem",
+          "document_year": 2009,
+          "description": "Antagonist activity at human adenosine A2A receptor assessed as inhibition of CGS-21680-stimulated cAMP production",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "85.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.07",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    },
+    {
+      "chembl_id": "CHEMBL4849795",
+      "molecule_name": "CHEMBL4849795",
+      "proposed_class": "antagonist",
+      "evidence_strength": "high",
+      "training_eligible": false,
+      "documents": [
+        {
+          "document_chembl_id": "CHEMBL4813923",
+          "document_type": "PUBLICATION",
+          "title": "Design, synthesis and biological evaluation of novel scaffold benzo[4,5]imidazo [1,2-a]pyrazin-1-amine: Towards adenosine A<sub>2A</sub> receptor (A<sub>2A</sub> AR) antagonist.",
+          "authors": "Reddy GL, Sarma R, Liu S, Huang W, Lei J, Fu J, Hu W.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2021,
+          "doi": "10.1016/j.ejmech.2020.113040",
+          "pubmed_id": 33316692,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL4813923",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2020.113040",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/33316692/"
+        },
+        {
+          "document_chembl_id": "CHEMBL5126505",
+          "document_type": "PUBLICATION",
+          "title": "Adenosine receptor antagonists: Recent advances and therapeutic perspective.",
+          "authors": "Saini A, Patel R, Gaba S, Singh G, Gupta GD, Monga V.",
+          "journal": "European journal of medicinal chemistry.",
+          "year": 2022,
+          "doi": "10.1016/j.ejmech.2021.113907",
+          "pubmed_id": 34695776,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/document/CHEMBL5126505",
+          "doi_url": "https://doi.org/10.1016/j.ejmech.2021.113907",
+          "pubmed_url": "https://pubmed.ncbi.nlm.nih.gov/34695776/"
+        }
+      ],
+      "assays": [
+        {
+          "assay_chembl_id": "CHEMBL4814789",
+          "assay_type": "F",
+          "description": "Antagonist activity at human A2A expressed in human HEK293 cells assessed as reduction in cAMP production preincubated for 10 mins followed by NECA stimulation and measured after 30 mins by micro plate reader method",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL4814789"
+        },
+        {
+          "assay_chembl_id": "CHEMBL5126865",
+          "assay_type": "F",
+          "description": "Antagonist activity at recombinant human adenosine A2A receptor expressed in HEK293 cells measured by cAMP functional assay",
+          "confidence_score": 9,
+          "relationship_type": "D",
+          "target_chembl_id": "CHEMBL251",
+          "organism": "Homo sapiens",
+          "cell_type": "HEK293",
+          "tissue": null,
+          "chembl_url": "https://www.ebi.ac.uk/chembl/explore/assay/CHEMBL5126865"
+        }
+      ],
+      "functional_activity_evidence": [
+        {
+          "activity_id": 23172721,
+          "assay_chembl_id": "CHEMBL4814789",
+          "document_chembl_id": "CHEMBL4813923",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2021,
+          "description": "Antagonist activity at human A2A expressed in human HEK293 cells assessed as reduction in cAMP production preincubated for 10 mins followed by NECA stimulation and measured after 30 mins by micro plate reader method",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "31.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.51",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        },
+        {
+          "activity_id": 24772484,
+          "assay_chembl_id": "CHEMBL5126865",
+          "document_chembl_id": "CHEMBL5126505",
+          "document_journal": "Eur J Med Chem",
+          "document_year": 2022,
+          "description": "Antagonist activity at recombinant human adenosine A2A receptor expressed in HEK293 cells measured by cAMP functional assay",
+          "standard_type": "IC50",
+          "standard_relation": "=",
+          "standard_value": "31.0",
+          "standard_units": "nM",
+          "pchembl_value": "7.51",
+          "proposed_functional_class": "antagonist",
+          "classification_rule": "assay_description_rule"
+        }
+      ],
+      "review_questions": [
+        "Does the source report a human A2A functional response rather than binding alone?",
+        "Does the source support the proposed agonist or antagonist direction?",
+        "Are species, construct, mutation, and assay context acceptable?",
+        "Is the tested molecular identity consistent with the standardized parent structure?"
+      ]
+    }
+  ]
+}

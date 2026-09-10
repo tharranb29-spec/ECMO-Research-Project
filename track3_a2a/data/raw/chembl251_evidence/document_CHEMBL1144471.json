@@ -1,0 +1,24 @@
+{
+  "abstract": "2, N6, and 5'-substituted adenosine derivatives were synthesized via alkylation of 2-oxypurine nucleosides leading to 2-arylalkylether derivatives. 2-(3-(Indolyl)ethyloxy)adenosine 17 was examined in both binding and cAMP assays and found to be a potent agonist of the human A2BAR. Simplification, altered connectivity, and mimicking of the indole ring of 17 failed to maintain A2BAR potency. Introduction of N6-ethyl or N6-guanidino substitution, shown to favor A2BAR potency, failed to enhance potency in the 2-(3-(indolyl)ethyloxy)adenosine series. Indole 5' '- or 6' '-halo substitution was favored at the A2BAR, but a 5'-N-ethylcarboxyamide did not further enhance potency. 2-(3' '-(6' '-Bromoindolyl)ethyloxy)adenosine 28 displayed an A2BAR EC50 value of 128 nM, that is, more potent than the parent 17 (299 nM) and similar to 5'-N-ethylcarboxamidoadenosine (140 nM). Compound 28 was a full agonist at A2B and A2AARs and a low efficacy partial agonist at A1 and A3ARs. Thus, we have identified and optimized 2-(2-arylethyl)oxo moieties in AR agonists that enhance A2BAR potency and selectivity.",
+  "authors": "Adachi H, Palaniappan KK, Ivanov AA, Bergman N, Gao ZG, Jacobson KA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1144471",
+  "doi": "10.1021/jm061278q",
+  "doi_chembl": null,
+  "first_page": "1810",
+  "issue": "8",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "1827",
+  "patent_id": null,
+  "pubmed_id": 17378544,
+  "src_id": 1,
+  "title": "Structure-activity relationships of 2,N(6),5'-substituted adenosine derivatives with potent activity at the A2B adenosine receptor.",
+  "volume": "50",
+  "year": 2007
+}

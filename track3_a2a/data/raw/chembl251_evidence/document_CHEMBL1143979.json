@@ -1,0 +1,24 @@
+{
+  "abstract": "A large series of piperazin-, piperidin- and tetrahydroisoquinolinamides of 4-(1,3-dialkyl-9-deazaxanthin-8-yl)phenoxyacetic acid were prepared through conventional or multiple parallel syntheses and evaluated for their binding affinity at the recombinant human adenosine receptors, chiefly at the hA(2B) and hA(2A) receptor subtypes. Several ligands endowed with high binding affinity at hA(2B) receptors, excellent selectivity over hA(2A) and hA(3) and a significant, but lower, selectivity over hA(1) were identified. Among them, piperazinamide derivatives 23 and 52, and piperidinamide derivative 69 proved highly potent at hA(2B) (K(i)=11, 2 and 5.5 nM, respectively) and selective towards hA(2A) (hA(2A)/hA(2B) SI=912, 159 and 630, respectively), hA(3) (hA(3)/hA(2B) SI=>100, 3090 and >180, respectively) and hA(1) (hA(1)/hA(2B) SI=>100, 44 and 120, respectively), SI being the selectivity index. A number of selected ligands tested in functional assays in vitro showed very interesting antagonist activities and efficacies at both A(2A) and A(2B) receptor subtypes, with pA(2) values close to the corresponding pK(i)s. Structure-affinity and structure-selectivity relationships suggested that the binding potency at the hA(2B) receptor may be increased by lipophilic substituents at the N4-position of piperazinamides and that an ortho-methoxy substituent at the 8-phenyl ring and alkyl groups at N1 larger than the ones at N3, in the 9-deazaxanthine ring, may strongly enhance the hA(2A)/hA(2B) SI.",
+  "authors": "Stefanachi A, Brea JM, Cadavid MI, Centeno NB, Esteve C, Loza MI, Martinez A, Nieto R, Ravi\u00f1a E, Sanz F, Segarra V, Sotelo E, Vidal B, Carotti A.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_1",
+    "creation_date": "2009-09-03"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1143979",
+  "doi": "10.1016/j.bmc.2008.01.002",
+  "doi_chembl": null,
+  "first_page": "2852",
+  "issue": "6",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "2869",
+  "patent_id": null,
+  "pubmed_id": 18226909,
+  "src_id": 1,
+  "title": "1-, 3- and 8-substituted-9-deazaxanthines as potent and selective antagonists at the human A2B adenosine receptor.",
+  "volume": "16",
+  "year": 2008
+}

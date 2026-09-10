@@ -1,0 +1,24 @@
+{
+  "abstract": "Modulation of multiple biological targets with a single drug can lead to synergistic therapeutic effects and has been demonstrated to be essential for efficient treatment of CNS disorders. However, rational design of compounds that interact with several targets is very challenging. Here, we demonstrate that structure-based virtual screening can guide the discovery of multi-target ligands of unrelated proteins relevant for Parkinson's disease. A library with 5.4 million molecules was docked to crystal structures of the A2A adenosine receptor (A2AAR) and monoamine oxidase B (MAO-B). Twenty-four compounds that were among the highest ranked for both binding sites were evaluated experimentally, resulting in the discovery of four dual-target ligands. The most potent compound was an A2AAR antagonist with nanomolar affinity ( Ki = 19 nM) and inhibited MAO-B with an IC50 of 100 nM. Optimization guided by the predicted binding modes led to the identification of a second potent dual-target scaffold. The two discovered scaffolds were shown to counteract 6-hydroxydopamine-induced neurotoxicity in dopaminergic neuronal-like SH-SY5Y cells. Structure-based screening can hence be used to identify ligands with specific polypharmacological profiles, providing new avenues for drug development against complex diseases.",
+  "authors": "Jaiteh M, Zeifman A, Saarinen M, Svenningsson P, Br\u00e9a J, Loza MI, Carlsson J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_26",
+    "creation_date": "2020-01-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4118207",
+  "doi": "10.1021/acs.jmedchem.8b00204",
+  "doi_chembl": null,
+  "first_page": "5269",
+  "issue": "12",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5278",
+  "patent_id": null,
+  "pubmed_id": 29792714,
+  "src_id": 1,
+  "title": "Docking Screens for Dual Inhibitors of Disparate Drug Targets for Parkinson's Disease.",
+  "volume": "61",
+  "year": 2018
+}

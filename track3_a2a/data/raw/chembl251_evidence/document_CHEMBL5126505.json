@@ -1,0 +1,24 @@
+{
+  "abstract": "Adenosine is an endogenous purine-based nucleoside expressed nearly in all body tissues. It regulates various body functions by activating four G-protein coupled receptors, A<sub>1</sub>, A<sub>2A</sub>, A<sub>2B</sub>, and A<sub>3</sub>. These receptors are widely acknowledged as drug targets for treating different neurological, metabolic, and inflammatory diseases. Although numerous adenosine receptor inhibitors have been developed worldwide, achieving target selectivity is still a big hurdle in drug development. However, the identification of specific radioligands-based affinity assay, fluorescent ligands, and MS-based ligand assay have contributed to the development of selective and potent adenosine ligands. In recent years various small heterocyclic-based molecules have shown some promising results. Istradefylline has been approved for treating Parkinson's in Japan, while preladenant, tozadenant, CVT-6883, MRS-1523, and many more are under different phases of clinical development. The present review is focused on the quest to develop potent and selective adenosine inhibitors from 2013 to early 2021 by various research groups. The review also highlights their biological activity, selectivity, structure-activity relationship, molecular docking, and mechanistic studies. A special emphsesis on drug designing strategies has been also given the manuscript. The comprehensive compilation of research work carried out in the field will provide inevitable scope for designing and developing novel adenosine inhibitors with improved selectivity and efficacy.",
+  "authors": "Saini A, Patel R, Gaba S, Singh G, Gupta GD, Monga V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5126505",
+  "doi": "10.1016/j.ejmech.2021.113907",
+  "doi_chembl": null,
+  "first_page": "113907",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "113907",
+  "patent_id": null,
+  "pubmed_id": 34695776,
+  "src_id": 1,
+  "title": "Adenosine receptor antagonists: Recent advances and therapeutic perspective.",
+  "volume": "227",
+  "year": 2022
+}

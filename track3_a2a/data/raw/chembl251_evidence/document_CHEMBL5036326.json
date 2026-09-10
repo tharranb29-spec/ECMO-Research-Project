@@ -1,0 +1,24 @@
+{
+  "abstract": "Adenosine receptors are attractive therapeutic targets for multiple conditions, including ischemia-reperfusion injury and neuropathic pain. Adenosine receptor drug discovery efforts would be facilitated by the development of appropriate tools to assist in target validation and direct receptor visualization in different native environments. We report the development of the first bifunctional (chemoreactive and clickable) ligands for the adenosine A<sub>1</sub> receptor (A<sub>1</sub>R) and adenosine A<sub>3</sub> receptor (A<sub>3</sub>R) based on an orthosteric antagonist xanthine-based scaffold and on an existing structure-activity relationship. Bifunctional ligands were functional antagonists with nanomolar affinity and irreversible binding at the A<sub>1</sub>R and A<sub>3</sub>R. In-depth pharmacological profiling of these bifunctional ligands showed moderate selectivity over A<sub>2A</sub> and A<sub>2B</sub> adenosine receptors. Once bound to the receptor, ligands were successfully \"clicked\" with a cyanine-5 fluorophore containing the complementary \"click\" partner, enabling receptor detection. These bifunctional ligands are expected to aid in the understanding of A<sub>1</sub>R and A<sub>3</sub>R localization and trafficking in native cells and living systems.",
+  "authors": "Trinh PNH, Chong DJW, Leach K, Hill SJ, Tyndall JDA, May LT, Vernall AJ, Gregory KJ.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_32",
+    "creation_date": "2023-01-26"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5036326",
+  "doi": "10.1021/acs.jmedchem.0c02169",
+  "doi_chembl": null,
+  "first_page": "8161",
+  "issue": "12.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "8178",
+  "patent_id": null,
+  "pubmed_id": 34120444,
+  "src_id": 1,
+  "title": "Development of Covalent, Clickable Probes for Adenosine A<sub>1</sub> and A<sub>3</sub> Receptors.",
+  "volume": "64",
+  "year": 2021
+}

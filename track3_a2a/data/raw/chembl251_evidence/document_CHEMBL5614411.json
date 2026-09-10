@@ -1,0 +1,24 @@
+{
+  "abstract": "A series of 2,6,9-trisubstituted purine derivatives were designed and synthesized with diverse chemical moieties. Through a comprehensive biological evaluation, we identified 4-(6-(methylamino)-2-(phenylethynyl)-9H-purin-9-yl)phenol (6a) as a promising A<sub>2A</sub>AR antagonist with potent antifibrotic properties. Compound 6a demonstrated significant efficacy in inhibiting CRE promoter activity and in reducing the expression of fibrogenic marker proteins and downstream effectors of A<sub>2A</sub>AR activation, surpassing the A<sub>2A</sub>AR antagonist ZM241385 and initial screening hits, 9-benzyl-N-methyl-2-(phenylethynyl)-9H-purin-6-amine (5a) and 9-((benzyloxy)methyl)-N-methyl-2-(phenylethynyl)-9H-purin-6-amine (5j). Further validation revealed that compound 6a effectively inhibited fibrogenic marker proteins induced by A<sub>2A</sub>AR overexpression or TGF-\u03b21 treatment in hepatic stellate cells, alongside reducing PKA and CREB phosphorylation. These findings suggest that compound 6a exerts its antifibrotic action by modulating the cAMP/PKA/CREB pathway through A<sub>2A</sub>AR inhibition. Overall, our study provides valuable insights for the development of novel therapeutics that target hepatic fibrosis through A<sub>2A</sub>AR antagonism.",
+  "authors": "Sun J, Kim S, Park S, Hwang S, Sheen N, Kim S, Kwon Y, Ryu JS.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_36",
+    "creation_date": "2025-07-28"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5614411",
+  "doi": "10.1016/j.bmc.2024.117881",
+  "doi_chembl": null,
+  "first_page": "117881",
+  "issue": null,
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "117881",
+  "patent_id": null,
+  "pubmed_id": 39178585,
+  "src_id": 1,
+  "title": "Exploring novel A<sub>2A</sub>AR antagonists: Design, synthesis, and evaluation of 2,6,9-trisubstituted purine derivatives as promising antifibrotic agents.",
+  "volume": "112",
+  "year": 2024
+}

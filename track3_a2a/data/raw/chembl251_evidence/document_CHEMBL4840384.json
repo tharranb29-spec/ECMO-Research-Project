@@ -1,0 +1,24 @@
+{
+  "abstract": "",
+  "authors": "Abdel-Magid AF.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_31",
+    "creation_date": "2022-07-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4840384",
+  "doi": "10.1021/acsmedchemlett.1c00620",
+  "doi_chembl": null,
+  "first_page": "1892",
+  "issue": "12.0",
+  "journal": "ACS Med Chem Lett",
+  "journal_full_title": "ACS medicinal chemistry letters.",
+  "last_page": "1893",
+  "patent_id": null,
+  "pubmed_id": 34917249,
+  "src_id": 1,
+  "title": "Adenosine Receptor Antagonists as Potential Cancer Therapy.",
+  "volume": "12",
+  "year": 2021
+}

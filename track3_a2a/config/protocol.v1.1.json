@@ -1,0 +1,100 @@
+{
+  "protocol_id": "a2a-dual-state-v1.1",
+  "supersedes": "a2a-dual-state-v1.0",
+  "status": "frozen_before_functional_model_results",
+  "change_control": {
+    "reason": "The registered 4EIY top-pose redocking gate failed. An independently selected 1.70 A room-temperature inactive A2A structure, 5NM4, passed the same five-seed gate after validated DBREF mapping.",
+    "preserved_negative_result": "outputs/redocking_report.json",
+    "required_sensitivity_structure": "4EIY",
+    "selection_warning": "5NM4 must not be presented as a retrospective replacement that erases the 4EIY failure. Final conclusions must report structure sensitivity."
+  },
+  "target": {
+    "name": "human adenosine A2A receptor",
+    "gene": "ADORA2A",
+    "uniprot": "P29274",
+    "target_class": "class A GPCR"
+  },
+  "task": "agonist_vs_antagonist_functional_classification_after_binding_identification",
+  "structures": {
+    "inactive_primary": {
+      "pdb_id": "5NM4",
+      "ligand_code": "ZMA",
+      "ligand_name": "ZM241385",
+      "chain": "A",
+      "ligand_auth_seq_id": 507,
+      "state": "inactive",
+      "resolution_angstrom": 1.70,
+      "source_note": "room-temperature A2A-BRIL crystallographic structure",
+      "source_sha256": "fc1a1e9ae2d334170e2442e648e5ea9ffd28c70c666d30a3001115216b3dc179",
+      "ligand_sha256": "83b5652f86ee38f775d8cf09560cd50bea86e98e2690c4bcc4448845127d7a1e",
+      "uniprot_mapping": [
+        {"pdb_start": 11, "pdb_end": 217, "uniprot_start": 2, "uniprot_end": 208},
+        {"pdb_start": 324, "pdb_end": 422, "uniprot_start": 219, "uniprot_end": 317}
+      ]
+    },
+    "active_like_primary": {
+      "pdb_id": "2YDO",
+      "ligand_code": "ADN",
+      "ligand_name": "adenosine",
+      "chain": "A",
+      "ligand_auth_seq_id": 400,
+      "state": "agonist-bound intermediate-active",
+      "resolution_angstrom": 3.00,
+      "source_sha256": "47752abf2452db20bf6b4c39182e19216e0d723107ba016699c840728cf4b711",
+      "ligand_sha256": "763f3c6179c8d03f1cab51565d7551ab2fe51f914497ea6927525d550b4853c0",
+      "uniprot_mapping": [
+        {"pdb_start": 1, "pdb_end": 317, "uniprot_start": 1, "uniprot_end": 317}
+      ]
+    },
+    "inactive_sensitivity": {
+      "pdb_id": "4EIY",
+      "role": "mandatory sensitivity analysis",
+      "registered_v1_0_gate_status": "failed"
+    }
+  },
+  "alignment": {
+    "reference": "5NM4",
+    "mobile": "2YDO",
+    "mapping_basis": "PDB DBREF to UniProt P29274",
+    "minimum_common_tm_ca_atoms": 150,
+    "maximum_alignment_rmsd_angstrom": 3.0,
+    "tm_ranges_uniprot": [[6, 66], [73, 108], [117, 142], [167, 211], [224, 259], [266, 311]]
+  },
+  "box": {
+    "reference_ligand": "5NM4:ZMA:A:507",
+    "padding_angstrom": 6.0,
+    "same_dimensions_for_both_primary_states": true
+  },
+  "receptor_preparation": {
+    "tool": "PDB2PQR",
+    "version": "3.6.2",
+    "force_field": "AMBER",
+    "ph": 7.4,
+    "propka_titration": true,
+    "hydrogen_bond_optimization": true,
+    "heteroatom_policy": "primary dry-pocket preparation; retained-water and sodium sensitivity must be declared separately"
+  },
+  "gnina": {
+    "docker_image": "gnina/gnina:v1.3.3",
+    "exhaustiveness": 8,
+    "seeds": [42, 43, 44, 45, 46],
+    "num_modes": 1,
+    "cnn_scoring": "rescore",
+    "primary_seed_aggregation": "median_valid_runs",
+    "zero_affinity_policy": "failed_run_not_binding_measurement"
+  },
+  "redocking_gate": {
+    "rmsd_type": "symmetry_minimized_heavy_atom",
+    "rmsd_threshold_angstrom": 2.0,
+    "minimum_passing_seeds": 4,
+    "median_rmsd_must_pass": true
+  },
+  "dataset_partitions": ["benchmark", "locked_holdout", "prospective", "quarantine"],
+  "primary_model": "regularized_logistic_regression",
+  "sensitivity_model": "random_forest",
+  "primary_incremental_endpoint": "paired_scaffold_split_auc_model_D_minus_model_C",
+  "autonomous_update_mode": "shadow_quarantine_only",
+  "model_training_unlocked": false,
+  "production_screening_unlocked": false
+}
+

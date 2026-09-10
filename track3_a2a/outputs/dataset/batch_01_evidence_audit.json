@@ -1,0 +1,19 @@
+{
+  "created_at": "2026-09-05T13:40:31.206370+00:00",
+  "batch_record_count": 19,
+  "unique_document_count": 30,
+  "unique_assay_count": 49,
+  "document_type_counts": {
+    "PUBLICATION": 30
+  },
+  "documents_with_doi": 30,
+  "documents_with_pubmed_id": 29,
+  "assay_target_counts": {
+    "CHEMBL251": 49
+  },
+  "assay_organism_counts": {
+    "Homo sapiens": 49
+  },
+  "training_eligible_count": 0,
+  "next_gate": "two independent reviewers inspect the linked assay and source publication"
+}

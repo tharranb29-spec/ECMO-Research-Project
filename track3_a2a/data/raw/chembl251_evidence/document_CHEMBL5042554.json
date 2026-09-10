@@ -1,0 +1,24 @@
+{
+  "abstract": "Ischemic stroke is a complex systemic disease characterized by high morbidity, disability, and mortality. The activation of the presynaptic adenosine A<sub>2A</sub> and A<sub>1</sub> receptors modifies a variety of brain insults from excitotoxicity to stroke. Therefore, the discovery of dual A<sub>2A</sub>/A<sub>1</sub> adenosine receptor (AR)-targeting therapeutic compounds could be a strategy for the treatment of ischemic stroke. Inspired by two clinical phase III drugs, ASP-5854 (dual A<sub>2A</sub>/A<sub>1</sub> AR antagonist) and preladenant (selective A<sub>2A</sub> AR antagonist), and using the hybrid medicinal strategy, we characterized novel pyridone-substituted triazolopyrimidine scaffolds as dual A<sub>2A</sub>/A<sub>1</sub> AR antagonists. Among them, compound <b>1a</b> exerted excellent A<sub>2A</sub>/A<sub>1</sub> AR binding affinity (<i>K</i> <sub><i>i</i></sub> = 5.58/24.2 nM), an antagonistic effect (IC<sub>50</sub> = 5.72/25.9 nM), and good metabolic stability in human liver microsomes, rat liver microsomes, and dog liver microsomes. Importantly, compound <b>1a</b> demonstrated a dose-effect relationship in the oxygen-glucose deprivation/reperfusion (OGD/R)-treated HT22 cell model. These findings support the development of dual A<sub>2A</sub>/A<sub>1</sub> AR antagonists as a potential treatment for ischemic stroke.",
+  "authors": "Tang ML, Wen ZH, Wang JH, Wang ML, Zhang H, Liu XH, Jin L, Chang J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_32",
+    "creation_date": "2023-01-26"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5042554",
+  "doi": "10.1021/acsmedchemlett.1c00599",
+  "doi_chembl": null,
+  "first_page": "436",
+  "issue": "3.0",
+  "journal": "ACS Med Chem Lett",
+  "journal_full_title": "ACS medicinal chemistry letters.",
+  "last_page": "442",
+  "patent_id": null,
+  "pubmed_id": 35295085,
+  "src_id": 1,
+  "title": "Discovery of Pyridone-Substituted Triazolopyrimidine Dual A<sub>2A</sub>/A<sub>1</sub> AR Antagonists for the Treatment of Ischemic Stroke.",
+  "volume": "13",
+  "year": 2022
+}

@@ -1,0 +1,22 @@
+{
+  "protocol_id": "a2a-ligand-preparation-v1.2",
+  "input_partition": "chembl251_provisional_partitions_v1.2.json",
+  "protonation": {
+    "tool": "Dimorphite-DL",
+    "version": "2.0.2",
+    "ph_min": 7.4,
+    "ph_max": 7.4,
+    "precision": 0.1,
+    "max_variants": 16
+  },
+  "primary_protomer_rule": "lexicographically first canonical isomeric SMILES before docking",
+  "alternate_protomer_use": "sensitivity analysis only",
+  "three_dimensional_embedding": {
+    "tool": "RDKit ETKDGv3",
+    "version": "2025.9.6",
+    "seed_rule": "SHA256 of CHEMBL ID and protomer index mapped to a positive 31-bit integer",
+    "optimization": "MMFF94 when parameters exist, otherwise UFF",
+    "maximum_iterations": 500
+  },
+  "anti_bias_rule": "Primary protomer is selected before docking; best-scoring protomer selection is prohibited for the primary analysis."
+}

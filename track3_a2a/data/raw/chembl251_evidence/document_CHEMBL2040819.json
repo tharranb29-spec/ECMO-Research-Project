@@ -1,0 +1,24 @@
+{
+  "abstract": "A series of adenosine-5'-N-alkylcarboxamides and N(6)-(2,2-diphenylethyl)adenosine-5'-N-alkylcarboxamides bearing antioxidant moieties in the 2-position were synthesized from the versatile intermediate, O(6)-(benzotriazol-1-yl)-2-fluoro-2',3'-O-isopropylideneinosine-5'-N-alkylcarboxamide (1). These compounds were evaluated as A(2A) adenosine receptor (A(2A)R) agonists in a cAMP accumulation assay, and a number of potent and selective agonists were identified. Three of these compounds were evaluated further in an ischemic injury cell survival assay and a reactive oxygen species (ROS) production assay whereby 15b and 15c were shown to reduce ROS activity and cell death due to ischemia.",
+  "authors": "Hausler NE, Devine SM, McRobb FM, Warfe L, Pouton CW, Haynes JM, Bottle SE, White PJ, Scammells PJ.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_15",
+    "creation_date": "2013-01-23"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2040819",
+  "doi": "10.1021/jm300206u",
+  "doi_chembl": null,
+  "first_page": "3521",
+  "issue": "7",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3534",
+  "patent_id": null,
+  "pubmed_id": 22432713,
+  "src_id": 1,
+  "title": "Synthesis and pharmacological evaluation of dual acting antioxidant A(2A) adenosine receptor agonists.",
+  "volume": "55",
+  "year": 2012
+}

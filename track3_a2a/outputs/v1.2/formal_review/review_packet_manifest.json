@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T10:43:02.440838+00:00",
+  "source": "data/curated/chembl251_curation_plan_220_v1.2.csv",
+  "source_sha256": "85aa30f9c2ee76c5cfe0530dce5ba4a1f203d9ba1dd70efed2ab1aeaf4ceb9ea",
+  "record_count_per_reviewer": 220,
+  "reviewers": [
+    "Tharran",
+    "Lucky"
+  ],
+  "blinding": "proposed class, other reviewer decision, and model outputs omitted",
+  "allowed_decisions": [
+    "accept_agonist",
+    "accept_antagonist",
+    "reject_binding_only",
+    "reject_context",
+    "reject_conflict",
+    "needs_full_text"
+  ],
+  "allowed_evidence_tiers_for_accepted_records": [
+    "tier_1",
+    "tier_2"
+  ],
+  "attestation": "Each named reviewer must personally check the cited source and enter their own decision, tier, notes, and review time.",
+  "packets": {
+    "Tharran": {
+      "path": "outputs/v1.2/formal_review/tharran_blinded_review.csv",
+      "sha256": "a6cac558eaa668f80c7c9985ebd744ade67708b98580a6467d6162b6a3ff9ebe"
+    },
+    "Lucky": {
+      "path": "outputs/v1.2/formal_review/lucky_blinded_review.csv",
+      "sha256": "17db67e7d03a10c729a1b6e15d2b334386ff8d7415db793bac947d4d64aa2c3f"
+    }
+  },
+  "formal_review_complete": false
+}

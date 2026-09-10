@@ -31,6 +31,10 @@ def main():
         "gnina_bridge_results": load_json(OUTPUTS / "gnina_bridge_results.json"),
         "gnina_status": load_json(OUTPUTS / "gnina_status.json"),
         "gnina_validation": load_json(OUTPUTS / "gnina_validation.json"),
+        "a2a_curation": load_json(ROOT / "track3_a2a" / "outputs" / "v1.3" / "computational_curation_audit.json"),
+        "a2a_partitions": load_json(ROOT / "track3_a2a" / "outputs" / "v1.3" / "computational_partition_audit.json"),
+        "a2a_features": load_json(ROOT / "track3_a2a" / "outputs" / "v1.3" / "feature_construction_audit.json"),
+        "a2a_confirmatory": load_json(ROOT / "track3_a2a" / "outputs" / "v1.3" / "confirmatory" / "holdout_report_v1.3.1.json"),
     }
     serialized = json.dumps(payload, indent=2)
     content = f"window.ECMO_DASHBOARD_DATA = {serialized};\n"

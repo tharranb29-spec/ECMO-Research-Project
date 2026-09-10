@@ -1,0 +1,24 @@
+{
+  "abstract": "A new series of amino-3,5-dicyanopyridines (<b>1-31</b>) was synthesized and biologically evaluated in order to further investigate the potential of this scaffold to obtain adenosine receptor (AR) ligands. In general, the modifications performed have led to compounds having high to good human (h) A<sub>1</sub>AR affinity and an inverse agonist profile. While most of the compounds are hA<sub>1</sub>AR-selective, some derivatives behave as mixed hA<sub>1</sub>AR inverse agonists/A<sub>2A</sub> and A<sub>2B</sub> AR antagonists. The latter compounds (<b>9-12)</b> showed that they reduce oxaliplatin-induced neuropathic pain by a mechanism involving the alpha7 subtype of nAchRs, similar to the nonselective AR antagonist caffeine, taken as the reference compound. Along with the pharmacological evaluation, chemical stability of methyl 3-(((6-amino-3,5-dicyano-4-(furan-2-yl)pyridin-2-yl)sulfanyl)methyl)benzoate <b>10</b> was assessed in plasma matrices (rat and human), and molecular modeling studies were carried out to better rationalize the available structure-activity relationships.",
+  "authors": "Betti M, Catarzi D, Varano F, Falsini M, Varani K, Vincenzi F, Pasquini S, di Cesare Mannelli L, Ghelardini C, Lucarini E, Dal Ben D, Spinaci A, Bartolucci G, Menicatti M, Colotta V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_28",
+    "creation_date": "2021-01-15"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4406810",
+  "doi": "10.1021/acs.jmedchem.9b00106",
+  "doi_chembl": null,
+  "first_page": "6894",
+  "issue": "15",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "6912",
+  "patent_id": null,
+  "pubmed_id": 31306001,
+  "src_id": 1,
+  "title": "Modifications on the Amino-3,5-dicyanopyridine Core To Obtain Multifaceted Adenosine Receptor Ligands with Antineuropathic Activity.",
+  "volume": "62",
+  "year": 2019
+}

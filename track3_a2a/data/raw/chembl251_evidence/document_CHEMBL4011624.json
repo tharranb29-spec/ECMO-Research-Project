@@ -1,0 +1,24 @@
+{
+  "abstract": "In this work, we describe the identification of the 1,2,4-triazolo[4,3-a]pyrazin-3-one as a new versatile scaffold for the development of adenosine human (h) receptor antagonists. The new chemotype ensued from a molecular simplification approach applied to our previously reported 1,2,4-triazolo[4,3-a]quinoxalin-1-one series. Hence, a set of novel 8-amino-2-aryl-1,2,4-triazolopyrazin-3-one derivatives, featured by different substituents on the 2-phenyl ring (R) and at position 6 (R6), was synthesized with the main purpose of targeting the hA2A adenosine receptor (AR). Several compounds possessed nanomolar affinity for the hA2A AR (Ki = 2.9-10 nM) and some, very interestingly, also showed high selectivity for the target. One selected potent hA2A AR antagonist (12, R = H, R6 = 4-methoxyphenyl) demonstrated some ability to counteract MPP+-induced neurotoxicity in cultured human neuroblastoma SH-SY5Y cells, a widely used in vitro Parkinson's disease model. Docking studies at hAR structures were performed to rationalize the observed affinity data.",
+  "authors": "Falsini M, Squarcialupi L, Catarzi D, Varano F, Betti M, Dal Ben D, Marucci G, Buccioni M, Volpini R, De Vita T, Cavalli A, Colotta V.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_25",
+    "creation_date": "2018-12-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4011624",
+  "doi": "10.1021/acs.jmedchem.7b00457",
+  "doi_chembl": null,
+  "first_page": "5772",
+  "issue": "13",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5790",
+  "patent_id": null,
+  "pubmed_id": 28590753,
+  "src_id": 1,
+  "title": "The 1,2,4-Triazolo[4,3-a]pyrazin-3-one as a Versatile Scaffold for the Design of Potent Adenosine Human Receptor Antagonists. Structural Investigations to Target the A2A Receptor Subtype.",
+  "volume": "60",
+  "year": 2017
+}

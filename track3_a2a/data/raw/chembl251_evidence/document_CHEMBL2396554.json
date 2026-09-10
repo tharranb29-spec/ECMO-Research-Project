@@ -1,0 +1,24 @@
+{
+  "abstract": "The synthesis and preliminary in vitro evaluation of five metabolites of the A2A antagonist ST1535 (1) are reported. The metabolites, originating in vivo from enzymatic oxidation of the 2-butyl group of the parent compound, were synthesized from 6-chloro-2-iodo-9-methyl-9H-purine (2) by selective C-C bond formation via halogen/magnesium exchange reaction and/or palladium-catalyzed reactions. The metabolites behaved in vitro as antagonist ligands of cloned human A2A receptor with affinities (Ki 7.5-53 nM) comparable to that of compound 1 (Ki 10.7 nM), thus showing that the long duration of action of 1 could be in part due to its metabolites. General behavior after oral administration in mice was also analyzed.",
+  "authors": "Piersanti G, Bartoccini F, Lucarini S, Cabri W, Stasi MA, Riccioni T, Borsini F, Tarzia G, Minetti P.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_18",
+    "creation_date": "2014-03-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL2396554",
+  "doi": "10.1021/jm400491x",
+  "doi_chembl": null,
+  "first_page": "5456",
+  "issue": "13",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5463",
+  "patent_id": null,
+  "pubmed_id": 23789814,
+  "src_id": 1,
+  "title": "Synthesis and biological evaluation of metabolites of 2-n-butyl-9-methyl-8-[1,2,3]triazol-2-yl-9H-purin-6-ylamine (ST1535), a potent antagonist of the A2A adenosine receptor for the treatment of Parkinson's disease.",
+  "volume": "56",
+  "year": 2013
+}

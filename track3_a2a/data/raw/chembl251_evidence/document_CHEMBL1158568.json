@@ -1,0 +1,24 @@
+{
+  "abstract": "One of the grand challenges in chemical biology is identifying a small-molecule modulator for each individual function of all human proteins. Instead of targeting one protein at a time, an efficient approach to address this challenge is to target entire protein families by taking advantage of the relatively high levels of chemical promiscuity observed within certain boundaries of sequence phylogeny. We recently developed a computational approach to identifying the potential protein targets of compounds based on their similarity to known bioactive molecules for almost 700 targets. Here, we describe the direct identification of novel antagonists for all four adenosine receptor subtypes by applying our virtual profiling approach to a unique synthesis-driven chemical collection composed of 482 biologically-orphan molecules. These results illustrate the potential role of in silico target profiling to guide efficiently screening campaigns directed to discover new chemical probes for all members of a protein family.",
+  "authors": "Areias FM, Brea J, Gregori-Puigjan\u00e9 E, Zaki ME, Carvalho MA, Dom\u00ednguez E, Guti\u00e9rrez-de-Ter\u00e1n H, Proen\u00e7a MF, Loza MI, Mestres J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_6",
+    "creation_date": "2010-08-27"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1158568",
+  "doi": "10.1016/j.bmc.2010.03.048",
+  "doi_chembl": null,
+  "first_page": "3043",
+  "issue": "9",
+  "journal": "Bioorg Med Chem",
+  "journal_full_title": "Bioorganic & medicinal chemistry.",
+  "last_page": "3052",
+  "patent_id": null,
+  "pubmed_id": 20382540,
+  "src_id": 1,
+  "title": "In silico directed chemical probing of the adenosine receptor family.",
+  "volume": "18",
+  "year": 2010
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "Adenosine A(2A) (A(2A)R) and dopamine D(2) (D(2)R) receptors mediate the antagonism between adenosinergic and dopaminergic transmission in striatopallidal GABAergic neurons and are pharmacological targets for the treatment of Parkinson's disease. Here, a family of heterobivalent ligands containing a D(2)R agonist and an A(2A)R antagonist linked through a spacer of variable size was designed and synthesized to study A(2A)R-D(2)R heteromers. Bivalent ligands with shorter linkers bound to D(2)R or A(2A)R with higher affinity than the corresponding monovalent controls in membranes from brain striatum and from cells coexpressing both receptors. In contrast, no differences in affinity of bivalent versus monovalent ligands were detected in experiments using membranes from cells expressing only one receptor. These findings indicate the existence of A(2A)R-D(2)R heteromers and of a simultaneous interaction of heterobivalent ligands with both receptors. The cooperative effect derived from the simultaneous interaction suggests the occurrence of A(2A)R-D(2)R heteromers in cotransfected cells and in brain striatum. The dopamine/adenosine bivalent action could constitute a novel concept in Parkinson's disease pharmacotherapy.",
+  "authors": "Soriano A, Ventura R, Molero A, Hoen R, Casad\u00f3 V, Cort\u00e9s A, Fanelli F, Albericio F, Llu\u00eds C, Franco R, Royo M.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_3",
+    "creation_date": "2010-04-16"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1153525",
+  "doi": "10.1021/jm900298c",
+  "doi_chembl": null,
+  "first_page": "5590",
+  "issue": "18",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "5602",
+  "patent_id": null,
+  "pubmed_id": 19711895,
+  "src_id": 1,
+  "title": "Adenosine A2A receptor-antagonist/dopamine D2 receptor-agonist bivalent ligands as pharmacological tools to detect A2A-D2 receptor heteromers.",
+  "volume": "52",
+  "year": 2009
+}

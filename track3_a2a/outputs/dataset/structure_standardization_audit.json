@@ -1,0 +1,106 @@
+{
+  "created_at": "2026-09-04T14:42:45.780863+00:00",
+  "input_record_count": 1591,
+  "successfully_standardized_count": 1591,
+  "invalid_structure_count": 0,
+  "unique_standardized_structure_count": 1591,
+  "duplicate_standardized_structure_group_count": 0,
+  "duplicate_groups_with_contradictory_provisional_classes": 0,
+  "generic_scaffold_count_including_acyclic": 478,
+  "acyclic_record_count": 0,
+  "passes_declared_property_filters_count": 1295,
+  "provisional_class_counts": {
+    "agonist": 330,
+    "ambiguous": 103,
+    "antagonist": 835,
+    "inverse_agonist": 6,
+    "partial_agonist": 17,
+    "unknown": 300
+  },
+  "largest_scaffold_groups": [
+    {
+      "generic_scaffold": "C1CCC(CC2CC3CCC(C4CCCC4)CC3C2)CC1",
+      "record_count": 58
+    },
+    {
+      "generic_scaffold": "C1CCC2C(C1)CCC2C1CCCC1",
+      "record_count": 47
+    },
+    {
+      "generic_scaffold": "C1CCC(CC2CC3CCC(C4CCCCC4)CC3C2)CC1",
+      "record_count": 41
+    },
+    {
+      "generic_scaffold": "CC1CC(C2CCCC(C3CCCCC3)C2)CCC1CC1CCCCC1",
+      "record_count": 38
+    },
+    {
+      "generic_scaffold": "CC1CC(C)C2CCCC2C1",
+      "record_count": 32
+    },
+    {
+      "generic_scaffold": "CC1CCC2C(C3CCCC3)CCCC2C1CCC1CCC(C2CCCCC2)CC1",
+      "record_count": 32
+    },
+    {
+      "generic_scaffold": "C1CCC(C2CCCC3CCCC32)C1",
+      "record_count": 30
+    },
+    {
+      "generic_scaffold": "C1CCC(C2CCCC(C3CCC(CC4CCC5CCCCC54)C3)C2)CC1",
+      "record_count": 29
+    },
+    {
+      "generic_scaffold": "CC(C1CCCC1)C1CC(CCC2CCCCC2)CC2CCCC21",
+      "record_count": 26
+    },
+    {
+      "generic_scaffold": "C1CCC(C2CCCC(C3CCCCC3)C2)CC1",
+      "record_count": 26
+    },
+    {
+      "generic_scaffold": "C1CCC(C2CCC(CCCC3CCC4CCC(C5CCCC5)C4C3)CC2)CC1",
+      "record_count": 25
+    },
+    {
+      "generic_scaffold": "CC(CCC1CCCCC1)CC1CC2CCCC(C3CCCCC3)C2C1",
+      "record_count": 23
+    },
+    {
+      "generic_scaffold": "C1CCC(CCCC2CCC3CCC(C4CCCC4)C3C2)CC1",
+      "record_count": 22
+    },
+    {
+      "generic_scaffold": "C1CCC(C2CCC(CCC3CCC4C3CCC3CC(C5CCCC5)CC34)CC2)CC1",
+      "record_count": 22
+    },
+    {
+      "generic_scaffold": "CC1CC2C3CC(C4CCCC4)CC3CCC2C1CCC1CCC(C2CCCCC2)CC1",
+      "record_count": 21
+    },
+    {
+      "generic_scaffold": "C1CCC(CCC2CCC3CCC(C4CCCC4)C3C2)CC1",
+      "record_count": 20
+    },
+    {
+      "generic_scaffold": "C1CCC(CCCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "record_count": 19
+    },
+    {
+      "generic_scaffold": "CC(CCC1CCC(C2CC3CC(C)CC(C)C3C2)CC1)CC1CCCCC1",
+      "record_count": 19
+    },
+    {
+      "generic_scaffold": "CC1C2CCCCC2C2CCCC(C3CCCCC3)C12",
+      "record_count": 18
+    },
+    {
+      "generic_scaffold": "C1CCC(CCCC2CCC3CCC(C4CCC(C5CCCC5)C4)C3C2)CC1",
+      "record_count": 17
+    }
+  ],
+  "errors": [],
+  "duplicate_groups": [],
+  "training_eligible_count": 0,
+  "next_gate": "evidence review and scaffold-balanced benchmark selection"
+}

@@ -1,0 +1,2 @@
+record_id,molecule_name,chembl_id,canonical_smiles,standardized_smiles,inchikey,dataset_partition,functional_class,primary_binary_label,evidence_status,assay_type,assay_readout,activity_relation,activity_value,activity_unit,source_type,source_id,source_url,source_passage,label_rationale,reviewed_by,reviewed_at
+

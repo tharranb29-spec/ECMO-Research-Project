@@ -1,0 +1,24 @@
+{
+  "abstract": "Potent and selective adenosine A(1) receptor antagonists were disclosed. SAR and pharmacological profile of selected compounds were discussed.",
+  "authors": "Griebenow N, B\u00e4rfacker L, Meier H, Schneider D, Teusch N, Lustig K, Kast R, Kolkhof P.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_10",
+    "creation_date": "2011-05-26"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1255521",
+  "doi": "10.1016/j.bmcl.2010.07.095",
+  "doi_chembl": null,
+  "first_page": "5891",
+  "issue": "19",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "5894",
+  "patent_id": null,
+  "pubmed_id": 20728355,
+  "src_id": 1,
+  "title": "Identification and optimization of substituted 5-aminopyrazoles as potent and selective adenosine A1 receptor antagonists.",
+  "volume": "20",
+  "year": 2010
+}

@@ -1,0 +1,31 @@
+{
+  "protocol_id": "a2a-provisional-dual-state-docking-v1.2",
+  "status": "frozen_before_provisional_docking_results",
+  "receptors": {
+    "inactive_5NM4": "docking_inputs/v1.1/receptors/5NM4_inactive_ph7.4.pdb",
+    "active_like_2YDO": "docking_inputs/v1.1/receptors/2YDO_active_like_ph7.4.pdb"
+  },
+  "box_source": "outputs/v1.1.1/preparation_status.json",
+  "gnina": {
+    "image": "gnina/gnina:v1.3.3",
+    "exhaustiveness": 8,
+    "seeds": [42, 43, 44],
+    "num_modes": 1,
+    "cnn_scoring": "rescore"
+  },
+  "aggregation": {
+    "primary": "median of valid seeds",
+    "minimum_valid_seeds_per_receptor": 2,
+    "zero_or_missing_affinity": "failed run",
+    "best_of_seed": "prohibited"
+  },
+  "ligand_state": {
+    "primary_analysis": "primary protomer selected before docking",
+    "alternate_protomers": "sensitivity analysis only"
+  },
+  "pose_quality": {
+    "cnnscore_flag_threshold": 0.3,
+    "behavior": "flag and report by provisional class; do not hard-delete before bias analysis"
+  },
+  "interpretation": "computational prototype only; scores are not experimental affinity or functional validation"
+}

@@ -1,0 +1,24 @@
+{
+  "abstract": "Recent studies and clinical evidence have strongly supported the development of adenosine A<sub>2A</sub> receptor (A<sub>2A</sub>R) antagonists as novel approaches for cancer immunotherapy. By screening our in-house compound library, a pyridinone hit compound (<b>1</b>) with weak A<sub>2A</sub>R antagonistic activity was identified. Further structure-activity relationship studies revealed a series of pyridinone derivatives with strong potency. Compound <b>38</b> stood out with a potent A<sub>2A</sub>R antagonistic activity (IC<sub>50</sub> = 29.0 nM), good mouse liver microsomal metabolic stability (<i>t</i><sub>1/2</sub> = 86.1 min), and excellent oral bioavailability (<i>F</i> = 86.1%). Of note, <b>38</b> effectively enhanced the activation and killing ability of T cells in vitro by down-regulation of immunosuppressive molecules (<i>LAG-3</i> and <i>TIM-3</i>) and up-regulation of effector molecules (<i>GZMB</i>, <i>IFNG</i>, and <i>IL-2</i>). Moreover, <b>38</b> exhibited excellent in vivo antitumor activity with a tumor growth inhibition (TGI) of 56.0% in the MC38 tumor model via oral administration, demonstrating its potential as a novel A<sub>2A</sub>R antagonist candidate for cancer immunotherapy.",
+  "authors": "Zhu C, Ze S, Zhou R, Yang X, Wang H, Chai X, Fang M, Liu M, Wang Y, Lu W, Xie Q.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_35",
+    "creation_date": "2024-12-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5380829",
+  "doi": "10.1021/acs.jmedchem.2c01860",
+  "doi_chembl": null,
+  "first_page": "4734",
+  "issue": "7",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4754",
+  "patent_id": null,
+  "pubmed_id": 36951370,
+  "src_id": 1,
+  "title": "Discovery of Pyridinone Derivatives as Potent, Selective, and Orally Bioavailable Adenosine A<sub>2A</sub> Receptor Antagonists for Cancer Immunotherapy.",
+  "volume": "66",
+  "year": 2023
+}

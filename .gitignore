@@ -1,4 +1,6 @@
 .DS_Store
+__pycache__/
+*.pyc
 outputs/dashboard-server.log
 outputs/dashboard-server.pid
 outputs/structures/
@@ -8,5 +10,13 @@ docking_inputs/**/*.pdbqt
 docking_inputs/**/*.sdf
 docking_inputs/**/*.mol2
 .venv-pdb2pqr/
+.venv-track3/
 docking_inputs/**/*.pqr
 docking_inputs/**/*.log
+track3_a2a/docking_inputs/**/*.pdb
+track3_a2a/docking_inputs/**/*.pqr
+track3_a2a/docking_inputs/**/*.sdf
+track3_a2a/outputs/redocking/**/*.sdf
+track3_a2a/outputs/redocking/**/*.log
+track3_a2a/outputs/v1.2/docking-*/*/*/*.sdf
+track3_a2a/outputs/v1.2/docking-*/*/*/*.log

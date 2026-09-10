@@ -1,0 +1,22 @@
+{
+  "created_at": "2026-09-05T11:37:37.257465+00:00",
+  "plan_status": "review_required_not_training_eligible",
+  "planned_record_count": 220,
+  "planned_class_counts": {
+    "agonist": 65,
+    "antagonist": 155
+  },
+  "planned_agonist_fraction": 0.2955,
+  "curation_batch_counts": {
+    "1": 19,
+    "2": 51,
+    "3": 50,
+    "4": 50,
+    "5": 50
+  },
+  "unique_generic_scaffolds": 216,
+  "records_in_repeated_scaffolds": 4,
+  "training_eligible_count": 0,
+  "replacement_rule": "Rejected, conflicting, or unresolved records do not count toward 220 and require a new reviewed replacement.",
+  "next_gate": "independent dual review followed by adjudication and scaffold partitioning"
+}

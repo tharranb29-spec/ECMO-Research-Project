@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "protocol_id": "a2a-random-forest-sensitivity-v1.2",
+  "status": "specified_after_primary_step4_result_for_predeclared_model-class_sensitivity",
+  "input": "outputs/v1.2/docking_clean.csv",
+  "partition": "provisional_development",
+  "locked_holdout_policy": "do_not_load_or_score",
+  "models": ["AB", "C", "D", "E"],
+  "estimator": {
+    "n_estimators": 300,
+    "max_features": "sqrt",
+    "min_samples_leaf": 2,
+    "class_weight": "balanced_subsample",
+    "n_jobs": -1
+  },
+  "validation": {
+    "splitter": "StratifiedGroupKFold",
+    "group": "generic_murcko_scaffold_smiles",
+    "folds": 5,
+    "repeats": 10,
+    "random_seed": 20260910,
+    "bootstrap_resamples": 2000
+  },
+  "interpretation": "nonlinear sensitivity only; does not replace or rescue the frozen logistic primary analysis"
+}

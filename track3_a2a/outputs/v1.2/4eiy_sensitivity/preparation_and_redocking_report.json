@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "protocol_id": "a2a-4eiy-aligned-sensitivity-v1.2",
+  "role": "mandatory inactive-structure sensitivity; never substitutes for 5NM4 primary",
+  "original_4eiy_gate_failure_preserved": true,
+  "source_hashes": {
+    "receptor": "2a1f198ec341f82e7cc1d8ab6e43ae5438d8c03631e329e4c0bc9f423f795b95",
+    "ligand": "beea8f1f23c323a65cecdefaaa3e3cc5f23f27f7b4fc470d34e69ffe845585df"
+  },
+  "alignment": {
+    "reference": "5NM4",
+    "mobile": "4EIY",
+    "common_tm_ca_count": 232,
+    "rmsd_angstrom": 0.2751,
+    "cognate_ligand_inside_frozen_box": true
+  },
+  "redocking": {
+    "case_id": "4EIY-v1.2-aligned-sensitivity",
+    "status": "fail",
+    "valid_run_count": 5,
+    "failed_run_count": 0,
+    "passing_pose_count": 2,
+    "median_rmsd_angstrom": 3.0306,
+    "mean_rmsd_angstrom": 2.303,
+    "runs": [
+      {
+        "seed": 42,
+        "status": "valid",
+        "rmsd_angstrom": 3.0658,
+        "minimized_affinity_kcal_mol": -8.9951,
+        "cnn_score": 0.9603,
+        "cnn_affinity_pk": 7.6329,
+        "pose_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-42.sdf",
+        "log_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-42.log"
+      },
+      {
+        "seed": 43,
+        "status": "valid",
+        "rmsd_angstrom": 3.0306,
+        "minimized_affinity_kcal_mol": -8.838,
+        "cnn_score": 0.8957,
+        "cnn_affinity_pk": 7.2952,
+        "pose_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-43.sdf",
+        "log_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-43.log"
+      },
+      {
+        "seed": 44,
+        "status": "valid",
+        "rmsd_angstrom": 0.8931,
+        "minimized_affinity_kcal_mol": -9.1986,
+        "cnn_score": 0.9417,
+        "cnn_affinity_pk": 7.1165,
+        "pose_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-44.sdf",
+        "log_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-44.log"
+      },
+      {
+        "seed": 45,
+        "status": "valid",
+        "rmsd_angstrom": 3.1025,
+        "minimized_affinity_kcal_mol": -9.1025,
+        "cnn_score": 0.9083,
+        "cnn_affinity_pk": 7.4803,
+        "pose_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-45.sdf",
+        "log_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-45.log"
+      },
+      {
+        "seed": 46,
+        "status": "valid",
+        "rmsd_angstrom": 1.4231,
+        "minimized_affinity_kcal_mol": -8.9248,
+        "cnn_score": 0.7914,
+        "cnn_affinity_pk": 6.8703,
+        "pose_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-46.sdf",
+        "log_path": "outputs/redocking/4EIY-v1.2-aligned-sensitivity/seed-46.log"
+      }
+    ]
+  },
+  "production_sensitivity_authorized": false,
+  "interpretation": "A failed gate remains a structure-sensitivity limitation; it must not be tuned after seeing downstream labels."
+}

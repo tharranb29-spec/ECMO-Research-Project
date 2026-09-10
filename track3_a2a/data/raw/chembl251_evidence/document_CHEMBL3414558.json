@@ -1,0 +1,24 @@
+{
+  "abstract": "Stimulation of A2A adenosine receptors (AR) promotes anti-inflammatory responses in animal models of allergic rhinitis, asthma, chronic obstructive pulmonary disease, and rheumatic diseases. Herein we describe the results of a research program aimed at identifying potent and selective agonists of the A2AAR as potential anti-inflammatory agents. The recent crystallographic analysis of A2AAR agonists and antagonists in complex with the receptor provided key information on the structural determinants leading to receptor activation or blocking. In light of this, we designed a new series of 2-((4-aryl(alkyl)piperazin-1-yl)alkylamino)-5'-N-ethylcarboxamidoadenosines with high A2AAR affinity, activation potency and selectivity obtained by merging distinctive structural elements of known agonists and antagonists of the investigated target. Docking-based SAR optimization allowed us to identify compound 42 as one of the most potent and selective A2A agonist discovered so far (Ki hA2AAR = 4.8 nM, EC50 hA2AAR = 4.9 nM, Ki hA1AR > 10\u202f000 nM, Ki hA3AR = 1487 nM, EC50 hA2BAR > 10\u202f000 nM).",
+  "authors": "Preti D, Baraldi PG, Saponaro G, Romagnoli R, Aghazadeh Tabrizi M, Baraldi S, Cosconati S, Bruno A, Novellino E, Vincenzi F, Ravani A, Borea PA, Varani K.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_21",
+    "creation_date": "2016-02-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3414558",
+  "doi": "10.1021/acs.jmedchem.5b00215",
+  "doi_chembl": null,
+  "first_page": "3253",
+  "issue": "7",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3267",
+  "patent_id": null,
+  "pubmed_id": 25780876,
+  "src_id": 1,
+  "title": "Design, synthesis, and biological evaluation of novel 2-((2-(4-(substituted)phenylpiperazin-1-yl)ethyl)amino)-5'-N-ethylcarboxamidoadenosines as potent and selective agonists of the A2A adenosine receptor.",
+  "volume": "58",
+  "year": 2015
+}

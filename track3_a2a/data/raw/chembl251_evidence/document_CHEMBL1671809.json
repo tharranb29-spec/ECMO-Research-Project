@@ -1,0 +1,24 @@
+{
+  "abstract": "The discovery and structure-activity relationship of a series of hA(2A) receptor antagonists is described. Compound 28 was selected from the series as a potent and selective compound and was shown to be efficacious in an in vivo model of Parkinson's disease. It had acceptable ADME properties; however, the low intrinsic solubility of this compound was limiting for its developability, because the oral bioavailability from dosing in suspension was significantly lower than the oral bioavailability from solution dosage. As a consequence, prodrugs of 28 were prepared with dramatically increased aqueous solubility. The prodrugs efficiently delivered 28 into systemic circulation, with no detectable levels of prodrug in plasma samples. From this investigation, we selected 32 (Lu AA47070), a phosphonooxymethylene prodrug of 28, as a drug candidate.",
+  "authors": "Sams AG, Mikkelsen GK, Larsen M, Langg\u00e5rd M, Howells ME, Schr\u00f8der TJ, Brennum LT, Torup L, J\u00f8rgensen EB, Bundgaard C, Kreilg\u00e5rd M, Bang-Andersen B.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_11",
+    "creation_date": "2011-08-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1671809",
+  "doi": "10.1021/jm1008659",
+  "doi_chembl": null,
+  "first_page": "751",
+  "issue": "3",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "764",
+  "patent_id": null,
+  "pubmed_id": 21210664,
+  "src_id": 1,
+  "title": "Discovery of phosphoric acid mono-{2-[(E/Z)-4-(3,3-dimethyl-butyrylamino)-3,5-difluoro-benzoylimino]-thiazol-3-ylmethyl} ester (Lu AA47070): a phosphonooxymethylene prodrug of a potent and selective hA(2A) receptor antagonist.",
+  "volume": "54",
+  "year": 2011
+}

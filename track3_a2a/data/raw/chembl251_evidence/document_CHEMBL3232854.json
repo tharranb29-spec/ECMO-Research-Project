@@ -1,0 +1,24 @@
+{
+  "abstract": "We report the synthesis and evaluation of previously unreported 4-amino-6-aryl-5-cyano-2-thiopyrimidines as selective human adenosine A1 receptor (hA1AR) agonists with tunable binding kinetics, this without affecting their nanomolar affinity for the target receptor. They show a very diverse range of kinetic profiles (from 1 min (compound 52) to 1 h (compound 43)), and their structure-affinity relationships (SAR) and structure-kinetics relationships (SKR) were established. When put in perspective with the increasing importance of binding kinetics in drug discovery, these results bring new evidence of the consequences of affinity-only driven selection of drug candidates, that is, the potential elimination of slightly less active compounds that may display preferable binding kinetics.",
+  "authors": "Louvel J, Guo D, Agliardi M, Mocking TA, Kars R, Pham TP, Xia L, de Vries H, Brussee J, Heitman LH, Ijzerman AP.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_20",
+    "creation_date": "2015-01-14"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3232854",
+  "doi": "10.1021/jm401643m",
+  "doi_chembl": null,
+  "first_page": "3213",
+  "issue": "8",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "3222",
+  "patent_id": null,
+  "pubmed_id": 24669958,
+  "src_id": 1,
+  "title": "Agonists for the adenosine A1 receptor with tunable residence time. A Case for nonribose 4-amino-6-aryl-5-cyano-2-thiopyrimidines.",
+  "volume": "57",
+  "year": 2014
+}

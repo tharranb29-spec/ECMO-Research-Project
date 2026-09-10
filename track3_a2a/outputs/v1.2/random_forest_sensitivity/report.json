@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T10:45:19.690730+00:00",
+  "protocol_id": "a2a-random-forest-sensitivity-v1.2",
+  "interpretation": "nonlinear sensitivity only; does not replace or rescue the frozen logistic primary analysis",
+  "formal_label_review_gate_passed": false,
+  "locked_holdout_accessed": false,
+  "source_hashes": {
+    "config": "290700e6e2d6292990518fd471d8bc5150dfa23862ae5835a5a81a288514e108",
+    "feature_matrix": "4e7ca973af12ad6fecb86d9c4563d5070faa62be4c21565939ba37ad286eddb6"
+  },
+  "dataset": {
+    "molecule_count": 171,
+    "fold_count": 50
+  },
+  "roc_auc": {
+    "AB": 0.9852892561983471,
+    "C": 0.9342148760330579,
+    "D": 0.9294214876033059,
+    "E": 0.9864462809917356
+  },
+  "paired_auc_differences": {
+    "E_minus_AB": {
+      "estimate": 0.0009758215640568446,
+      "lower": -0.0010295126973232094,
+      "upper": 0.0042344173441732965
+    },
+    "D_minus_C": {
+      "estimate": -0.004575264035368565,
+      "lower": -0.037424927450225916,
+      "upper": 0.026709096950642813
+    }
+  }
+}

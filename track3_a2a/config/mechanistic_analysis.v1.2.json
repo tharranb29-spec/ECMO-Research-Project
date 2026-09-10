@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "protocol_id": "a2a-mechanistic-analysis-v1.2-exploratory",
+  "status": "frozen_before_local_step5_run_after_external_result_disclosure",
+  "interpretation": "independent implementation of a teammate-proposed exploratory analysis; not a confirmatory primary endpoint",
+  "input": "outputs/v1.2/docking_clean.csv",
+  "partition": "provisional_development",
+  "locked_holdout_policy": "do_not_load_or_score",
+  "positive_class": "agonist",
+  "chemistry": {
+    "descriptors": [
+      "clogp",
+      "h_bond_donors",
+      "h_bond_acceptors",
+      "rotatable_bonds",
+      "tpsa",
+      "heavy_atom_count",
+      "qed"
+    ],
+    "excluded_redundant_descriptor": "molecular_weight",
+    "standardization": "z_score",
+    "pca_components": 3
+  },
+  "exploratory_model": {
+    "formula": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk + d_pk",
+    "m_pk": "m_cnnaffinity_pk",
+    "d_pk": "d_cnnaffinity_pk = active_like_2YDO - inactive_5NM4",
+    "estimator": "unpenalized_unweighted_logistic_regression",
+    "continuous_predictors": "z_score",
+    "maximum_iterations": 10000
+  },
+  "resampling": {
+    "random_seed": 20260910,
+    "bootstrap_resamples": 5000,
+    "permutation_resamples": 10000,
+    "sensitivity_resamples": 2000,
+    "confidence_level": 0.95,
+    "bootstrap_unit": "molecule",
+    "permutation": "two_sided_label_permutation",
+    "preprocessing": "refit_within_each_molecule_resample"
+  },
+  "sensitivity_analyses": [
+    "chemistry PCA component counts 1 through 6",
+    "force-field m_affinity plus d_affinity comparator",
+    "leave-one-molecule-out coefficient sign stability",
+    "joint d_pk and d_cnnscore pose-quality model",
+    "MW versus heavy-atom-count correlation"
+  ],
+  "exploratory_robustness_criteria": {
+    "d_pk_bootstrap_interval_excludes_zero": true,
+    "d_pk_two_sided_permutation_p_max": 0.01,
+    "leave_one_out_positive_sign_fraction_min": 0.95,
+    "same_positive_sign_for_pc_counts_1_through_6": true
+  },
+  "formal_limitations": [
+    "d_pk was selected after development results were observed",
+    "CNNaffinity is a learned docking score rather than experimental affinity",
+    "record-level dual-review fields remain incomplete",
+    "pose-quality entanglement may explain part of the signal"
+  ]
+}

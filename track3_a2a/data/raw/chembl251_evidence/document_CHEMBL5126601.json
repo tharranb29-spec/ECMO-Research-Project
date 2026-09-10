@@ -1,0 +1,24 @@
+{
+  "abstract": "Surface plasmon resonance (SPR) is a widely used method to study ligand-protein interactions. The throughput and sensitivity of SPR has made it an important technology for measuring low-affinity, ultralow weight fragments (<200 Da) in the early stages of drug discovery. However, the biochemistry of membrane proteins, such as G-protein-coupled receptors (GPCRs), makes their SPR fragment screening particularly challenging, especially for native/wild-type, nonthermostabilized mutant receptors. In this study, we demonstrate the use of SPR-based biosensors to study the entire human family of adenosine receptors and present biologically active novel binders with a range of selectivity to human adenosine 2a receptor (hA<sub>2A</sub>R) from an ultralow weight fragment library and the public GlaxoSmithKline (GSK) kinase library. Thus, we demonstrate the ability of SPR to screen ultra-low-affinity fragments and identify biologically meaningful chemical equity and that SPR campaigns are highly effective \"chemical filters\" for screening small building block fragments that can be used to enable drug discovery programs.",
+  "authors": "Shepherd C, Robinson S, Berizzi A, Thompson LEJ, Bird L, Culurgioni S, Varzandeh S, Rawlins PB, Olsen RHJ, Navratilova IH.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5126601",
+  "doi": "10.1021/acsmedchemlett.2c00099",
+  "doi_chembl": null,
+  "first_page": "1172",
+  "issue": "7.0",
+  "journal": "ACS Med Chem Lett",
+  "journal_full_title": "ACS medicinal chemistry letters.",
+  "last_page": "1181",
+  "patent_id": null,
+  "pubmed_id": 35859869,
+  "src_id": 1,
+  "title": "Surface Plasmon Resonance Screening to Identify Active and Selective Adenosine Receptor Binding Fragments.",
+  "volume": "13",
+  "year": 2022
+}

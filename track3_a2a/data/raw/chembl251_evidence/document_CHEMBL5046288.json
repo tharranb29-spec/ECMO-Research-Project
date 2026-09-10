@@ -1,0 +1,24 @@
+{
+  "abstract": "In recent years, the adenosine A<sub>2A</sub> receptor (A<sub>2A</sub>R) has shown exciting progress in the development of immunotherapies for the treatment of cancer. Herein, a 2-amino-7,9-dihydro-8<i>H</i>-purin-8-one compound (<b>1</b>) was identified as an A<sub>2A</sub>R antagonist hit through in-house library screening. Extensive structure-activity relationship (SAR) studies led to the discovery of 2-aminopteridin-7(8<i>H</i>)-one derivatives, which showed high potencies on A<sub>2A</sub>R in the cAMP assay. Compound <b>57</b> stood out with an IC<sub>50</sub> value of 8.3 \u00b1 0.4 nM against A<sub>2A</sub>R at the 5'-<i>N</i>-ethylcarboxamidoadenosine (NECA) level of 40 nM. The antagonistic effect of <b>57</b> was sustained even at a higher NECA concentration of 1 \u03bcM, which mimicked the adenosine level in the tumor microenvironment (TME). Importantly, <b>57</b> enhanced T cell activation in both the IL-2 production assay and the cancer-cell-killing model, thus demonstrating its potential as a lead for developing novel A<sub>2A</sub>R antagonists in cancer immunotherapy.",
+  "authors": "Yu F, Zhu C, Ze S, Wang H, Yang X, Liu M, Xie Q, Lu W, Wang Y.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_32",
+    "creation_date": "2023-01-26"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5046288",
+  "doi": "10.1021/acs.jmedchem.1c02199",
+  "doi_chembl": null,
+  "first_page": "4367",
+  "issue": "5.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4386",
+  "patent_id": null,
+  "pubmed_id": 35212542,
+  "src_id": 1,
+  "title": "Design, Synthesis, and Bioevaluation of 2-Aminopteridin-7(8<i>H</i>)-one Derivatives as Novel Potent Adenosine A<sub>2A</sub> Receptor Antagonists for Cancer Immunotherapy.",
+  "volume": "65",
+  "year": 2022
+}

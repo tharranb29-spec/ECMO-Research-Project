@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-05T11:42:16.259702+00:00",
+  "source_plan": "/Users/tharran/Documents/New project/track3_a2a/data/curated/chembl251_curation_plan_220.csv",
+  "dataset_partition": "reviewed_unpartitioned",
+  "training_eligible_count": 0,
+  "records": []
+}

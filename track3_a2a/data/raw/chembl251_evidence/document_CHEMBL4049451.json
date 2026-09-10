@@ -1,0 +1,24 @@
+{
+  "abstract": "Structural determinants of affinity of N6-substituted-5'-C-(ethyltetrazol-2-yl)adenosine and 2-chloroadenosine derivatives at adenosine receptor (AR) subtypes were studied with binding and molecular modeling. Small N6-cycloalkyl and 3-halobenzyl groups furnished potent dual acting A1AR agonists and A3AR antagonists. 4 was the most potent dual acting human (h) A1AR agonist (Ki = 0.45 nM) and A3AR antagonist (Ki = 0.31 nM) and highly selective versus A2A; 11 and 26 were most potent at both h and rat (r) A3AR. All N6-substituted-5'-C-(ethyltetrazol-2-yl)adenosine derivatives proved to be antagonists at hA3AR but agonists at the rA3AR. Analgesia of 11, 22, and 26 was evaluated in the mouse formalin test (A3AR antagonist blocked and A3AR agonist strongly potentiated). N6-Methyl-5'-C-(ethyltetrazol-2-yl)adenosine (22) was most potent, inhibiting both phases, as observed combining A1AR and A3AR agonists. This study demonstrated for the first time the advantages of a single molecule activating two AR pathways both leading to benefit in this acute pain model.",
+  "authors": "Petrelli R, Scortichini M, Kachler S, Boccella S, Cerchia C, Torquati I, Del Bello F, Salvemini D, Novellino E, Luongo L, Maione S, Jacobson KA, Lavecchia A, Klotz KN, Cappellacci L.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_25",
+    "creation_date": "2018-12-10"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4049451",
+  "doi": "10.1021/acs.jmedchem.7b00291",
+  "doi_chembl": null,
+  "first_page": "4327",
+  "issue": "10",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "4341",
+  "patent_id": null,
+  "pubmed_id": 28447789,
+  "src_id": 1,
+  "title": "Exploring the Role of N6-Substituents in Potent Dual Acting 5'-C-Ethyltetrazolyladenosine Derivatives: Synthesis, Binding, Functional Assays, and Antinociceptive Effects in Mice \u2207.",
+  "volume": "60",
+  "year": 2017
+}

@@ -1,0 +1,29 @@
+{
+  "protocol_id": "a2a-feature-construction-v1.3",
+  "status": "computational-curation amendment; frozen v1.2 results preserved",
+  "inputs": {
+    "docking_report": "outputs/v1.2/docking-full/report.json",
+    "partitions": "data/curated/chembl251_computational_partitions_v1.3.json",
+    "evidence_review": "data/curated/chembl251_computational_audit_v1.3.json",
+    "standardized_chemistry": "data/curated/chembl251_standardized_quarantine.json"
+  },
+  "outputs": {
+    "feature_matrix": "outputs/v1.3/docking_clean_computational.csv",
+    "audit": "outputs/v1.3/feature_construction_audit.json"
+  },
+  "aggregation": {
+    "receptor_affinity": "median_of_valid_seeds",
+    "receptor_cnnscore": "median_of_valid_seeds",
+    "receptor_cnnaffinity": "median_of_valid_seeds",
+    "minimum_valid_seeds_per_receptor": 2,
+    "best_of_seed": "prohibited"
+  },
+  "pose_quality": {
+    "cnnscore_flag_threshold": 0.3,
+    "comparison": "less_than_or_equal",
+    "primary_behavior": "soft_flag_retain_row",
+    "hard_filter": "sensitivity_analysis_only"
+  },
+  "label_status": "computationally_adjudicated_functional",
+  "human_validation_claimed": false
+}

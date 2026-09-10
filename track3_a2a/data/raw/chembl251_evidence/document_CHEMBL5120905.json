@@ -1,0 +1,24 @@
+{
+  "abstract": "The adenosine A<sub>1</sub> receptor is a therapeutic target based on its ability to provide cardioprotection during episodes of myocardial ischemia and reperfusion injury. However, the clinical translation of A<sub>1</sub>R agonists has been hindered by dose-limiting adverse effects (bradycardia and hypotension). Previously, we demonstrated that the bitopic agonist VCP746 (<b>1</b>), consisting of an adenosine pharmacophore linked to an allosteric moiety, can stimulate cardioprotective A<sub>1</sub>R signaling effects in the absence of unwanted bradycardia. This study maps the structure-activity relationships of <b>1</b> through modifications to the linker moiety. Derivatives differing in the flexibility, length, and nature of the linker were assessed, which revealed that the linker is tolerant of several modifications including added rigidity. Ligands featuring 1,4-disubstituted 1,2,3-triazoles were the most biased of the novel analogues but also displayed sub-nanomolar potency in a cAMP accumulation assay at the A<sub>2B</sub>R. To our knowledge, <b>10</b> is the most potent A<sub>2B</sub>R agonist published to date.",
+  "authors": "Awalt JK, Nguyen ATN, Fyfe TJ, Thai BS, White PJ, Christopoulos A, J\u00f6rg M, May LT, Scammells PJ.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_33",
+    "creation_date": "2023-05-31"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5120905",
+  "doi": "10.1021/acs.jmedchem.2c00320",
+  "doi_chembl": null,
+  "first_page": "9076",
+  "issue": "13.0",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "9095",
+  "patent_id": null,
+  "pubmed_id": 35729775,
+  "src_id": 1,
+  "title": "Examining the Role of the Linker in Bitopic <i>N</i><sup>6</sup>-Substituted Adenosine Derivatives Acting as Biased Adenosine A<sub>1</sub> Receptor Agonists.",
+  "volume": "65",
+  "year": 2022
+}

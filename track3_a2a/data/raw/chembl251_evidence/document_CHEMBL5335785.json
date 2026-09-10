@@ -1,0 +1,24 @@
+{
+  "abstract": "Development of subtype-selective leads is essential in drug discovery campaigns targeting G protein-coupled receptors (GPCRs). Herein, a structure-based virtual screening approach to rationally design subtype-selective ligands was applied to the A<sub>1</sub> and A<sub>2A</sub> adenosine receptors (A<sub>1</sub>R and A<sub>2A</sub>R). Crystal structures of these closely related subtypes revealed a non-conserved subpocket in the binding sites that could be exploited to identify A<sub>1</sub>R selective ligands. A library of 4.6 million compounds was screened computationally against both receptors using molecular docking and 20 A<sub>1</sub>R selective ligands were predicted. Of these, seven antagonized the A<sub>1</sub>R with micromolar activities and several compounds displayed slight selectivity for this subtype. Twenty-seven analogs of two discovered scaffolds were designed, resulting in antagonists with nanomolar potency and up to 76-fold A<sub>1</sub>R-selectivity. Our results show the potential of structure-based virtual screening to guide discovery and optimization of subtype-selective ligands, which could facilitate the development of safer drugs.",
+  "authors": "Matricon P, Nguyen AT, Vo DD, Baltos JA, Jaiteh M, Luttens A, Kampen S, Christopoulos A, Kihlberg J, May LT, Carlsson J.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_35",
+    "creation_date": "2024-12-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5335785",
+  "doi": "10.1016/j.ejmech.2023.115419",
+  "doi_chembl": null,
+  "first_page": "115419",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "115419",
+  "patent_id": null,
+  "pubmed_id": 37301076,
+  "src_id": 1,
+  "title": "Structure-based virtual screening discovers potent and selective adenosine A<sub>1</sub> receptor antagonists.",
+  "volume": "257",
+  "year": 2023
+}

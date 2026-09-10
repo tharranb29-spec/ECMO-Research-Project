@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-06T14:12:21.890302+00:00",
+  "protocol_id": "a2a-provisional-dual-state-docking-v1.2",
+  "mode": "smoke-2",
+  "human_validation_claimed": false,
+  "molecule_count": 2,
+  "valid_molecule_count": 2,
+  "failed_molecule_count": 0,
+  "molecules": [
+    {
+      "chembl_id": "CHEMBL5425820",
+      "status": "valid",
+      "primary_protomer_sha256": "af81485be65c2f9a4aac4a7edf027a5a818a33ecf1658633da1f3a7997daa0f6",
+      "receptors": {
+        "inactive_5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -10.6273,
+          "mean_affinity_kcal_mol": -10.6197,
+          "affinity_sd": 0.015,
+          "median_cnn_score": 0.7848,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.6273,
+              "cnn_score": 0.779,
+              "cnn_affinity_pk": 7.8131,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.6024,
+              "cnn_score": 0.7933,
+              "cnn_affinity_pk": 7.8328,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.6293,
+              "cnn_score": 0.7848,
+              "cnn_affinity_pk": 7.8305,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/inactive_5NM4/seed-44.log"
+            }
+          ]
+        },
+        "active_like_2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -10.4113,
+          "mean_affinity_kcal_mol": -10.2414,
+          "affinity_sd": 0.2965,
+          "median_cnn_score": 0.8784,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.4113,
+              "cnn_score": 0.8789,
+              "cnn_affinity_pk": 8.1252,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.899,
+              "cnn_score": 0.8543,
+              "cnn_affinity_pk": 8.2453,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.4139,
+              "cnn_score": 0.8784,
+              "cnn_affinity_pk": 8.1247,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL5425820/active_like_2YDO/seed-44.log"
+            }
+          ]
+        }
+      },
+      "m_affinity": -10.5193,
+      "d_affinity": 0.216
+    },
+    {
+      "chembl_id": "CHEMBL3133079",
+      "status": "valid",
+      "primary_protomer_sha256": "195a281046d7ac9894f7f94be1712ffd72fed129c777b7760d8641c3266f8053",
+      "receptors": {
+        "inactive_5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.7109,
+          "mean_affinity_kcal_mol": -9.727,
+          "affinity_sd": 0.0637,
+          "median_cnn_score": 0.5493,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.7109,
+              "cnn_score": 0.5493,
+              "cnn_affinity_pk": 6.7898,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.7972,
+              "cnn_score": 0.5856,
+              "cnn_affinity_pk": 6.7508,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.6729,
+              "cnn_score": 0.5314,
+              "cnn_affinity_pk": 6.7058,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/inactive_5NM4/seed-44.log"
+            }
+          ]
+        },
+        "active_like_2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.7034,
+          "mean_affinity_kcal_mol": -9.5863,
+          "affinity_sd": 0.2485,
+          "median_cnn_score": 0.6714,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.3008,
+              "cnn_score": 0.6714,
+              "cnn_affinity_pk": 7.1473,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.7546,
+              "cnn_score": 0.5677,
+              "cnn_affinity_pk": 7.1301,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.7034,
+              "cnn_score": 0.9047,
+              "cnn_affinity_pk": 7.6636,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.2/docking-smoke-2/CHEMBL3133079/active_like_2YDO/seed-44.log"
+            }
+          ]
+        }
+      },
+      "m_affinity": -9.7072,
+      "d_affinity": 0.0075
+    }
+  ],
+  "next_gate": "inspect smoke diagnostics before authorizing full provisional docking"
+}

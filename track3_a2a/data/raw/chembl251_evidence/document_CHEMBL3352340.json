@@ -1,0 +1,24 @@
+{
+  "abstract": "In previous research, several 7-amino-2-arylpyrazolo[4,3-d]pyrimidine derivatives were identified as highly potent and selective antagonists at the human A3 adenosine receptor. Structure-activity relationship studies highlighted that affinity and selectivity depended on the nature of the substituents at the 5- and 7-positions of the pyrazolo[4,3-d]pyrimidine scaffold. In particular, small lipophilic residues at the 5-position and a free amino group at position 7 afforded compounds able to bind all four human (h) adenosine receptors. Hence, to shift affinity toward the hA1 and/or hA(2A) subtypes, alkyl and arylalkyl chains of different length were appended at position 5 of the 2-phenylpyrazolo[4,3-d]pyrimidin-7-amine. Among the new compounds, a dual hA1/hA(2A) receptor antagonist was identified, namely the 5-(3-phenylpropyl) derivative 25, which shows high affinity both at human A1 (K(i) = 5.31 nM) and A(2A) (K(i) = 55 nM) receptors. We also obtained some potent and selective antagonists for the A1 receptor, such as the 5-(3-arylpropyl)-substituted compounds 26-31, whose affinities fall in the low nanomolar range (K(i) = 0.15-18 nM). Through an in silico receptor-driven approach, the obtained binding data were rationalized and the molecular bases of the hA1 and hA(2A) AR affinity and selectivity of derivatives 25-31 are explained.",
+  "authors": "Squarcialupi L, Colotta V, Catarzi D, Varano F, Betti M, Varani K, Vincenzi F, Borea PA, Porta N, Ciancetta A, Moro S.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_21",
+    "creation_date": "2016-02-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3352340",
+  "doi": "10.1016/j.ejmech.2014.07.060",
+  "doi_chembl": null,
+  "first_page": "614",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "627",
+  "patent_id": null,
+  "pubmed_id": 25063944,
+  "src_id": 1,
+  "title": "7-Amino-2-phenylpyrazolo[4,3-d]pyrimidine derivatives: structural investigations at the 5-position to target human A\u2081 and A(2A) adenosine receptors. Molecular modeling and pharmacological studies.",
+  "volume": "84",
+  "year": 2014
+}

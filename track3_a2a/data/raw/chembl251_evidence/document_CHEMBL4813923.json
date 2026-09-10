@@ -1,0 +1,24 @@
+{
+  "abstract": "Antagonists of adenosine receptor are under exploration as potential drug candidates for treatment of neurological disorders, depression, certain cancers and potentially used as a cancer immunotherapy. Herein, we describe design and synthesis of novel scaffold benzo[4,5]imidazo [1,2-a]pyrazin-1-amine (6) derivatives. All the compounds were evaluated for A<sub>2A</sub> AR antagonist activity and displayed encouraging results (IC<sub>50</sub> 9-300\u00a0nM) of A<sub>2A</sub> AR antagonist binding affinity in biochemical assay. Compound 27 exhibits good activity in A<sub>2A</sub> AR antagonist cAMP functional assay (IC<sub>50</sub> 31\u00a0nM) and further this compound shows T-cell activation at the IL-2 production assay (EC<sub>50</sub> 165\u00a0nM). Molecular docking studies were carried out to rationalize the observed binding affinity of compound 27.",
+  "authors": "Reddy GL, Sarma R, Liu S, Huang W, Lei J, Fu J, Hu W.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_31",
+    "creation_date": "2022-07-12"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL4813923",
+  "doi": "10.1016/j.ejmech.2020.113040",
+  "doi_chembl": null,
+  "first_page": "113040",
+  "issue": null,
+  "journal": "Eur J Med Chem",
+  "journal_full_title": "European journal of medicinal chemistry.",
+  "last_page": "113040",
+  "patent_id": null,
+  "pubmed_id": 33316692,
+  "src_id": 1,
+  "title": "Design, synthesis and biological evaluation of novel scaffold benzo[4,5]imidazo [1,2-a]pyrazin-1-amine: Towards adenosine A<sub>2A</sub> receptor (A<sub>2A</sub> AR) antagonist.",
+  "volume": "210",
+  "year": 2021
+}

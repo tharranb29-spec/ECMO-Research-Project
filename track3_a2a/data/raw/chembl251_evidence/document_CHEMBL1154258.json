@@ -1,0 +1,24 @@
+{
+  "abstract": "We herein report the discovery of a novel class of antagonists of the human adenosine A2B receptor. This low molecular weight scaffold has been optimized to offer derivatives with potential utility for the alleviation of conditions associated with this receptor subtype, such as nociception, diabetes, asthma and COPD. Furthermore, preliminary pharmacokinetic analysis has revealed compounds with profiles suitable for either inhaled or systemic routes of administration.",
+  "authors": "Bedford ST, Benwell KR, Brooks T, Chen I, Comer M, Dugdale S, Haymes T, Jordan AM, Kennett GA, Knight AR, Klenke B, LeStrat L, Merrett A, Misra A, Lightowler S, Padfield A, Poullennec K, Reece M, Simmonite H, Wong M, Yule IA.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_6",
+    "creation_date": "2010-08-27"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1154258",
+  "doi": "10.1016/j.bmcl.2009.08.040",
+  "doi_chembl": null,
+  "first_page": "5945",
+  "issue": "20",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "5949",
+  "patent_id": null,
+  "pubmed_id": 19733067,
+  "src_id": 1,
+  "title": "Discovery and optimization of potent and selective functional antagonists of the human adenosine A2B receptor.",
+  "volume": "19",
+  "year": 2009
+}

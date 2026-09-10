@@ -1,0 +1,24 @@
+{
+  "abstract": "A series of N(6)-substituted-5'-C-(2-ethyl-2H-tetrazol-5-yl)-adenosine and 2-chloro-adenosine derivatives was synthesized as novel, highly potent dual acting hA1AR agonists and hA3AR antagonists, potentially useful in the treatment of glaucoma and other diseases. The best affinity and selectivity profiles were achieved by N(6)-substitution with a 2-fluoro-4-chloro-phenyl- or a methyl- group. Through an in silico receptor-driven approach, the molecular bases of the hA1- and hA3AR recognition and activation of this series of 5'-C-ethyl-tetrazolyl derivatives were explained.",
+  "authors": "Petrelli R, Torquati I, Kachler S, Luongo L, Maione S, Franchetti P, Grifantini M, Novellino E, Lavecchia A, Klotz KN, Cappellacci L.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_21",
+    "creation_date": "2016-02-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3414438",
+  "doi": "10.1021/acs.jmedchem.5b00074",
+  "doi_chembl": null,
+  "first_page": "2560",
+  "issue": "5",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "2566",
+  "patent_id": null,
+  "pubmed_id": 25699637,
+  "src_id": 1,
+  "title": "5'-C-Ethyl-tetrazolyl-N(6)-substituted adenosine and 2-chloro-adenosine derivatives as highly potent dual acting A1 adenosine receptor agonists and A3 adenosine receptor antagonists.",
+  "volume": "58",
+  "year": 2015
+}

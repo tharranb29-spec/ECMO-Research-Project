@@ -1,0 +1,24 @@
+{
+  "abstract": "",
+  "authors": "Shook BC, Charavarty D, Barbay JK, Wang A, Leonard K, Alford V, Powell M, Beauchamp DA, Rassnick S, Scannevin R, Carroll K, Wallace N, Crooke J, Ault M, Lampron L, Westover L, Rhodes K, Jackson PF",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_20",
+    "creation_date": "2015-01-14"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3217453",
+  "doi": "10.1039/C1MD00082A",
+  "doi_chembl": null,
+  "first_page": "950",
+  "issue": "10",
+  "journal": "Medchemcomm",
+  "journal_full_title": null,
+  "last_page": "965",
+  "patent_id": null,
+  "pubmed_id": null,
+  "src_id": 1,
+  "title": "Aminomethyl substituted thieno[2,3-d]pyrimidines as adenosine A2A receptor antagonists",
+  "volume": "2",
+  "year": 2011
+}

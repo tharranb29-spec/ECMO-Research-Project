@@ -1,0 +1,67 @@
+{
+  "specification_id": "a2a-computational-curation-v1.3",
+  "status": "prospective_amendment_before_new_label_admission_and_holdout_access",
+  "effective_date": "2026-09-10",
+  "amends": {
+    "specification_id": "a2a-functional-classification-v1.2",
+    "scope": "label evidence admission only",
+    "preservation_rule": "All v1.2 files, results, and dual-review requirements remain immutable historical artifacts."
+  },
+  "target": {
+    "name": "human adenosine A2A receptor",
+    "gene": "ADORA2A",
+    "chembl_id": "CHEMBL251",
+    "organism": "Homo sapiens",
+    "minimum_target_confidence": 8
+  },
+  "endpoint": {
+    "primary": "agonist_vs_antagonist",
+    "positive_class": "agonist",
+    "excluded": [
+      "binding_only",
+      "partial_agonist",
+      "inverse_agonist",
+      "ambiguous",
+      "wrong_context",
+      "unresolved"
+    ]
+  },
+  "curation_mode": {
+    "name": "machine_curated_computational_audit",
+    "human_approval_required": false,
+    "human_validation_claimed": false,
+    "decision_engine": "deterministic evidence rules",
+    "llm_role": "extract evidence only for quarantined records; self-reported confidence cannot admit a label"
+  },
+  "evidence_tiers": {
+    "tier_1": "Direct human A2A functional assay with explicit agonist or antagonist direction and a traceable primary publication.",
+    "tier_2": "Unambiguous functional assignment in a primary source with incomplete machine-readable assay detail; sensitivity analysis only."
+  },
+  "admission_gate": {
+    "required": [
+      "explicit functional readout",
+      "class direction agrees across qualifying evidence",
+      "no raw activity annotation belongs to an endpoint-excluded functional class",
+      "CHEMBL251 target",
+      "Homo sapiens assay organism",
+      "ChEMBL target confidence at least 8",
+      "traceable primary publication with DOI or PubMed identifier"
+    ],
+    "ambiguous_action": "quarantine",
+    "excluded_function_action": "quarantine",
+    "missing_primary_source_action": "quarantine",
+    "binding_only_action": "reject_binding_only",
+    "wrong_context_action": "reject_context"
+  },
+  "separation_of_gates": {
+    "label_admission": "evidence rules only",
+    "model_promotion": "predeclared scaffold-split performance and uncertainty gate",
+    "auc_must_not_validate_labels": true,
+    "same_scaffold_disagreement_must_not_reject_labels": true
+  },
+  "outputs": {
+    "all_decisions": "data/curated/chembl251_computational_audit_v1.3.json",
+    "accepted_benchmark": "data/curated/chembl251_computational_benchmark_v1.3.json",
+    "audit_report": "outputs/v1.3/computational_curation_audit.json"
+  }
+}

@@ -787,6 +787,10 @@
       const runtime = getAutoResearchRuntime();
       const status = getAutoResearchStatus();
       const sessionUser = authState.sessionUser;
+      const a2aCuration = bundle.a2a_curation || {};
+      const a2aFeatures = bundle.a2a_features || {};
+      const a2aConfirmatory = bundle.a2a_confirmatory || {};
+      const confirmatoryEndpoint = a2aConfirmatory.primary_confirmatory_endpoint || {};
       const signalCards = [
         {
           label: "Session",
@@ -811,6 +815,22 @@
           label: "Discovery Yield",
           value: `${status.lead_count || 0} leads`,
           copy: `${status.article_count || 0} articles screened, ${status.relevant_article_count || 0} considered relevant, ${status.new_lead_count || 0} new leads in the latest cycle.`,
+        },
+        {
+          label: "Track 3 Evidence Audit",
+          value: a2aCuration.accepted_record_count != null ? `${a2aCuration.accepted_record_count} admitted` : "Not bundled",
+          copy: a2aCuration.accepted_record_count != null
+            ? `${a2aCuration.quarantined_or_rejected_count || 0} records remain quarantined or rejected. Labels are machine-curated, not human-validated; ${a2aFeatures.output_row_count || 0} docked records are in the versioned feature matrix.`
+            : "Run the v1.3 computational curation and rebuild the dashboard bundle to display the Track 3 evidence state.",
+        },
+        {
+          label: "Locked Holdout Gate",
+          value: confirmatoryEndpoint.success === true
+            ? "Gate passed"
+            : (a2aConfirmatory.holdout_accessed ? "Not confirmed" : "Not evaluated"),
+          copy: a2aConfirmatory.holdout_accessed
+            ? `One-time ${a2aConfirmatory.holdout_record_count}-record holdout: d_pk coefficient ${Number(confirmatoryEndpoint.observed_coefficient).toFixed(3)}, one-sided p=${Number(confirmatoryEndpoint.one_sided_p_value).toFixed(4)} (predeclared alpha 0.05). No biological validation is claimed.`
+            : "The hash-locked v1.3.1 confirmatory holdout has not been evaluated.",
         },
       ];
 
@@ -857,13 +877,22 @@
       if (runtime.next_run_at) {
         parts.push(`Next scheduled refresh: ${formatDate(runtime.next_run_at)}.`);
       }
+      if (bundle.a2a_curation && bundle.a2a_curation.accepted_record_count != null) {
+        parts.push(`Track 3 audit: ${bundle.a2a_curation.accepted_record_count} computationally admitted records; no human validation is claimed.`);
+      }
+      if (bundle.a2a_confirmatory && bundle.a2a_confirmatory.holdout_accessed) {
+        const endpoint = bundle.a2a_confirmatory.primary_confirmatory_endpoint || {};
+        parts.push(endpoint.success
+          ? "The one-time Track 3 confirmatory holdout gate passed."
+          : `The one-time Track 3 confirmatory holdout gate did not pass (p=${Number(endpoint.one_sided_p_value).toFixed(4)}).`);
+      }
       settingsAlertBox.textContent = parts.join(" ");
     }
 
     if (settingsSessionNote) {
       const promotedCount = getPromotedAutonomousRows().length;
       settingsSessionNote.textContent = promotedCount
-        ? `${promotedCount} autonomous candidate${promotedCount === 1 ? "" : "s"} are currently promoted into the main review workspace.`
+        ? `${promotedCount} autonomous candidate${promotedCount === 1 ? " is" : "s are"} currently promoted into the main review workspace.`
         : "No autonomous candidates are currently promoted into the main review workspace.";
     }
   }

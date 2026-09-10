@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-10T15:05:58.357674+00:00",
+  "status": "post_hoc_numerical_stability_diagnostic_not_confirmatory",
+  "source_hashes": {
+    "holdout_report": "63795f806e1b93beb541d3d1f352356a1bfcde748ae61b3af4075028171f2c7e",
+    "feature_matrix": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88"
+  },
+  "design_condition_number": 4.334132869476549,
+  "unpenalized_iterations": 22,
+  "unpenalized_coefficient_norm": 374.6843974037226,
+  "unpenalized_probability_min": 1.0729129915465719e-222,
+  "unpenalized_probability_max": 1.0,
+  "near_zero_probability_count": 23,
+  "near_one_probability_count": 10,
+  "ridge_sensitivity_d_pk_coefficient": -0.21349127467739704,
+  "ridge_sensitivity_d_cnnscore_coefficient": 1.7046951918058717,
+  "interpretation": "The unpenalized joint sensitivity model is separation-dominated; its extreme coefficients are numerically unstable and must not be interpreted as independent biological effects.",
+  "changes_primary_result": false,
+  "human_validation_claimed": false
+}

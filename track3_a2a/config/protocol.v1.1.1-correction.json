@@ -1,0 +1,16 @@
+{
+  "protocol_id": "a2a-dual-state-v1.1.1",
+  "base_protocol": "config/protocol.v1.1.json",
+  "change_type": "implementation_correction_before_model_results",
+  "preserved_failed_run": "outputs/v1.1/redocking_report.json",
+  "correction": {
+    "field": "box.atom_selection",
+    "previous_behavior": "all SDF atoms, which made the box depend on whether explicit hydrogens were present",
+    "corrected_behavior": "heavy atoms only",
+    "scientific_reason": "4EIY and 5NM4 crystallographic SDF exports differ in explicit-hydrogen representation; box geometry must not depend on that file-format difference"
+  },
+  "acceptance_rule_changed": false,
+  "seeds_changed": false,
+  "exhaustiveness_changed": false
+}
+

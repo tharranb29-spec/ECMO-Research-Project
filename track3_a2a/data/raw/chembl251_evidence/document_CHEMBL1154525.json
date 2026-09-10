@@ -1,0 +1,24 @@
+{
+  "abstract": "The discovery and synthesis of a series of 2-amino-5-benzoyl-4-(2-furyl)thiazoles as adenosine A(2A) receptor antagonists from a small-molecule combinatorial library using a high-throughput radioligand-binding assay is described. Antagonists were further characterized in the A(2A) binding assay and an A(1) selectivity assay. Selected examples exhibited excellent affinity for A(2A) and good selectivity versus the A(1) receptor.",
+  "authors": "Cole AG, Stauffer TM, Rokosz LL, Metzger A, Dillard LW, Zeng W, Henderson I.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_2",
+    "creation_date": "2009-11-30"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1154525",
+  "doi": "10.1016/j.bmcl.2008.11.066",
+  "doi_chembl": null,
+  "first_page": "378",
+  "issue": "2",
+  "journal": "Bioorg Med Chem Lett",
+  "journal_full_title": "Bioorganic & medicinal chemistry letters.",
+  "last_page": "381",
+  "patent_id": null,
+  "pubmed_id": 19059776,
+  "src_id": 1,
+  "title": "Synthesis of 2-amino-5-benzoyl-4-(2-furyl)thiazoles as adenosine A(2A) receptor antagonists.",
+  "volume": "19",
+  "year": 2009
+}

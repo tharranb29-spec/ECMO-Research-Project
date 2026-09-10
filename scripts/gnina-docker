@@ -13,4 +13,18 @@ if ! command -v docker >/dev/null 2>&1; then
   exit 127
 fi
 
-exec docker run --rm   --platform linux/amd64   --volume "$PROJECT_ROOT:$PROJECT_ROOT"   --workdir "$PROJECT_ROOT"   --entrypoint /usr/local/bin/gnina   "$IMAGE" --no_gpu "$@"
+if [ -n "$GNINA_CONTAINER_NAME" ]; then
+  exec docker run --rm --name "$GNINA_CONTAINER_NAME" \
+    --platform linux/amd64 \
+    --volume "$PROJECT_ROOT:$PROJECT_ROOT" \
+    --workdir "$PROJECT_ROOT" \
+    --entrypoint /usr/local/bin/gnina \
+    "$IMAGE" --no_gpu "$@"
+fi
+
+exec docker run --rm \
+  --platform linux/amd64 \
+  --volume "$PROJECT_ROOT:$PROJECT_ROOT" \
+  --workdir "$PROJECT_ROOT" \
+  --entrypoint /usr/local/bin/gnina \
+  "$IMAGE" --no_gpu "$@"

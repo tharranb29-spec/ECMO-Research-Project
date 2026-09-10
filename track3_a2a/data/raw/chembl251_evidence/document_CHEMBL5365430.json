@@ -1,0 +1,24 @@
+{
+  "abstract": "Based on hA<sub>2A</sub>AR structures, a hydrophobic C8-heteroaromatic ring in 5'-truncated adenosine analogues occupies the subpocket tightly, converting hA<sub>2A</sub>AR agonists into antagonists while maintaining affinity toward hA<sub>3</sub>AR. The final compounds of 2,8-disubstituted-<i>N</i><sup>6</sup>-substituted 4'-thionucleosides, or 4'-oxo, were synthesized from d-mannose and d-erythrono-1,4-lactone, respectively, using a Pd-catalyst-controlled regioselective cross-coupling reaction. All tested compounds completely antagonized hA<sub>2A</sub>AR, including <b>5d</b> with the highest affinity (<i>K</i><sub>i,A<sub>2A</sub></sub> = 7.7 \u00b1 0.5 nM). The hA<sub>2A</sub>AR-<b>5d</b> X-ray structure revealed that C8-heteroaromatic rings prevented receptor activation-associated conformational changes. However, the C8-substituted compounds still antagonized hA<sub>3</sub>AR. Structural SAR features and docking studies supported different binding modes at A<sub>2A</sub>AR and A<sub>3</sub>AR, elucidating pharmacophores for receptor activation and selectivity. Favorable pharmacokinetics were demonstrated, in which <b>5d</b> displayed high oral absorption, moderate half-life, and bioavailability. Also, <b>5d</b> significantly improved the antitumor effect of anti-PD-L1 <i>in vivo</i>. Overall, this study suggests that the novel dual A<sub>2A</sub>AR/A<sub>3</sub>AR nucleoside antagonists would be promising drug candidates for immune-oncology.",
+  "authors": "Kim G, Hou X, Byun WS, Kim G, Jarhad DB, Lee G, Hyun YE, Yu J, Lee CS, Qu S, Warnick E, Gao ZG, Kim JY, Ji S, Shin H, Choi JR, Jacobson KA, Lee HW, Lee SK, Jeong LS.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_35",
+    "creation_date": "2024-12-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL5365430",
+  "doi": "10.1021/acs.jmedchem.3c00806",
+  "doi_chembl": null,
+  "first_page": "12249",
+  "issue": "17",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "12265",
+  "patent_id": null,
+  "pubmed_id": 37603705,
+  "src_id": 1,
+  "title": "Structure-Activity Relationship of Truncated 2,8-Disubstituted-Adenosine Derivatives as Dual A<sub>2A</sub>/A<sub>3</sub> Adenosine Receptor Antagonists and Their Cancer Immunotherapeutic Activity.",
+  "volume": "66",
+  "year": 2023
+}

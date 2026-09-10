@@ -1,0 +1,24 @@
+{
+  "abstract": "",
+  "authors": "Rodriguez A, Guerrero A, Gutierrez-de-Teran H, Rodriguez D, Brea J, Loza MI, Rosell G, Pilar Bosch M",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_23",
+    "creation_date": "2017-05-01"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3739405",
+  "doi": "10.1039/C5MD00086F",
+  "doi_chembl": null,
+  "first_page": "1178",
+  "issue": "6",
+  "journal": "Medchemcomm",
+  "journal_full_title": null,
+  "last_page": "1185",
+  "patent_id": null,
+  "pubmed_id": null,
+  "src_id": 1,
+  "title": "New selective A2Aagonists and A3antagonists for human adenosine receptors: synthesis, biological activity and molecular docking studies",
+  "volume": "6",
+  "year": 2015
+}

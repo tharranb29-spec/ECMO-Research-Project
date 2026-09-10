@@ -1,0 +1,24 @@
+{
+  "abstract": "In this study, we describe the design and synthesis of new N5-substituted-2-(2-furanyl) thiazolo[5,4-d]pyrimidine-5,7-diamines (2-18) and their pharmacological characterization as A2A adenosine receptor (AR) antagonists by using in vitro and in vivo assays. In competition binding experiments two derivatives (13 and 14) emerged as outstanding ligands showing two different affinity values (KH and KL) for the hA2A receptor with the high affinity KH value in the femtomolar range. The in vitro functional activity assays, performed by using cyclic AMP experiments, assessed that they behave as potent inverse agonists at the hA2A AR. Compounds 13 and 14 were evaluated for their antinociceptive activity in acute experimental models of pain showing an effect equal to or greater than that of morphine. Overall, these novel inverse agonists might represent potential drug candidates for an alternative approach to the management of pain.",
+  "authors": "Varano F, Catarzi D, Vincenzi F, Betti M, Falsini M, Ravani A, Borea PA, Colotta V, Varani K.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_24",
+    "creation_date": "2018-04-23"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL3877301",
+  "doi": "10.1021/acs.jmedchem.6b01068",
+  "doi_chembl": null,
+  "first_page": "10564",
+  "issue": "23",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "10576",
+  "patent_id": null,
+  "pubmed_id": 27933962,
+  "src_id": 1,
+  "title": "Design, Synthesis, and Pharmacological Characterization of 2-(2-Furanyl)thiazolo[5,4-d]pyrimidine-5,7-diamine Derivatives: New Highly Potent A2A Adenosine Receptor Inverse Agonists with Antinociceptive Activity.",
+  "volume": "59",
+  "year": 2016
+}

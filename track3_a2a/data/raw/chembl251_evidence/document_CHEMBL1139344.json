@@ -1,0 +1,24 @@
+{
+  "abstract": "Antagonism of the human A(2A) receptor has been implicated as a point of therapeutic intervention in the alleviation of the symptoms associated with Parkinson's disease. This is thought to occur, at least in part, by increasing the sensitivity of the dopaminergic neurons to the residual, depleted levels of striatal dopamine. We herein describe a novel series of functionalized triazolo[4,5-d]pyrimidine derivatives that display functional antagonism of the A(2A) receptor. Optimization of these compounds has resulted in improvements in potency, selectivity, and the pharmacokinetic properties of key derivatives. These efforts have led to the discovery of 60 (V2006/BIIB014), which demonstrates strong oral activity in commonly used models of Parkinson's disease. Furthermore, this derivative has shown excellent preclinical pharmacokinetics and has successfully completed phase I clinical studies. This compound is presently undergoing further clinical evaluation in collaboration with Biogen Idec.",
+  "authors": "Gillespie RJ, Bamford SJ, Botting R, Comer M, Denny S, Gaur S, Griffin M, Jordan AM, Knight AR, Lerpiniere J, Leonardi S, Lightowler S, McAteer S, Merrett A, Misra A, Padfield A, Reece M, Saadi M, Selwood DL, Stratton GC, Surry D, Todd R, Tong X, Ruston V, Upton R, Weiss SM.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_2",
+    "creation_date": "2009-11-30"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1139344",
+  "doi": "10.1021/jm800961g",
+  "doi_chembl": null,
+  "first_page": "33",
+  "issue": "1",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "47",
+  "patent_id": null,
+  "pubmed_id": 19072055,
+  "src_id": 1,
+  "title": "Antagonists of the human A(2A) adenosine receptor. 4. Design, synthesis, and preclinical evaluation of 7-aryltriazolo[4,5-d]pyrimidines.",
+  "volume": "52",
+  "year": 2009
+}

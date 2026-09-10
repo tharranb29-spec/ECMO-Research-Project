@@ -1,0 +1,24 @@
+{
+  "abstract": "The recent progress in crystallography of G-protein coupled receptors opens an unprecedented venue for structure-based GPCR drug discovery. To test efficiency of the structure-based approach, we performed molecular docking and virtual ligand screening (VLS) of more than 4 million commercially available \"drug-like\" and ''lead-like'' compounds against the A(2A)AR 2.6 A resolution crystal structure. Out of 56 high ranking compounds tested in A(2A)AR binding assays, 23 showed affinities under 10 microM, 11 of those had sub-microM affinities and two compounds had affinities under 60 nM. The identified hits represent at least 9 different chemical scaffolds and are characterized by very high ligand efficiency (0.3-0.5 kcal/mol per heavy atom). Significant A(2A)AR antagonist activities were confirmed for 10 out of 13 ligands tested in functional assays. High success rate, novelty, and diversity of the chemical scaffolds and strong ligand efficiency of the A(2A)AR antagonists identified in this study suggest practical applicability of receptor-based VLS in GPCR drug discovery.",
+  "authors": "Katritch V, Jaakola VP, Lane JR, Lin J, Ijzerman AP, Yeager M, Kufareva I, Stevens RC, Abagyan R.",
+  "chembl_release": {
+    "chembl_release": "CHEMBL_5",
+    "creation_date": "2010-06-24"
+  },
+  "contact": null,
+  "doc_type": "PUBLICATION",
+  "document_chembl_id": "CHEMBL1156885",
+  "doi": "10.1021/jm901647p",
+  "doi_chembl": null,
+  "first_page": "1799",
+  "issue": "4",
+  "journal": "J Med Chem",
+  "journal_full_title": "Journal of medicinal chemistry.",
+  "last_page": "1809",
+  "patent_id": null,
+  "pubmed_id": 20095623,
+  "src_id": 1,
+  "title": "Structure-based discovery of novel chemotypes for adenosine A(2A) receptor antagonists.",
+  "volume": "53",
+  "year": 2010
+}
