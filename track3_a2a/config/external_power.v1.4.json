@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-external-power-v1.4",
+  "status": "frozen_before_external_candidate_admission",
+  "historical_feature_matrix": "outputs/v1.3/docking_clean_computational.csv",
+  "chemistry_descriptors": [
+    "molecular_weight",
+    "clogp",
+    "h_bond_donors",
+    "h_bond_acceptors",
+    "rotatable_bonds",
+    "tpsa",
+    "heavy_atom_count",
+    "qed"
+  ],
+  "chemistry_pca_components": 3,
+  "signals": ["m_cnnaffinity_pk", "d_cnnaffinity_pk"],
+  "positive_class_fraction": 0.5,
+  "sampling_design": "approximately class-balanced evidence-admitted external cohort",
+  "standardized_d_pk_effect_scenarios": [0.5, 0.75, 1.0],
+  "planning_effect": 0.75,
+  "planning_effect_rationale": "A deliberately shrunken alternative relative to the accessed v1.3.1 holdout estimate of 1.0477; 0.50 and 1.00 are retained as sensitivity scenarios.",
+  "sample_sizes": [120, 160, 200, 240, 280, 300, 320, 360, 450, 600],
+  "simulations_per_scenario": 2000,
+  "alpha_one_sided": 0.05,
+  "target_power": 0.8,
+  "minimum_expected_per_class": 60,
+  "random_seed": 20260911,
+  "planning_test": "one-sided Wald test from the same standardized five-predictor logistic model; the final external endpoint remains the predeclared parametric bootstrap",
+  "failure_policy": "Nonconvergence, singular information, or a simulated single-class sample counts as a failed rejection."
+}

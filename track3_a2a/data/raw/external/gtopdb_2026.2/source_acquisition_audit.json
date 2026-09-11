@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:32:13.121266+00:00",
+  "source_snapshot_id": "gtopdb-2026.2-target19-b0de701b8ebea1f4",
+  "sealed_interaction_snapshot_sha256": "91a807b3de49013ca39a97f68a33c1ac157ab1c19934306e640d1a52d2a71d4b",
+  "sealed_interaction_count": 97,
+  "unique_human_a2a_ligand_count": 96,
+  "retrieved_structure_count": 96,
+  "candidate_with_smiles_count": 96,
+  "retrieval_errors": [],
+  "labels_in_structure_snapshot": false,
+  "labels_in_candidate_csv": false,
+  "structure_snapshot_sha256": "b0de701b8ebea1f4dc1c5773bcb13aa844c6f2e903be2ed576f2455c06c629e7",
+  "candidate_csv_sha256": "c6b619d41d6c68a89fc542ea159e7bfb367915e6d92191da220ab836526f2574",
+  "next_gate": "run screen_external_candidates_v14.py before any evidence labels are joined"
+}

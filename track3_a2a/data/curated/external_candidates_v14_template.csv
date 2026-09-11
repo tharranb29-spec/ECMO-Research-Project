@@ -1,0 +1,1 @@
+record_id,molecule_name,external_identifier,canonical_smiles,source_cohort,source_type,source_id,source_url,source_snapshot_id,source_published_at,source_retrieved_at,prior_project_visibility,source_independence_basis,priority_category,evidence_status,ingested_at

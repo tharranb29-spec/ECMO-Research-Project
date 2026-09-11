@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "registry_id": "a2a-external-sources-v1.4",
+  "status": "source_strategy_frozen_before_first_candidate_snapshot",
+  "historical_visibility_cutoff_utc": "2026-09-10T13:08:35.650328+00:00",
+  "sources": [
+    {
+      "source_id": "gtopdb-2026.2-adora2a",
+      "name": "IUPHAR/BPS Guide to PHARMACOLOGY",
+      "release": "2026.2",
+      "release_date": "2026-06-15",
+      "target_id": "19",
+      "target": "human A2A receptor",
+      "official_download_url": "https://www.guidetopharmacology.org/download.jsp",
+      "official_api_documentation": "https://www.guidetopharmacology.org/webServices.jsp",
+      "planned_role": "primary independent curated discovery source",
+      "admission_boundary": "Interactions provide candidate action annotations only; every final label still requires a qualifying human functional assay and traceable primary publication.",
+      "known_scale": "The official human A2A pharmacology search reports 96 ligands before structure/scaffold/evidence exclusions."
+    },
+    {
+      "source_id": "pubchem-bioassay-adora2a-non-chembl",
+      "name": "NCBI PubChem BioAssay",
+      "target_accession": "P29274",
+      "official_target_url": "https://pubchem.ncbi.nlm.nih.gov/protein/P29274",
+      "planned_role": "supplemental direct functional-assay discovery source",
+      "admission_boundary": "Exclude ChEMBL-mirrored assays, patents without a traceable qualifying primary publication, binding-only assays, and records lacking explicit agonist or antagonist direction."
+    },
+    {
+      "source_id": "prospective-project-functional-assays",
+      "name": "Versioned project wet-lab results",
+      "planned_role": "highest-independence prospective source",
+      "admission_boundary": "Assay protocol, plate-level quality control, blinded molecule identifiers, and signed human adjudication must be frozen before labels are joined."
+    }
+  ],
+  "explicitly_nonexternal_sources": [
+    {
+      "source_id": "chembl251-functional-review-packet-2026-09-04",
+      "reason": "Visible to the project before v1.3 model and holdout analysis; permitted only for a retrospective external-like stress test."
+    },
+    {
+      "source_id": "v1.3-locked-holdout",
+      "reason": "Already accessed once and reported; immutable historical evidence."
+    }
+  ],
+  "multi_source_rule": "No source is assumed to meet the 280-record target alone. Merge only after per-source snapshots, licenses, identifiers, evidence provenance, exact structures, and generic Murcko scaffolds are audited.",
+  "label_masking_rule": "Discovery and structure screening operate on candidate files without functional_class, primary_binary_label, assay_readout, or evidence_rationale columns."
+}

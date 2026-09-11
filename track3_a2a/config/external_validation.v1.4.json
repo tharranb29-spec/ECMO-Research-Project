@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-external-validation-v1.4",
+  "status": "frozen_foundation_before_external_cohort_ingestion",
+  "effective_date": "2026-09-11",
+  "preservation_rule": "All v1.2, v1.3, and v1.3.1 inputs, outputs, partitions, predictions, and reports remain immutable historical artifacts. The 40-record v1.3.1 holdout must never be rerun or relabeled as external validation.",
+  "scientific_questions": {
+    "primary": "Does the positive conformation-associated CNNaffinity difference, d_pk, reproduce in a genuinely external human A2A functional cohort?",
+    "secondary": "Does chemistry plus dual-state docking improve external agonist-versus-antagonist discrimination beyond chemistry alone?",
+    "prospective": "Can the frozen system prioritize diverse, experimentally actionable A2A candidates without treating predictions as functional labels?"
+  },
+  "existing_evidence_boundary": {
+    "historical_training_and_evaluation_records": 203,
+    "historical_development_records": 163,
+    "historical_holdout_records": 40,
+    "historical_holdout_accessed": true,
+    "historical_holdout_primary_p_value": 0.08189181081891811,
+    "historical_holdout_gate_passed": false,
+    "use_for_external_evaluation": false
+  },
+  "external_cohort": {
+    "target": "human ADORA2A",
+    "endpoint": "direct functional agonist versus antagonist",
+    "required_independence": [
+      "no exact InChIKey overlap with any v1.3 record",
+      "no standardized-structure overlap with any v1.3 record",
+      "no generic Murcko scaffold overlap with any v1.3 record",
+      "no use in prior feature selection, threshold selection, model selection, or presentation-driven hypothesis selection"
+    ],
+    "priority_chemotypes": [
+      "adenosine-scaffold antagonists",
+      "non-adenosine agonists",
+      "same-scaffold agonist-antagonist switches",
+      "chemistry-baseline and docking-model disagreement cases",
+      "molecules near the current applicability-domain boundary"
+    ],
+    "class_balance": {
+      "target_minority_class_count": 60,
+      "descriptive_only_below_minority_class_count": 40,
+      "final_sample_size_rule": "Run a simulation-based power analysis before admitting or unmasking external labels; preserve the simulation code, assumptions, and result hash."
+    },
+    "source_freeze": {
+      "historical_visibility_cutoff_utc": "2026-09-10T13:08:35.650328+00:00",
+      "candidate_snapshot_must_be_retrieved_after_cutoff": true,
+      "prior_project_visibility_must_be_false": true,
+      "source_snapshot_id_required": true,
+      "note": "Publication before the cutoff is allowed only when the molecule and functional label were not present in any project source pool, review packet, model input, analysis, or presentation before the cutoff."
+    },
+    "prefreeze_pool_policy": "The unused September 4 ChEMBL review pool is eligible only for a clearly labeled retrospective stress test. It is not the definitive external cohort, even when exact structures and scaffolds are disjoint from v1.3.",
+    "label_blinding": "External labels are stored separately from structures and predictions until every model artifact, feature rule, and analysis script is frozen and hashed."
+  },
+  "power_analysis": {
+    "configuration": "config/external_power.v1.4.json",
+    "runner": "plan_external_power_v14.py",
+    "output": "outputs/v1.4/external_power_analysis.json",
+    "selection_rule": "Use the smallest tested sample size with estimated one-sided power at least 0.80 under the planning effect and at least 60 expected records in each class."
+  },
+  "evidence_admission": {
+    "specification": "a2a-computational-curation-v1.3",
+    "required": [
+      "explicit human A2A functional readout",
+      "explicit agonist or antagonist direction",
+      "Homo sapiens assay context",
+      "CHEMBL251 or verified ADORA2A target mapping",
+      "target confidence at least 8 when ChEMBL confidence is available",
+      "traceable primary publication with DOI or PubMed identifier"
+    ],
+    "llm_role": "extract candidate evidence passages and flag ambiguity only",
+    "llm_confidence_can_admit_label": false,
+    "auc_can_admit_or_reject_label": false,
+    "same_scaffold_disagreement_action": "quarantine_for_conflict_analysis",
+    "human_validation_claimed_by_default": false
+  },
+  "docking": {
+    "inactive_receptor": "5NM4",
+    "active_like_receptor": "2YDO",
+    "gnina_image": "gnina/gnina:v1.3.3",
+    "exhaustiveness": 8,
+    "production_seeds": [42, 43, 44],
+    "num_modes": 1,
+    "aggregation": "median of valid seeds",
+    "minimum_valid_seeds_per_receptor": 2,
+    "zero_or_missing_score": "failed run",
+    "cnnscore_threshold": 0.3,
+    "cnnscore_behavior": "soft flag only; report by class and receptor",
+    "best_of_seed": "prohibited",
+    "4EIY_policy": "retain the completed failed sensitivity result; do not launch production docking without a new prospectively justified protocol"
+  },
+  "frozen_predictive_models": {
+    "training_population": "all 203 evidence-admitted and docked v1.3 records after the historical holdout evaluation is archived",
+    "external_labels_in_training": false,
+    "AB_reference": "ECFP4 plus physicochemical descriptors",
+    "E_candidate": "AB plus orthogonal dual-state GNINA and CNN features",
+    "fit_rule": "Fit preprocessing and estimators once on the frozen historical population, then hash model artifacts before external labels are unmasked."
+  },
+  "primary_external_endpoint": {
+    "parameter": "standardized coefficient of d_pk in the external cohort",
+    "formula": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk + d_pk",
+    "direction": "positive",
+    "test": "one-sided reduced-logistic-model parametric bootstrap",
+    "null_model": "agonist ~ chemistry_PC1 + chemistry_PC2 + chemistry_PC3 + m_pk",
+    "resamples": 10000,
+    "alpha": 0.05,
+    "success": "observed d_pk coefficient is positive and the one-sided parametric-bootstrap p-value is at most 0.05",
+    "separation_rule": "If the declared estimator does not converge or separation makes the coefficient uninterpretable, mark the primary endpoint unevaluable; do not switch estimators after unmasking."
+  },
+  "secondary_external_endpoint": {
+    "metric": "ROC AUC",
+    "comparison": "AUC(E) - AUC(AB)",
+    "uncertainty": "paired molecule-level bootstrap with 2000 resamples",
+    "minimum_delta_auc": 0.02,
+    "success": "point estimate is at least 0.02 and the paired 95% confidence interval lower bound is greater than 0"
+  },
+  "mandatory_reporting": [
+    "ROC AUC",
+    "PR AUC",
+    "balanced accuracy",
+    "MCC",
+    "sensitivity",
+    "specificity",
+    "Brier score",
+    "calibration",
+    "applicability-domain distance",
+    "pose-quality flag rates by class and receptor",
+    "d_pk and d_cnnscore correlation"
+  ],
+  "promotion": {
+    "mode": "shadow_candidate_only",
+    "automatic_served_model_replacement": false,
+    "requirements": [
+      "external cohort independence checks pass",
+      "all model and analysis hashes verify",
+      "primary endpoint is evaluable and passes",
+      "secondary predictive-improvement gate passes",
+      "no unresolved critical data-provenance audit finding",
+      "named human release approval"
+    ],
+    "failure_action": "Archive the complete result and keep the current dashboard model state unchanged."
+  }
+}

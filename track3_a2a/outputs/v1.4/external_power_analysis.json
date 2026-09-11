@@ -1,0 +1,394 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:24:25.103833+00:00",
+  "specification_id": "a2a-external-power-v1.4",
+  "analysis_status": "frozen_sample_size_result",
+  "source_hashes": {
+    "power_config": "e316546198b25107f554780aef3a20b7f1100fe1112025fd1f7c34387c3d3488",
+    "historical_feature_matrix": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+    "power_runner": "f5cebb800b8c335aa967a45805fa9c2f15da985d215dd575a58ddb60b3e8f6f6"
+  },
+  "design_metadata": {
+    "historical_row_count": 203,
+    "historical_positive_fraction": 0.3103448275862069,
+    "chemistry_pca_variance_explained": 0.945707564152646,
+    "standardized_nuisance_coefficients": [
+      1.9001925538255664,
+      -1.1938539584880798,
+      -1.9270556223534971,
+      -1.3406085303609585
+    ]
+  },
+  "simulation_scenarios": {
+    "beta_0.50": [
+      {
+        "sample_size": 120,
+        "expected_positive_count": 59.866,
+        "expected_negative_count": 60.134,
+        "successful_rejections": 611,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.3055,
+        "power_wilson_95_ci": {
+          "lower": 0.2857016368980114,
+          "upper": 0.32604409449439586
+        }
+      },
+      {
+        "sample_size": 160,
+        "expected_positive_count": 79.757,
+        "expected_negative_count": 80.243,
+        "successful_rejections": 771,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.3855,
+        "power_wilson_95_ci": {
+          "lower": 0.3644080722975489,
+          "upper": 0.4070309315298579
+        }
+      },
+      {
+        "sample_size": 200,
+        "expected_positive_count": 99.845,
+        "expected_negative_count": 100.155,
+        "successful_rejections": 892,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.446,
+        "power_wilson_95_ci": {
+          "lower": 0.42433927402485516,
+          "upper": 0.4678677670815201
+        }
+      },
+      {
+        "sample_size": 240,
+        "expected_positive_count": 120.087,
+        "expected_negative_count": 119.913,
+        "successful_rejections": 1027,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.5135,
+        "power_wilson_95_ci": {
+          "lower": 0.4915900364167016,
+          "upper": 0.5353582033067044
+        }
+      },
+      {
+        "sample_size": 280,
+        "expected_positive_count": 139.3305,
+        "expected_negative_count": 140.6695,
+        "successful_rejections": 1131,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.5655,
+        "power_wilson_95_ci": {
+          "lower": 0.5436706785393429,
+          "upper": 0.5870781882668129
+        }
+      },
+      {
+        "sample_size": 300,
+        "expected_positive_count": 149.7725,
+        "expected_negative_count": 150.2275,
+        "successful_rejections": 1176,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.588,
+        "power_wilson_95_ci": {
+          "lower": 0.5662803215340441,
+          "upper": 0.6093822781444554
+        }
+      },
+      {
+        "sample_size": 320,
+        "expected_positive_count": 160.1455,
+        "expected_negative_count": 159.8545,
+        "successful_rejections": 1239,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.6195,
+        "power_wilson_95_ci": {
+          "lower": 0.598012070294439,
+          "upper": 0.6405297554053416
+        }
+      },
+      {
+        "sample_size": 360,
+        "expected_positive_count": 180.01,
+        "expected_negative_count": 179.99,
+        "successful_rejections": 1306,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.653,
+        "power_wilson_95_ci": {
+          "lower": 0.631862707256606,
+          "upper": 0.6735506762753306
+        }
+      },
+      {
+        "sample_size": 450,
+        "expected_positive_count": 225.156,
+        "expected_negative_count": 224.844,
+        "successful_rejections": 1460,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.73,
+        "power_wilson_95_ci": {
+          "lower": 0.7101157144382858,
+          "upper": 0.7490024438123378
+        }
+      },
+      {
+        "sample_size": 600,
+        "expected_positive_count": 299.9985,
+        "expected_negative_count": 300.0015,
+        "successful_rejections": 1690,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.845,
+        "power_wilson_95_ci": {
+          "lower": 0.8284791517075799,
+          "upper": 0.8601980856683554
+        }
+      }
+    ],
+    "beta_0.75": [
+      {
+        "sample_size": 120,
+        "expected_positive_count": 59.9695,
+        "expected_negative_count": 60.0305,
+        "successful_rejections": 1000,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.5,
+        "power_wilson_95_ci": {
+          "lower": 0.4781079507511692,
+          "upper": 0.5218920492488308
+        }
+      },
+      {
+        "sample_size": 160,
+        "expected_positive_count": 80.193,
+        "expected_negative_count": 79.807,
+        "successful_rejections": 1217,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.6085,
+        "power_wilson_95_ci": {
+          "lower": 0.5869205913312101,
+          "upper": 0.6296634094087581
+        }
+      },
+      {
+        "sample_size": 200,
+        "expected_positive_count": 100.138,
+        "expected_negative_count": 99.862,
+        "successful_rejections": 1418,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.709,
+        "power_wilson_95_ci": {
+          "lower": 0.6887075345662707,
+          "upper": 0.7284911396701655
+        }
+      },
+      {
+        "sample_size": 240,
+        "expected_positive_count": 119.9005,
+        "expected_negative_count": 120.0995,
+        "successful_rejections": 1555,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.7775,
+        "power_wilson_95_ci": {
+          "lower": 0.7587493421088081,
+          "upper": 0.7951866966500964
+        }
+      },
+      {
+        "sample_size": 280,
+        "expected_positive_count": 139.767,
+        "expected_negative_count": 140.233,
+        "successful_rejections": 1681,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.8405,
+        "power_wilson_95_ci": {
+          "lower": 0.8238027769511458,
+          "upper": 0.855891713850321
+        }
+      },
+      {
+        "sample_size": 300,
+        "expected_positive_count": 149.915,
+        "expected_negative_count": 150.085,
+        "successful_rejections": 1707,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.8535,
+        "power_wilson_95_ci": {
+          "lower": 0.8373251458577445,
+          "upper": 0.8683195017144097
+        }
+      },
+      {
+        "sample_size": 320,
+        "expected_positive_count": 160.059,
+        "expected_negative_count": 159.941,
+        "successful_rejections": 1745,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.8725,
+        "power_wilson_95_ci": {
+          "lower": 0.8571650426124494,
+          "upper": 0.8864067571630171
+        }
+      },
+      {
+        "sample_size": 360,
+        "expected_positive_count": 179.946,
+        "expected_negative_count": 180.054,
+        "successful_rejections": 1808,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.904,
+        "power_wilson_95_ci": {
+          "lower": 0.8903038697549172,
+          "upper": 0.9161471560418305
+        }
+      },
+      {
+        "sample_size": 450,
+        "expected_positive_count": 224.8375,
+        "expected_negative_count": 225.1625,
+        "successful_rejections": 1900,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.95,
+        "power_wilson_95_ci": {
+          "lower": 0.9395558910656041,
+          "upper": 0.9587187663812682
+        }
+      },
+      {
+        "sample_size": 600,
+        "expected_positive_count": 300.0915,
+        "expected_negative_count": 299.9085,
+        "successful_rejections": 1973,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9865,
+        "power_wilson_95_ci": {
+          "lower": 0.9804292069930002,
+          "upper": 0.9907055060023408
+        }
+      }
+    ],
+    "beta_1.00": [
+      {
+        "sample_size": 120,
+        "expected_positive_count": 59.8555,
+        "expected_negative_count": 60.1445,
+        "successful_rejections": 1309,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.6545,
+        "power_wilson_95_ci": {
+          "lower": 0.6333810126543552,
+          "upper": 0.6750266197357376
+        }
+      },
+      {
+        "sample_size": 160,
+        "expected_positive_count": 79.5995,
+        "expected_negative_count": 80.4005,
+        "successful_rejections": 1578,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.789,
+        "power_wilson_95_ci": {
+          "lower": 0.7705726675452257,
+          "upper": 0.80631927912621
+        }
+      },
+      {
+        "sample_size": 200,
+        "expected_positive_count": 100.314,
+        "expected_negative_count": 99.686,
+        "successful_rejections": 1718,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.859,
+        "power_wilson_95_ci": {
+          "lower": 0.8430584362486597,
+          "upper": 0.8735651238034006
+        }
+      },
+      {
+        "sample_size": 240,
+        "expected_positive_count": 119.9365,
+        "expected_negative_count": 120.0635,
+        "successful_rejections": 1841,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9205,
+        "power_wilson_95_ci": {
+          "lower": 0.9078221139475915,
+          "upper": 0.9315656492888746
+        }
+      },
+      {
+        "sample_size": 280,
+        "expected_positive_count": 140.027,
+        "expected_negative_count": 139.973,
+        "successful_rejections": 1889,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9445,
+        "power_wilson_95_ci": {
+          "lower": 0.9335871935538151,
+          "upper": 0.9537085514131509
+        }
+      },
+      {
+        "sample_size": 300,
+        "expected_positive_count": 150.178,
+        "expected_negative_count": 149.822,
+        "successful_rejections": 1923,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9615,
+        "power_wilson_95_ci": {
+          "lower": 0.9521448929760082,
+          "upper": 0.9690856723833953
+        }
+      },
+      {
+        "sample_size": 320,
+        "expected_positive_count": 160.014,
+        "expected_negative_count": 159.986,
+        "successful_rejections": 1947,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9735,
+        "power_wilson_95_ci": {
+          "lower": 0.9655014766396225,
+          "upper": 0.979683079585031
+        }
+      },
+      {
+        "sample_size": 360,
+        "expected_positive_count": 180.0415,
+        "expected_negative_count": 179.9585,
+        "successful_rejections": 1953,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9765,
+        "power_wilson_95_ci": {
+          "lower": 0.9688912783026569,
+          "upper": 0.9822817756383091
+        }
+      },
+      {
+        "sample_size": 450,
+        "expected_positive_count": 225.198,
+        "expected_negative_count": 224.802,
+        "successful_rejections": 1990,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.995,
+        "power_wilson_95_ci": {
+          "lower": 0.990820304050058,
+          "upper": 0.9972818191415014
+        }
+      },
+      {
+        "sample_size": 600,
+        "expected_positive_count": 300.3175,
+        "expected_negative_count": 299.6825,
+        "successful_rejections": 1999,
+        "fit_failures_counted_as_non_rejections": 0,
+        "estimated_power": 0.9995,
+        "power_wilson_95_ci": {
+          "lower": 0.9971731374967338,
+          "upper": 0.9999117322692944
+        }
+      }
+    ]
+  },
+  "selected_total_sample_size": 280,
+  "selected_expected_per_class": 140.0,
+  "selection_rule_satisfied": true,
+  "interpretation": "This simulation plans collection; it does not test the external endpoint. Labels remain masked until the later one-time evaluation."
+}

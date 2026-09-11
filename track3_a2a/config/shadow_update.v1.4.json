@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-shadow-update-v1.4",
+  "status": "foundation_ready_not_running",
+  "mode": "shadow_only",
+  "served_track3_model": null,
+  "candidate_model": "a2a-external-validation-v1.4",
+  "cycle": [
+    "ingest_new_sources_additively",
+    "deduplicate_and_check_historical_overlap",
+    "extract_candidate_evidence",
+    "apply_deterministic_evidence_gate",
+    "keep_unverified_records_in_quarantine",
+    "prepare_and_dock_eligible_structures",
+    "score_with_frozen_models",
+    "write_candidate_metrics_and_predictions",
+    "evaluate_promotion_gate_when_an_external_labeled_cohort_is_available",
+    "require_named_release_approval"
+  ],
+  "llm_permissions": {
+    "discover_literature": true,
+    "extract_candidate_passages": true,
+    "propose_novel_molecules": true,
+    "assign_training_labels": false,
+    "remove_quarantine": false,
+    "change_frozen_thresholds": false,
+    "promote_model": false,
+    "publish_candidates_as_validated_hits": false
+  },
+  "classifier_permissions": {
+    "score_unlabeled_candidates": true,
+    "write_shadow_predictions": true,
+    "use_predictions_as_evidence_labels": false,
+    "self_retrain_on_predictions": false
+  },
+  "data_rules": {
+    "library_updates_are_additive": true,
+    "deletions_require_versioned_tombstones": true,
+    "label_and_model_promotion_gates_are_separate": true,
+    "same_scaffold_conflicts_are_quarantined": true,
+    "external_or_wet_lab_labels_required_for_new_training_truth": true
+  },
+  "ui_contract": {
+    "show_mode": true,
+    "show_served_and_candidate_versions": true,
+    "show_last_successful_cycle": true,
+    "show_quarantine_count": true,
+    "show_external_gate_status": true,
+    "show_human_release_status": true,
+    "prediction_label": "computationally prioritized",
+    "prohibited_label": "validated hit"
+  },
+  "promotion": {
+    "comparison_target": "best previously accepted external performance",
+    "cross_validation_alone_is_sufficient": false,
+    "external_gate_required": true,
+    "human_release_required": true,
+    "on_failure": "retain the new records and reports but do not change the served model"
+  }
+}

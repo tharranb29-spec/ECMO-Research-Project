@@ -82,6 +82,33 @@ The one-time confirmatory gate was frozen and executed with:
 The gate did not pass (`d_pk = +1.048`, one-sided permutation `p = 0.0819`).
 Do not delete or overwrite the resulting holdout report to obtain another run.
 
+## Version 1.4 external validation and shadow automation
+
+Version 1.4 starts a new external-validation cycle without modifying or rerunning
+the v1.3.1 holdout. The Track 3 dashboard remains in shadow mode: an LLM may
+discover literature, extract candidate passages, and propose molecules, while
+the supervised classifier may score unlabeled candidates. Neither may create
+training labels or promote a served model.
+
+The foundation is defined in:
+
+- `config/external_validation.v1.4.json`
+- `config/external_power.v1.4.json`
+- `config/external_sources.v1.4.json`
+- `config/shadow_update.v1.4.json`
+- `EXTERNAL_VALIDATION_AND_SHADOW_UPDATE_PLAN_V14.md`
+- `STEP_04_EXTERNAL_COHORT_STATUS_V14.md`
+
+The frozen power analysis selects an approximately class-balanced external
+cohort of 280 evidence-admitted molecules. The pre-freeze pool audit found 202
+chemically disjoint retrospective stress-test candidates, but zero records that
+can honestly be claimed as definitive external validation because that source
+pool was already visible before v1.3 was evaluated.
+
+No Track 3 autonomous model is currently promoted. Promotion requires a new,
+independent external cohort, successful predeclared external gates, clean data
+provenance, and named human release approval.
+
 ## Reproduce the current data stage
 
 Create the isolated chemistry environment once:
