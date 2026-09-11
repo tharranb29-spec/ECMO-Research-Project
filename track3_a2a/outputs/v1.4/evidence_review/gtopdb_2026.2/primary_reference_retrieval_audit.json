@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:46:40.489018+00:00",
+  "source": "NCBI PubMed E-utilities",
+  "source_url": "https://www.ncbi.nlm.nih.gov/books/NBK25501/",
+  "queue_sha256": "1d6b327e9f8263dcae6e73754e7b10e68c5f3cdd1b24e8b6619b9941ca670d5d",
+  "requested_pmid_count": 26,
+  "retrieved_article_count": 26,
+  "missing_pmids": [],
+  "articles_with_abstract_count": 26,
+  "articles_with_doi_count": 25,
+  "articles_with_pmcid_count": 10,
+  "sealed_primary_evidence_sha256": "0436a8bbc1bb1dd8d077637e3e353585a49b7a6a51216728a85bc42c43d918a1",
+  "labels_written_to_repository": false,
+  "next_gate": "triage the retrieved primary text for explicit human A2A functional evidence and obtain full text where abstracts are insufficient"
+}

@@ -1,0 +1,43 @@
+record_id,molecule_name,pmids,pmcids,abstract_triage_status
+GTPDB-392,MRS1041,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-393,MRS1042,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-395,MRS1065,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-396,MRS1066,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-397,MRS1084,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-398,MRS1086,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-399,MRS1093,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-400,MRS1132,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-401,MRS923,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-402,MRS928,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-409,flavone,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-410,galangin,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-411,morin,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-412,sakuranetin,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-419,CV-1674,9920286,,possible_functional_context_needs_candidate_linkage
+GTPDB-420,CV-1808,9179373;9920286,PMC1564691,high_priority_full_text_review
+GTPDB-428,KF 17837S,9179373,PMC1564691,possible_functional_context_needs_candidate_linkage
+GTPDB-429,MRS1088,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-433,visnagin,8691424,PMC10792445,possible_functional_context_needs_candidate_linkage
+GTPDB-455,[<sup>3</sup>H]ZM 241385,10927024;11164377,PMC5567773,possible_functional_context_needs_candidate_linkage
+GTPDB-459,MRE 3008F20,10779381;16219300;16518376,PMC3463109,high_priority_full_text_review
+GTPDB-470,MRS1191,,,no_primary_pubmed_record
+GTPDB-474,MRS1523,,,no_primary_pubmed_record
+GTPDB-3281,derenofylline,17558436,PMC2042943,abstract_insufficient
+GTPDB-3285,PSB36,16902942,,abstract_insufficient
+GTPDB-3289,BAY 60-6583,17632123,PMC2729547,abstract_insufficient
+GTPDB-4252,mefloquine,14663021,,abstract_insufficient
+GTPDB-5590,TCPA,12672250,,high_priority_full_text_review
+GTPDB-5593,GS9667,19012505,,abstract_insufficient
+GTPDB-5601,MRS3558,16518376,PMC3463109,abstract_insufficient
+GTPDB-5604,rolofylline,14532289;17125264,,abstract_insufficient
+GTPDB-5606,FK-453,16518376,PMC3463109,abstract_insufficient
+GTPDB-5607,LUF5981,17300165,,abstract_insufficient
+GTPDB-5610,MSX-2,10669571,,abstract_insufficient
+GTPDB-5615,CVT-6883,18321039,,abstract_insufficient
+GTPDB-5616,ATL802,10737749,PMC9364909,possible_functional_context_needs_candidate_linkage
+GTPDB-5617,LAS38096,17469811;20137946,,abstract_insufficient
+GTPDB-5618,KF26777,12063073,,high_priority_full_text_review
+GTPDB-5619,PSB-10,12517430,PMC8376400,abstract_insufficient
+GTPDB-5620,PSB-11,12517430,PMC8376400,abstract_insufficient
+GTPDB-5622,MRS5151,18424135,PMC2430186,abstract_insufficient
+GTPDB-10351,LUF7602,30869893,PMC6466477,abstract_insufficient

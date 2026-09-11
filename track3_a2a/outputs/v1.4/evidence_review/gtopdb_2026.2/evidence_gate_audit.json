@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:43:11.215908+00:00",
+  "specification_id": "a2a-gtopdb-evidence-review-v1.4",
+  "source_hashes": {
+    "sealed_interaction_snapshot": "91a807b3de49013ca39a97f68a33c1ac157ab1c19934306e640d1a52d2a71d4b",
+    "eligible_candidates": "6689ebd755f044eed06dd4a8b4c7fd1a10072d978b4732ae3ada6180b1ae9154",
+    "evidence_runner": "47b9097b00a41daab4c76060a99c181b7b85783e0431b0f6c2b1a1834c9315af",
+    "sealed_evidence_packet": "954e2b0201e0eeac266fdc1c80affd390bd522accbf71c4afa17d2ba3f6ccd47",
+    "label_free_review_queue": "1d6b327e9f8263dcae6e73754e7b10e68c5f3cdd1b24e8b6619b9941ca670d5d"
+  },
+  "candidate_count": 42,
+  "decision_counts": {
+    "needs_primary_paper_review": 38,
+    "needs_traceable_primary_source": 2,
+    "reject_database_description_binding_only": 2
+  },
+  "automatically_evidence_admitted_count": 0,
+  "labels_written_to_repository": false,
+  "model_or_docking_artifacts_accessed": false,
+  "human_validation_claimed": false,
+  "next_gate": "retrieve and review the cited primary papers; database action annotations alone cannot admit labels"
+}

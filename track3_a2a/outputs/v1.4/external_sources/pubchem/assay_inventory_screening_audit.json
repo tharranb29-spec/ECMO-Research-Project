@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T12:05:07.648482+00:00",
+  "specification_id": "a2a-pubchem-assay-screen-v1.4",
+  "source_hashes": {
+    "sealed_inventory": "5c47c5a120cbc8f419150f3a66678cbd87c1315295c046e7159b91b9ae70b422",
+    "screening_runner": "fe41bc80efb730b353228dba6d02b19bb369e175f3caaa3555ee762c62a1804a",
+    "sealed_screening_packet": "66ea4222a538411eda88d574cbc9918c295a479807494f446ba33a92cc615203"
+  },
+  "total_assay_count": 1661,
+  "chembl_mirror_count": 1568,
+  "independent_source_assay_count": 93,
+  "single_direct_p29274_assay_count": 33,
+  "functional_readout_assay_count": 14,
+  "explicit_binary_direction_assay_count": 11,
+  "primary_publication_eligible_assay_count": 0,
+  "evidence_eligible_assay_count": 0,
+  "independent_source_exclusion_reason_counts": {
+    "no_explicit_binary_action_direction": 40,
+    "no_primary_publication_doi_or_pmid": 81,
+    "not_single_direct_p29274_target": 60,
+    "patent_only_evidence": 63,
+    "readout_binding_only": 54,
+    "readout_unresolved": 6
+  },
+  "labels_or_activity_rows_written_to_repository": false,
+  "next_gate": "do not use patent-only or ChEMBL-mirrored PubChem assays as external labels; continue to another independent primary-publication source"
+}

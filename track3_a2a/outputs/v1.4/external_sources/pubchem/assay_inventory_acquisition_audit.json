@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T12:02:49.382343+00:00",
+  "source": "NCBI PubChem PUG REST",
+  "official_documentation": "https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest-tutorial",
+  "target_accession": "P29274",
+  "requested_aid_count": 1661,
+  "retrieved_assay_summary_count": 1661,
+  "missing_aid_count": 0,
+  "source_name_counts": {
+    "BindingDB": 75,
+    "ChEMBL": 1568,
+    "IUPHAR-DB": 1,
+    "Vanderbilt Screening Center for GPCRs, Ion Channels and Transporters": 4,
+    "Vanderbilt Specialized Chemistry Center": 13
+  },
+  "sealed_inventory_sha256": "5c47c5a120cbc8f419150f3a66678cbd87c1315295c046e7159b91b9ae70b422",
+  "labels_or_activity_rows_written_to_repository": false,
+  "next_gate": "exclude ChEMBL mirrors and binding-only or non-A2A assays, then retrieve candidate structures from qualifying independent functional assays"
+}

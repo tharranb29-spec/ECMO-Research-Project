@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:52:27.827350+00:00",
+  "source": "Europe PMC with NCBI PMC EFetch fallback",
+  "source_urls": [
+    "https://europepmc.org/RestfulWebService",
+    "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
+  ],
+  "sealed_pubmed_snapshot_sha256": "0436a8bbc1bb1dd8d077637e3e353585a49b7a6a51216728a85bc42c43d918a1",
+  "requested_pmcid_count": 10,
+  "retrieved_fulltext_count": 1,
+  "failed_fulltext_count": 9,
+  "machine_readable_fulltext_unavailable_count": 9,
+  "failed_pmcids": [
+    "PMC2042943",
+    "PMC1564691",
+    "PMC10792445",
+    "PMC2729547",
+    "PMC2430186",
+    "PMC3463109",
+    "PMC5567773",
+    "PMC8376400",
+    "PMC9364909"
+  ],
+  "sealed_fulltext_snapshot_sha256": "3b3d4d8635a899e6172393e538833d13acf027f310fe812880c91db2db44650e",
+  "labels_written_to_repository": false,
+  "retrieval_interpretation": "A failed XML retrieval means machine-readable article-body XML was unavailable from both endpoints; it is not a scientific evidence rejection.",
+  "next_gate": "review candidate-linked passages; full-text availability does not by itself admit evidence"
+}

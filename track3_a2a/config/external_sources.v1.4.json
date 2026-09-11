@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "registry_id": "a2a-external-sources-v1.4",
-  "status": "source_strategy_frozen_before_first_candidate_snapshot",
+  "status": "source_strategy_frozen_and_first_two_database_sources_screened",
   "historical_visibility_cutoff_utc": "2026-09-10T13:08:35.650328+00:00",
   "sources": [
     {
@@ -23,7 +23,14 @@
       "target_accession": "P29274",
       "official_target_url": "https://pubchem.ncbi.nlm.nih.gov/protein/P29274",
       "planned_role": "supplemental direct functional-assay discovery source",
-      "admission_boundary": "Exclude ChEMBL-mirrored assays, patents without a traceable qualifying primary publication, binding-only assays, and records lacking explicit agonist or antagonist direction."
+      "admission_boundary": "Exclude ChEMBL-mirrored assays, patents without a traceable qualifying primary publication, binding-only assays, and records lacking explicit agonist or antagonist direction.",
+      "screening_result": "The complete 2026-09-11 P29274 assay inventory contained 1,661 assays: 1,568 ChEMBL mirrors and 93 independent-source records. None of the 93 passed every functional, direction, and primary-publication requirement."
+    },
+    {
+      "source_id": "independent-primary-literature-structure-extraction",
+      "name": "Post-freeze primary A2A functional literature",
+      "planned_role": "next supplemental candidate and evidence source",
+      "admission_boundary": "Require an extractable exact chemical structure, explicit candidate-linked human A2A functional agonist or antagonist evidence, a traceable primary paper, source-date eligibility, and exact-structure plus generic-scaffold disjointness from all pre-freeze project data."
     },
     {
       "source_id": "prospective-project-functional-assays",

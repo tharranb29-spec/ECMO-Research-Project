@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-11T11:53:45.999305+00:00",
+  "specification_id": "a2a-gtopdb-primary-evidence-triage-v1.4",
+  "source_hashes": {
+    "sealed_evidence_packet": "954e2b0201e0eeac266fdc1c80affd390bd522accbf71c4afa17d2ba3f6ccd47",
+    "sealed_pubmed_snapshot": "0436a8bbc1bb1dd8d077637e3e353585a49b7a6a51216728a85bc42c43d918a1",
+    "triage_runner": "5e47ca38379a6b1f8a5b8eccac9251531d70f3060b8caf8aefc7197ca6dc4cc2",
+    "sealed_triage_packet": "e1a2a9d54c0e3524ac7e098c679834b6b6793a997ef120ba474442e624bcf01f",
+    "label_free_full_text_queue": "b1c6261a9d100983813d91a6d72c95fdfd638d88f656b797810e0d9df3adf8ec"
+  },
+  "candidate_count": 42,
+  "candidate_status_counts": {
+    "abstract_insufficient": 16,
+    "high_priority_full_text_review": 4,
+    "no_primary_pubmed_record": 2,
+    "possible_functional_context_needs_candidate_linkage": 20
+  },
+  "article_assessment_counts": {
+    "abstract_insufficient": 21,
+    "high_priority_full_text_review": 4,
+    "possible_functional_context_needs_candidate_linkage": 21
+  },
+  "evidence_admitted_count": 0,
+  "labels_written_to_repository": false,
+  "human_validation_claimed": false,
+  "next_gate": "retrieve available full text and perform record-level dual evidence review; abstract triage cannot admit a label"
+}
