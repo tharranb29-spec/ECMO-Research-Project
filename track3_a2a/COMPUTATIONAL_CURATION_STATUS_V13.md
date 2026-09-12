@@ -41,8 +41,20 @@ as an unreported deletion rule.
 - `CHEMBL4064207`: primary source not established.
 - `CHEMBL4065326`: primary source not established.
 - `CHEMBL1258170`: target/organism context failed.
-- Eleven records with raw inverse-agonist evidence are listed in the versioned
-  computational audit and excluded from the binary endpoint.
+- Eleven records that triggered the conservative inverse-agonist quarantine are
+  listed in `data/curated/chembl251_inverse_agonist_exclusions_v1.3.csv`:
+  `CHEMBL113`, `CHEMBL113142`, `CHEMBL240624`, `CHEMBL273094`,
+  `CHEMBL3904408`, `CHEMBL4125975`, `CHEMBL4126427`, `CHEMBL4127213`,
+  `CHEMBL4159215`, `CHEMBL4167557`, and `CHEMBL431770`.
+- Seven have candidate-linked primary functional inverse-agonist evidence. Four
+  (`CHEMBL113`, `CHEMBL240624`, `CHEMBL273094`, and `CHEMBL431770`) are
+  conservatively quarantined because ChEMBL uses inverse-agonist wording for a
+  mutant-receptor SPR binding assay; they still require candidate-linked
+  functional confirmation.
+- Removing exactly these 11 historical antagonist labels reconstructs the
+  203-record matrix: 63 agonists and 140 antagonists, with 163 development and
+  40 locked-holdout records. The machine-checkable reconciliation is stored in
+  `outputs/v1.3/inverse_agonist_exclusion_audit_v1.3.json`.
 
 ## Confirmatory gate completed
 

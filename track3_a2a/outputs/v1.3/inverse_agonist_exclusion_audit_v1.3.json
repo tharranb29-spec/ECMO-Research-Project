@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T13:14:23Z",
+  "specification_id": "a2a-computational-curation-v1.3",
+  "purpose": "Reconcile the historical 214-molecule docking matrix with the corrected 203-molecule computational cohort.",
+  "source_hashes": {
+    "inverse_agonist_manifest": "38601c21ee75f7f9d8e289ada84abac586d05568fe35c026a32063b1950e55fc",
+    "historical_214_matrix": "4e7ca973af12ad6fecb86d9c4563d5070faa62be4c21565939ba37ad286eddb6",
+    "corrected_203_matrix": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+    "computational_curation_audit": "ea585972993a331d1f3bd44b5b0d2bd96027a3eb5d2c4605f1c3c07eb955b755"
+  },
+  "historical_docking_count": 214,
+  "corrected_docking_count": 203,
+  "removed_record_count": 11,
+  "removed_development_count": 8,
+  "removed_locked_holdout_count": 3,
+  "historical_class_counts": {
+    "agonist": 63,
+    "antagonist": 151
+  },
+  "corrected_class_counts": {
+    "agonist": 63,
+    "antagonist": 140
+  },
+  "removed_ids": [
+    "CHEMBL113",
+    "CHEMBL113142",
+    "CHEMBL240624",
+    "CHEMBL273094",
+    "CHEMBL3904408",
+    "CHEMBL4125975",
+    "CHEMBL4126427",
+    "CHEMBL4127213",
+    "CHEMBL4159215",
+    "CHEMBL4167557",
+    "CHEMBL431770"
+  ],
+  "set_reconciliation": "corrected_203_ids = historical_214_ids - removed_ids",
+  "set_reconciliation_passed": true,
+  "evidence_status_counts": {
+    "primary_functional_inverse_agonist_evidence": 7,
+    "binding_only_inverse_annotation_requires_review": 4
+  },
+  "interpretation": "All 11 records remain excluded from the frozen binary endpoint. Seven have candidate-linked primary functional inverse-agonist evidence. Four triggered the conservative quarantine through inverse-agonist wording in a mutant-receptor SPR binding assay and require separate functional evidence review before they can be described as confirmed inverse agonists.",
+  "human_validation_claimed": false,
+  "cohort_changed": false,
+  "next_gate": "Resolve the four binding-only annotations during v1.5 evidence review; do not retroactively alter the frozen v1.3.1 cohort or holdout result."
+}
