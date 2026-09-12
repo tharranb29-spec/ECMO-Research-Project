@@ -6,9 +6,10 @@ Step 4 is active. The dashboard redesign and presentation editing are outside
 this workstream and will resume after the scientific pipeline is complete.
 
 The v1.4 protocol foundation, sample-size analysis, historical-independence
-screen, label-free candidate intake, and the first two database-source evidence
-screens are now implemented. No candidate has yet passed the complete evidence
-and independence gate, so the external cohort is not assembled or frozen.
+screen, label-free candidate intake, the first two database-source evidence
+screens, and the first primary-literature structure pilot are now implemented.
+No candidate has yet passed the complete evidence and independence gate, so the
+external cohort is not assembled or frozen.
 
 ## Frozen power target
 
@@ -83,13 +84,27 @@ Most independent PubChem records were BindingDB patent deposits. Even where a
 cAMP assay existed, patent-only provenance did not satisfy the frozen primary-
 publication rule. Consequently **0 PubChem assays are evidence-admitted**.
 
+The first primary-literature pilot now registers two newly acquired papers and
+six exact structures from authoritative RCSB PDB, OPSIN, or PubChem records.
+Automated independence screening found:
+
+- structurally independent: **4**;
+- quarantined for historical generic-scaffold overlap: **2**;
+- deferred because absolute stereochemical configuration is unresolved: **2**;
+- evidence-admitted after dual review: **0**.
+
+The four eligible structures remain label-masked from modeling. Candidate-
+level functional evidence is stored only in the sealed evidence workspace.
+Any functional category not explicitly mapped by the frozen binary endpoint is
+quarantined instead of being silently recoded.
+
 Every source record must still pass the human A2A functional-evidence gate and
 link to a primary publication. Action annotations, database curation, binding
 assays, patents, and LLM summaries do not by themselves create labels.
 
 ## Next executable sequence
 
-1. Register post-freeze primary-literature sources with explicit human A2A
+1. Register newly acquired primary-literature sources with explicit human A2A
    functional assays, prioritizing recent studies with extractable structures
    and both agonist and antagonist or inactive counterexamples.
 2. Extract structures and evidence into the sealed evidence workspace; publish
@@ -132,6 +147,12 @@ assays, patents, and LLM summaries do not by themselves create labels.
   GtoPdb evidence audits
 - `outputs/v1.4/external_sources/pubchem/`: aggregate PubChem acquisition and
   screening audits
+- `data/raw/external/literature_pilot_2025/`: label-free source registry and
+  exact-structure candidate snapshot for the first two primary papers
+- `outputs/v1.4/external_cohort/literature_pilot_2025/`: automated independence
+  screening outputs
+- `outputs/v1.4/evidence_review/literature_pilot_2025/`: aggregate sealed-review
+  status without candidate labels
 
 All activity rows, candidate-level evidence proposals, abstracts, and full text
 remain outside the repository in the sealed evidence workspace.

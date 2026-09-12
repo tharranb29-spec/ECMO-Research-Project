@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T08:25:09.024191+00:00",
+  "specification_id": "a2a-external-validation-v1.4",
+  "candidate_snapshot": "track3_a2a/data/raw/external/literature_pilot_2025/external_candidates_literature_pilot_2025.csv",
+  "source_hashes": {
+    "candidate_snapshot": "1991f0059289a0fb5d594cf60ca854214efe233973de9d29faf8f5310464b18a",
+    "external_protocol": "ffea866a366b3ab41e2fd7a668fa4330edbf443d5d1ae18a50eb2b84df656908",
+    "historical_partitions": "c87a21b8569e92c0a17c49f5add32341803110fd4f37342444ffc60f68fdd0f8",
+    "prefreeze_review_packet": "0dfd133a0ecce7e5835d5bfe2ee5dae6ea5ad6d35d2617c6c1999b084d55a711",
+    "prefreeze_structure_pool": "ace1a1abc33ee83d97642df275035942044bcdb454cef951752e0863b15723f2",
+    "screening_runner": "192095f1c0241d6239e039e3c8afa0637157218a83678fb21270b096516c8ac1"
+  },
+  "input_count": 6,
+  "eligible_count": 4,
+  "quarantined_count": 2,
+  "quarantine_reason_counts": {
+    "historical_generic_murcko_scaffold_overlap": 2
+  },
+  "labels_loaded": false,
+  "external_cohort_frozen": false,
+  "next_gate": "independent evidence review, final power-target completion, candidate snapshot freeze, then docking with labels still masked"
+}

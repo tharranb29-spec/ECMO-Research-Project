@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "registry_id": "a2a-external-sources-v1.4",
-  "status": "source_strategy_frozen_and_first_two_database_sources_screened",
+  "status": "source_strategy_frozen_database_sources_screened_and_literature_pilot_active",
   "historical_visibility_cutoff_utc": "2026-09-10T13:08:35.650328+00:00",
   "sources": [
     {
@@ -28,9 +28,9 @@
     },
     {
       "source_id": "independent-primary-literature-structure-extraction",
-      "name": "Post-freeze primary A2A functional literature",
+      "name": "Newly acquired primary A2A functional literature",
       "planned_role": "next supplemental candidate and evidence source",
-      "admission_boundary": "Require an extractable exact chemical structure, explicit candidate-linked human A2A functional agonist or antagonist evidence, a traceable primary paper, source-date eligibility, and exact-structure plus generic-scaffold disjointness from all pre-freeze project data."
+      "admission_boundary": "Require an extractable exact chemical structure, explicit candidate-linked human A2A functional agonist or antagonist evidence, a traceable primary paper, source-visibility eligibility, and exact-structure plus generic-scaffold disjointness from all pre-freeze project data."
     },
     {
       "source_id": "prospective-project-functional-assays",

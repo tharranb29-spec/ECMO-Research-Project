@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "a2a-primary-literature-pilot-2026-09-11",
+  "created_at": "2026-09-11T12:38:05Z",
+  "purpose": "Label-free structure intake from newly acquired primary human A2A functional literature.",
+  "historical_visibility_basis": "The publications predate the project cutoff, but these candidate structures were not found in the pre-freeze Track 3 repository sources or artifacts. Automated exact-structure and generic-scaffold screening remains mandatory.",
+  "sources": [
+    {
+      "source_id": "PMID:40592852",
+      "title": "Identification of nanomolar adenosine A2A receptor ligands using reinforcement learning and structure-based drug design",
+      "doi": "10.1038/s41467-025-60629-0",
+      "pmid": "40592852",
+      "pmcid": "PMC12216625",
+      "published_at": "2025-07-01",
+      "primary_article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12216625/",
+      "structure_authority": "RCSB PDB Chemical Component Dictionary and OPSIN systematic-name resolver",
+      "structure_records": [
+        "https://data.rcsb.org/rest/v1/core/chemcomp/A1IR1",
+        "https://data.rcsb.org/rest/v1/core/chemcomp/A1IR0",
+        "https://opsin.ch.cam.ac.uk/opsin/4-(2-amino-6-fluoroquinazolin-4-yl)phenol.json"
+      ],
+      "supporting_information_sha256": "7f10bacaa8aaa72c0202231e966a663045fd728cf14c0761c511c0cdf5253ba0",
+      "structure_resolution_note": "Compound 5 was resolved from its exact systematic name in the primary supporting information using OPSIN. Two compound 4 stereoisomers were deferred because the supporting information explicitly marks their absolute configurations as unknown.",
+      "candidate_structure_count": 3,
+      "deferred_unresolved_stereoisomer_count": 2,
+      "evidence_review_status": "sealed_candidate_level_review_pending"
+    },
+    {
+      "source_id": "PMID:41366530",
+      "title": "Systematic metabolite screening identifies functional regulators of the adenosine A2A receptor",
+      "doi": "10.1038/s42004-025-01825-3",
+      "pmid": "41366530",
+      "pmcid": "PMC12800297",
+      "published_at": "2025-12-09",
+      "primary_article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12800297/",
+      "structure_authority": "NCBI PubChem PUG REST",
+      "structure_records": [
+        "https://pubchem.ncbi.nlm.nih.gov/compound/439155",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/13730",
+        "https://pubchem.ncbi.nlm.nih.gov/compound/448457"
+      ],
+      "candidate_structure_count": 3,
+      "evidence_review_status": "sealed_candidate_level_review_pending"
+    }
+  ],
+  "candidate_structure_count": 6,
+  "deferred_unresolved_stereoisomer_count": 2,
+  "functional_labels_in_registry": false,
+  "activity_values_in_registry": false,
+  "model_or_docking_artifacts_accessed": false
+}

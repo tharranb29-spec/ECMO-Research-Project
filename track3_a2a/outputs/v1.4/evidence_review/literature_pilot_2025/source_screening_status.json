@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T08:25:09Z",
+  "specification_id": "a2a-primary-literature-pilot-evidence-v1.4",
+  "source_hashes": {
+    "source_registry": "d932774d5897bbd954ef8cdb506932badd8ff8d9f4675d41aa19fdf98de81dc5",
+    "candidate_snapshot": "1991f0059289a0fb5d594cf60ca854214efe233973de9d29faf8f5310464b18a",
+    "eligible_candidates": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
+    "quarantined_candidates": "029d8245d0933fa2d5696cf283bbb8509b69c15558be9bad60841b4b3ac1b23f",
+    "sealed_evidence_packet": "5000e7fa81027756195db1e567812df3887815aafc59e7d8939c162a92cc767e",
+    "primary_supporting_information": "7f10bacaa8aaa72c0202231e966a663045fd728cf14c0761c511c0cdf5253ba0"
+  },
+  "primary_publication_count": 2,
+  "label_free_candidate_count": 6,
+  "structural_independence_eligible_count": 4,
+  "structural_quarantine_count": 2,
+  "deferred_unresolved_stereoisomer_count": 2,
+  "structural_quarantine_reason_counts": {
+    "historical_generic_murcko_scaffold_overlap": 2
+  },
+  "evidence_admitted_count": 0,
+  "labels_written_to_repository": false,
+  "model_or_docking_artifacts_accessed": false,
+  "human_validation_claimed": false,
+  "next_gate": "perform dual evidence review of the four structurally eligible records; explicitly adjudicate partial-agonist and inverse-agonist endpoint mapping, preserve unresolved ambiguity as quarantine, and do not unmask labels to modeling"
+}
