@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-md-validation-v1.5",
+  "status": "planned_not_executed",
+  "effective_date": "2026-09-12",
+  "purpose": "Test pose stability and receptor-state plausibility for a bounded A2A control and candidate panel.",
+  "claim_boundary": "MD provides mechanistic and stability evidence only. It does not create potency or functional labels and cannot rescue a failed external QSAR gate.",
+  "can_create_activity_labels": false,
+  "can_rescue_failed_qsar_gate": false,
+  "scientific_basis": {
+    "inactive_control_structure": "https://www.rcsb.org/structure/5NM4",
+    "active_control_structure": "https://www.rcsb.org/structure/5G53",
+    "active_state_primary_reference": "https://doi.org/10.1038/nature18966",
+    "mini_gs_md_reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6445292/"
+  },
+  "tiers": {
+    "tier_a_controls": [
+      {
+        "system_id": "5NM4_ZMA_native",
+        "receptor_state": "inactive",
+        "pdb_id": "5NM4",
+        "ligand": "ZM241385",
+        "purpose": "inactive-state native-pose control"
+      },
+      {
+        "system_id": "5G53_NECA_miniGs_native",
+        "receptor_state": "active_G_protein_coupled",
+        "pdb_id": "5G53",
+        "ligand": "NECA",
+        "retain_mini_gs": true,
+        "purpose": "active-state native-pose and receptor-activation control"
+      }
+    ],
+    "tier_b_blinded_candidates": {
+      "candidate_ids": ["LIT25-RL-C5", "LIT25-RL-C7", "LIT25-RL-C9", "LIT25-MET-PGD2"],
+      "receptor_structures": ["5NM4", "2YDO"],
+      "selection_rule": "All four structurally independent literature-pilot candidates; functional labels remain masked from setup and trajectory analysis.",
+      "start_rule": "Use the predeclared retained GNINA pose after the v1.4 docking gate."
+    },
+    "tier_c_active_state_sensitivity": {
+      "status": "conditional",
+      "receptor_structure": "5G53",
+      "retain_mini_gs": true,
+      "candidate_count": 2,
+      "selection_rule": "Select two candidates before viewing MD outcomes using highest structural diversity and acceptable pose-quality evidence.",
+      "activation_rule": "Run only after both native controls pass Tier A."
+    }
+  },
+  "system_preparation": {
+    "membrane": "POPC:cholesterol 70:30 molar ratio",
+    "solvent": "explicit TIP3P water",
+    "salt": "0.15 M NaCl after neutralization",
+    "temperature_kelvin": 310,
+    "pressure_bar": 1.0,
+    "protein_force_field": "CHARMM36m",
+    "lipid_force_field": "CHARMM36",
+    "ligand_force_field": "CGenFF with version and parameter-penalty audit recorded",
+    "protonation_ph": 7.4,
+    "protonation_method": "record tool version and manually review binding-site titratable residues",
+    "crystallographic_waters": "retain only conserved or ligand-bridging waters with documented identifiers",
+    "construct_policy": "Record mutations, fusion partners, missing loops, termini, and any removed engineered components for every system."
+  },
+  "simulation": {
+    "engine": "OpenMM",
+    "engine_version": "record_exact_version_at_execution",
+    "boundary_conditions": "periodic",
+    "electrostatics": "particle mesh Ewald",
+    "nonbonded_cutoff_nm": 1.0,
+    "integration_timestep_fs": 2.0,
+    "ensemble": "NPT",
+    "equilibration": "energy minimization followed by staged restrained NVT and NPT equilibration and at least 10 ns unrestrained equilibration",
+    "production_ns_per_replica": 100,
+    "replicas": 3,
+    "replica_seeds": [20260912, 20260913, 20260914],
+    "frame_interval_ps": 100,
+    "restart_interval_ns": 1,
+    "estimated_minimum_candidate_sampling_microseconds": 2.4,
+    "estimated_minimum_tier_a_plus_b_sampling_microseconds": 3.0,
+    "best_replica_selection": "prohibited"
+  },
+  "quality_control": {
+    "analysis_window": "final 80 ns of each 100 ns production replica after excluding the first 20 ns as prespecified stabilization time",
+    "bound_pose_definition": "After transmembrane-pocket alignment, median ligand heavy-atom RMSD is at most 3.0 A and ligand center-of-mass displacement is at most 5.0 A over the analysis window.",
+    "direct_contact_definition": "Any ligand-receptor heavy-atom distance at most 4.0 A.",
+    "hydrogen_bond_definition": "Donor-acceptor distance at most 3.5 A and donor-hydrogen-acceptor angle at least 120 degrees.",
+    "water_bridge_definition": "A water oxygen simultaneously lies within 3.5 A of ligand and receptor heteroatoms.",
+    "native_contact_freeze": "Enumerate direct and hydrogen-bond contacts in each deposited control after preparation but before dynamics; store and hash the list before production.",
+    "required": [
+      "stable temperature and pressure after equilibration",
+      "stable membrane area per lipid",
+      "no persistent vacuum bubbles or broken periodic imaging",
+      "protein backbone RMSD and ligand RMSD time series inspected",
+      "energy and checkpoint files complete",
+      "all three replicas reported regardless of direction"
+    ],
+    "control_gate": "In at least two of three replicas, each native ligand must satisfy the bound-pose definition and at least half of its frozen native orthosteric contacts must each have occupancy of at least 50 percent. If either control fails, stop candidate interpretation and diagnose setup.",
+    "failed_replica_rule": "Do not replace or omit a failed replica after inspecting its outcome. Report failure and repeat only under a versioned technical amendment."
+  },
+  "predeclared_analyses": {
+    "pose_stability": [
+      "ligand heavy-atom RMSD after transmembrane-pocket alignment",
+      "ligand center-of-mass displacement",
+      "fraction of frames retaining the starting binding-site neighborhood"
+    ],
+    "orthosteric_contacts": [
+      "Glu169 contact occupancy",
+      "His250 contact occupancy",
+      "Asn253 contact occupancy",
+      "Ser277 contact occupancy",
+      "His278 contact occupancy",
+      "water-mediated contact occupancy"
+    ],
+    "receptor_state": [
+      "TM6 cytoplasmic displacement",
+      "DRY ionic-lock distance",
+      "Trp246 rotamer",
+      "NPxxY motif geometry"
+    ],
+    "energetics": "MM/GBSA may be reported as an exploratory sensitivity with replica uncertainty. It is not an experimental affinity estimate or a promotion gate.",
+    "statistics": "Summarize each metric by replica and system with medians, dispersion, and bootstrap intervals; do not pool frames as independent observations."
+  },
+  "outputs": {
+    "required_manifests": [
+      "input structure and parameter hashes",
+      "system composition and protonation ledger",
+      "replica seed and run-status table",
+      "trajectory and checkpoint hashes",
+      "control-gate report",
+      "candidate analysis report with blinded identifiers"
+    ],
+    "dashboard_status": "planned until trajectories and control gates are complete",
+    "allowed_candidate_term": "MD-supported computational candidate",
+    "prohibited_candidate_term": "validated hit"
+  }
+}

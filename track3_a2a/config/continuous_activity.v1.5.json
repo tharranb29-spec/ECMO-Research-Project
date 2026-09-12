@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-continuous-activity-v1.5",
+  "status": "frozen_foundation_before_new_confirmatory_potency_acquisition",
+  "effective_date": "2026-09-12",
+  "objective": "Rank human A2A ligands by measured potency while quantifying applicability and testing whether dual-state docking adds information beyond two-dimensional chemistry.",
+  "source_definitions": {
+    "chembl_pchembl_faq": "https://github.com/chembl/GLaDOS-docs/blob/master/frequently-asked-questions/chembl-data-questions.md",
+    "chembl_curation_reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4607714/"
+  },
+  "historical_boundary": {
+    "immutable_versions": ["v1.2", "v1.3", "v1.3.1", "v1.4"],
+    "binary_endpoint_result": "historical_hypothesis_generating_only",
+    "historical_214_activity_results_already_seen": true,
+    "corrected_203_activity_results_already_seen": true,
+    "use_current_activity_results_for_confirmatory_claim": false,
+    "locked_v1_3_1_holdout_must_not_be_reused_for_model_selection": true,
+    "development_use": "Current ChEMBL-derived potency results may be reproduced and used for exploratory model development only."
+  },
+  "endpoints": {
+    "primary_pbind": {
+      "name": "pBind_Ki",
+      "meaning": "negative base-10 logarithm of molar human A2A Ki",
+      "allowed_standard_types": ["Ki"],
+      "allowed_assay_types": ["B"],
+      "functional_modes": [],
+      "pool_with_other_endpoints": false
+    },
+    "secondary_pfunc_agonism": {
+      "name": "pFunc_agonism",
+      "meaning": "negative base-10 logarithm of molar agonist EC50 or explicitly named functional potency",
+      "allowed_standard_types": ["EC50", "Potency"],
+      "allowed_assay_types": ["F"],
+      "functional_modes": ["agonist", "full_agonist"],
+      "pool_with_other_endpoints": false
+    },
+    "secondary_pfunc_inhibition": {
+      "name": "pFunc_inhibition",
+      "meaning": "negative base-10 logarithm of molar antagonist IC50 in an agonist-stimulated human A2A functional assay",
+      "allowed_standard_types": ["IC50", "Potency"],
+      "allowed_assay_types": ["F"],
+      "functional_modes": ["antagonist"],
+      "pool_with_other_endpoints": false
+    },
+    "inverse_agonism": {
+      "name": "pFunc_inverse_agonism",
+      "status": "separate_exploratory_endpoint_until_evidence_review_and_sample_size_are_sufficient",
+      "allowed_standard_types": ["IC50", "Potency"],
+      "allowed_assay_types": ["F"],
+      "functional_modes": ["inverse_agonist"],
+      "pool_with_antagonist_inhibition": false,
+      "source_manifest": "data/curated/chembl251_inverse_agonist_exclusions_v1.3.csv"
+    },
+    "prohibited_pooling": [
+      "Ki with Kd, IC50, EC50, or generic pChEMBL in the primary endpoint",
+      "agonist EC50 with antagonist IC50",
+      "antagonist inhibition of stimulated response with inverse agonist inhibition of basal activity",
+      "binding measurements with functional measurements"
+    ]
+  },
+  "measurement_admission": {
+    "target_chembl_id": "CHEMBL251",
+    "target_gene": "ADORA2A",
+    "target_organism": "Homo sapiens",
+    "allowed_target_types": ["SINGLE PROTEIN"],
+    "minimum_target_confidence": 8,
+    "standard_relation": "=",
+    "standard_units": "nM",
+    "standard_value_must_be_positive": true,
+    "pactivity_rule": "Use ChEMBL pchembl_value only when it is consistent with -log10(standard_value in molar units); otherwise quarantine the row.",
+    "data_validity_allowed": [null, "Manually validated"],
+    "primary_publication_required": true,
+    "doi_or_pmid_required": true,
+    "exclude_document_types": ["REVIEW", "PATENT"],
+    "exclude_if": [
+      "ambiguous or censored relation",
+      "mutant receptor unless prospectively declared as a separate task",
+      "non-human target context",
+      "binding or functional mode cannot be determined",
+      "activity value is copied only from a review",
+      "critical structure or stereochemistry is unresolved"
+    ],
+    "llm_can_admit_measurement": false,
+    "model_performance_can_admit_measurement": false
+  },
+  "replicate_aggregation": {
+    "level_1": "Take the median of exact duplicate measurements within one assay after provenance checks.",
+    "level_2": "Take the median of assay-level values within the same endpoint and functional mode for each standardized parent structure.",
+    "minimum_independent_assays": 1,
+    "record": [
+      "number of measurements",
+      "number of assays",
+      "number of primary publications",
+      "median pActivity",
+      "inter-assay standard deviation",
+      "inter-assay median absolute deviation",
+      "minimum and maximum pActivity"
+    ],
+    "high_disagreement_rule": "Do not silently delete high-variance molecules. Flag inter-assay SD above 0.75 log units and report sensitivity with and without them.",
+    "sample_weighting": "Primary analysis gives one equal-weighted row per molecule. Inverse-variance weighting is sensitivity-only."
+  },
+  "structure_standardization": {
+    "unit": "standardized parent molecule",
+    "desalt": true,
+    "neutralize": true,
+    "preserve_defined_stereochemistry": true,
+    "deduplicate_by": "standardized InChIKey",
+    "scaffold_group": "generic Murcko scaffold",
+    "structure_conflict_action": "quarantine"
+  },
+  "development_evaluation": {
+    "claim_status": "exploratory_because_current_activity_labels_and_results_have_been_seen",
+    "headline_split": "repeated generic-Murcko-scaffold grouped cross-validation",
+    "folds": 5,
+    "repeat_seeds": [20260912, 20260913, 20260914, 20260915, 20260916, 20260917, 20260918, 20260919, 20260920, 20260921],
+    "identical_splits_for_all_models": true,
+    "preprocessing_fit_inside_training_fold": true,
+    "duplicate_structures_must_share_fold": true,
+    "minimum_test_records_for_r2": 10,
+    "sparse_fold_rule": "When a test fold has fewer than 10 records, report MAE and RMSE but mark fold-level R2 unevaluable.",
+    "random_split_role": "optimistic sensitivity only"
+  },
+  "models": {
+    "mean_baseline": "training-fold mean pActivity",
+    "qsar_primary": {
+      "name": "AB_RF",
+      "features": "ECFP4 radius 2, 2048 bits, plus the frozen physicochemical descriptor panel",
+      "estimator": "RandomForestRegressor",
+      "parameters": {
+        "n_estimators": 1000,
+        "max_features": "sqrt",
+        "min_samples_leaf": 2,
+        "random_state": 20260912,
+        "n_jobs": 1
+      }
+    },
+    "linear_reference": {
+      "name": "AB_Ridge",
+      "estimator": "Ridge",
+      "alpha": 1.0
+    },
+    "docking_augmented": {
+      "name": "E_RF",
+      "base_features": "AB_RF",
+      "additional_features": [
+        "m_affinity_kcal_mol",
+        "d_affinity_kcal_mol",
+        "m_cnnaffinity_pk",
+        "d_cnnaffinity_pk",
+        "m_cnnscore",
+        "d_cnnscore"
+      ],
+      "role": "predeclared incremental-value comparison",
+      "missing_docking_rule": "Do not impute from the outcome. Report a matched-record comparison and a chemistry-only prediction for unmatched records."
+    }
+  },
+  "applicability_domain": {
+    "chemistry_similarity": "maximum ECFP4 Tanimoto similarity to a training molecule",
+    "descriptor_distance": "robust distance in the frozen physicochemical descriptor space",
+    "threshold_freeze": "Derive the similarity threshold from the fifth percentile of held-out-to-training nearest-neighbor similarities across the fixed development scaffold folds; derive the descriptor threshold from the training 99th percentile. Freeze both before external outcomes are joined.",
+    "outside_domain_action": "Return a prediction with an explicit abstention or high-uncertainty flag.",
+    "docking_is_automatic_fallback": false,
+    "reason": "Docking has its own applicability limits and cannot automatically replace an uncertain QSAR prediction."
+  },
+  "mandatory_metrics": [
+    "R2",
+    "RMSE in log units",
+    "MAE in log units",
+    "Spearman rho",
+    "regression calibration intercept",
+    "regression calibration slope",
+    "empirical interval coverage",
+    "metrics stratified by applicability domain",
+    "metrics stratified by endpoint and functional mode"
+  ],
+  "uncertainty": {
+    "development": "molecule-level bootstrap of fixed out-of-fold predictions with 2000 resamples",
+    "external": "paired molecule-level bootstrap with 5000 resamples",
+    "random_seed": 20260912,
+    "report_95_percent_intervals": true
+  },
+  "external_confirmation": {
+    "protocol_freeze_utc": "2026-09-12T13:22:19Z",
+    "prior_project_visibility_must_be_false": true,
+    "candidate_structures_frozen_before_labels": true,
+    "minimum_primary_pbind_molecules": 60,
+    "minimum_primary_pbind_generic_scaffolds": 20,
+    "final_sample_size_rule": "Treat 60 molecules and 20 scaffolds as planning floors. Before outcomes are unmasked, freeze a simulation or precision analysis for the desired external R2 and paired delta-R2 confidence interval.",
+    "no_exact_or_generic_scaffold_overlap_with_model_selection_data": true,
+    "primary_model": "AB_RF",
+    "primary_success": "External R2 bootstrap lower bound is above zero and RMSE is lower than the training-mean baseline with a paired 95% interval excluding zero.",
+    "docking_increment": "Compare E_RF minus AB_RF on identical external molecules using delta R2 and delta RMSE. Claim incremental value only when the delta-R2 lower bound is above zero and the delta-RMSE upper bound is below zero.",
+    "pfunc_status_below_40_molecules": "descriptive_only",
+    "one_time_unmask": true
+  },
+  "llm_role": {
+    "allowed": [
+      "discover candidate primary publications",
+      "extract candidate measurement passages and table locations",
+      "normalize molecule-name candidates",
+      "flag assay and endpoint ambiguity"
+    ],
+    "prohibited": [
+      "invent or infer missing activity values",
+      "convert docking or model predictions into labels",
+      "admit a measurement without deterministic provenance checks",
+      "promote a model"
+    ],
+    "required_release_gate": "deterministic validation plus named human approval"
+  },
+  "md_linkage": {
+    "configuration": "config/md_validation.v1.5.json",
+    "plan": "MD_VALIDATION_PLAN_V15.md",
+    "role": "orthogonal mechanistic and pose-stability evidence",
+    "can_create_activity_labels": false,
+    "can_rescue_failed_external_qsar_gate": false
+  },
+  "promotion": {
+    "mode": "shadow_only",
+    "automatic_model_replacement": false,
+    "requirements": [
+      "measurement provenance audit passes",
+      "all source, split, model, and prediction hashes verify",
+      "independent external primary gate passes",
+      "applicability and calibration results are acceptable",
+      "named human release approval"
+    ]
+  }
+}

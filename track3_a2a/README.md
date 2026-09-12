@@ -109,6 +109,28 @@ No Track 3 autonomous model is currently promoted. Promotion requires a new,
 independent external cohort, successful predeclared external gates, clean data
 provenance, and named human release approval.
 
+## Version 1.5 continuous potency and molecular dynamics
+
+Version 1.5 adds a continuous-potency workstream without replacing the frozen
+binary history. Curated human A2A Ki is the primary ranking endpoint. Agonist
+functional potency, antagonist inhibitory potency, and inverse agonism remain
+separate tasks because their measurements do not have the same biological
+meaning. Current 214- and 203-molecule potency results are exploratory because
+they were viewed before this specification was frozen.
+
+The MD module is a bounded validation layer. It first tests native `5NM4`-ZMA
+and `5G53`-NECA-mini-Gs controls, then evaluates the four structurally
+independent v1.4 literature candidates under blinded identifiers. MD does not
+create activity labels or rescue a failed external potency gate.
+
+The new specifications and plans are:
+
+- `config/continuous_activity.v1.5.json`
+- `CONTINUOUS_ACTIVITY_PROTOCOL_V15.md`
+- `config/md_validation.v1.5.json`
+- `MD_VALIDATION_PLAN_V15.md`
+- `outputs/v1.5/protocol_status.json`
+
 ## Reproduce the current data stage
 
 Create the isolated chemistry environment once:

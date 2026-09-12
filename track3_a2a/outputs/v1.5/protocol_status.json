@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-12T13:22:19Z",
+  "continuous_activity_specification": "a2a-continuous-activity-v1.5",
+  "md_specification": "a2a-md-validation-v1.5",
+  "status": "protocols_frozen_execution_not_started",
+  "protocol_hashes": {
+    "continuous_activity_config": "269d9a731db379f38fb81eb887f44f3f34a95b558018010b5ffcf4e34164770a",
+    "continuous_activity_protocol": "d1d15c56d3ef8e79344e8a2272caee674cd40000b0199db8ac7636fd3531f555",
+    "md_config": "fed6d59f674a72c0d6eb116b42f8625434522a550cd58e006334c6dfc9d44346",
+    "md_plan": "6592249dbe4a9ab03610c66b84a4a5c86411728ecc117df3a250066f363d3904",
+    "measurement_template": "1188683bee887629f47a516a5faed74f93c974727add5a8dc5c146fb7ceffbab",
+    "molecule_summary_template": "a18dfc504567158de30d61a2fe7349ee9b1e24384e8f089c3663108756cd54f9"
+  },
+  "historical_activity_results_classification": "exploratory",
+  "new_confirmatory_potency_labels_loaded": false,
+  "v1_5_model_trained": false,
+  "external_potency_predictions_frozen": false,
+  "external_potency_labels_unmasked": false,
+  "md_systems_prepared": false,
+  "md_control_gate_evaluated": false,
+  "md_candidate_trajectories_started": false,
+  "served_model_changed": false,
+  "next_gate": "obtain the teammate's reproducibility package, build the measurement-level potency ledger under the frozen endpoint rules, and verify the two native MD control systems before candidate simulation"
+}
