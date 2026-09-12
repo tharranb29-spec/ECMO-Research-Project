@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:13:34.746114+00:00",
+  "protocol_id": "a2a-external-validation-v1.4",
+  "candidate_labels_loaded": false,
+  "candidate_count": 4,
+  "valid_candidate_count": 4,
+  "failed_candidate_count": 0,
+  "source_hashes": {
+    "external_config": "ffea866a366b3ab41e2fd7a668fa4330edbf443d5d1ae18a50eb2b84df656908",
+    "docking_config": "1ec55c972f4395a02506cd8884aa27b13d4c187e338beca7b4767388ebb27406",
+    "pose_selection_config": "53e30cc7709195122751e1306f0bb6f01f1799fdc2de06b3d28d7d65ee629a88",
+    "ligand_manifest": "ffc607e30d686c61a51e3aa2f9a5e08a0c6635af8fa03e1aab8305347ec2a71f",
+    "preparation_status": "61cc5f949e2366028c42f2809fbd2eafddfbf8e8236a89650ef1b893ae7ba26e",
+    "receptor_inactive_5NM4": "dbc74cda868ac20ea1e3b216da365b5c42d2c47b7c9ea5425a316c12d7160f2e",
+    "receptor_active_like_2YDO": "bc32e38d569b49f6492adc263611b8d78e54e7f352ec021cb310480b1b5d12bb"
+  },
+  "results": [
+    {
+      "candidate_id": "LIT25-MET-PGD2",
+      "functional_label_blinded": true,
+      "status": "valid",
+      "receptors": {
+        "5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -7.1291,
+          "mean_affinity_kcal_mol": -6.9898,
+          "affinity_sd": 0.4731,
+          "median_cnn_score": 0.5859,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -6.4627,
+              "cnn_score": 0.5979,
+              "cnn_affinity_pk": 5.6909,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -7.3777,
+              "cnn_score": 0.4682,
+              "cnn_affinity_pk": 5.6926,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -7.1291,
+              "cnn_score": 0.5859,
+              "cnn_affinity_pk": 5.7421,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/inactive_5NM4/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 44,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-MET-PGD2/5NM4/retained_pose.sdf",
+            "sha256": "cb4ed5dd1f12a71a52ebc90585c2789af30066b3f1f9731e7d3dfcf9873b6b46"
+          }
+        },
+        "2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -7.0607,
+          "mean_affinity_kcal_mol": -7.0674,
+          "affinity_sd": 0.0175,
+          "median_cnn_score": 0.7386,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -7.0607,
+              "cnn_score": 0.5827,
+              "cnn_affinity_pk": 5.5095,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -7.0542,
+              "cnn_score": 0.7563,
+              "cnn_affinity_pk": 6.1263,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -7.0872,
+              "cnn_score": 0.7386,
+              "cnn_affinity_pk": 5.6248,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-MET-PGD2/active_like_2YDO/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 42,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-MET-PGD2/2YDO/retained_pose.sdf",
+            "sha256": "ab2f616cd8212db94ccbc834fd7234db1167b104db20587a03ba89034d775cf2"
+          }
+        }
+      }
+    },
+    {
+      "candidate_id": "LIT25-RL-C5",
+      "functional_label_blinded": true,
+      "status": "valid",
+      "receptors": {
+        "5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.6379,
+          "mean_affinity_kcal_mol": -9.6419,
+          "affinity_sd": 0.0172,
+          "median_cnn_score": 0.9373,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.6379,
+              "cnn_score": 0.9403,
+              "cnn_affinity_pk": 6.9133,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.627,
+              "cnn_score": 0.9373,
+              "cnn_affinity_pk": 6.9089,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.6607,
+              "cnn_score": 0.9355,
+              "cnn_affinity_pk": 6.894,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/inactive_5NM4/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 42,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C5/5NM4/retained_pose.sdf",
+            "sha256": "eef82e4467fe43ce48c8a49dfb12d6736809d99e03c51027317e19d7233b3aa0"
+          }
+        },
+        "2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -10.0486,
+          "mean_affinity_kcal_mol": -10.0478,
+          "affinity_sd": 0.0141,
+          "median_cnn_score": 0.9171,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.0486,
+              "cnn_score": 0.9186,
+              "cnn_affinity_pk": 7.0327,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.0615,
+              "cnn_score": 0.9154,
+              "cnn_affinity_pk": 7.0201,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -10.0334,
+              "cnn_score": 0.9171,
+              "cnn_affinity_pk": 7.024,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C5/active_like_2YDO/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 42,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C5/2YDO/retained_pose.sdf",
+            "sha256": "4c83f630af89935a0757ba91c7e60ece4ac058407c440a6f35b1e0e5aea65a5d"
+          }
+        }
+      }
+    },
+    {
+      "candidate_id": "LIT25-RL-C7",
+      "functional_label_blinded": true,
+      "status": "valid",
+      "receptors": {
+        "5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.9848,
+          "mean_affinity_kcal_mol": -9.9844,
+          "affinity_sd": 0.0006,
+          "median_cnn_score": 0.9685,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.9848,
+              "cnn_score": 0.9685,
+              "cnn_affinity_pk": 7.4091,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.9837,
+              "cnn_score": 0.969,
+              "cnn_affinity_pk": 7.4094,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.9848,
+              "cnn_score": 0.9683,
+              "cnn_affinity_pk": 7.4086,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/inactive_5NM4/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 42,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C7/5NM4/retained_pose.sdf",
+            "sha256": "6b420e87e04ab119b58397408b35d7d506071bcfc62d0352459ea7a447351c34"
+          }
+        },
+        "2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.473,
+          "mean_affinity_kcal_mol": -9.4748,
+          "affinity_sd": 0.0108,
+          "median_cnn_score": 0.9553,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.473,
+              "cnn_score": 0.9545,
+              "cnn_affinity_pk": 7.576,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.4864,
+              "cnn_score": 0.9553,
+              "cnn_affinity_pk": 7.5788,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.4651,
+              "cnn_score": 0.9564,
+              "cnn_affinity_pk": 7.5836,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C7/active_like_2YDO/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 42,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C7/2YDO/retained_pose.sdf",
+            "sha256": "75e9cad3a1e9e90f8a0920aaa8d5169010269752b02aeaad242ff34621254db5"
+          }
+        }
+      }
+    },
+    {
+      "candidate_id": "LIT25-RL-C9",
+      "functional_label_blinded": true,
+      "status": "valid",
+      "receptors": {
+        "5NM4": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -9.5699,
+          "mean_affinity_kcal_mol": -9.5684,
+          "affinity_sd": 0.007,
+          "median_cnn_score": 0.97,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.5608,
+              "cnn_score": 0.97,
+              "cnn_affinity_pk": 7.4294,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.5746,
+              "cnn_score": 0.97,
+              "cnn_affinity_pk": 7.4347,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -9.5699,
+              "cnn_score": 0.9697,
+              "cnn_affinity_pk": 7.4293,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/inactive_5NM4/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 44,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C9/5NM4/retained_pose.sdf",
+            "sha256": "b658fe15e11501aa691fedb3119391d445f5c4b09cb553fab938104d72f85991"
+          }
+        },
+        "2YDO": {
+          "status": "valid",
+          "valid_seed_count": 3,
+          "failed_seed_count": 0,
+          "median_affinity_kcal_mol": -8.8396,
+          "mean_affinity_kcal_mol": -8.8395,
+          "affinity_sd": 0.0008,
+          "median_cnn_score": 0.8326,
+          "cnnscore_flagged_seed_count": 0,
+          "runs": [
+            {
+              "seed": 42,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -8.8403,
+              "cnn_score": 0.8354,
+              "cnn_affinity_pk": 7.4028,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-42.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-42.log"
+            },
+            {
+              "seed": 43,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -8.8387,
+              "cnn_score": 0.832,
+              "cnn_affinity_pk": 7.4035,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-43.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-43.log"
+            },
+            {
+              "seed": 44,
+              "status": "valid",
+              "cached": false,
+              "minimized_affinity_kcal_mol": -8.8396,
+              "cnn_score": 0.8326,
+              "cnn_affinity_pk": 7.4029,
+              "cnnscore_flag": false,
+              "pose_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-44.sdf",
+              "log_path": "outputs/v1.4/docking/runs/LIT25-RL-C9/active_like_2YDO/seed-44.log"
+            }
+          ],
+          "retained_pose": {
+            "seed": 44,
+            "selection_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+            "cnnscore_soft_flag": false,
+            "path": "outputs/v1.4/docking/LIT25-RL-C9/2YDO/retained_pose.sdf",
+            "sha256": "5456dd456a4e4a0274291b19c8d410845cb2f1ead3ef3e9cd0de7afd27b041de"
+          }
+        }
+      }
+    }
+  ],
+  "next_gate": "Use retained poses for the label-blind MD input manifest; do not unmask functional labels."
+}

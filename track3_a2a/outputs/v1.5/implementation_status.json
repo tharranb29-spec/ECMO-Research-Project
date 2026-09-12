@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:23:31.103224+00:00",
+  "specification_id": "a2a-continuous-activity-v1.5",
+  "stage": "strict_exploratory_activity_and_external_docking_complete_md_preflight_blocked",
+  "claim_status": "exploratory_only",
+  "activity": {
+    "activity_rows_seen": 644,
+    "admitted_measurements": 258,
+    "quarantined_measurements": 386,
+    "summary_molecules_by_endpoint": {
+      "pBind_Ki": 98,
+      "pFunc_agonism": 25,
+      "pFunc_inhibition": 44
+    },
+    "eligible_development_counts": {
+      "pBind_Ki": 78,
+      "pFunc_agonism": 19,
+      "pFunc_inhibition": 36
+    },
+    "historical_locked_holdout_rows_used": 0,
+    "development_results": {
+      "pBind_Ki": {
+        "status": "complete_exploratory",
+        "n": 78,
+        "scaffold_count": 68,
+        "small_sample_warning": false,
+        "AB_Ridge": {
+          "n": 78,
+          "r2": 0.5605377886314917,
+          "rmse": 0.7585287258909658,
+          "mae": 0.6154408512881633,
+          "spearman_rho": 0.7522923601858651,
+          "calibration_intercept": -1.0566004086581262,
+          "calibration_slope": 1.141743192073489,
+          "empirical_interval_coverage": 0.20512820512820512
+        },
+        "AB_RF": {
+          "n": 78,
+          "r2": 0.4532708826227454,
+          "rmse": 0.8460526030116207,
+          "mae": 0.706546333806894,
+          "spearman_rho": 0.6954924309709877,
+          "calibration_intercept": -2.8352268782652277,
+          "calibration_slope": 1.3741121286366118,
+          "empirical_interval_coverage": 0.05128205128205128
+        },
+        "E_RF": {
+          "n": 78,
+          "r2": 0.4340376087330504,
+          "rmse": 0.8608055342186961,
+          "mae": 0.7204411391216476,
+          "spearman_rho": 0.6807833867320873,
+          "calibration_intercept": -2.8145122968727008,
+          "calibration_slope": 1.3712277125749703,
+          "empirical_interval_coverage": 0.0641025641025641
+        },
+        "paired_docking_increment": {
+          "delta_r2_E_minus_AB": {
+            "estimate": -0.019606544182826535,
+            "lower": -0.03300021477662426,
+            "upper": -0.008099444662453171
+          },
+          "delta_rmse_E_minus_AB": {
+            "estimate": 0.014708724736023748,
+            "lower": 0.0063426081519087855,
+            "upper": 0.023724487745589443
+          }
+        }
+      },
+      "pFunc_agonism": {
+        "status": "complete_exploratory",
+        "n": 19,
+        "scaffold_count": 18,
+        "small_sample_warning": true,
+        "AB_Ridge": {
+          "n": 19,
+          "r2": -0.4549101402544744,
+          "rmse": 0.8712987037156072,
+          "mae": 0.6967021512870758,
+          "spearman_rho": -0.21412902456284616,
+          "calibration_intercept": 10.3497463374001,
+          "calibration_slope": -0.3762567833721846,
+          "empirical_interval_coverage": 0.3157894736842105
+        },
+        "AB_RF": {
+          "n": 19,
+          "r2": -0.22034990289323764,
+          "rmse": 0.7979784590341282,
+          "mae": 0.6303582044994112,
+          "spearman_rho": -0.5195261579557579,
+          "calibration_intercept": 36.52353970793122,
+          "calibration_slope": -3.8528299190303748,
+          "empirical_interval_coverage": 0.21052631578947367
+        },
+        "E_RF": {
+          "n": 19,
+          "r2": -0.21069176173082416,
+          "rmse": 0.7948144902564664,
+          "mae": 0.6309508911043998,
+          "spearman_rho": -0.49670913074824147,
+          "calibration_intercept": 34.63577225039008,
+          "calibration_slope": -3.604536814437207,
+          "empirical_interval_coverage": 0.21052631578947367
+        },
+        "paired_docking_increment": {
+          "delta_r2_E_minus_AB": {
+            "estimate": 0.008777562133344352,
+            "lower": -0.012484062425887298,
+            "upper": 0.03284937918495819
+          },
+          "delta_rmse_E_minus_AB": {
+            "estimate": -0.0027474449742483364,
+            "lower": -0.009754508585468455,
+            "upper": 0.0033055216167421774
+          }
+        }
+      },
+      "pFunc_inhibition": {
+        "status": "complete_exploratory",
+        "n": 36,
+        "scaffold_count": 36,
+        "small_sample_warning": true,
+        "AB_Ridge": {
+          "n": 36,
+          "r2": 0.5532506245078206,
+          "rmse": 0.6396029117740428,
+          "mae": 0.5256886784677383,
+          "spearman_rho": 0.6837904462689082,
+          "calibration_intercept": -0.7820282299490535,
+          "calibration_slope": 1.1248615657629546,
+          "empirical_interval_coverage": 0.1388888888888889
+        },
+        "AB_RF": {
+          "n": 36,
+          "r2": 0.36119701864450093,
+          "rmse": 0.7648247304794308,
+          "mae": 0.6018150178627406,
+          "spearman_rho": 0.5964980488728773,
+          "calibration_intercept": -5.525860472998509,
+          "calibration_slope": 1.802038273297282,
+          "empirical_interval_coverage": 0.16666666666666666
+        },
+        "E_RF": {
+          "n": 36,
+          "r2": 0.3838416329196641,
+          "rmse": 0.7511464694631369,
+          "mae": 0.5921013959229708,
+          "spearman_rho": 0.6243080161848872,
+          "calibration_intercept": -6.026310658593023,
+          "calibration_slope": 1.873421539811551,
+          "empirical_interval_coverage": 0.1388888888888889
+        },
+        "paired_docking_increment": {
+          "delta_r2_E_minus_AB": {
+            "estimate": 0.023370023245204652,
+            "lower": 0.011025147557807318,
+            "upper": 0.03908767655024228
+          },
+          "delta_rmse_E_minus_AB": {
+            "estimate": -0.013733445392692833,
+            "lower": -0.02049765785042225,
+            "upper": -0.006145481256743063
+          }
+        }
+      }
+    }
+  },
+  "external_candidate_docking": {
+    "candidate_labels_loaded": false,
+    "candidate_count": 4,
+    "valid_candidate_count": 4,
+    "failed_candidate_count": 0,
+    "retained_pose_count": 8
+  },
+  "md": {
+    "status": "blocked_before_system_preparation",
+    "trajectory_production_started": false,
+    "candidate_labels_loaded": false,
+    "blockers": [
+      {
+        "system_id": "5G53_NECA_miniGs_native",
+        "reason": "deposited_structure_caveat_requires_manual_review",
+        "details": [
+          "CAVEAT     5G53    ASN C 239 HAS WRONG CHIRALITY AT ATOM CA"
+        ]
+      },
+      {
+        "system_id": "global",
+        "reason": "openmm_not_installed"
+      },
+      {
+        "system_id": "global",
+        "reason": "cgenff_ligand_parameters_not_generated_or_audited"
+      },
+      {
+        "system_id": "global",
+        "reason": "membrane_systems_not_built"
+      },
+      {
+        "system_id": "global",
+        "reason": "native_contact_lists_not_frozen"
+      }
+    ]
+  },
+  "external_confirmation_performed": false,
+  "model_promotion_allowed": false,
+  "source_hashes": {
+    "curation": "18261d17e3dc08a5039ff6869d40fc120c5e49c3acd5019747fa00f212fbb17d",
+    "models": "2f066858b234ac5f686d585ee5115c92600a53bbf07f7f33455854647498bccb",
+    "external_docking": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17",
+    "md_preflight": "2f4c32f71dba51e682045406706c8456631ee9b905a6244efb9331e7d6f421a7"
+  },
+  "next_actions": [
+    "Complete independent primary-evidence review and freeze an adequately powered external pBind_Ki cohort before outcomes are unmasked.",
+    "Resolve the 5G53 structure caveat and provision audited OpenMM, force-field, membrane, and ligand-parameter inputs.",
+    "Build and run Tier A native controls; interpret Tier B trajectories only if both control gates pass."
+  ]
+}

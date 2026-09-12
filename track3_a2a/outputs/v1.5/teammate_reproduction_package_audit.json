@@ -1,0 +1,52 @@
+{
+  "audit_date": "2026-09-12",
+  "decision": "exploratory_evidence_only_not_frozen_v1_5_implementation",
+  "verified": {
+    "set_214_to_203_exact": true,
+    "inverse_ids_exact": true,
+    "class_counts_203": {"agonist": 63, "antagonist": 140},
+    "partition_counts_203": {"provisional_development": 163, "provisional_locked_holdout": 40},
+    "ribose_counts": {"agonist": 51, "antagonist": 2},
+    "package_target_counts": {"pBind_pooled_Ki_Kd": 98, "pFunc_pooled_EC50_IC50": 96},
+    "auc_rerun_exact": true,
+    "supplied_oof_point_metrics_recalculate": true,
+    "target_scaffolds_do_not_cross_folds": true
+  },
+  "corrections": {
+    "distinct_scaffolds_203_reported": 201,
+    "distinct_scaffolds_203_observed": 199,
+    "largest_scaffold_group_reported": 2,
+    "largest_scaffold_group_observed": 3,
+    "pbind_scaffolds": 97,
+    "pfunc_scaffolds": 95
+  },
+  "reproduction": {
+    "auc_reproduced": true,
+    "rf_reproduced": false,
+    "local_environment": {"rdkit": "2025.09.6", "scikit_learn": "1.7.2", "pandas": "3.0.5"},
+    "package_claimed_rdkit": "2026.03.6",
+    "local_main_script_r2": {"pBind": 0.3510, "pFunc": 0.3983},
+    "supplied_oof_r2": {"pBind": 0.4002, "pFunc": 0.4240},
+    "docking_input_sha256": "7c4251aafec0e5dc1575e3b575742decc181a59008b6ba696593e2beeacb2cab"
+  },
+  "missing_delivered_files": [
+    "a2a_activity.xlsx",
+    "docking_clean.xlsx",
+    "molecule_target_v15.csv",
+    "oof_predictions.json",
+    "s6_package.py",
+    "complete_environment_lock"
+  ],
+  "major_protocol_mismatches": [
+    "pBind pools Ki and Kd rather than Ki only",
+    "pFunc pools agonist EC50 and antagonist IC50",
+    "measurement admission gate is incomplete",
+    "historical locked holdout is reused in cross-validation",
+    "QSAR baseline omits frozen physicochemical descriptors",
+    "RF configuration and random seeds differ",
+    "only one grouped five-fold split is used",
+    "mandatory metrics and applicability-domain analysis are incomplete",
+    "docking comparison is not the frozen AB versus E comparison",
+    "external confirmation is absent"
+  ]
+}

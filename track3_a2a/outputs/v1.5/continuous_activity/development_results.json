@@ -1,0 +1,6457 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:23:18.821176+00:00",
+  "specification_id": "a2a-continuous-activity-v1.5",
+  "claim_status": "exploratory_only",
+  "historical_locked_holdout_rows_used": 0,
+  "source_hashes": {
+    "config": "269d9a731db379f38fb81eb887f44f3f34a95b558018010b5ffcf4e34164770a",
+    "summary": "ef11f161298d4208dd9384aaf334a428f0d40953708df63b822f3702bd2be5b3",
+    "features": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88"
+  },
+  "eligible_development_counts": {
+    "pBind_Ki": 78,
+    "pFunc_agonism": 19,
+    "pFunc_inhibition": 36
+  },
+  "results": {
+    "pBind_Ki": {
+      "status": "complete_exploratory",
+      "primary": {
+        "analysis": "primary",
+        "endpoint_name": "pBind_Ki",
+        "n": 78,
+        "scaffold_count": 68,
+        "small_sample_warning": false,
+        "metrics": {
+          "Mean": {
+            "n": 78,
+            "r2": -0.037004677818093024,
+            "rmse": 1.165203074140081,
+            "mae": 0.9849072084268139,
+            "spearman_rho": -0.5744341791113021,
+            "calibration_intercept": 155.41008953872685,
+            "calibration_slope": -19.62334739815833,
+            "empirical_interval_coverage": 0.0641025641025641
+          },
+          "AB_Ridge": {
+            "n": 78,
+            "r2": 0.5605377886314917,
+            "rmse": 0.7585287258909658,
+            "mae": 0.6154408512881633,
+            "spearman_rho": 0.7522923601858651,
+            "calibration_intercept": -1.0566004086581262,
+            "calibration_slope": 1.141743192073489,
+            "empirical_interval_coverage": 0.20512820512820512
+          },
+          "AB_RF": {
+            "n": 78,
+            "r2": 0.4532708826227454,
+            "rmse": 0.8460526030116207,
+            "mae": 0.706546333806894,
+            "spearman_rho": 0.6954924309709877,
+            "calibration_intercept": -2.8352268782652277,
+            "calibration_slope": 1.3741121286366118,
+            "empirical_interval_coverage": 0.05128205128205128
+          },
+          "E_RF": {
+            "n": 78,
+            "r2": 0.4340376087330504,
+            "rmse": 0.8608055342186961,
+            "mae": 0.7204411391216476,
+            "spearman_rho": 0.6807833867320873,
+            "calibration_intercept": -2.8145122968727008,
+            "calibration_slope": 1.3712277125749703,
+            "empirical_interval_coverage": 0.0641025641025641
+          }
+        },
+        "applicability_domain": {
+          "similarity_threshold": 0.25,
+          "descriptor_distance_threshold": 7.595001386539151,
+          "inside_n": 74,
+          "outside_n": 4,
+          "stratified_metrics": {
+            "inside": {
+              "Mean": {
+                "n": 74,
+                "r2": -0.03584523577761756,
+                "rmse": 1.1592782728673725,
+                "mae": 0.9817317771069713,
+                "spearman_rho": -0.559188600959302,
+                "calibration_intercept": 157.94940282962568,
+                "calibration_slope": -19.95711705907399,
+                "empirical_interval_coverage": 0.05405405405405406
+              },
+              "AB_Ridge": {
+                "n": 74,
+                "r2": 0.5925145360406003,
+                "rmse": 0.7271036427550543,
+                "mae": 0.5907559947992433,
+                "spearman_rho": 0.7729787381157678,
+                "calibration_intercept": -1.0493450131902362,
+                "calibration_slope": 1.1462780807476214,
+                "empirical_interval_coverage": 0.21621621621621623
+              },
+              "AB_RF": {
+                "n": 74,
+                "r2": 0.48058427785335944,
+                "rmse": 0.8209142707932372,
+                "mae": 0.6823706502404037,
+                "spearman_rho": 0.7180415773620981,
+                "calibration_intercept": -2.9634446290893117,
+                "calibration_slope": 1.3952594754857457,
+                "empirical_interval_coverage": 0.05405405405405406
+              },
+              "E_RF": {
+                "n": 74,
+                "r2": 0.4624641672962866,
+                "rmse": 0.8351105496428987,
+                "mae": 0.6957411231124706,
+                "spearman_rho": 0.7078362110209607,
+                "calibration_intercept": -2.9886023451513184,
+                "calibration_slope": 1.3985484072591483,
+                "empirical_interval_coverage": 0.06756756756756757
+              }
+            },
+            "outside": {
+              "Mean": {
+                "n": 4,
+                "r2": null,
+                "rmse": 1.2698353711341992,
+                "mae": 1.043652687843902,
+                "spearman_rho": -0.7999999999999999,
+                "calibration_intercept": 126.59030006132024,
+                "calibration_slope": -15.8630939944974,
+                "empirical_interval_coverage": 0.25
+              },
+              "AB_Ridge": {
+                "n": 4,
+                "r2": null,
+                "rmse": 1.1996078779512342,
+                "mae": 1.0721106963331846,
+                "spearman_rho": 0.39999999999999997,
+                "calibration_intercept": -5.563369532355829,
+                "calibration_slope": 1.6309850392206011,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_RF": {
+                "n": 4,
+                "r2": null,
+                "rmse": 1.221082797303915,
+                "mae": 1.153796479786965,
+                "spearman_rho": -0.19999999999999998,
+                "calibration_intercept": 3.3976254720867405,
+                "calibration_slope": 0.4673516943928899,
+                "empirical_interval_coverage": 0.0
+              },
+              "E_RF": {
+                "n": 4,
+                "r2": null,
+                "rmse": 1.243845695273308,
+                "mae": 1.1773914352914259,
+                "spearman_rho": -0.19999999999999998,
+                "calibration_intercept": 4.284793467496232,
+                "calibration_slope": 0.34880698798164134,
+                "empirical_interval_coverage": 0.0
+              }
+            }
+          }
+        },
+        "uncertainty": {
+          "model_intervals": {
+            "Mean": {
+              "r2": {
+                "estimate": -0.04520029880767451,
+                "lower": -0.10730642055728871,
+                "upper": -0.029413708399241248
+              },
+              "rmse": {
+                "estimate": 1.1616828269599786,
+                "lower": 1.0251321840022705,
+                "upper": 1.2914911414771317
+              },
+              "mae": {
+                "estimate": 0.9815337152669418,
+                "lower": 0.8473718152406065,
+                "upper": 1.1169949615647758
+              },
+              "spearman_rho": {
+                "estimate": -0.5703696960472922,
+                "lower": -0.7059648873815162,
+                "upper": -0.41126344938106607
+              }
+            },
+            "AB_Ridge": {
+              "r2": {
+                "estimate": 0.553339670340906,
+                "lower": 0.4378608953371851,
+                "upper": 0.6552664750328815
+              },
+              "rmse": {
+                "estimate": 0.7568706903113118,
+                "lower": 0.6458693319381379,
+                "upper": 0.8660024270399636
+              },
+              "mae": {
+                "estimate": 0.6135630590154345,
+                "lower": 0.5179215391191099,
+                "upper": 0.7167101144083793
+              },
+              "spearman_rho": {
+                "estimate": 0.7483493375532706,
+                "lower": 0.6409812712872152,
+                "upper": 0.8213585999766867
+              }
+            },
+            "AB_RF": {
+              "r2": {
+                "estimate": 0.446896469847917,
+                "lower": 0.33816766399265136,
+                "upper": 0.5444961450727126
+              },
+              "rmse": {
+                "estimate": 0.8440912694822835,
+                "lower": 0.725877724929931,
+                "upper": 0.9546406978734692
+              },
+              "mae": {
+                "estimate": 0.7057370388414635,
+                "lower": 0.6053027712956656,
+                "upper": 0.8175974225193474
+              },
+              "spearman_rho": {
+                "estimate": 0.693310046281506,
+                "lower": 0.5743314125010264,
+                "upper": 0.7748997363085923
+              }
+            },
+            "E_RF": {
+              "r2": {
+                "estimate": 0.42654498869972446,
+                "lower": 0.3179772527792441,
+                "upper": 0.5265146410274065
+              },
+              "rmse": {
+                "estimate": 0.8589884293675917,
+                "lower": 0.7417085850945545,
+                "upper": 0.9693852059049234
+              },
+              "mae": {
+                "estimate": 0.7206798356462569,
+                "lower": 0.6173659013243229,
+                "upper": 0.8314372090398732
+              },
+              "spearman_rho": {
+                "estimate": 0.676641921113603,
+                "lower": 0.5560269207847948,
+                "upper": 0.766264149990396
+              }
+            }
+          },
+          "paired_docking_increment": {
+            "delta_r2_E_minus_AB": {
+              "estimate": -0.019606544182826535,
+              "lower": -0.03300021477662426,
+              "upper": -0.008099444662453171
+            },
+            "delta_rmse_E_minus_AB": {
+              "estimate": 0.014708724736023748,
+              "lower": 0.0063426081519087855,
+              "upper": 0.023724487745589443
+            }
+          },
+          "resamples": 2000
+        },
+        "fold_manifest": [
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 1,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2165804",
+              "CHEMBL225459",
+              "CHEMBL259580",
+              "CHEMBL261482",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL4076003",
+              "CHEMBL4203542",
+              "CHEMBL4207839",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL2042081",
+              "CHEMBL2382434",
+              "CHEMBL3740939",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4205884",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4440752",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4549506",
+              "CHEMBL487554",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 3,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL136689",
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL1950665",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042073",
+              "CHEMBL294223",
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3416810",
+              "CHEMBL4529321",
+              "CHEMBL4582207",
+              "CHEMBL5561038",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 4,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL2153629",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL4212810",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4294888",
+              "CHEMBL506250",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 5,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1097859",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2070508",
+              "CHEMBL270654",
+              "CHEMBL372148",
+              "CHEMBL3827859",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4207914",
+              "CHEMBL4540395",
+              "CHEMBL461665",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1561896",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070508",
+              "CHEMBL2153629",
+              "CHEMBL261482",
+              "CHEMBL294223",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4212810",
+              "CHEMBL4549506",
+              "CHEMBL4559969",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 2,
+            "train_n": 59,
+            "test_n": 19,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1671936",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950665",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL458242",
+              "CHEMBL5561038",
+              "CHEMBL600794",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 3,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL136689",
+              "CHEMBL2070507",
+              "CHEMBL2382434",
+              "CHEMBL270654",
+              "CHEMBL3335523",
+              "CHEMBL3416776",
+              "CHEMBL3827859",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4440752",
+              "CHEMBL4582207",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 4,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL2042073",
+              "CHEMBL2042081",
+              "CHEMBL225459",
+              "CHEMBL3414573",
+              "CHEMBL3416810",
+              "CHEMBL4128848",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL461665",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 5,
+            "train_n": 65,
+            "test_n": 13,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL2165804",
+              "CHEMBL259580",
+              "CHEMBL3414946",
+              "CHEMBL372148",
+              "CHEMBL3740939",
+              "CHEMBL4076003",
+              "CHEMBL4204531",
+              "CHEMBL4207914",
+              "CHEMBL4294888",
+              "CHEMBL4540395",
+              "CHEMBL506250",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 1,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1097859",
+              "CHEMBL136689",
+              "CHEMBL1561896",
+              "CHEMBL1950653",
+              "CHEMBL2042081",
+              "CHEMBL225459",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4207839",
+              "CHEMBL4549506",
+              "CHEMBL4582207",
+              "CHEMBL5556919",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 2,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1671936",
+              "CHEMBL2042073",
+              "CHEMBL294223",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL3827859",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL458242",
+              "CHEMBL487554",
+              "CHEMBL506250"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1950655",
+              "CHEMBL1950665",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070508",
+              "CHEMBL2165804",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4212810",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4559969",
+              "CHEMBL461665",
+              "CHEMBL5561038",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 18,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2070507",
+              "CHEMBL2153629",
+              "CHEMBL3335523",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3740939",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4294888",
+              "CHEMBL4440752",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 5,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2382434",
+              "CHEMBL259580",
+              "CHEMBL261482",
+              "CHEMBL3414573",
+              "CHEMBL4204531",
+              "CHEMBL4205884",
+              "CHEMBL4529321",
+              "CHEMBL4540395",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 1,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950653",
+              "CHEMBL2042081",
+              "CHEMBL225459",
+              "CHEMBL259580",
+              "CHEMBL3335523",
+              "CHEMBL3416776",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4582207",
+              "CHEMBL461665",
+              "CHEMBL506250",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL261482",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL372148",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4549506",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL487554",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL2070508",
+              "CHEMBL2165804",
+              "CHEMBL294223",
+              "CHEMBL3414573",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3416810",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4212810",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4294888",
+              "CHEMBL4529321",
+              "CHEMBL4540395",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 4,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL136689",
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL1950665",
+              "CHEMBL2153629",
+              "CHEMBL270654",
+              "CHEMBL3827859",
+              "CHEMBL4204531",
+              "CHEMBL4440752",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL5203469",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 5,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042073",
+              "CHEMBL2382434",
+              "CHEMBL3414946",
+              "CHEMBL3740939",
+              "CHEMBL4203542",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042073",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL372148",
+              "CHEMBL4204531",
+              "CHEMBL4212810",
+              "CHEMBL4284097",
+              "CHEMBL4582207",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 2,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL2042081",
+              "CHEMBL2070508",
+              "CHEMBL2165804",
+              "CHEMBL2382434",
+              "CHEMBL261482",
+              "CHEMBL3335523",
+              "CHEMBL3827859",
+              "CHEMBL398272",
+              "CHEMBL4076003",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL506250",
+              "CHEMBL5203469",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950653",
+              "CHEMBL3414573",
+              "CHEMBL3416810",
+              "CHEMBL3740939",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4128848",
+              "CHEMBL4203542",
+              "CHEMBL4207839",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 4,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL136689",
+              "CHEMBL1990267",
+              "CHEMBL259580",
+              "CHEMBL270654",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4529321",
+              "CHEMBL4549506",
+              "CHEMBL458242",
+              "CHEMBL600794",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 5,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950655",
+              "CHEMBL1950665",
+              "CHEMBL2070507",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL4205884",
+              "CHEMBL4207914",
+              "CHEMBL4294888",
+              "CHEMBL4440752",
+              "CHEMBL4540395",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 1,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL136689",
+              "CHEMBL1671936",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2042073",
+              "CHEMBL2153629",
+              "CHEMBL2382434",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414573",
+              "CHEMBL4076003",
+              "CHEMBL4207839",
+              "CHEMBL4212810",
+              "CHEMBL4294888",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 2,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1095488",
+              "CHEMBL1950653",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2165804",
+              "CHEMBL294223",
+              "CHEMBL3416776",
+              "CHEMBL3827859",
+              "CHEMBL398272",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL506250",
+              "CHEMBL5561038",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL225459",
+              "CHEMBL261482",
+              "CHEMBL3414946",
+              "CHEMBL372148",
+              "CHEMBL3740939",
+              "CHEMBL4207914",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4540395",
+              "CHEMBL4559969",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 18,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL197669",
+              "CHEMBL2070508",
+              "CHEMBL259580",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL458242",
+              "CHEMBL5556919",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 5,
+            "train_n": 65,
+            "test_n": 13,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL1950665",
+              "CHEMBL1990267",
+              "CHEMBL2042081",
+              "CHEMBL3335523",
+              "CHEMBL3416810",
+              "CHEMBL4205884",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL4549506",
+              "CHEMBL4582207",
+              "CHEMBL487554",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 1,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL225459",
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL4205884",
+              "CHEMBL4440752",
+              "CHEMBL4540395",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL5203469",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 2,
+            "train_n": 60,
+            "test_n": 18,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2042073",
+              "CHEMBL261482",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL398272",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL506250",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 3,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1950665",
+              "CHEMBL2042081",
+              "CHEMBL2070508",
+              "CHEMBL372148",
+              "CHEMBL3740939",
+              "CHEMBL4076003",
+              "CHEMBL4207839",
+              "CHEMBL4212810",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4549506",
+              "CHEMBL4582207",
+              "CHEMBL461665",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 4,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL136689",
+              "CHEMBL1671936",
+              "CHEMBL1950653",
+              "CHEMBL2153629",
+              "CHEMBL2165804",
+              "CHEMBL270654",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4207914",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 5,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950655",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070507",
+              "CHEMBL2382434",
+              "CHEMBL259580",
+              "CHEMBL294223",
+              "CHEMBL3416810",
+              "CHEMBL3827859",
+              "CHEMBL4203542",
+              "CHEMBL4294888",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 1,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL2042073",
+              "CHEMBL2070507",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL3827859",
+              "CHEMBL4204531",
+              "CHEMBL4582207",
+              "CHEMBL458242",
+              "CHEMBL487554",
+              "CHEMBL506250",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 2,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL136689",
+              "CHEMBL1950665",
+              "CHEMBL1990267",
+              "CHEMBL2042081",
+              "CHEMBL225459",
+              "CHEMBL372148",
+              "CHEMBL3740939",
+              "CHEMBL4203542",
+              "CHEMBL4205884",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL600819",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1950655",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2382434",
+              "CHEMBL259580",
+              "CHEMBL261482",
+              "CHEMBL294223",
+              "CHEMBL3335523",
+              "CHEMBL4076003",
+              "CHEMBL4207839",
+              "CHEMBL4212810",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4529321",
+              "CHEMBL4549506",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 4,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL197669",
+              "CHEMBL2070508",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL4128848",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4294888",
+              "CHEMBL4559969",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 5,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950653",
+              "CHEMBL2153629",
+              "CHEMBL2165804",
+              "CHEMBL270654",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4540395",
+              "CHEMBL461665",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 1,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL136689",
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2153629",
+              "CHEMBL2382434",
+              "CHEMBL3827859",
+              "CHEMBL398272",
+              "CHEMBL4205884",
+              "CHEMBL4294888",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4212810",
+              "CHEMBL4540395",
+              "CHEMBL5556919",
+              "CHEMBL5561038",
+              "CHEMBL600819",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2042081",
+              "CHEMBL2070507",
+              "CHEMBL270654",
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3740939",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4549506",
+              "CHEMBL4559969",
+              "CHEMBL506250",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 4,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL197669",
+              "CHEMBL2042073",
+              "CHEMBL2070508",
+              "CHEMBL261482",
+              "CHEMBL294223",
+              "CHEMBL3416776",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 5,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950665",
+              "CHEMBL1990267",
+              "CHEMBL2165804",
+              "CHEMBL225459",
+              "CHEMBL259580",
+              "CHEMBL4076003",
+              "CHEMBL4207839",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4582207",
+              "CHEMBL458242",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL2042073",
+              "CHEMBL2042081",
+              "CHEMBL3335523",
+              "CHEMBL3416810",
+              "CHEMBL3827859",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4440752",
+              "CHEMBL461665",
+              "CHEMBL5561038",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 2,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070507",
+              "CHEMBL225459",
+              "CHEMBL294223",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL3740939",
+              "CHEMBL4203542",
+              "CHEMBL4207839",
+              "CHEMBL4207914",
+              "CHEMBL4529321",
+              "CHEMBL4540395",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1561896",
+              "CHEMBL1950653",
+              "CHEMBL197669",
+              "CHEMBL2070508",
+              "CHEMBL2165804",
+              "CHEMBL2382434",
+              "CHEMBL259580",
+              "CHEMBL3414573",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4294888",
+              "CHEMBL506250"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 4,
+            "train_n": 63,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL136689",
+              "CHEMBL1671936",
+              "CHEMBL1950655",
+              "CHEMBL1950665",
+              "CHEMBL1990267",
+              "CHEMBL2153629",
+              "CHEMBL270654",
+              "CHEMBL4076003",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4582207",
+              "CHEMBL487554",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 5,
+            "train_n": 64,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL261482",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL372148",
+              "CHEMBL398272",
+              "CHEMBL4205884",
+              "CHEMBL4212810",
+              "CHEMBL4284097",
+              "CHEMBL4549506",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL5556919",
+              "CHEMBL601413"
+            ]
+          }
+        ],
+        "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+      },
+      "high_disagreement_sensitivity": {
+        "analysis": "exclude_high_disagreement",
+        "endpoint_name": "pBind_Ki",
+        "n": 76,
+        "scaffold_count": 66,
+        "small_sample_warning": false,
+        "metrics": {
+          "Mean": {
+            "n": 76,
+            "r2": -0.03639201334543096,
+            "rmse": 1.1753592209083195,
+            "mae": 0.9949657644244878,
+            "spearman_rho": -0.5972107335568957,
+            "calibration_intercept": 170.41910319995802,
+            "calibration_slope": -21.633809769127836,
+            "empirical_interval_coverage": 0.05263157894736842
+          },
+          "AB_Ridge": {
+            "n": 76,
+            "r2": 0.5492757766423318,
+            "rmse": 0.7751112486441648,
+            "mae": 0.6287716996387749,
+            "spearman_rho": 0.733948153424458,
+            "calibration_intercept": -1.4145570277275181,
+            "calibration_slope": 1.1898761331088057,
+            "empirical_interval_coverage": 0.2631578947368421
+          },
+          "AB_RF": {
+            "n": 76,
+            "r2": 0.4440119684194481,
+            "rmse": 0.8608774093351703,
+            "mae": 0.7258766267357724,
+            "spearman_rho": 0.6878708748164154,
+            "calibration_intercept": -3.3271529090794427,
+            "calibration_slope": 1.4394109328347462,
+            "empirical_interval_coverage": 0.06578947368421052
+          },
+          "E_RF": {
+            "n": 76,
+            "r2": 0.42268607864296215,
+            "rmse": 0.8772322817001506,
+            "mae": 0.7427437400461198,
+            "spearman_rho": 0.6726530673710887,
+            "calibration_intercept": -3.2955824886223004,
+            "calibration_slope": 1.4352668370443968,
+            "empirical_interval_coverage": 0.06578947368421052
+          }
+        },
+        "applicability_domain": {
+          "similarity_threshold": 0.22666666666666666,
+          "descriptor_distance_threshold": 8.586668761554975,
+          "inside_n": 73,
+          "outside_n": 3,
+          "stratified_metrics": {
+            "inside": {
+              "Mean": {
+                "n": 73,
+                "r2": -0.03666980199689163,
+                "rmse": 1.1895768080265858,
+                "mae": 1.0133117941211818,
+                "spearman_rho": -0.5778173801166263,
+                "calibration_intercept": 169.1983852132556,
+                "calibration_slope": -21.472883463345,
+                "empirical_interval_coverage": 0.0410958904109589
+              },
+              "AB_Ridge": {
+                "n": 73,
+                "r2": 0.5594907204505962,
+                "rmse": 0.7754428491641498,
+                "mae": 0.6275886777534001,
+                "spearman_rho": 0.7333384774434402,
+                "calibration_intercept": -1.5230586840625815,
+                "calibration_slope": 1.2038434830687639,
+                "empirical_interval_coverage": 0.2602739726027397
+              },
+              "AB_RF": {
+                "n": 73,
+                "r2": 0.4554471446845014,
+                "rmse": 0.8621687639592641,
+                "mae": 0.7257754856156677,
+                "spearman_rho": 0.6840115728392115,
+                "calibration_intercept": -3.5646484078636065,
+                "calibration_slope": 1.4698099611956854,
+                "empirical_interval_coverage": 0.0684931506849315
+              },
+              "E_RF": {
+                "n": 73,
+                "r2": 0.4325088241919951,
+                "rmse": 0.8801401259948048,
+                "mae": 0.7445075183535304,
+                "spearman_rho": 0.6673635496712533,
+                "calibration_intercept": -3.5146508420918137,
+                "calibration_slope": 1.4633754787980935,
+                "empirical_interval_coverage": 0.0684931506849315
+              }
+            },
+            "outside": {
+              "Mean": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.7505284718173575,
+                "mae": 0.5485457084715968,
+                "spearman_rho": -0.8660254037844387,
+                "calibration_intercept": 267.6681713119894,
+                "calibration_slope": -34.545864891748344,
+                "empirical_interval_coverage": 0.3333333333333333
+              },
+              "AB_Ridge": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.7669981163670878,
+                "mae": 0.657558565516228,
+                "spearman_rho": -0.8660254037844387,
+                "calibration_intercept": 16.08184874128586,
+                "calibration_slope": -1.0163668900951275,
+                "empirical_interval_coverage": 0.3333333333333333
+              },
+              "AB_RF": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.8288345423428225,
+                "mae": 0.7283377273249853,
+                "spearman_rho": -0.8660254037844387,
+                "calibration_intercept": 15.216191395211755,
+                "calibration_slope": -0.9205900560658531,
+                "empirical_interval_coverage": 0.0
+              },
+              "E_RF": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.8032366523700156,
+                "mae": 0.6998251345657938,
+                "spearman_rho": -0.8660254037844387,
+                "calibration_intercept": 15.747148636339121,
+                "calibration_slope": -0.9864091950105611,
+                "empirical_interval_coverage": 0.0
+              }
+            }
+          }
+        },
+        "uncertainty": {
+          "model_intervals": {
+            "Mean": {
+              "r2": {
+                "estimate": -0.04477681943314904,
+                "lower": -0.11281289577363456,
+                "upper": -0.02884845951050636
+              },
+              "rmse": {
+                "estimate": 1.1736188220521675,
+                "lower": 1.040542604308305,
+                "upper": 1.3048498828970385
+              },
+              "mae": {
+                "estimate": 0.9958169729943475,
+                "lower": 0.856788370247542,
+                "upper": 1.1312904971669404
+              },
+              "spearman_rho": {
+                "estimate": -0.5937396364739929,
+                "lower": -0.7364621811824841,
+                "upper": -0.40989193158224196
+              }
+            },
+            "AB_Ridge": {
+              "r2": {
+                "estimate": 0.542391673453618,
+                "lower": 0.43393791791685105,
+                "upper": 0.6423903258262943
+              },
+              "rmse": {
+                "estimate": 0.7728229759249918,
+                "lower": 0.661759698198663,
+                "upper": 0.8833726658302397
+              },
+              "mae": {
+                "estimate": 0.6286667948577982,
+                "lower": 0.5292931228491273,
+                "upper": 0.7332401522328464
+              },
+              "spearman_rho": {
+                "estimate": 0.7304462655665136,
+                "lower": 0.6175166516357965,
+                "upper": 0.8105320987256348
+              }
+            },
+            "AB_RF": {
+              "r2": {
+                "estimate": 0.4362800542584553,
+                "lower": 0.3326792330793758,
+                "upper": 0.5338610975809076
+              },
+              "rmse": {
+                "estimate": 0.8564768111060979,
+                "lower": 0.7432913024212181,
+                "upper": 0.9715721077188778
+              },
+              "mae": {
+                "estimate": 0.724673160274802,
+                "lower": 0.6230916443821375,
+                "upper": 0.8309048426952225
+              },
+              "spearman_rho": {
+                "estimate": 0.6838247124603773,
+                "lower": 0.5561568173512254,
+                "upper": 0.7785703737559213
+              }
+            },
+            "E_RF": {
+              "r2": {
+                "estimate": 0.4145086039588961,
+                "lower": 0.3123017083192926,
+                "upper": 0.5141125701646921
+              },
+              "rmse": {
+                "estimate": 0.8736714157017971,
+                "lower": 0.7587737678786869,
+                "upper": 0.9875458703335699
+              },
+              "mae": {
+                "estimate": 0.7417379253569096,
+                "lower": 0.6394990218651763,
+                "upper": 0.8456732297617888
+              },
+              "spearman_rho": {
+                "estimate": 0.668570883336973,
+                "lower": 0.5411446765076287,
+                "upper": 0.7636212157825925
+              }
+            }
+          },
+          "paired_docking_increment": {
+            "delta_r2_E_minus_AB": {
+              "estimate": -0.021663821001477124,
+              "lower": -0.03490213161939962,
+              "upper": -0.01030090000705761
+            },
+            "delta_rmse_E_minus_AB": {
+              "estimate": 0.01627726868233209,
+              "lower": 0.007839777541292187,
+              "upper": 0.026136525263654144
+            }
+          },
+          "resamples": 2000
+        },
+        "fold_manifest": [
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 1,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL197669",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4212810",
+              "CHEMBL4559969",
+              "CHEMBL4582207",
+              "CHEMBL458242",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1950653",
+              "CHEMBL225459",
+              "CHEMBL2382434",
+              "CHEMBL270654",
+              "CHEMBL3740939",
+              "CHEMBL3827859",
+              "CHEMBL4203542",
+              "CHEMBL4294888",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4440752",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL1561896",
+              "CHEMBL1950655",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042081",
+              "CHEMBL2070508",
+              "CHEMBL259580",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414573",
+              "CHEMBL4529321",
+              "CHEMBL5203469",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950665",
+              "CHEMBL1990267",
+              "CHEMBL2042073",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL4204531",
+              "CHEMBL4207914",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4540395",
+              "CHEMBL506250",
+              "CHEMBL5556919",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 5,
+            "train_n": 63,
+            "test_n": 13,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1671936",
+              "CHEMBL2070507",
+              "CHEMBL2153629",
+              "CHEMBL261482",
+              "CHEMBL3335523",
+              "CHEMBL3416776",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4284097",
+              "CHEMBL4549506",
+              "CHEMBL600794",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 1,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1671936",
+              "CHEMBL1950655",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL259580",
+              "CHEMBL294223",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4128848",
+              "CHEMBL4203542",
+              "CHEMBL4294888",
+              "CHEMBL4540395",
+              "CHEMBL4559969"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 2,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL2042073",
+              "CHEMBL270654",
+              "CHEMBL3416810",
+              "CHEMBL398272",
+              "CHEMBL4204531",
+              "CHEMBL4207839",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL458242",
+              "CHEMBL5561038",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1561896",
+              "CHEMBL2070508",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3416776",
+              "CHEMBL3827859",
+              "CHEMBL4205884",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4582207",
+              "CHEMBL5556919",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 4,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1950653",
+              "CHEMBL1950665",
+              "CHEMBL2070507",
+              "CHEMBL2382434",
+              "CHEMBL261482",
+              "CHEMBL3414573",
+              "CHEMBL372148",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL461665",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 5,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL197669",
+              "CHEMBL2042081",
+              "CHEMBL3335523",
+              "CHEMBL3414946",
+              "CHEMBL3740939",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4076003",
+              "CHEMBL4212810",
+              "CHEMBL4549506",
+              "CHEMBL506250",
+              "CHEMBL5203469",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4076003",
+              "CHEMBL4204531",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4294888",
+              "CHEMBL4582207",
+              "CHEMBL461665",
+              "CHEMBL5556919",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 2,
+            "train_n": 63,
+            "test_n": 13,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1097859",
+              "CHEMBL2382434",
+              "CHEMBL259580",
+              "CHEMBL3335523",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL372148",
+              "CHEMBL4540395",
+              "CHEMBL458242",
+              "CHEMBL487554",
+              "CHEMBL506250",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1671936",
+              "CHEMBL1950665",
+              "CHEMBL2042073",
+              "CHEMBL2042081",
+              "CHEMBL261482",
+              "CHEMBL270654",
+              "CHEMBL3416810",
+              "CHEMBL4212810",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4559969",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 4,
+            "train_n": 58,
+            "test_n": 18,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1561896",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070508",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3740939",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4440752",
+              "CHEMBL600794",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 5,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950653",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL3414573",
+              "CHEMBL3827859",
+              "CHEMBL4128848",
+              "CHEMBL4207914",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL4549506"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL2042081",
+              "CHEMBL259580",
+              "CHEMBL270654",
+              "CHEMBL3416776",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4549506",
+              "CHEMBL4582207",
+              "CHEMBL458242",
+              "CHEMBL461665",
+              "CHEMBL506250"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 2,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950665",
+              "CHEMBL2070507",
+              "CHEMBL2070508",
+              "CHEMBL261482",
+              "CHEMBL3416810",
+              "CHEMBL398272",
+              "CHEMBL4212810",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL600794",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 3,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1671936",
+              "CHEMBL294223",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4207914",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4294888",
+              "CHEMBL4529321",
+              "CHEMBL4540395",
+              "CHEMBL5203469",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 4,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1097859",
+              "CHEMBL1950655",
+              "CHEMBL2042073",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414573",
+              "CHEMBL3827859",
+              "CHEMBL4203542",
+              "CHEMBL4284097",
+              "CHEMBL4440752",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 5,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950653",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2382434",
+              "CHEMBL3335523",
+              "CHEMBL3414946",
+              "CHEMBL372148",
+              "CHEMBL3740939",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 1,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1561896",
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042081",
+              "CHEMBL225459",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4582207",
+              "CHEMBL5203469",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL1671936",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL4207914",
+              "CHEMBL4294888",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4540395",
+              "CHEMBL487554",
+              "CHEMBL506250",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 3,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2070507",
+              "CHEMBL2153629",
+              "CHEMBL2382434",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL3740939",
+              "CHEMBL4212810",
+              "CHEMBL4559969",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1950665",
+              "CHEMBL259580",
+              "CHEMBL398272",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL600819",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 5,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL2042073",
+              "CHEMBL2070508",
+              "CHEMBL261482",
+              "CHEMBL294223",
+              "CHEMBL3335523",
+              "CHEMBL3827859",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4204531",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4549506",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 1,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2042081",
+              "CHEMBL2153629",
+              "CHEMBL259580",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3416810",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4076003",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4294888"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 2,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL1950665",
+              "CHEMBL2070508",
+              "CHEMBL261482",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL3740939",
+              "CHEMBL4128848",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4540395",
+              "CHEMBL506250",
+              "CHEMBL5561038",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL398272",
+              "CHEMBL4204531",
+              "CHEMBL4207914",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4549506",
+              "CHEMBL4559969",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1671936",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL197669",
+              "CHEMBL2382434",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL372148",
+              "CHEMBL4203542",
+              "CHEMBL4440752",
+              "CHEMBL458242",
+              "CHEMBL5556919",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 5,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL1990267",
+              "CHEMBL2042073",
+              "CHEMBL225459",
+              "CHEMBL294223",
+              "CHEMBL3827859",
+              "CHEMBL4212810",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4529321",
+              "CHEMBL4582207",
+              "CHEMBL487554",
+              "CHEMBL5203469",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 1,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL1990267",
+              "CHEMBL2042081",
+              "CHEMBL2070507",
+              "CHEMBL225459",
+              "CHEMBL259580",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL4128848",
+              "CHEMBL4204531",
+              "CHEMBL4440752",
+              "CHEMBL4559969",
+              "CHEMBL461665",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL2042073",
+              "CHEMBL2153629",
+              "CHEMBL2382434",
+              "CHEMBL270654",
+              "CHEMBL3335523",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL506250",
+              "CHEMBL5561038",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL1950655",
+              "CHEMBL261482",
+              "CHEMBL3740939",
+              "CHEMBL398272",
+              "CHEMBL4076003",
+              "CHEMBL4203542",
+              "CHEMBL4205884",
+              "CHEMBL4207839",
+              "CHEMBL4212810",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4549506"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 4,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL1097859",
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3827859",
+              "CHEMBL4284097",
+              "CHEMBL4294888",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4529321",
+              "CHEMBL4582207",
+              "CHEMBL458242",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 5,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950653",
+              "CHEMBL1950665",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL2070508",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4207914",
+              "CHEMBL4540395",
+              "CHEMBL5203469",
+              "CHEMBL600819",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 1,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL2042073",
+              "CHEMBL2070508",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL2382434",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL4212810",
+              "CHEMBL458242",
+              "CHEMBL487554",
+              "CHEMBL506250",
+              "CHEMBL600794"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 2,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1097859",
+              "CHEMBL1561896",
+              "CHEMBL1950665",
+              "CHEMBL259580",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3740939",
+              "CHEMBL4204531",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL461665",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 3,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1950655",
+              "CHEMBL1990267",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL3335523",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4203542",
+              "CHEMBL4207839",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4529321",
+              "CHEMBL4540395",
+              "CHEMBL4582207",
+              "CHEMBL5556919"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 4,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1671936",
+              "CHEMBL1950653",
+              "CHEMBL197669",
+              "CHEMBL2070507",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4207914",
+              "CHEMBL4559969",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 5,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL2042081",
+              "CHEMBL261482",
+              "CHEMBL270654",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3827859",
+              "CHEMBL4205884",
+              "CHEMBL4284097",
+              "CHEMBL4294888",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4549506",
+              "CHEMBL5561038",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 1,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1561896",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL259580",
+              "CHEMBL261482",
+              "CHEMBL294223",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3416810",
+              "CHEMBL372148",
+              "CHEMBL3827859",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4549506",
+              "CHEMBL4582207",
+              "CHEMBL5203469"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 2,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1097859",
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL270654",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3414946",
+              "CHEMBL4207914",
+              "CHEMBL4212810",
+              "CHEMBL4529321",
+              "CHEMBL5556919",
+              "CHEMBL5561038",
+              "CHEMBL600794",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 3,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL2070508",
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3740939",
+              "CHEMBL398272",
+              "CHEMBL4204531",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4440752",
+              "CHEMBL4540395",
+              "CHEMBL506250",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 4,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1671936",
+              "CHEMBL1950665",
+              "CHEMBL197669",
+              "CHEMBL2070507",
+              "CHEMBL2382434",
+              "CHEMBL3416776",
+              "CHEMBL4128848",
+              "CHEMBL4203542",
+              "CHEMBL4207839",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL4294888",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 5,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1990267",
+              "CHEMBL2042073",
+              "CHEMBL2042081",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL4076003",
+              "CHEMBL4205884",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL461665"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 1,
+            "train_n": 60,
+            "test_n": 16,
+            "test_ids": [
+              "CHEMBL1095488",
+              "CHEMBL2024116",
+              "CHEMBL2024116",
+              "CHEMBL3414946",
+              "CHEMBL3827859",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4064795",
+              "CHEMBL4203542",
+              "CHEMBL4204531",
+              "CHEMBL4205884",
+              "CHEMBL4212810",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL4549506",
+              "CHEMBL5561038"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 2,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL1950653",
+              "CHEMBL1950655",
+              "CHEMBL2070507",
+              "CHEMBL2070508",
+              "CHEMBL2153629",
+              "CHEMBL225459",
+              "CHEMBL261482",
+              "CHEMBL3414573",
+              "CHEMBL3416776",
+              "CHEMBL4297184",
+              "CHEMBL4297184",
+              "CHEMBL4540395",
+              "CHEMBL5203469",
+              "CHEMBL601413"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 3,
+            "train_n": 59,
+            "test_n": 17,
+            "test_ids": [
+              "CHEMBL119709",
+              "CHEMBL119709",
+              "CHEMBL1561896",
+              "CHEMBL1671936",
+              "CHEMBL183",
+              "CHEMBL183",
+              "CHEMBL1950665",
+              "CHEMBL197669",
+              "CHEMBL2382434",
+              "CHEMBL3317574",
+              "CHEMBL3317574",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3740939",
+              "CHEMBL4294888",
+              "CHEMBL4582207",
+              "CHEMBL506250"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 4,
+            "train_n": 61,
+            "test_n": 15,
+            "test_ids": [
+              "CHEMBL1092270",
+              "CHEMBL1097859",
+              "CHEMBL2042073",
+              "CHEMBL294223",
+              "CHEMBL3335523",
+              "CHEMBL372148",
+              "CHEMBL4076003",
+              "CHEMBL4128848",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4284595",
+              "CHEMBL447664",
+              "CHEMBL447664",
+              "CHEMBL487554",
+              "CHEMBL600819"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pBind_Ki",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 5,
+            "train_n": 62,
+            "test_n": 14,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL17127",
+              "CHEMBL1990267",
+              "CHEMBL2042081",
+              "CHEMBL259580",
+              "CHEMBL270654",
+              "CHEMBL3416810",
+              "CHEMBL4207839",
+              "CHEMBL4207914",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL461665",
+              "CHEMBL5556919",
+              "CHEMBL600794"
+            ]
+          }
+        ],
+        "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+      }
+    },
+    "pFunc_agonism": {
+      "status": "complete_exploratory",
+      "primary": {
+        "analysis": "primary",
+        "endpoint_name": "pFunc_agonism",
+        "n": 19,
+        "scaffold_count": 18,
+        "small_sample_warning": true,
+        "metrics": {
+          "Mean": {
+            "n": 19,
+            "r2": -0.14902667383244195,
+            "rmse": 0.7743085197273943,
+            "mae": 0.6205069862155387,
+            "spearman_rho": -0.81387181738367,
+            "calibration_intercept": 84.68911256388375,
+            "calibration_slope": -10.269640259749018,
+            "empirical_interval_coverage": 0.15789473684210525
+          },
+          "AB_Ridge": {
+            "n": 19,
+            "r2": -0.4549101402544744,
+            "rmse": 0.8712987037156072,
+            "mae": 0.6967021512870758,
+            "spearman_rho": -0.21412902456284616,
+            "calibration_intercept": 10.3497463374001,
+            "calibration_slope": -0.3762567833721846,
+            "empirical_interval_coverage": 0.3157894736842105
+          },
+          "AB_RF": {
+            "n": 19,
+            "r2": -0.22034990289323764,
+            "rmse": 0.7979784590341282,
+            "mae": 0.6303582044994112,
+            "spearman_rho": -0.5195261579557579,
+            "calibration_intercept": 36.52353970793122,
+            "calibration_slope": -3.8528299190303748,
+            "empirical_interval_coverage": 0.21052631578947367
+          },
+          "E_RF": {
+            "n": 19,
+            "r2": -0.21069176173082416,
+            "rmse": 0.7948144902564664,
+            "mae": 0.6309508911043998,
+            "spearman_rho": -0.49670913074824147,
+            "calibration_intercept": 34.63577225039008,
+            "calibration_slope": -3.604536814437207,
+            "empirical_interval_coverage": 0.21052631578947367
+          }
+        },
+        "applicability_domain": {
+          "similarity_threshold": 0.2361783726876223,
+          "descriptor_distance_threshold": 4.153866196525715,
+          "inside_n": 18,
+          "outside_n": 1,
+          "stratified_metrics": {
+            "inside": {
+              "Mean": {
+                "n": 18,
+                "r2": -0.15493643269261637,
+                "rmse": 0.7537504219134786,
+                "mae": 0.595015476190476,
+                "spearman_rho": -0.7809917355371901,
+                "calibration_intercept": 82.40338691027323,
+                "calibration_slope": -9.967430143206066,
+                "empirical_interval_coverage": 0.16666666666666666
+              },
+              "AB_Ridge": {
+                "n": 18,
+                "r2": -0.4731878066760957,
+                "rmse": 0.8512901048748742,
+                "mae": 0.6701552301992701,
+                "spearman_rho": -0.18172434016970188,
+                "calibration_intercept": 9.770382338412182,
+                "calibration_slope": -0.3062601157187162,
+                "empirical_interval_coverage": 0.3333333333333333
+              },
+              "AB_RF": {
+                "n": 18,
+                "r2": -0.23963156368934313,
+                "rmse": 0.7808989527474872,
+                "mae": 0.6065268153551693,
+                "spearman_rho": -0.4863191148859635,
+                "calibration_intercept": 34.86093056585023,
+                "calibration_slope": -3.637559993861856,
+                "empirical_interval_coverage": 0.2222222222222222
+              },
+              "E_RF": {
+                "n": 18,
+                "r2": -0.22654840808601362,
+                "rmse": 0.7767671918525708,
+                "mae": 0.6066278353297548,
+                "spearman_rho": -0.4718637696451918,
+                "calibration_intercept": 32.88927550826163,
+                "calibration_slope": -3.3779916192169672,
+                "empirical_interval_coverage": 0.2222222222222222
+              }
+            },
+            "outside": {
+              "Mean": {
+                "n": 1,
+                "r2": null,
+                "rmse": 1.0793541666666666,
+                "mae": 1.0793541666666666,
+                "spearman_rho": null,
+                "calibration_intercept": null,
+                "calibration_slope": null,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_Ridge": {
+                "n": 1,
+                "r2": null,
+                "rmse": 1.1745467308675792,
+                "mae": 1.1745467308675792,
+                "spearman_rho": null,
+                "calibration_intercept": null,
+                "calibration_slope": null,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_RF": {
+                "n": 1,
+                "r2": null,
+                "rmse": 1.0593232090957665,
+                "mae": 1.0593232090957665,
+                "spearman_rho": null,
+                "calibration_intercept": null,
+                "calibration_slope": null,
+                "empirical_interval_coverage": 0.0
+              },
+              "E_RF": {
+                "n": 1,
+                "r2": null,
+                "rmse": 1.068765895048009,
+                "mae": 1.068765895048009,
+                "spearman_rho": null,
+                "calibration_intercept": null,
+                "calibration_slope": null,
+                "empirical_interval_coverage": 0.0
+              }
+            }
+          }
+        },
+        "uncertainty": {
+          "model_intervals": {
+            "Mean": {
+              "r2": {
+                "estimate": -0.18392460330574323,
+                "lower": -0.5478536289797509,
+                "upper": -0.13150890173668997
+              },
+              "rmse": {
+                "estimate": 0.7677858208494678,
+                "lower": 0.5503144521168465,
+                "upper": 0.9644197477784002
+              },
+              "mae": {
+                "estimate": 0.6171654213659143,
+                "lower": 0.41616537280701765,
+                "upper": 0.8140644509711776
+              },
+              "spearman_rho": {
+                "estimate": -0.818392870391478,
+                "lower": -0.9551190475976328,
+                "upper": -0.481453909148194
+              }
+            },
+            "AB_Ridge": {
+              "r2": {
+                "estimate": -0.5417442898676766,
+                "lower": -1.3686775746036535,
+                "upper": -0.03170181566303061
+              },
+              "rmse": {
+                "estimate": 0.8606673487983313,
+                "lower": 0.6011699229070429,
+                "upper": 1.116368934498005
+              },
+              "mae": {
+                "estimate": 0.6947179551345354,
+                "lower": 0.4652662615694094,
+                "upper": 0.9386501969315373
+              },
+              "spearman_rho": {
+                "estimate": -0.22188109924905813,
+                "lower": -0.6646344084460464,
+                "upper": 0.2918334027409706
+              }
+            },
+            "AB_RF": {
+              "r2": {
+                "estimate": -0.264430926136346,
+                "lower": -0.6633148860004285,
+                "upper": -0.1182703682222004
+              },
+              "rmse": {
+                "estimate": 0.7893515789722414,
+                "lower": 0.5459137096335969,
+                "upper": 1.014839364267988
+              },
+              "mae": {
+                "estimate": 0.6254292149200029,
+                "lower": 0.4108161175299593,
+                "upper": 0.8408873607034416
+              },
+              "spearman_rho": {
+                "estimate": -0.5183226201950045,
+                "lower": -0.8059072492568745,
+                "upper": -0.01958266198661186
+              }
+            },
+            "E_RF": {
+              "r2": {
+                "estimate": -0.2567698128548199,
+                "lower": -0.6393126130738129,
+                "upper": -0.1087648207452807
+              },
+              "rmse": {
+                "estimate": 0.786413518128444,
+                "lower": 0.5448622481955109,
+                "upper": 1.0112570781065502
+              },
+              "mae": {
+                "estimate": 0.6269488410827302,
+                "lower": 0.41427502460297344,
+                "upper": 0.8390084825449442
+              },
+              "spearman_rho": {
+                "estimate": -0.4909095943337355,
+                "lower": -0.7807826480298214,
+                "upper": 0.004562006405769841
+              }
+            }
+          },
+          "paired_docking_increment": {
+            "delta_r2_E_minus_AB": {
+              "estimate": 0.008777562133344352,
+              "lower": -0.012484062425887298,
+              "upper": 0.03284937918495819
+            },
+            "delta_rmse_E_minus_AB": {
+              "estimate": -0.0027474449742483364,
+              "lower": -0.009754508585468455,
+              "upper": 0.0033055216167421774
+            }
+          },
+          "resamples": 2000
+        },
+        "fold_manifest": [
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042304",
+              "CHEMBL2042308",
+              "CHEMBL2070508"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL225459",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 3,
+            "train_n": 14,
+            "test_n": 5,
+            "test_ids": [
+              "CHEMBL261482",
+              "CHEMBL3414573",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042310",
+              "CHEMBL2070507",
+              "CHEMBL3235280"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL3335523",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2070507",
+              "CHEMBL261482",
+              "CHEMBL3335523"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL2042308",
+              "CHEMBL2070508",
+              "CHEMBL225459"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL3416810",
+              "CHEMBL4076003",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL3235280",
+              "CHEMBL3414573",
+              "CHEMBL3414946"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 5,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042310",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL3416776"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL3235280",
+              "CHEMBL3335523",
+              "CHEMBL3416776"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL2042310",
+              "CHEMBL3414573",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2070507",
+              "CHEMBL2070508",
+              "CHEMBL225459",
+              "CHEMBL261482"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL3414946",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 5,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL225459",
+              "CHEMBL3414573",
+              "CHEMBL3414946",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042308",
+              "CHEMBL261482",
+              "CHEMBL3235280"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL2042310",
+              "CHEMBL2070507",
+              "CHEMBL3335523"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2070508",
+              "CHEMBL3416776",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 5,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 1,
+            "train_n": 14,
+            "test_n": 5,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL2042305",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2070508",
+              "CHEMBL225459",
+              "CHEMBL3416776"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL3414573",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL2070507",
+              "CHEMBL261482"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042310",
+              "CHEMBL3235280",
+              "CHEMBL3335523"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL261482",
+              "CHEMBL3414946",
+              "CHEMBL3416810",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042304",
+              "CHEMBL2070507",
+              "CHEMBL3235280"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 3,
+            "train_n": 14,
+            "test_n": 5,
+            "test_ids": [
+              "CHEMBL3335523",
+              "CHEMBL3414573",
+              "CHEMBL3414940",
+              "CHEMBL3414941",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL225459",
+              "CHEMBL3416776"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL2042310",
+              "CHEMBL2070508"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL261482",
+              "CHEMBL3335523",
+              "CHEMBL3414946"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL3414573",
+              "CHEMBL3416810",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2070507",
+              "CHEMBL2070508",
+              "CHEMBL225459",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042308",
+              "CHEMBL3416776"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 5,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042310",
+              "CHEMBL3235280",
+              "CHEMBL3414940",
+              "CHEMBL3414941"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL225459",
+              "CHEMBL3416776",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042305",
+              "CHEMBL2070508",
+              "CHEMBL261482"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 3,
+            "train_n": 14,
+            "test_n": 5,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL2042310",
+              "CHEMBL3335523",
+              "CHEMBL3414940",
+              "CHEMBL3414941"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 4,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2070507",
+              "CHEMBL3414573",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL3235280",
+              "CHEMBL3414946",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL3414946",
+              "CHEMBL3416776",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL2070507",
+              "CHEMBL2070508",
+              "CHEMBL3414573"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2042305",
+              "CHEMBL225459",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 4,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL261482",
+              "CHEMBL3235280",
+              "CHEMBL3414940",
+              "CHEMBL3414941"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042310",
+              "CHEMBL3335523",
+              "CHEMBL4076003"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 1,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2070508",
+              "CHEMBL3416776",
+              "CHEMBL4076003",
+              "CHEMBL4104819"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 2,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042305",
+              "CHEMBL2042310",
+              "CHEMBL261482",
+              "CHEMBL3335523"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 3,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042303",
+              "CHEMBL2070507",
+              "CHEMBL225459",
+              "CHEMBL3416810"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 4,
+            "train_n": 15,
+            "test_n": 4,
+            "test_ids": [
+              "CHEMBL2042308",
+              "CHEMBL3235280",
+              "CHEMBL3414940",
+              "CHEMBL3414941"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_agonism",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 5,
+            "train_n": 16,
+            "test_n": 3,
+            "test_ids": [
+              "CHEMBL2042304",
+              "CHEMBL3414573",
+              "CHEMBL3414946"
+            ]
+          }
+        ],
+        "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+      }
+    },
+    "pFunc_inhibition": {
+      "status": "complete_exploratory",
+      "primary": {
+        "analysis": "primary",
+        "endpoint_name": "pFunc_inhibition",
+        "n": 36,
+        "scaffold_count": 36,
+        "small_sample_warning": true,
+        "metrics": {
+          "Mean": {
+            "n": 36,
+            "r2": -0.044109589896394796,
+            "rmse": 0.9778032974137982,
+            "mae": 0.7389123221127529,
+            "spearman_rho": -0.7334878878542591,
+            "calibration_intercept": 167.43506546357915,
+            "calibration_slope": -22.965218919471834,
+            "empirical_interval_coverage": 0.1388888888888889
+          },
+          "AB_Ridge": {
+            "n": 36,
+            "r2": 0.5532506245078206,
+            "rmse": 0.6396029117740428,
+            "mae": 0.5256886784677383,
+            "spearman_rho": 0.6837904462689082,
+            "calibration_intercept": -0.7820282299490535,
+            "calibration_slope": 1.1248615657629546,
+            "empirical_interval_coverage": 0.1388888888888889
+          },
+          "AB_RF": {
+            "n": 36,
+            "r2": 0.36119701864450093,
+            "rmse": 0.7648247304794308,
+            "mae": 0.6018150178627406,
+            "spearman_rho": 0.5964980488728773,
+            "calibration_intercept": -5.525860472998509,
+            "calibration_slope": 1.802038273297282,
+            "empirical_interval_coverage": 0.16666666666666666
+          },
+          "E_RF": {
+            "n": 36,
+            "r2": 0.3838416329196641,
+            "rmse": 0.7511464694631369,
+            "mae": 0.5921013959229708,
+            "spearman_rho": 0.6243080161848872,
+            "calibration_intercept": -6.026310658593023,
+            "calibration_slope": 1.873421539811551,
+            "empirical_interval_coverage": 0.1388888888888889
+          }
+        },
+        "applicability_domain": {
+          "similarity_threshold": 0.23529411764705882,
+          "descriptor_distance_threshold": 2.467433314138855,
+          "inside_n": 34,
+          "outside_n": 2,
+          "stratified_metrics": {
+            "inside": {
+              "Mean": {
+                "n": 34,
+                "r2": -0.04603436703680708,
+                "rmse": 0.9916635236901348,
+                "mae": 0.7498440850478121,
+                "spearman_rho": -0.7412107168834428,
+                "calibration_intercept": 168.0797169866298,
+                "calibration_slope": -23.062530361552806,
+                "empirical_interval_coverage": 0.14705882352941177
+              },
+              "AB_Ridge": {
+                "n": 34,
+                "r2": 0.5575122702311321,
+                "rmse": 0.6449736591288183,
+                "mae": 0.5264764016490721,
+                "spearman_rho": 0.671507254953385,
+                "calibration_intercept": -0.7601481079735151,
+                "calibration_slope": 1.1180202071040108,
+                "empirical_interval_coverage": 0.14705882352941177
+              },
+              "AB_RF": {
+                "n": 34,
+                "r2": 0.3632556817113749,
+                "rmse": 0.7737023241205409,
+                "mae": 0.6106050406480745,
+                "spearman_rho": 0.5800978904047567,
+                "calibration_intercept": -5.352515073470408,
+                "calibration_slope": 1.7748117535890533,
+                "empirical_interval_coverage": 0.14705882352941177
+              },
+              "E_RF": {
+                "n": 34,
+                "r2": 0.3840538700010022,
+                "rmse": 0.7609615753260013,
+                "mae": 0.602585984902179,
+                "spearman_rho": 0.6045552454679349,
+                "calibration_intercept": -5.8399272417078825,
+                "calibration_slope": 1.8444987776632806,
+                "empirical_interval_coverage": 0.11764705882352941
+              }
+            },
+            "outside": {
+              "Mean": {
+                "n": 2,
+                "r2": null,
+                "rmse": 0.701459863499873,
+                "mae": 0.5530723522167489,
+                "spearman_rho": null,
+                "calibration_intercept": 479.58970670126746,
+                "calibration_slope": -67.5143979556839,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_Ridge": {
+                "n": 2,
+                "r2": null,
+                "rmse": 0.5401912337373882,
+                "mae": 0.5122973843850631,
+                "spearman_rho": null,
+                "calibration_intercept": -2.6575335891200673,
+                "calibration_slope": 1.4585516186310226,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_RF": {
+                "n": 2,
+                "r2": null,
+                "rmse": 0.5939391908359483,
+                "mae": 0.452384630512066,
+                "spearman_rho": null,
+                "calibration_intercept": -34.00311373295029,
+                "calibration_slope": 5.8845524561774045,
+                "empirical_interval_coverage": 0.5
+              },
+              "E_RF": {
+                "n": 2,
+                "r2": null,
+                "rmse": 0.5584939654822911,
+                "mae": 0.4138633832764351,
+                "spearman_rho": null,
+                "calibration_intercept": -21.87455466695507,
+                "calibration_slope": 4.155971181938143,
+                "empirical_interval_coverage": 0.5
+              }
+            }
+          }
+        },
+        "uncertainty": {
+          "model_intervals": {
+            "Mean": {
+              "r2": {
+                "estimate": -0.060202738629450026,
+                "lower": -0.21677539380399263,
+                "upper": -0.03784929782324421
+              },
+              "rmse": {
+                "estimate": 0.9692718312352474,
+                "lower": 0.723160909701038,
+                "upper": 1.2218294924971296
+              },
+              "mae": {
+                "estimate": 0.73640469348659,
+                "lower": 0.5296403269533386,
+                "upper": 0.955049394926792
+              },
+              "spearman_rho": {
+                "estimate": -0.7297333433316363,
+                "lower": -0.8555405124215475,
+                "upper": -0.5218118226045915
+              }
+            },
+            "AB_Ridge": {
+              "r2": {
+                "estimate": 0.5342696522621506,
+                "lower": 0.2186954009728687,
+                "upper": 0.7174763043951575
+              },
+              "rmse": {
+                "estimate": 0.635687734748307,
+                "lower": 0.4943740657918246,
+                "upper": 0.7904770834329858
+              },
+              "mae": {
+                "estimate": 0.524368605967328,
+                "lower": 0.4095883477706725,
+                "upper": 0.6535265518636562
+              },
+              "spearman_rho": {
+                "estimate": 0.6744539662039302,
+                "lower": 0.43809177986409026,
+                "upper": 0.8389826875637876
+              }
+            },
+            "AB_RF": {
+              "r2": {
+                "estimate": 0.3389521537985696,
+                "lower": 0.1412687217472674,
+                "upper": 0.46653532624356414
+              },
+              "rmse": {
+                "estimate": 0.7602037543177143,
+                "lower": 0.5742233754371914,
+                "upper": 0.9310903774475479
+              },
+              "mae": {
+                "estimate": 0.5998744865940597,
+                "lower": 0.4456186712506655,
+                "upper": 0.7587567665062749
+              },
+              "spearman_rho": {
+                "estimate": 0.5959726696982516,
+                "lower": 0.3020413917033107,
+                "upper": 0.8030059208368778
+              }
+            },
+            "E_RF": {
+              "r2": {
+                "estimate": 0.36340308599833915,
+                "lower": 0.1757448246342973,
+                "upper": 0.48276552517883864
+              },
+              "rmse": {
+                "estimate": 0.7473404898518617,
+                "lower": 0.5647477236848899,
+                "upper": 0.9145951312468016
+              },
+              "mae": {
+                "estimate": 0.5892851425782611,
+                "lower": 0.4349278541007939,
+                "upper": 0.7466506283393352
+              },
+              "spearman_rho": {
+                "estimate": 0.6216232749419993,
+                "lower": 0.3435565941597572,
+                "upper": 0.8225661052784357
+              }
+            }
+          },
+          "paired_docking_increment": {
+            "delta_r2_E_minus_AB": {
+              "estimate": 0.023370023245204652,
+              "lower": 0.011025147557807318,
+              "upper": 0.03908767655024228
+            },
+            "delta_rmse_E_minus_AB": {
+              "estimate": -0.013733445392692833,
+              "lower": -0.02049765785042225,
+              "upper": -0.006145481256743063
+            }
+          },
+          "resamples": 2000
+        },
+        "fold_manifest": [
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL398272",
+              "CHEMBL4284097",
+              "CHEMBL4529321",
+              "CHEMBL4858144",
+              "CHEMBL4862010",
+              "CHEMBL487554",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL4855390",
+              "CHEMBL4855908",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1078085",
+              "CHEMBL2024116",
+              "CHEMBL4284595",
+              "CHEMBL4297184",
+              "CHEMBL4559969",
+              "CHEMBL4740383"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL4440752",
+              "CHEMBL458242",
+              "CHEMBL4849795",
+              "CHEMBL5076939"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1079141",
+              "CHEMBL197669",
+              "CHEMBL4064795",
+              "CHEMBL5090017",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077749",
+              "CHEMBL1078001",
+              "CHEMBL1078085",
+              "CHEMBL270654",
+              "CHEMBL4064795",
+              "CHEMBL4559969",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1079141",
+              "CHEMBL1082063",
+              "CHEMBL2024116",
+              "CHEMBL4440752",
+              "CHEMBL4858144",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4862010",
+              "CHEMBL487554",
+              "CHEMBL5076939",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL4297184",
+              "CHEMBL458242",
+              "CHEMBL4740383",
+              "CHEMBL4855390",
+              "CHEMBL5090017",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4529321",
+              "CHEMBL4849795",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL17127",
+              "CHEMBL4064795",
+              "CHEMBL487554",
+              "CHEMBL5078181",
+              "CHEMBL5090017",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1078001",
+              "CHEMBL1082063",
+              "CHEMBL4297184",
+              "CHEMBL4740383",
+              "CHEMBL4849795",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL2024116",
+              "CHEMBL4284097",
+              "CHEMBL4529321",
+              "CHEMBL4855908",
+              "CHEMBL5076939",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL1079141",
+              "CHEMBL3317574",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4559969",
+              "CHEMBL4858144"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL197669",
+              "CHEMBL270654",
+              "CHEMBL398272",
+              "CHEMBL458242",
+              "CHEMBL4855390",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL398272",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL4858144",
+              "CHEMBL5076939",
+              "CHEMBL5078181",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL183",
+              "CHEMBL4740383",
+              "CHEMBL4855390",
+              "CHEMBL487554",
+              "CHEMBL5090017",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL270654",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4849795"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1078001",
+              "CHEMBL2024116",
+              "CHEMBL3317574",
+              "CHEMBL4297184",
+              "CHEMBL4862010",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077902",
+              "CHEMBL197669",
+              "CHEMBL4064795",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL1077902",
+              "CHEMBL1082063",
+              "CHEMBL183",
+              "CHEMBL2024116",
+              "CHEMBL398272",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL3317574",
+              "CHEMBL4297184",
+              "CHEMBL4559969",
+              "CHEMBL4855390",
+              "CHEMBL487554",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL5076939",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL270654",
+              "CHEMBL4740383",
+              "CHEMBL4849795",
+              "CHEMBL4855908",
+              "CHEMBL4858144",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1078085",
+              "CHEMBL1079141",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL5090017",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077902",
+              "CHEMBL4064795",
+              "CHEMBL4855390",
+              "CHEMBL4862010",
+              "CHEMBL5090017",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1082063",
+              "CHEMBL3317574",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL4855908",
+              "CHEMBL4858144"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL4440752",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL1078085",
+              "CHEMBL2024116",
+              "CHEMBL270654",
+              "CHEMBL458242",
+              "CHEMBL5076939",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL197669",
+              "CHEMBL398272",
+              "CHEMBL4284097",
+              "CHEMBL4297184",
+              "CHEMBL4740383",
+              "CHEMBL4849795"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078001",
+              "CHEMBL183",
+              "CHEMBL4064795",
+              "CHEMBL4559969",
+              "CHEMBL4849795",
+              "CHEMBL4862010",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL270654",
+              "CHEMBL4284097",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL4740383",
+              "CHEMBL4855390",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1079141",
+              "CHEMBL17127",
+              "CHEMBL2024116",
+              "CHEMBL4284595",
+              "CHEMBL4297184",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL5090017",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077902",
+              "CHEMBL398272",
+              "CHEMBL4440752",
+              "CHEMBL4858144",
+              "CHEMBL5076939",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL17127",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4855390",
+              "CHEMBL5090017",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078001",
+              "CHEMBL2024116",
+              "CHEMBL398272",
+              "CHEMBL4740383",
+              "CHEMBL4849795",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL4858144",
+              "CHEMBL5076939"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1082063",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL4297184",
+              "CHEMBL4862010",
+              "CHEMBL487554",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1078085",
+              "CHEMBL1079141",
+              "CHEMBL4064795",
+              "CHEMBL4559969",
+              "CHEMBL5078181",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077749",
+              "CHEMBL1079141",
+              "CHEMBL2024116",
+              "CHEMBL3317574",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL4855390",
+              "CHEMBL4858144",
+              "CHEMBL4862010",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL4440752",
+              "CHEMBL4740383",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078001",
+              "CHEMBL1082063",
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL5076939",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL17127",
+              "CHEMBL398272",
+              "CHEMBL4297184",
+              "CHEMBL4849795",
+              "CHEMBL487554",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 1,
+            "train_n": 28,
+            "test_n": 8,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4529321",
+              "CHEMBL4855908",
+              "CHEMBL4862010",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 2,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1078001",
+              "CHEMBL183",
+              "CHEMBL4064795",
+              "CHEMBL4440752",
+              "CHEMBL5078181",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 3,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL1078085",
+              "CHEMBL4297184",
+              "CHEMBL458242",
+              "CHEMBL4740383",
+              "CHEMBL4849795"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 4,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL2024116",
+              "CHEMBL270654",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL5076939",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "primary",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 5,
+            "train_n": 29,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1082063",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4855390",
+              "CHEMBL4858144",
+              "CHEMBL5090017"
+            ]
+          }
+        ],
+        "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+      },
+      "high_disagreement_sensitivity": {
+        "analysis": "exclude_high_disagreement",
+        "endpoint_name": "pFunc_inhibition",
+        "n": 34,
+        "scaffold_count": 34,
+        "small_sample_warning": true,
+        "metrics": {
+          "Mean": {
+            "n": 34,
+            "r2": -0.0436024618728903,
+            "rmse": 0.9903715577257949,
+            "mae": 0.7481722689075629,
+            "spearman_rho": -0.6232138927404117,
+            "calibration_intercept": 169.86534813228238,
+            "calibration_slope": -23.42659668158012,
+            "empirical_interval_coverage": 0.14705882352941177
+          },
+          "AB_Ridge": {
+            "n": 34,
+            "r2": 0.565966231466289,
+            "rmse": 0.6386933168196215,
+            "mae": 0.5293646875397999,
+            "spearman_rho": 0.6858714935308896,
+            "calibration_intercept": -0.4834909218838932,
+            "calibration_slope": 1.081383864530389,
+            "empirical_interval_coverage": 0.20588235294117646
+          },
+          "AB_RF": {
+            "n": 34,
+            "r2": 0.3695679833734009,
+            "rmse": 0.7697500793858321,
+            "mae": 0.6064369563075929,
+            "spearman_rho": 0.5880645069311193,
+            "calibration_intercept": -5.6796421902351515,
+            "calibration_slope": 1.8291817575552576,
+            "empirical_interval_coverage": 0.17647058823529413
+          },
+          "E_RF": {
+            "n": 34,
+            "r2": 0.387241890624449,
+            "rmse": 0.7588835619179807,
+            "mae": 0.5986860542338802,
+            "spearman_rho": 0.6180178965772989,
+            "calibration_intercept": -6.0088624782590285,
+            "calibration_slope": 1.8779475338848675,
+            "empirical_interval_coverage": 0.14705882352941177
+          }
+        },
+        "applicability_domain": {
+          "similarity_threshold": 0.2631578947368421,
+          "descriptor_distance_threshold": 2.6870789217382116,
+          "inside_n": 31,
+          "outside_n": 3,
+          "stratified_metrics": {
+            "inside": {
+              "Mean": {
+                "n": 31,
+                "r2": -0.04375673989775053,
+                "rmse": 1.0154116738537267,
+                "mae": 0.7775130781703364,
+                "spearman_rho": -0.6011292721536458,
+                "calibration_intercept": 175.11031038332212,
+                "calibration_slope": -24.178918739739828,
+                "empirical_interval_coverage": 0.12903225806451613
+              },
+              "AB_Ridge": {
+                "n": 31,
+                "r2": 0.6208257002618605,
+                "rmse": 0.612014839061238,
+                "mae": 0.5114614150964317,
+                "spearman_rho": 0.7253478671374249,
+                "calibration_intercept": -0.7805935361749612,
+                "calibration_slope": 1.1152013971352324,
+                "empirical_interval_coverage": 0.22580645161290322
+              },
+              "AB_RF": {
+                "n": 31,
+                "r2": 0.37949012627544587,
+                "rmse": 0.7829190380847088,
+                "mae": 0.6227973647074495,
+                "spearman_rho": 0.6108086431913429,
+                "calibration_intercept": -5.565731141855705,
+                "calibration_slope": 1.807253486721086,
+                "empirical_interval_coverage": 0.16129032258064516
+              },
+              "E_RF": {
+                "n": 31,
+                "r2": 0.39816308541933865,
+                "rmse": 0.7710488908286753,
+                "mae": 0.6134940593910242,
+                "spearman_rho": 0.6196813999758986,
+                "calibration_intercept": -5.900204977149561,
+                "calibration_slope": 1.8566586328173804,
+                "empirical_interval_coverage": 0.12903225806451613
+              }
+            },
+            "outside": {
+              "Mean": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.6795908255767242,
+                "mae": 0.4449839065255725,
+                "spearman_rho": -0.5,
+                "calibration_intercept": 114.01107099709554,
+                "calibration_slope": -15.386767145477757,
+                "empirical_interval_coverage": 0.3333333333333333
+              },
+              "AB_Ridge": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.867595170598195,
+                "mae": 0.7143651694546064,
+                "spearman_rho": 0.5,
+                "calibration_intercept": -0.819060441294311,
+                "calibration_slope": 1.231205654838446,
+                "empirical_interval_coverage": 0.0
+              },
+              "AB_RF": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.6174375688366581,
+                "mae": 0.437379402842408,
+                "spearman_rho": 0.5,
+                "calibration_intercept": -31.07367569028838,
+                "calibration_slope": 5.560680992107076,
+                "empirical_interval_coverage": 0.3333333333333333
+              },
+              "E_RF": {
+                "n": 3,
+                "r2": null,
+                "rmse": 0.6193374699857072,
+                "mae": 0.44567000094339004,
+                "spearman_rho": 1.0,
+                "calibration_intercept": -30.554981200671836,
+                "calibration_slope": 5.492199127640954,
+                "empirical_interval_coverage": 0.3333333333333333
+              }
+            }
+          }
+        },
+        "uncertainty": {
+          "model_intervals": {
+            "Mean": {
+              "r2": {
+                "estimate": -0.05959611247984242,
+                "lower": -0.23717772783335817,
+                "upper": -0.03494853367297423
+              },
+              "rmse": {
+                "estimate": 0.9819374695069072,
+                "lower": 0.734598570095499,
+                "upper": 1.2454331712447269
+              },
+              "mae": {
+                "estimate": 0.7454497840802987,
+                "lower": 0.5408458323607215,
+                "upper": 0.9804822678376903
+              },
+              "spearman_rho": {
+                "estimate": -0.6259056876949103,
+                "lower": -0.8236519659037036,
+                "upper": -0.3236835253398845
+              }
+            },
+            "AB_Ridge": {
+              "r2": {
+                "estimate": 0.5467868122926789,
+                "lower": 0.20220143238229885,
+                "upper": 0.7295646474900639
+              },
+              "rmse": {
+                "estimate": 0.6371642070648444,
+                "lower": 0.49510679267728774,
+                "upper": 0.7882354663128838
+              },
+              "mae": {
+                "estimate": 0.5283919665584774,
+                "lower": 0.41332820295814393,
+                "upper": 0.659467184461722
+              },
+              "spearman_rho": {
+                "estimate": 0.6772788403149042,
+                "lower": 0.4551251423518754,
+                "upper": 0.8372508117445646
+              }
+            },
+            "AB_RF": {
+              "r2": {
+                "estimate": 0.34854494683297066,
+                "lower": 0.16400751547555004,
+                "upper": 0.46534237026958386
+              },
+              "rmse": {
+                "estimate": 0.7647972899141336,
+                "lower": 0.583205959461883,
+                "upper": 0.9448780287418354
+              },
+              "mae": {
+                "estimate": 0.604593479781192,
+                "lower": 0.4488017335543967,
+                "upper": 0.7770543186408825
+              },
+              "spearman_rho": {
+                "estimate": 0.5850054000146224,
+                "lower": 0.291412754854874,
+                "upper": 0.7910776589620474
+              }
+            },
+            "E_RF": {
+              "r2": {
+                "estimate": 0.36575944478814754,
+                "lower": 0.1876364306604138,
+                "upper": 0.47949475097109107
+              },
+              "rmse": {
+                "estimate": 0.7531129460813335,
+                "lower": 0.5765671837320429,
+                "upper": 0.9319435490941592
+              },
+              "mae": {
+                "estimate": 0.596984914487383,
+                "lower": 0.44245339086548224,
+                "upper": 0.7663773924494743
+              },
+              "spearman_rho": {
+                "estimate": 0.6141522135629698,
+                "lower": 0.3386663063087637,
+                "upper": 0.810304349205342
+              }
+            }
+          },
+          "paired_docking_increment": {
+            "delta_r2_E_minus_AB": {
+              "estimate": 0.018280755957654715,
+              "lower": 0.003943407056366382,
+              "upper": 0.03565831816050471
+            },
+            "delta_rmse_E_minus_AB": {
+              "estimate": -0.010695656594631009,
+              "lower": -0.019005866529184724,
+              "upper": -0.0024247273781603657
+            }
+          },
+          "resamples": 2000
+        },
+        "fold_manifest": [
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1082063",
+              "CHEMBL4284097",
+              "CHEMBL4529321",
+              "CHEMBL4740383",
+              "CHEMBL4855908",
+              "CHEMBL487554",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL398272",
+              "CHEMBL4855390",
+              "CHEMBL5078181",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1079141",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4559969",
+              "CHEMBL4849795",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078001",
+              "CHEMBL1078085",
+              "CHEMBL17127",
+              "CHEMBL3317574",
+              "CHEMBL4064795",
+              "CHEMBL5076939"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 1,
+            "seed": 20260912,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL197669",
+              "CHEMBL458242",
+              "CHEMBL4858144",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL4440752",
+              "CHEMBL5397080",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL3317574",
+              "CHEMBL4740383",
+              "CHEMBL4858144",
+              "CHEMBL4862010",
+              "CHEMBL487554",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL270654",
+              "CHEMBL398272",
+              "CHEMBL4284595",
+              "CHEMBL4855390",
+              "CHEMBL5076939",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL458242",
+              "CHEMBL4849795",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 2,
+            "seed": 20260913,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1078001",
+              "CHEMBL197669",
+              "CHEMBL4529321",
+              "CHEMBL4559969",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL4858144",
+              "CHEMBL487554",
+              "CHEMBL5076939",
+              "CHEMBL5090017",
+              "CHEMBL5439885",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077902",
+              "CHEMBL17127",
+              "CHEMBL270654",
+              "CHEMBL4740383",
+              "CHEMBL4849795",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4529321",
+              "CHEMBL4559969",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL183",
+              "CHEMBL4284097",
+              "CHEMBL4284595",
+              "CHEMBL4855390",
+              "CHEMBL4855908",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 3,
+            "seed": 20260914,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1078001",
+              "CHEMBL197669",
+              "CHEMBL4064795",
+              "CHEMBL4440752",
+              "CHEMBL458242"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL1082063",
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL458242",
+              "CHEMBL4849795"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL4855390",
+              "CHEMBL4855908",
+              "CHEMBL487554",
+              "CHEMBL5078181",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL17127",
+              "CHEMBL4284595",
+              "CHEMBL4559969",
+              "CHEMBL4740383",
+              "CHEMBL5076939",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL1077902",
+              "CHEMBL1078085",
+              "CHEMBL4862010",
+              "CHEMBL5397080",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 4,
+            "seed": 20260915,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL4440752",
+              "CHEMBL4529321",
+              "CHEMBL4858144"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL4559969",
+              "CHEMBL4740383",
+              "CHEMBL4855908",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1077902",
+              "CHEMBL398272",
+              "CHEMBL4284097",
+              "CHEMBL4855390",
+              "CHEMBL487554",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL197669",
+              "CHEMBL3317574",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL5078181",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL1079141",
+              "CHEMBL270654",
+              "CHEMBL4849795",
+              "CHEMBL4858144",
+              "CHEMBL5076939",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 5,
+            "seed": 20260916,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL4064795",
+              "CHEMBL4440752",
+              "CHEMBL458242",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078085",
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL4440752",
+              "CHEMBL4855390",
+              "CHEMBL4858144",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL4740383",
+              "CHEMBL5090017",
+              "CHEMBL5397080",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1078001",
+              "CHEMBL3317574",
+              "CHEMBL4064795",
+              "CHEMBL4559969",
+              "CHEMBL487554",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL197669",
+              "CHEMBL398272",
+              "CHEMBL458242",
+              "CHEMBL4849795",
+              "CHEMBL4855908",
+              "CHEMBL4862010",
+              "CHEMBL5076939"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 6,
+            "seed": 20260917,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077902",
+              "CHEMBL1079141",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL4284097"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL17127",
+              "CHEMBL183",
+              "CHEMBL4559969",
+              "CHEMBL4849795",
+              "CHEMBL487554",
+              "CHEMBL5076939"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL398272",
+              "CHEMBL4064795",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL4740383",
+              "CHEMBL4855390",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1077902",
+              "CHEMBL1078085",
+              "CHEMBL1082063",
+              "CHEMBL4284595",
+              "CHEMBL4862010",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL197669",
+              "CHEMBL270654",
+              "CHEMBL4858144",
+              "CHEMBL5397080",
+              "CHEMBL5439885",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 7,
+            "seed": 20260918,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1077749",
+              "CHEMBL3317574",
+              "CHEMBL4284097",
+              "CHEMBL4440752",
+              "CHEMBL4855908"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL398272",
+              "CHEMBL4284595",
+              "CHEMBL4440752",
+              "CHEMBL4849795",
+              "CHEMBL5076939",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL4529321",
+              "CHEMBL458242",
+              "CHEMBL4855908",
+              "CHEMBL4858144",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL183",
+              "CHEMBL270654",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL4862010",
+              "CHEMBL487554"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1078001",
+              "CHEMBL1078085",
+              "CHEMBL197669",
+              "CHEMBL4740383",
+              "CHEMBL5078181",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 8,
+            "seed": 20260919,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1079141",
+              "CHEMBL3317574",
+              "CHEMBL4559969",
+              "CHEMBL4855390",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078001",
+              "CHEMBL1078085",
+              "CHEMBL4440752",
+              "CHEMBL4559969",
+              "CHEMBL458242",
+              "CHEMBL4858144"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1079141",
+              "CHEMBL398272",
+              "CHEMBL4284595",
+              "CHEMBL4529321",
+              "CHEMBL4740383",
+              "CHEMBL4855390",
+              "CHEMBL4862010"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL183",
+              "CHEMBL197669",
+              "CHEMBL270654",
+              "CHEMBL3317574",
+              "CHEMBL5397080",
+              "CHEMBL5439885",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL4849795",
+              "CHEMBL4855908",
+              "CHEMBL5076939",
+              "CHEMBL5078181"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 9,
+            "seed": 20260920,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL1077902",
+              "CHEMBL4064795",
+              "CHEMBL4284097",
+              "CHEMBL487554",
+              "CHEMBL5090017"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 1,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076503",
+              "CHEMBL1078085",
+              "CHEMBL197669",
+              "CHEMBL4529321",
+              "CHEMBL4740383",
+              "CHEMBL4855908",
+              "CHEMBL5439885"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 2,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1078001",
+              "CHEMBL3317574",
+              "CHEMBL398272",
+              "CHEMBL4440752",
+              "CHEMBL5076939",
+              "CHEMBL5078181",
+              "CHEMBL5562893"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 3,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1077902",
+              "CHEMBL1079141",
+              "CHEMBL1082063",
+              "CHEMBL17127",
+              "CHEMBL4064795",
+              "CHEMBL458242",
+              "CHEMBL4849795"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 4,
+            "train_n": 27,
+            "test_n": 7,
+            "test_ids": [
+              "CHEMBL1076504",
+              "CHEMBL270654",
+              "CHEMBL4284097",
+              "CHEMBL4559969",
+              "CHEMBL4862010",
+              "CHEMBL487554",
+              "CHEMBL5397080"
+            ]
+          },
+          {
+            "analysis": "exclude_high_disagreement",
+            "endpoint_name": "pFunc_inhibition",
+            "repeat": 10,
+            "seed": 20260921,
+            "fold": 5,
+            "train_n": 28,
+            "test_n": 6,
+            "test_ids": [
+              "CHEMBL1077749",
+              "CHEMBL183",
+              "CHEMBL4284595",
+              "CHEMBL4855390",
+              "CHEMBL4858144",
+              "CHEMBL5090017"
+            ]
+          }
+        ],
+        "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+      }
+    }
+  },
+  "prediction_file": "outputs/v1.5/continuous_activity/development_oof_predictions.csv",
+  "prediction_sha256": "e744addb5256c03d43e445fb0596d7eabfc9ea8be3ddf9b83611f6c869043e5a",
+  "external_confirmation_performed": false,
+  "model_promotion_allowed": false
+}

@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:06:49.139386+00:00",
+  "protocol_id": "a2a-external-validation-v1.4",
+  "candidate_labels_loaded": false,
+  "candidate_manifest_sha256": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
+  "ligand_prep_config_sha256": "ed8285eb7ebc878bf3a9f2436d3f26440cc02babf566524b448d5ea04db7cdd1",
+  "candidate_count": 4,
+  "prepared_structure_count": 4,
+  "primary_structure_count": 4,
+  "entries": [
+    {
+      "candidate_id": "LIT25-MET-PGD2",
+      "functional_label_blinded": true,
+      "protomer_index": 1,
+      "primary_protomer": true,
+      "protonated_smiles": "CCCCC[C@H](O)/C=C/[C@H]1C(=O)C[C@H](O)[C@@H]1C/C=C\\CCCC(=O)[O-]",
+      "embedding_seed": 49629014,
+      "optimization": "MMFF94",
+      "optimization_converged": true,
+      "path": "docking_inputs/v1.4/literature_pilot_2025/ligands/LIT25-MET-PGD2_p1.sdf",
+      "sha256": "3c16616b05ef9e257277f57a5b5f92e7280f3b89de1803f76bf868422287cc10"
+    },
+    {
+      "candidate_id": "LIT25-RL-C5",
+      "functional_label_blinded": true,
+      "protomer_index": 1,
+      "primary_protomer": true,
+      "protonated_smiles": "Nc1nc(-c2ccc([O-])cc2)c2cc(F)ccc2n1",
+      "embedding_seed": 78207321,
+      "optimization": "MMFF94",
+      "optimization_converged": true,
+      "path": "docking_inputs/v1.4/literature_pilot_2025/ligands/LIT25-RL-C5_p1.sdf",
+      "sha256": "ba04472282f4db8f2abd00e8b332183e3d5c8c7725fd4840fe7437569b49c24a"
+    },
+    {
+      "candidate_id": "LIT25-RL-C7",
+      "functional_label_blinded": true,
+      "protomer_index": 1,
+      "primary_protomer": true,
+      "protonated_smiles": "Nc1nc(-c2cccc(-n3ccnc3)n2)nc(-c2ccco2)n1",
+      "embedding_seed": 2126178272,
+      "optimization": "MMFF94",
+      "optimization_converged": true,
+      "path": "docking_inputs/v1.4/literature_pilot_2025/ligands/LIT25-RL-C7_p1.sdf",
+      "sha256": "51be9854ff846c003854786279dd49a9b103dcfac8e5296ad702b2df959ad60a"
+    },
+    {
+      "candidate_id": "LIT25-RL-C9",
+      "functional_label_blinded": true,
+      "protomer_index": 1,
+      "primary_protomer": true,
+      "protonated_smiles": "Nc1nc(-c2ccco2)nc2c1ccn2-c1ccncc1",
+      "embedding_seed": 1539483458,
+      "optimization": "MMFF94",
+      "optimization_converged": true,
+      "path": "docking_inputs/v1.4/literature_pilot_2025/ligands/LIT25-RL-C9_p1.sdf",
+      "sha256": "df6cd08fbd79cd99825aad01264851949864b97e2801282f21c6a0aa0f3abced"
+    }
+  ]
+}

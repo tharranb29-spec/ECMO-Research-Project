@@ -1,0 +1,32 @@
+{
+  "cohort_path": "outputs/v1.3/docking_clean_computational.csv",
+  "cohort_sha256": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+  "created_at": "2026-09-12T13:56:46.856914+00:00",
+  "exploratory_only": true,
+  "files": {
+    "activities": {
+      "path": "data/raw/chembl251_activity_v15/activities.json",
+      "records": 644,
+      "sha256": "03922f6a4a9077f75f0f0716759958334926a46f581ad96f97ef35fc84df30c9"
+    },
+    "assays": {
+      "path": "data/raw/chembl251_activity_v15/assays.json",
+      "records": 321,
+      "sha256": "c77b4bafdb6e9b2d24c99b8cd61b631f198fa4013811ac5cd52019336bb265e9"
+    },
+    "documents": {
+      "path": "data/raw/chembl251_activity_v15/documents.json",
+      "records": 157,
+      "sha256": "a9ea71d8befb79023057dfcaaa3326730aee3c7704e6eef60f286ab77b2529ee"
+    },
+    "target": {
+      "path": "data/raw/chembl251_activity_v15/target.json",
+      "records": 1,
+      "sha256": "a4edc6e360f9e9f77a5e4d83c3b14f47972edc5059943d92c815f8b463d8e145"
+    }
+  },
+  "schema_version": 1,
+  "source": "ChEMBL API",
+  "specification_id": "a2a-continuous-activity-v1.5",
+  "target_chembl_id": "CHEMBL251"
+}

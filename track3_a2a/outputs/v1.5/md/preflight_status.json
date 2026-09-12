@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:20:25.347251+00:00",
+  "specification_id": "a2a-md-validation-v1.5",
+  "status": "blocked_before_system_preparation",
+  "trajectory_production_started": false,
+  "candidate_labels_loaded": false,
+  "tier_a_system_count": 2,
+  "tier_b_system_count": 8,
+  "planned_tier_a_plus_b_replicas": 30,
+  "planned_tier_a_plus_b_sampling_microseconds": 3.0,
+  "source_hashes": {
+    "md_config": "fed6d59f674a72c0d6eb116b42f8625434522a550cd58e006334c6dfc9d44346",
+    "candidate_manifest": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
+    "system_input_manifest": "3f08e54139ea23c7228e288e100cf781c71b01f4dd6b5b05134435e49215da4f"
+  },
+  "blockers": [
+    {
+      "system_id": "5G53_NECA_miniGs_native",
+      "reason": "deposited_structure_caveat_requires_manual_review",
+      "details": [
+        "CAVEAT     5G53    ASN C 239 HAS WRONG CHIRALITY AT ATOM CA"
+      ]
+    },
+    {
+      "system_id": "global",
+      "reason": "openmm_not_installed"
+    },
+    {
+      "system_id": "global",
+      "reason": "cgenff_ligand_parameters_not_generated_or_audited"
+    },
+    {
+      "system_id": "global",
+      "reason": "membrane_systems_not_built"
+    },
+    {
+      "system_id": "global",
+      "reason": "native_contact_lists_not_frozen"
+    }
+  ],
+  "next_gate": "Resolve every listed blocker, build both native controls, and freeze native contacts before any production trajectory."
+}

@@ -1,0 +1,5 @@
+# PDB records are fixed-width 80-column records; their terminal spaces are data.
+*.pdb whitespace=-trailing-space
+
+# Preserve raw GNINA console output without treating its banner padding as an error.
+track3_a2a/outputs/v1.4/docking/runs/**/*.log whitespace=-trailing-space

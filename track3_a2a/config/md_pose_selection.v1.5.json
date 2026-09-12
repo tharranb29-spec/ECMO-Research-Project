@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-md-pose-selection-v1.5",
+  "status": "frozen_before_tier_b_candidate_docking",
+  "effective_date": "2026-09-12",
+  "source_docking_protocol": "a2a-external-validation-v1.4",
+  "eligible_candidate_manifest": "outputs/v1.4/external_cohort/literature_pilot_2025/eligible_candidates.csv",
+  "receptors": ["5NM4", "2YDO"],
+  "production_seeds": [42, 43, 44],
+  "minimum_valid_seeds": 2,
+  "retained_pose_rule": "Choose the valid seed whose empirical GNINA affinity is closest to the median valid-seed affinity; resolve exact ties using the lower seed.",
+  "cnnscore_rule": "CNNscore at or below 0.3 is retained but soft-flagged; it cannot be silently replaced by a better-looking pose.",
+  "best_score_selection_prohibited": true,
+  "functional_labels_available_to_selection": false,
+  "change_after_docking_requires_versioned_amendment": true
+}

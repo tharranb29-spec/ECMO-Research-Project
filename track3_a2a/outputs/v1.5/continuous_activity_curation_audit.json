@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-12T14:20:25.308887+00:00",
+  "specification_id": "a2a-continuous-activity-v1.5",
+  "claim_status": "exploratory_only",
+  "source_hashes": {
+    "config": "269d9a731db379f38fb81eb887f44f3f34a95b558018010b5ffcf4e34164770a",
+    "features": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+    "acquisition_manifest": "5a86df278c4a09fc9a4294f0146ff22481f6c789279ad335f39bb65811f7c408"
+  },
+  "activity_rows_seen": 644,
+  "admitted_measurements": 258,
+  "quarantined_measurements": 386,
+  "admitted_by_endpoint": {
+    "pBind_Ki": 170,
+    "pFunc_agonism": 30,
+    "pFunc_inhibition": 58
+  },
+  "summary_molecules_by_endpoint": {
+    "pBind_Ki": 98,
+    "pFunc_agonism": 25,
+    "pFunc_inhibition": 44
+  },
+  "quarantine_reasons": {
+    "disallowed_validity_comment": 1,
+    "doi_or_pmid_missing": 1,
+    "endpoint_or_functional_mode_not_admitted": 341,
+    "mutant_or_variant_assay": 19,
+    "non_exact_relation": 121,
+    "non_human_context": 16,
+    "non_nm_units": 203,
+    "non_positive_or_missing_value": 73,
+    "not_primary_publication": 34,
+    "pchembl_missing_or_inconsistent": 237,
+    "unassigned_stereocenter": 37
+  },
+  "high_disagreement_molecules": [
+    {
+      "molecule_id": "CHEMBL136689",
+      "endpoint_name": "pBind_Ki"
+    },
+    {
+      "molecule_id": "CHEMBL2024116",
+      "endpoint_name": "pFunc_inhibition"
+    },
+    {
+      "molecule_id": "CHEMBL2165804",
+      "endpoint_name": "pBind_Ki"
+    },
+    {
+      "molecule_id": "CHEMBL4297184",
+      "endpoint_name": "pFunc_inhibition"
+    },
+    {
+      "molecule_id": "CHEMBL477",
+      "endpoint_name": "pBind_Ki"
+    }
+  ],
+  "historical_locked_holdout_measurements_admitted_but_model_ineligible": 40,
+  "outputs": {
+    "ledger": {
+      "path": "data/curated/activity_measurements_v15_exploratory.csv",
+      "sha256": "a216dbb61bc3e51c927d2787d25744ab7c670e1501065a1c0186922c517d2fdb"
+    },
+    "summary": {
+      "path": "data/curated/activity_molecule_summary_v15_exploratory.csv",
+      "sha256": "ef11f161298d4208dd9384aaf334a428f0d40953708df63b822f3702bd2be5b3"
+    }
+  }
+}

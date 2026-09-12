@@ -131,6 +131,23 @@ The new specifications and plans are:
 - `MD_VALIDATION_PLAN_V15.md`
 - `outputs/v1.5/protocol_status.json`
 
+The executable v1.5 workflow is:
+
+```bash
+.venv-track3/bin/python track3_a2a/acquire_chembl_activity_v15.py
+.venv-track3/bin/python track3_a2a/build_continuous_activity_v15.py
+.venv-track3/bin/python track3_a2a/run_continuous_activity_v15.py
+.venv-track3/bin/python track3_a2a/prepare_external_ligands_v14.py
+.venv-track3/bin/python track3_a2a/run_external_docking_v14.py
+.venv-track3/bin/python track3_a2a/prepare_md_validation_v15.py
+.venv-track3/bin/python track3_a2a/build_v15_implementation_status.py
+```
+
+The activity runner uses development records only; the historical locked
+holdout remains excluded. Candidate docking and MD preparation remain
+label-blind. Current execution status is recorded in
+`outputs/v1.5/implementation_status.json`.
+
 ## Reproduce the current data stage
 
 Create the isolated chemistry environment once:
