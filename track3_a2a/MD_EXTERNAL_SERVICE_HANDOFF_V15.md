@@ -10,6 +10,11 @@ CGenFF/ParamChem or the CHARMM-GUI Ligand Reader and Modeler. Preserve the
 submitted MOL2, generated topology/parameter stream, job metadata, software
 version, and retrieval timestamp.
 
+Select **CGenFF 4.6**, not the web application's 5.0 default. The frozen local
+runtime uses the July 2024 CHARMM topology/parameter package, whose CGenFF core
+is version 4.6. Mixing a 5.0-generated ligand stream with that 4.6 core is not
+an accepted production configuration.
+
 Expected formal charges are:
 
 - NEC: 0

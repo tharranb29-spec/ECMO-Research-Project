@@ -60,7 +60,7 @@
     "pressure_bar": 1.0,
     "protein_force_field": "CHARMM36m",
     "lipid_force_field": "CHARMM36",
-    "ligand_force_field": "CGenFF with version and parameter-penalty audit recorded",
+    "ligand_force_field": "CGenFF 4.6, matched to the frozen CHARMM July 2024 package, with parameter-penalty audit recorded",
     "protonation_ph": 7.4,
     "protonation_method": "deterministic pKa/protonation assignment at pH 7.4 followed by machine-audited charge, hydrogen-bond-network, and alternative-protomer sensitivity checks",
     "crystallographic_waters": "retain only conserved or ligand-bridging waters with documented identifiers",

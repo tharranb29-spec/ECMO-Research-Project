@@ -72,7 +72,7 @@ def main() -> None:
             item["status"] = "blocked"
         elif max_penalty >= 10:
             reviews.append({"residue_name": residue, "reason": "penalty_10_through_50", "maximum": max_penalty})
-            item["status"] = "human_review_required"
+            item["status"] = "computational_sensitivity_required"
         else:
             item["status"] = "accepted"
         results.append(item)

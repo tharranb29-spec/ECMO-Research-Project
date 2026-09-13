@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T13:03:44.742424+00:00",
+  "created_at": "2026-09-13T13:45:31.393930+00:00",
   "specification_id": "a2a-md-validation-v1.5",
   "status": "blocked_before_system_preparation",
   "trajectory_production_started": false,
@@ -25,16 +25,16 @@
   "planned_tier_a_plus_b_replicas": 30,
   "planned_tier_a_plus_b_sampling_microseconds": 3.0,
   "source_hashes": {
-    "md_config": "ebb95310e64ba6b0bca259db8179ab7200597c9763314604bc66b1398b4ae430",
+    "md_config": "0e80add45fe9a512c432cc1716a3c3235e6a340fd412fb7a1e2b3820963c1952",
     "candidate_manifest": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
     "system_input_manifest": "5a36cff6d5b246a8ea38057fc0b85ac5ae40c7692d0fa9382be27583aac1c857",
     "md_construct_policy": "e990e66f214add3216a91ab9d4fc48e8d14565dcacb636c1d4749f4b2a46ff75",
     "5g53_chirality_review": "e107f9c20e338489bdf85090ed2b1bccfa0c2de0730205ac64f8052988078df5",
     "md_environment_audit": "b814fee876aa2b72541b57bb6416701eec3421b1d8ca2b9479462722b40828ca",
     "tier_a_builder_audit": "ad32dc47f44188338a0d4a697675fe6977f06c2601b9c6ca9fd8fced399d0789",
-    "cgenff_request_manifest": "e43761f9041669b80ed67eb0998b0674dca181a3acc0868a26f4d7cce589e48c",
+    "cgenff_request_manifest": "417ce7652bcc6e30e5e6856d010a6647e45108db37c0a9a03e0738a81d153488",
     "openmm_cpu_benchmark": "e459794453130190886ccb9dc4126af3a5468ba8d89a62f109a4781d4e0685fe",
-    "cgenff_parameter_audit": "c6bfd03b85237bbe066f677bd655acfab4f8c6ccf41cb55bc8a5eda783757a2c"
+    "cgenff_parameter_audit": "fed99c76338d04df664bae2786eb60d1c71e52f32f2fec67aadb691046bffca0"
   },
   "blockers": [
     {
