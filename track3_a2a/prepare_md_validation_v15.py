@@ -121,7 +121,7 @@ def main() -> None:
             if caveats and not review_resolves_caveat:
                 blockers.append({
                     "system_id": system["system_id"],
-                    "reason": "deposited_structure_caveat_requires_manual_review",
+                    "reason": "deposited_structure_caveat_requires_computational_resolution",
                     "details": caveats,
                 })
     environment_ready = (
@@ -138,7 +138,7 @@ def main() -> None:
     if gdp_transfer and not gdp_transfer.get("passed"):
         blockers.append({
             "system_id": "5G53_NECA_miniGs_native",
-            "reason": "transferred_gdp_clash_requires_manual_resolution",
+            "reason": "transferred_gdp_clash_requires_computational_resolution",
             "minimum_heavy_atom_distance_angstrom": gdp_transfer.get(
                 "minimum_transferred_gdp_heavy_atom_distance_angstrom"
             ),

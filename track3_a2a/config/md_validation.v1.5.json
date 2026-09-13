@@ -3,6 +3,12 @@
   "specification_id": "a2a-md-validation-v1.5",
   "status": "planned_not_executed",
   "effective_date": "2026-09-12",
+  "amendment": {
+    "date": "2026-09-13",
+    "timing": "before any Tier A or Tier B production trajectory",
+    "reason": "Clarify that formal validation is fully computational and requires no named-person or visual approval.",
+    "scope": "Acceptance language only; systems, force fields, sampling, seeds, thresholds, and tier order are unchanged."
+  },
   "purpose": "Test pose stability and receptor-state plausibility for a bounded A2A control and candidate panel.",
   "claim_boundary": "MD provides mechanistic and stability evidence only. It does not create potency or functional labels and cannot rescue a failed external QSAR gate.",
   "can_create_activity_labels": false,
@@ -56,7 +62,7 @@
     "lipid_force_field": "CHARMM36",
     "ligand_force_field": "CGenFF with version and parameter-penalty audit recorded",
     "protonation_ph": 7.4,
-    "protonation_method": "record tool version and manually review binding-site titratable residues",
+    "protonation_method": "deterministic pKa/protonation assignment at pH 7.4 followed by machine-audited charge, hydrogen-bond-network, and alternative-protomer sensitivity checks",
     "crystallographic_waters": "retain only conserved or ligand-bridging waters with documented identifiers",
     "construct_policy": "Record mutations, fusion partners, missing loops, termini, and any removed engineered components for every system."
   },

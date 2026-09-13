@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T12:53:14.137990+00:00",
+  "status": "mixed_membrane_patch_rejected_by_geometry_audit",
+  "source_popc_patch": "/Users/tharran/Documents/ChatGPT/ECMO Research Project/ECMO-Research-Project/.venv-md/lib/python3.12/site-packages/openmm/app/data/POPC.pdb",
+  "source_popc_patch_sha256": "a35daa948562a67c142ea5ba38c1e18cc7a50bc1afc559338b2565d23fd38a29",
+  "source_cholesterol_structure": "5NM4 CLR A 508",
+  "source_cholesterol_sha256": "698e483fd4513540e2348c07b36488b7f687a4539c06735e4d25aa351e225d83",
+  "force_field": "OpenMM 8.6 charmm36_2024.xml and charmm36_2024/water.xml",
+  "leaflet_initial_popc": {
+    "upper": 64,
+    "lower": 64
+  },
+  "leaflet_cholesterol": {
+    "upper": 19,
+    "lower": 19
+  },
+  "residue_counts": {
+    "POP": 90,
+    "HOH": 5087,
+    "CHL1": 38
+  },
+  "cholesterol_mole_fraction": 0.296875,
+  "target_cholesterol_mole_fraction": 0.3,
+  "ratio_absolute_error": 0.003124999999999989,
+  "removed_clashing_water_count": 33,
+  "minimum_placement_clearance_angstrom": 0.6331423191401704,
+  "atom_count": 30133,
+  "all_force_field_templates_resolved": true,
+  "visualization_pdb": "outputs/v1.5/md/membrane_patch/POPC_CHL1_70_30_patch.pdb",
+  "visualization_pdb_sha256": "762471490fbe72ee1256acb6ac27f8cfa79325cd4bb57740ef5e971b2ba45acd",
+  "output_cif": "outputs/v1.5/md/membrane_patch/POPC_CHL1_70_30_patch.cif",
+  "output_cif_sha256": "fd443308dcf53f1cb5546ee67865b9df151c14982f341c60ecb059bce66e7f94",
+  "accepted_as_custom_addmembrane_patch": false,
+  "trajectory_production_started": false,
+  "artifacts_quarantined_not_committed": true,
+  "quarantine_path": "/private/tmp/a2a_rejected_membrane_patch_20260913"
+}

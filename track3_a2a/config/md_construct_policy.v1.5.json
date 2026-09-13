@@ -11,7 +11,7 @@
     "terminal_missing_segments": "do not model unless required for a transmembrane helix or declared contact; cap the resolved construct termini",
     "sidechain_completion": "rebuild all missing heavy atoms before protonation",
     "protonation_ph": 7.4,
-    "binding_site_manual_review": ["GLU169", "HIS250", "ASN253", "SER277", "HIS278"],
+    "binding_site_computational_protonation_audit": ["GLU169", "HIS250", "ASN253", "SER277", "HIS278"],
     "retained_water_rule": "retain deposited waters within 5.0 A of the native ligand or retained sodium ion; record residue IDs before dynamics",
     "removed_solvent_rule": "remove detergents, crystallization additives, and bulk crystallographic solvent",
     "validation_required": [
@@ -84,9 +84,9 @@
     "pressure_bar": 1.0
   },
   "tool_boundary": {
-    "preferred_builder": "CHARMM-GUI PDB Reader plus GalaxyFill and Membrane Builder",
-    "reason": "The controls contain internal missing segments, an engineered fusion, a mini-Gs complex, and a mixed POPC/cholesterol membrane; these require visual and topology validation beyond automatic PDBFixer output.",
-    "pdbfixer_role": "inventory and independent missing-atom checks only; do not accept its long-loop coordinates without human structural review"
+    "preferred_builder": "versioned computational structure completion followed by OpenMM topology, geometry, energy, and short-stability audits",
+    "reason": "The project does not require human validation; every acceptance decision must be reproducible from machine-readable thresholds, hashes, and retained failure reports.",
+    "pdbfixer_role": "inventory and candidate structure completion only; accept a completed model solely when all independent computational geometry, topology, energy, and stability gates pass"
   },
   "references": {
     "5g53_primary": "https://doi.org/10.1038/nature18966",

@@ -1,5 +1,10 @@
 # Google Colab MD runbook v1.5
 
+The upload-ready notebook for the complete campaign is
+`notebooks/A2A_FULL_TIER_A_B_COLAB.ipynb`. It manages all 30 replicas in frozen
+order, resumes 1 ns checkpoints from Google Drive, evaluates Tier A, and makes
+Tier B callable only when the machine-readable control report passes.
+
 Use Colab only after the repository preflight status is
 `ready_for_tier_a_production` and a completed, hashed system bundle exists for
 each native control. The runner intentionally refuses preliminary builder files.
@@ -31,3 +36,20 @@ Do not adapt the Tier A runner to candidate systems. First complete the frozen
 control analysis and commit a control-gate report showing that both controls
 passed in at least two of three replicas. A separate Tier B launcher should then
 verify that report and preserve the blinded candidate identifiers.
+
+## Completed bundle layout
+
+Google Drive must contain `MyDrive/a2a_md_v15/bundles/<system_id>/` for both
+controls and all eight candidate/receptor systems. Each directory requires:
+
+- `system.xml`
+- `topology.pdb`
+- `equilibrated_state.xml`
+- `native_contacts.json`
+- `bundle_manifest.json`
+
+Create the final two files with `audit_md_system_bundle_v15.py`. A bundle is
+rejected for identity mismatch, missing or nonfinite coordinates, unresolved
+force-field templates, nonfinite energy, severe cross-residue clashes,
+insufficient receptor alignment atoms, or zero starting orthosteric contacts.
+No visual or named-person approval is used as a production gate.

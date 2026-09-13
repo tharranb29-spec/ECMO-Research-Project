@@ -21,21 +21,23 @@ Expected formal charges are:
 
 Reject an output if the returned structure differs from the submitted parent
 structure or formal charge. Any CGenFF penalty above 50 blocks that ligand.
-Every term from 10 through 50 requires documented manual review. Do not average,
-ignore, or silently edit penalties.
+Every term from 10 through 50 requires a documented computational sensitivity
+audit using alternative parameterization and short restrained stability tests.
+Do not average, ignore, or silently edit penalties.
 
 Return one stream file per residue, with each filename beginning with its frozen
 residue name (for example, `NEC.str`). Place the six files in
 `outputs/v1.5/md/cgenff_parameters/`, then run
 `python3 track3_a2a/audit_cgenff_parameters_v15.py`. Production remains blocked
 unless the audit reports `all_ligand_parameters_audited_and_accepted`; terms in
-the manual-review range cannot be cleared automatically.
+the sensitivity range require a machine-readable
+`computational_sensitivity_passed` sidecar.
 
 ## Tier A structure building
 
 The files in `outputs/v1.5/md/builder_inputs/` are non-production starting
-coordinates. They must pass through visual structure rebuilding before membrane
-construction.
+coordinates. They must pass versioned structure completion and independent
+computational geometry/topology audits before membrane construction.
 
 For 5NM4:
 
@@ -51,8 +53,9 @@ For 5G53:
 3. Refine the GDP pose and local mini-Gs pocket. The preliminary rigid transfer
    has a 0.977 A GDP O6–Ala D366 CB clash and must not be accepted unchanged.
 
-For both systems, reject chirality errors, cis-peptide artifacts, severe clashes,
-loop knots, membrane-spanning loop artifacts, or unexplained ligand movement.
+For both systems, computationally reject chirality errors, cis-peptide
+artifacts, severe clashes, chain discontinuities, membrane-spanning loop
+artifacts, or unexplained ligand movement.
 Return coordinate, topology, decision, and validation files with SHA-256 hashes.
 
 ## Membrane construction

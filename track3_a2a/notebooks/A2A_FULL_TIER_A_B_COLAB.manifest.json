@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T13:05:00+00:00",
+  "campaign": "a2a-md-validation-v1.5",
+  "planned_systems": 10,
+  "planned_replicas": 30,
+  "planned_sampling_microseconds": 3.0,
+  "candidate_labels_loaded": false,
+  "files": {
+    "A2A_FULL_TIER_A_B_COLAB.ipynb": "0646a897ae7b345c73016a4b4bdb23e85a20f69e7b6042a81f9d585f5305c6b3",
+    "run_tier_a_openmm_v15.py": "554fddfd17d8ae2601c9b52f304215cb10e8f8d2bd0b0e1fdc0469419437e751",
+    "run_tier_b_openmm_v15.py": "23ba182702e12beb514160f5b2099fd4b069c31b995831410e70f1b76d684ef9",
+    "analyze_md_campaign_v15.py": "7119dde98184296aa24c6a730bb2d3c847565fdf3aba35f4a9e92a2b9b27df4d",
+    "audit_md_system_bundle_v15.py": "be04d916e8506c98478ed8fe05182dcf85bfd48ae60623022d54cee7f87832ba",
+    "md_validation.v1.5.json": "ebb95310e64ba6b0bca259db8179ab7200597c9763314604bc66b1398b4ae430"
+  },
+  "execution_rule": "Tier B is callable only when control_gate_report.json has status both_tier_a_controls_passed and tier_b_unlocked=true."
+}

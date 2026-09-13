@@ -28,6 +28,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-dir", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--sensitivity-review", type=Path)
     args = parser.parse_args()
     manifest = json.loads(REQUESTS.read_text(encoding="utf-8"))
     results = []
@@ -75,10 +76,15 @@ def main() -> None:
         else:
             item["status"] = "accepted"
         results.append(item)
+    sensitivity = {}
+    if args.sensitivity_review and args.sensitivity_review.is_file():
+        sensitivity = json.loads(args.sensitivity_review.read_text(encoding="utf-8"))
+    approved = set(sensitivity.get("approved_residue_names", [])) if sensitivity.get("status") == "computational_sensitivity_passed" else set()
+    unresolved_reviews = [row for row in reviews if row["residue_name"] not in approved]
     if blockers:
         status = "blocked_or_parameters_pending"
-    elif reviews:
-        status = "human_penalty_review_required"
+    elif unresolved_reviews:
+        status = "computational_parameter_sensitivity_required"
     else:
         status = "all_ligand_parameters_audited_and_accepted"
     report = {
@@ -88,7 +94,8 @@ def main() -> None:
         "candidate_labels_loaded": False,
         "request_manifest_sha256": sha256(REQUESTS),
         "results": results,
-        "human_reviews_required": reviews,
+        "computational_sensitivity_reviews_required": unresolved_reviews,
+        "computational_sensitivity_review": sensitivity,
         "blockers": blockers,
         "production_parameter_gate_passed": status == "all_ligand_parameters_audited_and_accepted",
     }

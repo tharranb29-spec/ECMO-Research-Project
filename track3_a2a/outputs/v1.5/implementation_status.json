@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T12:25:17.298754+00:00",
+  "created_at": "2026-09-13T13:03:44.784376+00:00",
   "specification_id": "a2a-continuous-activity-v1.5",
   "stage": "external_pbind_intake_ready_primary_review_pending_md_preflight_blocked",
   "claim_status": "exploratory_only",
@@ -180,7 +180,7 @@
     "blockers": [
       {
         "system_id": "5G53_NECA_miniGs_native",
-        "reason": "transferred_gdp_clash_requires_manual_resolution",
+        "reason": "transferred_gdp_clash_requires_computational_resolution",
         "minimum_heavy_atom_distance_angstrom": 0.976799,
         "closest_pair": {
           "left": "GDP:O6",
@@ -226,7 +226,7 @@
     "models": "2f066858b234ac5f686d585ee5115c92600a53bbf07f7f33455854647498bccb",
     "external_docking": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17",
     "external_pbind_intake": "2dd1758d0d33b582771b604869872f797f98bed585ea44e17ff0ee3989120f64",
-    "md_preflight": "13377246515b9dde70a3299c50f8b450740d5a40b35896e17355ca4b631fb4ac",
+    "md_preflight": "2b55b0fa4f0bda91a94a1500306d676a1e569e5f317da271d881e411f674a89b",
     "external_pbind_review_queue": "d1fe4cd2924c52b7a047d5418cc7a1b54519c4a4b2dbe97fc7aeef773597c162"
   },
   "next_actions": [

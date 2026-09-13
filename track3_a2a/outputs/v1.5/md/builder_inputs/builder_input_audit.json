@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T12:18:46.130539+00:00",
+  "created_at": "2026-09-13T13:01:32.229020+00:00",
   "specification_id": "a2a-md-construct-policy-v1.5",
   "status": "tier_a_builder_inputs_audited_not_simulation_ready",
   "trajectory_production_started": false,
   "source_hashes": {
-    "construct_policy": "abee2cc5970f35547bd634a36f6bc8b4789fb9051ae637b33c36bcbda4283f47",
+    "construct_policy": "e990e66f214add3216a91ab9d4fc48e8d14565dcacb636c1d4749f4b2a46ff75",
     "5NM4": "698e483fd4513540e2348c07b36488b7f687a4539c06735e4d25aa351e225d83",
     "5G53": "105a55361d60a5fbf74f772ce80dca3c2b2bb848bd0004c8e9019f130962e6fd"
   },
@@ -167,9 +167,9 @@
         "model receptor residues 208-223 and mini-Gs internal segments 193-207 and 225-238",
         "complete missing sidechains and validate all modeled geometry",
         "assign protonation at pH 7.4 and parameterize NEC and GDP",
-        "manually resolve the transferred GDP/Ala366 clash before accepting the nucleotide pose"
+        "computationally relax and re-audit the transferred GDP/Ala366 clash before accepting the nucleotide pose"
       ]
     }
   ],
-  "remaining_gate": "Complete and visually audit external loop/mutation rebuilding before membrane construction."
+  "remaining_gate": "Complete loop/mutation rebuilding and pass every computational structure audit before membrane construction."
 }

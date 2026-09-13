@@ -10,7 +10,7 @@ Status date: 2026-09-13
 | OpenMM and receptor/membrane force fields | Pass for preparation | OpenMM 8.6 and bundled CHARMM36m/CHARMM36 July 2024 files load; POPC, CHL1, GDP, and TIP3 templates are present. |
 | Production compute | Not practical locally | Only Reference and CPU platforms are usable. A 21,308-atom periodic CHARMM water benchmark reached 6.93 ns/day, implying 14.43 days per 100 ns and 432.99 serial days per 3 microseconds even before the substantially larger receptor/membrane systems are considered. |
 | Tier A source completeness | Pass after correction | The truncated 5NM4 download was replaced by the complete official RCSB PDB; ZMA has 40 atoms, sodium is present, and 17 local waters pass the 5 A retention rule. |
-| Tier A builder inputs | Partial | Label-blind, non-production inputs are generated and hashed. Missing loops, sidechains, back-mutations, protonation, and visual audits remain. |
+| Tier A builder inputs | Partial | Label-blind, non-production inputs are generated and hashed. Missing loops, sidechains, back-mutations, protonation, and computational structure audits remain. |
 | 5G53 GDP transfer | Fail | Local mini-Gs C-to-D alignment RMSD is 0.087 A, but the transferred GDP O6–Ala D366 CB distance is 0.977 A, below the frozen 1.5 A severe-clash gate. |
 | CGenFF | Inputs ready; parameters blocked | Six MOL2 request files are charge-audited. The return-package auditor correctly reports all six stream files missing; generated parameters and penalty review are absent. |
 | Membrane systems | Blocked | Construction must wait for accepted constructs and ligand parameters. |
@@ -28,12 +28,12 @@ transfer as production coordinates.
 
 ## Immediate execution sequence
 
-1. In a visual structure builder, restore the declared wild-type receptor
-   mutations, model only the frozen internal segments, and resolve the GDP/Ala
-   D366 clash. Reject any model with chirality, knot, peptide, or severe-clash
-   defects.
+1. Restore the declared wild-type receptor mutations, model only the frozen
+   internal segments, and resolve the GDP/Ala D366 clash. Computationally reject
+   any model with chirality, chain-continuity, peptide, or severe-clash defects.
 2. Generate CGenFF outputs for all six frozen MOL2 files. Block any molecule
-   with a penalty above 50; manually review every term from 10 through 50.
+   with a penalty above 50; run a computational parameter-sensitivity audit for
+   every term from 10 through 50.
 3. Build both native controls in the frozen 70:30 POPC/cholesterol bilayer,
    CHARMM TIP3P water, and 0.15 M salt. Audit composition, orientation,
    protonation, net charge, minimum distances, and all file hashes.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T12:25:17.259616+00:00",
+  "created_at": "2026-09-13T13:03:44.742424+00:00",
   "specification_id": "a2a-md-validation-v1.5",
   "status": "blocked_before_system_preparation",
   "trajectory_production_started": false,
@@ -25,21 +25,21 @@
   "planned_tier_a_plus_b_replicas": 30,
   "planned_tier_a_plus_b_sampling_microseconds": 3.0,
   "source_hashes": {
-    "md_config": "fed6d59f674a72c0d6eb116b42f8625434522a550cd58e006334c6dfc9d44346",
+    "md_config": "ebb95310e64ba6b0bca259db8179ab7200597c9763314604bc66b1398b4ae430",
     "candidate_manifest": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
     "system_input_manifest": "5a36cff6d5b246a8ea38057fc0b85ac5ae40c7692d0fa9382be27583aac1c857",
-    "md_construct_policy": "abee2cc5970f35547bd634a36f6bc8b4789fb9051ae637b33c36bcbda4283f47",
+    "md_construct_policy": "e990e66f214add3216a91ab9d4fc48e8d14565dcacb636c1d4749f4b2a46ff75",
     "5g53_chirality_review": "e107f9c20e338489bdf85090ed2b1bccfa0c2de0730205ac64f8052988078df5",
     "md_environment_audit": "b814fee876aa2b72541b57bb6416701eec3421b1d8ca2b9479462722b40828ca",
-    "tier_a_builder_audit": "5124c3c257a3ad9da41ec062bdbfab1cbafbb567b1ec1263dafe71216ea17929",
+    "tier_a_builder_audit": "ad32dc47f44188338a0d4a697675fe6977f06c2601b9c6ca9fd8fced399d0789",
     "cgenff_request_manifest": "e43761f9041669b80ed67eb0998b0674dca181a3acc0868a26f4d7cce589e48c",
     "openmm_cpu_benchmark": "e459794453130190886ccb9dc4126af3a5468ba8d89a62f109a4781d4e0685fe",
-    "cgenff_parameter_audit": "89e011663a0c3c4cab9c641edc9ba26a4afe3c5502774838e4d2a32998f17d1e"
+    "cgenff_parameter_audit": "c6bfd03b85237bbe066f677bd655acfab4f8c6ccf41cb55bc8a5eda783757a2c"
   },
   "blockers": [
     {
       "system_id": "5G53_NECA_miniGs_native",
-      "reason": "transferred_gdp_clash_requires_manual_resolution",
+      "reason": "transferred_gdp_clash_requires_computational_resolution",
       "minimum_heavy_atom_distance_angstrom": 0.976799,
       "closest_pair": {
         "left": "GDP:O6",

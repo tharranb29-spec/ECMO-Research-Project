@@ -210,7 +210,7 @@ def prepare_5g53(atoms: list[Atom], output: Path) -> dict:
             "model receptor residues 208-223 and mini-Gs internal segments 193-207 and 225-238",
             "complete missing sidechains and validate all modeled geometry",
             "assign protonation at pH 7.4 and parameterize NEC and GDP",
-            "manually resolve the transferred GDP/Ala366 clash before accepting the nucleotide pose",
+            "computationally relax and re-audit the transferred GDP/Ala366 clash before accepting the nucleotide pose",
         ],
     }
 
@@ -294,7 +294,7 @@ def main() -> None:
             "5G53": sha256(source_5g53),
         },
         "systems": systems,
-        "remaining_gate": "Complete and visually audit external loop/mutation rebuilding before membrane construction.",
+        "remaining_gate": "Complete loop/mutation rebuilding and pass every computational structure audit before membrane construction.",
     }
     audit_path = args.output / "builder_input_audit.json"
     audit_path.write_text(json.dumps(audit, indent=2) + "\n", encoding="utf-8")
