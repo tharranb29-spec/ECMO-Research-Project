@@ -22,6 +22,8 @@ ENVIRONMENT_AUDIT = OUTPUT / "environment_audit.json"
 CONSTRUCT_POLICY = ROOT / "config" / "md_construct_policy.v1.5.json"
 BUILDER_AUDIT = OUTPUT / "builder_inputs" / "builder_input_audit.json"
 CGENFF_REQUESTS = OUTPUT / "cgenff_requests" / "request_manifest.json"
+CPU_BENCHMARK = OUTPUT / "openmm_cpu_benchmark.json"
+CGENFF_AUDIT = OUTPUT / "cgenff_parameters" / "parameter_audit.json"
 
 
 def utc_now() -> str:
@@ -50,6 +52,8 @@ def main() -> None:
     environment_audit = read_json_if_present(ENVIRONMENT_AUDIT)
     builder_audit = read_json_if_present(BUILDER_AUDIT)
     cgenff_requests = read_json_if_present(CGENFF_REQUESTS)
+    cpu_benchmark = read_json_if_present(CPU_BENCHMARK)
+    cgenff_audit = read_json_if_present(CGENFF_AUDIT)
     candidates = {row["record_id"]: row for row in read_csv(CANDIDATES)}
     declared = config["tiers"]["tier_b_blinded_candidates"]["candidate_ids"]
     if set(declared) != set(candidates):
@@ -140,17 +144,23 @@ def main() -> None:
             ),
             "closest_pair": gdp_transfer.get("closest_pair"),
         })
+    cgenff_ready = cgenff_audit.get("status") == "all_ligand_parameters_audited_and_accepted"
     blockers.extend([
         {"system_id": "global", "reason": "tier_a_completed_construct_models_not_audited"},
-        {"system_id": "global", "reason": "cgenff_ligand_parameters_not_generated_or_audited"},
         {"system_id": "global", "reason": "membrane_systems_not_built"},
         {"system_id": "global", "reason": "native_contact_lists_not_frozen"},
     ])
+    if not cgenff_ready:
+        blockers.append({
+            "system_id": "global",
+            "reason": "cgenff_ligand_parameters_not_generated_or_audited",
+            "audit_status": cgenff_audit.get("status", "audit_not_run"),
+        })
     status = {
         "schema_version": 1,
         "created_at": utc_now(),
         "specification_id": config["specification_id"],
-        "status": "blocked_before_system_preparation" if blockers else "ready_for_system_preparation",
+        "status": "blocked_before_system_preparation" if blockers else "ready_for_tier_a_production",
         "trajectory_production_started": False,
         "candidate_labels_loaded": False,
         "resolved_gates": {
@@ -158,10 +168,16 @@ def main() -> None:
             "openmm_and_core_force_fields": environment_ready,
             "tier_a_builder_inputs": builder_audit.get("status") == "tier_a_builder_inputs_audited_not_simulation_ready",
             "cgenff_request_inputs": cgenff_requests.get("status") == "request_inputs_ready_parameters_pending",
+            "cgenff_parameters": cgenff_ready,
         },
-        "compute_warnings": [
-            environment_audit.get("production_compute_status")
-        ] if environment_ready and environment_audit.get("production_compute_status") != "accelerator_available" else [],
+        "compute_warnings": ([
+            environment_audit.get("production_compute_status"),
+            {
+                "benchmark_atom_count": cpu_benchmark.get("atom_count"),
+                "benchmark_ns_per_day": cpu_benchmark.get("throughput_ns_per_day"),
+                "optimistic_serial_days_for_3us": cpu_benchmark.get("estimated_serial_days_per_3us_at_benchmark_size"),
+            },
+        ] if environment_ready and environment_audit.get("production_compute_status") != "accelerator_available" else []),
         "tier_a_system_count": 2,
         "tier_b_system_count": 8,
         "planned_tier_a_plus_b_replicas": 30,
@@ -175,6 +191,8 @@ def main() -> None:
             **({"md_environment_audit": sha256(ENVIRONMENT_AUDIT)} if ENVIRONMENT_AUDIT.exists() else {}),
             **({"tier_a_builder_audit": sha256(BUILDER_AUDIT)} if BUILDER_AUDIT.exists() else {}),
             **({"cgenff_request_manifest": sha256(CGENFF_REQUESTS)} if CGENFF_REQUESTS.exists() else {}),
+            **({"openmm_cpu_benchmark": sha256(CPU_BENCHMARK)} if CPU_BENCHMARK.exists() else {}),
+            **({"cgenff_parameter_audit": sha256(CGENFF_AUDIT)} if CGENFF_AUDIT.exists() else {}),
         },
         "blockers": blockers,
         "next_gate": "Resolve every listed blocker, build both native controls, and freeze native contacts before any production trajectory.",

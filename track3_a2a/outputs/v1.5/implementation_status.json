@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T08:52:28.253368+00:00",
+  "created_at": "2026-09-13T12:25:17.298754+00:00",
   "specification_id": "a2a-continuous-activity-v1.5",
   "stage": "external_pbind_intake_ready_primary_review_pending_md_preflight_blocked",
   "claim_status": "exploratory_only",
@@ -193,15 +193,16 @@
       },
       {
         "system_id": "global",
-        "reason": "cgenff_ligand_parameters_not_generated_or_audited"
-      },
-      {
-        "system_id": "global",
         "reason": "membrane_systems_not_built"
       },
       {
         "system_id": "global",
         "reason": "native_contact_lists_not_frozen"
+      },
+      {
+        "system_id": "global",
+        "reason": "cgenff_ligand_parameters_not_generated_or_audited",
+        "audit_status": "blocked_or_parameters_pending"
       }
     ]
   },
@@ -214,6 +215,8 @@
       "molecules": true,
       "generic_scaffolds": true
     },
+    "review_queue_candidate_count": 240,
+    "review_queue_generic_scaffold_count": 240,
     "next_gate": "Dual primary-publication review and assay-context verification; do not freeze membership or unmask outcomes yet."
   },
   "external_confirmation_performed": false,
@@ -223,7 +226,8 @@
     "models": "2f066858b234ac5f686d585ee5115c92600a53bbf07f7f33455854647498bccb",
     "external_docking": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17",
     "external_pbind_intake": "2dd1758d0d33b582771b604869872f797f98bed585ea44e17ff0ee3989120f64",
-    "md_preflight": "0b9bef71568a141e0b580716983281bedeec3268744afa1c6c53dfd9c0b4e58b"
+    "md_preflight": "13377246515b9dde70a3299c50f8b450740d5a40b35896e17355ca4b631fb4ac",
+    "external_pbind_review_queue": "d1fe4cd2924c52b7a047d5418cc7a1b54519c4a4b2dbe97fc7aeef773597c162"
   },
   "next_actions": [
     "Complete independent primary-evidence review and freeze an adequately powered external pBind_Ki cohort before outcomes are unmasked.",

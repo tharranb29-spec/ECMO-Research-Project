@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T12:25:17.224335+00:00",
+  "status": "blocked_or_parameters_pending",
+  "candidate_labels_loaded": false,
+  "request_manifest_sha256": "e43761f9041669b80ed67eb0998b0674dca181a3acc0868a26f4d7cce589e48c",
+  "results": [
+    {
+      "residue_name": "NEC",
+      "status": "missing_stream_file"
+    },
+    {
+      "residue_name": "ZMA",
+      "status": "missing_stream_file"
+    },
+    {
+      "residue_name": "C5A",
+      "status": "missing_stream_file"
+    },
+    {
+      "residue_name": "C7A",
+      "status": "missing_stream_file"
+    },
+    {
+      "residue_name": "C9A",
+      "status": "missing_stream_file"
+    },
+    {
+      "residue_name": "PGD2",
+      "status": "missing_stream_file"
+    }
+  ],
+  "human_reviews_required": [],
+  "blockers": [
+    {
+      "residue_name": "NEC",
+      "reason": "missing_stream_file",
+      "matches": []
+    },
+    {
+      "residue_name": "ZMA",
+      "reason": "missing_stream_file",
+      "matches": []
+    },
+    {
+      "residue_name": "C5A",
+      "reason": "missing_stream_file",
+      "matches": []
+    },
+    {
+      "residue_name": "C7A",
+      "reason": "missing_stream_file",
+      "matches": []
+    },
+    {
+      "residue_name": "C9A",
+      "reason": "missing_stream_file",
+      "matches": []
+    },
+    {
+      "residue_name": "PGD2",
+      "reason": "missing_stream_file",
+      "matches": []
+    }
+  ],
+  "production_parameter_gate_passed": false
+}

@@ -29,6 +29,11 @@ After parent standardization and deduplication:
 - 2,968 structures across 834 generic scaffolds remain eligible for primary-
   evidence review.
 
+A deterministic first-pass review queue now contains 240 candidates on 240
+different generic scaffolds. Candidates with both DOI and PMID metadata are
+preferred within a scaffold, but no outcome field participates in ordering.
+This is a review queue, not frozen cohort membership.
+
 The 60-molecule and 20-scaffold planning floors are therefore feasible before
 primary review, but they have not yet been met by admitted evidence. Counts at
 this stage are discovery-pool counts, not cohort counts.

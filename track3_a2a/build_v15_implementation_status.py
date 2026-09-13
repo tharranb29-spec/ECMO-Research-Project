@@ -16,6 +16,7 @@ MODELS = ROOT / "outputs" / "v1.5" / "continuous_activity" / "development_result
 DOCKING = ROOT / "outputs" / "v1.4" / "docking" / "literature_pilot_2025_report.json"
 MD = ROOT / "outputs" / "v1.5" / "md" / "preflight_status.json"
 EXTERNAL_PBIND = ROOT / "outputs" / "v1.5" / "external_pbind_intake" / "intake_audit.json"
+EXTERNAL_PBIND_QUEUE = ROOT / "outputs" / "v1.5" / "external_pbind_intake" / "primary_evidence_review_queue_audit.json"
 OUTPUT = ROOT / "outputs" / "v1.5" / "implementation_status.json"
 
 
@@ -48,6 +49,7 @@ def main() -> None:
     inputs = {name: path for name, path in {
         "curation": CURATION, "models": MODELS, "external_docking": DOCKING,
         "external_pbind_intake": EXTERNAL_PBIND, "md_preflight": MD,
+        "external_pbind_review_queue": EXTERNAL_PBIND_QUEUE,
     }.items()}
     missing = [str(path) for path in inputs.values() if not path.exists()]
     if missing:
@@ -57,6 +59,7 @@ def main() -> None:
     docking = json.loads(DOCKING.read_text(encoding="utf-8"))
     md = json.loads(MD.read_text(encoding="utf-8"))
     external_pbind = json.loads(EXTERNAL_PBIND.read_text(encoding="utf-8"))
+    external_queue = json.loads(EXTERNAL_PBIND_QUEUE.read_text(encoding="utf-8"))
     output = {
         "schema_version": 1,
         "created_at": datetime.now(timezone.utc).isoformat(),
@@ -97,6 +100,8 @@ def main() -> None:
             ],
             "eligible_generic_scaffold_count": external_pbind["eligible_generic_scaffold_count"],
             "floor_status_before_primary_review": external_pbind["floor_status_before_primary_review"],
+            "review_queue_candidate_count": external_queue["queue_candidate_count"],
+            "review_queue_generic_scaffold_count": external_queue["queue_generic_scaffold_count"],
             "next_gate": external_pbind["next_gate"],
         },
         "external_confirmation_performed": False,

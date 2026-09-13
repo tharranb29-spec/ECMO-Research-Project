@@ -129,6 +129,18 @@ def prepare_5g53(atoms: list[Atom], output: Path) -> dict:
     proteins = [a for a in atoms if a.record == "ATOM" and a.chain in {"B", "D"}]
     neca = [a for a in atoms if a.record == "HETATM" and a.chain == "B" and a.resname == "NEC" and a.resseq == 400]
     gdp = [a for a in atoms if a.record == "HETATM" and a.chain == "C" and a.resname == "GDP" and a.resseq == 400]
+    residues_by_chain = {
+        chain: {a.resseq for a in atoms if a.record == "ATOM" and a.chain == chain}
+        for chain in {"A", "B", "C", "D"}
+    }
+    if any(residue in residues_by_chain["A"] for residue in range(147, 159)):
+        raise RuntimeError("Expected deposited receptor chain A gap 147-158 was not reproduced")
+    if not set(range(147, 159)).issubset(residues_by_chain["B"]):
+        raise RuntimeError("Selected receptor chain B does not resolve residues 147-158")
+    if any(residue in residues_by_chain["C"] for residue in {366, 367, 368}):
+        raise RuntimeError("Expected deposited mini-Gs chain C pocket gap 366-368 was not reproduced")
+    if not {366, 367, 368}.issubset(residues_by_chain["D"]):
+        raise RuntimeError("Selected mini-Gs chain D does not resolve the expected pocket residues 366-368")
 
     allowed_backbone = {"N", "CA", "C", "O"}
     source_map = {(a.resseq, a.icode, a.resname, a.name): a for a in atoms
@@ -182,6 +194,16 @@ def prepare_5g53(atoms: list[Atom], output: Path) -> dict:
             "alignment_passed": alignment_passed,
             "clash_passed": clash_passed,
             "passed": alignment_passed and clash_passed,
+        },
+        "copy_selection_rationale": {
+            "assembly_1_receptor_A_missing_residues": list(range(147, 159)) + list(range(212, 224)),
+            "assembly_2_receptor_B_missing_residues": list(range(208, 224)),
+            "gdp_source_miniGs_C_missing_pocket_residues": [366, 367, 368],
+            "selected_miniGs_D_resolves_pocket_residues": [366, 367, 368],
+            "decision": (
+                "Retain B/D. Do not switch automatically to A/C or accept a rigid GDP transfer; "
+                "jointly refine GDP with the resolved D-chain pocket."
+            ),
         },
         "required_builder_edits": [
             "back-mutate receptor A154N",

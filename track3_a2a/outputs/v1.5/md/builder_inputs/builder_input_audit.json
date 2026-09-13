@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-13T08:22:52.376412+00:00",
+  "created_at": "2026-09-13T12:18:46.130539+00:00",
   "specification_id": "a2a-md-construct-policy-v1.5",
   "status": "tier_a_builder_inputs_audited_not_simulation_ready",
   "trajectory_production_started": false,
@@ -104,6 +104,63 @@
         "alignment_passed": true,
         "clash_passed": false,
         "passed": false
+      },
+      "copy_selection_rationale": {
+        "assembly_1_receptor_A_missing_residues": [
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223
+        ],
+        "assembly_2_receptor_B_missing_residues": [
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223
+        ],
+        "gdp_source_miniGs_C_missing_pocket_residues": [
+          366,
+          367,
+          368
+        ],
+        "selected_miniGs_D_resolves_pocket_residues": [
+          366,
+          367,
+          368
+        ],
+        "decision": "Retain B/D. Do not switch automatically to A/C or accept a rigid GDP transfer; jointly refine GDP with the resolved D-chain pocket."
       },
       "required_builder_edits": [
         "back-mutate receptor A154N",
