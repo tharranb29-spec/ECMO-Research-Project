@@ -15,6 +15,7 @@ CURATION = ROOT / "outputs" / "v1.5" / "continuous_activity_curation_audit.json"
 MODELS = ROOT / "outputs" / "v1.5" / "continuous_activity" / "development_results.json"
 DOCKING = ROOT / "outputs" / "v1.4" / "docking" / "literature_pilot_2025_report.json"
 MD = ROOT / "outputs" / "v1.5" / "md" / "preflight_status.json"
+EXTERNAL_PBIND = ROOT / "outputs" / "v1.5" / "external_pbind_intake" / "intake_audit.json"
 OUTPUT = ROOT / "outputs" / "v1.5" / "implementation_status.json"
 
 
@@ -45,7 +46,8 @@ def metric_summary(models: dict) -> dict:
 
 def main() -> None:
     inputs = {name: path for name, path in {
-        "curation": CURATION, "models": MODELS, "external_docking": DOCKING, "md_preflight": MD,
+        "curation": CURATION, "models": MODELS, "external_docking": DOCKING,
+        "external_pbind_intake": EXTERNAL_PBIND, "md_preflight": MD,
     }.items()}
     missing = [str(path) for path in inputs.values() if not path.exists()]
     if missing:
@@ -54,11 +56,12 @@ def main() -> None:
     models = json.loads(MODELS.read_text(encoding="utf-8"))
     docking = json.loads(DOCKING.read_text(encoding="utf-8"))
     md = json.loads(MD.read_text(encoding="utf-8"))
+    external_pbind = json.loads(EXTERNAL_PBIND.read_text(encoding="utf-8"))
     output = {
         "schema_version": 1,
         "created_at": datetime.now(timezone.utc).isoformat(),
         "specification_id": "a2a-continuous-activity-v1.5",
-        "stage": "strict_exploratory_activity_and_external_docking_complete_md_preflight_blocked",
+        "stage": "external_pbind_intake_ready_primary_review_pending_md_preflight_blocked",
         "claim_status": "exploratory_only",
         "activity": {
             "activity_rows_seen": curation["activity_rows_seen"],
@@ -86,12 +89,23 @@ def main() -> None:
             "candidate_labels_loaded": md["candidate_labels_loaded"],
             "blockers": md["blockers"],
         },
+        "external_pbind_intake": {
+            "outcomes_unmasked": external_pbind["outcomes_unmasked"],
+            "membership_frozen": external_pbind["membership_frozen"],
+            "eligible_for_primary_evidence_review_count": external_pbind[
+                "eligible_for_primary_evidence_review_count"
+            ],
+            "eligible_generic_scaffold_count": external_pbind["eligible_generic_scaffold_count"],
+            "floor_status_before_primary_review": external_pbind["floor_status_before_primary_review"],
+            "next_gate": external_pbind["next_gate"],
+        },
         "external_confirmation_performed": False,
         "model_promotion_allowed": False,
         "source_hashes": {name: sha256(path) for name, path in inputs.items()},
         "next_actions": [
             "Complete independent primary-evidence review and freeze an adequately powered external pBind_Ki cohort before outcomes are unmasked.",
-            "Resolve the 5G53 structure caveat and provision audited OpenMM, force-field, membrane, and ligand-parameter inputs.",
+            "Resolve the transferred-GDP/Ala366 clash, complete both Tier A construct models, and audit CGenFF ligand parameters.",
+            "Build and audit the standardized POPC/cholesterol membrane systems and freeze native-contact definitions.",
             "Build and run Tier A native controls; interpret Tier B trajectories only if both control gates pass.",
         ],
     }

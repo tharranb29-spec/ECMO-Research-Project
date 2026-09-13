@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-md-construct-policy-v1.5",
+  "status": "frozen_before_structure_modeling_and_dynamics",
+  "effective_date": "2026-09-13",
+  "common_policy": {
+    "target_sequence": "human ADORA2A UniProt P29274",
+    "receptor_mutations": "back-mutate every deposited receptor mutation to the UniProt residue before MD",
+    "engineered_fusions_and_tags": "remove",
+    "internal_missing_segments": "model and validate; reject knots, clashes, cis peptide artifacts, and chirality errors",
+    "terminal_missing_segments": "do not model unless required for a transmembrane helix or declared contact; cap the resolved construct termini",
+    "sidechain_completion": "rebuild all missing heavy atoms before protonation",
+    "protonation_ph": 7.4,
+    "binding_site_manual_review": ["GLU169", "HIS250", "ASN253", "SER277", "HIS278"],
+    "retained_water_rule": "retain deposited waters within 5.0 A of the native ligand or retained sodium ion; record residue IDs before dynamics",
+    "removed_solvent_rule": "remove detergents, crystallization additives, and bulk crystallographic solvent",
+    "validation_required": [
+      "all selected residues have standard L chirality",
+      "no severe steric clashes after repair",
+      "all peptide bonds and disulfides are valid",
+      "no modeled loop knot or membrane-spanning artifact",
+      "native ligand remains in the deposited pose before minimization",
+      "all coordinate, topology, parameter, and decision files are hashed"
+    ]
+  },
+  "controls": {
+    "5NM4_ZMA_native": {
+      "source_pdb": "5NM4",
+      "selected_chain": "A",
+      "selected_ligand": "ZMA A 507",
+      "sifts_source": "data/raw/pdbe_sifts/5nm4_uniprot_mapping.json",
+      "keep_receptor_uniprot_segments": [[2, 208], [219, 317]],
+      "model_internal_receptor_segment": [209, 218],
+      "do_not_model_terminal_receptor_segments": [[1, 1], [318, 412]],
+      "remove_pdb_residue_ranges": [[1, 10], [218, 323], [423, 433]],
+      "remove_components": ["b562RIL fusion", "OLA detergent/fatty-acid molecules", "deposited cholesterol molecules before rebuilding the standardized membrane"],
+      "retain_components": ["ZMA A 507", "NA A 506", "waters passing the common retained-water rule"],
+      "back_mutations_to_uniprot": [
+        {"pdb_residue": "LEU A 63", "uniprot_residue": "ALA 54"},
+        {"pdb_residue": "ALA A 97", "uniprot_residue": "THR 88"},
+        {"pdb_residue": "ALA A 116", "uniprot_residue": "ARG 107"},
+        {"pdb_residue": "ALA A 131", "uniprot_residue": "LYS 122"},
+        {"pdb_residue": "ALA A 163", "uniprot_residue": "ASN 154"},
+        {"pdb_residue": "ALA A 211", "uniprot_residue": "LEU 202"},
+        {"pdb_residue": "ALA A 340", "uniprot_residue": "LEU 235"},
+        {"pdb_residue": "ALA A 344", "uniprot_residue": "VAL 239"},
+        {"pdb_residue": "ALA A 382", "uniprot_residue": "SER 277"}
+      ],
+      "native_disulfides_uniprot_numbering": [[71, 159], [74, 146], [77, 166], [259, 262]],
+      "special_risk": "S277A is a deposited orthosteric mutation and must be restored before native-contact enumeration."
+    },
+    "5G53_NECA_miniGs_native": {
+      "source_pdb": "5G53",
+      "selected_biological_assembly": 2,
+      "selected_receptor_chain": "B",
+      "selected_mini_gs_chain": "D",
+      "selected_ligand": "NEC B 400",
+      "chirality_resolution": "outputs/v1.5/md/5g53_chirality_review.json",
+      "sifts_source": "data/raw/pdbe_sifts/5g53_uniprot_mapping.json",
+      "keep_receptor_uniprot_segment": [1, 308],
+      "model_internal_receptor_segment": [208, 223],
+      "do_not_model_terminal_receptor_segments": [[1, 5], [306, 308]],
+      "remove_receptor_expression_tag": [309, 314],
+      "back_mutations_to_uniprot": [
+        {"pdb_residue": "ALA B 154", "uniprot_residue": "ASN 154"}
+      ],
+      "mini_gs_policy": "retain the engineered mini-Gs sequence and mutations exactly; model only internal missing engineered segments",
+      "model_internal_mini_gs_segments": [[193, 207], [225, 238]],
+      "do_not_model_terminal_mini_gs_segments": [[25, 38], [394, 394]],
+      "gdp_policy": "include GDP by rigidly transferring GDP C 400 into the selected D-chain nucleotide pocket using shared mini-Gs backbone atoms; report alignment RMSD and reject clashes",
+      "gdp_basis": "The deposited asymmetric unit contains GDP only in chain C; the published 5G53 mini-Gs MD precedent selected chains B/D and included GDP.",
+      "remove_components": ["SOG detergent", "all components belonging only to chains A/C except the aligned GDP source coordinates"],
+      "retain_components": ["NEC B 400", "selected B/D proteins", "aligned GDP after geometric validation"],
+      "native_disulfides_receptor_numbering": [[71, 159], [74, 146], [77, 166], [259, 262]]
+    }
+  },
+  "membrane_and_solvent": {
+    "orientation": "OPM/PPM orientation with membrane normal along Z; store the orientation transform",
+    "upper_leaflet": {"POPC_mole_fraction": 0.7, "CHL1_mole_fraction": 0.3},
+    "lower_leaflet": {"POPC_mole_fraction": 0.7, "CHL1_mole_fraction": 0.3},
+    "water": "CHARMM-modified TIP3P",
+    "salt_molar": 0.15,
+    "temperature_kelvin": 310,
+    "pressure_bar": 1.0
+  },
+  "tool_boundary": {
+    "preferred_builder": "CHARMM-GUI PDB Reader plus GalaxyFill and Membrane Builder",
+    "reason": "The controls contain internal missing segments, an engineered fusion, a mini-Gs complex, and a mixed POPC/cholesterol membrane; these require visual and topology validation beyond automatic PDBFixer output.",
+    "pdbfixer_role": "inventory and independent missing-atom checks only; do not accept its long-loop coordinates without human structural review"
+  },
+  "references": {
+    "5g53_primary": "https://doi.org/10.1038/nature18966",
+    "5g53_md_precedent": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6445292/",
+    "charmm_gui_missing_residues": "https://charmm-gui.org/?doc=help&id=missing_residue",
+    "charmm_gui_membrane_builder": "https://charmm-gui.org/?doc=demo&id=membrane_builder&lesson=2"
+  }
+}

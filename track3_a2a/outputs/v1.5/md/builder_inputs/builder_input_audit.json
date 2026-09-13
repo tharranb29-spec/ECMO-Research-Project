@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T08:22:52.376412+00:00",
+  "specification_id": "a2a-md-construct-policy-v1.5",
+  "status": "tier_a_builder_inputs_audited_not_simulation_ready",
+  "trajectory_production_started": false,
+  "source_hashes": {
+    "construct_policy": "abee2cc5970f35547bd634a36f6bc8b4789fb9051ae637b33c36bcbda4283f47",
+    "5NM4": "698e483fd4513540e2348c07b36488b7f687a4539c06735e4d25aa351e225d83",
+    "5G53": "105a55361d60a5fbf74f772ce80dca3c2b2bb848bd0004c8e9019f130962e6fd"
+  },
+  "systems": [
+    {
+      "system_id": "5NM4_ZMA_native",
+      "status": "builder_input_ready_not_simulation_ready",
+      "output": "outputs/v1.5/md/builder_inputs/5NM4_A_ZMA_sodium_builder_input.pdb",
+      "output_sha256": "77b4989a97deacf2583d87cb24ba872431d911298e6e8712fed3102bd8198851",
+      "selected_receptor_atom_count": 4596,
+      "zma_atom_count": 40,
+      "sodium_atom_count": 1,
+      "retained_water_atom_count": 17,
+      "retained_water_residue_ids": [
+        "A:607",
+        "A:610",
+        "A:613",
+        "A:615",
+        "A:618",
+        "A:631",
+        "A:633",
+        "A:636",
+        "A:637",
+        "A:639",
+        "A:641",
+        "A:643",
+        "A:645",
+        "A:646",
+        "A:647",
+        "A:650",
+        "A:652"
+      ],
+      "deposited_mutation_inventory_verified": [
+        {
+          "pdb_residue_number": 63,
+          "deposited_residue": "LEU"
+        },
+        {
+          "pdb_residue_number": 97,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 116,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 131,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 163,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 211,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 340,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 344,
+          "deposited_residue": "ALA"
+        },
+        {
+          "pdb_residue_number": 382,
+          "deposited_residue": "ALA"
+        }
+      ],
+      "required_builder_edits": [
+        "restore all nine receptor mutations, including orthosteric S277A",
+        "model the ICL3 segment corresponding to UniProt 209-218",
+        "complete missing sidechains and validate all modeled geometry",
+        "assign protonation at pH 7.4 and parameterize ZMA"
+      ]
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native",
+      "status": "builder_input_generated_geometric_review_failed",
+      "output": "outputs/v1.5/md/builder_inputs/5G53_BD_NECA_GDP_builder_input.pdb",
+      "output_sha256": "f45e740e9ad87cc099d2a2ffffba282f09af1025519571d51aae884c81177222",
+      "selected_protein_atom_count": 3546,
+      "neca_atom_count": 22,
+      "gdp_atom_count": 28,
+      "gdp_transfer": {
+        "alignment_atom_count": 77,
+        "backbone_alignment_rmsd_angstrom": 0.087004,
+        "minimum_transferred_gdp_heavy_atom_distance_angstrom": 0.976799,
+        "closest_pair": {
+          "left": "GDP:O6",
+          "right": "D:ALA366:CB"
+        },
+        "rmsd_gate_angstrom": 0.5,
+        "severe_clash_gate_angstrom": 1.5,
+        "alignment_passed": true,
+        "clash_passed": false,
+        "passed": false
+      },
+      "required_builder_edits": [
+        "back-mutate receptor A154N",
+        "model receptor residues 208-223 and mini-Gs internal segments 193-207 and 225-238",
+        "complete missing sidechains and validate all modeled geometry",
+        "assign protonation at pH 7.4 and parameterize NEC and GDP",
+        "manually resolve the transferred GDP/Ala366 clash before accepting the nucleotide pose"
+      ]
+    }
+  ],
+  "remaining_gate": "Complete and visually audit external loop/mutation rebuilding before membrane construction."
+}

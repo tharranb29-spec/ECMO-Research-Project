@@ -1,5 +1,5 @@
 system_id,tier,candidate_id,receptor_pdb_id,receptor_state,ligand,standardized_smiles,source_pose_required,source_pose_path,input_status,input_sha256,replicas,production_ns_per_replica
-5NM4_ZMA_native,A,,5NM4,inactive,ZM241385,,native_deposited_pose,data/raw/5NM4.pdb,present_unprepared,fc1a1e9ae2d334170e2442e648e5ea9ffd28c70c666d30a3001115216b3dc179,3,100
+5NM4_ZMA_native,A,,5NM4,inactive,ZM241385,,native_deposited_pose,data/raw/5NM4.pdb,present_unprepared,698e483fd4513540e2348c07b36488b7f687a4539c06735e4d25aa351e225d83,3,100
 5G53_NECA_miniGs_native,A,,5G53,active_G_protein_coupled,NECA,,native_deposited_pose,data/raw/5G53.pdb,present_unprepared,105a55361d60a5fbf74f772ce80dca3c2b2bb848bd0004c8e9019f130962e6fd,3,100
 LIT25-RL-C5_5NM4,B,LIT25-RL-C5,5NM4,inactive,RL study compound 5,Nc1nc(-c2ccc(O)cc2)c2cc(F)ccc2n1,predeclared_retained_gnina_pose,outputs/v1.4/docking/LIT25-RL-C5/5NM4/retained_pose.sdf,present_unprepared,eef82e4467fe43ce48c8a49dfb12d6736809d99e03c51027317e19d7233b3aa0,3,100
 LIT25-RL-C5_2YDO,B,LIT25-RL-C5,2YDO,active_like,RL study compound 5,Nc1nc(-c2ccc(O)cc2)c2cc(F)ccc2n1,predeclared_retained_gnina_pose,outputs/v1.4/docking/LIT25-RL-C5/2YDO/retained_pose.sdf,present_unprepared,4c83f630af89935a0757ba91c7e60ece4ac058407c440a6f35b1e0e5aea65a5d,3,100

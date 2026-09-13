@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T07:25:37.884979+00:00",
+  "specification_id": "a2a-md-5g53-structure-review-v1.5",
+  "source": {
+    "path": "data/raw/5G53.pdb",
+    "sha256": "105a55361d60a5fbf74f772ce80dca3c2b2bb848bd0004c8e9019f130962e6fd",
+    "deposited_resolution_angstrom": 3.4,
+    "caveats": [
+      "CAVEAT     5G53    ASN C 239 HAS WRONG CHIRALITY AT ATOM CA"
+    ]
+  },
+  "biological_assemblies": {
+    "1": {
+      "chains": [
+        "A",
+        "C"
+      ]
+    },
+    "2": {
+      "chains": [
+        "B",
+        "D"
+      ]
+    }
+  },
+  "chirality_check": {
+    "C": {
+      "residue": "ASN C239",
+      "signed_chiral_volume_a3": -0.888653,
+      "observed_sign": "negative",
+      "dominant_chain_sign": "positive",
+      "matches_dominant_chain_sign": false,
+      "chain_sign_counts": {
+        "positive": 187,
+        "negative": 1
+      }
+    },
+    "D": {
+      "residue": "ASN D239",
+      "signed_chiral_volume_a3": 2.342176,
+      "observed_sign": "positive",
+      "dominant_chain_sign": "positive",
+      "matches_dominant_chain_sign": true,
+      "chain_sign_counts": {
+        "positive": 179
+      }
+    }
+  },
+  "copy_inventory": {
+    "A_C": {
+      "receptor_atom_count": 2186,
+      "mini_gs_atom_count": 1515,
+      "neca_atom_count": 22,
+      "gdp_atom_count": 28,
+      "asn_239_minimum_distance_to_receptor_angstrom": 12.581,
+      "asn_239_minimum_distance_to_neca_angstrom": 44.556
+    },
+    "B_D": {
+      "receptor_atom_count": 2142,
+      "mini_gs_atom_count": 1404,
+      "neca_atom_count": 22,
+      "gdp_atom_count": 0,
+      "asn_239_minimum_distance_to_receptor_angstrom": 13.207,
+      "asn_239_minimum_distance_to_neca_angstrom": 45.264
+    }
+  },
+  "decision": {
+    "status": "resolved_by_copy_selection",
+    "selected_biological_assembly": 2,
+    "selected_receptor_chain": "B",
+    "selected_mini_gs_chain": "D",
+    "selected_neca": "NEC B 400",
+    "deposited_coordinate_edit_performed": false,
+    "rationale": "Use the independently deposited B/D biological assembly, whose D239 alpha-carbon chirality matches the dominant L-amino-acid sign. This avoids the chain-C defect instead of repairing experimental coordinates.",
+    "literature_precedent": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6445292/"
+  },
+  "remaining_structure_preparation_gates": [
+    "resolve missing receptor and mini-Gs residues and atoms with a versioned construct policy",
+    "decide and document GDP occupancy because GDP is present only in chain C of the deposited asymmetric unit",
+    "orient the selected B/D assembly in the membrane and document retained waters and engineered components",
+    "validate the complete prepared model before membrane building"
+  ]
+}

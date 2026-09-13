@@ -11,6 +11,7 @@ docking_inputs/**/*.sdf
 docking_inputs/**/*.mol2
 .venv-pdb2pqr/
 .venv-track3/
+.venv-md/
 docking_inputs/**/*.pqr
 docking_inputs/**/*.log
 track3_a2a/docking_inputs/**/*.pdb

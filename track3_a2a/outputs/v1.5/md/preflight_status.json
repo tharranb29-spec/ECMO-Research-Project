@@ -1,10 +1,19 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-12T14:20:25.347251+00:00",
+  "created_at": "2026-09-13T08:23:57.259857+00:00",
   "specification_id": "a2a-md-validation-v1.5",
   "status": "blocked_before_system_preparation",
   "trajectory_production_started": false,
   "candidate_labels_loaded": false,
+  "resolved_gates": {
+    "5g53_chirality_caveat": true,
+    "openmm_and_core_force_fields": true,
+    "tier_a_builder_inputs": true,
+    "cgenff_request_inputs": true
+  },
+  "compute_warnings": [
+    "cpu_only_not_suitable_for_full_3_microsecond_campaign"
+  ],
   "tier_a_system_count": 2,
   "tier_b_system_count": 8,
   "planned_tier_a_plus_b_replicas": 30,
@@ -12,19 +21,26 @@
   "source_hashes": {
     "md_config": "fed6d59f674a72c0d6eb116b42f8625434522a550cd58e006334c6dfc9d44346",
     "candidate_manifest": "96d938ae32ff440585a75b876c03f28b1ae332d4c763d122effaa3f08bbd24bb",
-    "system_input_manifest": "3f08e54139ea23c7228e288e100cf781c71b01f4dd6b5b05134435e49215da4f"
+    "system_input_manifest": "5a36cff6d5b246a8ea38057fc0b85ac5ae40c7692d0fa9382be27583aac1c857",
+    "md_construct_policy": "abee2cc5970f35547bd634a36f6bc8b4789fb9051ae637b33c36bcbda4283f47",
+    "5g53_chirality_review": "e107f9c20e338489bdf85090ed2b1bccfa0c2de0730205ac64f8052988078df5",
+    "md_environment_audit": "b814fee876aa2b72541b57bb6416701eec3421b1d8ca2b9479462722b40828ca",
+    "tier_a_builder_audit": "2ffebc653abacad2394ced38798cd4ff720d80a90b34df3b9e5b965deebd4538",
+    "cgenff_request_manifest": "e43761f9041669b80ed67eb0998b0674dca181a3acc0868a26f4d7cce589e48c"
   },
   "blockers": [
     {
       "system_id": "5G53_NECA_miniGs_native",
-      "reason": "deposited_structure_caveat_requires_manual_review",
-      "details": [
-        "CAVEAT     5G53    ASN C 239 HAS WRONG CHIRALITY AT ATOM CA"
-      ]
+      "reason": "transferred_gdp_clash_requires_manual_resolution",
+      "minimum_heavy_atom_distance_angstrom": 0.976799,
+      "closest_pair": {
+        "left": "GDP:O6",
+        "right": "D:ALA366:CB"
+      }
     },
     {
       "system_id": "global",
-      "reason": "openmm_not_installed"
+      "reason": "tier_a_completed_construct_models_not_audited"
     },
     {
       "system_id": "global",

@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T07:35:56.643781+00:00",
+  "specification_id": "a2a-md-environment-v1.5",
+  "status": "openmm_and_core_force_fields_audited",
+  "runtime": {
+    "python": "3.12.14",
+    "python_executable": "/Users/tharran/Documents/ChatGPT/ECMO Research Project/ECMO-Research-Project/.venv-md/bin/python",
+    "operating_system": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "numpy": "2.5.3",
+    "openmm": "8.6",
+    "openmm_git_revision": "c6173db6e8edd705eb59172bd21e9ce69c572405",
+    "openbabel": "3.2.1",
+    "pdbfixer": "1.12.0"
+  },
+  "platforms": {
+    "Reference": {
+      "status": "usable",
+      "test_energy_kj_mol": 0.005
+    },
+    "CPU": {
+      "status": "usable",
+      "test_energy_kj_mol": 0.005
+    },
+    "OpenCL": {
+      "status": "unavailable",
+      "reason": "No compatible OpenCL platform is available"
+    }
+  },
+  "accelerated_platforms": [],
+  "production_compute_status": "cpu_only_not_suitable_for_full_3_microsecond_campaign",
+  "force_field": {
+    "primary_xml": "/Users/tharran/Documents/ChatGPT/ECMO Research Project/ECMO-Research-Project/.venv-md/lib/python3.12/site-packages/openmm/app/data/charmm36_2024.xml",
+    "primary_xml_sha256": "8c004a18f6d4721634fdafdf8642fb735a0b3b6a249c37d751da6635daea35be",
+    "water_xml": "/Users/tharran/Documents/ChatGPT/ECMO Research Project/ECMO-Research-Project/.venv-md/lib/python3.12/site-packages/openmm/app/data/charmm36_2024/water.xml",
+    "water_xml_sha256": "0ba7d58e5f23550bc98197c4f8e3c1ba0507cf9b8863f7631200f4088aeefe98",
+    "required_template_status": {
+      "POPC": true,
+      "CHL1": true,
+      "GDP": true,
+      "TIP3": true
+    },
+    "selected_source_package": "toppar_c36_jul24.tgz",
+    "selected_protein_parameter_set": "CHARMM36m",
+    "selected_lipid_parameter_set": "CHARMM36 July 2024",
+    "selected_water_model": "CHARMM-modified TIP3P",
+    "selected_sources": [
+      {
+        "path": "toppar/top_all36_prot.rtf",
+        "Source": "toppar/top_all36_prot.rtf",
+        "md5hash": "4e53dc8450d0533691e95e37c2648d20",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/par_all36m_prot.prm",
+        "Source": "toppar/par_all36m_prot.prm",
+        "md5hash": "ff62b63c74f62fde2e1a458c0eaa29c9",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/top_all36_lipid.rtf",
+        "Source": "toppar/top_all36_lipid.rtf",
+        "md5hash": "eab2698d4a58b6cc44c8552ab9c83542",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/par_all36_lipid.prm",
+        "Source": "toppar/par_all36_lipid.prm",
+        "md5hash": "62a3e0ae74573d4f7b6c477eeaaa00c8",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/top_all36_cgenff.rtf",
+        "Source": "toppar/top_all36_cgenff.rtf",
+        "md5hash": "0f639a4c0dd33a1753e89575d946494a",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/par_all36_cgenff.prm",
+        "Source": "toppar/par_all36_cgenff.prm",
+        "md5hash": "0dc11733831c3737fd07d17d85fcca8d",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      },
+      {
+        "path": "toppar/stream/lipid/toppar_all36_lipid_cholesterol.str",
+        "Source": "toppar/stream/lipid/toppar_all36_lipid_cholesterol.str",
+        "md5hash": "fe29bfab9260085419df2aa2c231ef48",
+        "sourcePackage": "charmm36",
+        "sourcePackageVersion": "toppar_c36_jul24.tgz"
+      }
+    ]
+  },
+  "requirements": {
+    "path": "requirements-md.txt",
+    "sha256": "b966778b50c185b8f44b4b09908746cbdc519bf095a8a0ea8f835b927615f515"
+  },
+  "custom_ligand_parameter_status": "not_generated_or_audited",
+  "remaining_gates": [
+    "generate and independently inspect CGenFF parameters and penalty scores for NEC, ZMA, and all four candidates",
+    "obtain an accelerated OpenMM execution host before the full 3 microsecond campaign",
+    "build and validate the prepared protein, membrane, solvent, and ion systems"
+  ]
+}

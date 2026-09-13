@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-13T08:51:21.444675+00:00",
+  "source": "BindingDB getLigandsByUniprots P29274 API",
+  "source_url": "https://bindingdb.org/rest/getLigandsByUniprots?uniprot=P29274&cutoff=1000000000&response=application/json",
+  "outcomes_exposed_to_public_workspace": false,
+  "outcomes_unmasked": false,
+  "membership_frozen": false,
+  "source_record_count": 12184,
+  "ki_record_count": 8516,
+  "exact_relation_ki_record_count": 6865,
+  "invalid_or_missing_structure_record_count": 2,
+  "unique_standardized_structure_count": 5742,
+  "eligible_for_primary_evidence_review_count": 2968,
+  "eligible_generic_scaffold_count": 834,
+  "quarantined_structure_count": 2774,
+  "quarantine_reason_counts": {
+    "exact_structure_previously_visible": 753,
+    "generic_scaffold_overlaps_model_selection": 1454,
+    "primary_publication_identifier_missing": 1002
+  },
+  "protocol_floors": {
+    "molecules": 60,
+    "generic_scaffolds": 20
+  },
+  "floor_status_before_primary_review": {
+    "molecules": true,
+    "generic_scaffolds": true
+  },
+  "source_hashes": {
+    "sealed_raw_response": "ceb055d7bbbcf04775949fc2a99ddb9a11729e8772e3bac6e88ef06bf30a5490",
+    "prior_visibility_pool": "ace1a1abc33ee83d97642df275035942044bcdb454cef951752e0863b15723f2",
+    "model_selection_features": "7c3997e7898481baa8e1fb2cf8e40995ef58260a130649625b87c1acbe921b88",
+    "public_eligible_intake": "e1974602d4bdb9f89894276e666bcb7ee4aa30eec1322a0f9ac361c94e469b35",
+    "public_quarantine": "2123acc172bb6a782f6f7043c2d09930ce844bb84432d8670237a174633d2a3c",
+    "sealed_outcome_file": "b7ccc55a7832665f8af4bf1eb4bded4350eb0c662a2d9d43109c474626b1e46f"
+  },
+  "next_gate": "Dual primary-publication review and assay-context verification; do not freeze membership or unmask outcomes yet."
+}

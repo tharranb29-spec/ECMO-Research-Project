@@ -1,0 +1,4 @@
+numpy==2.5.3
+openmm==8.6.0
+openbabel==3.2.1
+pdbfixer @ git+https://github.com/openmm/pdbfixer.git@94cfa4c0ca551cdc5f13320f9a658efd59f2b881

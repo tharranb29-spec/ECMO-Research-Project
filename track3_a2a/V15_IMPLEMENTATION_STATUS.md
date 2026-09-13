@@ -1,6 +1,6 @@
 # Version 1.5 implementation status
 
-Status date: 2026-09-12
+Status date: 2026-09-13
 
 ## Completed
 
@@ -22,6 +22,16 @@ Status date: 2026-09-12
   affinity rule. No candidate functional labels were loaded.
 - Acquired and hashed the deposited `5G53` active-state native-control
   structure.
+- Resolved the deposited `5G53` ASN C239 chirality caveat without editing
+  coordinates by selecting unaffected biological assembly 2 (receptor B and
+  mini-Gs D).
+- Installed and audited OpenMM 8.6, the bundled CHARMM36m/CHARMM36 July 2024
+  protein/lipid files, POPC, cholesterol, GDP, and CHARMM TIP3P templates.
+- Prepared and audited label-blind CGenFF request files for NEC, ZMA, C5A,
+  C7A, C9A, and PGD2. CGenFF-generated parameters are still pending.
+- Frozen the Tier A construct policy and generated non-production builder
+  inputs. The incomplete local `5NM4` source was detected and replaced with
+  the complete official RCSB file before the builder input was regenerated.
 
 ## Strict exploratory activity results
 
@@ -50,20 +60,28 @@ establish functional class or experimental activity.
 
 ## Current MD gate
 
-The MD system manifest now contains both Tier A controls and all eight Tier B
-candidate-state poses. Production trajectories have not started. Five blocker
-classes remain:
+The MD system manifest contains both Tier A controls and all eight Tier B
+candidate-state poses. Production trajectories have not started. The chirality
+and local OpenMM/core-force-field gates are resolved. Four preparation classes
+and one specific structural finding remain:
 
-1. The deposited `5G53` file states that ASN C239 has incorrect chirality at
-   atom CA; this must be resolved and documented during construct preparation.
-2. OpenMM is not installed in the project environment.
+1. Rigid transfer of GDP from mini-Gs chain C to the selected D copy aligns
+   the local backbone at 0.087 A RMSD but creates a 0.977 A heavy-atom contact
+   between GDP O6 and Ala D366 CB. This is a failed clash gate and requires
+   manual structural resolution; minimization must not be used to hide it.
+2. The receptor back-mutations, missing internal loops, missing sidechains,
+   termini, and the repaired GDP pose must be completed and visually audited.
 3. CGenFF ligand parameters and penalty audits have not been generated.
-4. POPC/cholesterol membrane systems have not been built.
-5. Native contact lists have not been enumerated and frozen.
+4. POPC/cholesterol membrane systems have not been built or composition-
+   audited.
+5. Native contact lists cannot be enumerated and frozen until the final native
+   structures are accepted.
 
-The correct next action is to resolve these setup prerequisites and run the two
-Tier A native controls. Tier B trajectory interpretation remains locked until
-both controls pass in at least two of three replicas.
+The local machine exposes only OpenMM Reference and CPU platforms, so it is
+suitable for preparation and smoke tests but not the planned 3 microsecond
+campaign. The two Tier A controls require an accelerated compute environment.
+Tier B remains locked until both controls pass in at least two of three
+replicas.
 
 ## Confirmation boundary
 

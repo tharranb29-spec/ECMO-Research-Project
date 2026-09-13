@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "created_at": "2026-09-12T14:23:31.103224+00:00",
+  "created_at": "2026-09-13T08:52:28.253368+00:00",
   "specification_id": "a2a-continuous-activity-v1.5",
-  "stage": "strict_exploratory_activity_and_external_docking_complete_md_preflight_blocked",
+  "stage": "external_pbind_intake_ready_primary_review_pending_md_preflight_blocked",
   "claim_status": "exploratory_only",
   "activity": {
     "activity_rows_seen": 644,
@@ -180,14 +180,16 @@
     "blockers": [
       {
         "system_id": "5G53_NECA_miniGs_native",
-        "reason": "deposited_structure_caveat_requires_manual_review",
-        "details": [
-          "CAVEAT     5G53    ASN C 239 HAS WRONG CHIRALITY AT ATOM CA"
-        ]
+        "reason": "transferred_gdp_clash_requires_manual_resolution",
+        "minimum_heavy_atom_distance_angstrom": 0.976799,
+        "closest_pair": {
+          "left": "GDP:O6",
+          "right": "D:ALA366:CB"
+        }
       },
       {
         "system_id": "global",
-        "reason": "openmm_not_installed"
+        "reason": "tier_a_completed_construct_models_not_audited"
       },
       {
         "system_id": "global",
@@ -203,17 +205,30 @@
       }
     ]
   },
+  "external_pbind_intake": {
+    "outcomes_unmasked": false,
+    "membership_frozen": false,
+    "eligible_for_primary_evidence_review_count": 2968,
+    "eligible_generic_scaffold_count": 834,
+    "floor_status_before_primary_review": {
+      "molecules": true,
+      "generic_scaffolds": true
+    },
+    "next_gate": "Dual primary-publication review and assay-context verification; do not freeze membership or unmask outcomes yet."
+  },
   "external_confirmation_performed": false,
   "model_promotion_allowed": false,
   "source_hashes": {
     "curation": "18261d17e3dc08a5039ff6869d40fc120c5e49c3acd5019747fa00f212fbb17d",
     "models": "2f066858b234ac5f686d585ee5115c92600a53bbf07f7f33455854647498bccb",
     "external_docking": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17",
-    "md_preflight": "2f4c32f71dba51e682045406706c8456631ee9b905a6244efb9331e7d6f421a7"
+    "external_pbind_intake": "2dd1758d0d33b582771b604869872f797f98bed585ea44e17ff0ee3989120f64",
+    "md_preflight": "0b9bef71568a141e0b580716983281bedeec3268744afa1c6c53dfd9c0b4e58b"
   },
   "next_actions": [
     "Complete independent primary-evidence review and freeze an adequately powered external pBind_Ki cohort before outcomes are unmasked.",
-    "Resolve the 5G53 structure caveat and provision audited OpenMM, force-field, membrane, and ligand-parameter inputs.",
+    "Resolve the transferred-GDP/Ala366 clash, complete both Tier A construct models, and audit CGenFF ligand parameters.",
+    "Build and audit the standardized POPC/cholesterol membrane systems and freeze native-contact definitions.",
     "Build and run Tier A native controls; interpret Tier B trajectories only if both control gates pass."
   ]
 }
