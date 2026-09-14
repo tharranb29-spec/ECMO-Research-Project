@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:53:14.382091+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "C9A",
+  "molecule_id": "LIT25-RL-C9",
+  "functional_label_blinded": true,
+  "residue_code": "C9A",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": 0,
+  "typed_mol2_charge": -0.0009999999999999315,
+  "input_atom_count": 32,
+  "output_atom_count": 32,
+  "atom_order_preserved": true,
+  "rdkit_audit_copy": "ligand_tripostypes_for_rdkit_audit.mol2",
+  "rdkit_audit_copy_is_not_a_production_parameter_file": true,
+  "source_isomeric_smiles": "[H]c1nc([H])c([H])c(-n2c([H])c([H])c3c(N([H])[H])nc(-c4oc([H])c([H])c4[H])nc32)c1[H]",
+  "output_isomeric_smiles": "[H]c1nc([H])c([H])c(-n2c([H])c([H])c3c(N([H])[H])nc(-c4oc([H])c([H])c4[H])nc32)c1[H]",
+  "stereochemistry_comparison_available": true,
+  "stereochemistry_preserved": true,
+  "source_chiral_centers": [],
+  "bond_graph_preserved": true,
+  "achiral_graph_fallback_passed": false,
+  "tleap_severe_tokens": [],
+  "status": "accepted_for_system_building",
+  "files": {
+    "ligand_gaff2.mol2": "af1ad65d8fd33e2683a0caa7b61594c3d997690e5f44e09f86c6dda3a90ca51e",
+    "ligand.frcmod": "a09e3f7ff53d240addaa55753d98faddf4e752e6113b1507ffc335951a26a66d",
+    "ligand.prmtop": "6ab36d3bcd08231469d36dfd1dccf8b02d979749007d2ff4dcc21e4e1a803b5a",
+    "ligand.inpcrd": "efcf5b2bbc587dc02ed0771976b0c195a7e4c96e192f550d034f037e53b1d852",
+    "ligand_parameterized.pdb": "8f964891eb15aebf98127248d13d576240fbb71bbbcda9e64cfe925a49216765",
+    "atom_name_map.csv": "5695c77892e18a97d3a1135af88d4645848beb7b622492d781a9fcac01634df9"
+  },
+  "source_hashes": {
+    "original_structure": "df6cd08fbd79cd99825aad01264851949864b97e2801282f21c6a0aa0f3abced",
+    "input_mol2": "1c018de49bccf38b781c009441fb25d24a93bbd64fab56edbaccb782af79c17a"
+  }
+}

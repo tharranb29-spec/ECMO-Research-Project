@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:35:29.112672+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "C5A",
+  "molecule_id": "LIT25-RL-C5",
+  "functional_label_blinded": true,
+  "residue_code": "C5A",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": -1,
+  "typed_mol2_charge": -1.0010000000000001,
+  "input_atom_count": 28,
+  "output_atom_count": 28,
+  "atom_order_and_elements_preserved": false,
+  "source_isomeric_smiles": "[H]c1c([H])c(-c2nc(N([H])[H])nc3c([H])c([H])c(F)c([H])c23)c([H])c([H])c1[O-]",
+  "output_isomeric_smiles": null,
+  "stereochemistry_comparison_available": false,
+  "stereochemistry_preserved": null,
+  "tleap_severe_tokens": [],
+  "status": "blocked_by_ligand_bundle_audit",
+  "files": {
+    "ligand_gaff2.mol2": "449fa3160064da49a5401b60ebf06b359bc99164585ccc1c1c6e3563278cf890",
+    "ligand.frcmod": "cf9f4688331fd66f82ed74c83143125d6e9d2ffed9cae10e5497294b4a066c30",
+    "ligand.prmtop": "5f639c230a51d5fa053e03014e749ebfa85e8db7b1df1fcc5a967dcf16cefa5a",
+    "ligand.inpcrd": "babf87a9e3655741a0f575bcfadaff732694222556f8e33244f7a85e02fd2292",
+    "ligand_parameterized.pdb": "f1d1cf3f4fe55e1a247cdb93ddd77f25228eb888fc3cee012dfa904869caf872",
+    "atom_name_map.csv": "a139bc5421799c577002b3a50e4d4ef586cb4083ecc1474fea6f9d44168842db"
+  },
+  "source_hashes": {
+    "original_structure": "ba04472282f4db8f2abd00e8b332183e3d5c8c7725fd4840fe7437569b49c24a",
+    "input_mol2": "afbd025f50fe6d0b7e3812b35dd82da3ffb10e498d9993d435967ee9cbefcd05"
+  }
+}

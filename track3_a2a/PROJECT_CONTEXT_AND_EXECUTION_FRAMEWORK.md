@@ -536,3 +536,13 @@ The three central messages are:
 ## Context-preservation note
 
 This file is the durable context copy for future work. Update it only through a versioned change that also updates the relevant machine-readable status/configuration files. Do not overwrite historical v1.3, v1.3.1, v1.4, or v1.5 artifacts when implementing v1.6.
+
+## 13. Execution update — September 14, 2026
+
+Protocol v1.6 is prospectively frozen. Ridge is the primary external `pBind_Ki` predictor; the RF comparators use `500/sqrt/1`. A ten-repeat rerun on the repository's 78-molecule development subset reproduced Ridge R2 `0.561`, RF R2 `0.503`, and docking-augmented RF R2 `0.482`.
+
+The open AmberTools route is operational on the Mac through the pinned `a2a-ambertools:v1.6` container. All six GAFF2/AM1-BCC ligand bundles have passed the computational bundle gate. The selected 5G53 B/D active control is prospectively nucleotide-free; cross-copy GDP transfer is prohibited. Tier A awaits completed constructs and membrane/smoke-test audits, and Tier B remains locked.
+
+For independent external confirmation, all 141 PubMed records linked to the frozen 240-candidate queue were retrieved without loading outcomes. Eighteen of 29 PMC-linked full texts were obtained; unavailable full text is a retrieval limitation and not an evidence rejection. Cohort membership remains unfrozen pending the two-pass computational evidence gate.
+
+The authoritative current status is `outputs/v1.6/implementation_status.json` and the human-readable summary is `V16_IMPLEMENTATION_STATUS.md`.

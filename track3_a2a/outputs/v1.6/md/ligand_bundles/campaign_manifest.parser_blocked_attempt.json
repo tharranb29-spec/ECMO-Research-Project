@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:37:49.742418+00:00",
+  "specification_id": "a2a-md-ligand-campaign-v1.6",
+  "image": "a2a-ambertools:v1.6",
+  "image_id": "sha256:f9c5dc14d8a347035b90054daaec4b59ac1534b21dd209967629f977d00da17c",
+  "source_manifest": "outputs/v1.5/md/cgenff_requests/request_manifest.json",
+  "source_manifest_sha256": "417ce7652bcc6e30e5e6856d010a6647e45108db37c0a9a03e0738a81d153488",
+  "candidate_labels_loaded": false,
+  "entries": [
+    {
+      "ligand": "NEC",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/NEC/audit.json",
+      "audit_sha256": "8f23e0e7fc3393d1cf59c12fd0031f697b2a6a96bb524b491f7487818e999ebb"
+    },
+    {
+      "ligand": "ZMA",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/ZMA/audit.json",
+      "audit_sha256": "10ed4775e7d7dbfca6225beda6d7576b38ef2b52bf514fb8a3546526da06ee34"
+    },
+    {
+      "ligand": "C5A",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/C5A/audit.json",
+      "audit_sha256": "51a6c7d0ee7e11d295ea0fff4ee9e9b0f32a71f5d5a451aec76c3b8983eca838"
+    },
+    {
+      "ligand": "C7A",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/C7A/audit.json",
+      "audit_sha256": "184ef4a9275d00e6123a211534a3f6d734892bb12f6c2f7023da1e04390d269b"
+    },
+    {
+      "ligand": "C9A",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/C9A/audit.json",
+      "audit_sha256": "d107a66100191d3ae60b780a1e2a67f036f34e065c81fba45cbdf8cbb6b1f07f"
+    },
+    {
+      "ligand": "PGD2",
+      "status": "blocked_by_ligand_bundle_audit",
+      "audit": "outputs/v1.6/md/ligand_bundles/PGD2/audit.json",
+      "audit_sha256": "6c6f7b9898de50df59edf2df3b2cf8a7e32a91379fbdcb662714052cac7dcb88"
+    }
+  ],
+  "accepted_count": 0,
+  "status": "blocked"
+}

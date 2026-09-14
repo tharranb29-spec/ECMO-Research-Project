@@ -1,0 +1,2 @@
+COMMAND: parmchk2 -i ligand_gaff2.mol2 -f mol2 -o ligand.frcmod -s gaff2
+

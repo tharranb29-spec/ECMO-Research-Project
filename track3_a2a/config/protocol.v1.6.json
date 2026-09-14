@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-protocol-v1.6",
+  "status": "prospectively_frozen_before_external_outcome_join_and_md_trajectory_production",
+  "effective_date": "2026-09-14",
+  "competition_deadline": "2026-09-30",
+  "title": "Evidence-Gated Dual-State Docking and Machine Learning for Functional Classification and Virtual Screening of A2A Adenosine Receptor Ligands",
+  "historical_boundary": {
+    "immutable_versions": ["v1.2", "v1.3", "v1.3.1", "v1.4", "v1.5"],
+    "v1_5_role": "archived development and preflight evidence",
+    "no_historical_output_may_be_overwritten": true,
+    "locked_v1_3_1_holdout_may_not_be_reused_for_selection": true
+  },
+  "scientific_claim": {
+    "primary": "An independently evaluated, evidence-gated chemistry model can rank direct human A2A Ki measurements with quantified applicability and uncertainty.",
+    "docking": "Dual-state docking is evaluated as a separate structural evidence channel and as a predeclared incremental predictor; it is not assumed to improve potency prediction.",
+    "md": "Gated molecular dynamics tests control and candidate pose stability on the declared time scale; it does not create activity labels or rescue a failed external model gate.",
+    "autonomy": "The dashboard demonstrates a provenance-first shadow-mode literature-to-candidate loop. Autonomous records remain quarantined until computational evidence gates pass."
+  },
+  "endpoints": {
+    "primary": {
+      "name": "pBind_Ki",
+      "definition": "negative base-10 logarithm of molar direct-binding Ki for wild-type human ADORA2A",
+      "allowed_standard_types": ["Ki"],
+      "allowed_relation": "=",
+      "allowed_units": "nM",
+      "minimum_records_for_external_evaluation": 60,
+      "minimum_generic_murcko_scaffolds": 20
+    },
+    "secondary_exploratory": {
+      "name": "pFunc_inhibition",
+      "claim_status": "exploratory_only"
+    },
+    "not_modelable": {
+      "name": "pFunc_agonism",
+      "reason": "insufficient endpoint-specific development sample size"
+    },
+    "prohibited_pooling": [
+      "Ki with Kd, IC50, EC50, or generic pChEMBL",
+      "functional agonism with functional inhibition",
+      "inverse agonism with stimulated-response antagonism"
+    ]
+  },
+  "models": {
+    "primary_external_predictor": {
+      "name": "AB_Ridge",
+      "selection_basis": "best frozen v1.5 repeated grouped-CV pBind_Ki result before external outcomes",
+      "features": "ECFP4 radius 2, 2048 bits, plus frozen physicochemical descriptors",
+      "estimator": "Ridge",
+      "parameters": {"alpha": 1.0}
+    },
+    "chemistry_rf_comparator": {
+      "name": "AB_RF_500_sqrt_1",
+      "estimator": "RandomForestRegressor",
+      "parameters": {
+        "n_estimators": 500,
+        "max_features": "sqrt",
+        "min_samples_leaf": 1,
+        "random_state": 20260914,
+        "n_jobs": 1
+      }
+    },
+    "docking_increment_comparator": {
+      "name": "E_RF_500_sqrt_1",
+      "base": "AB_RF_500_sqrt_1",
+      "additional_features": [
+        "m_affinity_kcal_mol",
+        "d_affinity_kcal_mol",
+        "m_cnnaffinity_pk",
+        "d_cnnaffinity_pk",
+        "m_cnnscore",
+        "d_cnnscore"
+      ]
+    },
+    "required_baseline": "training-development mean pBind_Ki"
+  },
+  "development_reproduction": {
+    "grouping": "generic Murcko scaffold with exact structures sharing a group",
+    "folds": 5,
+    "repeat_seeds": [20260912, 20260913, 20260914, 20260915, 20260916, 20260917, 20260918, 20260919, 20260920, 20260921],
+    "identical_splits_for_all_models": true,
+    "all_preprocessing_inside_training_fold": true,
+    "sensitivity_configs_may_not_replace_frozen_external_models": true
+  },
+  "external_confirmation": {
+    "source_queue": "outputs/v1.5/external_pbind_intake/primary_evidence_review_queue.csv",
+    "queue_records": 240,
+    "outcome_firewall": "No numeric Ki value, derived pKi, or outcome-dependent statistic may influence membership, review order, structure standardization, applicability thresholds, model choice, or docking selection.",
+    "membership_freeze_before_outcome_join": true,
+    "independence": {
+      "no_exact_structure_overlap_with_development": true,
+      "no_generic_murcko_scaffold_overlap_with_development": true,
+      "no_prior_model_or_presentation_use": true
+    },
+    "computational_evidence_gate": {
+      "human_approval_required": false,
+      "human_validation_claimed": false,
+      "pass_1": "deterministic metadata, identifier, structure, target, endpoint, unit, relation, and provenance validator",
+      "pass_2": "independently configured source-grounded evidence extractor",
+      "agreement_fields": ["molecule_identity", "stereochemistry", "target_species", "wild_type_status", "assay_type", "endpoint", "relation", "units", "primary_source_locator"],
+      "admission_rule": "admit only when both passes independently accept and all agreement fields match",
+      "failure_rule": "quarantine missing evidence, ambiguity, or any disagreement; never resolve by predicted activity"
+    },
+    "minimum_floor_failure": "If fewer than 60 molecules or 20 generic Murcko scaffolds pass, report a stress-test cohort and do not weaken the floor.",
+    "one_time_outcome_join": true,
+    "primary_metrics": ["R2", "RMSE", "MAE", "Spearman_rho", "calibration_intercept", "calibration_slope", "interval_coverage"],
+    "stratify_by": ["applicability_status", "nearest_neighbor_similarity", "descriptor_distance"],
+    "bootstrap_resamples": 5000,
+    "random_seed": 20260914,
+    "primary_success": "AB_Ridge external R2 bootstrap lower bound above zero and RMSE improvement versus the frozen training-mean baseline has a paired 95 percent interval excluding zero.",
+    "docking_increment_success": "On identical external records, E_RF minus AB_RF delta-R2 lower bound above zero and delta-RMSE upper bound below zero.",
+    "promotion_rule": "Only a model satisfying its predeclared external gate, provenance, calibration, applicability, artifact-hash, and computational release checks may be displayed as externally confirmed."
+  },
+  "md_v1_6": {
+    "engine": "OpenMM 8.6",
+    "parameterization_toolkit": "AmberTools 25",
+    "protein_force_field": "ff19SB",
+    "lipid_force_field": "Lipid21",
+    "ligand_force_field": "GAFF2",
+    "ligand_charge_method": "AM1-BCC",
+    "water_model": "TIP3P",
+    "salt": "0.15 M NaCl after neutralization",
+    "temperature_kelvin": 310,
+    "pressure_bar": 1.0,
+    "membrane": "symmetric 70:30 POPC:cholesterol molar composition using one audited Amber-compatible parameter set",
+    "gdp_policy": {
+      "decision": "omit_GDP_from_selected_BD_control",
+      "reason": "GDP is absent from deposited biological assembly B/D and rigid transfer from chain C produced a 0.9768 A severe clash with Ala D366 CB.",
+      "implementation": "Do not transplant GDP across asymmetric-unit copies. Build every 5G53 B/D-derived v1.6 control and sensitivity system as explicitly nucleotide-free mini-Gs.",
+      "claim_limit": "The active Tier A control tests a nucleotide-free mini-Gs-bound construct and cannot establish GDP-dependent stability."
+    },
+    "tier_a": {
+      "systems": ["5NM4_ZMA_native", "5G53_NECA_miniGs_native_nucleotide_free"],
+      "replicas": 3,
+      "pilot_production_ns_per_replica": 50,
+      "full_target_ns_per_replica": 100,
+      "seeds": [20260914, 20260915, 20260916],
+      "pass_rule": "Each control passes in at least two of three replicas using the frozen pose and native-contact criteria."
+    },
+    "tier_b": {
+      "candidate_ids": ["LIT25-RL-C5", "LIT25-RL-C7", "LIT25-RL-C9", "LIT25-MET-PGD2"],
+      "receptor_states": ["5NM4", "2YDO"],
+      "system_count": 8,
+      "replicas": 3,
+      "pilot_production_ns_per_replica": 20,
+      "full_target_ns_per_replica": 100,
+      "unlock_rule": "Both Tier A controls pass."
+    },
+    "trajectory_start_gate": "No trajectory may start until ligand parameters, completed constructs, membrane systems, native contacts, minimization, NVT, NPT, geometry, energy, composition, and hash audits pass.",
+    "best_replica_selection": "prohibited"
+  },
+  "dashboard": {
+    "mode": "autonomous_shadow_mode",
+    "served_data_first": "static versioned repository artifacts",
+    "required_modules": ["evidence_inbox", "molecule_registry", "model_registry", "applicability_and_uncertainty", "dual_state_docking", "md_gate", "candidate_portfolio", "immutable_audit_log"],
+    "agent_may": ["discover public literature", "retrieve permitted source text", "extract candidate records", "deduplicate structures", "queue computational evidence review", "run authorized frozen scoring and docking workflows"],
+    "agent_may_not": ["invent measurements", "admit unresolved evidence", "unmask sealed outcomes", "promote a model without gates", "call a computational candidate an experimentally validated hit"],
+    "demonstration_exit": "One source-to-candidate vertical slice with complete provenance and a reproducible shadow-mode replay."
+  },
+  "release": {
+    "human_approval_required": false,
+    "computational_release_required": true,
+    "required_checks": ["schema validation", "source and artifact hashes", "outcome-firewall assertion", "external gate result", "Tier A lock state", "claim-language audit"],
+    "automatic_model_replacement": false
+  }
+}

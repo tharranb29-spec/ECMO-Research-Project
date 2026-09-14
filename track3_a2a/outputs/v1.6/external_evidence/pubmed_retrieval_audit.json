@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:48:14.733614+00:00",
+  "status": "retrieved_outcome_blind_metadata_and_abstracts",
+  "queue_sha256": "8cab350b416df7a19723f19d537963736ba3cb4801dfad78447abe769726e9fa",
+  "requested_pmid_count": 141,
+  "retrieved_article_count": 141,
+  "articles_with_abstract_count": 140,
+  "articles_with_pmcid_count": 29,
+  "missing_pmids": [],
+  "raw_batches": [
+    {
+      "path": "outputs/v1.6/external_evidence/pubmed_batch_01.xml",
+      "sha256": "ce3619ef630e70191d8d8695bf8361d6dd3400dda9ac6c82844b0a27e0906f2f"
+    },
+    {
+      "path": "outputs/v1.6/external_evidence/pubmed_batch_02.xml",
+      "sha256": "a8d11c276e320ac3934507dc1bd45224fd829c1f913fcb0288543cc524b564a8"
+    }
+  ],
+  "evidence_path": "outputs/v1.6/external_evidence/pubmed_evidence.json",
+  "evidence_sha256": "cd1f15694f737f23f7b63cf0c53eab8735734e541e76ac3c542cffe10fd437f8",
+  "external_outcomes_loaded": false,
+  "membership_frozen": false,
+  "next_gate": "Run deterministic publication/identifier triage, retrieve permitted full text, and require a separate source-grounded extraction pass before admission."
+}

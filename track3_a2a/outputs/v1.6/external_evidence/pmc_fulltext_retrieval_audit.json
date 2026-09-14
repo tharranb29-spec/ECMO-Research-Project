@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:49:32.719924+00:00",
+  "status": "fulltext_retrieval_complete",
+  "pubmed_evidence_sha256": "cd1f15694f737f23f7b63cf0c53eab8735734e541e76ac3c542cffe10fd437f8",
+  "requested_pmcid_count": 29,
+  "retrieved_fulltext_count": 18,
+  "failed_fulltext_count": 11,
+  "failed_pmcids": [
+    "PMC3156476",
+    "PMC3405160",
+    "PMC3468300",
+    "PMC3474371",
+    "PMC3549271",
+    "PMC3578427",
+    "PMC4018059",
+    "PMC4027370",
+    "PMC4160753",
+    "PMC6540094",
+    "PMC8128054"
+  ],
+  "output_sha256": "d5782122fe6b0d24f9126b286c56f6b2edc615584c2e0aeee5022eea5f11a3e5",
+  "external_outcomes_loaded": false,
+  "membership_frozen": false,
+  "interpretation": "Full-text availability alone neither admits nor rejects a candidate."
+}

@@ -3,3 +3,12 @@
 
 # Preserve raw GNINA console output without treating its banner padding as an error.
 track3_a2a/outputs/v1.4/docking/runs/**/*.log whitespace=-trailing-space
+
+# AmberTools writes chemically meaningful fixed-format and padded records.
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.mol2 whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.frcmod whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.prmtop whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.inpcrd whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.log whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/sqm.in whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/ligand_bundles/**/sqm.out whitespace=-trailing-space

@@ -21,3 +21,16 @@ track3_a2a/outputs/redocking/**/*.sdf
 track3_a2a/outputs/redocking/**/*.log
 track3_a2a/outputs/v1.2/docking-*/*/*/*.sdf
 track3_a2a/outputs/v1.2/docking-*/*/*/*.log
+
+# Reproducible AmberTools scratch intermediates; production bundles retain inputs,
+# parameters, topologies, sqm output, captured command logs, and audit manifests.
+track3_a2a/outputs/v1.6/md/ligand_bundles/*/ANTECHAMBER_*
+track3_a2a/outputs/v1.6/md/ligand_bundles/*/ATOMTYPE.INF
+track3_a2a/outputs/v1.6/md/ligand_bundles/*/leap.log
+track3_a2a/outputs/v1.6/md/ligand_bundles/*/sqm.pdb
+
+# Re-acquirable literature bodies and raw XML stay local; retrieval audits and
+# hashes are versioned without redistributing source text.
+track3_a2a/outputs/v1.6/external_evidence/pubmed_batch_*.xml
+track3_a2a/outputs/v1.6/external_evidence/pubmed_evidence.json
+track3_a2a/outputs/v1.6/external_evidence/pmc_fulltext_evidence.json

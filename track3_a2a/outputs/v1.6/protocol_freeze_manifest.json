@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-protocol-v1.6",
+  "created_at_utc": "2026-09-14T14:19:39.944189+00:00",
+  "status": "frozen_and_machine_validated",
+  "external_outcomes_joined": false,
+  "md_trajectory_production_started": false,
+  "human_approval_required": false,
+  "frozen_decisions": {
+    "primary_endpoint": "pBind_Ki",
+    "primary_external_predictor": "AB_Ridge(alpha=1.0)",
+    "rf_comparators": "500/sqrt/1; seed=20260914",
+    "evidence_gate": "two independent computational passes; disagreement quarantined",
+    "md_stack": "AmberTools25/OpenMM8.6/ff19SB/Lipid21/GAFF2-AM1-BCC/TIP3P",
+    "gdp_policy": "selected 5G53 B/D control is nucleotide-free; cross-copy transfer prohibited",
+    "tier_a_pilot": "2 controls x 3 replicas x 50 ns",
+    "tier_b_pilot": "8 systems x 3 replicas x 20 ns; locked until Tier A passes"
+  },
+  "files": {
+    "config/protocol.v1.6.json": "72ff053253d9f7714ef450435a845bb4222eb6a3477d4d2f081ada17de5118a2",
+    "V16_PROTOCOL_AMENDMENT.md": "18abdeb489e80b15ff05074c71ae52a6d212e1c587229eb492259797e1a7f367"
+  },
+  "computational_release_signature_sha256": "49480a28f3e0a0342d635ac8692d3c4e5dc781ba1ad3b7d7cdfcc7f8196b9287"
+}

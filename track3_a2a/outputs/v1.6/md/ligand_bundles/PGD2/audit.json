@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:53:14.384546+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "PGD2",
+  "molecule_id": "LIT25-MET-PGD2",
+  "functional_label_blinded": true,
+  "residue_code": "PG2",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": -1,
+  "typed_mol2_charge": -1.000999,
+  "input_atom_count": 56,
+  "output_atom_count": 56,
+  "atom_order_preserved": true,
+  "rdkit_audit_copy": "ligand_tripostypes_for_rdkit_audit.mol2",
+  "rdkit_audit_copy_is_not_a_production_parameter_file": true,
+  "source_isomeric_smiles": "[H]O[C@@]1([H])C([H])([H])C(=O)[C@]([H])(/C([H])=C(\\[H])[C@@]([H])(O[H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])[H])[C@@]1([H])C([H])([H])/C([H])=C(/[H])C([H])([H])C([H])([H])C([H])([H])C(=O)[O-]",
+  "output_isomeric_smiles": "[H]O[C@@]1([H])C([H])([H])C(=O)[C@]([H])(/C([H])=C(\\[H])[C@@]([H])(O[H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])[H])[C@@]1([H])C([H])([H])/C([H])=C(/[H])C([H])([H])C([H])([H])C([H])([H])C(=O)[O-]",
+  "stereochemistry_comparison_available": true,
+  "stereochemistry_preserved": true,
+  "source_chiral_centers": [
+    [
+      5,
+      "S"
+    ],
+    [
+      9,
+      "R"
+    ],
+    [
+      13,
+      "S"
+    ],
+    [
+      15,
+      "R"
+    ]
+  ],
+  "bond_graph_preserved": true,
+  "achiral_graph_fallback_passed": false,
+  "tleap_severe_tokens": [],
+  "status": "accepted_for_system_building",
+  "files": {
+    "ligand_gaff2.mol2": "3f7d5dce5aca96f7f265567b21581e16e1939ad73d4bc4cfb8af1712c1033a4c",
+    "ligand.frcmod": "c1fbd457185d536ae1636f8e47dd5f89866b9409773e9f6a1488390634d6aa26",
+    "ligand.prmtop": "37550d2e9dfbfff0612edae15bb6654b03100bfb2148a290ff992e5cf82790cd",
+    "ligand.inpcrd": "62105552bbd32c50e3214e3b2bd231853928840882806c3d0ad35c7d901be24e",
+    "ligand_parameterized.pdb": "21aef9d117f50ae16ed3749f61cdfb756a6d19e06ddb131189e904d6c15dcf01",
+    "atom_name_map.csv": "51a0c9513638c866d235346046dfd9327a0028576db17aa58f5eb5d4a6718c0a"
+  },
+  "source_hashes": {
+    "original_structure": "3c16616b05ef9e257277f57a5b5f92e7280f3b89de1803f76bf868422287cc10",
+    "input_mol2": "be0be0b4ba1438f3c5a14d8f9fa825670e8d02421f9412317ec95c42903b6550"
+  }
+}

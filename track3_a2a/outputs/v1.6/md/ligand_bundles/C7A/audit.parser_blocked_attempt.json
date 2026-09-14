@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:36:00.062153+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "C7A",
+  "molecule_id": "LIT25-RL-C7",
+  "functional_label_blinded": true,
+  "residue_code": "C7A",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": 0,
+  "typed_mol2_charge": 1.3877787807814457e-17,
+  "input_atom_count": 34,
+  "output_atom_count": 34,
+  "atom_order_and_elements_preserved": false,
+  "source_isomeric_smiles": "[H]c1nc([H])n(-c2nc(-c3nc(-c4oc([H])c([H])c4[H])nc(N([H])[H])n3)c([H])c([H])c2[H])c1[H]",
+  "output_isomeric_smiles": null,
+  "stereochemistry_comparison_available": false,
+  "stereochemistry_preserved": null,
+  "tleap_severe_tokens": [],
+  "status": "blocked_by_ligand_bundle_audit",
+  "files": {
+    "ligand_gaff2.mol2": "47ae0559d7a34fdc104dbb5750c0f6b2c93ee332c6a229a264df6ad6578cff98",
+    "ligand.frcmod": "bdb76bce558af8f91a30ea65a6051b7ea1089d85cc7b23f3a45ba1b2a2d5f097",
+    "ligand.prmtop": "740a96298a2741ddf9e595f5d0946b0721d6540076f9d1027606bdb73cce6ae5",
+    "ligand.inpcrd": "534490a2d3f6901962b83374e2643074419e701860dc1bada9814c595790c99f",
+    "ligand_parameterized.pdb": "1bb81217578a328155fedca1dfc38b1317a8e17b3f7c0a09c58ac1e9e0d31a7a",
+    "atom_name_map.csv": "f960041479207aa01edc6d30e77cde0d299ed572bf7df3d3cf0b9653d9165ba0"
+  },
+  "source_hashes": {
+    "original_structure": "51be9854ff846c003854786279dd49a9b103dcfac8e5296ad702b2df959ad60a",
+    "input_mol2": "aa375683c9bb93231f322da1a1bdc3bacf44921d36330550eba09a399ef3891f"
+  }
+}

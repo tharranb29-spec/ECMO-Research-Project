@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:35:00.136219+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "NEC",
+  "molecule_id": "NECA active-control ligand",
+  "functional_label_blinded": false,
+  "residue_code": "NEC",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": 0,
+  "typed_mol2_charge": 0.0009999999999998448,
+  "input_atom_count": 38,
+  "output_atom_count": 38,
+  "atom_order_and_elements_preserved": false,
+  "source_isomeric_smiles": "[H]O[C@@]1([H])[C@@]([H])(O[H])[C@]([H])(n2c([H])nc3c(N([H])[H])nc([H])nc32)O[C@]1([H])C(=O)N([H])C([H])([H])C([H])([H])[H]",
+  "output_isomeric_smiles": null,
+  "stereochemistry_comparison_available": false,
+  "stereochemistry_preserved": null,
+  "tleap_severe_tokens": [],
+  "status": "blocked_by_ligand_bundle_audit",
+  "files": {
+    "ligand_gaff2.mol2": "17f9a3ca6e2109506024ed23b804533fda7068d335ef7cea6db94f9dd5076437",
+    "ligand.frcmod": "b428c480dfbb0bb1516182e0f569202930856a534c837a32caa6ac6b5566e005",
+    "ligand.prmtop": "3f1e509d23aabd58038bb9f14e4afd229a84018c8f634dbcaad6194dec734152",
+    "ligand.inpcrd": "5fe854570eed8e38874427aa23aebc9b3d113b378b473026ef5ee60fd6815f47",
+    "ligand_parameterized.pdb": "1d76a3a23b3bf0d5bbf66006f1ae47f9827b6a0b17f6e80a9c86c6e52a026af0",
+    "atom_name_map.csv": "b9947d910b2819bbda7b29e435d71d13847c74b2403cb005079aac21a52e4ef3"
+  },
+  "source_hashes": {
+    "original_structure": "864e245b5153e2351f04e84381d696747778cb2a024c5d19cd9192670ad6315c",
+    "input_mol2": "0b453c9836bd7e37e9bfa70be931e6da80cb49ff7056760e7e19744f634d3556"
+  }
+}

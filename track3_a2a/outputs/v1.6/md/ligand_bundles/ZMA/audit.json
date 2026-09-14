@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-14T14:53:14.375975+00:00",
+  "specification_id": "a2a-md-ligand-bundle-v1.6",
+  "ligand": "ZMA",
+  "molecule_id": "ZM241385 inactive-control ligand",
+  "functional_label_blinded": false,
+  "residue_code": "ZMA",
+  "parameterization": "GAFF2 with AM1-BCC",
+  "expected_formal_charge": 0,
+  "typed_mol2_charge": -0.004000000000000094,
+  "input_atom_count": 40,
+  "output_atom_count": 40,
+  "atom_order_preserved": true,
+  "rdkit_audit_copy": "ligand_tripostypes_for_rdkit_audit.mol2",
+  "rdkit_audit_copy_is_not_a_production_parameter_file": true,
+  "source_isomeric_smiles": "[H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])N([H])c2nc(N([H])[H])n3nc(-c4oc([H])c([H])c4[H])nc3n2)c([H])c1[H]",
+  "output_isomeric_smiles": "[H]Oc1c([H])c([H])c(C([H])([H])C([H])([H])N([H])c2nc(N([H])[H])n3nc(-c4oc([H])c([H])c4[H])nc3n2)c([H])c1[H]",
+  "stereochemistry_comparison_available": true,
+  "stereochemistry_preserved": true,
+  "source_chiral_centers": [],
+  "bond_graph_preserved": true,
+  "achiral_graph_fallback_passed": false,
+  "tleap_severe_tokens": [],
+  "status": "accepted_for_system_building",
+  "files": {
+    "ligand_gaff2.mol2": "4d6d94a44bdfda0c403edd1a758910110101acf0fa7fdff0fd528a8e60f5ded1",
+    "ligand.frcmod": "99761aad3e79cd1b675559c07dd1b3f0ef67c64fa34171b6723e07f41125fc9e",
+    "ligand.prmtop": "0c9902c4286c8aa9a0ae188cdccda7486d7bc058bb9f7f658e6591812931bedb",
+    "ligand.inpcrd": "3ad1a9d7859da254ded8d6e1b958ce75d1e57fa373a9f5394f8c0da5467992ea",
+    "ligand_parameterized.pdb": "4ba8e4699081b284637eeb7c41453bba5e6db5cde6937c25f6d63eb4ac3e5820",
+    "atom_name_map.csv": "fd9c60a58754000e194adc5d075d1fabd301436f068a1a93dcc7989e9a8ddbb3"
+  },
+  "source_hashes": {
+    "original_structure": "83b5652f86ee38f775d8cf09560cd50bea86e98e2690c4bcc4448845127d7a1e",
+    "input_mol2": "72b0428a022b8d22c3a09884a81057e922eb82c1e545bf2b7be4a1d86345f990"
+  }
+}

@@ -1,0 +1,7 @@
+COMMAND: micromamba list --name base ambertools
+
+List of packages in environment: "/opt/conda"
+
+  Name        Version  Build                              Channel    
+───────────────────────────────────────────────────────────────────────
+  ambertools  25.3     cuda_None_nompi_py314ha768024_100  conda-forge
