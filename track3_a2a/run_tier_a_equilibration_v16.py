@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the frozen, checkpointable v1.6.3 Tier A staged equilibration."""
+"""Run the frozen, checkpointable v1.6.4 Tier A staged equilibration."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from openmm.app import PDBFile, Simulation
 
 
 ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.3.json"
+CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.4.json"
 LOCAL_INPUT = ROOT / "outputs" / "v1.6" / "md" / "tier_a_periodic_systems"
 LOCAL_SMOKE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_smoke_tests"
 RELEASE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_release_bundles"
@@ -104,7 +104,7 @@ def contact_fraction(positions, contacts: list[dict], cutoff_angstrom: float = 6
 
 
 def add_restraints(system, pdb: PDBFile, reference_positions=None) -> tuple[mm.CustomExternalForce, int]:
-    force = mm.CustomExternalForce("0.5*k*((x-x0)^2+(y-y0)^2+(z-z0)^2)")
+    force = mm.CustomExternalForce("0.5*k*periodicdistance(x,y,z,x0,y0,z0)^2")
     force.addGlobalParameter("k", 1000.0 * unit.kilojoule_per_mole / unit.nanometer**2)
     for name in ("x0", "y0", "z0"):
         force.addPerParticleParameter(name)

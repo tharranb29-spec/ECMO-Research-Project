@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-tier-a-equilibration-v1.6.4",
+  "frozen_at_utc": "2026-09-15T16:25:00Z",
+  "supersedes": "a2a-tier-a-equilibration-v1.6.3",
+  "change_trigger": "CUDA retained a 3.736e8 kJ/mol restraint term despite scalar parameters and reported coordinate agreement, demonstrating an internal periodic-image mismatch for the nonperiodic Cartesian restraint.",
+  "change_scope": "Replace squared Cartesian displacement with OpenMM periodicdistance for positional restraints. All systems, parameters, stages, durations, timesteps, seeds, contacts, and gates are unchanged.",
+  "claim_limit": "Equilibration establishes readiness for the Tier A pilot only; it is not production sampling or evidence of binding stability.",
+  "systems": ["5NM4_ZMA_native", "5G53_NECA_miniGs_native_nucleotide_free"],
+  "replica_seeds": [20260914, 20260915, 20260916],
+  "temperature_kelvin": 310.0,
+  "pressure_bar": 1.0,
+  "surface_tension_bar_nm": 0.0,
+  "collision_rate_per_picosecond": 1.0,
+  "constraint_tolerance": 1e-6,
+  "barostat_frequency_steps": 25,
+  "monitor_interval_ps": 2.0,
+  "checkpoint_interval_ps": 50.0,
+  "minimization": {
+    "tolerance_kj_mol_nm": 100.0,
+    "maximum_iterations": 100,
+    "protein_ligand_heavy_restraint_k_kj_mol_nm2": 1000.0,
+    "restraint_reference": "accepted_smoke_state_positions_as_explicit_scalar_floats",
+    "restraint_distance": "periodicdistance",
+    "reason": "Make the restraint invariant to CPU/GPU internal periodic-image representation."
+  },
+  "stages": [
+    {"name": "nvt_heat_100K", "ensemble": "NVT", "temperature_kelvin": 100.0, "duration_ps": 20.0, "timestep_femtoseconds": 0.25, "restraint_k_kj_mol_nm2": 1000.0},
+    {"name": "nvt_heat_200K", "ensemble": "NVT", "temperature_kelvin": 200.0, "duration_ps": 20.0, "timestep_femtoseconds": 0.5, "restraint_k_kj_mol_nm2": 1000.0},
+    {"name": "nvt_heat_310K", "ensemble": "NVT", "temperature_kelvin": 310.0, "duration_ps": 100.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 1000.0},
+    {"name": "npt_release_1000", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 200.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 1000.0},
+    {"name": "npt_release_500", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 200.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 500.0},
+    {"name": "npt_release_100", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 200.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 100.0},
+    {"name": "npt_release_10", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 400.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 10.0},
+    {"name": "npt_release_1", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 200.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 1.0},
+    {"name": "npt_unrestrained", "ensemble": "NPT", "temperature_kelvin": 310.0, "duration_ps": 800.0, "timestep_femtoseconds": 1.0, "restraint_k_kj_mol_nm2": 0.0}
+  ],
+  "equilibration_gate": {
+    "finite_energy_temperature_volume": true,
+    "minimum_final_native_contact_fraction_at_6A": 0.8,
+    "maximum_absolute_final_temperature_deviation_kelvin": 25.0,
+    "maximum_last_half_volume_coefficient_of_variation": 0.1,
+    "required_systems_passed": 2
+  },
+  "production_remains_locked_until_gate_report_passes": true,
+  "tier_b_remains_locked_until_tier_a_production_passes": true,
+  "best_replica_selection": "prohibited"
+}

@@ -11,7 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
-CONFIG = ROOT / "config" / "tier_a_equilibration.v1.6.3.json"
+CONFIG = ROOT / "config" / "tier_a_equilibration.v1.6.4.json"
 DEFAULT_INPUT = ROOT / "outputs" / "v1.6" / "md" / "tier_a_equilibration"
 
 
@@ -46,7 +46,7 @@ def main() -> None:
     )
     report = {
         "schema_version": 1, "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "specification_id": "a2a-tier-a-equilibration-gate-v1.6.3",
+        "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
         "config_sha256": sha256(CONFIG), "expected_run_count": expected,
         "observed_run_count": len(records), "passed_run_count": passed,
         "missing_audits": missing, "runs": records,

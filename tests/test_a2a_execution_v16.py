@@ -84,9 +84,12 @@ class A2AExecutionV16Tests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), bundle["archive"]["sha256"])
 
     def test_equilibration_protocol_preserves_all_replicas_and_locks_tier_b(self):
-        config = self.load("config/tier_a_equilibration.v1.6.3.json")
-        self.assertEqual(config["supersedes"], "a2a-tier-a-equilibration-v1.6.2")
-        self.assertEqual(config["minimization"]["restraint_reference"], "accepted_smoke_state_positions_as_explicit_scalar_floats")
+        config = self.load("config/tier_a_equilibration.v1.6.4.json")
+        self.assertEqual(config["supersedes"], "a2a-tier-a-equilibration-v1.6.3")
+        self.assertEqual(config["minimization"]["restraint_distance"], "periodicdistance")
+        runner = (ROOT / "run_tier_a_equilibration_v16.py").read_text()
+        self.assertIn("periodicdistance(x,y,z,x0,y0,z0)^2", runner)
+        self.assertNotIn("(x-x0)^2+(y-y0)^2+(z-z0)^2", runner)
         self.assertEqual(len(config["systems"]), 2)
         self.assertEqual(config["replica_seeds"], [20260914, 20260915, 20260916])
         self.assertEqual(config["best_replica_selection"], "prohibited")

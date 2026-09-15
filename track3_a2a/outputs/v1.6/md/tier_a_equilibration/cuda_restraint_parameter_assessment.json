@@ -12,6 +12,8 @@
   "restraint_energy_after_constraints_kj_mol": 373577417.8359375,
   "diagnostic_conclusion": "The coordinates agree and constraint projection is negligible, but the CUDA CustomExternalForce receives incorrect effective reference values when a Vec3 is supplied as the three-parameter vector.",
   "corrective_action": "Convert every x0/y0/z0 value to an explicit scalar float list before adding the particle.",
+  "retrospective_status": "hypothesis_falsified_by_v1.6.3_corrected_only_cuda_probe",
+  "superseded_by": "a2a-tier-a-cuda-periodic-restraint-assessment-v1.6.4",
   "accepted_equilibration_result": false,
   "production_trajectory_started": false,
   "tier_b_unlocked": false

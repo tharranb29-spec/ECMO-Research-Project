@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T16:19:41.264753+00:00",
+  "specification_id": "a2a-tier-a-cuda-periodic-restraint-assessment-v1.6.4",
+  "source": "user-reported corrected-only CUDA diagnostic output",
+  "source_specification_id": "a2a-tier-a-cuda-nan-isolation-v1.6.3",
+  "system_id": "5NM4_ZMA_native",
+  "precision": "mixed",
+  "completed_diagnostic_steps": 208,
+  "maximum_reference_displacement_before_constraints_nm": 1.4916295350712085e-6,
+  "maximum_constraint_projection_displacement_nm": 1.1524106535777904e-6,
+  "restraint_energy_before_constraints_kj_mol": 373577417.8359375,
+  "restraint_energy_after_constraints_kj_mol": 373577417.8359375,
+  "status": "cuda_probe_failed",
+  "error": "non-finite state at diagnostic step 208",
+  "diagnostic_conclusion": "Explicit scalar reference parameters did not change the CUDA result. The ordinary Cartesian restraint is sensitive to the internally selected periodic image even when retrieved particle and reference coordinates agree.",
+  "corrective_action": "Use OpenMM periodicdistance for the positional-restraint displacement and repeat the corrected-only CUDA probe before any equilibration retry.",
+  "accepted_equilibration_result": false,
+  "production_trajectory_started": false,
+  "tier_b_unlocked": false
+}
