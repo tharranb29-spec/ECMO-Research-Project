@@ -61,6 +61,8 @@ The v1.6.2 pre-integration CUDA audit then showed that reference and particle co
 
 The v1.6.4 corrected-only mixed-precision CUDA validation passed 10,000 steps. Restraint energy fell from `3.736e8` to `2.50e-9 kJ/mol`, initial potential energy was `-817033.3 kJ/mol`, and no duplicate constraints or non-finite states were detected. This passes the numerical preflight and authorizes the first full staged-equilibration job only; it is not an accepted equilibration result, production remains locked, and Tier B remains locked.
 
+The Colab notebook writes the accepted campaign to a clean `tier_a_equilibration_v164` Drive directory. Superseded failures remain in the earlier directory and the repository audit, preventing stale files from being mistaken for v1.6.4 campaign output.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.
