@@ -53,6 +53,8 @@ Both systems also pass bounded minimization, NVT, and semi-isotropic membrane-NP
 
 The next gate is the prospectively frozen 2.14 ns staged equilibration for both systems under all three predeclared seeds. Its runner is checkpointable and selects CUDA, usable OpenCL, or CPU without changing the protocol. A scaled Mac CPU preflight passed the execution logic but cannot count as equilibration. Tier A production remains locked until all six full-duration equilibration audits pass; Tier B remains locked until the later Tier A control-production rule passes in at least two of three replicas for each control.
 
+The first Colab CUDA attempt for 5NM4-ZMA seed 20260914 failed before its first 10 ps report with `Particle coordinate is NaN`; the state-data file was empty and no checkpoint or accepted result existed. The original v1.6 equilibration contract is preserved. Numerical hotfix v1.6.1 keeps every scientific input, total duration, ensemble, seed, contact, and gate unchanged, but starts from the accepted smoke state with only 100 bounded minimization iterations, uses 0.25/0.5/1 fs heating and a 1 fs ceiling, adds a final 1 kJ mol-1 nm-2 restraint-release step, monitors finite state every 2 ps, checkpoints every 50 ps and at stage boundaries, and emits an explicit failure audit.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.

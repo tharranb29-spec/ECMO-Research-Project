@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "reported_at_utc": "2026-09-15T15:16:20Z",
+  "evidence_origin": "user-supplied Google Colab traceback and Drive directory listing",
+  "system_id": "5NM4_ZMA_native",
+  "seed": 20260914,
+  "platform": "CUDA",
+  "gpu": "Tesla T4",
+  "openmm_version": "8.6.0",
+  "protocol_specification_id": "a2a-tier-a-equilibration-v1.6",
+  "protocol_sha256": "8e5526354250e37884728a3110f765ef34189fb646d0b0f18fbd79380fd777ba",
+  "status": "numerical_qc_failure_before_first_report",
+  "exception": "openmm.OpenMMException: Particle coordinate is NaN.",
+  "state_data_file_present": true,
+  "state_data_file_empty": true,
+  "checkpoint_present": false,
+  "progress_manifest_present": false,
+  "accepted_equilibration_result": false,
+  "production_trajectory_started": false,
+  "tier_b_unlocked": false,
+  "disposition": "Superseded prospectively by numerical-stability hotfix v1.6.1; failed attempt is not an equilibration replica result."
+}

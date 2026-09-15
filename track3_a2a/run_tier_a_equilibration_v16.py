@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Run the frozen, checkpointable v1.6 Tier A staged equilibration."""
+"""Run the frozen, checkpointable v1.6.1 Tier A staged equilibration."""
 
 from __future__ import annotations
 
 import argparse
-import csv
-import gzip
 import hashlib
 import json
 import math
@@ -16,11 +14,11 @@ from pathlib import Path
 import numpy as np
 import openmm as mm
 from openmm import Platform, XmlSerializer, unit
-from openmm.app import PDBFile, Simulation, StateDataReporter
+from openmm.app import PDBFile, Simulation
 
 
 ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.json"
+CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.1.json"
 LOCAL_INPUT = ROOT / "outputs" / "v1.6" / "md" / "tier_a_periodic_systems"
 LOCAL_SMOKE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_smoke_tests"
 RELEASE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_release_bundles"
@@ -123,6 +121,31 @@ def stage_steps(duration_ps: float, timestep_fs: float, scale: float) -> int:
     return max(1, round(duration_ps * 1000.0 / timestep_fs * scale))
 
 
+def state_metrics(simulation, system, degrees_of_freedom: int, contacts: list[dict]) -> dict:
+    state = simulation.context.getState(getEnergy=True, getPositions=True)
+    pe = float(state.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole))
+    ke = float(state.getKineticEnergy().value_in_unit(unit.kilojoule_per_mole))
+    temperature = 2 * ke / (
+        degrees_of_freedom
+        * unit.MOLAR_GAS_CONSTANT_R.value_in_unit(unit.kilojoule_per_mole / unit.kelvin)
+    )
+    vectors = state.getPeriodicBoxVectors(asNumpy=True).value_in_unit(unit.nanometer)
+    volume = float(abs(np.linalg.det(np.asarray(vectors))))
+    positions = state.getPositions(asNumpy=True)
+    coordinates = positions.value_in_unit(unit.nanometer)
+    metrics = {
+        "potential_energy_kj_mol": pe,
+        "kinetic_energy_kj_mol": ke,
+        "instantaneous_temperature_kelvin": temperature,
+        "volume_nm3": volume,
+        "native_contact_fraction_at_6A": contact_fraction(positions, contacts),
+    }
+    metrics["finite"] = bool(np.all(np.isfinite(coordinates))) and all(
+        math.isfinite(value) for value in metrics.values()
+    )
+    return metrics
+
+
 def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale: float) -> dict:
     config = json.loads(CONFIG_PATH.read_text())
     scratch = output_root / "_inputs"
@@ -141,18 +164,19 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
         0,
     )
     system.addForce(barostat)
-    timestep = config["timestep_femtoseconds"] * unit.femtoseconds
+    timestep = config["stages"][0]["timestep_femtoseconds"] * unit.femtoseconds
     integrator = mm.LangevinMiddleIntegrator(
         config["temperature_kelvin"] * unit.kelvin,
         config["collision_rate_per_picosecond"] / unit.picosecond,
         timestep,
     )
     integrator.setRandomNumberSeed(seed)
+    integrator.setConstraintTolerance(config["constraint_tolerance"])
     platform, properties = choose_platform(platform_name)
     simulation = Simulation(pdb.topology, system, integrator, platform, properties)
     simulation.context.setPeriodicBoxVectors(*smoke_state.getPeriodicBoxVectors())
     simulation.context.setPositions(smoke_state.getPositions())
-    simulation.context.applyConstraints(1e-6)
+    simulation.context.applyConstraints(config["constraint_tolerance"])
     degrees_of_freedom = 3 * system.getNumParticles() - system.getNumConstraints()
     if any(isinstance(system.getForce(i), mm.CMMotionRemover) for i in range(system.getNumForces())):
         degrees_of_freedom -= 3
@@ -163,6 +187,8 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
     progress = destination / "progress.json"
     completed: list[dict] = []
     start_index = 0
+    active_steps = 0
+    global_steps = 0
     if checkpoint.is_file() and progress.is_file():
         saved = json.loads(progress.read_text())
         if saved.get("config_sha256") != sha256(CONFIG_PATH) or saved.get("system_id") != system_id or saved.get("seed") != seed:
@@ -170,6 +196,11 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
         simulation.loadCheckpoint(str(checkpoint))
         completed = saved["completed_stages"]
         start_index = len(completed)
+        active = saved.get("active_stage") or {}
+        if active and active.get("index") != start_index:
+            raise RuntimeError("Checkpoint active-stage index is inconsistent")
+        active_steps = int(active.get("completed_steps", 0))
+        global_steps = int(saved.get("global_steps", 0))
     else:
         simulation.context.setParameter("k", config["minimization"]["protein_ligand_heavy_restraint_k_kj_mol_nm2"])
         simulation.minimizeEnergy(
@@ -179,19 +210,28 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
                 if scale == 1.0 else max(25, round(config["minimization"]["maximum_iterations"] * scale))
             ),
         )
+        minimized = state_metrics(simulation, system, degrees_of_freedom, contacts)
+        if not minimized["finite"]:
+            raise RuntimeError("Non-finite state after bounded minimization")
+        print(f"{system_id} seed {seed}: bounded minimization passed; PE={minimized['potential_energy_kj_mol']:.1f} kJ/mol", flush=True)
         simulation.context.setVelocitiesToTemperature(100 * unit.kelvin, seed)
 
     log_path = destination / "state_data.csv"
-    simulation.reporters.append(StateDataReporter(
-        str(log_path), max(1, round(config["report_interval_steps"] * scale)),
-        step=True, time=True, potentialEnergy=True, kineticEnergy=True, temperature=True,
-        volume=True, density=True, separator=",", append=start_index > 0,
-    ))
+    log_fields = [
+        "stage", "stage_step", "global_step", "effective_time_ps",
+        "potential_energy_kj_mol", "kinetic_energy_kj_mol",
+        "instantaneous_temperature_kelvin", "volume_nm3",
+        "native_contact_fraction_at_6A", "finite",
+    ]
+    if not log_path.exists() or (start_index == 0 and active_steps == 0):
+        log_path.write_text(",".join(log_fields) + "\n")
     npt_enabled = start_index > 0 and any(row["ensemble"] == "NPT" for row in completed)
     if npt_enabled:
         barostat.setFrequency(config["barostat_frequency_steps"])
         simulation.context.reinitialize(preserveState=True)
     for index, stage in enumerate(config["stages"][start_index:], start=start_index):
+        timestep_fs = stage["timestep_femtoseconds"]
+        integrator.setStepSize(timestep_fs * unit.femtoseconds)
         integrator.setTemperature(stage["temperature_kelvin"] * unit.kelvin)
         simulation.context.setParameter("k", stage["restraint_k_kj_mol_nm2"])
         barostat.setDefaultTemperature(stage["temperature_kelvin"] * unit.kelvin)
@@ -200,27 +240,76 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
             simulation.context.reinitialize(preserveState=True)
             npt_enabled = True
         simulation.context.setParameter(mm.MonteCarloMembraneBarostat.Temperature(), stage["temperature_kelvin"])
-        steps = stage_steps(stage["duration_ps"], config["timestep_femtoseconds"], scale)
-        simulation.step(steps)
-        state = simulation.context.getState(getEnergy=True, getPositions=True)
-        pe = float(state.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole))
-        ke = float(state.getKineticEnergy().value_in_unit(unit.kilojoule_per_mole))
-        temp = 2 * ke / (degrees_of_freedom * unit.MOLAR_GAS_CONSTANT_R.value_in_unit(unit.kilojoule_per_mole / unit.kelvin))
-        vectors = state.getPeriodicBoxVectors(asNumpy=True).value_in_unit(unit.nanometer)
-        volume = float(abs(np.linalg.det(np.asarray(vectors))))
+        steps = stage_steps(stage["duration_ps"], timestep_fs, scale)
+        monitor_steps = max(10 if scale < 1.0 else 1, stage_steps(config["monitor_interval_ps"], timestep_fs, scale))
+        checkpoint_steps = max(monitor_steps, stage_steps(config["checkpoint_interval_ps"], timestep_fs, scale))
+        stage_done = active_steps if index == start_index else 0
+        next_checkpoint = min(steps, ((stage_done // checkpoint_steps) + 1) * checkpoint_steps)
+        print(
+            f"{system_id} seed {seed}: {stage['name']} from step {stage_done}/{steps} "
+            f"at {timestep_fs} fs",
+            flush=True,
+        )
+        metrics = None
+        while stage_done < steps:
+            chunk = min(monitor_steps, steps - stage_done)
+            try:
+                simulation.step(chunk)
+                stage_done += chunk
+                global_steps += chunk
+                metrics = state_metrics(simulation, system, degrees_of_freedom, contacts)
+                if not metrics["finite"]:
+                    raise RuntimeError("finite-state monitor failed")
+            except Exception as exc:
+                failure = {
+                    "schema_version": 1, "created_at_utc": datetime.now(timezone.utc).isoformat(),
+                    "specification_id": config["specification_id"], "system_id": system_id,
+                    "seed": seed, "status": "numerical_qc_failure", "stage": stage["name"],
+                    "stage_step": stage_done, "global_step": global_steps,
+                    "error_type": type(exc).__name__, "error": str(exc),
+                    "production_trajectory_started": False, "tier_b_unlocked": False,
+                }
+                (destination / "failure_audit.json").write_text(json.dumps(failure, indent=2) + "\n")
+                print(json.dumps(failure, indent=2), flush=True)
+                raise
+            effective_time = sum(row["effective_duration_ps"] for row in completed) + stage_done * timestep_fs / 1000.0
+            values = {
+                "stage": stage["name"], "stage_step": stage_done, "global_step": global_steps,
+                "effective_time_ps": effective_time, **metrics,
+            }
+            with log_path.open("a") as handle:
+                handle.write(",".join(str(values[name]) for name in log_fields) + "\n")
+            if stage_done >= next_checkpoint or stage_done == steps:
+                simulation.saveCheckpoint(str(checkpoint))
+                progress.write_text(json.dumps({
+                    "system_id": system_id, "seed": seed, "config_sha256": sha256(CONFIG_PATH),
+                    "completed_stages": completed, "global_steps": global_steps,
+                    "active_stage": {"index": index, "name": stage["name"], "completed_steps": stage_done},
+                }, indent=2) + "\n")
+                next_checkpoint = min(steps, next_checkpoint + checkpoint_steps)
+            print(
+                f"  {stage['name']} {stage_done}/{steps}: T={metrics['instantaneous_temperature_kelvin']:.1f} K, "
+                f"PE={metrics['potential_energy_kj_mol']:.1f}, contacts={metrics['native_contact_fraction_at_6A']:.3f}",
+                flush=True,
+            )
+        if metrics is None:
+            metrics = state_metrics(simulation, system, degrees_of_freedom, contacts)
         row = {
             "name": stage["name"], "ensemble": stage["ensemble"], "steps": steps,
-            "effective_duration_ps": steps * config["timestep_femtoseconds"] / 1000.0,
-            "potential_energy_kj_mol": pe, "kinetic_energy_kj_mol": ke,
-            "instantaneous_temperature_kelvin": temp, "volume_nm3": volume,
-            "native_contact_fraction_at_6A": contact_fraction(state.getPositions(asNumpy=True), contacts),
+            "timestep_femtoseconds": timestep_fs,
+            "effective_duration_ps": steps * timestep_fs / 1000.0,
+            **{key: metrics[key] for key in (
+                "potential_energy_kj_mol", "kinetic_energy_kj_mol",
+                "instantaneous_temperature_kelvin", "volume_nm3", "native_contact_fraction_at_6A",
+            )},
         }
         completed.append(row)
         simulation.saveCheckpoint(str(checkpoint))
         progress.write_text(json.dumps({
             "system_id": system_id, "seed": seed, "config_sha256": sha256(CONFIG_PATH),
-            "completed_stages": completed,
+            "completed_stages": completed, "global_steps": global_steps, "active_stage": None,
         }, indent=2) + "\n")
+        active_steps = 0
 
     final_state = simulation.context.getState(getEnergy=True, getPositions=True, getVelocities=True)
     final_path = destination / "equilibrated_state.xml"
@@ -235,12 +324,10 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
     # from the state-data series when enough unrestrained observations exist.
     volumes: list[float] = []
     if log_path.is_file():
-        with log_path.open(newline="") as handle:
-            lines = (line[1:] if line.startswith("#") else line for line in handle)
-            for row in csv.DictReader(lines):
-                key = next((name for name in row if "Volume" in name), None)
-                if key and row[key]:
-                    volumes.append(float(row[key]))
+        lines = [line.split(",") for line in log_path.read_text().splitlines() if line]
+        if lines and "volume_nm3" in lines[0]:
+            volume_index = lines[0].index("volume_nm3")
+            volumes = [float(row[volume_index]) for row in lines[1:] if len(row) > volume_index]
     tail = volumes[len(volumes) // 2:] if volumes else [final["volume_nm3"]]
     volume_cv = float(np.std(tail) / np.mean(tail)) if np.mean(tail) else math.inf
     passed = (

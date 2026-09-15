@@ -84,12 +84,15 @@ class A2AExecutionV16Tests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), bundle["archive"]["sha256"])
 
     def test_equilibration_protocol_preserves_all_replicas_and_locks_tier_b(self):
-        config = self.load("config/tier_a_equilibration.v1.6.json")
+        config = self.load("config/tier_a_equilibration.v1.6.1.json")
+        self.assertEqual(config["supersedes"], "a2a-tier-a-equilibration-v1.6")
         self.assertEqual(len(config["systems"]), 2)
         self.assertEqual(config["replica_seeds"], [20260914, 20260915, 20260916])
         self.assertEqual(config["best_replica_selection"], "prohibited")
         self.assertTrue(config["production_remains_locked_until_gate_report_passes"])
         self.assertTrue(config["tier_b_remains_locked_until_tier_a_production_passes"])
+        self.assertAlmostEqual(sum(stage["duration_ps"] for stage in config["stages"]), 2140.0)
+        self.assertLessEqual(max(stage["timestep_femtoseconds"] for stage in config["stages"]), 1.0)
         gate = self.load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
         self.assertEqual(gate["status"], "tier_a_equilibration_gate_locked")
         self.assertFalse(gate["tier_a_production_unlocked"])
