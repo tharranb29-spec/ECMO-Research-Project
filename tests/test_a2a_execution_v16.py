@@ -84,8 +84,9 @@ class A2AExecutionV16Tests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), bundle["archive"]["sha256"])
 
     def test_equilibration_protocol_preserves_all_replicas_and_locks_tier_b(self):
-        config = self.load("config/tier_a_equilibration.v1.6.1.json")
-        self.assertEqual(config["supersedes"], "a2a-tier-a-equilibration-v1.6")
+        config = self.load("config/tier_a_equilibration.v1.6.2.json")
+        self.assertEqual(config["supersedes"], "a2a-tier-a-equilibration-v1.6.1")
+        self.assertEqual(config["minimization"]["restraint_reference"], "accepted_smoke_state_positions")
         self.assertEqual(len(config["systems"]), 2)
         self.assertEqual(config["replica_seeds"], [20260914, 20260915, 20260916])
         self.assertEqual(config["best_replica_selection"], "prohibited")

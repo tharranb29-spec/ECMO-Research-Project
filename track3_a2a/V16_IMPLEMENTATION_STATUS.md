@@ -55,6 +55,8 @@ The next gate is the prospectively frozen 2.14 ns staged equilibration for both 
 
 The first Colab CUDA attempt for 5NM4-ZMA seed 20260914 failed before its first 10 ps report with `Particle coordinate is NaN`; the state-data file was empty and no checkpoint or accepted result existed. The original v1.6 equilibration contract is preserved. Numerical hotfix v1.6.1 keeps every scientific input, total duration, ensemble, seed, contact, and gate unchanged, but starts from the accepted smoke state with only 100 bounded minimization iterations, uses 0.25/0.5/1 fs heating and a 1 fs ceiling, adds a final 1 kJ mol-1 nm-2 restraint-release step, monitors finite state every 2 ps, checkpoints every 50 ps and at stage boundaries, and emits an explicit failure audit.
 
+The first v1.6.1 CUDA retry still failed on the first NVT integration chunk. A six-case CUDA isolation matrix then passed the base, restraint-only, and restraint-plus-disabled-barostat variants in both mixed and double precision, with no duplicate constraints. It exposed a `3.734e8 kJ/mol` restraint-energy increase: the nonperiodic positional restraints used pre-smoke PDB coordinates while the accepted smoke state occupied a translated periodic image. Hotfix v1.6.2 changes only those reference coordinates to the smoke-state positions. It does not change the systems, total duration, stages, ensembles, timesteps, seeds, contacts, or gates.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.

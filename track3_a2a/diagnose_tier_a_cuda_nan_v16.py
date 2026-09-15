@@ -17,13 +17,15 @@ from openmm.app import PDBFile, Simulation
 import run_tier_a_equilibration_v16 as equil
 
 
-def run_case(source: Path, system_id: str, precision: str, extras: str) -> dict:
+def run_case(source: Path, system_id: str, precision: str, extras: str, steps: int) -> dict:
     pdb = PDBFile(str(source / "positions.pdb"))
     system = XmlSerializer.deserialize((source / "system.xml").read_text())
     state, _ = equil.read_smoke_state(source, system_id)
     if extras in {"restraints", "restraints_and_disabled_barostat"}:
         equil.add_restraints(system, pdb)
-    if extras == "restraints_and_disabled_barostat":
+    elif extras == "smoke_referenced_restraints_and_disabled_barostat":
+        equil.add_restraints(system, pdb, state.getPositions())
+    if extras in {"restraints_and_disabled_barostat", "smoke_referenced_restraints_and_disabled_barostat"}:
         system.addForce(mm.MonteCarloMembraneBarostat(
             1.0 * unit.bar, 0.0 * unit.bar * unit.nanometer, 310 * unit.kelvin,
             mm.MonteCarloMembraneBarostat.XYIsotropic,
@@ -65,14 +67,14 @@ def run_case(source: Path, system_id: str, precision: str, extras: str) -> dict:
                 for i in top
             ],
         })
-        for step in range(1, 11):
+        for step in range(1, steps + 1):
             simulation.step(1)
             check = simulation.context.getState(getEnergy=True, getPositions=True)
             coordinates = check.getPositions(asNumpy=True).value_in_unit(unit.nanometer)
             energy = float(check.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole))
             if not np.all(np.isfinite(coordinates)) or not math.isfinite(energy):
                 raise RuntimeError(f"non-finite state at diagnostic step {step}")
-        result.update({"status": "ten_step_cuda_probe_passed", "completed_steps": 10})
+        result.update({"status": "cuda_probe_passed", "completed_steps": steps})
     except Exception as exc:
         result.update({"status": "cuda_probe_failed", "error_type": type(exc).__name__, "error": str(exc)})
     return result
@@ -82,13 +84,20 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--system", default="5NM4_ZMA_native", choices=json.loads(equil.CONFIG_PATH.read_text())["systems"])
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--steps", type=int, default=10)
+    parser.add_argument("--corrected-only", action="store_true")
     args = parser.parse_args()
+    if args.steps < 1:
+        parser.error("--steps must be positive")
     source = equil.materialize_bundle(args.system, args.output / "_inputs")
-    cases = [
-        run_case(source, args.system, precision, extras)
-        for precision in ("mixed", "double")
-        for extras in ("base", "restraints", "restraints_and_disabled_barostat")
-    ]
+    if args.corrected_only:
+        cases = [run_case(source, args.system, "mixed", "smoke_referenced_restraints_and_disabled_barostat", args.steps)]
+    else:
+        cases = [
+            run_case(source, args.system, precision, extras, args.steps)
+            for precision in ("mixed", "double")
+            for extras in ("base", "restraints", "restraints_and_disabled_barostat")
+        ]
     report = {
         "schema_version": 1, "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "specification_id": "a2a-tier-a-cuda-nan-isolation-v1.6.1",

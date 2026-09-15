@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the frozen, checkpointable v1.6.1 Tier A staged equilibration."""
+"""Run the frozen, checkpointable v1.6.2 Tier A staged equilibration."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from openmm.app import PDBFile, Simulation
 
 
 ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.1.json"
+CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.2.json"
 LOCAL_INPUT = ROOT / "outputs" / "v1.6" / "md" / "tier_a_periodic_systems"
 LOCAL_SMOKE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_smoke_tests"
 RELEASE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_release_bundles"
@@ -103,13 +103,14 @@ def contact_fraction(positions, contacts: list[dict], cutoff_angstrom: float = 6
     return retained / len(contacts) if contacts else 0.0
 
 
-def add_restraints(system, pdb: PDBFile) -> tuple[mm.CustomExternalForce, int]:
+def add_restraints(system, pdb: PDBFile, reference_positions=None) -> tuple[mm.CustomExternalForce, int]:
     force = mm.CustomExternalForce("0.5*k*((x-x0)^2+(y-y0)^2+(z-z0)^2)")
     force.addGlobalParameter("k", 1000.0 * unit.kilojoule_per_mole / unit.nanometer**2)
     for name in ("x0", "y0", "z0"):
         force.addPerParticleParameter(name)
     count = 0
-    for atom, position in zip(pdb.topology.atoms(), pdb.positions):
+    references = pdb.positions if reference_positions is None else reference_positions
+    for atom, position in zip(pdb.topology.atoms(), references):
         if atom.element.symbol != "H" and (atom.residue.name in PROTEIN or atom.residue.name in LIGANDS):
             force.addParticle(atom.index, position.value_in_unit(unit.nanometer))
             count += 1
@@ -154,7 +155,7 @@ def run(system_id: str, seed: int, output_root: Path, platform_name: str, scale:
     system = XmlSerializer.deserialize((source / "system.xml").read_text())
     smoke_state, smoke_path = read_smoke_state(source, system_id)
     contacts = json.loads((source / "native_contacts.json").read_text())["native_contacts"]
-    _, restrained_count = add_restraints(system, pdb)
+    _, restrained_count = add_restraints(system, pdb, smoke_state.getPositions())
     barostat = mm.MonteCarloMembraneBarostat(
         config["pressure_bar"] * unit.bar,
         config["surface_tension_bar_nm"] * unit.bar * unit.nanometer,

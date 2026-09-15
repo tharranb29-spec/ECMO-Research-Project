@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T15:29:25.127332+00:00",
+  "evidence_origin": "runner-emitted Google Colab failure audit supplied by the user",
+  "specification_id": "a2a-tier-a-equilibration-v1.6.1",
+  "system_id": "5NM4_ZMA_native",
+  "seed": 20260914,
+  "status": "numerical_qc_failure",
+  "stage": "nvt_heat_100K",
+  "stage_step": 0,
+  "global_step": 0,
+  "exception": "openmm.OpenMMException: Particle coordinate is NaN.",
+  "progress_manifest_present": false,
+  "state_data_header_only": true,
+  "accepted_equilibration_result": false,
+  "production_trajectory_started": false,
+  "tier_b_unlocked": false,
+  "disposition": "Root cause isolated as a periodic-image mismatch in positional-restraint reference coordinates; superseded by v1.6.2."
+}
