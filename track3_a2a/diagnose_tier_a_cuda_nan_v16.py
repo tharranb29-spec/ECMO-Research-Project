@@ -119,7 +119,7 @@ def main() -> None:
         ]
     report = {
         "schema_version": 1, "created_at_utc": datetime.now(timezone.utc).isoformat(),
-        "specification_id": "a2a-tier-a-cuda-nan-isolation-v1.6.1",
+        "specification_id": "a2a-tier-a-cuda-nan-isolation-v1.6.3",
         "system_id": args.system, "purpose": "diagnostic only; no equilibration or production trajectory",
         "cases": cases,
     }

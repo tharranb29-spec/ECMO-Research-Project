@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T16:14:32.357048+00:00",
+  "specification_id": "a2a-tier-a-cuda-restraint-parameter-assessment-v1.6.3",
+  "source_file": "cuda_nan_diagnostic (1).json",
+  "source_sha256": "84c06aa3a924ce8e6a91f293c15187d0efd58c76961c6304678dd61d44e36905",
+  "system_id": "5NM4_ZMA_native",
+  "precision": "mixed",
+  "maximum_reference_displacement_before_constraints_nm": 1.4916295350712085e-6,
+  "maximum_constraint_projection_displacement_nm": 1.1524106535777904e-6,
+  "restraint_energy_before_constraints_kj_mol": 373577417.8359375,
+  "restraint_energy_after_constraints_kj_mol": 373577417.8359375,
+  "diagnostic_conclusion": "The coordinates agree and constraint projection is negligible, but the CUDA CustomExternalForce receives incorrect effective reference values when a Vec3 is supplied as the three-parameter vector.",
+  "corrective_action": "Convert every x0/y0/z0 value to an explicit scalar float list before adding the particle.",
+  "accepted_equilibration_result": false,
+  "production_trajectory_started": false,
+  "tier_b_unlocked": false
+}

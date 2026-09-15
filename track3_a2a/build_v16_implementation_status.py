@@ -39,7 +39,7 @@ def main() -> None:
     smoke, smoke_path = load("outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json")
     releases, releases_path = load("outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json")
     equilibration_gate, equilibration_gate_path = load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
-    equilibration_config_path = ROOT / "config" / "tier_a_equilibration.v1.6.2.json"
+    equilibration_config_path = ROOT / "config" / "tier_a_equilibration.v1.6.3.json"
     metrics = model["result"]["metrics"]
     payload = {
         "schema_version": 1,

@@ -57,6 +57,8 @@ The first Colab CUDA attempt for 5NM4-ZMA seed 20260914 failed before its first 
 
 The first v1.6.1 CUDA retry still failed on the first NVT integration chunk. A six-case CUDA isolation matrix then passed the base, restraint-only, and restraint-plus-disabled-barostat variants in both mixed and double precision, with no duplicate constraints. It exposed a `3.734e8 kJ/mol` restraint-energy increase: the nonperiodic positional restraints used pre-smoke PDB coordinates while the accepted smoke state occupied a translated periodic image. Hotfix v1.6.2 changes only those reference coordinates to the smoke-state positions. It does not change the systems, total duration, stages, ensembles, timesteps, seeds, contacts, or gates.
 
+The v1.6.2 pre-integration CUDA audit then showed that reference and particle coordinates already agreed within `1.5e-6 nm`, and constraint projection moved them by only `1.2e-6 nm`, yet the restraint term remained `3.736e8 kJ/mol`. The remaining implementation defect was the transfer of an OpenMM `Vec3` object into three per-particle parameters on CUDA. Version 1.6.3 passes `x0`, `y0`, and `z0` as explicit scalar floats. No scientific setting changes, and the failed v1.6.1/v1.6.2 attempts remain excluded.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.

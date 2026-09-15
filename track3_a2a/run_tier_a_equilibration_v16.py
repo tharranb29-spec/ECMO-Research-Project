@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the frozen, checkpointable v1.6.2 Tier A staged equilibration."""
+"""Run the frozen, checkpointable v1.6.3 Tier A staged equilibration."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ from openmm.app import PDBFile, Simulation
 
 
 ROOT = Path(__file__).resolve().parent
-CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.2.json"
+CONFIG_PATH = ROOT / "config" / "tier_a_equilibration.v1.6.3.json"
 LOCAL_INPUT = ROOT / "outputs" / "v1.6" / "md" / "tier_a_periodic_systems"
 LOCAL_SMOKE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_smoke_tests"
 RELEASE = ROOT / "outputs" / "v1.6" / "md" / "tier_a_release_bundles"
@@ -112,7 +112,8 @@ def add_restraints(system, pdb: PDBFile, reference_positions=None) -> tuple[mm.C
     references = pdb.positions if reference_positions is None else reference_positions
     for atom, position in zip(pdb.topology.atoms(), references):
         if atom.element.symbol != "H" and (atom.residue.name in PROTEIN or atom.residue.name in LIGANDS):
-            force.addParticle(atom.index, position.value_in_unit(unit.nanometer))
+            xyz = position.value_in_unit(unit.nanometer)
+            force.addParticle(atom.index, [float(xyz[0]), float(xyz[1]), float(xyz[2])])
             count += 1
     system.addForce(force)
     return force, count

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-15T15:42:06.618006+00:00",
-  "specification_id": "a2a-tier-a-equilibration-gate-v1.6.2",
-  "config_sha256": "fcdaf1dd639e2d6cd14485092c010a1f6fc7c5569693aff3a4af0195b758bc00",
+  "created_at_utc": "2026-09-15T16:18:19.162188+00:00",
+  "specification_id": "a2a-tier-a-equilibration-gate-v1.6.3",
+  "config_sha256": "8a7c1b5c31abc0c0a69c78872a273ca528336ce43af68c153b32be37a81ce282",
   "expected_run_count": 6,
   "observed_run_count": 0,
   "passed_run_count": 0,
