@@ -21,10 +21,16 @@ def run_case(source: Path, system_id: str, precision: str, extras: str, steps: i
     pdb = PDBFile(str(source / "positions.pdb"))
     system = XmlSerializer.deserialize((source / "system.xml").read_text())
     state, _ = equil.read_smoke_state(source, system_id)
+    restraint = None
+    reference_positions = None
     if extras in {"restraints", "restraints_and_disabled_barostat"}:
-        equil.add_restraints(system, pdb)
+        restraint, _ = equil.add_restraints(system, pdb)
+        reference_positions = pdb.positions
     elif extras == "smoke_referenced_restraints_and_disabled_barostat":
-        equil.add_restraints(system, pdb, state.getPositions())
+        reference_positions = state.getPositions()
+        restraint, _ = equil.add_restraints(system, pdb, reference_positions)
+    if restraint is not None:
+        restraint.setForceGroup(31)
     if extras in {"restraints_and_disabled_barostat", "smoke_referenced_restraints_and_disabled_barostat"}:
         system.addForce(mm.MonteCarloMembraneBarostat(
             1.0 * unit.bar, 0.0 * unit.bar * unit.nanometer, 310 * unit.kelvin,
@@ -50,7 +56,20 @@ def run_case(source: Path, system_id: str, precision: str, extras: str, steps: i
         )
         simulation.context.setPeriodicBoxVectors(*state.getPeriodicBoxVectors())
         simulation.context.setPositions(state.getPositions())
+        before_constraints = simulation.context.getState(getEnergy=True, getPositions=True, groups=1 << 31)
+        before_xyz = before_constraints.getPositions(asNumpy=True).value_in_unit(unit.nanometer)
+        reference_xyz = reference_positions.value_in_unit(unit.nanometer) if reference_positions is not None else before_xyz
+        result["maximum_reference_displacement_before_constraints_nm"] = float(np.max(np.linalg.norm(before_xyz - reference_xyz, axis=1)))
+        result["restraint_energy_before_constraints_kj_mol"] = float(
+            before_constraints.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole)
+        ) if restraint is not None else 0.0
         simulation.context.applyConstraints(1e-6)
+        after_constraints = simulation.context.getState(getEnergy=True, getPositions=True, groups=1 << 31)
+        after_xyz = after_constraints.getPositions(asNumpy=True).value_in_unit(unit.nanometer)
+        result["maximum_constraint_projection_displacement_nm"] = float(np.max(np.linalg.norm(after_xyz - before_xyz, axis=1)))
+        result["restraint_energy_after_constraints_kj_mol"] = float(
+            after_constraints.getPotentialEnergy().value_in_unit(unit.kilojoule_per_mole)
+        ) if restraint is not None else 0.0
         simulation.context.setVelocitiesToTemperature(100 * unit.kelvin, 20260914)
         simulation.context.applyVelocityConstraints(1e-6)
         initial = simulation.context.getState(getEnergy=True, getForces=True, getPositions=True)
