@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-tier-a-release-bundle-v1.6",
+  "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+  "status": "accepted_for_staged_equilibration",
+  "candidate_labels_loaded": false,
+  "production_trajectory_started": false,
+  "members_sha256": {
+    "system.xml": "9670122c0574526e63eeaf8a0c2ce83bddbcee244c84f03c7fd49d2b2fdd6691",
+    "positions.pdb": "2b2ad9f683bdeeea4a25ede05a7ea4a7bfd49fc52d9bc4128a088aaf1bbcb0af",
+    "native_contacts.json": "8f59d01f83ec3377701ebd4e0636ccc78c40557b0212afe5f5a140be4c738220",
+    "assembly_audit.json": "b685dc89147b5958b68268e5440e96ce254278be28ae5388de46c8a0555d619a",
+    "smoke_final_state.xml": "ece30bdca638dff25b1e8bacb48e10fe0b4464412bcaac7a389f653c55cdd995",
+    "smoke_audit.json": "8c726cb4c9a7b1171a30d4140033eb30c9d4760923318d29286e14b6191c5209"
+  },
+  "archive": {
+    "path": "outputs/v1.6/md/tier_a_release_bundles/5G53_NECA_miniGs_native_nucleotide_free.tar.gz",
+    "size_bytes": 14914965,
+    "sha256": "60aa39d0b5fa7f66a79f2a62a9d47b1cdc8f4a7263157834c52c27ed785f523d"
+  }
+}

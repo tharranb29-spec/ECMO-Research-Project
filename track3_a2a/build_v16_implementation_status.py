@@ -33,7 +33,13 @@ def main() -> None:
     minimized, minimized_path = load("outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json")
     native_poses, native_poses_path = load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
     membrane, membrane_path = load("outputs/v1.6/md/membrane_patch/patch_audit.json")
+    membrane_relaxation, membrane_relaxation_path = load("outputs/v1.6/md/membrane_patch/patch_relaxation_audit.json")
     complexes, complexes_path = load("outputs/v1.6/md/tier_a_complex_preflight/complex_preflight_audit.json")
+    periodic, periodic_path = load("outputs/v1.6/md/tier_a_periodic_systems/periodic_assembly_audit.json")
+    smoke, smoke_path = load("outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json")
+    releases, releases_path = load("outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json")
+    equilibration_gate, equilibration_gate_path = load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
+    equilibration_config_path = ROOT / "config" / "tier_a_equilibration.v1.6.json"
     metrics = model["result"]["metrics"]
     payload = {
         "schema_version": 1,
@@ -70,7 +76,7 @@ def main() -> None:
                 "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement",
             },
             "C_open_md": {
-                "status": "static_input_gates_passed_final_periodic_systems_pending",
+                "status": "periodic_and_smoke_gates_passed_staged_equilibration_pending",
                 "ambertools_image": ligands["image"],
                 "ambertools_image_id": ligands["image_id"],
                 "accepted_ligand_bundles": ligands["accepted_count"],
@@ -82,9 +88,17 @@ def main() -> None:
                 "unsolvated_tier_a_complex_preflights_passed": complexes["accepted_count"],
                 "mixed_membrane_patch_status": membrane["status"],
                 "mixed_membrane_cholesterol_fraction": membrane["cholesterol_mole_fraction"],
-                "tier_a_unlocked_for_trajectory": False,
+                "relaxed_membrane_patch_status": membrane_relaxation["status"],
+                "periodic_tier_a_systems_passed": periodic["passed_count"],
+                "minimization_nvt_npt_smoke_systems_passed": smoke["passed_count"],
+                "github_safe_release_bundles_passed": releases["accepted_count"],
+                "tier_a_unlocked_for_staged_equilibration": True,
+                "staged_equilibration_gate_status": equilibration_gate["status"],
+                "staged_equilibration_runs_passed": equilibration_gate["passed_run_count"],
+                "staged_equilibration_runs_required": equilibration_gate["expected_run_count"],
+                "tier_a_production_unlocked": False,
                 "tier_b_unlocked": False,
-                "next_gate": "build both complete periodic Tier A bundles, freeze native contacts, and pass final minimization/NVT/NPT smoke tests",
+                "next_gate": "complete the frozen full-duration staged equilibration for both controls and all three seeds, then pass the aggregate equilibration gate before Tier A pilot production",
             },
             "D_dashboard": {
                 "status": "scheduled_to_start_2026-09-16",
@@ -97,10 +111,11 @@ def main() -> None:
             for path in [
                 freeze_path, model_path, ligand_path, pubmed_path, pmc_path, pass1_path,
                 constructs_path, minimized_path, native_poses_path, membrane_path,
-                complexes_path,
+                membrane_relaxation_path, complexes_path, periodic_path, smoke_path,
+                releases_path, equilibration_config_path, equilibration_gate_path,
             ]
         },
-        "timeline_status": "on_track_for_September_15_external_pass_1_and_static_md_input_milestone",
+        "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending",
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, indent=2) + "\n")

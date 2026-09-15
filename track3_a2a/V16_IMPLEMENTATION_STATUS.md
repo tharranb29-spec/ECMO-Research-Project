@@ -6,7 +6,7 @@
 
 **Outcome firewall:** sealed
 
-**MD trajectories started:** no
+**MD production trajectories started:** no
 
 ## Workstream A — protocol and governance
 
@@ -45,7 +45,13 @@ Native ZMA and NECA poses have been transferred into the accepted GAFF2 bundles.
 
 Both unsolvated ff19SB/GAFF2 receptor–ligand compatibility builds pass tleap, topology, finite-energy, and geometry checks. A deterministic Amber translation step types explicit histidine tautomers, maps four disulfide pairs per construct to CYX, and removes the generic backbone hydrogen at each 5G53 chain start so tleap can generate correct uncapped N-terminal hydrogens. The accepted bundles contain no missing bonded parameter or fatal token.
 
-The Amber Lipid21 mixed-membrane patch is accepted at 86 POPC and 38 cholesterol molecules (30.65% cholesterol). Three colliding POPC residues and one leaflet-balancing POPC residue were removed; the final patch has complete Lipid21 template coverage and zero cross-residue non-water heavy-atom clashes below 1 Å. Tier A remains locked pending assembly of the two complete periodic control bundles, frozen native contacts, and final minimization/NVT/NPT smoke tests. Tier B remains locked until both Tier A controls pass.
+The Amber Lipid21 mixed-membrane patch is accepted at 86 POPC and 38 cholesterol molecules (30.65% cholesterol). Three colliding POPC residues and one leaflet-balancing POPC residue were removed. A restrained lipid-heavy-atom relaxation then reduced the patch energy from `2.799e15` to `-247559.8 kJ/mol`; the accepted relaxed patch has no cross-residue non-water atom contact below 1 Å.
+
+Both complete periodic Tier A controls now pass assembly. The inactive 5NM4-ZMA system has 81,447 particles, 156 POPC, 70 cholesterol, and 75 frozen native contacts. The active nucleotide-free 5G53-NECA-mini-Gs system has 210,308 particles, 322 POPC, 148 cholesterol, and 74 frozen native contacts. Both have finite initial energy, the declared approximately 70:30 membrane composition, normalized coordinate-export identifiers, and zero non-water heavy-atom clashes below 1 Å.
+
+Both systems also pass bounded minimization, NVT, and semi-isotropic membrane-NPT smoke tests with finite energy, volume, and coordinates and 100% retention of the frozen contacts at the 6 Å smoke threshold. These are initialization checks, not equilibrated trajectories. Two deterministic signed release archives (6.4 MB and 14.9 MB) now carry the full systems for GitHub/Colab without committing 44–97 MB raw XML files.
+
+The next gate is the prospectively frozen 2.14 ns staged equilibration for both systems under all three predeclared seeds. Its runner is checkpointable and selects CUDA, usable OpenCL, or CPU without changing the protocol. A scaled Mac CPU preflight passed the execution logic but cannot count as equilibration. Tier A production remains locked until all six full-duration equilibration audits pass; Tier B remains locked until the later Tier A control-production rule passes in at least two of three replicas for each control.
 
 ## Workstream D — autonomous dashboard
 

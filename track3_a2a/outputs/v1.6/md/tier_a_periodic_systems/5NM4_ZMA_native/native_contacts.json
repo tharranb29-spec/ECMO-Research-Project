@@ -1,0 +1,383 @@
+{
+  "schema_version": 1,
+  "system_id": "5NM4_ZMA_native",
+  "distance_cutoff_angstrom": 4.0,
+  "native_contacts": [
+    {
+      "ligand_atom_index": 81407,
+      "receptor_atom_index": 4206,
+      "starting_distance_angstrom": 3.9777355367092913
+    },
+    {
+      "ligand_atom_index": 81411,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.1400434710366594
+    },
+    {
+      "ligand_atom_index": 81412,
+      "receptor_atom_index": 2532,
+      "starting_distance_angstrom": 3.630431654776045
+    },
+    {
+      "ligand_atom_index": 81412,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 2.539215233098592
+    },
+    {
+      "ligand_atom_index": 81413,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.584745179228221
+    },
+    {
+      "ligand_atom_index": 81414,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.93114143729274
+    },
+    {
+      "ligand_atom_index": 81414,
+      "receptor_atom_index": 4176,
+      "starting_distance_angstrom": 3.9946109948279016
+    },
+    {
+      "ligand_atom_index": 81415,
+      "receptor_atom_index": 2506,
+      "starting_distance_angstrom": 3.890491357142432
+    },
+    {
+      "ligand_atom_index": 81416,
+      "receptor_atom_index": 2506,
+      "starting_distance_angstrom": 3.46974148892968
+    },
+    {
+      "ligand_atom_index": 81416,
+      "receptor_atom_index": 4252,
+      "starting_distance_angstrom": 3.8149119255888513
+    },
+    {
+      "ligand_atom_index": 81417,
+      "receptor_atom_index": 2506,
+      "starting_distance_angstrom": 3.5098036982144767
+    },
+    {
+      "ligand_atom_index": 81417,
+      "receptor_atom_index": 2509,
+      "starting_distance_angstrom": 3.6018729849898903
+    },
+    {
+      "ligand_atom_index": 81417,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.67768255835111
+    },
+    {
+      "ligand_atom_index": 81417,
+      "receptor_atom_index": 4252,
+      "starting_distance_angstrom": 3.9589909067842064
+    },
+    {
+      "ligand_atom_index": 81418,
+      "receptor_atom_index": 2506,
+      "starting_distance_angstrom": 3.777708697080826
+    },
+    {
+      "ligand_atom_index": 81418,
+      "receptor_atom_index": 2509,
+      "starting_distance_angstrom": 3.4953606394762797
+    },
+    {
+      "ligand_atom_index": 81418,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.7093527737329053
+    },
+    {
+      "ligand_atom_index": 81418,
+      "receptor_atom_index": 2512,
+      "starting_distance_angstrom": 3.848719917063329
+    },
+    {
+      "ligand_atom_index": 81418,
+      "receptor_atom_index": 4252,
+      "starting_distance_angstrom": 3.7285672851646425
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2506,
+      "starting_distance_angstrom": 3.9929868519693392
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2509,
+      "starting_distance_angstrom": 3.978850210802111
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.588292212181164
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2529,
+      "starting_distance_angstrom": 3.661127968263327
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2532,
+      "starting_distance_angstrom": 3.9648361882932868
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.5381534732117035
+    },
+    {
+      "ligand_atom_index": 81419,
+      "receptor_atom_index": 4183,
+      "starting_distance_angstrom": 3.9408137484534866
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.4478139450962204
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.7950034255583964
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 2529,
+      "starting_distance_angstrom": 3.8720823854871638
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.9443255443738563
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 3921,
+      "starting_distance_angstrom": 3.8390488405332857
+    },
+    {
+      "ligand_atom_index": 81420,
+      "receptor_atom_index": 4183,
+      "starting_distance_angstrom": 3.968730401526422
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 2529,
+      "starting_distance_angstrom": 3.3472476753296783
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 2532,
+      "starting_distance_angstrom": 3.2936258135981444
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 2533,
+      "starting_distance_angstrom": 3.949526174112531
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 2534,
+      "starting_distance_angstrom": 3.287466045452034
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 3920,
+      "starting_distance_angstrom": 3.7878148053990235
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 3921,
+      "starting_distance_angstrom": 2.7929090568795845
+    },
+    {
+      "ligand_atom_index": 81421,
+      "receptor_atom_index": 4183,
+      "starting_distance_angstrom": 3.58296664790506
+    },
+    {
+      "ligand_atom_index": 81422,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.4174682149216835
+    },
+    {
+      "ligand_atom_index": 81422,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.4022491090453677
+    },
+    {
+      "ligand_atom_index": 81423,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.538764897531341
+    },
+    {
+      "ligand_atom_index": 81423,
+      "receptor_atom_index": 2518,
+      "starting_distance_angstrom": 3.9292702884886883
+    },
+    {
+      "ligand_atom_index": 81423,
+      "receptor_atom_index": 3920,
+      "starting_distance_angstrom": 3.8911162922739817
+    },
+    {
+      "ligand_atom_index": 81423,
+      "receptor_atom_index": 3921,
+      "starting_distance_angstrom": 3.6859508949523447
+    },
+    {
+      "ligand_atom_index": 81423,
+      "receptor_atom_index": 3922,
+      "starting_distance_angstrom": 3.16756389043694
+    },
+    {
+      "ligand_atom_index": 81424,
+      "receptor_atom_index": 2509,
+      "starting_distance_angstrom": 3.725050469456763
+    },
+    {
+      "ligand_atom_index": 81424,
+      "receptor_atom_index": 2510,
+      "starting_distance_angstrom": 3.563348565605114
+    },
+    {
+      "ligand_atom_index": 81424,
+      "receptor_atom_index": 2512,
+      "starting_distance_angstrom": 3.949957214958156
+    },
+    {
+      "ligand_atom_index": 81424,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.670556769755785
+    },
+    {
+      "ligand_atom_index": 81424,
+      "receptor_atom_index": 2518,
+      "starting_distance_angstrom": 3.912308909071468
+    },
+    {
+      "ligand_atom_index": 81425,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.906036866185473
+    },
+    {
+      "ligand_atom_index": 81425,
+      "receptor_atom_index": 2516,
+      "starting_distance_angstrom": 3.827987199560625
+    },
+    {
+      "ligand_atom_index": 81425,
+      "receptor_atom_index": 2518,
+      "starting_distance_angstrom": 3.721623033032762
+    },
+    {
+      "ligand_atom_index": 81426,
+      "receptor_atom_index": 2514,
+      "starting_distance_angstrom": 3.7977395908619083
+    },
+    {
+      "ligand_atom_index": 81426,
+      "receptor_atom_index": 2518,
+      "starting_distance_angstrom": 3.7145188113670846
+    },
+    {
+      "ligand_atom_index": 81426,
+      "receptor_atom_index": 3922,
+      "starting_distance_angstrom": 3.9880579233506572
+    },
+    {
+      "ligand_atom_index": 81427,
+      "receptor_atom_index": 2658,
+      "starting_distance_angstrom": 3.491297466558809
+    },
+    {
+      "ligand_atom_index": 81427,
+      "receptor_atom_index": 3848,
+      "starting_distance_angstrom": 3.985502352276309
+    },
+    {
+      "ligand_atom_index": 81427,
+      "receptor_atom_index": 3922,
+      "starting_distance_angstrom": 3.9583582455356376
+    },
+    {
+      "ligand_atom_index": 81428,
+      "receptor_atom_index": 1245,
+      "starting_distance_angstrom": 3.532164633762141
+    },
+    {
+      "ligand_atom_index": 81428,
+      "receptor_atom_index": 2658,
+      "starting_distance_angstrom": 3.8517483043418013
+    },
+    {
+      "ligand_atom_index": 81428,
+      "receptor_atom_index": 3800,
+      "starting_distance_angstrom": 3.8858928189027564
+    },
+    {
+      "ligand_atom_index": 81429,
+      "receptor_atom_index": 1245,
+      "starting_distance_angstrom": 3.556272627344536
+    },
+    {
+      "ligand_atom_index": 81429,
+      "receptor_atom_index": 2658,
+      "starting_distance_angstrom": 3.6937310405604684
+    },
+    {
+      "ligand_atom_index": 81429,
+      "receptor_atom_index": 3796,
+      "starting_distance_angstrom": 3.9925337819484903
+    },
+    {
+      "ligand_atom_index": 81429,
+      "receptor_atom_index": 3800,
+      "starting_distance_angstrom": 3.6764628381094777
+    },
+    {
+      "ligand_atom_index": 81429,
+      "receptor_atom_index": 3870,
+      "starting_distance_angstrom": 3.8128630974636377
+    },
+    {
+      "ligand_atom_index": 81430,
+      "receptor_atom_index": 2658,
+      "starting_distance_angstrom": 3.271550702648503
+    },
+    {
+      "ligand_atom_index": 81430,
+      "receptor_atom_index": 3866,
+      "starting_distance_angstrom": 3.4225703791156734
+    },
+    {
+      "ligand_atom_index": 81430,
+      "receptor_atom_index": 3870,
+      "starting_distance_angstrom": 3.259956748179338
+    },
+    {
+      "ligand_atom_index": 81430,
+      "receptor_atom_index": 3922,
+      "starting_distance_angstrom": 3.8644303590568088
+    },
+    {
+      "ligand_atom_index": 81431,
+      "receptor_atom_index": 2658,
+      "starting_distance_angstrom": 3.1641025583883886
+    },
+    {
+      "ligand_atom_index": 81431,
+      "receptor_atom_index": 3843,
+      "starting_distance_angstrom": 3.789924009792284
+    },
+    {
+      "ligand_atom_index": 81431,
+      "receptor_atom_index": 3922,
+      "starting_distance_angstrom": 2.997327643084743
+    }
+  ],
+  "source_topology_sha256": "6df077e3fcf6c3a3ec5eec5ff70873839a25655ed50ce8f6ba133e3dfba156d6"
+}

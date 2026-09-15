@@ -1,0 +1,34 @@
+{
+  "system_id": "5NM4_ZMA_native",
+  "status": "minimization_nvt_npt_smoke_gate_passed",
+  "purpose": "initialization smoke test only; not equilibration or production sampling",
+  "particle_count": 81447,
+  "restrained_protein_ligand_heavy_atom_count": 2385,
+  "minimization_max_iterations": 25,
+  "pre_minimization_constraints_applied": true,
+  "steps_per_nvt_npt_stage": 50,
+  "timestep_femtoseconds": 2.0,
+  "initial_potential_energy_kj_mol": -754720.6841764249,
+  "minimized_potential_energy_kj_mol": -863826.7158140333,
+  "energy_decreased_during_minimization": true,
+  "nvt": {
+    "potential_energy_kj_mol": -812505.5003186319,
+    "kinetic_energy_kj_mol": 189014.0765027154,
+    "volume_nm3": 882.8006800031096,
+    "native_contact_fraction_at_6A": 1.0
+  },
+  "npt": {
+    "potential_energy_kj_mol": -813232.0852665997,
+    "kinetic_energy_kj_mol": 197280.5608264186,
+    "volume_nm3": 882.8006800031096,
+    "native_contact_fraction_at_6A": 1.0
+  },
+  "finite_energy_volume_coordinates": true,
+  "barostat": "MonteCarloMembraneBarostat 1 bar, zero surface tension, XY isotropic, Z free",
+  "trajectory_production_started": false,
+  "tier_a_production_unlocked": false,
+  "files": {
+    "smoke_final_state.xml": "ed0873e5b223d14e9987fb250865a80d9b9dac41ca72ad2bb28e7cb425e10474",
+    "smoke_system.xml": "e5ab32a1d1eeb197730dfc9351cc504b1a8f81a7ddc4d1b53b48ad00906ae45d"
+  }
+}

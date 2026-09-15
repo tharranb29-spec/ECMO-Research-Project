@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-15T10:02:07.466995+00:00",
+  "created_at_utc": "2026-09-15T14:33:15.487295+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -45,7 +45,7 @@
       "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement"
     },
     "C_open_md": {
-      "status": "static_input_gates_passed_final_periodic_systems_pending",
+      "status": "periodic_and_smoke_gates_passed_staged_equilibration_pending",
       "ambertools_image": "a2a-ambertools:v1.6",
       "ambertools_image_id": "sha256:f9c5dc14d8a347035b90054daaec4b59ac1534b21dd209967629f977d00da17c",
       "accepted_ligand_bundles": 6,
@@ -57,9 +57,17 @@
       "unsolvated_tier_a_complex_preflights_passed": 2,
       "mixed_membrane_patch_status": "mixed_membrane_patch_computationally_accepted",
       "mixed_membrane_cholesterol_fraction": 0.3064516129032258,
-      "tier_a_unlocked_for_trajectory": false,
+      "relaxed_membrane_patch_status": "relaxed_membrane_patch_accepted",
+      "periodic_tier_a_systems_passed": 2,
+      "minimization_nvt_npt_smoke_systems_passed": 2,
+      "github_safe_release_bundles_passed": 2,
+      "tier_a_unlocked_for_staged_equilibration": true,
+      "staged_equilibration_gate_status": "tier_a_equilibration_gate_locked",
+      "staged_equilibration_runs_passed": 0,
+      "staged_equilibration_runs_required": 6,
+      "tier_a_production_unlocked": false,
       "tier_b_unlocked": false,
-      "next_gate": "build both complete periodic Tier A bundles, freeze native contacts, and pass final minimization/NVT/NPT smoke tests"
+      "next_gate": "complete the frozen full-duration staged equilibration for both controls and all three seeds, then pass the aggregate equilibration gate before Tier A pilot production"
     },
     "D_dashboard": {
       "status": "scheduled_to_start_2026-09-16",
@@ -78,7 +86,13 @@
     "outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json": "a791dc1f996e466a8aa389945ee7b5c6e10e3fb9cb77e3f42ae4c569d4e297f3",
     "outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json": "ad28ede2a82a769b0de19cf2b6fe38e371c8e3564f403ae674606f28f2821e99",
     "outputs/v1.6/md/membrane_patch/patch_audit.json": "786cd78ff7bd3880802229ca1e1f971bcf9e00c3388240f82312bae9032ea5ef",
-    "outputs/v1.6/md/tier_a_complex_preflight/complex_preflight_audit.json": "f996ca835bd60a98592c068c7a8664d3eb1cd8f234f6f37c0fb7ed9faec6e5a3"
+    "outputs/v1.6/md/membrane_patch/patch_relaxation_audit.json": "61113b23e5d7e30c5f90e0a727a4c6d4f43481e24fd5f7aecddd78db745476ea",
+    "outputs/v1.6/md/tier_a_complex_preflight/complex_preflight_audit.json": "f996ca835bd60a98592c068c7a8664d3eb1cd8f234f6f37c0fb7ed9faec6e5a3",
+    "outputs/v1.6/md/tier_a_periodic_systems/periodic_assembly_audit.json": "34ad18db1dd6e66dd75d9e6a38c1a7e721df17b5ef8c1f94881c36de6d681770",
+    "outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json": "e96af587cf5a349ec8841ca47d394e447242434e057a9ab00cce67217169df16",
+    "outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json": "3e78a753c36e4a596714e0b25962c10a564e55149431034f38fb78e8d88ff120",
+    "config/tier_a_equilibration.v1.6.json": "8e5526354250e37884728a3110f765ef34189fb646d0b0f18fbd79380fd777ba",
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "8d37f6f3b570d213d5c2c53ab2f7b2c72f70d0431e2d5f319b27a34c24dbcd55"
   },
-  "timeline_status": "on_track_for_September_15_external_pass_1_and_static_md_input_milestone"
+  "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending"
 }

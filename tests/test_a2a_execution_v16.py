@@ -1,3 +1,4 @@
+import hashlib
 import json
 import unittest
 from pathlib import Path
@@ -48,6 +49,51 @@ class A2AExecutionV16Tests(unittest.TestCase):
             self.assertTrue(system["finite_initial_energy"])
             self.assertFalse(system["tleap_severe_tokens"])
             self.assertTrue(system["geometry"]["passed"])
+
+    def test_relaxed_membrane_patch_is_finite_and_clash_free(self):
+        audit = self.load("outputs/v1.6/md/membrane_patch/patch_relaxation_audit.json")
+        self.assertEqual(audit["status"], "relaxed_membrane_patch_accepted")
+        self.assertTrue(audit["energy_decreased"])
+        self.assertEqual(audit["cross_residue_nonwater_all_atom_pair_count_below_1_angstrom"], 0)
+        self.assertEqual(audit["cross_residue_nonwater_heavy_pair_count_below_1_angstrom"], 0)
+
+    def test_periodic_tier_a_assemblies_pass_without_starting_trajectories(self):
+        audit = self.load("outputs/v1.6/md/tier_a_periodic_systems/periodic_assembly_audit.json")
+        self.assertEqual(audit["status"], "all_periodic_assembly_gates_passed")
+        self.assertEqual(audit["passed_count"], 2)
+        self.assertFalse(audit["trajectory_production_started"])
+        for system in audit["systems"]:
+            self.assertTrue(system["finite_initial_energy"])
+            self.assertEqual(system["severe_nonwater_heavy_clash_count_below_1_angstrom"], 0)
+            self.assertGreaterEqual(system["native_contact_count"], 70)
+            self.assertTrue(system["coordinate_export_ids_normalized"])
+
+    def test_tier_a_smoke_and_release_gates_pass_but_production_stays_locked(self):
+        smoke = self.load("outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json")
+        release = self.load("outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json")
+        self.assertEqual(smoke["status"], "all_tier_a_smoke_gates_passed")
+        self.assertEqual(smoke["passed_count"], 2)
+        self.assertFalse(smoke["trajectory_production_started"])
+        self.assertEqual(release["status"], "all_tier_a_release_bundles_accepted")
+        self.assertEqual(release["accepted_count"], 2)
+        for bundle in release["systems"]:
+            self.assertFalse(bundle["production_trajectory_started"])
+            self.assertEqual(bundle["status"], "accepted_for_staged_equilibration")
+            archive = ROOT / bundle["archive"]["path"]
+            self.assertTrue(archive.is_file())
+            self.assertEqual(hashlib.sha256(archive.read_bytes()).hexdigest(), bundle["archive"]["sha256"])
+
+    def test_equilibration_protocol_preserves_all_replicas_and_locks_tier_b(self):
+        config = self.load("config/tier_a_equilibration.v1.6.json")
+        self.assertEqual(len(config["systems"]), 2)
+        self.assertEqual(config["replica_seeds"], [20260914, 20260915, 20260916])
+        self.assertEqual(config["best_replica_selection"], "prohibited")
+        self.assertTrue(config["production_remains_locked_until_gate_report_passes"])
+        self.assertTrue(config["tier_b_remains_locked_until_tier_a_production_passes"])
+        gate = self.load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
+        self.assertEqual(gate["status"], "tier_a_equilibration_gate_locked")
+        self.assertFalse(gate["tier_a_production_unlocked"])
+        self.assertFalse(gate["tier_b_unlocked"])
 
 
 if __name__ == "__main__":

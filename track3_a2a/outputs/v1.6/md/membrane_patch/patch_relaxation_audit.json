@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T14:10:04.363382+00:00",
+  "specification_id": "a2a-amber-lipid21-patch-relaxation-v1.6",
+  "status": "relaxed_membrane_patch_accepted",
+  "force_field_files": [
+    "amber19/lipid21.xml",
+    "amber14/tip3p.xml"
+  ],
+  "restraint_k_kj_mol_nm2": 1000.0,
+  "restrained_lipid_heavy_atom_count": 5536,
+  "maximum_minimizer_iterations": 200,
+  "initial_potential_energy_kj_mol": 2799241785806591.5,
+  "final_potential_energy_kj_mol": -247559.79709462947,
+  "energy_decreased": true,
+  "minimum_cross_residue_nonwater_all_atom_distance_angstrom": 1.553283003794488,
+  "cross_residue_nonwater_all_atom_pair_count_below_1_angstrom": 0,
+  "minimum_cross_residue_nonwater_heavy_distance_angstrom": 2.3007412939331093,
+  "cross_residue_nonwater_heavy_pair_count_below_1_angstrom": 0,
+  "trajectory_production_started": false,
+  "files": {
+    "source": {
+      "path": "outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch.cif",
+      "sha256": "494708c3669b25dc0a04d8a49994fdf0471f5d37029461398006209c0caee844"
+    },
+    "cif": {
+      "path": "outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch_relaxed.cif",
+      "sha256": "72dd3c59fa6e451bb03bdbbb5148fd7187e0d2cba4afccbf3dfc7e8f3536e57d"
+    },
+    "pdb": {
+      "path": "outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch_relaxed.pdb",
+      "sha256": "2fb2f63358a3bb6d4adb09f5007e06230fd04ef5dde61ada5db3423b4875edca"
+    }
+  }
+}

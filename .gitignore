@@ -34,3 +34,13 @@ track3_a2a/outputs/v1.6/md/ligand_bundles/*/sqm.pdb
 track3_a2a/outputs/v1.6/external_evidence/pubmed_batch_*.xml
 track3_a2a/outputs/v1.6/external_evidence/pubmed_evidence.json
 track3_a2a/outputs/v1.6/external_evidence/pmc_fulltext_evidence.json
+
+# Regenerable full Tier A periodic systems and smoke states are too large for
+# ordinary GitHub source control. Compact signed release bundles are versioned.
+track3_a2a/outputs/v1.6/md/tier_a_periodic_systems/*/system.xml
+track3_a2a/outputs/v1.6/md/tier_a_periodic_systems/*/topology.cif
+track3_a2a/outputs/v1.6/md/tier_a_periodic_systems/*/positions.pdb
+track3_a2a/outputs/v1.6/md/tier_a_smoke_tests/*/smoke_system.xml
+track3_a2a/outputs/v1.6/md/tier_a_smoke_tests/*/smoke_final_state.xml
+track3_a2a/outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch_relaxed.cif
+track3_a2a/outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch_relaxed.pdb

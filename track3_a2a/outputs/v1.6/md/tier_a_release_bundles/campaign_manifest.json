@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T14:26:11.625532+00:00",
+  "specification_id": "a2a-tier-a-release-campaign-v1.6",
+  "systems": [
+    {
+      "schema_version": 1,
+      "specification_id": "a2a-tier-a-release-bundle-v1.6",
+      "system_id": "5NM4_ZMA_native",
+      "status": "accepted_for_staged_equilibration",
+      "candidate_labels_loaded": false,
+      "production_trajectory_started": false,
+      "members_sha256": {
+        "system.xml": "0597ca9b9f6162305a5f8394602c166fd5bce3cd7a3fd385cfa3ed1e8fd5af63",
+        "positions.pdb": "43f56868419e12dbe658722212510ef2eb18d8bdf37d3e251d4e1314d9b679c4",
+        "native_contacts.json": "7acc5bc4118fae2a6915b3f1a0cbd3b64b8f22c180891d05dd23ce5454b233e0",
+        "assembly_audit.json": "bcb48e3cf669946fdf0faa755d92c390f4c0be736ab6ed634772f0432668eaec",
+        "smoke_final_state.xml": "ed0873e5b223d14e9987fb250865a80d9b9dac41ca72ad2bb28e7cb425e10474",
+        "smoke_audit.json": "3c055165ef6aae83d86d99e74d7c7320c1743e47b2ba55e2304e7c1fb9ecc91d"
+      },
+      "archive": {
+        "path": "outputs/v1.6/md/tier_a_release_bundles/5NM4_ZMA_native.tar.gz",
+        "size_bytes": 6407212,
+        "sha256": "2b57b33323c4f2b62c97dc152b8982d2f4ddc01b9fc7fb88ae0fc5b3e3aa7171"
+      }
+    },
+    {
+      "schema_version": 1,
+      "specification_id": "a2a-tier-a-release-bundle-v1.6",
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "status": "accepted_for_staged_equilibration",
+      "candidate_labels_loaded": false,
+      "production_trajectory_started": false,
+      "members_sha256": {
+        "system.xml": "9670122c0574526e63eeaf8a0c2ce83bddbcee244c84f03c7fd49d2b2fdd6691",
+        "positions.pdb": "2b2ad9f683bdeeea4a25ede05a7ea4a7bfd49fc52d9bc4128a088aaf1bbcb0af",
+        "native_contacts.json": "8f59d01f83ec3377701ebd4e0636ccc78c40557b0212afe5f5a140be4c738220",
+        "assembly_audit.json": "b685dc89147b5958b68268e5440e96ce254278be28ae5388de46c8a0555d619a",
+        "smoke_final_state.xml": "ece30bdca638dff25b1e8bacb48e10fe0b4464412bcaac7a389f653c55cdd995",
+        "smoke_audit.json": "8c726cb4c9a7b1171a30d4140033eb30c9d4760923318d29286e14b6191c5209"
+      },
+      "archive": {
+        "path": "outputs/v1.6/md/tier_a_release_bundles/5G53_NECA_miniGs_native_nucleotide_free.tar.gz",
+        "size_bytes": 14914965,
+        "sha256": "60aa39d0b5fa7f66a79f2a62a9d47b1cdc8f4a7263157834c52c27ed785f523d"
+      }
+    }
+  ],
+  "accepted_count": 2,
+  "status": "all_tier_a_release_bundles_accepted",
+  "claim_limit": "Bundles are accepted for staged equilibration only; Tier A production and Tier B remain locked."
+}

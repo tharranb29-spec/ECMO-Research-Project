@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T14:33:15.447725+00:00",
+  "specification_id": "a2a-tier-a-equilibration-gate-v1.6",
+  "config_sha256": "8e5526354250e37884728a3110f765ef34189fb646d0b0f18fbd79380fd777ba",
+  "expected_run_count": 6,
+  "observed_run_count": 0,
+  "passed_run_count": 0,
+  "missing_audits": [
+    "5NM4_ZMA_native/seed-20260914/equilibration_audit.json",
+    "5NM4_ZMA_native/seed-20260915/equilibration_audit.json",
+    "5NM4_ZMA_native/seed-20260916/equilibration_audit.json",
+    "5G53_NECA_miniGs_native_nucleotide_free/seed-20260914/equilibration_audit.json",
+    "5G53_NECA_miniGs_native_nucleotide_free/seed-20260915/equilibration_audit.json",
+    "5G53_NECA_miniGs_native_nucleotide_free/seed-20260916/equilibration_audit.json"
+  ],
+  "runs": [],
+  "status": "tier_a_equilibration_gate_locked",
+  "tier_a_production_unlocked": false,
+  "tier_b_unlocked": false,
+  "best_replica_selection": "prohibited",
+  "claim_limit": "This gate authorizes Tier A pilot production; it does not establish control stability or unlock Tier B."
+}

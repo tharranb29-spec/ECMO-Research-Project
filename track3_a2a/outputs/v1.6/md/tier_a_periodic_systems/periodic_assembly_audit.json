@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T14:20:52.560103+00:00",
+  "specification_id": "a2a-tier-a-periodic-system-assembly-v1.6",
+  "candidate_labels_loaded": false,
+  "trajectory_production_started": false,
+  "systems": [
+    {
+      "system_id": "5NM4_ZMA_native",
+      "status": "periodic_assembly_gate_passed",
+      "orientation": {
+        "method": "largest principal axis of declared seven-TM CA coordinates",
+        "tm_ca_count": 203,
+        "extracellular_sign_rule": "N-terminal CA centroid mapped toward positive z",
+        "source_axis": [
+          0.12670818718415694,
+          0.9916336397368721,
+          -0.024652785698747477
+        ],
+        "state_alignment_rmsd_nm": 0.0
+      },
+      "force_field_files": [
+        "amber19/protein.ff19SB.xml",
+        "amber19/lipid21.xml",
+        "amber14/tip3p.xml"
+      ],
+      "particle_count": 81447,
+      "residue_counts": {
+        "ALA": 31,
+        "ARG": 14,
+        "ASN": 14,
+        "ASP": 4,
+        "CHL1": 70,
+        "CL": 55,
+        "CYS": 14,
+        "GLN": 10,
+        "GLU": 8,
+        "GLY": 18,
+        "HIS": 6,
+        "HOH": 16809,
+        "ILE": 29,
+        "LEU": 38,
+        "LYS": 7,
+        "MET": 7,
+        "NA": 46,
+        "PHE": 19,
+        "POP": 156,
+        "PRO": 13,
+        "SER": 16,
+        "THR": 12,
+        "TRP": 6,
+        "TYR": 10,
+        "VAL": 27,
+        "ZMA": 1
+      },
+      "cholesterol_mole_fraction": 0.30973451327433627,
+      "removed_ligand_overlap_residues": {},
+      "initial_potential_energy_kj_mol": -755579.8745128815,
+      "finite_initial_energy": true,
+      "native_contact_count": 75,
+      "severe_nonwater_heavy_clash_count_below_1_angstrom": 0,
+      "severe_nonwater_heavy_clashes_below_1_angstrom": [],
+      "trajectory_production_started": false,
+      "files": {
+        "system.xml": "0597ca9b9f6162305a5f8394602c166fd5bce3cd7a3fd385cfa3ed1e8fd5af63",
+        "topology.cif": "65ce4f1dd1f4e23e00711fe0633e4c4024ec15baaedd49248fda4510cf0da18f",
+        "positions.pdb": "43f56868419e12dbe658722212510ef2eb18d8bdf37d3e251d4e1314d9b679c4",
+        "native_contacts.json": "7acc5bc4118fae2a6915b3f1a0cbd3b64b8f22c180891d05dd23ce5454b233e0"
+      },
+      "coordinate_export_ids_normalized": true
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "status": "periodic_assembly_gate_passed",
+      "orientation": {
+        "method": "largest principal axis of declared seven-TM CA coordinates",
+        "tm_ca_count": 203,
+        "extracellular_sign_rule": "N-terminal CA centroid mapped toward positive z",
+        "source_axis": [
+          0.12670818718415694,
+          0.9916336397368721,
+          -0.024652785698747477
+        ],
+        "state_alignment_ca_count": 203,
+        "state_alignment_rmsd_nm": 0.21482729478270768
+      },
+      "force_field_files": [
+        "amber19/protein.ff19SB.xml",
+        "amber19/lipid21.xml",
+        "amber14/tip3p.xml"
+      ],
+      "particle_count": 210308,
+      "residue_counts": {
+        "ALA": 43,
+        "ARG": 33,
+        "ASN": 24,
+        "ASP": 21,
+        "CHL1": 148,
+        "CL": 144,
+        "CYS": 18,
+        "GLN": 18,
+        "GLU": 20,
+        "GLY": 32,
+        "HIS": 12,
+        "HOH": 49232,
+        "ILE": 43,
+        "LEU": 53,
+        "LYS": 18,
+        "MET": 9,
+        "NA": 134,
+        "NEC": 1,
+        "PHE": 33,
+        "POP": 322,
+        "PRO": 18,
+        "SER": 29,
+        "THR": 25,
+        "TRP": 9,
+        "TYR": 18,
+        "VAL": 38
+      },
+      "cholesterol_mole_fraction": 0.3148936170212766,
+      "removed_ligand_overlap_residues": {},
+      "initial_potential_energy_kj_mol": -1877464.9487592573,
+      "finite_initial_energy": true,
+      "native_contact_count": 74,
+      "severe_nonwater_heavy_clash_count_below_1_angstrom": 0,
+      "severe_nonwater_heavy_clashes_below_1_angstrom": [],
+      "trajectory_production_started": false,
+      "files": {
+        "system.xml": "9670122c0574526e63eeaf8a0c2ce83bddbcee244c84f03c7fd49d2b2fdd6691",
+        "topology.cif": "e455f3beb9c4cdeca8d58fe4c140b3afb50a716299166d7fbd455ed8815f70f7",
+        "positions.pdb": "2b2ad9f683bdeeea4a25ede05a7ea4a7bfd49fc52d9bc4128a088aaf1bbcb0af",
+        "native_contacts.json": "8f59d01f83ec3377701ebd4e0636ccc78c40557b0212afe5f5a140be4c738220"
+      },
+      "coordinate_export_ids_normalized": true
+    }
+  ],
+  "passed_count": 2,
+  "status": "all_periodic_assembly_gates_passed",
+  "next_gate": "Run restrained minimization, staged NVT, and semi-isotropic NPT smoke tests; Tier A production remains locked.",
+  "runner_sha256": "b890e1b7f89c4cc7a0177c3e6c8d7249d4b1c446d4bca72646019a92229fffa7"
+}

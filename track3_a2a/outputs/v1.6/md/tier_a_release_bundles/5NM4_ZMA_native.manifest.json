@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-tier-a-release-bundle-v1.6",
+  "system_id": "5NM4_ZMA_native",
+  "status": "accepted_for_staged_equilibration",
+  "candidate_labels_loaded": false,
+  "production_trajectory_started": false,
+  "members_sha256": {
+    "system.xml": "0597ca9b9f6162305a5f8394602c166fd5bce3cd7a3fd385cfa3ed1e8fd5af63",
+    "positions.pdb": "43f56868419e12dbe658722212510ef2eb18d8bdf37d3e251d4e1314d9b679c4",
+    "native_contacts.json": "7acc5bc4118fae2a6915b3f1a0cbd3b64b8f22c180891d05dd23ce5454b233e0",
+    "assembly_audit.json": "bcb48e3cf669946fdf0faa755d92c390f4c0be736ab6ed634772f0432668eaec",
+    "smoke_final_state.xml": "ed0873e5b223d14e9987fb250865a80d9b9dac41ca72ad2bb28e7cb425e10474",
+    "smoke_audit.json": "3c055165ef6aae83d86d99e74d7c7320c1743e47b2ba55e2304e7c1fb9ecc91d"
+  },
+  "archive": {
+    "path": "outputs/v1.6/md/tier_a_release_bundles/5NM4_ZMA_native.tar.gz",
+    "size_bytes": 6407212,
+    "sha256": "2b57b33323c4f2b62c97dc152b8982d2f4ddc01b9fc7fb88ae0fc5b3e3aa7171"
+  }
+}
