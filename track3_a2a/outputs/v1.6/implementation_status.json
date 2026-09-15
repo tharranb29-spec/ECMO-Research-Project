@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-15T16:23:49.825044+00:00",
+  "created_at_utc": "2026-09-15T16:47:56.546855+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -62,6 +62,8 @@
       "minimization_nvt_npt_smoke_systems_passed": 2,
       "github_safe_release_bundles_passed": 2,
       "tier_a_unlocked_for_staged_equilibration": true,
+      "cuda_numerical_preflight_status": "cuda_periodic_restraint_preflight_passed",
+      "cuda_numerical_preflight_steps": 10000,
       "staged_equilibration_gate_status": "tier_a_equilibration_gate_locked",
       "staged_equilibration_runs_passed": 0,
       "staged_equilibration_runs_required": 6,
@@ -91,6 +93,7 @@
     "outputs/v1.6/md/tier_a_periodic_systems/periodic_assembly_audit.json": "34ad18db1dd6e66dd75d9e6a38c1a7e721df17b5ef8c1f94881c36de6d681770",
     "outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json": "e96af587cf5a349ec8841ca47d394e447242434e057a9ab00cce67217169df16",
     "outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json": "3e78a753c36e4a596714e0b25962c10a564e55149431034f38fb78e8d88ff120",
+    "outputs/v1.6/md/tier_a_equilibration/cuda_periodic_restraint_validation.json": "cac925c4ea121fdceb835aec55cbfaa9bb1bc2267e5e08241ebc4566e6992ef4",
     "config/tier_a_equilibration.v1.6.4.json": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
     "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "89c0379a84538ebcfd72f1dc15dbbfdca3f74d1eb7971feec00afc0e74712621"
   },

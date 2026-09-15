@@ -39,6 +39,7 @@ def main() -> None:
     smoke, smoke_path = load("outputs/v1.6/md/tier_a_smoke_tests/smoke_campaign_audit.json")
     releases, releases_path = load("outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json")
     equilibration_gate, equilibration_gate_path = load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
+    cuda_validation, cuda_validation_path = load("outputs/v1.6/md/tier_a_equilibration/cuda_periodic_restraint_validation.json")
     equilibration_config_path = ROOT / "config" / "tier_a_equilibration.v1.6.4.json"
     metrics = model["result"]["metrics"]
     payload = {
@@ -93,6 +94,8 @@ def main() -> None:
                 "minimization_nvt_npt_smoke_systems_passed": smoke["passed_count"],
                 "github_safe_release_bundles_passed": releases["accepted_count"],
                 "tier_a_unlocked_for_staged_equilibration": True,
+                "cuda_numerical_preflight_status": cuda_validation["status"],
+                "cuda_numerical_preflight_steps": cuda_validation["completed_diagnostic_steps"],
                 "staged_equilibration_gate_status": equilibration_gate["status"],
                 "staged_equilibration_runs_passed": equilibration_gate["passed_run_count"],
                 "staged_equilibration_runs_required": equilibration_gate["expected_run_count"],
@@ -112,7 +115,7 @@ def main() -> None:
                 freeze_path, model_path, ligand_path, pubmed_path, pmc_path, pass1_path,
                 constructs_path, minimized_path, native_poses_path, membrane_path,
                 membrane_relaxation_path, complexes_path, periodic_path, smoke_path,
-                releases_path, equilibration_config_path, equilibration_gate_path,
+                releases_path, cuda_validation_path, equilibration_config_path, equilibration_gate_path,
             ]
         },
         "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending",

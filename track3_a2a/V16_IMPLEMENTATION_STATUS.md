@@ -59,6 +59,8 @@ The first v1.6.1 CUDA retry still failed on the first NVT integration chunk. A s
 
 The v1.6.2 pre-integration CUDA audit then showed that reference and particle coordinates already agreed within `1.5e-6 nm`, and constraint projection moved them by only `1.2e-6 nm`, yet the restraint term remained `3.736e8 kJ/mol`. Version 1.6.3 tested explicit scalar `x0`, `y0`, and `z0` parameters, but the corrected-only CUDA probe reproduced the same energy and failed at step 208. That falsified the parameter-container hypothesis. The remaining defect was use of an ordinary Cartesian displacement in a periodic system: CUDA could evaluate a wrapped internal coordinate image even though retrieved coordinates matched the references. Version 1.6.4 replaces that displacement with OpenMM `periodicdistance`, preserving all systems, parameters, stages, durations, timesteps, seeds, contacts, and gates. All failed diagnostic/equilibration attempts remain recorded and excluded.
 
+The v1.6.4 corrected-only mixed-precision CUDA validation passed 10,000 steps. Restraint energy fell from `3.736e8` to `2.50e-9 kJ/mol`, initial potential energy was `-817033.3 kJ/mol`, and no duplicate constraints or non-finite states were detected. This passes the numerical preflight and authorizes the first full staged-equilibration job only; it is not an accepted equilibration result, production remains locked, and Tier B remains locked.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.
