@@ -28,6 +28,12 @@ def main() -> None:
     ligands, ligand_path = load("outputs/v1.6/md/ligand_bundles/campaign_manifest.json")
     pubmed, pubmed_path = load("outputs/v1.6/external_evidence/pubmed_retrieval_audit.json")
     pmc, pmc_path = load("outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json")
+    pass1, pass1_path = load("outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json")
+    constructs, constructs_path = load("outputs/v1.6/md/tier_a_constructs/construct_audit.json")
+    minimized, minimized_path = load("outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json")
+    native_poses, native_poses_path = load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
+    membrane, membrane_path = load("outputs/v1.6/md/membrane_patch/patch_audit.json")
+    complexes, complexes_path = load("outputs/v1.6/md/tier_a_complex_preflight/complex_preflight_audit.json")
     metrics = model["result"]["metrics"]
     payload = {
         "schema_version": 1,
@@ -51,25 +57,34 @@ def main() -> None:
                 },
             },
             "B_external_confirmation": {
-                "status": "evidence_retrieval_in_progress_membership_not_frozen",
+                "status": "pass_1_complete_pass_2_pending_membership_not_frozen",
                 "queue_candidates": 240,
                 "pubmed_requested": pubmed["requested_pmid_count"],
                 "pubmed_retrieved": pubmed["retrieved_article_count"],
                 "pmc_requested": pmc["requested_pmcid_count"],
                 "pmc_fulltext_retrieved": pmc["retrieved_fulltext_count"],
                 "pmc_fulltext_unavailable": pmc["failed_fulltext_count"],
-                "next_gate": "deterministic source triage plus independent source-grounded extraction; freeze membership only after agreement",
+                "pass_1_status_counts": pass1["status_counts"],
+                "pass_2_required_candidates": pass1["pass_2_required_count"],
+                "external_cohort_admitted": pass1["external_cohort_admitted_count"],
+                "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement",
             },
             "C_open_md": {
-                "status": "ligand_gate_passed_construct_gate_pending",
+                "status": "static_input_gates_passed_final_periodic_systems_pending",
                 "ambertools_image": ligands["image"],
                 "ambertools_image_id": ligands["image_id"],
                 "accepted_ligand_bundles": ligands["accepted_count"],
                 "required_ligand_bundles": 6,
                 "gdp_policy": "nucleotide-free selected 5G53 B/D mini-Gs control",
+                "initial_construct_candidates_geometry_passed": constructs["geometry_pass_count"],
+                "pre_membrane_minimized_constructs_passed": minimized["passed_count"],
+                "native_control_pose_mappings_passed": native_poses["accepted_count"],
+                "unsolvated_tier_a_complex_preflights_passed": complexes["accepted_count"],
+                "mixed_membrane_patch_status": membrane["status"],
+                "mixed_membrane_cholesterol_fraction": membrane["cholesterol_mole_fraction"],
                 "tier_a_unlocked_for_trajectory": False,
                 "tier_b_unlocked": False,
-                "next_gate": "complete and audit two Tier A receptor constructs, membranes, native contacts, and local minimization/NVT/NPT smoke tests",
+                "next_gate": "build both complete periodic Tier A bundles, freeze native contacts, and pass final minimization/NVT/NPT smoke tests",
             },
             "D_dashboard": {
                 "status": "scheduled_to_start_2026-09-16",
@@ -79,9 +94,13 @@ def main() -> None:
         },
         "artifact_hashes": {
             str(path.relative_to(ROOT)): sha256(path)
-            for path in [freeze_path, model_path, ligand_path, pubmed_path, pmc_path]
+            for path in [
+                freeze_path, model_path, ligand_path, pubmed_path, pmc_path, pass1_path,
+                constructs_path, minimized_path, native_poses_path, membrane_path,
+                complexes_path,
+            ]
         },
-        "timeline_status": "on_track_for_September_14_protocol_and_open_parameterization_milestone",
+        "timeline_status": "on_track_for_September_15_external_pass_1_and_static_md_input_milestone",
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, indent=2) + "\n")

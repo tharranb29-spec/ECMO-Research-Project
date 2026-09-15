@@ -12,3 +12,10 @@ track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.inpcrd whitespace=-trailing-space
 track3_a2a/outputs/v1.6/md/ligand_bundles/**/*.log whitespace=-trailing-space
 track3_a2a/outputs/v1.6/md/ligand_bundles/**/sqm.in whitespace=-trailing-space
 track3_a2a/outputs/v1.6/md/ligand_bundles/**/sqm.out whitespace=-trailing-space
+
+# Tier A tleap preflight outputs use the same Amber fixed-width formats.
+track3_a2a/outputs/v1.6/md/tier_a_complex_preflight/**/*.prmtop whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/tier_a_complex_preflight/**/*.inpcrd whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/tier_a_complex_preflight/**/*.mol2 whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/tier_a_complex_preflight/**/*.frcmod whitespace=-trailing-space
+track3_a2a/outputs/v1.6/md/tier_a_complex_preflight/**/*.log whitespace=-trailing-space

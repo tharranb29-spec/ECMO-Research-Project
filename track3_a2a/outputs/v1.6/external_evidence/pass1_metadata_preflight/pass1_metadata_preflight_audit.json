@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T09:26:49.918063+00:00",
+  "specification_id": "a2a-external-computational-evidence-pass1-v1.6",
+  "source_hashes": {
+    "source_queue": "8cab350b416df7a19723f19d537963736ba3cb4801dfad78447abe769726e9fa",
+    "pubmed_snapshot": "cd1f15694f737f23f7b63cf0c53eab8735734e541e76ac3c542cffe10fd437f8",
+    "pmc_snapshot": "d5782122fe6b0d24f9126b286c56f6b2edc615584c2e0aeee5022eea5f11a3e5"
+  },
+  "artifact_hashes": {
+    "preflight_packet": "cd979f3207832eece12d78cc074c45a94b869c502294d8c0df1b722196a0aa24",
+    "pass2_queue": "766cd5da5c2112206490c3c8c0bb1be5c08e6dd65ffa7d5090dfe278bc3719bd"
+  },
+  "candidate_count": 240,
+  "status_counts": {
+    "metadata_pass_doi_only_needs_source_retrieval": 1,
+    "metadata_pass_fulltext_ready": 24,
+    "metadata_pass_needs_fulltext": 131,
+    "metadata_pass_requires_endpoint_resolution": 31,
+    "quarantine_nonprimary_source": 7,
+    "quarantine_target_not_supported": 46
+  },
+  "pass_2_required_count": 187,
+  "fulltext_available_candidate_count": 29,
+  "external_cohort_admitted_count": 0,
+  "outcome_fields_loaded": false,
+  "human_validation_claimed": false,
+  "next_gate": "Run an independently configured, source-grounded pass-2 extractor and require exact agreement on every frozen field before membership freeze."
+}

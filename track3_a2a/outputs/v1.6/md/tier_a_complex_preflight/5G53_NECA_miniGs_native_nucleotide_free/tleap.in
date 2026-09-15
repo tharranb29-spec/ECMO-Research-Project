@@ -1,0 +1,10 @@
+source leaprc.protein.ff19SB
+source leaprc.gaff2
+loadAmberParams ligand.frcmod
+LIG = loadMol2 ligand_native_pose.mol2
+REC = loadPdb protein.pdb
+COM = combine {REC LIG}
+check COM
+saveAmberParm COM complex.prmtop complex.inpcrd
+savePdb COM complex.pdb
+quit

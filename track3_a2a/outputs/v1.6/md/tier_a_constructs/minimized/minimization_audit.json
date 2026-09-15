@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T09:55:54.332771+00:00",
+  "specification_id": "a2a-md-tier-a-construct-minimization-v1.6",
+  "purpose": "pre-membrane computational relaxation; not production dynamics",
+  "candidate_labels_loaded": false,
+  "trajectory_production_started": false,
+  "systems": [
+    {
+      "system_id": "5NM4_ZMA_native",
+      "source": "outputs/v1.6/md/tier_a_constructs/5NM4_ADORA2A_complete_candidate.pdb",
+      "source_sha256": "91cdb953ad58e462d88a046a0e91d064342a8d79d4befd6ede7d504ac855d7bc",
+      "output": "outputs/v1.6/md/tier_a_constructs/minimized/5NM4_ADORA2A_minimized_candidate.pdb",
+      "output_sha256": "fc1f3a2d8fa6bcf52dfc61248ba19ff68baa35627d4f05cf28e27d2e2559d8bc",
+      "force_field_files": [
+        "amber19-all.xml",
+        "implicit/obc2.xml"
+      ],
+      "solvent_model": "OBC2 implicit solvent for pre-membrane clash relaxation only",
+      "restraint_k_kj_mol_nm2": 1000.0,
+      "maximum_minimizer_iterations": 1000,
+      "restrained_backbone_heavy_atom_count": 1212,
+      "initial_potential_energy_kj_mol": 10061213.845318079,
+      "final_potential_energy_kj_mol": -40061.607087897544,
+      "energy_decreased": true,
+      "maximum_atom_displacement_angstrom": 4.470261690164564,
+      "median_atom_displacement_angstrom": 0.3027294531124083,
+      "geometry_reaudit": {
+        "system_id": "5NM4_ZMA_native",
+        "protein_atom_count": 4795,
+        "protein_residue_count": 303,
+        "observed_residue_ranges": {
+          "A": [
+            2,
+            304
+          ]
+        },
+        "expected_residue_sets_passed": true,
+        "back_mutation_names_passed": true,
+        "peptide_bond_count_audited": 302,
+        "peptide_distance_range_angstrom": [
+          1.327238109760267,
+          1.3549719554293373
+        ],
+        "continuity_failures": [],
+        "closest_nonlocal_heavy_atom_pair": {
+          "left": "A:ILE274:O",
+          "right": "A:SER277:OG",
+          "distance_angstrom": 2.636423
+        },
+        "severe_nonlocal_clashes_below_1_5_angstrom": [],
+        "geometry_gate_passed": true,
+        "status": "construct_candidate_geometry_passed"
+      },
+      "status": "minimized_construct_gate_passed"
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "source": "outputs/v1.6/md/tier_a_constructs/5G53_ADORA2A_miniGs_nucleotide_free_complete_candidate.pdb",
+      "source_sha256": "dec5bc7b0df54589492e8c432aabf2d42c9accd74dc9723f659ab1af46d35a63",
+      "output": "outputs/v1.6/md/tier_a_constructs/minimized/5G53_ADORA2A_miniGs_nucleotide_free_minimized_candidate.pdb",
+      "output_sha256": "641ebd38b6a8e1ede9b8d9ed5c2a5e2254e7e59fe8df30bdb18c81fa37fe3a83",
+      "force_field_files": [
+        "amber19-all.xml",
+        "implicit/obc2.xml"
+      ],
+      "solvent_model": "OBC2 implicit solvent for pre-membrane clash relaxation only",
+      "restraint_k_kj_mol_nm2": 1000.0,
+      "maximum_minimizer_iterations": 30,
+      "restrained_backbone_heavy_atom_count": 2056,
+      "initial_potential_energy_kj_mol": 1243023.416091356,
+      "final_potential_energy_kj_mol": 9972.481029210747,
+      "energy_decreased": true,
+      "maximum_atom_displacement_angstrom": 1.7021266065726164,
+      "median_atom_displacement_angstrom": 0.08478754202484454,
+      "geometry_reaudit": {
+        "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+        "protein_atom_count": 8196,
+        "protein_residue_count": 514,
+        "observed_residue_ranges": {
+          "B": [
+            6,
+            305
+          ],
+          "D": [
+            39,
+            393
+          ]
+        },
+        "expected_residue_sets_passed": true,
+        "back_mutation_names_passed": true,
+        "peptide_bond_count_audited": 510,
+        "peptide_distance_range_angstrom": [
+          1.2003920193003628,
+          1.4659365607010353
+        ],
+        "continuity_failures": [],
+        "closest_nonlocal_heavy_atom_pair": {
+          "left": "D:ASN254:O",
+          "right": "D:ARG265:N",
+          "distance_angstrom": 2.268695
+        },
+        "severe_nonlocal_clashes_below_1_5_angstrom": [],
+        "geometry_gate_passed": true,
+        "status": "construct_candidate_geometry_passed"
+      },
+      "status": "minimized_construct_gate_passed"
+    }
+  ],
+  "passed_count": 2,
+  "status": "minimized_construct_gate_passed",
+  "next_gate": "Map native ligands, build explicit membrane systems, and rerun energy/geometry audits in the final periodic environment.",
+  "runner_sha256": "df29b43bb5cc236f5560179530e624a74a4848277df6cdf9f10c7babc277babf"
+}

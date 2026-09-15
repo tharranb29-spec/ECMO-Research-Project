@@ -1,0 +1,300 @@
+COMMAND: tleap -f tleap.in
+
+-I: Adding /opt/conda/dat/leap/prep to search path.
+-I: Adding /opt/conda/dat/leap/lib to search path.
+-I: Adding /opt/conda/dat/leap/parm to search path.
+-I: Adding /opt/conda/dat/leap/cmd to search path.
+-f: Source tleap.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap.in
+----- Source: /opt/conda/dat/leap/cmd/leaprc.protein.ff19SB
+----- Source of /opt/conda/dat/leap/cmd/leaprc.protein.ff19SB done
+Log file: ./leap.log
+Loading parameters: /opt/conda/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+Loading parameters: /opt/conda/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+Loading library: /opt/conda/dat/leap/lib/amino19.lib
+Loading library: /opt/conda/dat/leap/lib/aminoct12.lib
+Loading library: /opt/conda/dat/leap/lib/aminont12.lib
+----- Source: /opt/conda/dat/leap/cmd/leaprc.gaff2
+----- Source of /opt/conda/dat/leap/cmd/leaprc.gaff2 done
+Log file: ./leap.log
+Loading parameters: /opt/conda/dat/leap/parm/gaff2.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 2.2.20, March 2021)
+Loading parameters: ./ligand.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading Mol2 file: ./ligand_native_pose.mol2
+Reading MOLECULE named NEC
+Loading PDB file: ./protein.pdb
+  total atoms in file: 8194
+  Leap added 2 missing atoms according to residue templates:
+       2 H / lone pairs
+Checking 'COM'....
+
+/opt/conda/bin/teLeap: Warning!
+The unperturbed charge of the unit (10.001000) is not zero.
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.347 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<GLN 516>.A<HG2 9> and .R<GLN 516>.A<HG3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.452 angstroms between nonbonded atoms HE21 and HE22
+-------  .R<GLN 516>.A<HE21 14> and .R<GLN 516>.A<HE22 15>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.192 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<TYR 484>.A<HB2 6> and .R<TYR 484>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.368 angstroms between nonbonded atoms HA2 and HA3
+-------  .R<GLY 481>.A<HA2 4> and .R<GLY 481>.A<HA3 5>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.418 angstroms between nonbonded atoms HG22 and HG23
+-------  .R<ILE 467>.A<HG22 9> and .R<ILE 467>.A<HG23 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.499 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<TYR 465>.A<HB2 6> and .R<TYR 465>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.239 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<PRO 452>.A<HG2 6> and .R<PRO 452>.A<HG3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.450 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<TYR 437>.A<HB2 6> and .R<TYR 437>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.276 angstroms between nonbonded atoms HD2 and HD3
+-------  .R<ARG 409>.A<HD2 12> and .R<ARG 409>.A<HD3 13>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.309 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<PHE 382>.A<HB2 6> and .R<PHE 382>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.493 angstroms between nonbonded atoms H and O
+-------  .R<TRP 370>.A<H 2> and .R<LYS 369>.A<O 22>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.496 angstroms between nonbonded atoms N and O
+-------  .R<ARG 368>.A<N 1> and .R<ARG 367>.A<O 24>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.328 angstroms between nonbonded atoms N and O
+-------  .R<GLU 366>.A<N 1> and .R<ASP 365>.A<O 12>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.413 angstroms between nonbonded atoms H and O
+-------  .R<GLU 366>.A<H 2> and .R<ASP 365>.A<O 12>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.300 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<GLU 345>.A<HB2 6> and .R<GLU 345>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.403 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<SER 341>.A<HB2 6> and .R<SER 341>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.299 angstroms between nonbonded atoms N and O
+-------  .R<GLY 338>.A<N 1> and .R<SER 337>.A<O 11>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.435 angstroms between nonbonded atoms H and O
+-------  .R<GLY 338>.A<H 2> and .R<SER 337>.A<O 11>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.426 angstroms between nonbonded atoms N and O
+-------  .R<GLY 333>.A<N 1> and .R<GLY 332>.A<O 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.498 angstroms between nonbonded atoms N and O
+-------  .R<GLY 332>.A<N 1> and .R<HID 331>.A<O 17>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.348 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<HID 331>.A<HB2 6> and .R<HID 331>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.320 angstroms between nonbonded atoms N and O
+-------  .R<TYR 330>.A<N 1> and .R<ILE 329>.A<O 19>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.380 angstroms between nonbonded atoms H and O
+-------  .R<TYR 330>.A<H 2> and .R<ILE 329>.A<O 19>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 0.225 angstroms between nonbonded atoms H1 and H2
+-------  .R<NALA 306>.A<H1 2> and .R<NALA 306>.A<H2 3>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.264 angstroms between nonbonded atoms O and OXT
+-------  .R<CSER 305>.A<O 11> and .R<CSER 305>.A<OXT 12>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.388 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<LYS 301>.A<HB2 6> and .R<LYS 301>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.402 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<ARG 293>.A<HB2 6> and .R<ARG 293>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.488 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<PHE 286>.A<HB2 6> and .R<PHE 286>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.328 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<MET 270>.A<HB2 6> and .R<MET 270>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.488 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<MET 270>.A<HG2 9> and .R<MET 270>.A<HG3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.403 angstroms between nonbonded atoms H and C
+-------  .R<ARG 222>.A<H 2> and .R<ALA 221>.A<C 9>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.301 angstroms between nonbonded atoms N and O
+-------  .R<GLY 218>.A<N 1> and .R<PRO 217>.A<O 14>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.387 angstroms between nonbonded atoms H and O
+-------  .R<GLY 218>.A<H 2> and .R<PRO 217>.A<O 14>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.312 angstroms between nonbonded atoms N and O
+-------  .R<GLN 214>.A<N 1> and .R<SER 213>.A<O 11>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.495 angstroms between nonbonded atoms N and CB
+-------  .R<GLU 212>.A<N 1> and .R<GLU 212>.A<CB 5>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.123 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<GLU 212>.A<HB2 6> and .R<GLU 212>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.445 angstroms between nonbonded atoms N and O
+-------  .R<GLN 210>.A<N 1> and .R<LYS 209>.A<O 22>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.271 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<GLN 210>.A<HG2 9> and .R<GLN 210>.A<HG3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.383 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<LYS 209>.A<HG2 9> and .R<LYS 209>.A<HG3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.417 angstroms between nonbonded atoms N and HA
+-------  .R<LEU 208>.A<N 1> and .R<LEU 208>.A<HA 4>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.465 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<GLN 207>.A<HB2 6> and .R<GLN 207>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.237 angstroms between nonbonded atoms HA2 and HA3
+-------  .R<GLY 195>.A<HA2 4> and .R<GLY 195>.A<HA3 5>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.454 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<PRO 189>.A<HB2 9> and .R<PRO 189>.A<HB3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.303 angstroms between nonbonded atoms HD2 and HD3
+-------  .R<PRO 139>.A<HD2 3> and .R<PRO 139>.A<HD3 4>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.333 angstroms between nonbonded atoms HG2 and HG3
+-------  .R<LYS 122>.A<HG2 9> and .R<LYS 122>.A<HG3 10>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.303 angstroms between nonbonded atoms HG12 and HG13
+-------  .R<ILE 108>.A<HG12 12> and .R<ILE 108>.A<HG13 13>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.273 angstroms between nonbonded atoms HB2 and HB3
+-------  .R<PHE 70>.A<HB2 6> and .R<PHE 70>.A<HB3 7>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.396 angstroms between nonbonded atoms H5 and H1
+-------  .R<NEC 520>.A<H5 28> and .R<NEC 520>.A<H1 24>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 0.963 angstroms between nonbonded atoms H5 and C1
+-------  .R<NEC 520>.A<H5 28> and .R<NEC 520>.A<C1 4>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 0.962 angstroms between nonbonded atoms H1 and C2
+-------  .R<NEC 520>.A<H1 24> and .R<NEC 520>.A<C2 5>
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.446 angstroms between nonbonded atoms H and C
+-------  .R<NEC 520>.A<H 23> and .R<NEC 520>.A<C 1>
+Checking parameters for unit 'COM'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Warnings: 52
+Unit is OK.
+Checking Unit.
+
+/opt/conda/bin/teLeap: Warning!
+The unperturbed charge of the unit (10.001000) is not zero.
+
+/opt/conda/bin/teLeap: Note.
+Ignoring the warning from Unit Checking.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 1727 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	CLEU	1
+	CSER	1
+	NALA	1
+	NEC	1
+	NSER	1
+  )
+ (no restraints)
+Writing pdb file: complex.pdb
+
+/opt/conda/bin/teLeap: Warning!
+ Converting N-terminal residue name to PDB format: NSER -> SER
+
+/opt/conda/bin/teLeap: Warning!
+ Converting C-terminal residue name to PDB format: CSER -> SER
+
+/opt/conda/bin/teLeap: Warning!
+ Converting N-terminal residue name to PDB format: NALA -> ALA
+
+/opt/conda/bin/teLeap: Warning!
+ Converting C-terminal residue name to PDB format: CLEU -> LEU
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 57; Notes = 1.

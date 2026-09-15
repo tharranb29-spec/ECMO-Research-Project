@@ -1,0 +1,90 @@
+COMMAND: tleap -f tleap.in
+
+-I: Adding /opt/conda/dat/leap/prep to search path.
+-I: Adding /opt/conda/dat/leap/lib to search path.
+-I: Adding /opt/conda/dat/leap/parm to search path.
+-I: Adding /opt/conda/dat/leap/cmd to search path.
+-f: Source tleap.in.
+
+Welcome to LEaP!
+(no leaprc in search path)
+Sourcing: ./tleap.in
+----- Source: /opt/conda/dat/leap/cmd/leaprc.protein.ff19SB
+----- Source of /opt/conda/dat/leap/cmd/leaprc.protein.ff19SB done
+Log file: ./leap.log
+Loading parameters: /opt/conda/dat/leap/parm/parm19.dat
+Reading title:
+PARM99 + frcmod.ff99SB + frcmod.parmbsc0 + OL3 for RNA + ff19SB
+Loading parameters: /opt/conda/dat/leap/parm/frcmod.ff19SB
+Reading force field modification type file (frcmod)
+Reading title:
+ff19SB AA-specific backbone CMAPs for protein 07/25/2019
+Loading library: /opt/conda/dat/leap/lib/amino19.lib
+Loading library: /opt/conda/dat/leap/lib/aminoct12.lib
+Loading library: /opt/conda/dat/leap/lib/aminont12.lib
+----- Source: /opt/conda/dat/leap/cmd/leaprc.gaff2
+----- Source of /opt/conda/dat/leap/cmd/leaprc.gaff2 done
+Log file: ./leap.log
+Loading parameters: /opt/conda/dat/leap/parm/gaff2.dat
+Reading title:
+AMBER General Force Field for organic molecules (Version 2.2.20, March 2021)
+Loading parameters: ./ligand.frcmod
+Reading force field modification type file (frcmod)
+Reading title:
+Remark line goes here
+Loading Mol2 file: ./ligand_native_pose.mol2
+Reading MOLECULE named ZMA
+Loading PDB file: ./protein.pdb
+  total atoms in file: 4795
+Checking 'COM'....
+
+/opt/conda/bin/teLeap: Warning!
+The unperturbed charge of the unit (8.996000) is not zero.
+
+/opt/conda/bin/teLeap: Warning!
+Close contact of 1.490 angstroms between nonbonded atoms H11 and H10
+-------  .R<ZMA 305>.A<H11 37> and .R<ZMA 305>.A<H10 36>
+Checking parameters for unit 'COM'.
+Checking for bond parameters.
+Checking for angle parameters.
+check:  Warnings: 2
+Unit is OK.
+Checking Unit.
+
+/opt/conda/bin/teLeap: Warning!
+The unperturbed charge of the unit (8.996000) is not zero.
+
+/opt/conda/bin/teLeap: Note.
+Ignoring the warning from Unit Checking.
+
+Building topology.
+Building atom parameters.
+Building bond parameters.
+Building angle parameters.
+Building proper torsion parameters.
+Building improper torsion parameters.
+ total 990 improper torsions applied
+Building H-Bond parameters.
+Incorporating Non-Bonded adjustments.
+Not Marking per-residue atom chain types.
+Marking per-residue atom chain types.
+  (Residues lacking connect0/connect1 - 
+   these don't have chain types marked:
+
+	res	total affected
+
+	CARG	1
+	NPRO	1
+	ZMA	1
+  )
+ (no restraints)
+Writing pdb file: complex.pdb
+
+/opt/conda/bin/teLeap: Warning!
+ Converting N-terminal residue name to PDB format: NPRO -> PRO
+
+/opt/conda/bin/teLeap: Warning!
+ Converting C-terminal residue name to PDB format: CARG -> ARG
+	Quit
+
+Exiting LEaP: Errors = 0; Warnings = 5; Notes = 1.

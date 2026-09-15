@@ -546,3 +546,13 @@ The open AmberTools route is operational on the Mac through the pinned `a2a-ambe
 For independent external confirmation, all 141 PubMed records linked to the frozen 240-candidate queue were retrieved without loading outcomes. Eighteen of 29 PMC-linked full texts were obtained; unavailable full text is a retrieval limitation and not an evidence rejection. Cohort membership remains unfrozen pending the two-pass computational evidence gate.
 
 The authoritative current status is `outputs/v1.6/implementation_status.json` and the human-readable summary is `V16_IMPLEMENTATION_STATUS.md`.
+
+## 14. Execution update — September 15, 2026
+
+External evidence pass 1 is complete for all 240 label-blind candidates. The deterministic preflight admits no records and loads no Ki outcome. It routes 187 candidates to an independently configured pass-2 source extractor, including 24 with available full text. Composite PMID/DOI locators are evaluated article by article. Membership remains unfrozen until pass 2 independently resolves molecule identity, stereochemistry, human wild-type A2A context, binding assay type, exact Ki endpoint, relation, units, and primary source locator and agrees with pass 1.
+
+The static Tier A MD inputs have materially advanced. Both completed receptor constructs are available; the single 5NM4 modeled-side-chain clash was removed by restrained pre-membrane relaxation, while 5G53 remains the frozen nucleotide-free B/D mini-Gs construct. Native ZMA and NECA coordinates are mapped into their accepted GAFF2/AM1-BCC topologies with deposited heavy atoms fixed exactly and no severe protein clash.
+
+Both unsolvated Tier A receptor–ligand compatibility bundles pass the pinned AmberTools 25.3 tleap build, finite-energy check, and native-pose geometry audit. The computational audit also resolved format-level ff19SB requirements by typing histidine tautomers from explicit hydrogens, naming four disulfide pairs per construct as CYX, and allowing tleap to generate correct hydrogens at the two 5G53 chain starts.
+
+The audited Amber membrane route is now concrete: the accepted reusable patch contains 86 POPC and 38 Lipid21 CHL1 molecules, a 30.65% cholesterol fraction, symmetric leaflet edits, full template resolution, and no cross-residue non-water heavy-atom contact below 1 Å. This replaces the historical CHARMM prototype and satisfies the v1.6 single-force-field-family requirement. No trajectory has started. The immediate MD gate is to assemble and parameterize the two full periodic Tier A complexes, freeze native contacts, and pass minimization, NVT, and NPT smoke tests before any Tier A production or Tier B unlock.

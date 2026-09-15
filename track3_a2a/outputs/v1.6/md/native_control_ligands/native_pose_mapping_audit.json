@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T09:59:25.015020+00:00",
+  "specification_id": "a2a-tier-a-native-ligand-pose-mapping-v1.6",
+  "candidate_labels_loaded": false,
+  "systems": [
+    {
+      "ligand": "ZMA",
+      "status": "native_pose_mapping_accepted",
+      "native_reference": "outputs/v1.6/md/tier_a_constructs/5NM4_native_reference.pdb",
+      "native_reference_sha256": "9ab1a085cd2e1517b554165db587f89ea23a08debf02e1dfa784cfe4de9b3fac",
+      "gaff2_source": "outputs/v1.6/md/ligand_bundles/ZMA/ligand_gaff2.mol2",
+      "gaff2_source_sha256": "4d6d94a44bdfda0c403edd1a758910110101acf0fa7fdff0fd528a8e60f5ded1",
+      "output": "outputs/v1.6/md/native_control_ligands/ZMA/ligand_gaff2_native_pose.mol2",
+      "output_sha256": "ecd6b9c8eb692ca2ea0be8264155bee9f919e4d6f5f2ff01c7073c8cb4db2b0b",
+      "atom_count": 40,
+      "heavy_atom_count": 25,
+      "heavy_atom_order_element_identical": true,
+      "pre_transfer_rigid_fit_rmsd_angstrom": 4.125046543429439e-15,
+      "post_transfer_native_heavy_rmsd_angstrom": 0.0,
+      "hydrogen_policy": "rigidly align, then translate each hydrogen with its bonded deposited heavy atom before final-system relaxation",
+      "minimum_ligand_protein_heavy_distance_angstrom": 2.539215233098603,
+      "native_contact_pair_count_within_4_angstrom": 75,
+      "bond_graph_preserved": true,
+      "trajectory_production_started": false
+    },
+    {
+      "ligand": "NEC",
+      "status": "native_pose_mapping_accepted",
+      "native_reference": "outputs/v1.6/md/tier_a_constructs/5G53_native_reference.pdb",
+      "native_reference_sha256": "dc3c0882275fe46819109fd45c5d471b747a60d0522fe24e80b352767c5dc2d6",
+      "gaff2_source": "outputs/v1.6/md/ligand_bundles/NEC/ligand_gaff2.mol2",
+      "gaff2_source_sha256": "17f9a3ca6e2109506024ed23b804533fda7068d335ef7cea6db94f9dd5076437",
+      "output": "outputs/v1.6/md/native_control_ligands/NEC/ligand_gaff2_native_pose.mol2",
+      "output_sha256": "7bf2ed37e7b7b8fe24ac75c641349bd63049a99757d75a0c167555d8cd0c7313",
+      "atom_count": 38,
+      "heavy_atom_count": 22,
+      "heavy_atom_order_element_identical": true,
+      "pre_transfer_rigid_fit_rmsd_angstrom": 1.0071134324482964,
+      "post_transfer_native_heavy_rmsd_angstrom": 0.0,
+      "hydrogen_policy": "rigidly align, then translate each hydrogen with its bonded deposited heavy atom before final-system relaxation",
+      "minimum_ligand_protein_heavy_distance_angstrom": 2.7693957824767486,
+      "native_contact_pair_count_within_4_angstrom": 72,
+      "bond_graph_preserved": true,
+      "trajectory_production_started": false
+    }
+  ],
+  "accepted_count": 2,
+  "status": "all_native_pose_mappings_accepted",
+  "next_gate": "Combine each pose with its audited construct, embed in the frozen Lipid21 membrane, parameterize with tleap, and run final periodic geometry and energy audits.",
+  "runner_sha256": "c5461cad9c091e228e4b846b9e2f6b417293f8c36d3ade106536c3077aa760c3"
+}

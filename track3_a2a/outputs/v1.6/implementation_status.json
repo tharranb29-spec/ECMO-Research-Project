@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-14T14:53:14.488998+00:00",
+  "created_at_utc": "2026-09-15T10:02:07.466995+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -25,25 +25,41 @@
       }
     },
     "B_external_confirmation": {
-      "status": "evidence_retrieval_in_progress_membership_not_frozen",
+      "status": "pass_1_complete_pass_2_pending_membership_not_frozen",
       "queue_candidates": 240,
       "pubmed_requested": 141,
       "pubmed_retrieved": 141,
       "pmc_requested": 29,
       "pmc_fulltext_retrieved": 18,
       "pmc_fulltext_unavailable": 11,
-      "next_gate": "deterministic source triage plus independent source-grounded extraction; freeze membership only after agreement"
+      "pass_1_status_counts": {
+        "metadata_pass_doi_only_needs_source_retrieval": 1,
+        "metadata_pass_fulltext_ready": 24,
+        "metadata_pass_needs_fulltext": 131,
+        "metadata_pass_requires_endpoint_resolution": 31,
+        "quarantine_nonprimary_source": 7,
+        "quarantine_target_not_supported": 46
+      },
+      "pass_2_required_candidates": 187,
+      "external_cohort_admitted": 0,
+      "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement"
     },
     "C_open_md": {
-      "status": "ligand_gate_passed_construct_gate_pending",
+      "status": "static_input_gates_passed_final_periodic_systems_pending",
       "ambertools_image": "a2a-ambertools:v1.6",
       "ambertools_image_id": "sha256:f9c5dc14d8a347035b90054daaec4b59ac1534b21dd209967629f977d00da17c",
       "accepted_ligand_bundles": 6,
       "required_ligand_bundles": 6,
       "gdp_policy": "nucleotide-free selected 5G53 B/D mini-Gs control",
+      "initial_construct_candidates_geometry_passed": 1,
+      "pre_membrane_minimized_constructs_passed": 2,
+      "native_control_pose_mappings_passed": 2,
+      "unsolvated_tier_a_complex_preflights_passed": 2,
+      "mixed_membrane_patch_status": "mixed_membrane_patch_computationally_accepted",
+      "mixed_membrane_cholesterol_fraction": 0.3064516129032258,
       "tier_a_unlocked_for_trajectory": false,
       "tier_b_unlocked": false,
-      "next_gate": "complete and audit two Tier A receptor constructs, membranes, native contacts, and local minimization/NVT/NPT smoke tests"
+      "next_gate": "build both complete periodic Tier A bundles, freeze native contacts, and pass final minimization/NVT/NPT smoke tests"
     },
     "D_dashboard": {
       "status": "scheduled_to_start_2026-09-16",
@@ -56,7 +72,13 @@
     "outputs/v1.6/model_reproduction/development_results.json": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db",
     "outputs/v1.6/md/ligand_bundles/campaign_manifest.json": "aad2162d9784003e6345580cc5c080469e30c6c8454931de43a7d10a5b377398",
     "outputs/v1.6/external_evidence/pubmed_retrieval_audit.json": "79357ef76fa2453d7c5492394c8209bd07a0ef8aa97bbd6d3f47a7cbebc92131",
-    "outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json": "9cb14912de6ee76f594698b95fe7727a5d7908e79bbd14e7636d40ece61b0e2d"
+    "outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json": "9cb14912de6ee76f594698b95fe7727a5d7908e79bbd14e7636d40ece61b0e2d",
+    "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
+    "outputs/v1.6/md/tier_a_constructs/construct_audit.json": "69adce104f5c3ad69e101c02c4dfd543951f8fe6f84a3ff94b5456bc898eb4f5",
+    "outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json": "a791dc1f996e466a8aa389945ee7b5c6e10e3fb9cb77e3f42ae4c569d4e297f3",
+    "outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json": "ad28ede2a82a769b0de19cf2b6fe38e371c8e3564f403ae674606f28f2821e99",
+    "outputs/v1.6/md/membrane_patch/patch_audit.json": "786cd78ff7bd3880802229ca1e1f971bcf9e00c3388240f82312bae9032ea5ef",
+    "outputs/v1.6/md/tier_a_complex_preflight/complex_preflight_audit.json": "f996ca835bd60a98592c068c7a8664d3eb1cd8f234f6f37c0fb7ed9faec6e5a3"
   },
-  "timeline_status": "on_track_for_September_14_protocol_and_open_parameterization_milestone"
+  "timeline_status": "on_track_for_September_15_external_pass_1_and_static_md_input_milestone"
 }

@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T09:06:58.243357+00:00",
+  "specification_id": "a2a-md-tier-a-constructs-v1.6",
+  "method": "PDBFixer 1.12 deterministic missing-atom and declared-loop candidate generation followed by independent geometry audit",
+  "pdbfixer_seed": 20260915,
+  "protonation_ph": 7.4,
+  "gdp_policy": "nucleotide-free selected 5G53 B/D assembly; no cross-copy GDP transfer",
+  "candidate_labels_loaded": false,
+  "trajectory_production_started": false,
+  "systems": [
+    {
+      "system_id": "5NM4_ZMA_native",
+      "protein_atom_count": 4795,
+      "protein_residue_count": 303,
+      "observed_residue_ranges": {
+        "A": [
+          2,
+          304
+        ]
+      },
+      "expected_residue_sets_passed": true,
+      "back_mutation_names_passed": true,
+      "peptide_bond_count_audited": 302,
+      "peptide_distance_range_angstrom": [
+        1.3000376917612824,
+        1.3717671085136873
+      ],
+      "continuity_failures": [],
+      "closest_nonlocal_heavy_atom_pair": {
+        "left": "A:ARG293:NH1",
+        "right": "A:ARG296:NH2",
+        "distance_angstrom": 1.435486
+      },
+      "severe_nonlocal_clashes_below_1_5_angstrom": [
+        {
+          "left": "A:ARG293:NH1",
+          "right": "A:ARG296:NH2",
+          "distance_angstrom": 1.435486
+        }
+      ],
+      "geometry_gate_passed": false,
+      "status": "construct_candidate_blocked_by_geometry_audit",
+      "construct_path": "outputs/v1.6/md/tier_a_constructs/5NM4_ADORA2A_complete_candidate.pdb",
+      "construct_sha256": "91cdb953ad58e462d88a046a0e91d064342a8d79d4befd6ede7d504ac855d7bc",
+      "native_reference_path": "outputs/v1.6/md/tier_a_constructs/5NM4_native_reference.pdb",
+      "native_reference_sha256": "9ab1a085cd2e1517b554165db587f89ea23a08debf02e1dfa784cfe4de9b3fac"
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "protein_atom_count": 8196,
+      "protein_residue_count": 514,
+      "observed_residue_ranges": {
+        "B": [
+          6,
+          305
+        ],
+        "D": [
+          39,
+          393
+        ]
+      },
+      "expected_residue_sets_passed": true,
+      "back_mutation_names_passed": true,
+      "peptide_bond_count_audited": 510,
+      "peptide_distance_range_angstrom": [
+        1.3145790200668843,
+        1.3803847289795665
+      ],
+      "continuity_failures": [],
+      "closest_nonlocal_heavy_atom_pair": {
+        "left": "D:LYS307:O",
+        "right": "D:ASP310:OD1",
+        "distance_angstrom": 1.546259
+      },
+      "severe_nonlocal_clashes_below_1_5_angstrom": [],
+      "geometry_gate_passed": true,
+      "status": "construct_candidate_geometry_passed",
+      "gdp_atom_count": 0,
+      "nucleotide_policy_passed": true,
+      "construct_path": "outputs/v1.6/md/tier_a_constructs/5G53_ADORA2A_miniGs_nucleotide_free_complete_candidate.pdb",
+      "construct_sha256": "dec5bc7b0df54589492e8c432aabf2d42c9accd74dc9723f659ab1af46d35a63",
+      "native_reference_path": "outputs/v1.6/md/tier_a_constructs/5G53_native_reference.pdb",
+      "native_reference_sha256": "dc3c0882275fe46819109fd45c5d471b747a60d0522fe24e80b352767c5dc2d6"
+    }
+  ],
+  "geometry_pass_count": 1,
+  "status": "construct_geometry_gate_blocked",
+  "next_gate": "Map parameterized native ligand coordinates, build Amber protein-ligand topology, then require energy and membrane-system audits before dynamics.",
+  "source_hashes": {
+    "protocol": "72ff053253d9f7714ef450435a845bb4222eb6a3477d4d2f081ada17de5118a2",
+    "inactive_builder_input": "77b4989a97deacf2583d87cb24ba872431d911298e6e8712fed3102bd8198851",
+    "active_builder_input": "f45e740e9ad87cc099d2a2ffffba282f09af1025519571d51aae884c81177222",
+    "runner": "48d5cca4a870e4ee8ddc4432358e2cef1daff18f2aba62f4ea354ea193f8221f"
+  }
+}

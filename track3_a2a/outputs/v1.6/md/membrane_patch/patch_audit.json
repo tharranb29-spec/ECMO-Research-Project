@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T09:48:21.863297+00:00",
+  "specification_id": "a2a-amber-lipid21-mixed-membrane-v1.6",
+  "status": "mixed_membrane_patch_computationally_accepted",
+  "force_field_files": [
+    "amber19/lipid21.xml",
+    "amber14/tip3p.xml"
+  ],
+  "source_popc_patch": "/Users/tharran/Documents/ChatGPT/ECMO Research Project/ECMO-Research-Project/.venv-md/lib/python3.12/site-packages/openmm/app/data/POPC.pdb",
+  "source_popc_patch_sha256": "a35daa948562a67c142ea5ba38c1e18cc7a50bc1afc559338b2565d23fd38a29",
+  "source_cholesterol_structure": "5NM4 CLR A 508",
+  "leaflet_initial_popc": {
+    "upper": 64,
+    "lower": 64
+  },
+  "leaflet_cholesterol": {
+    "upper": 19,
+    "lower": 19
+  },
+  "residue_counts": {
+    "CHL1": 38,
+    "HOH": 5087,
+    "POP": 86
+  },
+  "cholesterol_mole_fraction": 0.3064516129032258,
+  "target_cholesterol_mole_fraction": 0.3,
+  "ratio_absolute_error": 0.006451612903225823,
+  "removed_clashing_water_count": 33,
+  "initial_minimum_all_atom_placement_clearance_angstrom": 0.6331423191401704,
+  "removed_clashing_popc_count": 3,
+  "removed_balance_popc_count": 1,
+  "removed_popc_by_leaflet_before_balance": {
+    "1": 2,
+    "-1": 1
+  },
+  "minimum_final_cholesterol_popc_heavy_clearance_angstrom": 1.0183563233077069,
+  "cross_residue_nonwater_heavy_clash_count_below_1_angstrom": 0,
+  "particle_count": 29597,
+  "all_lipid21_templates_resolved": true,
+  "accepted_as_custom_addmembrane_patch": true,
+  "trajectory_production_started": false,
+  "files": {
+    "pdb": {
+      "path": "outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch.pdb",
+      "sha256": "d56441175313c1fcc704f358d5ffb2573e18d2fb806f74cd74343c05e248d40a"
+    },
+    "cif": {
+      "path": "outputs/v1.6/md/membrane_patch/POPC_CHL1_70_30_Lipid21_patch.cif",
+      "sha256": "494708c3669b25dc0a04d8a49994fdf0471f5d37029461398006209c0caee844"
+    }
+  }
+}

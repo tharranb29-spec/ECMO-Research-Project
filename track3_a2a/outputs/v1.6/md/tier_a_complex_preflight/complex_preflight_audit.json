@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-15T10:02:07.394800+00:00",
+  "specification_id": "a2a-tier-a-unsolvated-complex-preflight-v1.6",
+  "candidate_labels_loaded": false,
+  "systems": [
+    {
+      "system_id": "5NM4_ZMA_native",
+      "status": "unsolvated_complex_preflight_accepted",
+      "particle_count": 4835,
+      "initial_potential_energy_kj_mol": -26929.1590667417,
+      "finite_initial_energy": true,
+      "tleap_severe_tokens": [],
+      "geometry": {
+        "passed": true,
+        "ligand_heavy_atom_count": 25,
+        "receptor_heavy_atom_count": 2360,
+        "minimum_ligand_receptor_heavy_distance_angstrom": 2.5392152330986084,
+        "native_contact_pair_count_within_4_angstrom": 75,
+        "requested_receptor_chain_before_tleap": "A",
+        "note": "tleap may not preserve PDB chain identifiers; geometry uses all protein heavy atoms"
+      },
+      "amber_protein_translation": {
+        "histidines_typed": 6,
+        "disulfide_cysteines_typed": 8,
+        "disulfide_bond_count": 4,
+        "removed_disulfide_thiol_hydrogens": 0,
+        "removed_terminal_backbone_hydrogens": 0
+      },
+      "files": {
+        "protein.pdb": "b106e8b2c5e4479b5dc5fe111dd59b0df2196ad2de391b77612eb8829f339cd2",
+        "ligand_native_pose.mol2": "ecd6b9c8eb692ca2ea0be8264155bee9f919e4d6f5f2ff01c7073c8cb4db2b0b",
+        "ligand.frcmod": "99761aad3e79cd1b675559c07dd1b3f0ef67c64fa34171b6723e07f41125fc9e",
+        "tleap.in": "7d2e337f8de412611f3562dd0713ddc1f6431669d13e30ebb05954482eb97e77",
+        "tleap.log": "7528065dbf29cfc2f0d91780c6c07551dfb2c0772e20dacb4fb4cdad0e482abd",
+        "leap.log": "403877165a207bad4435638404cf1c2ab2163243c1737327bf20e5b0f9065249",
+        "complex.prmtop": "326f8bbfa85069d928be7a473b62a1d205381b84791bc3b3aec2deee94584d81",
+        "complex.inpcrd": "9f197ea8418550a762d39cd0a9f4edb57a231eedf4e8a2574f84570fccc1a609",
+        "complex.pdb": "ae0ac06991e8bb30ff70ac8a36ae201aa234588bdbf454f53281dae6edbaa819"
+      },
+      "trajectory_production_started": false
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "status": "unsolvated_complex_preflight_accepted",
+      "particle_count": 8234,
+      "initial_potential_energy_kj_mol": 40481.567673177466,
+      "finite_initial_energy": true,
+      "tleap_severe_tokens": [],
+      "geometry": {
+        "passed": true,
+        "ligand_heavy_atom_count": 22,
+        "receptor_heavy_atom_count": 4086,
+        "minimum_ligand_receptor_heavy_distance_angstrom": 2.7679076935476,
+        "native_contact_pair_count_within_4_angstrom": 74,
+        "requested_receptor_chain_before_tleap": "B",
+        "note": "tleap may not preserve PDB chain identifiers; geometry uses all protein heavy atoms"
+      },
+      "amber_protein_translation": {
+        "histidines_typed": 12,
+        "disulfide_cysteines_typed": 8,
+        "disulfide_bond_count": 4,
+        "removed_disulfide_thiol_hydrogens": 0,
+        "removed_terminal_backbone_hydrogens": 2
+      },
+      "files": {
+        "protein.pdb": "04d7c4287fa2fe659720dce706772f80fa2c3581129cfdd2223966693393978e",
+        "ligand_native_pose.mol2": "7bf2ed37e7b7b8fe24ac75c641349bd63049a99757d75a0c167555d8cd0c7313",
+        "ligand.frcmod": "b428c480dfbb0bb1516182e0f569202930856a534c837a32caa6ac6b5566e005",
+        "tleap.in": "7d2e337f8de412611f3562dd0713ddc1f6431669d13e30ebb05954482eb97e77",
+        "tleap.log": "230babd4bcc4a69e364f9ae669dc2387e36561765ccf42ac44cc30461338f99b",
+        "leap.log": "f0a1d86eff2ddd1ec1f8a84c26c6ad2924cd283711295107a06eaff67bf0e748",
+        "complex.prmtop": "b93248f6265be0382b5ebc5a9dcdf00e3eb1eb22ce08def10bcea95f40054d3a",
+        "complex.inpcrd": "b5ef890e64533adb6244984c584824d37c47271e92edb0eca9371b7367240535",
+        "complex.pdb": "7e927a7748bce8fb1a42397152653ee9f15a3de42b5486f7c298e1cf219e3958"
+      },
+      "trajectory_production_started": false
+    }
+  ],
+  "accepted_count": 2,
+  "status": "all_unsolvated_complex_preflights_accepted",
+  "next_gate": "Embed the accepted complexes into the audited Lipid21 patch, remove solvent overlaps, rebuild with tleap, and run final periodic-system audits.",
+  "runner_sha256": "130b28a28390b1e4f66c6f791f83738ee2d584f84e6147e048856ce0160226b1"
+}
