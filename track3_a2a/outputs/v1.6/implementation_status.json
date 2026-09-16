@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-16T07:49:18.380851+00:00",
+  "created_at_utc": "2026-09-16T16:16:50.273444+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -65,7 +65,7 @@
       "cuda_numerical_preflight_status": "cuda_periodic_restraint_preflight_passed",
       "cuda_numerical_preflight_steps": 10000,
       "staged_equilibration_gate_status": "tier_a_equilibration_gate_locked",
-      "staged_equilibration_runs_passed": 3,
+      "staged_equilibration_runs_passed": 4,
       "staged_equilibration_runs_required": 6,
       "tier_a_production_unlocked": false,
       "tier_b_unlocked": false,
@@ -95,7 +95,7 @@
     "outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json": "3e78a753c36e4a596714e0b25962c10a564e55149431034f38fb78e8d88ff120",
     "outputs/v1.6/md/tier_a_equilibration/cuda_periodic_restraint_validation.json": "cac925c4ea121fdceb835aec55cbfaa9bb1bc2267e5e08241ebc4566e6992ef4",
     "config/tier_a_equilibration.v1.6.4.json": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
-    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "ee508e9961ab3abc26635d4f27b82df3bb005fa105732e13e6b689094f33f724"
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "01086153c3781e30bc5a617019143e6f53616fb30ee0e1fb6c3e559061755cdb"
   },
   "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending"
 }

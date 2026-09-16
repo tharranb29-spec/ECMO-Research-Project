@@ -1,13 +1,12 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-16T07:48:47.260495+00:00",
+  "created_at_utc": "2026-09-16T16:16:38.205516+00:00",
   "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
   "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
   "expected_run_count": 6,
-  "observed_run_count": 3,
-  "passed_run_count": 3,
+  "observed_run_count": 4,
+  "passed_run_count": 4,
   "missing_audits": [
-    "5G53_NECA_miniGs_native_nucleotide_free/seed-20260914/equilibration_audit.json",
     "5G53_NECA_miniGs_native_nucleotide_free/seed-20260915/equilibration_audit.json",
     "5G53_NECA_miniGs_native_nucleotide_free/seed-20260916/equilibration_audit.json"
   ],
@@ -33,6 +32,14 @@
       "seed": 20260916,
       "path": "5NM4_ZMA_native/seed-20260916/equilibration_audit.json",
       "sha256": "a4c804e18c7c5e56f31462f794af5950879dc5d086105edcbd17390d59cb036e",
+      "status": "equilibration_gate_passed",
+      "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "seed": 20260914,
+      "path": "5G53_NECA_miniGs_native_nucleotide_free/seed-20260914/equilibration_audit.json",
+      "sha256": "237f6516623230ccf35c5e4565e164433222de06fbc75084b738d6007b1111a9",
       "status": "equilibration_gate_passed",
       "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
     }

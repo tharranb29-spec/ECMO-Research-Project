@@ -65,6 +65,8 @@ The Colab notebook writes the accepted campaign to a clean `tier_a_equilibration
 
 All three full v1.6.4 5NM4-ZMA replicas completed 2.14 ns and passed their equilibration gates. Seeds 20260914, 20260915, and 20260916 ended at `309.0 K`, `309.75 K`, and `309.80 K`; native-contact fractions were `0.8533`, `0.8933`, and `0.8267`; and last-half volume CVs were `0.00170`, `0.00172`, and `0.00168`. All monitored values were finite. Seed 20260916 passes the frozen contact threshold by `0.0267` and is retained without post hoc exclusion. Aggregate progress is three of six required equilibration replicas. Tier A production and Tier B remain locked pending all three 5G53 replicas.
 
+The first 5G53-NECA-mini-Gs replica, seed 20260914, also completed 2.14 ns and passed. Its final temperature was `308.68 K`, native-contact fraction `0.9865`, and last-half volume CV `0.00108`; all monitored values were finite. Aggregate progress is four of six. Tier A production and Tier B remain locked pending the two remaining 5G53 replicas and the complete aggregate gate.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.
