@@ -63,7 +63,7 @@ The v1.6.4 corrected-only mixed-precision CUDA validation passed 10,000 steps. R
 
 The Colab notebook writes the accepted campaign to a clean `tier_a_equilibration_v164` Drive directory. Superseded failures remain in the earlier directory and the repository audit, preventing stale files from being mistaken for v1.6.4 campaign output.
 
-The first full v1.6.4 replica, 5NM4-ZMA seed 20260914, completed all 2.14 ns and passed its equilibration gate. Its final temperature was `309.0 K`, native-contact fraction `0.8533`, and last-half volume CV `0.00170`; all monitored values were finite. Aggregate progress is one of six required equilibration replicas. This single pass does not unlock Tier A production or Tier B.
+The first two full v1.6.4 replicas, 5NM4-ZMA seeds 20260914 and 20260915, completed all 2.14 ns and passed their equilibration gates. Final temperatures were `309.0 K` and `309.75 K`, native-contact fractions were `0.8533` and `0.8933`, and last-half volume CVs were `0.00170` and `0.00172`; all monitored values were finite. Aggregate progress is two of six required equilibration replicas. These passes do not yet unlock Tier A production or Tier B.
 
 ## Workstream D — autonomous dashboard
 

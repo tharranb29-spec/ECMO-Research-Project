@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-16T04:42:16.878002+00:00",
+  "specification_id": "a2a-tier-a-equilibration-v1.6.4",
+  "system_id": "5NM4_ZMA_native",
+  "seed": 20260915,
+  "status": "equilibration_gate_passed",
+  "platform": "CUDA",
+  "platform_properties": {"Precision": "mixed"},
+  "scale": 1.0,
+  "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
+  "source_system_sha256": "0597ca9b9f6162305a5f8394602c166fd5bce3cd7a3fd385cfa3ed1e8fd5af63",
+  "source_smoke_state_sha256": "ed0873e5b223d14e9987fb250865a80d9b9dac41ca72ad2bb28e7cb425e10474",
+  "restrained_heavy_atom_count": 2385,
+  "temperature_degrees_of_freedom": 175449,
+  "completed_stages": [
+    {"name": "nvt_heat_100K", "ensemble": "NVT", "steps": 80000, "timestep_femtoseconds": 0.25, "effective_duration_ps": 20.0, "potential_energy_kj_mol": -1023103.1865095343, "kinetic_energy_kj_mol": 73176.64509463121, "instantaneous_temperature_kelvin": 100.32690342671707, "volume_nm3": 882.8006800031096, "native_contact_fraction_at_6A": 1.0},
+    {"name": "nvt_heat_200K", "ensemble": "NVT", "steps": 40000, "timestep_femtoseconds": 0.5, "effective_duration_ps": 20.0, "potential_energy_kj_mol": -943975.6209755098, "kinetic_energy_kj_mol": 146118.8445034838, "instantaneous_temperature_kelvin": 200.33237629802255, "volume_nm3": 882.8006800031096, "native_contact_fraction_at_6A": 1.0},
+    {"name": "nvt_heat_310K", "ensemble": "NVT", "steps": 100000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 100.0, "potential_energy_kj_mol": -810827.1789912358, "kinetic_energy_kj_mol": 225661.22321590196, "instantaneous_temperature_kelvin": 309.38685040095766, "volume_nm3": 882.8006800031096, "native_contact_fraction_at_6A": 1.0},
+    {"name": "npt_release_1000", "ensemble": "NPT", "steps": 200000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 200.0, "potential_energy_kj_mol": -823838.2527293204, "kinetic_energy_kj_mol": 226349.04626407483, "instantaneous_temperature_kelvin": 310.3298719953403, "volume_nm3": 794.5654920073217, "native_contact_fraction_at_6A": 1.0},
+    {"name": "npt_release_500", "ensemble": "NPT", "steps": 200000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 200.0, "potential_energy_kj_mol": -823570.315681302, "kinetic_energy_kj_mol": 226164.8422725617, "instantaneous_temperature_kelvin": 310.07732398574717, "volume_nm3": 793.7516243846167, "native_contact_fraction_at_6A": 1.0},
+    {"name": "npt_release_100", "ensemble": "NPT", "steps": 200000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 200.0, "potential_energy_kj_mol": -825318.0620496268, "kinetic_energy_kj_mol": 226985.12403103343, "instantaneous_temperature_kelvin": 311.2019495907946, "volume_nm3": 791.9559034681828, "native_contact_fraction_at_6A": 1.0},
+    {"name": "npt_release_10", "ensemble": "NPT", "steps": 400000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 400.0, "potential_energy_kj_mol": -827705.5492725405, "kinetic_energy_kj_mol": 226496.56084871988, "instantaneous_temperature_kelvin": 310.5321179642362, "volume_nm3": 791.7508601521655, "native_contact_fraction_at_6A": 0.9333333333333333},
+    {"name": "npt_release_1", "ensemble": "NPT", "steps": 200000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 200.0, "potential_energy_kj_mol": -827351.7669805964, "kinetic_energy_kj_mol": 225252.72289884114, "instantaneous_temperature_kelvin": 308.82678684780427, "volume_nm3": 791.2948237505578, "native_contact_fraction_at_6A": 0.92},
+    {"name": "npt_unrestrained", "ensemble": "NPT", "steps": 800000, "timestep_femtoseconds": 1.0, "effective_duration_ps": 800.0, "potential_energy_kj_mol": -825321.2416555448, "kinetic_energy_kj_mol": 225927.9533946023, "instantaneous_temperature_kelvin": 309.7525437563288, "volume_nm3": 791.8376043355345, "native_contact_fraction_at_6A": 0.8933333333333333}
+  ],
+  "last_half_volume_coefficient_of_variation": 0.0017248806843026732,
+  "finite_energy_temperature_volume": true,
+  "production_trajectory_started": false,
+  "tier_b_unlocked": false,
+  "claim_limit": "Equilibration establishes readiness for the Tier A pilot only; it is not production sampling or evidence of binding stability.",
+  "files": {
+    "equilibrated_state.xml": "a709bb87a2116f7649360c34a826cbdfdef1b28b7945c9d35cacb10a50db91da",
+    "state_data.csv": "241218134f82cd02da8d8b20985285d0097410c3dc6389c047bb9a6e10e2e3d8"
+  },
+  "ingestion": {
+    "source_file": "equilibration_audit (1).json",
+    "source_sha256": "466489e45e70ddb4089439ba02283adb82ceea6f0962bacf4403bcaf103e9065"
+  }
+}

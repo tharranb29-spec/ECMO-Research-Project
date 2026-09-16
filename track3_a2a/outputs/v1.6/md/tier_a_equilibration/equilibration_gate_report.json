@@ -1,13 +1,12 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-15T18:54:35.749127+00:00",
+  "created_at_utc": "2026-09-16T05:42:28.868715+00:00",
   "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
   "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
   "expected_run_count": 6,
-  "observed_run_count": 1,
-  "passed_run_count": 1,
+  "observed_run_count": 2,
+  "passed_run_count": 2,
   "missing_audits": [
-    "5NM4_ZMA_native/seed-20260915/equilibration_audit.json",
     "5NM4_ZMA_native/seed-20260916/equilibration_audit.json",
     "5G53_NECA_miniGs_native_nucleotide_free/seed-20260914/equilibration_audit.json",
     "5G53_NECA_miniGs_native_nucleotide_free/seed-20260915/equilibration_audit.json",
@@ -19,6 +18,14 @@
       "seed": 20260914,
       "path": "5NM4_ZMA_native/seed-20260914/equilibration_audit.json",
       "sha256": "f83bf81c87e926d6c1ba8a21db0ec4b2751a237b878127cf4eaa21f9c3e7bac1",
+      "status": "equilibration_gate_passed",
+      "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
+    },
+    {
+      "system_id": "5NM4_ZMA_native",
+      "seed": 20260915,
+      "path": "5NM4_ZMA_native/seed-20260915/equilibration_audit.json",
+      "sha256": "355393459feb02a29a5e1bb6458cb3b8f15ca2747f56c1d8b9e561a924cc31f2",
       "status": "equilibration_gate_passed",
       "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
     }
