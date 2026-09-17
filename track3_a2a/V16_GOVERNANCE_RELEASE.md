@@ -43,4 +43,4 @@ The builder fails closed if any frozen file, protocol decision, model mapping, p
 
 ## Current interpretation
 
-Workstream A is release-ready. External confirmation remains pending because pass 2 and cohort freeze are incomplete, no external outcome join has occurred, and model promotion is prohibited. Tier A production and Tier B remain locked under the current audited equilibration gate. These open gates are expected status, not failures of the Workstream A governance release.
+Workstream A is release-ready. External confirmation remains pending because pass 2 and cohort freeze are incomplete, no external outcome join has occurred, and model promotion is prohibited. All six prospectively declared v1.6.4 staged-equilibration replicas passed, so the frozen Tier A 50 ns pilot-production campaign is authorized but has not started. This authorization is not a control-stability result and does not unlock Tier B; Tier B remains locked until both Tier A controls pass the production rule in at least two of three replicas. These open gates are expected status, not failures of the Workstream A governance release.

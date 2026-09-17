@@ -10,15 +10,15 @@
     "outputs/v1.6/model_reproduction/development_results.json": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db",
     "outputs/v1.6/model_reproduction/development_oof_predictions.csv": "dbb448119ef652fbb4acd0667cd97636faa7aa08b2e99e5fad89d60c800fb668",
     "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
-    "outputs/v1.6/implementation_status.json": "39375c0ac2595ebc7aa88ac2bb3d0c0f1fe07e200abb8fe7bf7a854c517a8d1b",
-    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "079d318518ef25456cdaf0cc7db93081e479b81ffa96d154f10d037d9c8d3c96"
+    "outputs/v1.6/implementation_status.json": "5ff5d137a4b2b34c5dfc652d8bb3b9e1291f68143d85afa73a8aa7971149a2e8",
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
   },
   "release_artifacts": {
-    "governance_checks.csv": "9742fff4a84ab9385167367b11de7b684c15503bb467d37136b2ef2131e1804c",
+    "governance_checks.csv": "d1d748dc941f686b1238a5463676774d3e28357b85701a983e34722e23b14c5d",
     "model_evidence_table.csv": "7f4a30a07f5041fcf3142c4a4975ccb95c4411eb565e9f031b1cc41488f5d1f0",
-    "gate_status_table.csv": "a30ec83f13f7a603fbb1057391965c4ab22eceb3e160c2e0da4597f2776ffedc",
-    "evidence_artifact_inventory.csv": "ae2f683d16e1607b3e858099c3ec611096a6be63acce879e17c11dad0860c764",
-    "governance_status.json": "1efe4cdcbbc17d379b3cec3035dfcdecc3650f6f22212b87fd74ddde81656379"
+    "gate_status_table.csv": "b63c115d46df4e0953718e720fbbbdeebdc14fe0af9313e26f81968f9f4ee969",
+    "evidence_artifact_inventory.csv": "9b4cdaf31e8864670a6e6d3ca5bd56b64d60da9c5b3141ab24ba42a500d050bc",
+    "governance_status.json": "ef82c2b6e01754dfb50284281667e30161b9b55b954ffbb091a3094f026a7ed0"
   },
   "frozen_decisions": {
     "primary_endpoint": "pBind_Ki",
@@ -27,5 +27,5 @@
     "outcome_firewall": "sealed",
     "retroactive_tuning": "prohibited"
   },
-  "release_signature_sha256": "ef290efd3d202793a61dd71aae0c020bbd5dc2ad4485b47ebbb09c1fb22dc0ed"
+  "release_signature_sha256": "e93fd5231116b0427275fddbb2f5976c48b52b63d201b7bcae1bcec9264717fa"
 }

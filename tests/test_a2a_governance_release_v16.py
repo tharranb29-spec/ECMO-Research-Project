@@ -15,10 +15,12 @@ A2A = ROOT / "track3_a2a"
 
 class A2AGovernanceReleaseV16Tests(unittest.TestCase):
     def test_repository_governance_invariants_pass(self):
-        checks, _ = evaluate_invariants(A2A)
+        checks, context = evaluate_invariants(A2A)
         failures = [item for item in checks if item["status"] != "pass"]
         self.assertEqual(failures, [])
         self.assertGreaterEqual(len(checks), 30)
+        self.assertTrue(context["equilibration"]["tier_a_production_unlocked"])
+        self.assertFalse(context["equilibration"]["tier_b_unlocked"])
 
     def test_release_is_deterministic_and_self_reconciling(self):
         with tempfile.TemporaryDirectory() as first, tempfile.TemporaryDirectory() as second:

@@ -76,7 +76,8 @@ def evaluate_invariants(root: Path) -> tuple[list[dict[str, str]], dict[str, Any
         check("model_mapping_matches_protocol", model["model_mapping"]["AB_Ridge"] == primary and model["model_mapping"]["AB_RF"] == protocol["models"]["chemistry_rf_comparator"] and model["model_mapping"]["E_RF"] == protocol["models"]["docking_increment_comparator"], "development model mapping equals protocol", "Development model mapping does not match the frozen protocol."),
         check("prediction_hash_reconciles", model["prediction_sha256"] == sha256(root / model["prediction_file"]), model["prediction_sha256"], "Development prediction artifact hash mismatch."),
         check("freeze_signature_reconciles", freeze["computational_release_signature_sha256"] == freeze_signature(freeze), freeze["computational_release_signature_sha256"], "Protocol freeze signature mismatch."),
-        check("tier_a_production_locked", equilibration["tier_a_production_unlocked"] is False, equilibration["status"], "Tier A production was unlocked without a complete equilibration gate."),
+        check("tier_a_equilibration_gate_passed", equilibration["status"] == "tier_a_equilibration_gate_passed" and equilibration["observed_run_count"] == equilibration["expected_run_count"] == equilibration["passed_run_count"] == 6 and equilibration["missing_audits"] == [] and equilibration["tier_a_production_unlocked"] is True and implementation["workstreams"]["C_open_md"]["tier_a_production_unlocked"] is True, "6/6 passed; no missing audits; Tier A pilot production authorized", "Tier A production authorization does not reconcile with a complete six-replica equilibration gate."),
+        check("tier_a_production_not_started", implementation["md_trajectory_production_started"] is False, "authorized=true; started=false", "The implementation status indicates production trajectories have started."),
         check("tier_b_locked", equilibration["tier_b_unlocked"] is False, equilibration["status"], "Tier B was unlocked before the declared control gate."),
         check("no_best_replica_selection", equilibration["best_replica_selection"] == "prohibited", equilibration["best_replica_selection"], "Best-replica selection is no longer prohibited."),
     ]
@@ -150,7 +151,7 @@ def build_release(root: Path, output: Path) -> dict[str, Any]:
         {"gate_id": "A_protocol_and_governance", "status": "passed", "decision": "release governance evidence package", "next_required_action": "preserve frozen decisions through external evaluation"},
         {"gate_id": "B_external_membership", "status": "locked", "decision": "no cohort admitted", "next_required_action": "complete independent source-grounded pass 2 and freeze exact agreement cohort"},
         {"gate_id": "external_model_confirmation", "status": "not_run", "decision": "promotion prohibited", "next_required_action": "join outcomes once only after cohort, predictions, applicability thresholds, and hashes are frozen"},
-        {"gate_id": "tier_a_production", "status": "locked", "decision": f"{equilibration['passed_run_count']}/{equilibration['expected_run_count']} equilibration audits passed", "next_required_action": "complete the missing prospectively declared equilibration replica and rebuild aggregate gate"},
+        {"gate_id": "tier_a_production", "status": "authorized_not_started", "decision": f"{equilibration['passed_run_count']}/{equilibration['expected_run_count']} equilibration audits passed", "next_required_action": "run and analyze the frozen three-replica 50 ns Tier A pilot production for each control"},
         {"gate_id": "tier_b_candidate_md", "status": "locked", "decision": "both Tier A controls have not passed production rule", "next_required_action": "do not start Tier B"},
     ]
     gate_path = output / "gate_status_table.csv"
@@ -193,7 +194,8 @@ def build_release(root: Path, output: Path) -> dict[str, Any]:
         "external_membership_frozen": False,
         "external_confirmation_run": False,
         "model_promotion_allowed": False,
-        "tier_a_production_unlocked": False,
+        "tier_a_production_unlocked": True,
+        "tier_a_production_started": False,
         "tier_b_unlocked": False,
         "current_equilibration_progress": f"{equilibration['passed_run_count']}/{equilibration['expected_run_count']}",
         "claim_boundary": "Development metrics are not external confirmation; docking and MD cannot create labels or rescue a failed potency gate.",
