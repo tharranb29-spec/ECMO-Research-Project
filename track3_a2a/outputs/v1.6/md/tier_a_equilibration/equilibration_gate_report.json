@@ -1,14 +1,12 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-17T06:13:25.020293+00:00",
+  "created_at_utc": "2026-09-17T09:35:02.051069+00:00",
   "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
   "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
   "expected_run_count": 6,
-  "observed_run_count": 5,
-  "passed_run_count": 5,
-  "missing_audits": [
-    "5G53_NECA_miniGs_native_nucleotide_free/seed-20260916/equilibration_audit.json"
-  ],
+  "observed_run_count": 6,
+  "passed_run_count": 6,
+  "missing_audits": [],
   "runs": [
     {
       "system_id": "5NM4_ZMA_native",
@@ -49,10 +47,18 @@
       "sha256": "af4a183387750683681cd513e2e66b8ef2fd5c207561e8448de5360fd5b4dd0d",
       "status": "equilibration_gate_passed",
       "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
+    },
+    {
+      "system_id": "5G53_NECA_miniGs_native_nucleotide_free",
+      "seed": 20260916,
+      "path": "5G53_NECA_miniGs_native_nucleotide_free/seed-20260916/equilibration_audit.json",
+      "sha256": "167bb7d874873fc7cb3902bca390819e513d2b19abb54c9e820ecaff2eb0a571",
+      "status": "equilibration_gate_passed",
+      "config_sha256": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77"
     }
   ],
-  "status": "tier_a_equilibration_gate_locked",
-  "tier_a_production_unlocked": false,
+  "status": "tier_a_equilibration_gate_passed",
+  "tier_a_production_unlocked": true,
   "tier_b_unlocked": false,
   "best_replica_selection": "prohibited",
   "claim_limit": "This gate authorizes Tier A pilot production; it does not establish control stability or unlock Tier B."

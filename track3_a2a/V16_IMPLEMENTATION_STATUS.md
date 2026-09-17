@@ -69,6 +69,8 @@ The first 5G53-NECA-mini-Gs replica, seed 20260914, also completed 2.14 ns and p
 
 The second 5G53 replica, seed 20260915, completed 2.14 ns and passed with final temperature `309.27 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00102`; all monitored values were finite. Aggregate progress is five of six. Tier A production and Tier B remain locked pending seed 20260916 and regeneration of the complete aggregate gate.
 
+The final 5G53 replica, seed 20260916, was restarted from the accepted initial state after the earlier runtime was discarded and completed all 2.14 ns on CUDA mixed precision. It passed with final temperature `310.14 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00107`; all monitored values were finite. All six staged-equilibration replicas now pass the frozen v1.6.4 gate, authorizing the Tier A 50 ns pilot-production campaign. This gate does not establish control stability and does not unlock Tier B; both controls must still pass their production rule in at least two of three replicas.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.
