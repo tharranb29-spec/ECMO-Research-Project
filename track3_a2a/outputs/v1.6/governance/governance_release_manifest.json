@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-protocol-v1.6",
+  "release_id": "a2a-track3-v1.6-governance",
+  "status": "verified",
+  "source_artifacts": {
+    "config/protocol.v1.6.json": "72ff053253d9f7714ef450435a845bb4222eb6a3477d4d2f081ada17de5118a2",
+    "V16_PROTOCOL_AMENDMENT.md": "18abdeb489e80b15ff05074c71ae52a6d212e1c587229eb492259797e1a7f367",
+    "outputs/v1.6/protocol_freeze_manifest.json": "446e9f5e38c26360b710ee5a842cbb907989455f70814cf1bef4bdeb8d2ac9ce",
+    "outputs/v1.6/model_reproduction/development_results.json": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db",
+    "outputs/v1.6/model_reproduction/development_oof_predictions.csv": "dbb448119ef652fbb4acd0667cd97636faa7aa08b2e99e5fad89d60c800fb668",
+    "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
+    "outputs/v1.6/implementation_status.json": "39375c0ac2595ebc7aa88ac2bb3d0c0f1fe07e200abb8fe7bf7a854c517a8d1b",
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "079d318518ef25456cdaf0cc7db93081e479b81ffa96d154f10d037d9c8d3c96"
+  },
+  "release_artifacts": {
+    "governance_checks.csv": "9742fff4a84ab9385167367b11de7b684c15503bb467d37136b2ef2131e1804c",
+    "model_evidence_table.csv": "7f4a30a07f5041fcf3142c4a4975ccb95c4411eb565e9f031b1cc41488f5d1f0",
+    "gate_status_table.csv": "a30ec83f13f7a603fbb1057391965c4ab22eceb3e160c2e0da4597f2776ffedc",
+    "evidence_artifact_inventory.csv": "ae2f683d16e1607b3e858099c3ec611096a6be63acce879e17c11dad0860c764",
+    "governance_status.json": "1efe4cdcbbc17d379b3cec3035dfcdecc3650f6f22212b87fd74ddde81656379"
+  },
+  "frozen_decisions": {
+    "primary_endpoint": "pBind_Ki",
+    "primary_external_predictor": "AB_Ridge(alpha=1.0)",
+    "rf_comparators": "500/sqrt/1; seed=20260914; n_jobs=1",
+    "outcome_firewall": "sealed",
+    "retroactive_tuning": "prohibited"
+  },
+  "release_signature_sha256": "ef290efd3d202793a61dd71aae0c020bbd5dc2ad4485b47ebbb09c1fb22dc0ed"
+}

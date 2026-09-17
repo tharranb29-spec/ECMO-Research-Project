@@ -1,0 +1,5 @@
+model_id,governance_role,endpoint,development_n,generic_murcko_scaffolds,r2,rmse,mae,spearman_rho,claim_status,external_confirmation_status,promotion_allowed
+Mean,required_baseline,pBind_Ki,78,68,-0.037004677818093024,1.165203074140081,0.9849072084268139,-0.5744341791113021,development_only_not_external_confirmation,not_run,false
+AB_Ridge,primary_external_predictor,pBind_Ki,78,68,0.5605377886314917,0.7585287258909658,0.6154408512881633,0.7522923601858651,development_only_not_external_confirmation,not_run,false
+AB_RF,chemistry_rf_comparator,pBind_Ki,78,68,0.5027539353878119,0.8068576878008816,0.672131599959301,0.7191179637639938,development_only_not_external_confirmation,not_run,false
+E_RF,docking_increment_comparator,pBind_Ki,78,68,0.4817420330774198,0.8237288133904465,0.6909425643467652,0.7064451672658183,development_only_not_external_confirmation,not_run,false

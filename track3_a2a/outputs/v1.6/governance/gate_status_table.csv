@@ -1,0 +1,6 @@
+gate_id,status,decision,next_required_action
+A_protocol_and_governance,passed,release governance evidence package,preserve frozen decisions through external evaluation
+B_external_membership,locked,no cohort admitted,complete independent source-grounded pass 2 and freeze exact agreement cohort
+external_model_confirmation,not_run,promotion prohibited,"join outcomes once only after cohort, predictions, applicability thresholds, and hashes are frozen"
+tier_a_production,locked,5/6 equilibration audits passed,complete the missing prospectively declared equilibration replica and rebuild aggregate gate
+tier_b_candidate_md,locked,both Tier A controls have not passed production rule,do not start Tier B
