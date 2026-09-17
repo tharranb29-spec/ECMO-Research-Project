@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-17T06:42:22.223951+00:00",
+  "created_at_utc": "2026-09-17T09:46:19.266651+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -51,7 +51,7 @@
       "next_gate": "No outcome join. Report the frozen pass-2 attempt as a non-confirmatory floor failure; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment."
     },
     "C_open_md": {
-      "status": "periodic_and_smoke_gates_passed_staged_equilibration_pending",
+      "status": "staged_equilibration_passed_tier_a_pilot_production_authorized",
       "ambertools_image": "a2a-ambertools:v1.6",
       "ambertools_image_id": "sha256:f9c5dc14d8a347035b90054daaec4b59ac1534b21dd209967629f977d00da17c",
       "accepted_ligand_bundles": 6,
@@ -70,12 +70,12 @@
       "tier_a_unlocked_for_staged_equilibration": true,
       "cuda_numerical_preflight_status": "cuda_periodic_restraint_preflight_passed",
       "cuda_numerical_preflight_steps": 10000,
-      "staged_equilibration_gate_status": "tier_a_equilibration_gate_locked",
-      "staged_equilibration_runs_passed": 5,
+      "staged_equilibration_gate_status": "tier_a_equilibration_gate_passed",
+      "staged_equilibration_runs_passed": 6,
       "staged_equilibration_runs_required": 6,
-      "tier_a_production_unlocked": false,
+      "tier_a_production_unlocked": true,
       "tier_b_unlocked": false,
-      "next_gate": "complete the frozen full-duration staged equilibration for both controls and all three seeds, then pass the aggregate equilibration gate before Tier A pilot production"
+      "next_gate": "run and analyze the frozen three-replica 50 ns Tier A pilot production for each control; Tier B remains locked until both controls pass in at least two of three replicas"
     },
     "D_dashboard": {
       "status": "scheduled_to_start_2026-09-16",
@@ -103,7 +103,7 @@
     "outputs/v1.6/md/tier_a_release_bundles/campaign_manifest.json": "3e78a753c36e4a596714e0b25962c10a564e55149431034f38fb78e8d88ff120",
     "outputs/v1.6/md/tier_a_equilibration/cuda_periodic_restraint_validation.json": "cac925c4ea121fdceb835aec55cbfaa9bb1bc2267e5e08241ebc4566e6992ef4",
     "config/tier_a_equilibration.v1.6.4.json": "d41c52c915b704ea2d56d31f388c96f46026294d6744eedc7e622895c179cb77",
-    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "079d318518ef25456cdaf0cc7db93081e479b81ffa96d154f10d037d9c8d3c96"
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
   },
-  "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending"
+  "timeline_status": "staged_equilibration_complete_tier_a_pilot_production_next"
 }

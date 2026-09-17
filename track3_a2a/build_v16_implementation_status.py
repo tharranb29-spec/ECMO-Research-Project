@@ -85,7 +85,11 @@ def main() -> None:
                 "next_gate": "No outcome join. Report the frozen pass-2 attempt as a non-confirmatory floor failure; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment.",
             },
             "C_open_md": {
-                "status": "periodic_and_smoke_gates_passed_staged_equilibration_pending",
+                "status": (
+                    "staged_equilibration_passed_tier_a_pilot_production_authorized"
+                    if equilibration_gate["tier_a_production_unlocked"]
+                    else "periodic_and_smoke_gates_passed_staged_equilibration_pending"
+                ),
                 "ambertools_image": ligands["image"],
                 "ambertools_image_id": ligands["image_id"],
                 "accepted_ligand_bundles": ligands["accepted_count"],
@@ -107,9 +111,13 @@ def main() -> None:
                 "staged_equilibration_gate_status": equilibration_gate["status"],
                 "staged_equilibration_runs_passed": equilibration_gate["passed_run_count"],
                 "staged_equilibration_runs_required": equilibration_gate["expected_run_count"],
-                "tier_a_production_unlocked": False,
+                "tier_a_production_unlocked": equilibration_gate["tier_a_production_unlocked"],
                 "tier_b_unlocked": False,
-                "next_gate": "complete the frozen full-duration staged equilibration for both controls and all three seeds, then pass the aggregate equilibration gate before Tier A pilot production",
+                "next_gate": (
+                    "run and analyze the frozen three-replica 50 ns Tier A pilot production for each control; Tier B remains locked until both controls pass in at least two of three replicas"
+                    if equilibration_gate["tier_a_production_unlocked"]
+                    else "complete the frozen full-duration staged equilibration for both controls and all three seeds, then pass the aggregate equilibration gate before Tier A pilot production"
+                ),
             },
             "D_dashboard": {
                 "status": "scheduled_to_start_2026-09-16",
@@ -127,7 +135,11 @@ def main() -> None:
                 releases_path, cuda_validation_path, equilibration_config_path, equilibration_gate_path,
             ]
         },
-        "timeline_status": "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending",
+        "timeline_status": (
+            "staged_equilibration_complete_tier_a_pilot_production_next"
+            if equilibration_gate["tier_a_production_unlocked"]
+            else "ahead_of_September_18_20_periodic_system_milestone_equilibration_execution_pending"
+        ),
     }
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, indent=2) + "\n")

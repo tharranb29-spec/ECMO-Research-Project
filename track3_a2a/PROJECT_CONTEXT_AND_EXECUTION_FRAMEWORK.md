@@ -577,6 +577,8 @@ The first full 5G53-NECA-mini-Gs replica, seed 20260914, also completed 2.14 ns 
 
 The second full 5G53 replica, seed 20260915, completed 2.14 ns and passed with final temperature `309.27 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00102`; all monitored values were finite. Aggregate progress is five of six. Production and Tier B remain locked pending seed 20260916 and the complete aggregate gate.
 
+The final 5G53 replica, seed 20260916, was restarted from the accepted initial state after the earlier runtime was discarded and completed all 2.14 ns on CUDA mixed precision. It passed with final temperature `310.14 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00107`; all monitored values were finite. All six v1.6.4 staged-equilibration replicas therefore pass. The aggregate gate authorizes the frozen Tier A 50 ns pilot-production campaign only. Tier B remains locked until both native controls pass their later production criteria in at least two of three replicas.
+
 ## 15. Execution update — September 17, 2026
 
 The v1.6 pass-2 external evidence attempt is complete and frozen without loading or extracting numeric external Ki outcomes. Retrieved primary full text supported source-grounded categorical review for 29 queued candidates, including 24 that passed the pass-1 metadata preflight. No record was admitted: the retrieved text did not provide a machine-verifiable structure identifier that independently linked the queued standardized structure and stereochemistry to the paper record, and all remaining assay-context ambiguities were quarantined.

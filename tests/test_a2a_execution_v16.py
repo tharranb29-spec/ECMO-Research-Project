@@ -113,8 +113,9 @@ class A2AExecutionV16Tests(unittest.TestCase):
         self.assertAlmostEqual(sum(stage["duration_ps"] for stage in config["stages"]), 2140.0)
         self.assertLessEqual(max(stage["timestep_femtoseconds"] for stage in config["stages"]), 1.0)
         gate = self.load("outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json")
-        self.assertEqual(gate["status"], "tier_a_equilibration_gate_locked")
-        self.assertFalse(gate["tier_a_production_unlocked"])
+        self.assertEqual(gate["status"], "tier_a_equilibration_gate_passed")
+        self.assertEqual(gate["passed_run_count"], 6)
+        self.assertTrue(gate["tier_a_production_unlocked"])
         self.assertFalse(gate["tier_b_unlocked"])
 
 
