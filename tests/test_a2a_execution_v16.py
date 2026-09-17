@@ -18,6 +18,21 @@ class A2AExecutionV16Tests(unittest.TestCase):
         self.assertFalse(audit["outcome_fields_loaded"])
         self.assertGreaterEqual(audit["pass_2_required_count"], 60)
 
+    def test_external_pass2_freezes_floor_failure_without_outcome_join(self):
+        audit = self.load("outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json")
+        freeze = self.load("outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json")
+        self.assertEqual(audit["candidate_count"], 240)
+        self.assertEqual(audit["pass_1_eligible_source_grounded_candidate_count"], 24)
+        self.assertEqual(audit["admitted_count"], 0)
+        self.assertTrue(audit["membership_frozen"])
+        self.assertFalse(audit["numeric_ki_extracted"])
+        self.assertFalse(audit["outcome_fields_loaded"])
+        self.assertFalse(freeze["minimum_floors_passed"])
+        self.assertFalse(freeze["external_outcomes_joined"])
+        self.assertFalse(freeze["one_time_outcome_join_authorized"])
+        self.assertGreaterEqual(freeze["minimum_molecule_floor"], 60)
+        self.assertGreaterEqual(freeze["minimum_generic_murcko_scaffold_floor"], 20)
+
     def test_native_control_pose_mappings_pass(self):
         audit = self.load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
         self.assertEqual(audit["accepted_count"], 2)

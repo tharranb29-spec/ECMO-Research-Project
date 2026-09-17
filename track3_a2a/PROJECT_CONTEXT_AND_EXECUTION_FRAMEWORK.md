@@ -576,3 +576,9 @@ All three full v1.6.4 5NM4-ZMA equilibration replicas subsequently completed 2.1
 The first full 5G53-NECA-mini-Gs replica, seed 20260914, also completed 2.14 ns and passed with final temperature `308.68 K`, native-contact fraction `0.9865`, and last-half volume CV `0.00108`; all monitored values were finite. Aggregate progress is four of six. Production and Tier B remain locked pending the remaining two 5G53 replicas and the complete aggregate gate.
 
 The second full 5G53 replica, seed 20260915, completed 2.14 ns and passed with final temperature `309.27 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00102`; all monitored values were finite. Aggregate progress is five of six. Production and Tier B remain locked pending seed 20260916 and the complete aggregate gate.
+
+## 15. Execution update — September 17, 2026
+
+The v1.6 pass-2 external evidence attempt is complete and frozen without loading or extracting numeric external Ki outcomes. Retrieved primary full text supported source-grounded categorical review for 29 queued candidates, including 24 that passed the pass-1 metadata preflight. No record was admitted: the retrieved text did not provide a machine-verifiable structure identifier that independently linked the queued standardized structure and stereochemistry to the paper record, and all remaining assay-context ambiguities were quarantined.
+
+The frozen external membership is therefore zero molecules and zero generic Murcko scaffolds. It fails the unchanged 60-molecule and 20-scaffold floors and is reportable only as a non-confirmatory stress-test freeze. The one-time outcome join remains prohibited, external confirmation has not occurred, and no model is eligible for promotion. A broader source-acquisition campaign may proceed only under a new prospectively frozen pre-outcome amendment.

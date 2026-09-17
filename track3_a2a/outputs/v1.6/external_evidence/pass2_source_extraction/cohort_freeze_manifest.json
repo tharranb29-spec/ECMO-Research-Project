@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-17T06:40:45.674236+00:00",
+  "specification_id": "a2a-external-cohort-membership-freeze-v1.6",
+  "status": "frozen_nonconfirmatory_floor_failure",
+  "membership_frozen": true,
+  "membership_selected_without_outcomes": true,
+  "numeric_ki_extracted": false,
+  "external_outcomes_joined": false,
+  "one_time_outcome_join_authorized": false,
+  "candidate_count": 240,
+  "source_grounded_candidate_count": 29,
+  "pass_1_eligible_source_grounded_candidate_count": 24,
+  "admitted_molecule_count": 0,
+  "admitted_generic_murcko_scaffold_count": 0,
+  "minimum_molecule_floor": 60,
+  "minimum_generic_murcko_scaffold_floor": 20,
+  "minimum_floors_passed": false,
+  "quarantine_reason_counts": {
+    "pass_1_rejected": 53,
+    "retrieved_primary_full_text_unavailable": 211,
+    "unresolved_assay_type": 1,
+    "unresolved_molecule_identity": 29,
+    "unresolved_relation": 27,
+    "unresolved_stereochemistry": 29,
+    "unresolved_target_species": 4,
+    "unresolved_units": 29,
+    "unresolved_wild_type_status": 25
+  },
+  "source_hashes": {
+    "pass1_packet": "cd979f3207832eece12d78cc074c45a94b869c502294d8c0df1b722196a0aa24",
+    "pmc_fulltext_evidence": "d5782122fe6b0d24f9126b286c56f6b2edc615584c2e0aeee5022eea5f11a3e5"
+  },
+  "artifact_hashes": {
+    "pass2_packet": "642ae6e5f577839d04c28f1d4c66602494d2df2b81edfe8941e78432c15b6bc1",
+    "admitted_external_cohort": "9eaead7aaca8ea926c0eb1380889298a02604b86fbd015d1ea8e59f346b372ef",
+    "quarantined_external_cohort": "e05254f08fd945695e8cc9c64ce2de0d12376575df28ca178bf64cc49e3d293d"
+  },
+  "decision": "The frozen 60-molecule/20-scaffold floors were not met. This is a non-confirmatory stress-test freeze; the one-time outcome join remains prohibited."
+}

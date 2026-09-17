@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-17T06:13:53.258300+00:00",
+  "created_at_utc": "2026-09-17T06:42:22.223951+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -25,7 +25,7 @@
       }
     },
     "B_external_confirmation": {
-      "status": "pass_1_complete_pass_2_pending_membership_not_frozen",
+      "status": "frozen_nonconfirmatory_floor_failure",
       "queue_candidates": 240,
       "pubmed_requested": 141,
       "pubmed_retrieved": 141,
@@ -41,8 +41,14 @@
         "quarantine_target_not_supported": 46
       },
       "pass_2_required_candidates": 187,
+      "pass_2_source_grounded_candidates": 29,
+      "pass_2_eligible_source_grounded_candidates": 24,
       "external_cohort_admitted": 0,
-      "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement"
+      "external_cohort_generic_murcko_scaffolds": 0,
+      "membership_frozen": true,
+      "minimum_floors_passed": false,
+      "one_time_outcome_join_authorized": false,
+      "next_gate": "No outcome join. Report the frozen pass-2 attempt as a non-confirmatory floor failure; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment."
     },
     "C_open_md": {
       "status": "periodic_and_smoke_gates_passed_staged_equilibration_pending",
@@ -84,6 +90,8 @@
     "outputs/v1.6/external_evidence/pubmed_retrieval_audit.json": "79357ef76fa2453d7c5492394c8209bd07a0ef8aa97bbd6d3f47a7cbebc92131",
     "outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json": "9cb14912de6ee76f594698b95fe7727a5d7908e79bbd14e7636d40ece61b0e2d",
     "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
+    "outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json": "f46828a0a569fdec47f265ec815fe51214878f37852e60bf9924a48af809b9d5",
+    "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0",
     "outputs/v1.6/md/tier_a_constructs/construct_audit.json": "69adce104f5c3ad69e101c02c4dfd543951f8fe6f84a3ff94b5456bc898eb4f5",
     "outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json": "a791dc1f996e466a8aa389945ee7b5c6e10e3fb9cb77e3f42ae4c569d4e297f3",
     "outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json": "ad28ede2a82a769b0de19cf2b6fe38e371c8e3564f403ae674606f28f2821e99",
