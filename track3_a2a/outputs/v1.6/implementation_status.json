@@ -78,9 +78,22 @@
       "next_gate": "run and analyze the frozen three-replica 50 ns Tier A pilot production for each control; Tier B remains locked until both controls pass in at least two of three replicas"
     },
     "D_dashboard": {
-      "status": "scheduled_to_start_2026-09-16",
-      "current_mode": "legacy_dashboard_preserved",
-      "next_gate": "static versioned Track 3 evidence contracts before autonomous shadow-mode integration"
+      "status": "static_v1_contract_dashboard_implemented",
+      "current_mode": "legacy_dashboard_preserved_track3_dashboard_read_only",
+      "contract_version": "1.0.0",
+      "contracts": [
+        "evidence_inbox",
+        "molecule_registry",
+        "model_registry",
+        "applicability_uncertainty",
+        "dual_state_docking",
+        "md_gates",
+        "candidate_portfolio",
+        "audit_log"
+      ],
+      "autonomous_mode": "shadow_only",
+      "served_track3_model": null,
+      "next_gate": "connect additive literature updates as shadow proposals only after contract validation; retain external, human-release, and Tier B promotion gates"
     }
   },
   "artifact_hashes": {

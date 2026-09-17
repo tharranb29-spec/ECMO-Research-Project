@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.md-gates.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.md-gates.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {"type": "array", "items": {"type": "object", "required": ["gate_id", "specification_id", "status", "passed_runs", "required_runs", "tier_a_production_unlocked", "tier_b_unlocked", "claim_limit", "source"]}}
+  },
+  "additionalProperties": false
+}

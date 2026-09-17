@@ -1,0 +1,612 @@
+{
+  "contracts": {
+    "applicability_uncertainty": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "assessment_id": "pBind_Ki:AB_Ridge:development-v1.6",
+          "calibration_warning": "Empirical interval coverage is development-only and is not an external calibration claim.",
+          "descriptor_distance_threshold": 7.595001386539151,
+          "external_thresholds_frozen": false,
+          "inside_n": 74,
+          "model_id": "AB_Ridge",
+          "outside_n": 4,
+          "r2_interval": {
+            "estimate": 0.552653734355324,
+            "lower": 0.4396435513343424,
+            "upper": 0.6487845133745116
+          },
+          "scope": "development grouped out-of-fold predictions",
+          "similarity_threshold": 0.25,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        }
+      ],
+      "schema_id": "a2a-dashboard.applicability-uncertainty.v1"
+    },
+    "audit_log": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "action": "protocol-freeze",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "0a299f40f802f969f31919dd9e54dc7fad58ffc4e2738137a01d78f387d6e8d1",
+          "event_id": "audit-0001",
+          "previous_entry_hash": "GENESIS",
+          "record_id": "a2a-track3-protocol-v1.6",
+          "record_type": "protocol",
+          "sequence": 1,
+          "source": {
+            "path": "outputs/v1.6/protocol_freeze_manifest.json",
+            "sha256": "446e9f5e38c26360b710ee5a842cbb907989455f70814cf1bef4bdeb8d2ac9ce"
+          }
+        },
+        {
+          "action": "evidence-pass1",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "3d6a6013b668b3321e71a624de99c4f4137485ca82ba1442cb0fc90f2da7fe5d",
+          "event_id": "audit-0002",
+          "previous_entry_hash": "0a299f40f802f969f31919dd9e54dc7fad58ffc4e2738137a01d78f387d6e8d1",
+          "record_id": "external-pass-1",
+          "record_type": "evidence_inbox",
+          "sequence": 2,
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          }
+        },
+        {
+          "action": "model-reproduction",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "0d828297383e6bb68b283c36603be73b19b9dd540cf1f6599cedb6ed2c352d52",
+          "event_id": "audit-0003",
+          "previous_entry_hash": "3d6a6013b668b3321e71a624de99c4f4137485ca82ba1442cb0fc90f2da7fe5d",
+          "record_id": "pBind_Ki-development",
+          "record_type": "model_registry",
+          "sequence": 3,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        },
+        {
+          "action": "prospective-docking",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "91927e703f088e78a160b101aff978c74e537a5d9cc2386d902f9c9db4323771",
+          "event_id": "audit-0004",
+          "previous_entry_hash": "0d828297383e6bb68b283c36603be73b19b9dd540cf1f6599cedb6ed2c352d52",
+          "record_id": "a2a-external-validation-v1.4",
+          "record_type": "dual_state_docking",
+          "sequence": 4,
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          }
+        },
+        {
+          "action": "md-gate",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
+          "event_id": "audit-0005",
+          "previous_entry_hash": "91927e703f088e78a160b101aff978c74e537a5d9cc2386d902f9c9db4323771",
+          "record_id": "a2a-tier-a-equilibration-gate-v1.6.4",
+          "record_type": "md_gates",
+          "sequence": 5,
+          "source": {
+            "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
+            "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
+          }
+        },
+        {
+          "action": "shadow-policy",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "2b128c5562121f2166b1a734b285e032cec07f650b25463ed589c879c8f67093",
+          "event_id": "audit-0006",
+          "previous_entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
+          "record_id": "a2a-shadow-update-v1.4",
+          "record_type": "promotion",
+          "sequence": 6,
+          "source": {
+            "path": "config/shadow_update.v1.4.json",
+            "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
+          }
+        }
+      ],
+      "schema_id": "a2a-dashboard.audit-log.v1"
+    },
+    "candidate_portfolio": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "d_affinity_kcal_mol": 0.0684,
+          "dual_state_complete": true,
+          "label_status": "blinded",
+          "md_status": "tier_b_locked",
+          "molecule_id": "LIT25-MET-PGD2",
+          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "portfolio_id": "portfolio:LIT25-MET-PGD2",
+          "promotion_status": "shadow_proposal",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "computationally_prioritized"
+        },
+        {
+          "d_affinity_kcal_mol": -0.4107,
+          "dual_state_complete": true,
+          "label_status": "blinded",
+          "md_status": "tier_b_locked",
+          "molecule_id": "LIT25-RL-C5",
+          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "portfolio_id": "portfolio:LIT25-RL-C5",
+          "promotion_status": "shadow_proposal",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "computationally_prioritized"
+        },
+        {
+          "d_affinity_kcal_mol": 0.5118,
+          "dual_state_complete": true,
+          "label_status": "blinded",
+          "md_status": "tier_b_locked",
+          "molecule_id": "LIT25-RL-C7",
+          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "portfolio_id": "portfolio:LIT25-RL-C7",
+          "promotion_status": "shadow_proposal",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "computationally_prioritized"
+        },
+        {
+          "d_affinity_kcal_mol": 0.7303,
+          "dual_state_complete": true,
+          "label_status": "blinded",
+          "md_status": "tier_b_locked",
+          "molecule_id": "LIT25-RL-C9",
+          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "portfolio_id": "portfolio:LIT25-RL-C9",
+          "promotion_status": "shadow_proposal",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "computationally_prioritized"
+        }
+      ],
+      "schema_id": "a2a-dashboard.candidate-portfolio.v1"
+    },
+    "dual_state_docking": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-MET-PGD2:5NM4",
+          "median_affinity_kcal_mol": -7.1291,
+          "median_cnn_score": 0.5859,
+          "molecule_id": "LIT25-MET-PGD2",
+          "receptor_id": "5NM4",
+          "receptor_state": "inactive",
+          "retained_pose_sha256": "cb4ed5dd1f12a71a52ebc90585c2789af30066b3f1f9731e7d3dfcf9873b6b46",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-MET-PGD2:2YDO",
+          "median_affinity_kcal_mol": -7.0607,
+          "median_cnn_score": 0.7386,
+          "molecule_id": "LIT25-MET-PGD2",
+          "receptor_id": "2YDO",
+          "receptor_state": "active-like",
+          "retained_pose_sha256": "ab2f616cd8212db94ccbc834fd7234db1167b104db20587a03ba89034d775cf2",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C5:5NM4",
+          "median_affinity_kcal_mol": -9.6379,
+          "median_cnn_score": 0.9373,
+          "molecule_id": "LIT25-RL-C5",
+          "receptor_id": "5NM4",
+          "receptor_state": "inactive",
+          "retained_pose_sha256": "eef82e4467fe43ce48c8a49dfb12d6736809d99e03c51027317e19d7233b3aa0",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C5:2YDO",
+          "median_affinity_kcal_mol": -10.0486,
+          "median_cnn_score": 0.9171,
+          "molecule_id": "LIT25-RL-C5",
+          "receptor_id": "2YDO",
+          "receptor_state": "active-like",
+          "retained_pose_sha256": "4c83f630af89935a0757ba91c7e60ece4ac058407c440a6f35b1e0e5aea65a5d",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C7:5NM4",
+          "median_affinity_kcal_mol": -9.9848,
+          "median_cnn_score": 0.9685,
+          "molecule_id": "LIT25-RL-C7",
+          "receptor_id": "5NM4",
+          "receptor_state": "inactive",
+          "retained_pose_sha256": "6b420e87e04ab119b58397408b35d7d506071bcfc62d0352459ea7a447351c34",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C7:2YDO",
+          "median_affinity_kcal_mol": -9.473,
+          "median_cnn_score": 0.9553,
+          "molecule_id": "LIT25-RL-C7",
+          "receptor_id": "2YDO",
+          "receptor_state": "active-like",
+          "retained_pose_sha256": "75e9cad3a1e9e90f8a0920aaa8d5169010269752b02aeaad242ff34621254db5",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C9:5NM4",
+          "median_affinity_kcal_mol": -9.5699,
+          "median_cnn_score": 0.97,
+          "molecule_id": "LIT25-RL-C9",
+          "receptor_id": "5NM4",
+          "receptor_state": "inactive",
+          "retained_pose_sha256": "b658fe15e11501aa691fedb3119391d445f5c4b09cb553fab938104d72f85991",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        },
+        {
+          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "docking_id": "LIT25-RL-C9:2YDO",
+          "median_affinity_kcal_mol": -8.8396,
+          "median_cnn_score": 0.8326,
+          "molecule_id": "LIT25-RL-C9",
+          "receptor_id": "2YDO",
+          "receptor_state": "active-like",
+          "retained_pose_sha256": "5456dd456a4e4a0274291b19c8d410845cb2f1ead3ef3e9cd0de7afd27b041de",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "status": "valid",
+          "valid_seed_count": 3
+        }
+      ],
+      "schema_id": "a2a-dashboard.dual-state-docking.v1"
+    },
+    "evidence_inbox": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "count": 1,
+          "disposition": "review",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:metadata_pass_doi_only_needs_source_retrieval",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "metadata_pass_doi_only_needs_source_retrieval",
+          "title": "DOI-only retrieval"
+        },
+        {
+          "count": 24,
+          "disposition": "review",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:metadata_pass_fulltext_ready",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "metadata_pass_fulltext_ready",
+          "title": "Full text ready"
+        },
+        {
+          "count": 131,
+          "disposition": "review",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:metadata_pass_needs_fulltext",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "metadata_pass_needs_fulltext",
+          "title": "Needs source text"
+        },
+        {
+          "count": 31,
+          "disposition": "review",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:metadata_pass_requires_endpoint_resolution",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "metadata_pass_requires_endpoint_resolution",
+          "title": "Endpoint resolution"
+        },
+        {
+          "count": 7,
+          "disposition": "quarantined",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:quarantine_nonprimary_source",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "quarantine_nonprimary_source",
+          "title": "Non-primary source"
+        },
+        {
+          "count": 46,
+          "disposition": "quarantined",
+          "membership_frozen": false,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-lane:quarantine_target_not_supported",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+            "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
+          },
+          "status": "quarantine_target_not_supported",
+          "title": "A2A not supported"
+        }
+      ],
+      "schema_id": "a2a-dashboard.evidence-inbox.v1"
+    },
+    "md_gates": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "claim_limit": "This gate authorizes Tier A pilot production; it does not establish control stability or unlock Tier B.",
+          "gate_id": "G7:tier-a-equilibration",
+          "missing_audits": [],
+          "observed_runs": 6,
+          "passed_runs": 6,
+          "required_runs": 6,
+          "source": {
+            "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
+            "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
+          },
+          "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
+          "status": "tier_a_equilibration_gate_passed",
+          "tier_a_production_unlocked": true,
+          "tier_b_unlocked": false
+        },
+        {
+          "claim_limit": "Candidate MD cannot start until both Tier A native controls pass the frozen production rule.",
+          "gate_id": "G8:candidate-md",
+          "missing_audits": [],
+          "observed_runs": 0,
+          "passed_runs": 0,
+          "required_runs": 24,
+          "source": {
+            "path": "outputs/v1.5/md/preflight_status.json",
+            "sha256": "50c4d49deae777f47efdc55bac27440ddc945fe5d8af539d1e899bbb5d6a2ea8"
+          },
+          "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
+          "status": "locked",
+          "tier_a_production_unlocked": true,
+          "tier_b_unlocked": false
+        }
+      ],
+      "schema_id": "a2a-dashboard.md-gates.v1"
+    },
+    "model_registry": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "development_n": 78,
+          "display_name": "training-development mean pBind_Ki",
+          "endpoint": "pBind_Ki",
+          "external_outcomes_loaded": false,
+          "lifecycle_status": "candidate_not_served",
+          "model_id": "Mean",
+          "promotion_allowed": false,
+          "r2": -0.037004677818093024,
+          "rmse": 1.165203074140081,
+          "role": "development comparator",
+          "scaffold_count": 68,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        },
+        {
+          "development_n": 78,
+          "display_name": "AB_Ridge",
+          "endpoint": "pBind_Ki",
+          "external_outcomes_loaded": false,
+          "lifecycle_status": "candidate_not_served",
+          "model_id": "AB_Ridge",
+          "promotion_allowed": false,
+          "r2": 0.5605377886314917,
+          "rmse": 0.7585287258909658,
+          "role": "primary external predictor",
+          "scaffold_count": 68,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        },
+        {
+          "development_n": 78,
+          "display_name": "AB_RF_500_sqrt_1",
+          "endpoint": "pBind_Ki",
+          "external_outcomes_loaded": false,
+          "lifecycle_status": "candidate_not_served",
+          "model_id": "AB_RF",
+          "promotion_allowed": false,
+          "r2": 0.5027539353878119,
+          "rmse": 0.8068576878008816,
+          "role": "development comparator",
+          "scaffold_count": 68,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        },
+        {
+          "development_n": 78,
+          "display_name": "E_RF_500_sqrt_1",
+          "endpoint": "pBind_Ki",
+          "external_outcomes_loaded": false,
+          "lifecycle_status": "candidate_not_served",
+          "model_id": "E_RF",
+          "promotion_allowed": false,
+          "r2": 0.4817420330774198,
+          "rmse": 0.8237288133904465,
+          "role": "development comparator",
+          "scaffold_count": 68,
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          }
+        }
+      ],
+      "schema_id": "a2a-dashboard.model-registry.v1"
+    },
+    "molecule_registry": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "display_name": "MET-PGD2",
+          "functional_label_blinded": true,
+          "identity_status": "structure prepared",
+          "molecule_id": "LIT25-MET-PGD2",
+          "registry_version": "prospective-literature-pilot-v1.4",
+          "role": "label-blind prospective candidate",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "training_eligible": false
+        },
+        {
+          "display_name": "RL-C5",
+          "functional_label_blinded": true,
+          "identity_status": "structure prepared",
+          "molecule_id": "LIT25-RL-C5",
+          "registry_version": "prospective-literature-pilot-v1.4",
+          "role": "label-blind prospective candidate",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "training_eligible": false
+        },
+        {
+          "display_name": "RL-C7",
+          "functional_label_blinded": true,
+          "identity_status": "structure prepared",
+          "molecule_id": "LIT25-RL-C7",
+          "registry_version": "prospective-literature-pilot-v1.4",
+          "role": "label-blind prospective candidate",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "training_eligible": false
+        },
+        {
+          "display_name": "RL-C9",
+          "functional_label_blinded": true,
+          "identity_status": "structure prepared",
+          "molecule_id": "LIT25-RL-C9",
+          "registry_version": "prospective-literature-pilot-v1.4",
+          "role": "label-blind prospective candidate",
+          "source": {
+            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          },
+          "training_eligible": false
+        }
+      ],
+      "schema_id": "a2a-dashboard.molecule-registry.v1"
+    }
+  },
+  "dashboard_contract_version": "1.0.0",
+  "project": {
+    "claim_level": "Retrospective association plus limited prospective prioritization; no external or biological validation.",
+    "deadline": "2026-09-30",
+    "protocol": "a2a-track3-protocol-v1.6",
+    "short_title": "A2A Evidence Command Center",
+    "target": "Human ADORA2A \u00b7 CHEMBL251",
+    "title": "Evidence-Gated Dual-State Docking and Machine Learning for Functional Classification and Virtual Screening of A2A Adenosine Receptor Ligands"
+  },
+  "promotion": {
+    "automatic_model_replacement_enabled": false,
+    "candidate_model": "a2a-external-validation-v1.4",
+    "external_gate_passed": false,
+    "human_release_approved": false,
+    "mode": "shadow_only",
+    "permitted_label": "computationally prioritized",
+    "prohibited_label": "validated hit",
+    "served_model": null,
+    "source": {
+      "path": "outputs/v1.4/shadow_update_status.json",
+      "sha256": "ee09c22cb06824843aae242e423cd85ab3171af2fb5edfe6d5c2179f2eb54185"
+    }
+  },
+  "snapshot_created_at_utc": "2026-09-17T09:38:36.894903+00:00",
+  "summary": {
+    "docked_candidates": 4,
+    "evidence_queue": 240,
+    "external_admitted": 0,
+    "external_outcomes_loaded": false,
+    "md_runs_passed": 6,
+    "md_runs_required": 6,
+    "pass_2_required": 187,
+    "primary_model": "AB_Ridge",
+    "primary_model_r2": 0.5605377886314917,
+    "promotion_mode": "shadow_only",
+    "tier_a_production_unlocked": true,
+    "tier_b_unlocked": false
+  }
+}

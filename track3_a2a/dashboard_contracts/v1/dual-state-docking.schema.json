@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.dual-state-docking.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.dual-state-docking.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {"type": "array", "items": {"type": "object", "required": ["docking_id", "molecule_id", "receptor_id", "receptor_state", "valid_seed_count", "median_affinity_kcal_mol", "median_cnn_score", "retained_pose_sha256", "claim_limit", "source"]}}
+  },
+  "additionalProperties": false
+}

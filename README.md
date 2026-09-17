@@ -1,5 +1,23 @@
 # ECMO Ligand Ranking Prototype
 
+## Track 3 A2A dashboard
+
+The audited, read-only Track 3 interface is available at `track3-dashboard.html`.
+It is separate from the preserved legacy ECMO dashboard and presents versioned
+contracts for evidence intake, molecule and model registries, applicability and
+uncertainty, dual-state docking, MD gates, the candidate portfolio, and a
+hash-chained audit log.
+
+Rebuild its deterministic static data bundle after audited artifacts change:
+
+```bash
+python3 build_track3_dashboard.py
+python3 -m unittest tests.test_track3_dashboard
+```
+
+Autonomous records remain shadow proposals. The dashboard cannot admit labels,
+promote a model, unlock Tier B, or describe a candidate as experimentally validated.
+
 This folder now contains a rough, trainable ranking prototype for the AI-driven part of your ECMO biomaterials project.
 
 It is intentionally a seed model, not a final discovery engine.
