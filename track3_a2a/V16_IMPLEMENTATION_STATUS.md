@@ -1,6 +1,6 @@
 # Track 3 v1.6 implementation status
 
-**Status date:** 2026-09-15
+**Status date:** 2026-09-17
 
 **Deadline:** 2026-09-30
 
@@ -27,9 +27,11 @@ The result confirms that the revised RF setting is stronger than the old v1.5 RF
 
 The label-blind 240-candidate queue remains unchanged. PubMed retrieval covered all 141 unique linked PMIDs; 140 records include abstracts. Twenty-nine records carried PMC identifiers. Eighteen machine-readable full texts were retrieved, while 11 unavailable texts are retained as retrieval limitations, not evidence failures.
 
-Membership is not frozen and no Ki outcome has been joined. The next gate is deterministic source triage followed by an independently configured source-grounded extraction pass. Only exact agreement may admit a molecule; all ambiguity or disagreement is quarantined.
-
 The deterministic pass-1 preflight is now complete for all 240 candidates. It projects only label-blind identity and provenance fields, explicitly ignores the outcome-derived queue field, and admits zero records. It routes 187 candidates to pass 2: 24 are full-text-ready, 131 have primary abstract support but require source text, 31 require exact endpoint resolution, and one has a DOI but no linked PubMed record. Seven non-primary sources and 46 records without explicit A2A support in the retrieved evidence remain quarantined. Multi-PMID records are assessed source by source rather than being treated as malformed identifiers.
+
+The independently configured pass-2 extractor is complete for the frozen v1.6 attempt. It inspected only categorical source evidence and provenance, did not extract a numeric Ki, and did not read or join the sealed external outcome fields. Twenty-nine queued candidates had a retrieved primary full text, of which 24 had passed the pass-1 metadata preflight. None could be admitted because no retrieved source contained a machine-verifiable structure identifier that independently tied the queued standardized molecule and stereochemistry to the paper record; additional species, wild-type, relation, unit, and assay ambiguities were quarantined rather than inferred.
+
+Membership for this attempt is frozen at zero admitted molecules and zero admitted generic Murcko scaffolds. The predeclared floors of at least 60 molecules and at least 20 scaffolds therefore failed. This is a non-confirmatory stress-test freeze, the one-time outcome join is not authorized, and no external predictive claim or model promotion is permitted. Any expanded evidence-retrieval attempt requires a prospectively versioned amendment while outcomes remain sealed.
 
 ## Workstream C — open MD v1.6
 

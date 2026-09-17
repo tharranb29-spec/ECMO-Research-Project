@@ -29,6 +29,8 @@ def main() -> None:
     pubmed, pubmed_path = load("outputs/v1.6/external_evidence/pubmed_retrieval_audit.json")
     pmc, pmc_path = load("outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json")
     pass1, pass1_path = load("outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json")
+    pass2, pass2_path = load("outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json")
+    external_freeze, external_freeze_path = load("outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json")
     constructs, constructs_path = load("outputs/v1.6/md/tier_a_constructs/construct_audit.json")
     minimized, minimized_path = load("outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json")
     native_poses, native_poses_path = load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
@@ -64,7 +66,7 @@ def main() -> None:
                 },
             },
             "B_external_confirmation": {
-                "status": "pass_1_complete_pass_2_pending_membership_not_frozen",
+                "status": external_freeze["status"],
                 "queue_candidates": 240,
                 "pubmed_requested": pubmed["requested_pmid_count"],
                 "pubmed_retrieved": pubmed["retrieved_article_count"],
@@ -73,8 +75,14 @@ def main() -> None:
                 "pmc_fulltext_unavailable": pmc["failed_fulltext_count"],
                 "pass_1_status_counts": pass1["status_counts"],
                 "pass_2_required_candidates": pass1["pass_2_required_count"],
-                "external_cohort_admitted": pass1["external_cohort_admitted_count"],
-                "next_gate": "independent source-grounded pass-2 extraction; freeze membership only after exact field agreement",
+                "pass_2_source_grounded_candidates": pass2["source_grounded_candidate_count"],
+                "pass_2_eligible_source_grounded_candidates": pass2["pass_1_eligible_source_grounded_candidate_count"],
+                "external_cohort_admitted": external_freeze["admitted_molecule_count"],
+                "external_cohort_generic_murcko_scaffolds": external_freeze["admitted_generic_murcko_scaffold_count"],
+                "membership_frozen": external_freeze["membership_frozen"],
+                "minimum_floors_passed": external_freeze["minimum_floors_passed"],
+                "one_time_outcome_join_authorized": external_freeze["one_time_outcome_join_authorized"],
+                "next_gate": "No outcome join. Report the frozen pass-2 attempt as a non-confirmatory floor failure; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment.",
             },
             "C_open_md": {
                 "status": (
@@ -121,6 +129,7 @@ def main() -> None:
             str(path.relative_to(ROOT)): sha256(path)
             for path in [
                 freeze_path, model_path, ligand_path, pubmed_path, pmc_path, pass1_path,
+                pass2_path, external_freeze_path,
                 constructs_path, minimized_path, native_poses_path, membrane_path,
                 membrane_relaxation_path, complexes_path, periodic_path, smoke_path,
                 releases_path, cuda_validation_path, equilibration_config_path, equilibration_gate_path,

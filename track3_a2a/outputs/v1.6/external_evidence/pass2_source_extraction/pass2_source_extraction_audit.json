@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-17T06:40:45.675482+00:00",
+  "specification_id": "a2a-external-computational-evidence-pass2-v1.6",
+  "candidate_count": 240,
+  "source_grounded_candidate_count": 29,
+  "pass_1_eligible_source_grounded_candidate_count": 24,
+  "admitted_count": 0,
+  "quarantined_count": 240,
+  "pass_2_status_counts": {
+    "quarantine": 240
+  },
+  "quarantine_reason_counts": {
+    "pass_1_rejected": 53,
+    "retrieved_primary_full_text_unavailable": 211,
+    "unresolved_assay_type": 1,
+    "unresolved_molecule_identity": 29,
+    "unresolved_relation": 27,
+    "unresolved_stereochemistry": 29,
+    "unresolved_target_species": 4,
+    "unresolved_units": 29,
+    "unresolved_wild_type_status": 25
+  },
+  "numeric_ki_extracted": false,
+  "outcome_fields_loaded": false,
+  "membership_frozen": true,
+  "minimum_floors_passed": false,
+  "one_time_outcome_join_authorized": false,
+  "cohort_freeze_manifest_sha256": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0"
+}
