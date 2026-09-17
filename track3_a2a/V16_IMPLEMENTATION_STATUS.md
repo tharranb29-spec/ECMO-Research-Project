@@ -67,6 +67,8 @@ All three full v1.6.4 5NM4-ZMA replicas completed 2.14 ns and passed their equil
 
 The first 5G53-NECA-mini-Gs replica, seed 20260914, also completed 2.14 ns and passed. Its final temperature was `308.68 K`, native-contact fraction `0.9865`, and last-half volume CV `0.00108`; all monitored values were finite. Aggregate progress is four of six. Tier A production and Tier B remain locked pending the two remaining 5G53 replicas and the complete aggregate gate.
 
+The second 5G53 replica, seed 20260915, completed 2.14 ns and passed with final temperature `309.27 K`, native-contact fraction `1.0000`, and last-half volume CV `0.00102`; all monitored values were finite. Aggregate progress is five of six. Tier A production and Tier B remain locked pending seed 20260916 and regeneration of the complete aggregate gate.
+
 ## Workstream D — autonomous dashboard
 
 The legacy dashboard is preserved unchanged. Track 3 redesign starts on September 16, after the static v1.6 evidence contracts are stable. The first dashboard release will expose versioned evidence, molecule, model, docking, and MD-gate records before the autonomous literature loop is enabled in shadow mode.
