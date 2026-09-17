@@ -1,110 +1,49 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Audited Track 3 A2A evidence, model, docking, MD gate, and candidate portfolio dashboard.">
-  <title>A2A Evidence Command Center</title>
-  <link rel="stylesheet" href="track3-dashboard.css">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Audited A2A Track 3 competition dashboard for evidence, models, docking, molecular dynamics, and shadow autonomy.">
+  <title>A2A Track 3 · Evidence Command Center</title><link rel="stylesheet" href="track3-dashboard.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <div class="app-shell">
-    <aside class="sidebar" aria-label="Dashboard navigation">
-      <div class="brand-lockup">
-        <div class="mark" aria-hidden="true">A<sup>2A</sup></div>
-        <div><strong>Track 3</strong><span>Evidence command center</span></div>
-      </div>
-      <nav id="nav" class="nav-list">
-        <button class="nav-item active" data-view="overview"><span>01</span>Overview</button>
-        <button class="nav-item" data-view="evidence"><span>02</span>Evidence inbox</button>
-        <button class="nav-item" data-view="models"><span>03</span>Models & domain</button>
-        <button class="nav-item" data-view="docking"><span>04</span>Dual-state docking</button>
-        <button class="nav-item" data-view="md"><span>05</span>MD gates</button>
-        <button class="nav-item" data-view="audit"><span>06</span>Audit log</button>
-      </nav>
-      <div class="sidebar-foot">
-        <span class="status-dot"></span>
-        <div><strong>Static audited snapshot</strong><span id="snapshot-time">Loading…</span></div>
-      </div>
-    </aside>
+<a class="skip-link" href="#main">Skip to dashboard</a>
+<div class="shell">
+  <aside class="sidebar" aria-label="Dashboard navigation">
+    <div class="brand"><div class="brand-mark">A<sup>2A</sup></div><div><strong>Track 3</strong><span>Competition workspace</span></div></div>
+    <nav class="nav-list" id="nav">
+      <button class="nav-item active" data-view="overview"><i>01</i><span>Overview</span></button><button class="nav-item" data-view="evidence"><i>02</i><span>Evidence inbox</span></button><button class="nav-item" data-view="molecules"><i>03</i><span>Molecule registry</span></button><button class="nav-item" data-view="models"><i>04</i><span>Model registry</span></button><button class="nav-item" data-view="applicability"><i>05</i><span>Applicability</span></button><button class="nav-item" data-view="docking"><i>06</i><span>Dual-state docking</span></button><button class="nav-item" data-view="md"><i>07</i><span>MD gates</span></button><button class="nav-item" data-view="portfolio"><i>08</i><span>Candidate portfolio</span></button><button class="nav-item" data-view="shadow"><i>09</i><span>Shadow system</span></button><button class="nav-item" data-view="audit"><i>10</i><span>Immutable audit</span></button>
+    </nav>
+    <div class="side-status"><span class="pulse"></span><div><strong>Audited static snapshot</strong><small id="snapshot-time">Loading…</small></div></div>
+  </aside>
+  <main id="main">
+    <header class="topbar"><button id="menu-toggle" class="menu-button" aria-label="Toggle navigation" aria-expanded="false">Menu</button><div class="crumb"><span>ADORA2A</span><b id="protocol-label">v1.6</b></div><div class="top-actions"><span class="sealed-badge">Outcome firewall sealed</span><span class="shadow-badge">Shadow mode</span><a href="dashboard.html">Legacy workspace ↗</a></div></header>
 
-    <main id="main">
-      <header class="topbar">
-        <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
-        <div class="protocol-chip"><span></span><b id="protocol-label">Protocol</b></div>
-        <div class="top-actions">
-          <span class="mode-badge">Shadow mode only</span>
-          <a href="dashboard.html" class="legacy-link">Legacy dashboard ↗</a>
-        </div>
-      </header>
+    <section class="view active" data-panel="overview">
+      <div class="hero"><div class="hero-copy"><p class="eyebrow">Evidence-gated virtual screening · Human A2A receptor</p><h1 id="project-title"></h1><p id="claim-level" class="lede"></p><div class="meta-row"><span id="target-label"></span><span id="deadline-label"></span><span>Contract v1.0.0</span></div></div><aside class="release-lock"><div class="lock-orbit"><span>G9</span></div><p>Release state</p><h2>Not served</h2><small>External confirmation failed its minimum floors. Human release approval is absent.</small></aside></div>
+      <div id="summary-grid" class="metric-grid"></div>
+      <div class="dashboard-grid"><article class="panel span-7"><div class="panel-head"><div><span class="kicker">Scientific control plane</span><h2>Gate architecture</h2></div><span class="caption">Upstream failure cannot be repaired downstream</span></div><div id="gate-map" class="gate-map"></div></article><article class="panel span-5 dark-panel"><div class="panel-head"><div><span class="kicker">Primary decision</span><h2>What the evidence says</h2></div></div><div class="decision-stack"><div><span>Model</span><strong>AB_Ridge leads development</strong><small>R² 0.561, ahead of chemistry RF and docking-augmented RF.</small></div><div><span>External</span><strong>Non-confirmatory floor failure</strong><small>0 molecules / 0 scaffolds admitted; outcomes remain sealed.</small></div><div><span>MD</span><strong>Tier A pilot authorized</strong><small>Equilibration passed 6/6; production not complete; Tier B locked.</small></div></div></article><article class="panel span-12"><div class="panel-head"><div><span class="kicker">Autonomous-system draft</span><h2>Evidence-gated shadow loop</h2></div><button class="text-button" data-jump="shadow">Inspect authority boundaries →</button></div><div id="shadow-mini" class="shadow-mini"></div></article></div>
+      <div class="claim-strip"><b>Claim boundary</b><span>Docking scores are not measured affinity. Predictions are not hits. MD does not rescue failed external confirmation. No wet-lab result is represented.</span></div>
+    </section>
 
-      <section class="view active" data-panel="overview">
-        <div class="hero-grid">
-          <div class="hero-copy">
-            <p class="eyebrow">Human ADORA2A · Evidence-gated virtual screening</p>
-            <h1 id="project-title">A2A Evidence Command Center</h1>
-            <p id="claim-level" class="lede"></p>
-            <div class="hero-meta"><span id="target-label"></span><span id="deadline-label"></span></div>
-          </div>
-          <div class="gate-callout">
-            <span class="gate-index">G9</span>
-            <div><p>Model promotion</p><strong>Locked</strong><small>No served Track 3 model; external and release gates remain closed.</small></div>
-          </div>
-        </div>
-        <div id="summary-grid" class="metric-grid" aria-label="Project summary"></div>
-        <div class="overview-grid">
-          <article class="panel span-7">
-            <div class="section-heading"><div><span class="kicker">Decision architecture</span><h2>Gate state</h2></div><span class="micro-label">No downstream rescue</span></div>
-            <div id="gate-map" class="gate-map"></div>
-          </article>
-          <article class="panel span-5">
-            <div class="section-heading"><div><span class="kicker">Candidate portfolio</span><h2>Shadow proposals</h2></div><span id="portfolio-count" class="count-badge"></span></div>
-            <div id="portfolio-list" class="portfolio-list"></div>
-          </article>
-        </div>
-        <article class="boundary-banner">
-          <span>Claim boundary</span>
-          <p>Docking scores are not measured affinity. Predictions are not hits. MD cannot repair a failed external potency model. No wet-lab result is represented here.</p>
-        </article>
-      </section>
+    <section class="view" data-panel="evidence" hidden><div class="page-head"><div><p class="eyebrow">Outcome-blind evidence operations</p><h1>Literature & evidence inbox</h1><p>Pass 2 is complete and membership is frozen. Ambiguity was quarantined instead of inferred.</p></div><div class="hero-stat danger"><strong>0 / 60</strong><span>admitted molecules / floor</span></div></div><div class="freeze-banner"><div><span>Frozen result</span><strong>Non-confirmatory floor failure</strong></div><p>0 admitted molecules and 0 scaffolds failed the unchanged 60-molecule / 20-scaffold floors. The one-time outcome join is prohibited.</p></div><div id="evidence-funnel" class="funnel"></div><div class="dashboard-grid"><article class="panel span-7"><div class="panel-head"><div><span class="kicker">Pass 1 + pass 2</span><h2>Disposition lanes</h2></div><div class="segmented" id="evidence-filter"><button class="active" data-filter="all">All</button><button data-filter="review">Review</button><button data-filter="quarantined">Quarantine</button></div></div><div id="evidence-lanes" class="lane-grid"></div></article><article class="panel span-5"><div class="panel-head"><div><span class="kicker">Hard stops</span><h2>Outcome firewall</h2></div></div><ul class="policy-list"><li><b>Numeric external Ki</b><span>Not extracted</span></li><li><b>External outcomes</b><span>Not loaded or joined</span></li><li><b>Membership</b><span>Frozen at zero</span></li><li><b>Model promotion</b><span>Prohibited</span></li><li><b>Expanded retrieval</b><span>Requires prospective amendment</span></li></ul></article></div></section>
 
-      <section class="view" data-panel="evidence" hidden>
-        <div class="page-heading"><div><p class="eyebrow">Quarantine-first intake</p><h1>Evidence inbox</h1><p>Outcome-blind source triage before exact field agreement and membership freeze.</p></div><div class="headline-number"><strong id="evidence-total">—</strong><span>queue records</span></div></div>
-        <div id="evidence-lanes" class="lane-grid"></div>
-        <article class="panel">
-          <div class="section-heading"><div><span class="kicker">Frozen transition rule</span><h2>Pass 1 → Pass 2 → Cohort freeze</h2></div></div>
-          <div class="process-row"><div><b>01</b><strong>Metadata screen</strong><span>Target, provenance, and source type only</span></div><i>→</i><div><b>02</b><strong>Independent extraction</strong><span>Exact agreement on frozen fields</span></div><i>→</i><div class="locked"><b>03</b><strong>Membership freeze</strong><span>0 currently admitted</span></div><i>→</i><div class="locked"><b>04</b><strong>One-time outcome join</strong><span>Not loaded</span></div></div>
-        </article>
-      </section>
+    <section class="view" data-panel="molecules" hidden><div class="page-head"><div><p class="eyebrow">Identity before score</p><h1>Molecule registry</h1><p>Audited candidates and native controls, separated from labels, predictions, and outcomes.</p></div><div class="hero-stat"><strong id="molecule-count">—</strong><span>versioned records</span></div></div><div class="toolbar"><label class="search"><span>Search registry</span><input id="molecule-search" type="search" placeholder="Name, ID, role…"></label><div class="segmented" id="molecule-filter"><button class="active" data-filter="all">All</button><button data-filter="candidate">Candidates</button><button data-filter="control">Controls</button></div></div><div id="molecule-grid" class="registry-grid"></div></section>
 
-      <section class="view" data-panel="models" hidden>
-        <div class="page-heading"><div><p class="eyebrow">Development evidence only</p><h1>Model registry & applicability</h1><p>Frozen pBind_Ki development comparison with explicit external-use limits.</p></div></div>
-        <div id="model-grid" class="model-grid"></div>
-        <div class="overview-grid">
-          <article class="panel span-7"><div class="section-heading"><div><span class="kicker">Applicability</span><h2>Development domain</h2></div></div><div id="domain-panel"></div></article>
-          <article class="panel span-5"><div class="section-heading"><div><span class="kicker">Uncertainty</span><h2>Primary model interval</h2></div></div><div id="uncertainty-panel"></div></article>
-        </div>
-      </section>
+    <section class="view" data-panel="models" hidden><div class="page-head"><div><p class="eyebrow">Frozen development comparison</p><h1>Model registry</h1><p>pBind_Ki models compared under grouped out-of-fold evaluation; none are externally confirmed or served.</p></div><div class="hero-stat"><strong>78</strong><span>development molecules</span></div></div><div class="toolbar"><div class="segmented" id="metric-toggle"><button class="active" data-metric="r2">R²</button><button data-metric="rmse">RMSE</button><button data-metric="mae">MAE</button></div><span class="muted-note">Higher is better for R²; lower is better for RMSE/MAE</span></div><div id="model-comparison" class="comparison-chart"></div><div id="model-grid" class="model-grid"></div></section>
 
-      <section class="view" data-panel="docking" hidden>
-        <div class="page-heading"><div><p class="eyebrow">5NM4 inactive · 2YDO active-like</p><h1>Dual-state docking</h1><p>Three-seed medians for label-blind literature candidates. Values support prioritization only.</p></div><div class="legend"><span><i class="state-dot inactive"></i>Inactive</span><span><i class="state-dot active-like"></i>Active-like</span></div></div>
-        <div id="docking-grid" class="docking-grid"></div>
-      </section>
+    <section class="view" data-panel="applicability" hidden><div class="page-head"><div><p class="eyebrow">Know where the model does not know</p><h1>Applicability & uncertainty</h1><p>Development-domain diagnostics are visible, but external thresholds and calibration are not established.</p></div></div><div class="dashboard-grid"><article class="panel span-7"><div class="panel-head"><div><span class="kicker">Chemical domain</span><h2>Inside vs outside</h2></div></div><div id="domain-panel"></div></article><article class="panel span-5"><div class="panel-head"><div><span class="kicker">Bootstrap uncertainty</span><h2>AB_Ridge R²</h2></div></div><div id="uncertainty-panel"></div></article><article class="panel span-12 warning-panel"><div><span class="kicker">Interpretation gate</span><h2>External calibration is not claimed</h2></div><p>Similarity and descriptor-distance thresholds describe development evaluation only. Any new candidate outside the domain must remain explicitly flagged; shadow automation cannot suppress that flag.</p></article></div></section>
 
-      <section class="view" data-panel="md" hidden>
-        <div class="page-heading"><div><p class="eyebrow">Frozen v1.6.4 execution contract</p><h1>Molecular-dynamics gates</h1><p>Native controls must pass before candidate systems can unlock.</p></div></div>
-        <div id="md-gates" class="md-grid"></div>
-        <article class="panel"><div class="section-heading"><div><span class="kicker">Observed audits</span><h2>Tier A equilibration matrix</h2></div></div><div id="md-matrix" class="md-matrix"></div></article>
-      </section>
+    <section class="view" data-panel="docking" hidden><div class="page-head"><div><p class="eyebrow">Inactive 5NM4 · Active-like 2YDO</p><h1>Dual-state docking</h1><p>Three-seed medians for label-blind literature candidates; computational support, not measured affinity or efficacy.</p></div><div class="legend"><span><i class="dot inactive"></i>5NM4 inactive</span><span><i class="dot active"></i>2YDO active-like</span></div></div><div class="toolbar"><div class="segmented" id="docking-sort"><button class="active" data-sort="name">Name</button><button data-sort="delta">State difference</button><button data-sort="affinity">Mean score</button></div><span class="muted-note">Scores are GNINA outputs; no functional label is inferred</span></div><div id="docking-grid" class="docking-grid"></div></section>
 
-      <section class="view" data-panel="audit" hidden>
-        <div class="page-heading"><div><p class="eyebrow">Append-only source projection</p><h1>Immutable audit log</h1><p>Each dashboard event points to a repository artifact digest and the preceding entry hash.</p></div><div class="verified-seal"><span>✓</span><strong>Chain verified</strong></div></div>
-        <div id="audit-list" class="audit-list"></div>
-      </section>
-    </main>
-  </div>
-  <script src="track3-dashboard-data.js"></script>
-  <script src="track3-dashboard.js"></script>
+    <section class="view" data-panel="md" hidden><div class="page-head"><div><p class="eyebrow">Frozen v1.6.4 → v1.6 production route</p><h1>Molecular-dynamics gates</h1><p>Equilibration authorizes the control pilot; it does not establish stability and does not unlock candidates.</p></div><div class="hero-stat success"><strong>6 / 6</strong><span>equilibration audits passed</span></div></div><div id="md-gates" class="md-grid"></div><div class="dashboard-grid"><article class="panel span-7"><div class="panel-head"><div><span class="kicker">Observed audits</span><h2>Equilibration matrix</h2></div></div><div class="scroll-x"><div id="md-matrix" class="md-matrix"></div></div></article><article class="panel span-5"><div class="panel-head"><div><span class="kicker">Pilot contract</span><h2>Tier A production</h2></div></div><div class="production-spec"><strong>2 controls × 3 replicas × 50 ns</strong><span>GPU production authorized; no accepted trajectory report yet.</span><hr><b>Passing rule</b><span>Each control must pass at least 2 of 3 replicas before Tier B can unlock.</span></div></article></div></section>
+
+    <section class="view" data-panel="portfolio" hidden><div class="page-head"><div><p class="eyebrow">Prospective, blinded, non-promoted</p><h1>Candidate portfolio</h1><p>Four computationally prioritized records. None is an externally confirmed hit or eligible for release.</p></div><div class="hero-stat"><strong>4</strong><span>shadow proposals</span></div></div><div id="portfolio-board" class="portfolio-board"></div></section>
+
+    <section class="view" data-panel="shadow" hidden><div class="page-head"><div><p class="eyebrow">Bounded autonomy · no self-approval</p><h1>Shadow system</h1><p>The autonomous draft can discover, structure, score, and propose. It cannot validate truth, open sealed outcomes, change frozen decisions, promote, start Tier B, or release.</p></div><div class="hero-stat warning"><strong>0</strong><span>authorized promotions</span></div></div><div class="authority-banner"><div><span class="pulse"></span><strong>Observe · propose · record</strong></div><p>Every step ends at a computational or human gate. Failed gates retain artifacts and reasons without changing served state.</p></div><div id="shadow-workflow" class="shadow-workflow"></div><article class="panel"><div class="panel-head"><div><span class="kicker">Capability firewall</span><h2>Actions autonomy cannot take</h2></div></div><div id="prohibited-grid" class="prohibited-grid"></div></article></section>
+
+    <section class="view" data-panel="audit" hidden><div class="page-head"><div><p class="eyebrow">Append-only source projection</p><h1>Immutable audit log</h1><p>Each event resolves to a repository artifact digest and the hash of the previous entry.</p></div><div class="verified-seal"><span>✓</span><div><strong>Chain verified</strong><small id="audit-count"></small></div></div></div><div id="audit-list" class="audit-list"></div></section>
+  </main>
+</div>
+<script src="track3-dashboard-data.js"></script><script src="track3-dashboard.js"></script>
 </body>
 </html>

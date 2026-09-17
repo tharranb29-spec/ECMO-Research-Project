@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.shadow-actions.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.shadow-actions.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["action_id", "stage", "executor", "status", "authority", "required_gate", "prohibited_actions", "source"]
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -75,8 +75,8 @@ The final 5G53 replica, seed 20260916, was restarted from the accepted initial s
 
 ## Workstream D — autonomous dashboard
 
-The legacy dashboard remains unchanged. The first read-only Track 3 dashboard is now implemented as a separate static interface with v1 contracts for the evidence inbox, molecule and model registries, applicability and uncertainty, dual-state docking, MD gates, the candidate portfolio, and an immutable hash-chained audit log. Every projected record names its audited source artifact and SHA-256 digest.
+The legacy dashboard remains available, while the Track 3 competition dashboard is now the primary deployable draft. Its responsive information architecture covers the evidence inbox, molecule and model registries, applicability and uncertainty, dual-state docking, MD gates, the candidate portfolio, bounded shadow autonomy, and an immutable hash-chained audit log. Every projected record names its audited source artifact and SHA-256 digest.
 
-Autonomous updates remain shadow proposals. No Track 3 model is served, external outcomes remain unloaded, cohort membership remains unfrozen, Tier B remains locked, and the interface cannot admit labels or approve a model release. The next gate is additive shadow-loop integration behind the existing external, human-release, and MD promotion controls.
+Autonomous actions remain shadow proposals with explicit authority limits and required gates. No Track 3 model is served, external membership is frozen at the non-confirmatory zero-molecule floor failure, external outcomes remain sealed and unjoined, Tier A production is authorized but not complete, and Tier B remains locked. The interface cannot admit labels, alter frozen decisions, approve a model release, start candidate MD, or release a candidate.
 
 The machine-readable source of this status is `outputs/v1.6/implementation_status.json`.

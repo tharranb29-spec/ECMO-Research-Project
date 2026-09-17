@@ -7,7 +7,7 @@ services:
     # Scientific outputs are generated and reviewed before deployment. Render
     # only packages committed artifacts; it must not replace real GNINA results
     # with prototype scores during a production build.
-    buildCommand: "python3 build_dashboard_bundle.py"
+    buildCommand: "python3 build_dashboard_bundle.py && python3 build_track3_dashboard.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
       - key: PYTHON_VERSION
@@ -17,21 +17,21 @@ services:
       - key: DEEPSEEK_MODEL
         value: deepseek-chat
       - key: AUTO_RESEARCH_ENABLED
-        value: "1"
+        value: "0"
       - key: AUTO_RESEARCH_INTERVAL_SECONDS
         value: "3600"
       - key: AUTO_RESEARCH_LLM_ENABLED
-        value: "1"
+        value: "0"
       - key: AUTO_RESEARCH_PAGE_SIZE
         value: "24"
       - key: GNINA_MODE
-        value: prototype
+        value: disabled
       - key: GNINA_RUN_COUNT
         value: "5"
       - key: GNINA_CNN_SCORE_MIN
         value: "0.50"
       - key: GNINA_VERSION_LABEL
-        value: prototype-adapter
+        value: track3-dashboard-read-only
       - key: ECMO_DASHBOARD_HOST
         value: "0.0.0.0"
       - key: ECMO_ALLOWED_ORIGINS

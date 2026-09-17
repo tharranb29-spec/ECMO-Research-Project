@@ -80,7 +80,11 @@ APP_SESSION_TTL_HOURS = env_int("ECMO_SESSION_TTL_HOURS", 24)
 APP_SESSION_COOKIE_NAME = "ecmo_session"
 
 STATIC_FILES = {
-    "/": ROOT / "dashboard.html",
+    "/": ROOT / "track3-dashboard.html",
+    "/track3-dashboard.html": ROOT / "track3-dashboard.html",
+    "/track3-dashboard.css": ROOT / "track3-dashboard.css",
+    "/track3-dashboard.js": ROOT / "track3-dashboard.js",
+    "/track3-dashboard-data.js": ROOT / "track3-dashboard-data.js",
     "/dashboard.html": ROOT / "dashboard.html",
     "/dashboard.js": ROOT / "dashboard.js",
     "/evidence-dashboard.js": ROOT / "evidence-dashboard.js",
@@ -871,9 +875,9 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(body)
 
     def _cache_control_for_path(self, path):
-        if path.startswith("/api/"):
+        if path == "/healthz" or path.startswith("/api/"):
             return "no-store"
-        if path in {"/", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/evidence-dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
+        if path in {"/", "/track3-dashboard.html", "/track3-dashboard.css", "/track3-dashboard.js", "/track3-dashboard-data.js", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/evidence-dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
             return "no-store"
         return "public, max-age=3600"
 
@@ -947,7 +951,7 @@ class Handler(BaseHTTPRequestHandler):
                 {
                     "ok": True,
                     "service": "ecmo-research-dashboard",
-                    "release": "gnina-validation-v1",
+                    "release": "a2a-track3-dashboard-v2",
                     "git_commit": os.environ.get("RENDER_GIT_COMMIT") or "local",
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                 },

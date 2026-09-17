@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "created_at_utc": "2026-09-17T12:48:26.176424+00:00",
+  "created_at_utc": "2026-09-17T13:35:06+00:00",
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
   "external_outcomes_joined": false,
@@ -79,7 +79,7 @@
     },
     "D_dashboard": {
       "status": "static_v1_contract_dashboard_implemented",
-      "current_mode": "legacy_dashboard_preserved_track3_dashboard_read_only",
+      "current_mode": "track3_dashboard_primary_legacy_preserved",
       "contract_version": "1.0.0",
       "contracts": [
         "evidence_inbox",
@@ -89,11 +89,12 @@
         "dual_state_docking",
         "md_gates",
         "candidate_portfolio",
+        "shadow_actions",
         "audit_log"
       ],
       "autonomous_mode": "shadow_only",
       "served_track3_model": null,
-      "next_gate": "connect additive literature updates as shadow proposals only after contract validation; retain external, human-release, and Tier B promotion gates"
+      "next_gate": "deploy the read-only competition draft when a GitHub-connected Render service is available; keep literature automation disabled outside shadow proposals"
     }
   },
   "artifact_hashes": {

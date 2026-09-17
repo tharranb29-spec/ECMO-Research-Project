@@ -58,14 +58,28 @@ window.A2A_DASHBOARD_DATA = {
           }
         },
         {
-          "action": "model-reproduction",
+          "action": "evidence-pass2-freeze",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "0d828297383e6bb68b283c36603be73b19b9dd540cf1f6599cedb6ed2c352d52",
+          "entry_hash": "0719147cbbe561bb0b5f7e59724fc4d683ca8f05fff4f35cccc5937e43122f98",
           "event_id": "audit-0003",
           "previous_entry_hash": "3d6a6013b668b3321e71a624de99c4f4137485ca82ba1442cb0fc90f2da7fe5d",
+          "record_id": "a2a-external-cohort-membership-freeze-v1.6",
+          "record_type": "evidence_inbox",
+          "sequence": 3,
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
+            "sha256": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0"
+          }
+        },
+        {
+          "action": "model-reproduction",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "db545a5a035fea94dcdb5035246c06951fdeed17a7125ff06a376a16ccb69280",
+          "event_id": "audit-0004",
+          "previous_entry_hash": "0719147cbbe561bb0b5f7e59724fc4d683ca8f05fff4f35cccc5937e43122f98",
           "record_id": "pBind_Ki-development",
           "record_type": "model_registry",
-          "sequence": 3,
+          "sequence": 4,
           "source": {
             "path": "outputs/v1.6/model_reproduction/development_results.json",
             "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
@@ -74,12 +88,12 @@ window.A2A_DASHBOARD_DATA = {
         {
           "action": "prospective-docking",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "91927e703f088e78a160b101aff978c74e537a5d9cc2386d902f9c9db4323771",
-          "event_id": "audit-0004",
-          "previous_entry_hash": "0d828297383e6bb68b283c36603be73b19b9dd540cf1f6599cedb6ed2c352d52",
+          "entry_hash": "da7cdd46323f52235e2b4901fb6b497d0cbb66462a741937c8c371a6450bf07b",
+          "event_id": "audit-0005",
+          "previous_entry_hash": "db545a5a035fea94dcdb5035246c06951fdeed17a7125ff06a376a16ccb69280",
           "record_id": "a2a-external-validation-v1.4",
           "record_type": "dual_state_docking",
-          "sequence": 4,
+          "sequence": 5,
           "source": {
             "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
@@ -88,26 +102,40 @@ window.A2A_DASHBOARD_DATA = {
         {
           "action": "md-gate",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
-          "event_id": "audit-0005",
-          "previous_entry_hash": "91927e703f088e78a160b101aff978c74e537a5d9cc2386d902f9c9db4323771",
+          "entry_hash": "a6645c01c2829e82fd9c28dc49c1f7b93d1fb8ded2285a787839a13d67b2ce8d",
+          "event_id": "audit-0006",
+          "previous_entry_hash": "da7cdd46323f52235e2b4901fb6b497d0cbb66462a741937c8c371a6450bf07b",
           "record_id": "a2a-tier-a-equilibration-gate-v1.6.4",
           "record_type": "md_gates",
-          "sequence": 5,
+          "sequence": 6,
           "source": {
             "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
             "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
           }
         },
         {
+          "action": "md-production-authorized",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "03acdd1fc40b9061f3bee507c0f667c1421dcb49ae2b1144ae82ef59bc23f387",
+          "event_id": "audit-0007",
+          "previous_entry_hash": "a6645c01c2829e82fd9c28dc49c1f7b93d1fb8ded2285a787839a13d67b2ce8d",
+          "record_id": "a2a-md-production-v1.6",
+          "record_type": "md_gates",
+          "sequence": 7,
+          "source": {
+            "path": "config/md_production.v1.6.json",
+            "sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07"
+          }
+        },
+        {
           "action": "shadow-policy",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "2b128c5562121f2166b1a734b285e032cec07f650b25463ed589c879c8f67093",
-          "event_id": "audit-0006",
-          "previous_entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
+          "entry_hash": "2714619893f22c5af6ee1a604587950b6457baa3c300f8417492e263d0953c37",
+          "event_id": "audit-0008",
+          "previous_entry_hash": "03acdd1fc40b9061f3bee507c0f667c1421dcb49ae2b1144ae82ef59bc23f387",
           "record_id": "a2a-shadow-update-v1.4",
           "record_type": "promotion",
-          "sequence": 6,
+          "sequence": 8,
           "source": {
             "path": "config/shadow_update.v1.4.json",
             "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
@@ -125,7 +153,7 @@ window.A2A_DASHBOARD_DATA = {
           "label_status": "blinded",
           "md_status": "tier_b_locked",
           "molecule_id": "LIT25-MET-PGD2",
-          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
           "portfolio_id": "portfolio:LIT25-MET-PGD2",
           "promotion_status": "shadow_proposal",
           "source": {
@@ -140,7 +168,7 @@ window.A2A_DASHBOARD_DATA = {
           "label_status": "blinded",
           "md_status": "tier_b_locked",
           "molecule_id": "LIT25-RL-C5",
-          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
           "portfolio_id": "portfolio:LIT25-RL-C5",
           "promotion_status": "shadow_proposal",
           "source": {
@@ -155,7 +183,7 @@ window.A2A_DASHBOARD_DATA = {
           "label_status": "blinded",
           "md_status": "tier_b_locked",
           "molecule_id": "LIT25-RL-C7",
-          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
           "portfolio_id": "portfolio:LIT25-RL-C7",
           "promotion_status": "shadow_proposal",
           "source": {
@@ -170,7 +198,7 @@ window.A2A_DASHBOARD_DATA = {
           "label_status": "blinded",
           "md_status": "tier_b_locked",
           "molecule_id": "LIT25-RL-C9",
-          "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
           "portfolio_id": "portfolio:LIT25-RL-C9",
           "promotion_status": "shadow_proposal",
           "source": {
@@ -322,80 +350,114 @@ window.A2A_DASHBOARD_DATA = {
         {
           "count": 1,
           "disposition": "review",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:metadata_pass_doi_only_needs_source_retrieval",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "metadata_pass_doi_only_needs_source_retrieval",
           "title": "DOI-only retrieval"
         },
         {
           "count": 24,
           "disposition": "review",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:metadata_pass_fulltext_ready",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "metadata_pass_fulltext_ready",
           "title": "Full text ready"
         },
         {
           "count": 131,
           "disposition": "review",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:metadata_pass_needs_fulltext",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "metadata_pass_needs_fulltext",
           "title": "Needs source text"
         },
         {
           "count": 31,
           "disposition": "review",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:metadata_pass_requires_endpoint_resolution",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "metadata_pass_requires_endpoint_resolution",
           "title": "Endpoint resolution"
         },
         {
           "count": 7,
           "disposition": "quarantined",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:quarantine_nonprimary_source",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "quarantine_nonprimary_source",
           "title": "Non-primary source"
         },
         {
           "count": 46,
           "disposition": "quarantined",
-          "membership_frozen": false,
+          "membership_frozen": true,
           "outcome_fields_loaded": false,
           "record_id": "evidence-lane:quarantine_target_not_supported",
           "source": {
             "path": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
             "sha256": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867"
           },
+          "stage": "pass_1_historical",
           "status": "quarantine_target_not_supported",
           "title": "A2A not supported"
+        },
+        {
+          "count": 29,
+          "disposition": "reviewed",
+          "membership_frozen": true,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-stage:pass-2-source-grounded",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json",
+            "sha256": "f46828a0a569fdec47f265ec815fe51214878f37852e60bf9924a48af809b9d5"
+          },
+          "stage": "pass_2_frozen",
+          "status": "pass_2_source_grounded",
+          "title": "Source-grounded in pass 2"
+        },
+        {
+          "count": 0,
+          "disposition": "blocked",
+          "membership_frozen": true,
+          "outcome_fields_loaded": false,
+          "record_id": "evidence-stage:admitted",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
+            "sha256": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0"
+          },
+          "stage": "cohort_freeze",
+          "status": "frozen_floor_failure",
+          "title": "Admitted to external cohort"
         }
       ],
       "schema_id": "a2a-dashboard.evidence-inbox.v1"
@@ -416,6 +478,22 @@ window.A2A_DASHBOARD_DATA = {
           },
           "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
           "status": "tier_a_equilibration_gate_passed",
+          "tier_a_production_unlocked": true,
+          "tier_b_unlocked": false
+        },
+        {
+          "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim.",
+          "gate_id": "G7:tier-a-production",
+          "missing_audits": [],
+          "observed_runs": 0,
+          "passed_runs": 0,
+          "required_runs": 6,
+          "source": {
+            "path": "config/md_production.v1.6.json",
+            "sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07"
+          },
+          "specification_id": "a2a-md-production-v1.6",
+          "status": "authorized_not_started",
           "tier_a_production_unlocked": true,
           "tier_b_unlocked": false
         },
@@ -447,6 +525,7 @@ window.A2A_DASHBOARD_DATA = {
           "endpoint": "pBind_Ki",
           "external_outcomes_loaded": false,
           "lifecycle_status": "candidate_not_served",
+          "mae": 0.9849072084268139,
           "model_id": "Mean",
           "promotion_allowed": false,
           "r2": -0.037004677818093024,
@@ -464,6 +543,7 @@ window.A2A_DASHBOARD_DATA = {
           "endpoint": "pBind_Ki",
           "external_outcomes_loaded": false,
           "lifecycle_status": "candidate_not_served",
+          "mae": 0.6154408512881633,
           "model_id": "AB_Ridge",
           "promotion_allowed": false,
           "r2": 0.5605377886314917,
@@ -481,6 +561,7 @@ window.A2A_DASHBOARD_DATA = {
           "endpoint": "pBind_Ki",
           "external_outcomes_loaded": false,
           "lifecycle_status": "candidate_not_served",
+          "mae": 0.672131599959301,
           "model_id": "AB_RF",
           "promotion_allowed": false,
           "r2": 0.5027539353878119,
@@ -498,6 +579,7 @@ window.A2A_DASHBOARD_DATA = {
           "endpoint": "pBind_Ki",
           "external_outcomes_loaded": false,
           "lifecycle_status": "candidate_not_served",
+          "mae": 0.6909425643467652,
           "model_id": "E_RF",
           "promotion_allowed": false,
           "r2": 0.4817420330774198,
@@ -566,9 +648,154 @@ window.A2A_DASHBOARD_DATA = {
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
           },
           "training_eligible": false
+        },
+        {
+          "display_name": "ZM241385",
+          "functional_label_blinded": false,
+          "identity_status": "parameterized and pose-mapped",
+          "molecule_id": "CTRL-5NM4-ZMA",
+          "registry_version": "tier-a-native-controls-v1.6",
+          "role": "inactive-state native control",
+          "source": {
+            "path": "config/md_production.v1.6.json",
+            "sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07"
+          },
+          "training_eligible": false
+        },
+        {
+          "display_name": "NECA",
+          "functional_label_blinded": false,
+          "identity_status": "parameterized and pose-mapped",
+          "molecule_id": "CTRL-5G53-NECA",
+          "registry_version": "tier-a-native-controls-v1.6",
+          "role": "active-state native control",
+          "source": {
+            "path": "config/md_production.v1.6.json",
+            "sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07"
+          },
+          "training_eligible": false
         }
       ],
       "schema_id": "a2a-dashboard.molecule-registry.v1"
+    },
+    "shadow_actions": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "action_id": "shadow-01-literature-intake",
+          "authority": "May propose sources and passages; cannot create evidence truth.",
+          "executor": "LLM-assisted discovery",
+          "prohibited_actions": [
+            "assign_training_label",
+            "admit_external_member"
+          ],
+          "required_gate": "Source provenance and primary-publication filter",
+          "source": {
+            "path": "config/shadow_update.v1.4.json",
+            "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
+          },
+          "stage": "Literature discovery & intake",
+          "status": "proposal_only"
+        },
+        {
+          "action_id": "shadow-02-source-filter",
+          "authority": "May quarantine; cannot relax the frozen 60/20 floors.",
+          "executor": "Deterministic rules",
+          "prohibited_actions": [
+            "read_sealed_outcomes",
+            "weaken_floor"
+          ],
+          "required_gate": "Primary source, human wild-type A2A, exact endpoint context",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
+            "sha256": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0"
+          },
+          "stage": "Source filtering",
+          "status": "frozen_floor_failure"
+        },
+        {
+          "action_id": "shadow-03-standardize",
+          "authority": "May propose canonical identity and overlap flags; conflicts remain quarantined.",
+          "executor": "Deterministic chemistry pipeline",
+          "prohibited_actions": [
+            "infer_activity",
+            "overwrite_registry"
+          ],
+          "required_gate": "Identity, stereochemistry, exact-structure and scaffold audit",
+          "source": {
+            "path": "config/shadow_update.v1.4.json",
+            "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
+          },
+          "stage": "Standardize & deduplicate",
+          "status": "proposal_only"
+        },
+        {
+          "action_id": "shadow-04-evidence-extract",
+          "authority": "May draft categorical fields with citations; disagreements are quarantined.",
+          "executor": "Independent computational passes",
+          "prohibited_actions": [
+            "extract_numeric_sealed_ki",
+            "self_approve"
+          ],
+          "required_gate": "Exact field agreement before membership freeze",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json",
+            "sha256": "f46828a0a569fdec47f265ec815fe51214878f37852e60bf9924a48af809b9d5"
+          },
+          "stage": "Proposed evidence extraction",
+          "status": "human_review_required"
+        },
+        {
+          "action_id": "shadow-05-rank",
+          "authority": "May write computational priorities; predictions cannot become labels or hits.",
+          "executor": "Frozen development model",
+          "prohibited_actions": [
+            "serve_model",
+            "publish_validated_hit"
+          ],
+          "required_gate": "Model version, provenance, and molecule identity checks",
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          },
+          "stage": "Candidate ranking",
+          "status": "shadow_only"
+        },
+        {
+          "action_id": "shadow-06-domain",
+          "authority": "May flag unsupported chemistry; cannot claim external calibration.",
+          "executor": "Frozen development diagnostics",
+          "prohibited_actions": [
+            "suppress_out_of_domain_flag",
+            "claim_external_calibration"
+          ],
+          "required_gate": "Similarity and descriptor-distance assessment",
+          "source": {
+            "path": "outputs/v1.6/model_reproduction/development_results.json",
+            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+          },
+          "stage": "Applicability & uncertainty",
+          "status": "external_thresholds_not_frozen"
+        },
+        {
+          "action_id": "shadow-07-promotion",
+          "authority": "May emit a blocked proposal with reasons; cannot change served state.",
+          "executor": "Gate evaluator",
+          "prohibited_actions": [
+            "promote_model",
+            "start_tier_b",
+            "release_candidate"
+          ],
+          "required_gate": "External confirmation plus named human release approval",
+          "source": {
+            "path": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
+            "sha256": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0"
+          },
+          "stage": "Promotion proposal",
+          "status": "blocked"
+        }
+      ],
+      "schema_id": "a2a-dashboard.shadow-actions.v1"
     }
   },
   "dashboard_contract_version": "1.0.0",
@@ -594,18 +821,25 @@ window.A2A_DASHBOARD_DATA = {
       "sha256": "ee09c22cb06824843aae242e423cd85ab3171af2fb5edfe6d5c2179f2eb54185"
     }
   },
-  "snapshot_created_at_utc": "2026-09-17T12:48:26.176424+00:00",
+  "snapshot_created_at_utc": "2026-09-17T13:35:06+00:00",
   "summary": {
     "docked_candidates": 4,
     "evidence_queue": 240,
     "external_admitted": 0,
+    "external_floors_passed": false,
+    "external_membership_frozen": true,
+    "external_minimum_molecules": 60,
+    "external_minimum_scaffolds": 20,
     "external_outcomes_loaded": false,
+    "external_scaffolds": 0,
     "md_runs_passed": 6,
     "md_runs_required": 6,
+    "outcome_join_authorized": false,
     "pass_2_required": 187,
     "primary_model": "AB_Ridge",
     "primary_model_r2": 0.5605377886314917,
     "promotion_mode": "shadow_only",
+    "tier_a_production_started": false,
     "tier_a_production_unlocked": true,
     "tier_b_unlocked": false
   }

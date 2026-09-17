@@ -5,7 +5,8 @@ the static dashboard. `build_track3_dashboard.py` is the only projector. It read
 declared repository artifacts, records each source path and SHA-256 digest, and
 emits `outputs/dashboard/v1/contracts.json` plus the browser bundle.
 
-The contracts never authorize label admission, model promotion, candidate release,
-or Tier B MD. Autonomous updates are represented only as `shadow_proposal` records.
-Any future breaking field change requires a new version directory.
-
+The contracts never authorize label admission, sealed-outcome access, model
+promotion, candidate release, or Tier B MD. Autonomous work is represented in the
+`shadow-actions` contract as bounded proposals with an executor, authority limit,
+required gate, prohibited actions, and source digest. Any future breaking field
+change requires a new version directory.

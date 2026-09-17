@@ -26,11 +26,14 @@ SOURCES = {
     "freeze": A2A / "outputs/v1.6/protocol_freeze_manifest.json",
     "models": A2A / "outputs/v1.6/model_reproduction/development_results.json",
     "evidence": A2A / "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+    "pass2": A2A / "outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json",
+    "cohort_freeze": A2A / "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
     "pubmed": A2A / "outputs/v1.6/external_evidence/pubmed_retrieval_audit.json",
     "pmc": A2A / "outputs/v1.6/external_evidence/pmc_fulltext_retrieval_audit.json",
     "docking": A2A / "outputs/v1.4/docking/literature_pilot_2025_report.json",
     "md": A2A / "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
     "md_plan": A2A / "outputs/v1.5/md/preflight_status.json",
+    "md_production": A2A / "config/md_production.v1.6.json",
     "shadow_config": A2A / "config/shadow_update.v1.4.json",
     "shadow_status": A2A / "outputs/v1.4/shadow_update_status.json",
 }
@@ -68,9 +71,12 @@ def build() -> dict:
     model_report = data["models"]
     model_result = model_report["result"]
     evidence = data["evidence"]
+    pass2 = data["pass2"]
+    cohort_freeze = data["cohort_freeze"]
     docking = data["docking"]
     md = data["md"]
     md_plan = data["md_plan"]
+    md_production = data["md_production"]
     shadow = data["shadow_status"]
 
     evidence_records = []
@@ -91,9 +97,35 @@ def build() -> dict:
             "status": status,
             "disposition": disposition,
             "outcome_fields_loaded": evidence["outcome_fields_loaded"],
-            "membership_frozen": False,
+            "stage": "pass_1_historical",
+            "membership_frozen": pass2["membership_frozen"],
             "source": source_ref("evidence"),
         })
+
+    evidence_records.extend([
+        {
+            "record_id": "evidence-stage:pass-2-source-grounded",
+            "title": "Source-grounded in pass 2",
+            "count": pass2["source_grounded_candidate_count"],
+            "status": "pass_2_source_grounded",
+            "disposition": "reviewed",
+            "stage": "pass_2_frozen",
+            "outcome_fields_loaded": pass2["outcome_fields_loaded"],
+            "membership_frozen": pass2["membership_frozen"],
+            "source": source_ref("pass2"),
+        },
+        {
+            "record_id": "evidence-stage:admitted",
+            "title": "Admitted to external cohort",
+            "count": pass2["admitted_count"],
+            "status": "frozen_floor_failure",
+            "disposition": "blocked",
+            "stage": "cohort_freeze",
+            "outcome_fields_loaded": pass2["outcome_fields_loaded"],
+            "membership_frozen": pass2["membership_frozen"],
+            "source": source_ref("cohort_freeze"),
+        },
+    ])
 
     molecules = []
     docking_records = []
@@ -141,9 +173,32 @@ def build() -> dict:
             "dual_state_complete": all(item["status"] == "valid" for item in state_values.values()),
             "d_affinity_kcal_mol": round(delta, 4),
             "md_status": "tier_b_locked",
-            "next_gate": "External potency confirmation and Tier A control production must pass before any promotion.",
+            "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
             "source": source_ref("docking"),
         })
+
+    molecules.extend([
+        {
+            "molecule_id": "CTRL-5NM4-ZMA",
+            "display_name": "ZM241385",
+            "registry_version": "tier-a-native-controls-v1.6",
+            "role": "inactive-state native control",
+            "identity_status": "parameterized and pose-mapped",
+            "functional_label_blinded": False,
+            "training_eligible": False,
+            "source": source_ref("md_production"),
+        },
+        {
+            "molecule_id": "CTRL-5G53-NECA",
+            "display_name": "NECA",
+            "registry_version": "tier-a-native-controls-v1.6",
+            "role": "active-state native control",
+            "identity_status": "parameterized and pose-mapped",
+            "functional_label_blinded": False,
+            "training_eligible": False,
+            "source": source_ref("md_production"),
+        },
+    ])
 
     model_records = []
     for model_id, metrics in model_result["metrics"].items():
@@ -159,6 +214,7 @@ def build() -> dict:
             "scaffold_count": model_result["scaffold_count"],
             "r2": metrics["r2"],
             "rmse": metrics["rmse"],
+            "mae": metrics["mae"],
             "external_outcomes_loaded": model_report["external_outcomes_loaded"],
             "promotion_allowed": False,
             "source": source_ref("models"),
@@ -193,6 +249,18 @@ def build() -> dict:
         "claim_limit": md["claim_limit"],
         "source": source_ref("md"),
     }, {
+        "gate_id": "G7:tier-a-production",
+        "specification_id": md_production["specification_id"],
+        "status": "authorized_not_started",
+        "observed_runs": 0,
+        "passed_runs": 0,
+        "required_runs": len(md_production["tier_a"]["systems"]) * len(md_production["tier_a"]["replica_seeds"]),
+        "missing_audits": [],
+        "tier_a_production_unlocked": md["tier_a_production_unlocked"],
+        "tier_b_unlocked": md["tier_b_unlocked"],
+        "claim_limit": md_production["claim_limit"],
+        "source": source_ref("md_production"),
+    }, {
         "gate_id": "G8:candidate-md",
         "specification_id": md["specification_id"],
         "status": "locked",
@@ -218,6 +286,79 @@ def build() -> dict:
         "source": source_ref("shadow_status"),
     }
 
+    shadow_actions = [
+        {
+            "action_id": "shadow-01-literature-intake",
+            "stage": "Literature discovery & intake",
+            "executor": "LLM-assisted discovery",
+            "status": "proposal_only",
+            "authority": "May propose sources and passages; cannot create evidence truth.",
+            "required_gate": "Source provenance and primary-publication filter",
+            "prohibited_actions": ["assign_training_label", "admit_external_member"],
+            "source": source_ref("shadow_config"),
+        },
+        {
+            "action_id": "shadow-02-source-filter",
+            "stage": "Source filtering",
+            "executor": "Deterministic rules",
+            "status": "frozen_floor_failure",
+            "authority": "May quarantine; cannot relax the frozen 60/20 floors.",
+            "required_gate": "Primary source, human wild-type A2A, exact endpoint context",
+            "prohibited_actions": ["read_sealed_outcomes", "weaken_floor"],
+            "source": source_ref("cohort_freeze"),
+        },
+        {
+            "action_id": "shadow-03-standardize",
+            "stage": "Standardize & deduplicate",
+            "executor": "Deterministic chemistry pipeline",
+            "status": "proposal_only",
+            "authority": "May propose canonical identity and overlap flags; conflicts remain quarantined.",
+            "required_gate": "Identity, stereochemistry, exact-structure and scaffold audit",
+            "prohibited_actions": ["infer_activity", "overwrite_registry"],
+            "source": source_ref("shadow_config"),
+        },
+        {
+            "action_id": "shadow-04-evidence-extract",
+            "stage": "Proposed evidence extraction",
+            "executor": "Independent computational passes",
+            "status": "human_review_required",
+            "authority": "May draft categorical fields with citations; disagreements are quarantined.",
+            "required_gate": "Exact field agreement before membership freeze",
+            "prohibited_actions": ["extract_numeric_sealed_ki", "self_approve"],
+            "source": source_ref("pass2"),
+        },
+        {
+            "action_id": "shadow-05-rank",
+            "stage": "Candidate ranking",
+            "executor": "Frozen development model",
+            "status": "shadow_only",
+            "authority": "May write computational priorities; predictions cannot become labels or hits.",
+            "required_gate": "Model version, provenance, and molecule identity checks",
+            "prohibited_actions": ["serve_model", "publish_validated_hit"],
+            "source": source_ref("models"),
+        },
+        {
+            "action_id": "shadow-06-domain",
+            "stage": "Applicability & uncertainty",
+            "executor": "Frozen development diagnostics",
+            "status": "external_thresholds_not_frozen",
+            "authority": "May flag unsupported chemistry; cannot claim external calibration.",
+            "required_gate": "Similarity and descriptor-distance assessment",
+            "prohibited_actions": ["suppress_out_of_domain_flag", "claim_external_calibration"],
+            "source": source_ref("models"),
+        },
+        {
+            "action_id": "shadow-07-promotion",
+            "stage": "Promotion proposal",
+            "executor": "Gate evaluator",
+            "status": "blocked",
+            "authority": "May emit a blocked proposal with reasons; cannot change served state.",
+            "required_gate": "External confirmation plus named human release approval",
+            "prohibited_actions": ["promote_model", "start_tier_b", "release_candidate"],
+            "source": source_ref("cohort_freeze"),
+        },
+    ]
+
     contracts = {
         "evidence_inbox": envelope("evidence-inbox", evidence_records),
         "molecule_registry": envelope("molecule-registry", molecules),
@@ -226,14 +367,17 @@ def build() -> dict:
         "dual_state_docking": envelope("dual-state-docking", docking_records),
         "md_gates": envelope("md-gates", md_records),
         "candidate_portfolio": envelope("candidate-portfolio", portfolio),
+        "shadow_actions": envelope("shadow-actions", shadow_actions),
     }
 
     audit_events = [
         ("protocol-freeze", "protocol", data["freeze"]["specification_id"], "freeze"),
         ("evidence-pass1", "evidence_inbox", "external-pass-1", "evidence"),
+        ("evidence-pass2-freeze", "evidence_inbox", cohort_freeze["specification_id"], "cohort_freeze"),
         ("model-reproduction", "model_registry", "pBind_Ki-development", "models"),
         ("prospective-docking", "dual_state_docking", docking["protocol_id"], "docking"),
         ("md-gate", "md_gates", md["specification_id"], "md"),
+        ("md-production-authorized", "md_gates", md_production["specification_id"], "md_production"),
         ("shadow-policy", "promotion", data["shadow_config"]["specification_id"], "shadow_config"),
     ]
     previous = "GENESIS"
@@ -270,13 +414,20 @@ def build() -> dict:
             "evidence_queue": evidence["candidate_count"],
             "pass_2_required": evidence["pass_2_required_count"],
             "external_admitted": evidence["external_cohort_admitted_count"],
-            "external_outcomes_loaded": evidence["outcome_fields_loaded"],
+            "external_scaffolds": cohort_freeze["admitted_generic_murcko_scaffold_count"],
+            "external_minimum_molecules": cohort_freeze["minimum_molecule_floor"],
+            "external_minimum_scaffolds": cohort_freeze["minimum_generic_murcko_scaffold_floor"],
+            "external_membership_frozen": cohort_freeze["membership_frozen"],
+            "external_floors_passed": cohort_freeze["minimum_floors_passed"],
+            "outcome_join_authorized": cohort_freeze["one_time_outcome_join_authorized"],
+            "external_outcomes_loaded": cohort_freeze["external_outcomes_joined"],
             "primary_model": "AB_Ridge",
             "primary_model_r2": model_result["metrics"]["AB_Ridge"]["r2"],
             "docked_candidates": len(docking["results"]),
             "md_runs_passed": md["passed_run_count"],
             "md_runs_required": md["expected_run_count"],
             "tier_a_production_unlocked": md["tier_a_production_unlocked"],
+            "tier_a_production_started": implementation["md_trajectory_production_started"],
             "tier_b_unlocked": md["tier_b_unlocked"],
             "promotion_mode": promotion["mode"],
         },
@@ -289,7 +440,7 @@ def validate(payload: dict) -> None:
     expected = {
         "evidence_inbox", "molecule_registry", "model_registry",
         "applicability_uncertainty", "dual_state_docking", "md_gates",
-        "candidate_portfolio", "audit_log",
+        "candidate_portfolio", "shadow_actions", "audit_log",
     }
     if set(payload["contracts"]) != expected:
         raise ValueError("Dashboard contract set is incomplete")
@@ -300,6 +451,10 @@ def validate(payload: dict) -> None:
         raise ValueError("Autonomous dashboard may only emit shadow proposals")
     if payload["promotion"]["served_model"] is not None:
         raise ValueError("No Track 3 model is authorized for serving")
+    if payload["summary"]["external_outcomes_loaded"] or payload["summary"]["outcome_join_authorized"]:
+        raise ValueError("Sealed external outcomes must remain unavailable")
+    if payload["summary"]["tier_b_unlocked"]:
+        raise ValueError("Tier B must remain locked")
     previous = "GENESIS"
     for entry in payload["contracts"]["audit_log"]["records"]:
         if entry["previous_entry_hash"] != previous:

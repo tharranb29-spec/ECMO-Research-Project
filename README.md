@@ -2,11 +2,12 @@
 
 ## Track 3 A2A dashboard
 
-The audited, read-only Track 3 interface is available at `track3-dashboard.html`.
-It is separate from the preserved legacy ECMO dashboard and presents versioned
+The audited, read-only Track 3 competition interface is available at
+`track3-dashboard.html` and is served at `/` by `research_assistant_server.py`.
+The preserved legacy ECMO dashboard remains at `/dashboard.html`. The new interface presents versioned
 contracts for evidence intake, molecule and model registries, applicability and
-uncertainty, dual-state docking, MD gates, the candidate portfolio, and a
-hash-chained audit log.
+uncertainty, dual-state docking, MD gates, the candidate portfolio, a bounded
+shadow-action workflow, and a hash-chained audit log.
 
 Rebuild its deterministic static data bundle after audited artifacts change:
 
@@ -17,6 +18,8 @@ python3 -m unittest tests.test_track3_dashboard
 
 Autonomous records remain shadow proposals. The dashboard cannot admit labels,
 promote a model, unlock Tier B, or describe a candidate as experimentally validated.
+The Render blueprint disables live literature automation and prototype GNINA so a
+deployment cannot mutate scientific state or generate simulated evidence.
 
 This folder now contains a rough, trainable ranking prototype for the AI-driven part of your ECMO biomaterials project.
 

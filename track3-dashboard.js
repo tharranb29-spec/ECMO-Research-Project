@@ -1,69 +1,101 @@
 (function(){
   "use strict";
   const data=window.A2A_DASHBOARD_DATA;
-  if(!data){document.body.innerHTML="<p>Dashboard bundle missing. Run build_track3_dashboard.py.</p>";return;}
-  const $=(id)=>document.getElementById(id);
-  const records=(name)=>data.contracts[name].records;
-  const fmt=(n,d=2)=>Number(n).toFixed(d);
-  const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
-  const short=(s,n=12)=>String(s).slice(0,n)+"…";
-  const label=(s)=>String(s).replaceAll("_"," ");
+  if(!data){document.body.innerHTML="<p>Dashboard data is unavailable. Run build_track3_dashboard.py.</p>";return;}
+  const $=id=>document.getElementById(id), records=name=>data.contracts[name].records;
+  const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+  const label=value=>String(value??"").replaceAll("_"," ");
+  const fmt=(value,digits=2)=>Number(value).toFixed(digits);
+  const short=(value,length=12)=>String(value).slice(0,length)+"…";
+  const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","shadow","audit"];
+  let moleculeFilter="all",moleculeQuery="",evidenceFilter="all",modelMetric="r2",dockingSort="name";
 
   function setView(view){
-    document.querySelectorAll(".view").forEach(p=>{const on=p.dataset.panel===view;p.classList.toggle("active",on);p.hidden=!on;});
-    document.querySelectorAll(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.view===view));
+    const selected=views.includes(view)?view:"overview";
+    document.querySelectorAll(".view").forEach(panel=>{const on=panel.dataset.panel===selected;panel.hidden=!on;panel.classList.toggle("active",on);});
+    document.querySelectorAll(".nav-item").forEach(button=>button.classList.toggle("active",button.dataset.view===selected));
     document.querySelector(".sidebar").classList.remove("open");$("menu-toggle").setAttribute("aria-expanded","false");
-    history.replaceState(null,"",`#${view}`);
+    history.replaceState(null,"",`#${selected}`);window.scrollTo({top:0,behavior:"instant"});
   }
-  document.querySelectorAll(".nav-item").forEach(b=>b.addEventListener("click",()=>setView(b.dataset.view)));
-  $("menu-toggle").addEventListener("click",()=>{const side=document.querySelector(".sidebar");const open=side.classList.toggle("open");$("menu-toggle").setAttribute("aria-expanded",String(open));});
+  document.querySelectorAll(".nav-item").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
+  document.querySelectorAll("[data-jump]").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.jump)));
+  $("menu-toggle").addEventListener("click",()=>{const sidebar=document.querySelector(".sidebar"),open=sidebar.classList.toggle("open");$("menu-toggle").setAttribute("aria-expanded",String(open));});
 
-  $("project-title").textContent=data.project.title;
-  $("claim-level").textContent=data.project.claim_level;
-  $("target-label").textContent=data.project.target;
-  $("deadline-label").textContent=`Competition deadline · ${data.project.deadline}`;
-  $("protocol-label").textContent=data.project.protocol;
-  $("snapshot-time").textContent=new Date(data.snapshot_created_at_utc).toLocaleString();
+  $("project-title").textContent=data.project.title;$("claim-level").textContent=data.project.claim_level;$("target-label").textContent=data.project.target;$("deadline-label").textContent=`Deadline · ${data.project.deadline}`;$("protocol-label").textContent=data.project.protocol;$("snapshot-time").textContent=new Date(data.snapshot_created_at_utc).toLocaleString();
 
   const summary=[
-    ["Evidence queue",data.summary.evidence_queue,"187 require source-grounded pass 2"],
-    ["Primary model R²",fmt(data.summary.primary_model_r2,3),"Development-only AB_Ridge"],
-    ["Prospective docking",data.summary.docked_candidates,"Four label-blind candidates · both states"],
-    ["Tier A equilibration",`${data.summary.md_runs_passed}/${data.summary.md_runs_required}`,data.summary.tier_a_production_unlocked?"Pilot production authorized · Tier B locked":"Pilot production and Tier B locked"]
+    ["External cohort","0 / 60","Frozen floor failure"],
+    ["Primary model",fmt(data.summary.primary_model_r2,3),"AB_Ridge development R²"],
+    ["Dual-state candidates",data.summary.docked_candidates,"4 blinded proposals"],
+    ["Tier A equilibration",`${data.summary.md_runs_passed}/${data.summary.md_runs_required}`,"Pilot production authorized"],
+    ["Served models","0","Shadow-only; release locked"]
   ];
-  $("summary-grid").innerHTML=summary.map(x=>`<div class="metric"><span>${esc(x[0])}</span><strong>${esc(x[1])}</strong><small>${esc(x[2])}</small></div>`).join("");
+  $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
 
   const gates=[
-    ["G0–G1","Sources & development evidence","Frozen development sources; external membership pending","passed"],
-    ["G2–G3","Redocking & production QC","Retrospective and four prospective candidates complete","passed"],
-    ["G4–G6","Model & applicability","Development complete; external thresholds not frozen","review"],
-    ["G7","MD native controls",`${data.summary.md_runs_passed}/${data.summary.md_runs_required} equilibration audits pass; pilot production authorized`,"review"],
-    ["G8–G9","Candidate MD & promotion","Tier B and model promotion locked","locked"]
+    ["G0–G1","Sources & evidence admission","Development evidence frozen; external pass 2 froze at zero","passed"],
+    ["G2–G3","Redocking & docking QC","Primary receptors and prospective dual-state runs complete","passed"],
+    ["G4–G6","Models & applicability","AB_Ridge leads development; no external confirmation","review"],
+    ["G7","Tier A native controls","Equilibration 6/6; 50 ns pilot authorized, not complete","authorized"],
+    ["G8","Candidate MD","Locked until both controls pass 2/3 production replicas","locked"],
+    ["G9","Model promotion","Blocked: external floors failed and human release absent","blocked"]
   ];
-  $("gate-map").innerHTML=gates.map(g=>`<div class="gate-row"><div class="gate-number">${g[0]}</div><div><strong>${g[1]}</strong><span>${g[2]}</span></div><span class="status-pill ${g[3]}">${g[3]}</span></div>`).join("");
+  $("gate-map").innerHTML=gates.map(g=>`<div class="gate-row"><div class="gate-number">${g[0]}</div><div><strong>${g[1]}</strong><small>${g[2]}</small></div><span class="status-pill ${g[3]}">${g[3]}</span></div>`).join("");
 
-  const portfolio=records("candidate_portfolio");$("portfolio-count").textContent=`${portfolio.length} records`;
-  $("portfolio-list").innerHTML=portfolio.map(p=>`<div class="portfolio-item"><div><strong>${esc(p.molecule_id.replace("LIT25-",""))}</strong><span>${esc(label(p.promotion_status))} · ${esc(label(p.md_status))}</span></div><code>Δ ${p.d_affinity_kcal_mol>0?"+":""}${fmt(p.d_affinity_kcal_mol,3)}</code></div>`).join("");
+  const shadowActions=records("shadow_actions");
+  $("shadow-mini").innerHTML=shadowActions.map((action,index)=>`<div class="mini-step"><i>${String(index+1).padStart(2,"0")}</i><strong>${esc(action.stage)}</strong><span>${esc(label(action.status))}</span></div>`).join("");
 
-  $("evidence-total").textContent=data.summary.evidence_queue;
-  $("evidence-lanes").innerHTML=records("evidence_inbox").map(e=>`<article class="lane-card ${e.disposition}"><strong>${e.count}</strong><h3>${esc(e.title)}</h3><p>${e.disposition==="quarantined"?"Held outside membership.":"Requires independent source-grounded review."} Outcomes loaded: no.</p></article>`).join("");
+  const pass1=records("evidence_inbox").filter(item=>item.stage==="pass_1_historical"),pass2=records("evidence_inbox").find(item=>item.record_id.includes("pass-2"));
+  const funnel=[["Initial queue",data.summary.evidence_queue,"outcome blind"],["Pass 2 required",data.summary.pass_2_required,"source review"],["Source grounded",pass2.count,"retrieved full text"],["Admitted",data.summary.external_admitted,"membership frozen"],["Outcome join",0,"prohibited"]];
+  $("evidence-funnel").innerHTML=funnel.map(item=>`<div class="funnel-step"><span>${item[0]}</span><strong>${item[1]}</strong><small>${item[2]}</small></div>`).join("");
+  function renderEvidence(){
+    const rows=records("evidence_inbox").filter(row=>evidenceFilter==="all"||row.disposition===evidenceFilter||(evidenceFilter==="review"&&["reviewed","review"].includes(row.disposition)));
+    $("evidence-lanes").innerHTML=rows.map(row=>`<div class="lane-card ${esc(row.disposition)}"><strong>${row.count}</strong><h3>${esc(row.title)}</h3><p>${esc(label(row.stage))} · ${esc(label(row.status))}</p></div>`).join("")||"<p>No lanes match this filter.</p>";
+  }
+  document.querySelectorAll("#evidence-filter button").forEach(button=>button.addEventListener("click",()=>{evidenceFilter=button.dataset.filter;document.querySelectorAll("#evidence-filter button").forEach(item=>item.classList.toggle("active",item===button));renderEvidence();}));renderEvidence();
 
-  $("model-grid").innerHTML=records("model_registry").map(m=>`<article class="model-card ${m.model_id==="AB_Ridge"?"primary":""}"><span class="role">${esc(m.role)}</span><span class="lock">Not served</span><h3>${esc(m.display_name)}</h3><div class="score">${fmt(m.r2,3)}</div><small>R² · RMSE ${fmt(m.rmse,3)} · n=${m.development_n}</small></article>`).join("");
-  const domain=records("applicability_uncertainty")[0],total=domain.inside_n+domain.outside_n,inside=domain.inside_n/total*100;
-  $("domain-panel").innerHTML=`<div class="domain-bar"><span class="inside" style="width:${inside}%"></span><span class="outside" style="width:${100-inside}%"></span></div><div class="domain-legend"><span>${domain.inside_n} inside domain</span><span>${domain.outside_n} outside</span></div><p class="domain-note">Tanimoto threshold ${domain.similarity_threshold}; descriptor-distance threshold ${fmt(domain.descriptor_distance_threshold,3)}. These thresholds describe development evaluation and are not yet frozen for external use.</p>`;
-  const ci=domain.r2_interval,min=.3,max=.75,left=(ci.lower-min)/(max-min)*100,width=(ci.upper-ci.lower)/(max-min)*100,point=(ci.estimate-min)/(max-min)*100;
-  $("uncertainty-panel").innerHTML=`<div class="interval"><strong>${fmt(ci.estimate,3)}</strong><span>Bootstrap R² estimate</span><div class="interval-track"><i style="left:${left}%;width:${width}%"></i><b style="left:${point}%"></b></div><span>95% interval ${fmt(ci.lower,3)}–${fmt(ci.upper,3)}</span></div><p class="domain-note">${esc(domain.calibration_warning)}</p>`;
+  const molecules=records("molecule_registry");$("molecule-count").textContent=molecules.length;
+  function renderMolecules(){
+    const query=moleculeQuery.toLowerCase(),rows=molecules.filter(row=>{const type=row.role.includes("control")?"control":"candidate";return (moleculeFilter==="all"||type===moleculeFilter)&&`${row.molecule_id} ${row.display_name} ${row.role}`.toLowerCase().includes(query);});
+    $("molecule-grid").innerHTML=rows.map(row=>{const type=row.role.includes("control")?"control":"candidate";return `<article class="registry-card ${type}"><header><span class="tag">${type}</span><span class="tag">${row.functional_label_blinded?"label blind":"native control"}</span></header><h2>${esc(row.display_name)}</h2><small>${esc(row.molecule_id)}</small><p>${esc(row.role)}<br>${esc(row.identity_status)}</p><div class="source-line">${esc(row.source.path)} · ${short(row.source.sha256)}</div></article>`;}).join("")||"<p>No registry records match.</p>";
+  }
+  $("molecule-search").addEventListener("input",event=>{moleculeQuery=event.target.value;renderMolecules();});document.querySelectorAll("#molecule-filter button").forEach(button=>button.addEventListener("click",()=>{moleculeFilter=button.dataset.filter;document.querySelectorAll("#molecule-filter button").forEach(item=>item.classList.toggle("active",item===button));renderMolecules();}));renderMolecules();
 
-  const docking=records("dual_state_docking"),byMolecule=Object.groupBy?Object.groupBy(docking,d=>d.molecule_id):docking.reduce((a,d)=>((a[d.molecule_id]??=[]).push(d),a),{});
-  $("docking-grid").innerHTML=Object.entries(byMolecule).map(([id,rows])=>{const inactive=rows.find(r=>r.receptor_state==="inactive"),active=rows.find(r=>r.receptor_state==="active-like");return `<article class="docking-card"><header><div><span class="kicker">Label blind</span><h2>${esc(id.replace("LIT25-",""))}</h2></div><span class="shadow-tag">Shadow proposal</span></header><div class="state-pair"><div class="state-box"><span>5NM4 · inactive</span><strong>${fmt(inactive.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNNscore ${fmt(inactive.median_cnn_score,3)}</small></div><div class="state-box active-like"><span>2YDO · active-like</span><strong>${fmt(active.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNNscore ${fmt(active.median_cnn_score,3)}</small></div></div><div class="docking-footer"><span>3 + 3 valid seeds</span><span>Retained poses hashed</span></div></article>`}).join("");
+  const models=records("model_registry");
+  function renderModels(){
+    const values=models.map(row=>Number(row[modelMetric])),max=Math.max(...values),min=Math.min(...values),range=Math.max(max-min,.001),lowerBetter=modelMetric!=="r2";
+    $("model-comparison").innerHTML=models.map(row=>{const value=Number(row[modelMetric]),width=lowerBetter?(max-value)/range*80+20:(value-min)/range*80+20;return `<div class="bar-row ${row.model_id==="AB_Ridge"?"primary":""}"><label>${esc(row.display_name)}</label><div class="bar-track"><i style="width:${width}%"></i></div><strong>${fmt(value,3)}</strong></div>`;}).join("");
+    $("model-grid").innerHTML=models.map(row=>`<article class="model-card ${row.model_id==="AB_Ridge"?"primary":""}"><span class="kicker">${esc(row.role)}</span><span class="lock">Not served</span><h3>${esc(row.display_name)}</h3><div class="score">${fmt(row.r2,3)}</div><small>R² · RMSE ${fmt(row.rmse,3)} · MAE ${fmt(row.mae,3)}</small><div class="source-line">${esc(row.source.path)}</div></article>`).join("");
+  }
+  document.querySelectorAll("#metric-toggle button").forEach(button=>button.addEventListener("click",()=>{modelMetric=button.dataset.metric;document.querySelectorAll("#metric-toggle button").forEach(item=>item.classList.toggle("active",item===button));renderModels();}));renderModels();
+
+  const domain=records("applicability_uncertainty")[0],domainTotal=domain.inside_n+domain.outside_n,insidePercent=domain.inside_n/domainTotal*100;
+  $("domain-panel").innerHTML=`<div class="domain-visual"><div class="donut" style="--inside:${insidePercent*3.6}deg"><div><strong>${fmt(insidePercent,1)}%</strong><span>inside domain</span></div></div><div class="domain-copy"><dl><dt>Inside</dt><dd>${domain.inside_n}</dd><dt>Outside</dt><dd>${domain.outside_n}</dd><dt>Tanimoto floor</dt><dd>${domain.similarity_threshold}</dd><dt>Descriptor distance</dt><dd>${fmt(domain.descriptor_distance_threshold,3)}</dd></dl><p>Development grouped out-of-fold scope only.</p></div></div>`;
+  const ci=domain.r2_interval,scaleMin=.3,scaleMax=.75,left=(ci.lower-scaleMin)/(scaleMax-scaleMin)*100,width=(ci.upper-ci.lower)/(scaleMax-scaleMin)*100,point=(ci.estimate-scaleMin)/(scaleMax-scaleMin)*100;
+  $("uncertainty-panel").innerHTML=`<div class="interval"><strong>${fmt(ci.estimate,3)}</strong><span>bootstrap estimate</span><div class="interval-track"><i style="left:${left}%;width:${width}%"></i><b style="left:${point}%"></b></div><span>95% interval · ${fmt(ci.lower,3)}–${fmt(ci.upper,3)}</span></div><div class="source-line">${esc(domain.source.path)} · ${short(domain.source.sha256)}</div>`;
+
+  const dockingRows=records("dual_state_docking");
+  function dockingGroups(){return dockingRows.reduce((acc,row)=>{(acc[row.molecule_id]??=[]).push(row);return acc;},{});}
+  function renderDocking(){
+    let groups=Object.entries(dockingGroups()).map(([id,rows])=>{const inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return{id,inactive,active,delta:active.median_affinity_kcal_mol-inactive.median_affinity_kcal_mol,mean:(active.median_affinity_kcal_mol+inactive.median_affinity_kcal_mol)/2};});
+    groups.sort((a,b)=>dockingSort==="delta"?Math.abs(b.delta)-Math.abs(a.delta):dockingSort==="affinity"?a.mean-b.mean:a.id.localeCompare(b.id));
+    $("docking-grid").innerHTML=groups.map(group=>`<article class="docking-card"><header><div><span class="kicker">Label blind · 3+3 seeds</span><h2>${esc(group.id.replace("LIT25-",""))}</h2></div><span class="status-pill shadow">Shadow</span></header><div class="state-pair"><div class="state-box"><span>5NM4 inactive</span><strong>${fmt(group.inactive.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.inactive.median_cnn_score,3)}</small></div><div class="state-box active"><span>2YDO active-like</span><strong>${fmt(group.active.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.active.median_cnn_score,3)}</small></div></div><div class="delta-line"><span>State difference</span><b>${group.delta>0?"+":""}${fmt(group.delta,3)} kcal/mol</b></div><div class="source-line">${esc(group.inactive.source.path)} · retained poses hashed</div></article>`).join("");
+  }
+  document.querySelectorAll("#docking-sort button").forEach(button=>button.addEventListener("click",()=>{dockingSort=button.dataset.sort;document.querySelectorAll("#docking-sort button").forEach(item=>item.classList.toggle("active",item===button));renderDocking();}));renderDocking();
 
   const md=records("md_gates");
-  $("md-gates").innerHTML=md.map(g=>{const pct=g.required_runs?Math.round(g.passed_runs/g.required_runs*100):0,passed=g.gate_id.startsWith("G7")&&g.tier_a_production_unlocked;return `<article class="md-card ${passed?"passed":"locked"}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${g.passed_runs}/${g.required_runs}</span></div><span class="kicker">${esc(g.gate_id)}</span><h2>${g.gate_id.startsWith("G7")?"Equilibration gate":"Candidate MD gate"}</h2><span class="status-pill ${passed?"passed":"locked"}">${esc(label(g.status))}</span><p>${esc(g.claim_limit)}</p></article>`}).join("");
-  const mdSource=md[0],missing=new Set(mdSource.missing_audits.map(x=>x.split("/").slice(0,2).join(":"))),systems=["5NM4_ZMA_native","5G53_NECA_miniGs_native_nucleotide_free"],seeds=[20260914,20260915,20260916];
-  let matrix=`<div class="md-cell header">System</div>${seeds.map(s=>`<div class="md-cell header">Seed ${s}</div>`).join("")}`;
-  systems.forEach(system=>{matrix+=`<div class="md-cell header">${esc(system.replaceAll("_"," "))}</div>`;seeds.forEach(seed=>{const miss=missing.has(`${system}:seed-${seed}`);matrix+=`<div class="md-cell ${miss?"missing":"pass"}">${miss?"Missing audit":"Gate passed"}</div>`;});});$("md-matrix").innerHTML=matrix;
+  $("md-gates").innerHTML=md.map(gate=>{const isEquil=gate.gate_id.includes("equilibration"),isProduction=gate.gate_id.includes("production"),tone=isEquil?"passed":isProduction?"authorized":"locked",pct=gate.required_runs?Math.round(gate.passed_runs/gate.required_runs*100):0;return `<article class="md-card ${tone}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${gate.passed_runs}/${gate.required_runs}</span></div><span class="kicker">${esc(gate.gate_id)}</span><h2>${isEquil?"Equilibration passed":isProduction?"Pilot authorized":"Candidate MD locked"}</h2><span class="status-pill ${tone}">${esc(label(gate.status))}</span><p>${esc(gate.claim_limit)}</p><div class="source-line">${esc(gate.source.path)}</div></article>`;}).join("");
+  const mdSource=md[0],missing=new Set(mdSource.missing_audits.map(path=>path.split("/").slice(0,2).join(":"))),systems=["5NM4_ZMA_native","5G53_NECA_miniGs_native_nucleotide_free"],seeds=[20260914,20260915,20260916];
+  let matrix=`<div class="md-cell header">System</div>${seeds.map(seed=>`<div class="md-cell header">Seed ${seed}</div>`).join("")}`;systems.forEach(system=>{matrix+=`<div class="md-cell header">${esc(label(system))}</div>`;seeds.forEach(seed=>{const absent=missing.has(`${system}:seed-${seed}`);matrix+=`<div class="md-cell ${absent?"missing":"pass"}">${absent?"Missing audit":"Gate passed"}</div>`;});});$("md-matrix").innerHTML=matrix;
 
-  $("audit-list").innerHTML=records("audit_log").map(a=>`<article class="audit-item"><span>#${String(a.sequence).padStart(4,"0")}</span><div><strong>${esc(label(a.action))}</strong><small>${esc(a.record_type)}</small></div><div><strong>${esc(a.record_id)}</strong><code>${esc(a.source.path)}</code></div><div><code>${short(a.entry_hash,16)}</code><small>prev ${short(a.previous_entry_hash,10)}</small></div></article>`).join("");
-  const requested=location.hash.slice(1);
-  setView(["overview","evidence","models","docking","md","audit"].includes(requested)?requested:"overview");
+  const portfolio=records("candidate_portfolio"),dockingById=dockingGroups();
+  $("portfolio-board").innerHTML=portfolio.map(item=>{const rows=dockingById[item.molecule_id],inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return `<article class="portfolio-card"><header><div><span class="kicker">Computationally prioritized</span><h2>${esc(item.molecule_id.replace("LIT25-",""))}</h2></div><span class="status-pill blocked">Not releasable</span></header><div class="portfolio-metrics"><div><span>5NM4</span><strong>${fmt(inactive.median_affinity_kcal_mol,2)}</strong></div><div><span>2YDO</span><strong>${fmt(active.median_affinity_kcal_mol,2)}</strong></div><div><span>Δ score</span><strong>${item.d_affinity_kcal_mol>0?"+":""}${fmt(item.d_affinity_kcal_mol,2)}</strong></div></div><p>${esc(item.next_gate)} Label status: ${esc(item.label_status)}. MD state: ${esc(label(item.md_status))}.</p><div class="source-line">${esc(item.source.path)} · ${short(item.source.sha256)}</div></article>`;}).join("");
+
+  $("shadow-workflow").innerHTML=shadowActions.map((action,index)=>`<article class="shadow-card ${esc(action.status)}"><span class="kicker">Step ${String(index+1).padStart(2,"0")}</span><h2>${esc(action.stage)}</h2><div class="executor">${esc(action.executor)} · ${esc(label(action.status))}</div><p>${esc(action.authority)}</p><div class="gate"><b>Required gate</b><br>${esc(action.required_gate)}</div><div class="source-line">${esc(action.source.path)}<br>${short(action.source.sha256,16)}</div></article>`).join("");
+  const prohibited=[...new Set(shadowActions.flatMap(action=>action.prohibited_actions))];$("prohibited-grid").innerHTML=prohibited.map(item=>`<span>${esc(label(item))}</span>`).join("");
+
+  const audit=records("audit_log");$("audit-count").textContent=`${audit.length} linked entries`;
+  $("audit-list").innerHTML=audit.map(entry=>`<article class="audit-item"><span>#${String(entry.sequence).padStart(4,"0")}</span><div><strong>${esc(label(entry.action))}</strong><small>${esc(entry.record_type)}</small></div><div><strong>${esc(entry.record_id)}</strong><code>${esc(entry.source.path)}</code></div><div><code>${short(entry.entry_hash,16)}</code><small>prev ${short(entry.previous_entry_hash,10)}</small></div></article>`).join("");
+
+  const requested=location.hash.slice(1);setView(views.includes(requested)?requested:"overview");
 })();
