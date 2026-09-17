@@ -1,5 +1,7 @@
 # Track 3 A2A virtual-screening study
 
+The v1.6 Tier A 50 ns pilot-production and label-blind Tier B readiness contracts are documented in `MD_PRODUCTION_READINESS_V16.md`. They are fail-closed: Tier A requires all six accepted v1.6.4 equilibration audits and states, and Tier B requires both controls to pass at least two of three completed production replicas.
+
 This directory contains the evidence-gated Track 3 study. It is intentionally
 isolated from the legacy ECMO/Siglec work so targets, labels, and validation
 standards cannot be mixed accidentally.
