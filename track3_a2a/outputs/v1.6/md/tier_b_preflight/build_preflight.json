@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-17T09:43:24.917954+00:00",
+  "specification_id": "a2a-tier-b-build-v1.6",
+  "production_specification_id": "a2a-md-production-v1.6",
+  "candidate_labels_loaded": false,
+  "system_count": 8,
+  "input_ready_count": 4,
+  "tier_a_equilibration_gate_passed": true,
+  "tier_a_equilibration_gate_blocker": null,
+  "tier_a_control_gate_passed": false,
+  "tier_a_control_gate_blocker": "Tier A production control-gate report not supplied",
+  "tier_b_bundle_construction_authorized": false,
+  "tier_b_trajectory_unlocked": false,
+  "status": "tier_b_build_preflight_locked",
+  "systems": [
+    {
+      "system_id": "LIT25-RL-C5_5NM4",
+      "candidate_id": "LIT25-RL-C5",
+      "ligand_code": "C5A",
+      "receptor_id": "5NM4",
+      "receptor_state": "inactive",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "eef82e4467fe43ce48c8a49dfb12d6736809d99e03c51027317e19d7233b3aa0",
+      "ligand_audit_sha256": "5864b6bd5e5767200d97eb96da1c4b6ef8b63e3b41086cc66049f67db50809e6",
+      "receptor_construct_sha256": "fc1f3a2d8fa6bcf52dfc61248ba19ff68baa35627d4f05cf28e27d2e2559d8bc",
+      "input_preflight_passed": true,
+      "blockers": [],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-RL-C5_2YDO",
+      "candidate_id": "LIT25-RL-C5",
+      "ligand_code": "C5A",
+      "receptor_id": "2YDO",
+      "receptor_state": "active_like",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "4c83f630af89935a0757ba91c7e60ece4ac058407c440a6f35b1e0e5aea65a5d",
+      "ligand_audit_sha256": "5864b6bd5e5767200d97eb96da1c4b6ef8b63e3b41086cc66049f67db50809e6",
+      "receptor_construct_sha256": null,
+      "input_preflight_passed": false,
+      "blockers": [
+        "accepted_receptor_construct_missing",
+        "accepted_receptor_audit_missing"
+      ],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-RL-C7_5NM4",
+      "candidate_id": "LIT25-RL-C7",
+      "ligand_code": "C7A",
+      "receptor_id": "5NM4",
+      "receptor_state": "inactive",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "6b420e87e04ab119b58397408b35d7d506071bcfc62d0352459ea7a447351c34",
+      "ligand_audit_sha256": "d46c928f39a42dcd7c430a83d6a71ab01eb6dc090de52251d15c6d0f33a6405d",
+      "receptor_construct_sha256": "fc1f3a2d8fa6bcf52dfc61248ba19ff68baa35627d4f05cf28e27d2e2559d8bc",
+      "input_preflight_passed": true,
+      "blockers": [],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-RL-C7_2YDO",
+      "candidate_id": "LIT25-RL-C7",
+      "ligand_code": "C7A",
+      "receptor_id": "2YDO",
+      "receptor_state": "active_like",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "75e9cad3a1e9e90f8a0920aaa8d5169010269752b02aeaad242ff34621254db5",
+      "ligand_audit_sha256": "d46c928f39a42dcd7c430a83d6a71ab01eb6dc090de52251d15c6d0f33a6405d",
+      "receptor_construct_sha256": null,
+      "input_preflight_passed": false,
+      "blockers": [
+        "accepted_receptor_construct_missing",
+        "accepted_receptor_audit_missing"
+      ],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-RL-C9_5NM4",
+      "candidate_id": "LIT25-RL-C9",
+      "ligand_code": "C9A",
+      "receptor_id": "5NM4",
+      "receptor_state": "inactive",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "b658fe15e11501aa691fedb3119391d445f5c4b09cb553fab938104d72f85991",
+      "ligand_audit_sha256": "d45f1a2f5ac8301fa93ea46a8f3ada5654696ae5d9f9c04f2806a9afd43b77ac",
+      "receptor_construct_sha256": "fc1f3a2d8fa6bcf52dfc61248ba19ff68baa35627d4f05cf28e27d2e2559d8bc",
+      "input_preflight_passed": true,
+      "blockers": [],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-RL-C9_2YDO",
+      "candidate_id": "LIT25-RL-C9",
+      "ligand_code": "C9A",
+      "receptor_id": "2YDO",
+      "receptor_state": "active_like",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "5456dd456a4e4a0274291b19c8d410845cb2f1ead3ef3e9cd0de7afd27b041de",
+      "ligand_audit_sha256": "d45f1a2f5ac8301fa93ea46a8f3ada5654696ae5d9f9c04f2806a9afd43b77ac",
+      "receptor_construct_sha256": null,
+      "input_preflight_passed": false,
+      "blockers": [
+        "accepted_receptor_construct_missing",
+        "accepted_receptor_audit_missing"
+      ],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-MET-PGD2_5NM4",
+      "candidate_id": "LIT25-MET-PGD2",
+      "ligand_code": "PGD2",
+      "receptor_id": "5NM4",
+      "receptor_state": "inactive",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "cb4ed5dd1f12a71a52ebc90585c2789af30066b3f1f9731e7d3dfcf9873b6b46",
+      "ligand_audit_sha256": "00ed8930bda56109e3cc7d27920e8c6d1edbf0651cdc6fefdf8a7a6dd9c7805f",
+      "receptor_construct_sha256": "fc1f3a2d8fa6bcf52dfc61248ba19ff68baa35627d4f05cf28e27d2e2559d8bc",
+      "input_preflight_passed": true,
+      "blockers": [],
+      "bundle_created": false,
+      "trajectory_started": false
+    },
+    {
+      "system_id": "LIT25-MET-PGD2_2YDO",
+      "candidate_id": "LIT25-MET-PGD2",
+      "ligand_code": "PGD2",
+      "receptor_id": "2YDO",
+      "receptor_state": "active_like",
+      "functional_label_blinded": true,
+      "retained_pose_sha256": "ab2f616cd8212db94ccbc834fd7234db1167b104db20587a03ba89034d775cf2",
+      "ligand_audit_sha256": "00ed8930bda56109e3cc7d27920e8c6d1edbf0651cdc6fefdf8a7a6dd9c7805f",
+      "receptor_construct_sha256": null,
+      "input_preflight_passed": false,
+      "blockers": [
+        "accepted_receptor_construct_missing",
+        "accepted_receptor_audit_missing"
+      ],
+      "bundle_created": false,
+      "trajectory_started": false
+    }
+  ],
+  "bundles_created": 0,
+  "trajectories_started": 0,
+  "source_hashes": {
+    "tier_b_build_config": "aa1c7393f5d2d04d4529c76a430cd6320ec7a04d65ca8029588f93b2e6753358",
+    "md_production_config": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07",
+    "retained_pose_authority": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17",
+    "tier_a_equilibration_gate": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
+  },
+  "next_gate": "Complete and audit every Tier B receptor/system input, then require the passed Tier A production control report before constructing bundles. Trajectory launch requires separately accepted bundles."
+}

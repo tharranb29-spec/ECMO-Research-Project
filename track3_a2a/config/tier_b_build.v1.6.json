@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-tier-b-build-v1.6",
+  "production_specification_id": "a2a-md-production-v1.6",
+  "candidate_labels_loaded": false,
+  "purpose": "Label-blind, fail-closed input contract for eight prospective Tier B systems; this contract does not create or accept a system bundle.",
+  "candidate_ligands": {
+    "LIT25-RL-C5": "C5A",
+    "LIT25-RL-C7": "C7A",
+    "LIT25-RL-C9": "C9A",
+    "LIT25-MET-PGD2": "PGD2"
+  },
+  "receptors": {
+    "5NM4": {
+      "state": "inactive",
+      "accepted_construct": "outputs/v1.6/md/tier_a_constructs/minimized/5NM4_ADORA2A_minimized_candidate.pdb",
+      "accepted_construct_audit": "outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json"
+    },
+    "2YDO": {
+      "state": "active_like",
+      "accepted_construct": "outputs/v1.6/md/tier_b_receptors/2YDO_active_like/accepted_receptor.pdb",
+      "accepted_construct_audit": "outputs/v1.6/md/tier_b_receptors/2YDO_active_like/construct_audit.json"
+    }
+  },
+  "retained_pose_template": "outputs/v1.4/docking/{candidate_id}/{receptor_id}/retained_pose.sdf",
+  "retained_pose_authority": "outputs/v1.4/docking/literature_pilot_2025_report.json",
+  "ligand_bundle_template": "outputs/v1.6/md/ligand_bundles/{ligand_code}",
+  "required_ligand_files": ["ligand_gaff2.mol2", "ligand.frcmod", "ligand.prmtop", "ligand.inpcrd", "ligand_parameterized.pdb", "atom_name_map.csv"],
+  "required_future_bundle_files": ["system.xml", "positions.pdb", "equilibrated_state.xml", "native_contacts.json", "assembly_audit.json", "smoke_audit.json", "bundle_manifest.json"],
+  "build_authorization_rule": "Both Tier A controls must pass at least two of three completed production replicas before Tier B bundle construction or trajectory launch.",
+  "best_replica_selection": "prohibited"
+}
