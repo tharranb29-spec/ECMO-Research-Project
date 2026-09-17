@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.audit-log.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.audit-log.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {"type": "array", "items": {"type": "object", "required": ["sequence", "event_id", "actor", "action", "record_type", "record_id", "source", "previous_entry_hash", "entry_hash"]}}
+  },
+  "additionalProperties": false
+}

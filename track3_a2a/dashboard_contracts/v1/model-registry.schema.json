@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.model-registry.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.model-registry.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {"type": "array", "items": {"type": "object", "required": ["model_id", "endpoint", "lifecycle_status", "r2", "rmse", "external_outcomes_loaded", "promotion_allowed", "source"]}}
+  },
+  "additionalProperties": false
+}
