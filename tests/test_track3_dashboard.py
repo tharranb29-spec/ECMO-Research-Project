@@ -52,7 +52,8 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertFalse(self.payload["summary"]["external_outcomes_loaded"])
         self.assertEqual(self.payload["summary"]["external_admitted"], 0)
         self.assertFalse(self.payload["summary"]["tier_b_unlocked"])
-        self.assertEqual(self.payload["summary"]["md_runs_passed"], 5)
+        self.assertTrue(self.payload["summary"]["tier_a_production_unlocked"])
+        self.assertEqual(self.payload["summary"]["md_runs_passed"], 6)
         self.assertEqual(self.payload["summary"]["md_runs_required"], 6)
 
     def test_docking_contract_is_dual_state_and_label_blind(self):

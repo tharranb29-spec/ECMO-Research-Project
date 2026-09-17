@@ -29,7 +29,7 @@
     ["Evidence queue",data.summary.evidence_queue,"187 require source-grounded pass 2"],
     ["Primary model R²",fmt(data.summary.primary_model_r2,3),"Development-only AB_Ridge"],
     ["Prospective docking",data.summary.docked_candidates,"Four label-blind candidates · both states"],
-    ["Tier A equilibration",`${data.summary.md_runs_passed}/${data.summary.md_runs_required}`,"Tier A production and Tier B remain locked"]
+    ["Tier A equilibration",`${data.summary.md_runs_passed}/${data.summary.md_runs_required}`,data.summary.tier_a_production_unlocked?"Pilot production authorized · Tier B locked":"Pilot production and Tier B locked"]
   ];
   $("summary-grid").innerHTML=summary.map(x=>`<div class="metric"><span>${esc(x[0])}</span><strong>${esc(x[1])}</strong><small>${esc(x[2])}</small></div>`).join("");
 
@@ -37,7 +37,7 @@
     ["G0–G1","Sources & development evidence","Frozen development sources; external membership pending","passed"],
     ["G2–G3","Redocking & production QC","Retrospective and four prospective candidates complete","passed"],
     ["G4–G6","Model & applicability","Development complete; external thresholds not frozen","review"],
-    ["G7","MD native controls",`${data.summary.md_runs_passed}/${data.summary.md_runs_required} equilibration audits pass; production locked`,"review"],
+    ["G7","MD native controls",`${data.summary.md_runs_passed}/${data.summary.md_runs_required} equilibration audits pass; pilot production authorized`,"review"],
     ["G8–G9","Candidate MD & promotion","Tier B and model promotion locked","locked"]
   ];
   $("gate-map").innerHTML=gates.map(g=>`<div class="gate-row"><div class="gate-number">${g[0]}</div><div><strong>${g[1]}</strong><span>${g[2]}</span></div><span class="status-pill ${g[3]}">${g[3]}</span></div>`).join("");
@@ -58,7 +58,7 @@
   $("docking-grid").innerHTML=Object.entries(byMolecule).map(([id,rows])=>{const inactive=rows.find(r=>r.receptor_state==="inactive"),active=rows.find(r=>r.receptor_state==="active-like");return `<article class="docking-card"><header><div><span class="kicker">Label blind</span><h2>${esc(id.replace("LIT25-",""))}</h2></div><span class="shadow-tag">Shadow proposal</span></header><div class="state-pair"><div class="state-box"><span>5NM4 · inactive</span><strong>${fmt(inactive.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNNscore ${fmt(inactive.median_cnn_score,3)}</small></div><div class="state-box active-like"><span>2YDO · active-like</span><strong>${fmt(active.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNNscore ${fmt(active.median_cnn_score,3)}</small></div></div><div class="docking-footer"><span>3 + 3 valid seeds</span><span>Retained poses hashed</span></div></article>`}).join("");
 
   const md=records("md_gates");
-  $("md-gates").innerHTML=md.map(g=>{const pct=g.required_runs?Math.round(g.passed_runs/g.required_runs*100):0;return `<article class="md-card locked"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${g.passed_runs}/${g.required_runs}</span></div><span class="kicker">${esc(g.gate_id)}</span><h2>${g.gate_id.startsWith("G7")?"Native-control gate":"Candidate MD gate"}</h2><span class="status-pill locked">${esc(label(g.status))}</span><p>${esc(g.claim_limit)}</p></article>`}).join("");
+  $("md-gates").innerHTML=md.map(g=>{const pct=g.required_runs?Math.round(g.passed_runs/g.required_runs*100):0,passed=g.gate_id.startsWith("G7")&&g.tier_a_production_unlocked;return `<article class="md-card ${passed?"passed":"locked"}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${g.passed_runs}/${g.required_runs}</span></div><span class="kicker">${esc(g.gate_id)}</span><h2>${g.gate_id.startsWith("G7")?"Equilibration gate":"Candidate MD gate"}</h2><span class="status-pill ${passed?"passed":"locked"}">${esc(label(g.status))}</span><p>${esc(g.claim_limit)}</p></article>`}).join("");
   const mdSource=md[0],missing=new Set(mdSource.missing_audits.map(x=>x.split("/").slice(0,2).join(":"))),systems=["5NM4_ZMA_native","5G53_NECA_miniGs_native_nucleotide_free"],seeds=[20260914,20260915,20260916];
   let matrix=`<div class="md-cell header">System</div>${seeds.map(s=>`<div class="md-cell header">Seed ${s}</div>`).join("")}`;
   systems.forEach(system=>{matrix+=`<div class="md-cell header">${esc(system.replaceAll("_"," "))}</div>`;seeds.forEach(seed=>{const miss=missing.has(`${system}:seed-${seed}`);matrix+=`<div class="md-cell ${miss?"missing":"pass"}">${miss?"Missing audit":"Gate passed"}</div>`;});});$("md-matrix").innerHTML=matrix;

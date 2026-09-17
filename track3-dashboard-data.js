@@ -88,7 +88,7 @@ window.A2A_DASHBOARD_DATA = {
         {
           "action": "md-gate",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "5a4724198b17a04ab7052caa510ff66db2afc02fe3e051bdd8fb5b3407601cb8",
+          "entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
           "event_id": "audit-0005",
           "previous_entry_hash": "91927e703f088e78a160b101aff978c74e537a5d9cc2386d902f9c9db4323771",
           "record_id": "a2a-tier-a-equilibration-gate-v1.6.4",
@@ -96,15 +96,15 @@ window.A2A_DASHBOARD_DATA = {
           "sequence": 5,
           "source": {
             "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
-            "sha256": "079d318518ef25456cdaf0cc7db93081e479b81ffa96d154f10d037d9c8d3c96"
+            "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
           }
         },
         {
           "action": "shadow-policy",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "7e14842872ce96337c9ec1a658000f3d05b3bef8afb6423340f190249e6b772d",
+          "entry_hash": "2b128c5562121f2166b1a734b285e032cec07f650b25463ed589c879c8f67093",
           "event_id": "audit-0006",
-          "previous_entry_hash": "5a4724198b17a04ab7052caa510ff66db2afc02fe3e051bdd8fb5b3407601cb8",
+          "previous_entry_hash": "119b901f12ed2919a32e245c63eb495afa35dc245745cb0c01b46e24a6e527df",
           "record_id": "a2a-shadow-update-v1.4",
           "record_type": "promotion",
           "sequence": 6,
@@ -406,19 +406,17 @@ window.A2A_DASHBOARD_DATA = {
         {
           "claim_limit": "This gate authorizes Tier A pilot production; it does not establish control stability or unlock Tier B.",
           "gate_id": "G7:tier-a-equilibration",
-          "missing_audits": [
-            "5G53_NECA_miniGs_native_nucleotide_free/seed-20260916/equilibration_audit.json"
-          ],
-          "observed_runs": 5,
-          "passed_runs": 5,
+          "missing_audits": [],
+          "observed_runs": 6,
+          "passed_runs": 6,
           "required_runs": 6,
           "source": {
             "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
-            "sha256": "079d318518ef25456cdaf0cc7db93081e479b81ffa96d154f10d037d9c8d3c96"
+            "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
           },
           "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
-          "status": "tier_a_equilibration_gate_locked",
-          "tier_a_production_unlocked": false,
+          "status": "tier_a_equilibration_gate_passed",
+          "tier_a_production_unlocked": true,
           "tier_b_unlocked": false
         },
         {
@@ -434,7 +432,7 @@ window.A2A_DASHBOARD_DATA = {
           },
           "specification_id": "a2a-tier-a-equilibration-gate-v1.6.4",
           "status": "locked",
-          "tier_a_production_unlocked": false,
+          "tier_a_production_unlocked": true,
           "tier_b_unlocked": false
         }
       ],
@@ -596,18 +594,19 @@ window.A2A_DASHBOARD_DATA = {
       "sha256": "ee09c22cb06824843aae242e423cd85ab3171af2fb5edfe6d5c2179f2eb54185"
     }
   },
-  "snapshot_created_at_utc": "2026-09-17T06:45:40+00:00",
+  "snapshot_created_at_utc": "2026-09-17T09:38:36.894903+00:00",
   "summary": {
     "docked_candidates": 4,
     "evidence_queue": 240,
     "external_admitted": 0,
     "external_outcomes_loaded": false,
-    "md_runs_passed": 5,
+    "md_runs_passed": 6,
     "md_runs_required": 6,
     "pass_2_required": 187,
     "primary_model": "AB_Ridge",
     "primary_model_r2": 0.5605377886314917,
     "promotion_mode": "shadow_only",
+    "tier_a_production_unlocked": true,
     "tier_b_unlocked": false
   }
 };

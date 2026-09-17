@@ -276,6 +276,7 @@ def build() -> dict:
             "docked_candidates": len(docking["results"]),
             "md_runs_passed": md["passed_run_count"],
             "md_runs_required": md["expected_run_count"],
+            "tier_a_production_unlocked": md["tier_a_production_unlocked"],
             "tier_b_unlocked": md["tier_b_unlocked"],
             "promotion_mode": promotion["mode"],
         },
