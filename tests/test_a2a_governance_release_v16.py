@@ -44,6 +44,7 @@ class A2AGovernanceReleaseV16Tests(unittest.TestCase):
                 "freeze": "outputs/v1.6/protocol_freeze_manifest.json",
                 "model": "outputs/v1.6/model_reproduction/development_results.json",
                 "pass1": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+                "pass2": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
                 "implementation": "outputs/v1.6/implementation_status.json",
                 "equilibration": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
             }[key]

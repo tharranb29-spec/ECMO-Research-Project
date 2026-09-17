@@ -37,6 +37,8 @@ python track3_a2a/run_tier_a_production_v16.py \
 
 Remove `--preflight-only` only on the intended OpenMM 8.6 accelerator host. Runs checkpoint every 100 ps and resume only when the prior status metadata matches the exact config, system, seed, equilibrated state, audit, and aggregate gate. A technical failure is recorded and may not be silently replaced.
 
+For Google Colab execution, use `notebooks/A2A_TIER_A_PRODUCTION_V16_COLAB.ipynb`. It verifies all six Drive-hosted state files before launch, runs one predefined system/replica per session, prints checkpoint progress, and resumes only the same frozen job.
+
 ## Tier A analysis and Tier B unlock
 
 `analyze_tier_a_production_v16.py` requires all six completed 50 ns runs. For the final 80% of each trajectory it applies the predeclared v1.5 control criteria:

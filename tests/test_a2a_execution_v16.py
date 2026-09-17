@@ -33,6 +33,14 @@ class A2AExecutionV16Tests(unittest.TestCase):
         self.assertGreaterEqual(freeze["minimum_molecule_floor"], 60)
         self.assertGreaterEqual(freeze["minimum_generic_murcko_scaffold_floor"], 20)
 
+    def test_implementation_status_records_dashboard_as_shadow_only(self):
+        status = self.load("outputs/v1.6/implementation_status.json")
+        dashboard = status["workstreams"]["D_dashboard"]
+        self.assertEqual(dashboard["status"], "static_v1_contract_dashboard_implemented")
+        self.assertEqual(dashboard["contract_version"], "1.0.0")
+        self.assertEqual(dashboard["autonomous_mode"], "shadow_only")
+        self.assertIsNone(dashboard["served_track3_model"])
+
     def test_native_control_pose_mappings_pass(self):
         audit = self.load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
         self.assertEqual(audit["accepted_count"], 2)

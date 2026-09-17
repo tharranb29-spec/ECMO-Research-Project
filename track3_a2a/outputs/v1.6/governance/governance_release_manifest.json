@@ -10,15 +10,16 @@
     "outputs/v1.6/model_reproduction/development_results.json": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db",
     "outputs/v1.6/model_reproduction/development_oof_predictions.csv": "dbb448119ef652fbb4acd0667cd97636faa7aa08b2e99e5fad89d60c800fb668",
     "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
-    "outputs/v1.6/implementation_status.json": "5ff5d137a4b2b34c5dfc652d8bb3b9e1291f68143d85afa73a8aa7971149a2e8",
+    "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0",
+    "outputs/v1.6/implementation_status.json": "3fe19b46a0f292df4b36e3420b338ea017deae0c8c979e29aa18083bbd640323",
     "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
   },
   "release_artifacts": {
-    "governance_checks.csv": "d1d748dc941f686b1238a5463676774d3e28357b85701a983e34722e23b14c5d",
+    "governance_checks.csv": "ce1efa16548312179a26d7fa653ffda550fe7e2ea157c3a5662ac836629ee04e",
     "model_evidence_table.csv": "7f4a30a07f5041fcf3142c4a4975ccb95c4411eb565e9f031b1cc41488f5d1f0",
-    "gate_status_table.csv": "b63c115d46df4e0953718e720fbbbdeebdc14fe0af9313e26f81968f9f4ee969",
-    "evidence_artifact_inventory.csv": "9b4cdaf31e8864670a6e6d3ca5bd56b64d60da9c5b3141ab24ba42a500d050bc",
-    "governance_status.json": "ef82c2b6e01754dfb50284281667e30161b9b55b954ffbb091a3094f026a7ed0"
+    "gate_status_table.csv": "3fa93ef41860d05849a3174560a0da852fb21aef4598ffd12a772c28d39746f6",
+    "evidence_artifact_inventory.csv": "49ef085d6a6d22dde4c029b5c767aba180f25dbb48f3d1fdd111c4f628dca57d",
+    "governance_status.json": "a357d78251594f59b52d07cf774565f6bb66ce8e5c9f9f9e2559fb46be854835"
   },
   "frozen_decisions": {
     "primary_endpoint": "pBind_Ki",
@@ -27,5 +28,5 @@
     "outcome_firewall": "sealed",
     "retroactive_tuning": "prohibited"
   },
-  "release_signature_sha256": "e93fd5231116b0427275fddbb2f5976c48b52b63d201b7bcae1bcec9264717fa"
+  "release_signature_sha256": "3e8bc05552d38e129a535fd7b845b44c10bff2dfd7de58c9894a6d4b06064885"
 }

@@ -21,6 +21,7 @@ INPUTS = {
     "model": "outputs/v1.6/model_reproduction/development_results.json",
     "predictions": "outputs/v1.6/model_reproduction/development_oof_predictions.csv",
     "pass1": "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json",
+    "pass2": "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json",
     "implementation": "outputs/v1.6/implementation_status.json",
     "equilibration": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
 }
@@ -58,6 +59,7 @@ def evaluate_invariants(root: Path) -> tuple[list[dict[str, str]], dict[str, Any
     freeze = load_json(root, "freeze")
     model = load_json(root, "model")
     pass1 = load_json(root, "pass1")
+    pass2 = load_json(root, "pass2")
     implementation = load_json(root, "implementation")
     equilibration = load_json(root, "equilibration")
     primary = protocol["models"]["primary_external_predictor"]
@@ -71,7 +73,7 @@ def evaluate_invariants(root: Path) -> tuple[list[dict[str, str]], dict[str, Any
         check("outcome_firewall_declared", external["membership_freeze_before_outcome_join"] is True and external["one_time_outcome_join"] is True, external["outcome_firewall"], "Outcome-firewall contract is incomplete."),
         check("external_outcomes_not_loaded", model["external_outcomes_loaded"] is False and implementation["external_outcomes_joined"] is False and pass1["outcome_fields_loaded"] is False, "model=false; implementation=false; pass1=false", "An audited artifact indicates external outcomes were loaded or joined."),
         check("historical_holdout_not_reused", model["historical_locked_holdout_rows_used"] == 0, str(model["historical_locked_holdout_rows_used"]), "The historical locked holdout was reused."),
-        check("external_membership_not_premature", pass1["external_cohort_admitted_count"] == 0 and "membership_not_frozen" in implementation["workstreams"]["B_external_confirmation"]["status"], implementation["workstreams"]["B_external_confirmation"]["status"], "External membership was admitted or represented as frozen before pass 2."),
+        check("external_pass2_freeze_reconciles", pass1["external_cohort_admitted_count"] == 0 and pass2["membership_frozen"] is True and pass2["minimum_floors_passed"] is False and pass2["external_outcomes_joined"] is False and pass2["one_time_outcome_join_authorized"] is False and implementation["workstreams"]["B_external_confirmation"]["status"] == "frozen_nonconfirmatory_floor_failure", implementation["workstreams"]["B_external_confirmation"]["status"], "Pass-2 floor failure, membership freeze, and outcome firewall do not reconcile."),
         check("model_promotion_prohibited", model["promotion_allowed"] is False and protocol["release"]["automatic_model_replacement"] is False, "development promotion=false; automatic replacement=false", "Model promotion is allowed before the external gate."),
         check("model_mapping_matches_protocol", model["model_mapping"]["AB_Ridge"] == primary and model["model_mapping"]["AB_RF"] == protocol["models"]["chemistry_rf_comparator"] and model["model_mapping"]["E_RF"] == protocol["models"]["docking_increment_comparator"], "development model mapping equals protocol", "Development model mapping does not match the frozen protocol."),
         check("prediction_hash_reconciles", model["prediction_sha256"] == sha256(root / model["prediction_file"]), model["prediction_sha256"], "Development prediction artifact hash mismatch."),
@@ -94,6 +96,7 @@ def evaluate_invariants(root: Path) -> tuple[list[dict[str, str]], dict[str, Any
         "freeze": freeze,
         "model": model,
         "pass1": pass1,
+        "pass2": pass2,
         "implementation": implementation,
         "equilibration": equilibration,
     }
@@ -149,7 +152,7 @@ def build_release(root: Path, output: Path) -> dict[str, Any]:
     equilibration = context["equilibration"]
     gate_rows = [
         {"gate_id": "A_protocol_and_governance", "status": "passed", "decision": "release governance evidence package", "next_required_action": "preserve frozen decisions through external evaluation"},
-        {"gate_id": "B_external_membership", "status": "locked", "decision": "no cohort admitted", "next_required_action": "complete independent source-grounded pass 2 and freeze exact agreement cohort"},
+        {"gate_id": "B_external_membership", "status": "failed_frozen", "decision": "pass 2 frozen at 0 admitted molecules and 0 scaffolds; minimum floors failed", "next_required_action": "keep outcomes sealed; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment"},
         {"gate_id": "external_model_confirmation", "status": "not_run", "decision": "promotion prohibited", "next_required_action": "join outcomes once only after cohort, predictions, applicability thresholds, and hashes are frozen"},
         {"gate_id": "tier_a_production", "status": "authorized_not_started", "decision": f"{equilibration['passed_run_count']}/{equilibration['expected_run_count']} equilibration audits passed", "next_required_action": "run and analyze the frozen three-replica 50 ns Tier A pilot production for each control"},
         {"gate_id": "tier_b_candidate_md", "status": "locked", "decision": "both Tier A controls have not passed production rule", "next_required_action": "do not start Tier B"},
@@ -165,6 +168,7 @@ def build_release(root: Path, output: Path) -> dict[str, Any]:
         "model": "development-only model evidence",
         "predictions": "reproducible development OOF predictions",
         "pass1": "label-blind external evidence preflight",
+        "pass2": "outcome-blind pass-2 cohort freeze and floor decision",
         "implementation": "cross-workstream audited status",
         "equilibration": "current MD lock authority",
     }
@@ -184,14 +188,14 @@ def build_release(root: Path, output: Path) -> dict[str, Any]:
         "schema_version": 1,
         "specification_id": context["protocol"]["specification_id"],
         "deadline": context["protocol"]["competition_deadline"],
-        "status": "governance_controls_passed_external_confirmation_pending",
+        "status": "governance_controls_passed_external_floor_failure",
         "all_governance_checks_passed": True,
         "governance_check_count": len(checks),
         "primary_endpoint": "pBind_Ki",
         "primary_external_predictor": "AB_Ridge(alpha=1.0)",
         "rf_comparators": "500/sqrt/1; seed=20260914; n_jobs=1",
         "external_outcome_firewall": "sealed",
-        "external_membership_frozen": False,
+        "external_membership_frozen": context["pass2"]["membership_frozen"],
         "external_confirmation_run": False,
         "model_promotion_allowed": False,
         "tier_a_production_unlocked": True,

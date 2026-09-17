@@ -2,14 +2,14 @@
   "schema_version": 1,
   "specification_id": "a2a-track3-protocol-v1.6",
   "deadline": "2026-09-30",
-  "status": "governance_controls_passed_external_confirmation_pending",
+  "status": "governance_controls_passed_external_floor_failure",
   "all_governance_checks_passed": true,
-  "governance_check_count": 35,
+  "governance_check_count": 37,
   "primary_endpoint": "pBind_Ki",
   "primary_external_predictor": "AB_Ridge(alpha=1.0)",
   "rf_comparators": "500/sqrt/1; seed=20260914; n_jobs=1",
   "external_outcome_firewall": "sealed",
-  "external_membership_frozen": false,
+  "external_membership_frozen": true,
   "external_confirmation_run": false,
   "model_promotion_allowed": false,
   "tier_a_production_unlocked": true,
@@ -17,5 +17,5 @@
   "tier_b_unlocked": false,
   "current_equilibration_progress": "6/6",
   "claim_boundary": "Development metrics are not external confirmation; docking and MD cannot create labels or rescue a failed potency gate.",
-  "implementation_status_source_sha256": "5ff5d137a4b2b34c5dfc652d8bb3b9e1291f68143d85afa73a8aa7971149a2e8"
+  "implementation_status_source_sha256": "3fe19b46a0f292df4b36e3420b338ea017deae0c8c979e29aa18083bbd640323"
 }
