@@ -19,6 +19,7 @@ from md_readiness_v16 import (
     sha256,
     tier_a_systems,
     verify_equilibration_gate,
+    verify_release_bundle,
 )
 
 

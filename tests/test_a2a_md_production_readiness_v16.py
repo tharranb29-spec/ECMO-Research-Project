@@ -24,6 +24,7 @@ class TestA2AMDProductionReadinessV16(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.readiness = import_script("md_readiness_v16")
+        cls.tier_a_runner = import_script("run_tier_a_production_v16")
         cls.tier_b = import_script("preflight_tier_b_build_v16")
         cls.production = json.loads((A2A / "config" / "md_production.v1.6.json").read_text())
 
@@ -100,6 +101,15 @@ class TestA2AMDProductionReadinessV16(unittest.TestCase):
             result = self.readiness.verify_equilibration_gate(equilibration_root=root)
             self.assertEqual(result["status"], "tier_a_production_preflight_passed")
             self.assertEqual(len(result["verified_runs"]), 6)
+            args = type("Args", (), {
+                "system": "5NM4_ZMA_native",
+                "replica": 1,
+                "equilibration_root": root,
+                "release_root": self.readiness.DEFAULT_RELEASE_ROOT,
+            })()
+            preflight = self.tier_a_runner.preflight(args)
+            self.assertEqual(preflight["status"], "tier_a_replica_preflight_passed")
+            self.assertFalse(preflight["trajectory_started"])
 
     def test_repository_aggregate_gate_accepts_all_six_audits(self):
         result = self.readiness.verify_equilibration_gate(require_states=False)
