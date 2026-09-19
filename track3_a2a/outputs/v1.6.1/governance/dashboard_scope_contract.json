@@ -1,0 +1,54 @@
+{
+  "contract_version": "1.1.0",
+  "scope_specification_id": "a2a-track3-competition-scope-v1.6.1",
+  "claim_matrix_path": "outputs/v1.6.1/governance/claim_matrix.json",
+  "candidate_review": {
+    "mode": "human_review_queue",
+    "display_label": "screen-eligible / not ruled out",
+    "scientific_rank_allowed": false,
+    "candidate_probability_allowed": false,
+    "fixed_queue_count": null,
+    "interval_bound_rule": null,
+    "allowed_set_level_rates": [
+      "fraction_screen_eligible_not_ruled_out",
+      "fraction_inside_applicability_domain",
+      "fraction_outside_applicability_domain",
+      "fraction_with_high_model_disagreement",
+      "fraction_with_complete_required_evidence",
+      "scaffold_coverage_fraction"
+    ],
+    "prohibited_fields": [
+      "scientific_rank",
+      "hit_probability",
+      "success_probability",
+      "certified_hit",
+      "predicted_hit",
+      "interval_bound_selected"
+    ]
+  },
+  "external_confirmation": {
+    "minimum_molecules": 60,
+    "minimum_scaffolds": 20,
+    "queue_can_satisfy_floor": false,
+    "outcomes_sealed": true,
+    "confirmation_passed": false
+  },
+  "md_cutoff": {
+    "tier_a_status": "incomplete_at_cutoff_without_signed_control_gate",
+    "tier_a_completion_claim_allowed": false,
+    "tier_b_status": "locked",
+    "tier_b_submission_critical": false
+  },
+  "autonomy": {
+    "mode": "shadow_only_evidence_orchestration",
+    "automatic_scientific_validation": false,
+    "protocol_change": false,
+    "model_promotion": false,
+    "outcome_unsealing": false,
+    "md_unlock": false
+  },
+  "source": {
+    "path": "config/competition_scope.v1.6.1.json",
+    "sha256": "90615c860f7b28977de0e862c5aca08ce3bbb646ebcab3cbbcc6fce427296ae3"
+  }
+}

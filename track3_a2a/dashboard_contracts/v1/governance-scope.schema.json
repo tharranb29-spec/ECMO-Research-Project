@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.governance-scope.v1.6.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "scope_specification_id",
+    "claim_matrix_path",
+    "candidate_review",
+    "external_confirmation",
+    "md_cutoff",
+    "autonomy",
+    "source"
+  ],
+  "properties": {
+    "contract_version": {"const": "1.1.0"},
+    "scope_specification_id": {"const": "a2a-track3-competition-scope-v1.6.1"},
+    "claim_matrix_path": {"const": "outputs/v1.6.1/governance/claim_matrix.json"},
+    "candidate_review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "display_label", "scientific_rank_allowed", "candidate_probability_allowed", "fixed_queue_count", "interval_bound_rule", "allowed_set_level_rates", "prohibited_fields"],
+      "properties": {
+        "mode": {"const": "human_review_queue"},
+        "display_label": {"const": "screen-eligible / not ruled out"},
+        "scientific_rank_allowed": {"const": false},
+        "candidate_probability_allowed": {"const": false},
+        "fixed_queue_count": {"type": "null"},
+        "interval_bound_rule": {"type": "null"},
+        "allowed_set_level_rates": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true},
+        "prohibited_fields": {"type": "array", "items": {"type": "string"}, "minItems": 1, "uniqueItems": true}
+      }
+    },
+    "external_confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minimum_molecules", "minimum_scaffolds", "queue_can_satisfy_floor", "outcomes_sealed", "confirmation_passed"],
+      "properties": {
+        "minimum_molecules": {"const": 60},
+        "minimum_scaffolds": {"const": 20},
+        "queue_can_satisfy_floor": {"const": false},
+        "outcomes_sealed": {"const": true},
+        "confirmation_passed": {"const": false}
+      }
+    },
+    "md_cutoff": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier_a_status", "tier_a_completion_claim_allowed", "tier_b_status", "tier_b_submission_critical"],
+      "properties": {
+        "tier_a_status": {"const": "incomplete_at_cutoff_without_signed_control_gate"},
+        "tier_a_completion_claim_allowed": {"const": false},
+        "tier_b_status": {"const": "locked"},
+        "tier_b_submission_critical": {"const": false}
+      }
+    },
+    "autonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "automatic_scientific_validation", "protocol_change", "model_promotion", "outcome_unsealing", "md_unlock"],
+      "properties": {
+        "mode": {"const": "shadow_only_evidence_orchestration"},
+        "automatic_scientific_validation": {"const": false},
+        "protocol_change": {"const": false},
+        "model_promotion": {"const": false},
+        "outcome_unsealing": {"const": false},
+        "md_unlock": {"const": false}
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"const": "config/competition_scope.v1.6.1.json"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

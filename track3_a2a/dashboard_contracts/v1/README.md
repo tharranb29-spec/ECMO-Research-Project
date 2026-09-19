@@ -9,3 +9,11 @@ The contracts never authorize label admission, model promotion, candidate releas
 or Tier B MD. Autonomous updates are represented only as `shadow_proposal` records.
 Any future breaking field change requires a new version directory.
 
+## Competition-scope overlay
+
+The v1.6.1 governance release adds a non-breaking policy overlay at
+`outputs/v1.6.1/governance/dashboard_scope_contract.json`, validated by
+`governance-scope.schema.json`. Dashboard consumers must apply this overlay before
+rendering a review queue. It prohibits scientific rank and candidate-probability
+fields, permits only the enumerated set-level composition rates, separates the
+unlabeled queue from the external-confirmation floor, and keeps autonomy shadow-only.
