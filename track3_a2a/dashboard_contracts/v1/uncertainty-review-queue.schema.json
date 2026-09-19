@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.uncertainty-review-queue.v1",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "contract_version",
+    "created_at_utc",
+    "status",
+    "ranking_prohibited",
+    "per_molecule_hit_probabilities_present",
+    "external_outcomes_loaded",
+    "docking_used_for_selection",
+    "threshold_rule_semantics",
+    "records"
+  ],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.uncertainty-review-queue.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "created_at_utc": {"type": "string"},
+    "status": {"enum": ["ready", "fail_closed_prediction_intake"]},
+    "ranking_prohibited": {"const": true},
+    "per_molecule_hit_probabilities_present": {"const": false},
+    "external_outcomes_loaded": {"const": false},
+    "docking_used_for_selection": {"const": false},
+    "threshold_rule_semantics": {
+      "type": "object",
+      "required": ["screen_eligible_not_ruled_out", "robust_threshold_support", "claim_limit"],
+      "properties": {
+        "screen_eligible_not_ruled_out": {"type": "string"},
+        "robust_threshold_support": {"type": "string"},
+        "claim_limit": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "review_record_id",
+          "candidate_id",
+          "standardized_inchikey",
+          "generic_murcko_scaffold_smiles",
+          "scaffold_member_count",
+          "scaffold_composition",
+          "evidence_quality",
+          "pass_1_status",
+          "source_prediction_status",
+          "model_id",
+          "prediction_pbind_ki",
+          "interval_90",
+          "threshold_pbind_ki",
+          "threshold_provenance_status",
+          "interval_eligibility",
+          "applicability_status",
+          "nearest_neighbor_similarity",
+          "descriptor_distance",
+          "deterministic_review_eligibility",
+          "eligibility_reasons",
+          "human_disposition",
+          "source"
+        ],
+        "properties": {
+          "review_record_id": {"type": "string"},
+          "candidate_id": {"type": "string"},
+          "standardized_inchikey": {"type": "string"},
+          "generic_murcko_scaffold_smiles": {"type": "string"},
+          "scaffold_member_count": {"type": "integer", "minimum": 1},
+          "scaffold_composition": {"enum": ["singleton", "multi_member"]},
+          "evidence_quality": {"type": "string"},
+          "pass_1_status": {"type": "string"},
+          "source_prediction_status": {"enum": ["validated", "unavailable_or_rejected"]},
+          "model_id": {"type": ["string", "null"]},
+          "prediction_pbind_ki": {"type": ["number", "null"]},
+          "interval_90": {
+            "oneOf": [
+              {"type": "null"},
+              {
+                "type": "object",
+                "required": ["level", "lower", "upper", "method"],
+                "properties": {
+                  "level": {"const": 0.9},
+                  "lower": {"type": "number"},
+                  "upper": {"type": "number"},
+                  "method": {"type": "string", "minLength": 1}
+                },
+                "additionalProperties": false
+              }
+            ]
+          },
+          "threshold_pbind_ki": {"type": ["number", "null"]},
+          "threshold_provenance_status": {"enum": ["verified", "missing_or_rejected"]},
+          "interval_eligibility": {"enum": ["not_assessed", "screen_eligible_not_ruled_out", "robust_threshold_support", "ruled_out_by_90pct_interval"]},
+          "applicability_status": {"enum": ["not_assessed", "inside_domain", "outside_domain", "indeterminate"]},
+          "nearest_neighbor_similarity": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "descriptor_distance": {"type": ["number", "null"]},
+          "deterministic_review_eligibility": {"type": "string"},
+          "eligibility_reasons": {"type": "array", "items": {"type": "string"}},
+          "human_disposition": {
+            "type": "object",
+            "required": ["status", "decision", "reviewer", "decided_at_utc", "notes"],
+            "properties": {
+              "status": {"type": "string"},
+              "decision": {"type": ["string", "null"]},
+              "reviewer": {"type": ["string", "null"]},
+              "decided_at_utc": {"type": ["string", "null"]},
+              "notes": {"type": ["string", "null"]}
+            },
+            "additionalProperties": false
+          },
+          "source": {
+            "type": "object",
+            "required": ["ledger", "ledger_sha256"],
+            "properties": {
+              "ledger": {"type": "string"},
+              "ledger_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

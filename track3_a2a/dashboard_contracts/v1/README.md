@@ -23,3 +23,9 @@ The v1.6.1 governance release adds a non-breaking policy overlay at
 rendering a review queue. It prohibits scientific rank and candidate-probability
 fields, permits only the enumerated set-level composition rates, separates the
 unlabeled queue from the external-confirmation floor, and keeps autonomy shadow-only.
+
+`uncertainty-review-queue.schema.json` defines the non-ranked review-queue payload.
+Its records expose evidence quality, scaffold composition, applicability, validated
+90% intervals, deterministic eligibility, and human disposition. The contract
+forbids outcome-loaded or docking-selected queue data and does not carry ordinal
+positions or per-molecule hit probabilities.
