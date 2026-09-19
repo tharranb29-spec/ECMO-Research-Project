@@ -14,3 +14,12 @@ change requires a new version directory.
 `discovery-run.schema.json` defines the runtime live/cached shadow workflow,
 resolved upstream contracts, unordered queue composition, human disposition, and
 append-only runtime audit chain. Missing upstream contracts fail closed.
+
+## Competition-scope overlay
+
+The v1.6.1 governance release adds a non-breaking policy overlay at
+`outputs/v1.6.1/governance/dashboard_scope_contract.json`, validated by
+`governance-scope.schema.json`. Dashboard consumers must apply this overlay before
+rendering a review queue. It prohibits scientific rank and candidate-probability
+fields, permits only the enumerated set-level composition rates, separates the
+unlabeled queue from the external-confirmation floor, and keeps autonomy shadow-only.

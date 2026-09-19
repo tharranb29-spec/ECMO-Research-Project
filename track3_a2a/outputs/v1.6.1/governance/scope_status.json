@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-competition-scope-v1.6.1",
+  "status": "scope_frozen_claims_narrowed",
+  "competition_cutoff": "2026-09-30",
+  "outcome_firewall": "sealed",
+  "external_confirmation": "frozen_floor_failure_not_reopened",
+  "review_queue": "uncertainty_aware_scaffold_composed_human_review_only",
+  "candidate_level_scientific_ranking": "prohibited",
+  "candidate_hit_probability": "prohibited",
+  "candidate_status": "screen_eligible_not_ruled_out",
+  "certified_hit_claim": "prohibited",
+  "fixed_queue_count": null,
+  "interval_bound_selection_rule": null,
+  "tier_a_production": "incomplete_at_cutoff_without_signed_control_gate",
+  "tier_b": "locked_not_submission_critical",
+  "dashboard_autonomy": "shadow_only_evidence_orchestration"
+}

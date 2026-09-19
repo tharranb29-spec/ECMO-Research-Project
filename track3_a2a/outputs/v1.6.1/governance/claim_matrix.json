@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-competition-scope-v1.6.1",
+  "claim_matrix_version": "1.0.0",
+  "claims": [
+    {
+      "claim_id": "frozen_scientific_analysis",
+      "disposition": "allowed_with_qualification",
+      "authorized_language": "The v1.6 pBind_Ki analysis remains frozen and development-only.",
+      "prohibited_language": "The modified scope refit, retuned, or externally confirmed the model.",
+      "dashboard_behavior": "display frozen specification and source hashes"
+    },
+    {
+      "claim_id": "human_review_queue",
+      "disposition": "allowed_with_qualification",
+      "authorized_language": "An uncertainty-aware, scaffold-composed set is available for human review.",
+      "prohibited_language": "The queue is an externally confirmed cohort.",
+      "dashboard_behavior": "display review bands and set composition without scientific rank numbers"
+    },
+    {
+      "claim_id": "per_position_candidate_ranking",
+      "disposition": "prohibited",
+      "authorized_language": null,
+      "prohibited_language": "Candidate position is a defensible potency, activity, or hit ranking.",
+      "dashboard_behavior": "omit scientific rank and sortable hit-rank fields"
+    },
+    {
+      "claim_id": "per_candidate_hit_probability",
+      "disposition": "prohibited",
+      "authorized_language": null,
+      "prohibited_language": "A candidate has a calibrated probability of being a hit.",
+      "dashboard_behavior": "omit hit_probability and success_probability fields"
+    },
+    {
+      "claim_id": "screen_eligible_status",
+      "disposition": "allowed_with_qualification",
+      "authorized_language": "Screen-eligible / not ruled out by the declared label-blind checks.",
+      "prohibited_language": "Certified hit, validated hit, confirmed active, or equivalent.",
+      "dashboard_behavior": "use the exact screen-eligible / not ruled out label"
+    },
+    {
+      "claim_id": "set_level_rates",
+      "disposition": "allowed_with_qualification",
+      "authorized_language": "Report only the authorized review-set composition rates.",
+      "prohibited_language": "Hit rate, success probability, or certified-hit fraction.",
+      "dashboard_behavior": "allowlist rates from the scope specification; reject all others"
+    },
+    {
+      "claim_id": "fixed_queue_count_or_interval_bound",
+      "disposition": "prohibited_without_new_audited_artifact",
+      "authorized_language": null,
+      "prohibited_language": "A fixed queue size or interval-bound inclusion rule is frozen.",
+      "dashboard_behavior": "render no governed count and no interval-bound selection rule"
+    },
+    {
+      "claim_id": "external_confirmation_floor",
+      "disposition": "allowed_only_for_external_confirmation",
+      "authorized_language": "The external confirmation floor is at least 60 molecules and 20 independent generic Murcko scaffolds; the frozen attempt failed it.",
+      "prohibited_language": "An unlabeled review queue passes or contributes to the external confirmation floor.",
+      "dashboard_behavior": "keep review-queue counts separate from external-cohort floor status"
+    },
+    {
+      "claim_id": "tier_a_production",
+      "disposition": "incomplete_at_cutoff_without_signed_control_gate",
+      "authorized_language": "Tier A production is ongoing or staged but incomplete at cutoff.",
+      "prohibited_language": "Tier A controls passed production or established stability.",
+      "dashboard_behavior": "show incomplete until a new governed release verifies the signed six-run control gate"
+    },
+    {
+      "claim_id": "tier_b",
+      "disposition": "locked_not_submission_critical",
+      "authorized_language": "Tier B remains locked and is not submission-critical.",
+      "prohibited_language": "Tier B is unlocked, completed, or required for the competition claim.",
+      "dashboard_behavior": "show locked and do not offer an unlock action"
+    },
+    {
+      "claim_id": "dashboard_autonomy",
+      "disposition": "shadow_only",
+      "authorized_language": "The autonomous module orchestrates evidence in shadow mode.",
+      "prohibited_language": "The dashboard automatically validates science, changes protocol, promotes models, unseals outcomes, or unlocks MD.",
+      "dashboard_behavior": "ingest additive shadow proposals only; all scientific state transitions remain disabled"
+    }
+  ]
+}

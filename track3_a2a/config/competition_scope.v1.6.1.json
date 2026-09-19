@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-competition-scope-v1.6.1",
+  "parent_specification_id": "a2a-track3-protocol-v1.6",
+  "status": "prospectively_frozen_before_outcome_unsealing_and_review_queue_release",
+  "effective_date": "2026-09-19",
+  "competition_cutoff": "2026-09-30",
+  "purpose": "Narrow competition claims without changing the frozen scientific analysis or unsealing outcomes.",
+  "scientific_freeze": {
+    "endpoint": {
+      "name": "pBind_Ki",
+      "definition": "negative base-10 logarithm of molar direct-binding Ki for wild-type human ADORA2A"
+    },
+    "features": {
+      "AB": {
+        "fingerprint": "ECFP4 radius 2, 2048 bits",
+        "descriptors": [
+          "molecular_weight",
+          "clogp",
+          "h_bond_donors",
+          "h_bond_acceptors",
+          "rotatable_bonds",
+          "tpsa",
+          "heavy_atom_count",
+          "qed"
+        ]
+      },
+      "E_additional_docking": [
+        "m_affinity_kcal_mol",
+        "d_affinity_kcal_mol",
+        "m_cnnaffinity_pk",
+        "d_cnnaffinity_pk",
+        "m_cnnscore",
+        "d_cnnscore"
+      ]
+    },
+    "model_mapping": {
+      "Mean": "training-development mean pBind_Ki",
+      "AB_Ridge": "primary external predictor",
+      "AB_RF": "chemistry RF comparator",
+      "E_RF": "chemistry plus docking RF comparator"
+    },
+    "estimators": {
+      "AB_Ridge": {
+        "estimator": "Ridge",
+        "parameters": {"alpha": 1.0}
+      },
+      "AB_RF": {
+        "estimator": "RandomForestRegressor",
+        "parameters": {
+          "n_estimators": 500,
+          "max_features": "sqrt",
+          "min_samples_leaf": 1,
+          "random_state": 20260914,
+          "n_jobs": 1
+        }
+      },
+      "E_RF": {
+        "base": "AB_RF",
+        "same_estimator_parameters": true
+      }
+    },
+    "development_evaluation": {
+      "grouping": "generic Murcko scaffold with exact structures sharing a group",
+      "folds": 5,
+      "repeat_seeds": [20260912, 20260913, 20260914, 20260915, 20260916, 20260917, 20260918, 20260919, 20260920, 20260921],
+      "preprocessing": "inside each training fold",
+      "interval_method": "2.5th and 97.5th percentiles across ten repeated OOF predictions; exploratory coverage diagnostic"
+    },
+    "external_intervals": {
+      "method": "paired molecule bootstrap",
+      "resamples": 5000,
+      "random_seed": 20260914,
+      "confidence_level": 0.95
+    },
+    "change_control": {
+      "retroactive_tuning": "prohibited",
+      "model_remapping": "prohibited",
+      "outcome_dependent_queue_construction": "prohibited"
+    }
+  },
+  "outcome_firewall": {
+    "status": "sealed",
+    "numeric_ki_extracted": false,
+    "external_outcomes_joined": false,
+    "one_time_outcome_join_authorized": false,
+    "reason": "The frozen pass-2 external cohort failed the 60-molecule and 20-scaffold confirmation floors."
+  },
+  "candidate_review_scope": {
+    "mode": "uncertainty_aware_scaffold_composed_human_review_queue",
+    "selection_unit": "scaffold-composed set",
+    "per_position_candidate_ranking_defensible": false,
+    "per_candidate_hit_probability_defensible": false,
+    "allowed_candidate_status": "screen_eligible_not_ruled_out",
+    "prohibited_candidate_status": "certified_hit",
+    "allowed_set_level_rates": [
+      "fraction_screen_eligible_not_ruled_out",
+      "fraction_inside_applicability_domain",
+      "fraction_outside_applicability_domain",
+      "fraction_with_high_model_disagreement",
+      "fraction_with_complete_required_evidence",
+      "scaffold_coverage_fraction"
+    ],
+    "prohibited_set_level_rates": [
+      "hit_rate",
+      "success_probability",
+      "certified_hit_fraction"
+    ],
+    "queue_count": {
+      "fixed_count_authorized": false,
+      "authorized_count": null
+    },
+    "interval_bound_selection_rule": null,
+    "ordering_policy": "Scaffold composition and uncertainty bands may organize human review; no displayed position is a scientific rank."
+  },
+  "external_confirmation_floor": {
+    "minimum_molecules": 60,
+    "minimum_generic_murcko_scaffolds": 20,
+    "applies_only_to": "outcome-bearing external confirmation cohort",
+    "unlabeled_review_queue_satisfies_floor": false,
+    "current_frozen_external_cohort": {
+      "admitted_molecules": 0,
+      "admitted_generic_murcko_scaffolds": 0,
+      "confirmation_floor_passed": false
+    }
+  },
+  "md_cutoff_policy": {
+    "tier_a": {
+      "competition_status": "ongoing_or_staged_but_incomplete_at_cutoff",
+      "completion_requires": "signed control_gate_report.json containing all six completed 50 ns runs and both controls passing at least two of three replicas",
+      "repository_completed_control_gate_present_at_scope_freeze": false,
+      "completion_claim_allowed": false
+    },
+    "tier_b": {
+      "status": "locked",
+      "submission_critical": false,
+      "unlock_claim_allowed": false
+    }
+  },
+  "dashboard_autonomy": {
+    "mode": "shadow_only_evidence_orchestration",
+    "may": [
+      "discover and queue public evidence",
+      "preserve provenance and hashes",
+      "compose uncertainty-aware scaffold sets for human review",
+      "report authorized set-level process rates",
+      "display audited gate state"
+    ],
+    "may_not": [
+      "perform or claim automatic scientific validation",
+      "change a protocol or frozen analysis setting",
+      "promote or replace a model",
+      "unseal or join outcomes",
+      "unlock Tier A or Tier B molecular dynamics",
+      "assign a certified-hit label",
+      "display per-candidate hit probability",
+      "present queue position as a defensible scientific rank"
+    ]
+  }
+}

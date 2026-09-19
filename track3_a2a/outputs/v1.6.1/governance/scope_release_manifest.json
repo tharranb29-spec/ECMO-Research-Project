@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-track3-competition-scope-v1.6.1",
+  "release_id": "a2a-track3-v1.6.1-scope-governance",
+  "status": "prospectively_frozen_and_verified",
+  "source_artifacts": {
+    "config/competition_scope.v1.6.1.json": "90615c860f7b28977de0e862c5aca08ce3bbb646ebcab3cbbcc6fce427296ae3",
+    "V16_1_COMPETITION_SCOPE_AMENDMENT.md": "7dbbf363533fc2296bac7df1559043a4dc5e282478ec608aa8ee5d9fb50ce01f",
+    "build_v161_scope_release.py": "0d25ae10670ef17531d797298d14f54f8e9ebb3b77e29b676a263cb104557f6b",
+    "config/protocol.v1.6.json": "72ff053253d9f7714ef450435a845bb4222eb6a3477d4d2f081ada17de5118a2",
+    "outputs/v1.6/protocol_freeze_manifest.json": "446e9f5e38c26360b710ee5a842cbb907989455f70814cf1bef4bdeb8d2ac9ce",
+    "outputs/v1.6/model_reproduction/development_results.json": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db",
+    "run_continuous_activity_v15.py": "e2344f0570ab76e0a9b8956f403f35b479d8a54cb9fb0b8f24398995fbeb047e",
+    "outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json": "89d6a1ddd8ba4f2960a63df11713cc34ce505eb99a30c2376a9fa411a2f99cf0",
+    "outputs/v1.6/implementation_status.json": "3fe19b46a0f292df4b36e3420b338ea017deae0c8c979e29aa18083bbd640323",
+    "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11",
+    "config/md_production.v1.6.json": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07",
+    "outputs/dashboard/v1/contracts.json": "b5703c13fe4bf2f2d65b8821ecbb360382e57160565f4f236329a76127970286",
+    "dashboard_contracts/v1/governance-scope.schema.json": "f727c3a140669808dae14c2e04baa6e4b59631db2d88753a9093f68e05b1b08f"
+  },
+  "release_artifacts": {
+    "claim_matrix.json": "28f84be12807c401f00e2cf326b6bff89583096f62b3fafcf21dab46dfa0d55f",
+    "dashboard_scope_contract.json": "6843717f875dd86b266d4dd2f010dc8511045278d455ebf108ebfaf689a1c240",
+    "scope_status.json": "28b8ca598296e1ebde9e70ed4c9e24f9f50f6960775bbff5c2eb9d03a6d89236"
+  },
+  "immutable_scientific_parent": "a2a-track3-protocol-v1.6",
+  "outcomes_sealed": true,
+  "release_signature_sha256": "636a9b6c7c04b694bc6795b3f22d170fc16ddddefb71edf042e1ac84c9b1b465"
+}
