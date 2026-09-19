@@ -126,6 +126,27 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertEqual(result["state"], "live")
         self.assertEqual(result["sources"][0]["retrieval_state"], "live")
 
+    def test_auto_mode_fails_closed_to_cached_demo_on_live_timeout(self):
+        with mock.patch.object(workflow, "DEEPSEEK_API_KEY", "server-secret"), mock.patch.object(
+            workflow.DeepSeekEvidenceProvider,
+            "discover",
+            side_effect=RuntimeError("DeepSeek discovery request timed out."),
+        ):
+            result = workflow.run_workflow("A2A evidence", provider_mode="auto")
+        self.assertEqual(result["workflow_state"], "cached_demo")
+        self.assertIn("failed closed", result["fallback_reason"])
+        self.assertIn("timed out", result["fallback_reason"])
+        self.assertFalse(result["governance"]["model_promotion_enabled"])
+
+    def test_explicit_live_mode_surfaces_provider_timeout(self):
+        with mock.patch.object(workflow, "DEEPSEEK_API_KEY", "server-secret"), mock.patch.object(
+            workflow.DeepSeekEvidenceProvider,
+            "discover",
+            side_effect=RuntimeError("DeepSeek discovery request timed out."),
+        ):
+            with self.assertRaisesRegex(RuntimeError, "timed out"):
+                workflow.run_workflow("A2A evidence", provider_mode="live")
+
     def test_missing_upstream_contract_is_reported_unavailable(self):
         contracts = dict(workflow.CONTRACT_INPUTS)
         contracts["future_workstream"] = Path(self.temp_dir.name) / "missing.json"

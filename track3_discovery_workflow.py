@@ -27,6 +27,8 @@ DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
 EUROPE_PMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+SOURCE_TIMEOUT_SECONDS = float(os.environ.get("DISCOVERY_SOURCE_TIMEOUT_SECONDS", "20"))
+DEEPSEEK_TIMEOUT_SECONDS = float(os.environ.get("DEEPSEEK_DISCOVERY_TIMEOUT_SECONDS", "55"))
 MAX_MOLECULES = 12
 ALLOWED_DISPOSITIONS = {"pending", "retain_for_review", "quarantine", "reject"}
 CONTRACT_INPUTS = {
@@ -163,12 +165,14 @@ class CachedDemoProvider:
 def fetch_europe_pmc_sources(query: str, limit: int = 5) -> list[dict]:
     params = parse.urlencode({"query": query, "format": "json", "resultType": "core", "pageSize": str(limit)})
     try:
-        with request.urlopen(f"{EUROPE_PMC_SEARCH}?{params}", timeout=60) as response:
+        with request.urlopen(f"{EUROPE_PMC_SEARCH}?{params}", timeout=SOURCE_TIMEOUT_SECONDS) as response:
             payload = json.loads(response.read().decode("utf-8"))
     except error.HTTPError as exc:
         raise RuntimeError(f"Europe PMC retrieval error {exc.code}.") from exc
     except error.URLError as exc:
         raise RuntimeError(f"Europe PMC retrieval network error: {exc.reason}") from exc
+    except TimeoutError as exc:
+        raise RuntimeError("Europe PMC retrieval timed out.") from exc
     sources = []
     for item in (payload.get("resultList") or {}).get("result") or []:
         source_name = str(item.get("source") or "MED").upper()
@@ -226,13 +230,15 @@ class DeepSeekEvidenceProvider:
             method="POST",
         )
         try:
-            with request.urlopen(req, timeout=120) as response:
+            with request.urlopen(req, timeout=DEEPSEEK_TIMEOUT_SECONDS) as response:
                 parsed = json.loads(response.read().decode("utf-8"))
         except error.HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace")[:500]
             raise RuntimeError(f"DeepSeek discovery error {exc.code}: {detail}") from exc
         except error.URLError as exc:
             raise RuntimeError(f"DeepSeek discovery network error: {exc.reason}") from exc
+        except TimeoutError as exc:
+            raise RuntimeError("DeepSeek discovery request timed out.") from exc
         try:
             choices = parsed.get("choices") or []
             content = ((choices[0].get("message") or {}).get("content") if choices else "") or ""
@@ -386,7 +392,14 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
     query = str(query or "human ADORA2A primary ligand evidence").strip()[:500]
     provider_mode = provider_mode if provider_mode in {"auto", "live", "demo"} else "auto"
     provider, fallback_reason = select_provider(provider_mode)
-    discovery = provider.discover(query)
+    try:
+        discovery = provider.discover(query)
+    except RuntimeError as exc:
+        if provider_mode != "auto" or isinstance(provider, CachedDemoProvider):
+            raise
+        provider = CachedDemoProvider()
+        discovery = provider.discover(query)
+        fallback_reason = f"Live DeepSeek provider failed closed; cached demo used: {exc}"
     demo_mode = discovery["state"] == "cached"
     if molecules is None:
         molecules = []
