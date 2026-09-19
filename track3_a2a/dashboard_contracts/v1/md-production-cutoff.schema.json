@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.md-production-cutoff.v1",
+  "type": "object",
+  "required": ["schema_id", "contract_version", "records"],
+  "properties": {
+    "schema_id": {"const": "a2a-dashboard.md-production-cutoff.v1"},
+    "contract_version": {"const": "1.0.0"},
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "cutoff_id", "status", "equilibration_passed_runs", "equilibration_required_runs",
+          "required_replicas", "observed_replicas", "completed_replicas", "running_replicas", "failed_replicas", "not_observed_replicas",
+          "required_ns", "aggregate_reported_ns", "aggregate_completed_replica_ns",
+          "aggregate_last_scheduled_checkpoint_ns", "completion_fraction_by_reported_ns",
+          "tier_b_status", "tier_b_executed_replicas", "tier_b_unlocked",
+          "model_training_status", "md_campaign_incomplete_does_not_imply_model_training_incomplete",
+          "claim_limit"
+        ],
+        "properties": {
+          "status": {"enum": ["started_campaign_incomplete", "campaign_complete_pending_analysis"]},
+          "tier_b_status": {"const": "not_executed_locked"},
+          "tier_b_executed_replicas": {"const": 0},
+          "tier_b_unlocked": {"const": false},
+          "model_training_status": {"const": "not_assessed_by_md_cutoff"},
+          "md_campaign_incomplete_does_not_imply_model_training_incomplete": {"const": true}
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

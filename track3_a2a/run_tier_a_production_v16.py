@@ -174,6 +174,7 @@ def run(args: argparse.Namespace, checked: dict) -> dict:
         atomic_json(output / "failure_audit.json", {
             **base_status,
             "status": "technical_failure",
+            "updated_at_utc": datetime.now(timezone.utc).isoformat(),
             "current_step": simulation.currentStep,
             "error_type": type(exc).__name__,
             "error": str(exc),

@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-tier-a-production-cutoff-v1.6",
+  "cutoff_at_utc": "2026-09-17T14:24:05.656022Z",
+  "equilibration": {
+    "status": "tier_a_equilibration_gate_passed",
+    "passed_runs": 6,
+    "required_runs": 6,
+    "tier_a_production_unlocked": true,
+    "source_sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
+  },
+  "tier_a_production": {
+    "status": "started_campaign_incomplete",
+    "required_replicas": 6,
+    "observed_replicas": 1,
+    "completed_replicas": 0,
+    "running_replicas": 1,
+    "failed_replicas": 0,
+    "not_observed_replicas": 5,
+    "required_ns": 300.0,
+    "aggregate_reported_ns": 5.92,
+    "aggregate_completed_replica_ns": 0,
+    "aggregate_last_scheduled_checkpoint_ns": 5.9,
+    "completion_fraction_by_reported_ns": 0.019733333333333332
+  },
+  "tier_b": {
+    "status": "not_executed_locked",
+    "executed_replicas": 0,
+    "tier_b_unlocked": false
+  },
+  "model_training_interpretation": {
+    "status": "not_assessed_by_md_cutoff",
+    "md_campaign_incomplete_does_not_imply_model_training_incomplete": true
+  },
+  "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim.",
+  "snapshots": [
+    {
+      "artifact_type": "run_status",
+      "source_name": "run_status_5NM4_replica1_5.92ns.json",
+      "source_sha256": "9ae68e14b58645a619c18f5693b79be98ab45a45f4bbe8130112ffdbc2927c51",
+      "updated_at_utc": "2026-09-17T14:24:05.656022Z",
+      "status": "running",
+      "system_id": "5NM4_ZMA_native",
+      "replica": 1,
+      "seed": 20260914,
+      "platform": "CUDA",
+      "precision": "mixed",
+      "current_step": 5920000,
+      "target_steps": 50000000,
+      "reported_completed_ns": 5.92,
+      "target_ns": 50.0,
+      "last_scheduled_checkpoint_step": 5900000,
+      "last_scheduled_checkpoint_ns": 5.9,
+      "checkpoint_file_observed": false,
+      "tier_b_unlocked": false,
+      "specification_id": "a2a-md-production-v1.6",
+      "production_config_sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07",
+      "equilibration_gate_sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11",
+      "equilibration_audit_sha256": "f83bf81c87e926d6c1ba8a21db0ec4b2751a237b878127cf4eaa21f9c3e7bac1",
+      "equilibrated_state_sha256": "fb7018e2d2e167170a3eb89da00d554786603efe8c331e57eebbf93b2fb4f543",
+      "release_archive_sha256": "2b57b33323c4f2b62c97dc152b8982d2f4ddc01b9fc7fb88ae0fc5b3e3aa7171"
+    }
+  ],
+  "dashboard_contract": {
+    "schema_id": "a2a-dashboard.md-production-cutoff.v1",
+    "contract_version": "1.0.0",
+    "records": [
+      {
+        "cutoff_id": "tier-a-production:2026-09-17T14:24:05.656022Z",
+        "status": "started_campaign_incomplete",
+        "equilibration_passed_runs": 6,
+        "equilibration_required_runs": 6,
+        "required_replicas": 6,
+        "observed_replicas": 1,
+        "completed_replicas": 0,
+        "running_replicas": 1,
+        "failed_replicas": 0,
+        "not_observed_replicas": 5,
+        "required_ns": 300.0,
+        "aggregate_reported_ns": 5.92,
+        "aggregate_completed_replica_ns": 0,
+        "aggregate_last_scheduled_checkpoint_ns": 5.9,
+        "completion_fraction_by_reported_ns": 0.019733333333333332,
+        "tier_b_status": "not_executed_locked",
+        "tier_b_executed_replicas": 0,
+        "tier_b_unlocked": false,
+        "model_training_status": "not_assessed_by_md_cutoff",
+        "md_campaign_incomplete_does_not_imply_model_training_incomplete": true,
+        "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim."
+      }
+    ]
+  }
+}

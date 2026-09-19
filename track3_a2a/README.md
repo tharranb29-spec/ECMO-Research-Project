@@ -2,6 +2,10 @@
 
 The v1.6 Tier A 50 ns pilot-production and label-blind Tier B readiness contracts are documented in `MD_PRODUCTION_READINESS_V16.md`. They are fail-closed: Tier A requires all six accepted v1.6.4 equilibration audits and states, and Tier B requires both controls to pass at least two of three completed production replicas.
 
+Live Tier A `run_status.json` and `failure_audit.json` cutoff ingestion is
+documented in `MD_CUTOFF_INGESTION_V16.md`. The generated status is read-only,
+hash-audited, and explicitly independent of model-training completeness.
+
 This directory contains the evidence-gated Track 3 study. It is intentionally
 isolated from the legacy ECMO/Siglec work so targets, labels, and validation
 standards cannot be mixed accidentally.

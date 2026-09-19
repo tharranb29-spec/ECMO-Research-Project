@@ -1,0 +1,24 @@
+{
+  "status": "running",
+  "specification_id": "a2a-md-production-v1.6",
+  "system_id": "5NM4_ZMA_native",
+  "replica": 1,
+  "seed": 20260914,
+  "production_config_sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07",
+  "equilibration_gate_sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11",
+  "equilibration_audit_sha256": "f83bf81c87e926d6c1ba8a21db0ec4b2751a237b878127cf4eaa21f9c3e7bac1",
+  "equilibrated_state_sha256": "fb7018e2d2e167170a3eb89da00d554786603efe8c331e57eebbf93b2fb4f543",
+  "release_archive_sha256": "2b57b33323c4f2b62c97dc152b8982d2f4ddc01b9fc7fb88ae0fc5b3e3aa7171",
+  "candidate_labels_loaded": false,
+  "trajectory_started": true,
+  "platform": "CUDA",
+  "platform_properties": {
+    "Precision": "mixed"
+  },
+  "current_step": 5920000,
+  "target_steps": 50000000,
+  "target_ns": 50.0,
+  "tier_b_unlocked": false,
+  "updated_at_utc": "2026-09-17T14:24:05.656022+00:00",
+  "completed_ns": 5.92
+}
