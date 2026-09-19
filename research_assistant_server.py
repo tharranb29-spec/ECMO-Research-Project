@@ -53,10 +53,7 @@ def env_int(name, default):
 
 HOST = os.environ.get("ECMO_DASHBOARD_HOST", "127.0.0.1")
 PORT = env_int("PORT", env_int("ECMO_DASHBOARD_PORT", 8765))
-AI_PROVIDER = os.environ.get("AI_PROVIDER", "openai").strip().lower()
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4-mini")
-OPENAI_REASONING_EFFORT = os.environ.get("OPENAI_REASONING_EFFORT", "medium")
+AI_PROVIDER = "deepseek"
 DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY")
 DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
 DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
@@ -83,7 +80,7 @@ ALLOWED_ORIGINS = {
 BASIC_AUTH_USER = os.environ.get("ECMO_BASIC_AUTH_USER", "").strip()
 BASIC_AUTH_PASSWORD = os.environ.get("ECMO_BASIC_AUTH_PASSWORD", "")
 BASIC_AUTH_ENABLED = bool(BASIC_AUTH_USER and BASIC_AUTH_PASSWORD)
-APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "") or DEEPSEEK_API_KEY or OPENAI_API_KEY or ""
+APP_SESSION_SECRET = os.environ.get("ECMO_SESSION_SECRET", "") or DEEPSEEK_API_KEY or ""
 APP_SESSION_TTL_HOURS = env_int("ECMO_SESSION_TTL_HOURS", 24)
 APP_SESSION_COOKIE_NAME = "ecmo_session"
 
@@ -461,44 +458,6 @@ def build_chat_messages(dataset_key, question, extra_context, history):
     return messages
 
 
-def call_openai_responses(dataset_key, question, extra_context, history):
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY is not set.")
-
-    payload = {
-        "model": OPENAI_MODEL,
-        "reasoning": {"effort": OPENAI_REASONING_EFFORT},
-        "max_output_tokens": 900,
-        "input": build_messages(dataset_key, question, extra_context, history),
-    }
-
-    req = request.Request(
-        "https://api.openai.com/v1/responses",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
-        },
-        method="POST",
-    )
-
-    try:
-        with request.urlopen(req, timeout=120) as response:
-            body = response.read().decode("utf-8")
-            parsed = json.loads(body)
-    except error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"OpenAI API error {exc.code}: {detail}") from exc
-    except error.URLError as exc:
-        raise RuntimeError(f"Network error while calling the OpenAI API: {exc.reason}") from exc
-
-    return {
-        "answer": extract_response_text(parsed),
-        "model": parsed.get("model", OPENAI_MODEL),
-        "response_id": parsed.get("id"),
-    }
-
-
 def call_deepseek_chat(dataset_key, question, extra_context, history):
     if not DEEPSEEK_API_KEY:
         raise RuntimeError("DEEPSEEK_API_KEY is not set.")
@@ -546,21 +505,15 @@ def call_deepseek_chat(dataset_key, question, extra_context, history):
 
 
 def provider_enabled():
-    if AI_PROVIDER == "deepseek":
-        return bool(DEEPSEEK_API_KEY)
-    return bool(OPENAI_API_KEY)
+    return bool(DEEPSEEK_API_KEY)
 
 
 def current_model_name():
-    if AI_PROVIDER == "deepseek":
-        return DEEPSEEK_MODEL
-    return OPENAI_MODEL
+    return DEEPSEEK_MODEL
 
 
 def call_model(dataset_key, question, extra_context, history):
-    if AI_PROVIDER == "deepseek":
-        return call_deepseek_chat(dataset_key, question, extra_context, history)
-    return call_openai_responses(dataset_key, question, extra_context, history)
+    return call_deepseek_chat(dataset_key, question, extra_context, history)
 
 
 def refresh_due_now():
@@ -959,7 +912,7 @@ class Handler(BaseHTTPRequestHandler):
                 {
                     "ok": True,
                     "service": "ecmo-research-dashboard",
-                    "release": "a2a-track3-competition-prototype-v3",
+                    "release": "a2a-track3-autonomous-deepseek-v4",
                     "git_commit": os.environ.get("RENDER_GIT_COMMIT") or "local",
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                 },
@@ -974,7 +927,7 @@ class Handler(BaseHTTPRequestHandler):
                     "live_assistant_enabled": provider_enabled(),
                     "provider": AI_PROVIDER,
                     "model": current_model_name(),
-                    "reasoning_effort": OPENAI_REASONING_EFFORT if AI_PROVIDER == "openai" else None,
+                    "reasoning_effort": None,
                     "auto_research_enabled": AUTO_RESEARCH_ENABLED,
                     "auto_research_interval_seconds": AUTO_RESEARCH_INTERVAL_SECONDS,
                     "research_status": latest_research_status(),

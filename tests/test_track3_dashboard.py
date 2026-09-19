@@ -24,7 +24,8 @@ class Track3DashboardTests(unittest.TestCase):
         expected = {
             "evidence_inbox", "molecule_registry", "model_registry",
             "applicability_uncertainty", "dual_state_docking", "md_gates",
-            "candidate_portfolio", "shadow_actions", "audit_log",
+            "candidate_portfolio", "shadow_actions", "governance_scope",
+            "uncertainty_review_queue", "md_production_cutoff", "audit_log",
         }
         self.assertEqual(set(self.payload["contracts"]), expected)
         for contract in self.payload["contracts"].values():
@@ -62,7 +63,25 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertTrue(self.payload["summary"]["tier_a_production_unlocked"])
         self.assertEqual(self.payload["summary"]["md_runs_passed"], 6)
         self.assertEqual(self.payload["summary"]["md_runs_required"], 6)
-        self.assertFalse(self.payload["summary"]["tier_a_production_started"])
+        self.assertTrue(self.payload["summary"]["tier_a_production_started"])
+        self.assertEqual(self.payload["summary"]["tier_a_production_observed_replicas"], 1)
+        self.assertEqual(self.payload["summary"]["tier_a_production_completed_replicas"], 0)
+        self.assertEqual(self.payload["summary"]["tier_a_production_reported_ns"], 5.92)
+        self.assertEqual(self.payload["summary"]["uncertainty_queue_count"], 240)
+        self.assertEqual(self.payload["summary"]["uncertainty_queue_eligible"], 0)
+
+    def test_scope_and_uncertainty_queue_forbid_rank_and_probabilities(self):
+        scope = self.payload["contracts"]["governance_scope"]["records"][0]
+        queue = self.payload["contracts"]["uncertainty_review_queue"]["records"]
+        self.assertFalse(scope["candidate_review"]["scientific_rank_allowed"])
+        self.assertFalse(scope["candidate_review"]["candidate_probability_allowed"])
+        self.assertFalse(scope["autonomy"]["model_promotion"])
+        self.assertEqual(len(queue), 1)
+        self.assertEqual(queue[0]["candidate_count"], 240)
+        self.assertEqual(queue[0]["validated_prediction_count"], 0)
+        self.assertEqual(queue[0]["validated_interval_count"], 0)
+        self.assertEqual(queue[0]["review_eligible_count"], 0)
+        self.assertTrue(queue[0]["ranking_prohibited"])
 
     def test_docking_contract_is_dual_state_and_label_blind(self):
         docking = self.payload["contracts"]["dual_state_docking"]["records"]
@@ -118,12 +137,15 @@ class Track3DashboardTests(unittest.TestCase):
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")
         self.assertIn('"/": ROOT / "track3-dashboard.html"', server)
         self.assertIn('"/track3-dashboard-data.js"', server)
-        self.assertIn('"release": "a2a-track3-competition-prototype-v3"', server)
+        self.assertIn('"release": "a2a-track3-autonomous-deepseek-v4"', server)
         self.assertIn('"/api/discovery/run"', server)
         self.assertIn('"/api/discovery/disposition"', server)
+        self.assertIn('AI_PROVIDER = "deepseek"', server)
+        self.assertNotIn('call_openai_responses', server)
         self.assertIn('build_track3_dashboard.py', blueprint)
-        self.assertIn('key: AI_PROVIDER\n        value: openai', blueprint)
-        self.assertIn('key: OPENAI_API_KEY\n        sync: false', blueprint)
+        self.assertIn('key: AI_PROVIDER\n        value: deepseek', blueprint)
+        self.assertIn('key: DEEPSEEK_API_KEY\n        sync: false', blueprint)
+        self.assertNotIn('OPENAI_API_KEY', blueprint)
         self.assertIn('key: AUTO_RESEARCH_ENABLED\n        value: "0"', blueprint)
         self.assertIn('key: AUTO_RESEARCH_LLM_ENABLED\n        value: "0"', blueprint)
         self.assertIn('key: GNINA_MODE\n        value: disabled', blueprint)

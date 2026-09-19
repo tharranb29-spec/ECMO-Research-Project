@@ -13,7 +13,7 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.temp_dir = tempfile.TemporaryDirectory()
         self.state_path = Path(self.temp_dir.name) / "state.json"
         self.state_patch = mock.patch.object(workflow, "STATE_PATH", self.state_path)
-        self.key_patch = mock.patch.object(workflow, "OPENAI_API_KEY", "")
+        self.key_patch = mock.patch.object(workflow, "DEEPSEEK_API_KEY", "")
         self.state_patch.start()
         self.key_patch.start()
 
@@ -77,26 +77,29 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
     def test_live_request_without_key_falls_back_explicitly(self):
         result = workflow.run_workflow("A2A evidence", provider_mode="live")
         self.assertEqual(result["workflow_state"], "cached_demo")
-        self.assertIn("OPENAI_API_KEY", result["fallback_reason"])
+        self.assertIn("DEEPSEEK_API_KEY", result["fallback_reason"])
         self.assertFalse(result["provider"]["api_key_exposed"])
+        capabilities = workflow.capability_status()
+        self.assertEqual(capabilities["live_provider_name"], "deepseek_evidence_extraction")
+        self.assertEqual(capabilities["live_provider"], "unavailable")
 
-    def test_openai_provider_uses_web_search_and_structured_citations(self):
-        response_payload = {
-            "output_text": json.dumps({
-                "sources": [{
-                    "source_id": "PMID:1", "title": "Primary source", "url": "https://pubmed.ncbi.nlm.nih.gov/1/",
-                    "doi": "unresolved", "pmid": "1", "source_type": "primary_publication",
-                    "retrieval_state": "model_value", "full_text_state": "unresolved",
-                }],
-                "extractions": [{
-                    "source_id": "PMID:1", "target": "ADORA2A", "assay_context": "unresolved",
-                    "molecule_mentions": [], "evidence_quality": "review", "reason": "Exact context unresolved.",
-                    "citation_url": "https://pubmed.ncbi.nlm.nih.gov/1/",
-                }],
-            })
-        }
+    def test_deepseek_provider_structures_deterministically_retrieved_sources(self):
+        europe_payload = {"resultList": {"result": [{
+            "source": "MED", "id": "1", "pmid": "1", "title": "Primary source",
+            "doi": "unresolved", "abstractText": "Human ADORA2A assay context.", "isOpenAccess": "N",
+        }]}}
+        deepseek_payload = {"choices": [{"message": {"content": json.dumps({
+            "extractions": [{
+                "source_id": "PMID:1", "target": "ADORA2A", "assay_context": "unresolved",
+                "molecule_mentions": [], "evidence_quality": "review", "reason": "Exact context unresolved.",
+                "citation_url": "https://europepmc.org/article/MED/1",
+            }],
+        })}}]}
 
         class FakeResponse:
+            def __init__(self, payload):
+                self.payload = payload
+
             def __enter__(self):
                 return self
 
@@ -104,18 +107,21 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
                 return False
 
             def read(self):
-                return json.dumps(response_payload).encode("utf-8")
+                return json.dumps(self.payload).encode("utf-8")
 
         captured = {}
 
         def fake_urlopen(req, timeout):
+            if isinstance(req, str):
+                return FakeResponse(europe_payload)
             captured["payload"] = json.loads(req.data)
             captured["authorization"] = req.headers.get("Authorization")
-            return FakeResponse()
+            return FakeResponse(deepseek_payload)
 
         with mock.patch.object(workflow.request, "urlopen", side_effect=fake_urlopen):
-            result = workflow.OpenAIWebProvider("server-secret").discover("A2A evidence")
-        self.assertEqual(captured["payload"]["tools"], [{"type": "web_search_preview"}])
+            result = workflow.DeepSeekEvidenceProvider("server-secret").discover("A2A evidence")
+        self.assertEqual(captured["payload"]["model"], "deepseek-chat")
+        self.assertIn("messages", captured["payload"])
         self.assertEqual(captured["authorization"], "Bearer server-secret")
         self.assertEqual(result["state"], "live")
         self.assertEqual(result["sources"][0]["retrieval_state"], "live")

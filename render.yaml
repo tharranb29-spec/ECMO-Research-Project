@@ -13,13 +13,7 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.11"
       - key: AI_PROVIDER
-        value: openai
-      - key: OPENAI_MODEL
-        value: gpt-5.4-mini
-      - key: OPENAI_REASONING_EFFORT
-        value: medium
-      - key: OPENAI_API_KEY
-        sync: false
+        value: deepseek
       - key: DEEPSEEK_MODEL
         value: deepseek-chat
       - key: AUTO_RESEARCH_ENABLED

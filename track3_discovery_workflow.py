@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Evidence-gated Track 3 discovery prototype.
 
-The workflow is intentionally shadow-only. GPT may retrieve and structure source
-material, but deterministic gates decide whether records can enter an unordered
+The workflow is intentionally shadow-only. DeepSeek may structure deterministically
+retrieved source material, but deterministic gates decide whether records enter an unordered
 screening queue. No code in this module loads sealed outcomes, promotes a model,
 or interprets docking as potency.
 """
@@ -16,15 +16,17 @@ import re
 import threading
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib import error, request
+from urllib import error, parse, request
 
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_STATE_PATH = ROOT / "outputs" / "track3_discovery_runtime.json"
 STATE_PATH = Path(os.environ.get("TRACK3_DISCOVERY_STATE_PATH", DEFAULT_STATE_PATH))
 STATE_LOCK = threading.Lock()
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
-OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-5.4-mini")
+DEEPSEEK_API_KEY = os.environ.get("DEEPSEEK_API_KEY", "")
+DEEPSEEK_MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-chat")
+DEEPSEEK_BASE_URL = os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+EUROPE_PMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 MAX_MOLECULES = 12
 ALLOWED_DISPOSITIONS = {"pending", "retain_for_review", "quarantine", "reject"}
 CONTRACT_INPUTS = {
@@ -32,6 +34,9 @@ CONTRACT_INPUTS = {
     "development_model_report": ROOT / "track3_a2a/outputs/v1.6/model_reproduction/development_results.json",
     "dual_state_docking": ROOT / "track3_a2a/outputs/v1.4/docking/literature_pilot_2025_report.json",
     "tier_a_equilibration_gate": ROOT / "track3_a2a/outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
+    "competition_scope": ROOT / "track3_a2a/outputs/v1.6.1/governance/dashboard_scope_contract.json",
+    "uncertainty_review_queue": ROOT / "track3_a2a/outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+    "md_production_cutoff": ROOT / "track3_a2a/outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
 }
 
 
@@ -155,30 +160,67 @@ class CachedDemoProvider:
         }
 
 
-class OpenAIWebProvider:
-    name = "openai_web_search"
+def fetch_europe_pmc_sources(query: str, limit: int = 5) -> list[dict]:
+    params = parse.urlencode({"query": query, "format": "json", "resultType": "core", "pageSize": str(limit)})
+    try:
+        with request.urlopen(f"{EUROPE_PMC_SEARCH}?{params}", timeout=60) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except error.HTTPError as exc:
+        raise RuntimeError(f"Europe PMC retrieval error {exc.code}.") from exc
+    except error.URLError as exc:
+        raise RuntimeError(f"Europe PMC retrieval network error: {exc.reason}") from exc
+    sources = []
+    for item in (payload.get("resultList") or {}).get("result") or []:
+        source_name = str(item.get("source") or "MED").upper()
+        article_id = str(item.get("id") or item.get("pmid") or "").strip()
+        if not article_id:
+            continue
+        pmid = str(item.get("pmid") or "").strip()
+        sources.append({
+            "source_id": f"PMID:{pmid}" if pmid else f"{source_name}:{article_id}",
+            "title": item.get("title") or "Untitled source",
+            "url": f"https://europepmc.org/article/{source_name}/{article_id}",
+            "doi": item.get("doi") or "unresolved",
+            "pmid": pmid or None,
+            "source_type": "primary_publication_candidate",
+            "retrieval_state": "live",
+            "full_text_state": "open_access_available" if item.get("isOpenAccess") == "Y" else "metadata_or_abstract_only",
+            "abstract": item.get("abstractText") or "",
+        })
+    return sources
 
-    def __init__(self, api_key: str, model: str = OPENAI_MODEL):
+
+class DeepSeekEvidenceProvider:
+    name = "deepseek_evidence_extraction"
+
+    def __init__(self, api_key: str, model: str = DEEPSEEK_MODEL, base_url: str = DEEPSEEK_BASE_URL):
         self.api_key = api_key
         self.model = model
+        self.base_url = base_url
 
     def discover(self, query: str) -> dict:
+        sources = fetch_europe_pmc_sources(query)
+        if not sources:
+            raise RuntimeError("Europe PMC returned no citable source records for the query.")
         prompt = (
-            "Find up to five primary publications relevant to the user query. Return only a JSON object with "
-            "two arrays: sources and extractions. Each source must contain source_id, title, url, doi, pmid, "
-            "source_type, retrieval_state, and full_text_state. Each extraction must contain source_id, target, "
-            "assay_context, molecule_mentions, evidence_quality, reason, and citation_url. Do not infer potency, "
-            "efficacy, ordinal rank, or molecule identity. If exact source text does not support a field, use "
-            "'unresolved'. The target is human wild-type ADORA2A. Query: " + query
+            "You are an evidence extraction layer, never a potency oracle. Return only a JSON object with an "
+            "extractions array. Each extraction must contain source_id, target, assay_context, molecule_mentions, "
+            "evidence_quality, reason, and citation_url. Do not infer potency, efficacy, ordinal rank, or molecule "
+            "identity. If exact source text does not support a field, use 'unresolved'. Use only the supplied "
+            "retrieved metadata and abstracts; preserve each citation URL. Query and sources: "
+            + json.dumps({"query": query, "sources": sources}, ensure_ascii=False)
         )
         payload = {
             "model": self.model,
-            "tools": [{"type": "web_search_preview"}],
-            "max_output_tokens": 2200,
-            "input": prompt,
+            "messages": [
+                {"role": "system", "content": "Extract conservative, source-grounded ADORA2A evidence as strict JSON."},
+                {"role": "user", "content": prompt},
+            ],
+            "stream": False,
+            "max_tokens": 2200,
         }
         req = request.Request(
-            "https://api.openai.com/v1/responses",
+            f"{self.base_url.rstrip('/')}/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
             headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
             method="POST",
@@ -188,18 +230,20 @@ class OpenAIWebProvider:
                 parsed = json.loads(response.read().decode("utf-8"))
         except error.HTTPError as exc:
             detail = exc.read().decode("utf-8", errors="replace")[:500]
-            raise RuntimeError(f"OpenAI discovery error {exc.code}: {detail}") from exc
+            raise RuntimeError(f"DeepSeek discovery error {exc.code}: {detail}") from exc
         except error.URLError as exc:
-            raise RuntimeError(f"OpenAI discovery network error: {exc.reason}") from exc
+            raise RuntimeError(f"DeepSeek discovery network error: {exc.reason}") from exc
         try:
-            result = json.loads(strip_json_fence(extract_response_text(parsed)))
+            choices = parsed.get("choices") or []
+            content = ((choices[0].get("message") or {}).get("content") if choices else "") or ""
+            result = json.loads(strip_json_fence(content))
         except (TypeError, json.JSONDecodeError) as exc:
-            raise RuntimeError("OpenAI discovery response was not valid structured JSON.") from exc
-        if not isinstance(result.get("sources"), list) or not isinstance(result.get("extractions"), list):
-            raise RuntimeError("OpenAI discovery response omitted required source or extraction arrays.")
-        for source in result["sources"]:
-            source["retrieval_state"] = "live"
-        result.update({"provider": self.name, "state": "live", "query": query})
+            raise RuntimeError("DeepSeek discovery response was not valid structured JSON.") from exc
+        if not isinstance(result.get("extractions"), list):
+            raise RuntimeError("DeepSeek discovery response omitted the required extraction array.")
+        allowed_ids = {source["source_id"] for source in sources}
+        result["extractions"] = [item for item in result["extractions"] if item.get("source_id") in allowed_ids]
+        result.update({"provider": self.name, "state": "live", "query": query, "sources": sources})
         return result
 
 
@@ -331,11 +375,11 @@ def audit_chain(events: list[tuple[str, dict]]) -> list[dict]:
 def select_provider(mode: str):
     if mode == "demo":
         return CachedDemoProvider(), None
-    if OPENAI_API_KEY:
-        return OpenAIWebProvider(OPENAI_API_KEY), None
+    if DEEPSEEK_API_KEY:
+        return DeepSeekEvidenceProvider(DEEPSEEK_API_KEY), None
     if mode == "live":
-        return CachedDemoProvider(), "OPENAI_API_KEY is unavailable; fell back to cached demo."
-    return CachedDemoProvider(), "Live GPT provider is unconfigured; using cached demo."
+        return CachedDemoProvider(), "DEEPSEEK_API_KEY is unavailable; fell back to cached demo."
+    return CachedDemoProvider(), "Live DeepSeek provider is unconfigured; using cached demo."
 
 
 def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode: str = "auto") -> dict:
@@ -386,7 +430,7 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
         "workflow_state": "cached_demo" if demo_mode else "live",
         "fallback_reason": fallback_reason,
         "query": query,
-        "provider": {"name": discovery["provider"], "model": OPENAI_MODEL if not demo_mode else None, "api_key_exposed": False},
+        "provider": {"name": discovery["provider"], "model": DEEPSEEK_MODEL if not demo_mode else None, "api_key_exposed": False},
         "contract_inputs": contract_status(),
         "sources": discovery["sources"],
         "extractions": discovery["extractions"],
@@ -458,9 +502,9 @@ def apply_disposition(run_id: str, status: str, reviewer: str, note: str = "") -
 
 def capability_status() -> dict:
     return {
-        "live_provider": "available" if OPENAI_API_KEY else "unavailable",
-        "live_provider_name": "openai_web_search",
-        "live_model": OPENAI_MODEL if OPENAI_API_KEY else None,
+        "live_provider": "available" if DEEPSEEK_API_KEY else "unavailable",
+        "live_provider_name": "deepseek_evidence_extraction",
+        "live_model": DEEPSEEK_MODEL if DEEPSEEK_API_KEY else None,
         "cached_demo": "available",
         "rdkit": "available" if rdkit_available() else "unavailable",
         "ab_ridge_scorer": "unavailable_no_serialized_model_artifact",

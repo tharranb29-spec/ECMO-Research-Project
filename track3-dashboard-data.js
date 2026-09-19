@@ -128,14 +128,56 @@ window.A2A_DASHBOARD_DATA = {
           }
         },
         {
-          "action": "shadow-policy",
+          "action": "scope-amendment",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "2714619893f22c5af6ee1a604587950b6457baa3c300f8417492e263d0953c37",
+          "entry_hash": "c37d877bc3a0588e3185123e3f0f2161e564e9d2bb5bd86629344863623c7db9",
           "event_id": "audit-0008",
           "previous_entry_hash": "03acdd1fc40b9061f3bee507c0f667c1421dcb49ae2b1144ae82ef59bc23f387",
+          "record_id": "a2a-track3-competition-scope-v1.6.1",
+          "record_type": "governance_scope",
+          "sequence": 8,
+          "source": {
+            "path": "outputs/v1.6.1/governance/dashboard_scope_contract.json",
+            "sha256": "6843717f875dd86b266d4dd2f010dc8511045278d455ebf108ebfaf689a1c240"
+          }
+        },
+        {
+          "action": "uncertainty-queue",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "7ddb0df13826f334e73d51802c875c668ddfa496cdf2b5b33d69eb8e4c0cca43",
+          "event_id": "audit-0009",
+          "previous_entry_hash": "c37d877bc3a0588e3185123e3f0f2161e564e9d2bb5bd86629344863623c7db9",
+          "record_id": "fail_closed_prediction_intake",
+          "record_type": "uncertainty_review_queue",
+          "sequence": 9,
+          "source": {
+            "path": "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+            "sha256": "7267b37cc7917d909b471da926b94819d01bc5432fa96936f10c5fff4dfe77c1"
+          }
+        },
+        {
+          "action": "md-production-cutoff",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "c4261395b4d05130263e71c8a74e941b359aebbd2c3e0ee32f83f1a11778e3c6",
+          "event_id": "audit-0010",
+          "previous_entry_hash": "7ddb0df13826f334e73d51802c875c668ddfa496cdf2b5b33d69eb8e4c0cca43",
+          "record_id": "a2a-tier-a-production-cutoff-v1.6",
+          "record_type": "md_production_cutoff",
+          "sequence": 10,
+          "source": {
+            "path": "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
+            "sha256": "102de51bfc31b2696b046794c8961225aa8da073f72a534229a13ce71246f947"
+          }
+        },
+        {
+          "action": "shadow-policy",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "7250d6f39db6a5d4ad0e9f479c433e20092f52c0c3b73390e78c7561d6533973",
+          "event_id": "audit-0011",
+          "previous_entry_hash": "c4261395b4d05130263e71c8a74e941b359aebbd2c3e0ee32f83f1a11778e3c6",
           "record_id": "a2a-shadow-update-v1.4",
           "record_type": "promotion",
-          "sequence": 8,
+          "sequence": 11,
           "source": {
             "path": "config/shadow_update.v1.4.json",
             "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
@@ -462,6 +504,64 @@ window.A2A_DASHBOARD_DATA = {
       ],
       "schema_id": "a2a-dashboard.evidence-inbox.v1"
     },
+    "governance_scope": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "autonomy": {
+            "automatic_scientific_validation": false,
+            "md_unlock": false,
+            "mode": "shadow_only_evidence_orchestration",
+            "model_promotion": false,
+            "outcome_unsealing": false,
+            "protocol_change": false
+          },
+          "candidate_review": {
+            "allowed_set_level_rates": [
+              "fraction_screen_eligible_not_ruled_out",
+              "fraction_inside_applicability_domain",
+              "fraction_outside_applicability_domain",
+              "fraction_with_high_model_disagreement",
+              "fraction_with_complete_required_evidence",
+              "scaffold_coverage_fraction"
+            ],
+            "candidate_probability_allowed": false,
+            "display_label": "screen-eligible / not ruled out",
+            "fixed_queue_count": null,
+            "interval_bound_rule": null,
+            "mode": "human_review_queue",
+            "prohibited_fields": [
+              "scientific_rank",
+              "hit_probability",
+              "success_probability",
+              "certified_hit",
+              "predicted_hit",
+              "interval_bound_selected"
+            ],
+            "scientific_rank_allowed": false
+          },
+          "external_confirmation": {
+            "confirmation_passed": false,
+            "minimum_molecules": 60,
+            "minimum_scaffolds": 20,
+            "outcomes_sealed": true,
+            "queue_can_satisfy_floor": false
+          },
+          "md_cutoff": {
+            "tier_a_completion_claim_allowed": false,
+            "tier_a_status": "incomplete_at_cutoff_without_signed_control_gate",
+            "tier_b_status": "locked",
+            "tier_b_submission_critical": false
+          },
+          "scope_specification_id": "a2a-track3-competition-scope-v1.6.1",
+          "source": {
+            "path": "outputs/v1.6.1/governance/dashboard_scope_contract.json",
+            "sha256": "6843717f875dd86b266d4dd2f010dc8511045278d455ebf108ebfaf689a1c240"
+          }
+        }
+      ],
+      "schema_id": "a2a-dashboard.governance-scope.v1"
+    },
     "md_gates": {
       "contract_version": "1.0.0",
       "records": [
@@ -482,18 +582,21 @@ window.A2A_DASHBOARD_DATA = {
           "tier_b_unlocked": false
         },
         {
+          "aggregate_reported_ns": 5.92,
           "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim.",
+          "completion_fraction_by_reported_ns": 0.019733333333333332,
           "gate_id": "G7:tier-a-production",
           "missing_audits": [],
-          "observed_runs": 0,
+          "observed_runs": 1,
           "passed_runs": 0,
+          "required_ns": 300.0,
           "required_runs": 6,
           "source": {
-            "path": "config/md_production.v1.6.json",
-            "sha256": "21d6a5c2332bf9379b21ee04999eb31261bed7ed5d1dfd5e6ad510490a011e07"
+            "path": "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
+            "sha256": "102de51bfc31b2696b046794c8961225aa8da073f72a534229a13ce71246f947"
           },
           "specification_id": "a2a-md-production-v1.6",
-          "status": "authorized_not_started",
+          "status": "started_campaign_incomplete",
           "tier_a_production_unlocked": true,
           "tier_b_unlocked": false
         },
@@ -515,6 +618,39 @@ window.A2A_DASHBOARD_DATA = {
         }
       ],
       "schema_id": "a2a-dashboard.md-gates.v1"
+    },
+    "md_production_cutoff": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "aggregate_completed_replica_ns": 0,
+          "aggregate_last_scheduled_checkpoint_ns": 5.9,
+          "aggregate_reported_ns": 5.92,
+          "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim.",
+          "completed_replicas": 0,
+          "completion_fraction_by_reported_ns": 0.019733333333333332,
+          "cutoff_id": "tier-a-production:2026-09-17T14:24:05.656022Z",
+          "equilibration_passed_runs": 6,
+          "equilibration_required_runs": 6,
+          "failed_replicas": 0,
+          "md_campaign_incomplete_does_not_imply_model_training_incomplete": true,
+          "model_training_status": "not_assessed_by_md_cutoff",
+          "not_observed_replicas": 5,
+          "observed_replicas": 1,
+          "required_ns": 300.0,
+          "required_replicas": 6,
+          "running_replicas": 1,
+          "source": {
+            "path": "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
+            "sha256": "102de51bfc31b2696b046794c8961225aa8da073f72a534229a13ce71246f947"
+          },
+          "status": "started_campaign_incomplete",
+          "tier_b_executed_replicas": 0,
+          "tier_b_status": "not_executed_locked",
+          "tier_b_unlocked": false
+        }
+      ],
+      "schema_id": "a2a-dashboard.md-production-cutoff.v1"
     },
     "model_registry": {
       "contract_version": "1.0.0",
@@ -796,6 +932,32 @@ window.A2A_DASHBOARD_DATA = {
         }
       ],
       "schema_id": "a2a-dashboard.shadow-actions.v1"
+    },
+    "uncertainty_review_queue": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "candidate_count": 240,
+          "docking_used_for_selection": false,
+          "external_outcomes_loaded": false,
+          "per_molecule_hit_probabilities_present": false,
+          "ranking_prohibited": true,
+          "review_eligible_count": 0,
+          "source": {
+            "path": "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+            "sha256": "7267b37cc7917d909b471da926b94819d01bc5432fa96936f10c5fff4dfe77c1"
+          },
+          "status": "fail_closed_prediction_intake",
+          "threshold_rule_semantics": {
+            "claim_limit": "Neither category is a per-molecule hit probability or experimental validation.",
+            "robust_threshold_support": "lower bound of the 90% interval is greater than or equal to the verified threshold",
+            "screen_eligible_not_ruled_out": "upper bound of the 90% interval is greater than or equal to the verified threshold"
+          },
+          "validated_interval_count": 0,
+          "validated_prediction_count": 0
+        }
+      ],
+      "schema_id": "a2a-dashboard.uncertainty-review-queue.v1"
     }
   },
   "dashboard_contract_version": "1.0.0",
@@ -821,7 +983,7 @@ window.A2A_DASHBOARD_DATA = {
       "sha256": "ee09c22cb06824843aae242e423cd85ab3171af2fb5edfe6d5c2179f2eb54185"
     }
   },
-  "snapshot_created_at_utc": "2026-09-17T13:35:06+00:00",
+  "snapshot_created_at_utc": "2026-09-19T08:02:45.317569+00:00",
   "summary": {
     "docked_candidates": 4,
     "evidence_queue": 240,
@@ -839,8 +1001,14 @@ window.A2A_DASHBOARD_DATA = {
     "primary_model": "AB_Ridge",
     "primary_model_r2": 0.5605377886314917,
     "promotion_mode": "shadow_only",
-    "tier_a_production_started": false,
+    "tier_a_production_completed_replicas": 0,
+    "tier_a_production_observed_replicas": 1,
+    "tier_a_production_reported_ns": 5.92,
+    "tier_a_production_required_ns": 300.0,
+    "tier_a_production_started": true,
     "tier_a_production_unlocked": true,
-    "tier_b_unlocked": false
+    "tier_b_unlocked": false,
+    "uncertainty_queue_count": 240,
+    "uncertainty_queue_eligible": 0
   }
 };

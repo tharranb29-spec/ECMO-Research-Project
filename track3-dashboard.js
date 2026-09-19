@@ -28,7 +28,7 @@
     ["External cohort","0 / 60","Frozen floor failure"],
     ["Primary model",fmt(data.summary.primary_model_r2,3),"AB_Ridge development R²"],
     ["Dual-state candidates",data.summary.docked_candidates,"4 blinded proposals"],
-    ["Tier A equilibration",`${data.summary.md_runs_passed}/${data.summary.md_runs_required}`,"Pilot production authorized"],
+    ["Tier A production",`${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns`,"1/6 observed · 0 complete"],
     ["Served models","0","Shadow-only; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
@@ -37,7 +37,7 @@
     ["G0–G1","Sources & evidence admission","Development evidence frozen; external pass 2 froze at zero","passed"],
     ["G2–G3","Redocking & docking QC","Primary receptors and prospective dual-state runs complete","passed"],
     ["G4–G6","Models & applicability","AB_Ridge leads development; no external confirmation","review"],
-    ["G7","Tier A native controls","Equilibration 6/6; 50 ns pilot authorized, not complete","authorized"],
+    ["G7","Tier A native controls","Equilibration 6/6; production 1/6 observed, 0 complete","authorized"],
     ["G8","Candidate MD","Locked until both controls pass 2/3 production replicas","locked"],
     ["G9","Model promotion","Blocked: external floors failed and human release absent","blocked"]
   ];
@@ -85,7 +85,8 @@
   document.querySelectorAll("#docking-sort button").forEach(button=>button.addEventListener("click",()=>{dockingSort=button.dataset.sort;document.querySelectorAll("#docking-sort button").forEach(item=>item.classList.toggle("active",item===button));renderDocking();}));renderDocking();
 
   const md=records("md_gates");
-  $("md-gates").innerHTML=md.map(gate=>{const isEquil=gate.gate_id.includes("equilibration"),isProduction=gate.gate_id.includes("production"),tone=isEquil?"passed":isProduction?"authorized":"locked",pct=gate.required_runs?Math.round(gate.passed_runs/gate.required_runs*100):0;return `<article class="md-card ${tone}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${gate.passed_runs}/${gate.required_runs}</span></div><span class="kicker">${esc(gate.gate_id)}</span><h2>${isEquil?"Equilibration passed":isProduction?"Pilot authorized":"Candidate MD locked"}</h2><span class="status-pill ${tone}">${esc(label(gate.status))}</span><p>${esc(gate.claim_limit)}</p><div class="source-line">${esc(gate.source.path)}</div></article>`;}).join("");
+  $("md-gates").innerHTML=md.map(gate=>{const isEquil=gate.gate_id.includes("equilibration"),isProduction=gate.gate_id.includes("production"),tone=isEquil?"passed":isProduction?"authorized":"locked",pct=isProduction?Math.round((gate.completion_fraction_by_reported_ns||0)*100):(gate.required_runs?Math.round(gate.passed_runs/gate.required_runs*100):0);return `<article class="md-card ${tone}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${isProduction?`${pct}%`:`${gate.passed_runs}/${gate.required_runs}`}</span></div><span class="kicker">${esc(gate.gate_id)}</span><h2>${isEquil?"Equilibration passed":isProduction?"Pilot running, incomplete":"Candidate MD locked"}</h2><span class="status-pill ${tone}">${esc(label(gate.status))}</span><p>${esc(gate.claim_limit)}</p><div class="source-line">${esc(gate.source.path)}</div></article>`;}).join("");
+  $("production-progress-copy").textContent=`${data.summary.tier_a_production_observed_replicas}/6 replicas observed, ${data.summary.tier_a_production_completed_replicas} complete, ${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns reported at cutoff. Tier B remains locked.`;
   const mdSource=md[0],missing=new Set(mdSource.missing_audits.map(path=>path.split("/").slice(0,2).join(":"))),systems=["5NM4_ZMA_native","5G53_NECA_miniGs_native_nucleotide_free"],seeds=[20260914,20260915,20260916];
   let matrix=`<div class="md-cell header">System</div>${seeds.map(seed=>`<div class="md-cell header">Seed ${seed}</div>`).join("")}`;systems.forEach(system=>{matrix+=`<div class="md-cell header">${esc(label(system))}</div>`;seeds.forEach(seed=>{const absent=missing.has(`${system}:seed-${seed}`);matrix+=`<div class="md-cell ${absent?"missing":"pass"}">${absent?"Missing audit":"Gate passed"}</div>`;});});$("md-matrix").innerHTML=matrix;
 
@@ -103,7 +104,7 @@
   function updateDiscoveryBanner(capabilities,run){
     const banner=$("discovery-state-banner"),live=capabilities?.live_provider==="available";
     banner.classList.toggle("live",live);banner.classList.toggle("cached",!live);
-    banner.innerHTML=`<span class="state-dot"></span><div><strong>${live?"Live GPT retrieval available":"Cached demo ready · live GPT unavailable"}</strong><small>${run?`Latest run: ${esc(label(run.workflow_state))}`:"API keys remain server-side. Missing capabilities fail closed."}</small></div><div class="capability-row">${capabilityBadge("RDKit",capabilities?.rdkit||"unavailable")}${capabilityBadge("AB Ridge",capabilities?.ab_ridge_scorer||"unavailable")}</div>`;
+    banner.innerHTML=`<span class="state-dot"></span><div><strong>${live?"Live DeepSeek extraction available":"Cached demo ready · live DeepSeek unavailable"}</strong><small>${run?`Latest run: ${esc(label(run.workflow_state))}`:"API keys remain server-side. Missing capabilities fail closed."}</small></div><div class="capability-row">${capabilityBadge("RDKit",capabilities?.rdkit||"unavailable")}${capabilityBadge("AB Ridge",capabilities?.ab_ridge_scorer||"unavailable")}</div>`;
   }
   function renderDiscovery(run){
     if(!run)return;currentDiscoveryRun=run;$("discovery-results").hidden=false;$("discovery-run-id").textContent=run.run_id;

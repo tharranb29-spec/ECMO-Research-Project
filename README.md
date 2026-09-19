@@ -36,9 +36,10 @@ No key is required. The demonstration labels cached source metadata and simulate
 applicability separately, leaves AB_Ridge scores unavailable, and records a
 hash-chained human disposition.
 
-For live source retrieval, configure `OPENAI_API_KEY` only on the server and use
-Auto mode. GPT performs retrieval and structured extraction through the Responses
-API; it is not used as a potency oracle. RDKit standardization is activated when
+For live source retrieval, configure `DEEPSEEK_API_KEY` only on the server and use
+Auto mode. Europe PMC supplies deterministic source records and citations; DeepSeek
+performs structured extraction through its server-side chat API and is never used
+as a potency oracle. RDKit standardization is activated when
 RDKit is installed. Without RDKit or a serialized frozen AB_Ridge scorer, those
 gates fail closed rather than generating substitute values.
 
@@ -127,13 +128,13 @@ Recommended setup:
 1. Set your API key in the shell
 
 ```bash
-export OPENAI_API_KEY="your_api_key_here"
+export DEEPSEEK_API_KEY="your_deepseek_api_key_here"
 ```
 
 2. Optional model override
 
 ```bash
-export OPENAI_MODEL="gpt-5.4-mini"
+export DEEPSEEK_MODEL="deepseek-chat"
 ```
 
 3. Make sure the latest dashboard bundle exists
@@ -191,9 +192,9 @@ Useful environment variables:
 - `AUTO_RESEARCH_LLM_ENABLED=1`
 - `AUTO_RESEARCH_MAX_ARTICLES=12`
 
-### Using DeepSeek instead
+### DeepSeek configuration
 
-If you want to use DeepSeek for the live assistant, set:
+DeepSeek is the only live LLM provider. Set:
 
 ```bash
 export AI_PROVIDER="deepseek"
@@ -210,7 +211,8 @@ Then start the same server:
 python3 research_assistant_server.py
 ```
 
-The dashboard backend now supports both OpenAI and DeepSeek.
+The dashboard backend, Discovery Lab, and optional autonomous extraction all use
+DeepSeek. No API key is included in browser code or committed configuration.
 
 Important hosting note:
 

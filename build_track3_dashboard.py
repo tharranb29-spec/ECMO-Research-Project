@@ -36,6 +36,9 @@ SOURCES = {
     "md_production": A2A / "config/md_production.v1.6.json",
     "shadow_config": A2A / "config/shadow_update.v1.4.json",
     "shadow_status": A2A / "outputs/v1.4/shadow_update_status.json",
+    "scope": A2A / "outputs/v1.6.1/governance/dashboard_scope_contract.json",
+    "uncertainty_queue": A2A / "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+    "md_cutoff": A2A / "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
 }
 
 
@@ -78,6 +81,9 @@ def build() -> dict:
     md_plan = data["md_plan"]
     md_production = data["md_production"]
     shadow = data["shadow_status"]
+    scope = data["scope"]
+    uncertainty_queue = data["uncertainty_queue"]
+    md_cutoff = data["md_cutoff"]
 
     evidence_records = []
     evidence_labels = {
@@ -251,15 +257,18 @@ def build() -> dict:
     }, {
         "gate_id": "G7:tier-a-production",
         "specification_id": md_production["specification_id"],
-        "status": "authorized_not_started",
-        "observed_runs": 0,
-        "passed_runs": 0,
-        "required_runs": len(md_production["tier_a"]["systems"]) * len(md_production["tier_a"]["replica_seeds"]),
+        "status": md_cutoff["tier_a_production"]["status"],
+        "observed_runs": md_cutoff["tier_a_production"]["observed_replicas"],
+        "passed_runs": md_cutoff["tier_a_production"]["completed_replicas"],
+        "required_runs": md_cutoff["tier_a_production"]["required_replicas"],
+        "aggregate_reported_ns": md_cutoff["tier_a_production"]["aggregate_reported_ns"],
+        "required_ns": md_cutoff["tier_a_production"]["required_ns"],
+        "completion_fraction_by_reported_ns": md_cutoff["tier_a_production"]["completion_fraction_by_reported_ns"],
         "missing_audits": [],
         "tier_a_production_unlocked": md["tier_a_production_unlocked"],
         "tier_b_unlocked": md["tier_b_unlocked"],
         "claim_limit": md_production["claim_limit"],
-        "source": source_ref("md_production"),
+        "source": source_ref("md_cutoff"),
     }, {
         "gate_id": "G8:candidate-md",
         "specification_id": md["specification_id"],
@@ -359,6 +368,32 @@ def build() -> dict:
         },
     ]
 
+    scope_record = {
+        "scope_specification_id": scope["scope_specification_id"],
+        "candidate_review": scope["candidate_review"],
+        "external_confirmation": scope["external_confirmation"],
+        "md_cutoff": scope["md_cutoff"],
+        "autonomy": scope["autonomy"],
+        "source": source_ref("scope"),
+    }
+    raw_uncertainty_records = uncertainty_queue["records"]
+    uncertainty_records = [{
+        "status": uncertainty_queue["status"],
+        "candidate_count": len(raw_uncertainty_records),
+        "validated_prediction_count": sum(record["prediction_pbind_ki"] is not None for record in raw_uncertainty_records),
+        "validated_interval_count": sum(record["interval_90"] is not None for record in raw_uncertainty_records),
+        "review_eligible_count": sum(record["deterministic_review_eligibility"] == "eligible" for record in raw_uncertainty_records),
+        "ranking_prohibited": uncertainty_queue["ranking_prohibited"],
+        "per_molecule_hit_probabilities_present": uncertainty_queue["per_molecule_hit_probabilities_present"],
+        "external_outcomes_loaded": uncertainty_queue["external_outcomes_loaded"],
+        "docking_used_for_selection": uncertainty_queue["docking_used_for_selection"],
+        "threshold_rule_semantics": uncertainty_queue["threshold_rule_semantics"],
+        "source": source_ref("uncertainty_queue"),
+    }]
+    cutoff_records = []
+    for record in md_cutoff["dashboard_contract"]["records"]:
+        cutoff_records.append({**record, "source": source_ref("md_cutoff")})
+
     contracts = {
         "evidence_inbox": envelope("evidence-inbox", evidence_records),
         "molecule_registry": envelope("molecule-registry", molecules),
@@ -368,6 +403,9 @@ def build() -> dict:
         "md_gates": envelope("md-gates", md_records),
         "candidate_portfolio": envelope("candidate-portfolio", portfolio),
         "shadow_actions": envelope("shadow-actions", shadow_actions),
+        "governance_scope": envelope("governance-scope", [scope_record]),
+        "uncertainty_review_queue": envelope("uncertainty-review-queue", uncertainty_records),
+        "md_production_cutoff": envelope("md-production-cutoff", cutoff_records),
     }
 
     audit_events = [
@@ -378,6 +416,9 @@ def build() -> dict:
         ("prospective-docking", "dual_state_docking", docking["protocol_id"], "docking"),
         ("md-gate", "md_gates", md["specification_id"], "md"),
         ("md-production-authorized", "md_gates", md_production["specification_id"], "md_production"),
+        ("scope-amendment", "governance_scope", scope["scope_specification_id"], "scope"),
+        ("uncertainty-queue", "uncertainty_review_queue", uncertainty_queue["status"], "uncertainty_queue"),
+        ("md-production-cutoff", "md_production_cutoff", md_cutoff["specification_id"], "md_cutoff"),
         ("shadow-policy", "promotion", data["shadow_config"]["specification_id"], "shadow_config"),
     ]
     previous = "GENESIS"
@@ -427,7 +468,13 @@ def build() -> dict:
             "md_runs_passed": md["passed_run_count"],
             "md_runs_required": md["expected_run_count"],
             "tier_a_production_unlocked": md["tier_a_production_unlocked"],
-            "tier_a_production_started": implementation["md_trajectory_production_started"],
+            "tier_a_production_started": md_cutoff["tier_a_production"]["observed_replicas"] > 0,
+            "tier_a_production_observed_replicas": md_cutoff["tier_a_production"]["observed_replicas"],
+            "tier_a_production_completed_replicas": md_cutoff["tier_a_production"]["completed_replicas"],
+            "tier_a_production_reported_ns": md_cutoff["tier_a_production"]["aggregate_reported_ns"],
+            "tier_a_production_required_ns": md_cutoff["tier_a_production"]["required_ns"],
+            "uncertainty_queue_count": len(raw_uncertainty_records),
+            "uncertainty_queue_eligible": uncertainty_records[0]["review_eligible_count"],
             "tier_b_unlocked": md["tier_b_unlocked"],
             "promotion_mode": promotion["mode"],
         },
@@ -441,6 +488,7 @@ def validate(payload: dict) -> None:
         "evidence_inbox", "molecule_registry", "model_registry",
         "applicability_uncertainty", "dual_state_docking", "md_gates",
         "candidate_portfolio", "shadow_actions", "audit_log",
+        "governance_scope", "uncertainty_review_queue", "md_production_cutoff",
     }
     if set(payload["contracts"]) != expected:
         raise ValueError("Dashboard contract set is incomplete")
