@@ -2,12 +2,12 @@
 
 ## Track 3 A2A dashboard
 
-The audited, read-only Track 3 competition interface is available at
+The audited Track 3 competition interface is available at
 `track3-dashboard.html` and is served at `/` by `research_assistant_server.py`.
 The preserved legacy ECMO dashboard remains at `/dashboard.html`. The new interface presents versioned
 contracts for evidence intake, molecule and model registries, applicability and
 uncertainty, dual-state docking, MD gates, the candidate portfolio, a bounded
-shadow-action workflow, and a hash-chained audit log.
+shadow-action workflow, an interactive Discovery Lab, and hash-chained audit logs.
 
 Rebuild its deterministic static data bundle after audited artifacts change:
 
@@ -18,8 +18,33 @@ python3 -m unittest tests.test_track3_dashboard
 
 Autonomous records remain shadow proposals. The dashboard cannot admit labels,
 promote a model, unlock Tier B, or describe a candidate as experimentally validated.
-The Render blueprint disables live literature automation and prototype GNINA so a
-deployment cannot mutate scientific state or generate simulated evidence.
+The Render blueprint disables legacy background literature automation and
+prototype GNINA. The Discovery Lab is request-driven, shadow-only, and stores only
+its latest ephemeral run; it cannot mutate the frozen scientific artifacts.
+
+### Discovery Lab demo
+
+```bash
+python3 build_dashboard_bundle.py
+python3 build_track3_dashboard.py
+AUTO_RESEARCH_ENABLED=0 AUTO_RESEARCH_LLM_ENABLED=0 GNINA_MODE=disabled \
+  python3 research_assistant_server.py
+```
+
+Open `http://127.0.0.1:8765/#discovery` and choose **Deterministic cached demo**.
+No key is required. The demonstration labels cached source metadata and simulated
+applicability separately, leaves AB_Ridge scores unavailable, and records a
+hash-chained human disposition.
+
+For live source retrieval, configure `OPENAI_API_KEY` only on the server and use
+Auto mode. GPT performs retrieval and structured extraction through the Responses
+API; it is not used as a potency oracle. RDKit standardization is activated when
+RDKit is installed. Without RDKit or a serialized frozen AB_Ridge scorer, those
+gates fail closed rather than generating substitute values.
+
+```bash
+python3 -m unittest tests.test_track3_dashboard tests.test_track3_discovery_workflow
+```
 
 This folder now contains a rough, trainable ranking prototype for the AI-driven part of your ECMO biomaterials project.
 

@@ -4,10 +4,11 @@
   if(!data){document.body.innerHTML="<p>Dashboard data is unavailable. Run build_track3_dashboard.py.</p>";return;}
   const $=id=>document.getElementById(id), records=name=>data.contracts[name].records;
   const esc=value=>String(value??"").replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
+  const safeUrl=value=>{try{const url=new URL(String(value));return url.protocol==="https:"?url.href:"#";}catch{return "#";}};
   const label=value=>String(value??"").replaceAll("_"," ");
   const fmt=(value,digits=2)=>Number(value).toFixed(digits);
   const short=(value,length=12)=>String(value).slice(0,length)+"…";
-  const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","shadow","audit"];
+  const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","discovery","shadow","audit"];
   let moleculeFilter="all",moleculeQuery="",evidenceFilter="all",modelMetric="r2",dockingSort="name";
 
   function setView(view){
@@ -90,6 +91,45 @@
 
   const portfolio=records("candidate_portfolio"),dockingById=dockingGroups();
   $("portfolio-board").innerHTML=portfolio.map(item=>{const rows=dockingById[item.molecule_id],inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return `<article class="portfolio-card"><header><div><span class="kicker">Computationally prioritized</span><h2>${esc(item.molecule_id.replace("LIT25-",""))}</h2></div><span class="status-pill blocked">Not releasable</span></header><div class="portfolio-metrics"><div><span>5NM4</span><strong>${fmt(inactive.median_affinity_kcal_mol,2)}</strong></div><div><span>2YDO</span><strong>${fmt(active.median_affinity_kcal_mol,2)}</strong></div><div><span>Δ score</span><strong>${item.d_affinity_kcal_mol>0?"+":""}${fmt(item.d_affinity_kcal_mol,2)}</strong></div></div><p>${esc(item.next_gate)} Label status: ${esc(item.label_status)}. MD state: ${esc(label(item.md_status))}.</p><div class="source-line">${esc(item.source.path)} · ${short(item.source.sha256)}</div></article>`;}).join("");
+
+  let currentDiscoveryRun=null;
+  async function apiJson(path,options={}){
+    const response=await fetch(path,{headers:{"Content-Type":"application/json"},...options});
+    const payload=await response.json().catch(()=>({ok:false,error:"The server returned an unreadable response."}));
+    if(!response.ok||payload.ok===false)throw new Error(payload.error||`Request failed (${response.status})`);
+    return payload;
+  }
+  function capabilityBadge(name,value){const tone=value==="available"?"passed":value==="sealed"||value==="locked"||value==="disabled"?"blocked":"shadow";return `<span class="status-pill ${tone}">${esc(label(name))}: ${esc(label(value))}</span>`;}
+  function updateDiscoveryBanner(capabilities,run){
+    const banner=$("discovery-state-banner"),live=capabilities?.live_provider==="available";
+    banner.classList.toggle("live",live);banner.classList.toggle("cached",!live);
+    banner.innerHTML=`<span class="state-dot"></span><div><strong>${live?"Live GPT retrieval available":"Cached demo ready · live GPT unavailable"}</strong><small>${run?`Latest run: ${esc(label(run.workflow_state))}`:"API keys remain server-side. Missing capabilities fail closed."}</small></div><div class="capability-row">${capabilityBadge("RDKit",capabilities?.rdkit||"unavailable")}${capabilityBadge("AB Ridge",capabilities?.ab_ridge_scorer||"unavailable")}</div>`;
+  }
+  function renderDiscovery(run){
+    if(!run)return;currentDiscoveryRun=run;$("discovery-results").hidden=false;$("discovery-run-id").textContent=run.run_id;
+    const stateTone=run.workflow_state==="live"?"passed":"shadow";
+    const detailValue=value=>value&&typeof value==="object"?`${Object.keys(value).length} resolved contracts`:String(value);
+    $("discovery-stages").innerHTML=run.audit_log.map(item=>`<div class="discovery-stage"><span>${String(item.sequence).padStart(2,"0")}</span><div><strong>${esc(label(item.event_type))}</strong><small>${esc(Object.entries(item.details).map(([key,value])=>`${label(key)}: ${detailValue(value)}`).join(" · "))}</small></div><i class="status-pill ${stateTone}">${run.workflow_state==="live"?"live":"cached"}</i></div>`).join("");
+    $("source-count").textContent=`${run.sources.length} cited records · ${label(run.workflow_state)}`;
+    $("discovery-sources").innerHTML=run.sources.map(source=>{const extraction=run.extractions.find(item=>item.source_id===source.source_id)||{};return `<article class="source-card"><div><span class="status-pill ${source.retrieval_state==="live"?"passed":"shadow"}">${esc(source.retrieval_state)}</span><span class="status-pill ${extraction.evidence_quality==="quarantine"?"blocked":"review"}">${esc(extraction.evidence_quality||"unresolved")}</span></div><h3>${esc(source.title)}</h3><p>${esc(extraction.reason||"No extraction rationale returned.")}</p><a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer">${esc(source.source_id)} · source ↗</a><small>DOI ${esc(source.doi||"unresolved")} · full text ${esc(source.full_text_state||"unresolved")}</small></article>`;}).join("")||'<p class="empty-state">No citable sources returned.</p>';
+    const queue=run.screen_eligible_queue;$("queue-count").textContent=`${queue.count} eligible`;
+    $("discovery-queue").innerHTML=`<div class="queue-summary"><strong>${queue.count}</strong><span>unordered records</span><dl><dt>Scaffolds</dt><dd>${queue.scaffold_count}</dd><dt>Ordering</dt><dd>Composition only</dd><dt>AB_Ridge scores</dt><dd>Unavailable</dd></dl><p>${esc(queue.claim_limit)}</p></div>${Object.entries(queue.scaffold_composition).map(([scaffold,count])=>`<div class="scaffold-row"><code>${esc(scaffold)}</code><b>${count}</b></div>`).join("")}`;
+    $("discovery-molecule-grid").innerHTML=run.molecules.map(molecule=>`<article class="registry-card ${molecule.screen_eligible?"control":"candidate"}"><header><span class="tag">${esc(molecule.state_label)}</span><span class="status-pill ${molecule.screen_eligible?"passed":"blocked"}">${molecule.screen_eligible?"screen eligible":"held"}</span></header><h2>${esc(molecule.name)}</h2><small>${esc(molecule.molecule_id)}</small><p>Identity · ${esc(label(molecule.standardization_state))}<br>Domain · ${esc(label(molecule.applicability))}<br>Uncertainty · ${esc(label(molecule.uncertainty))}<br>AB_Ridge · ${esc(label(molecule.score_state))}</p><div class="eligibility-note">${esc(molecule.eligibility_reasons.join(" ")||"No gate rationale recorded.")}</div><div class="source-line">${esc(molecule.canonical_smiles||molecule.input_smiles)}</div></article>`).join("")||'<p class="empty-state">No molecule records were submitted.</p>';
+    $("disposition-state").textContent=label(run.human_disposition.status);$("disposition-state").className=`status-pill ${run.human_disposition.status==="pending"?"review":"passed"}`;
+  }
+  function parseMoleculeInput(value){return value.split(/\n+/).map(line=>{const [name,...smilesParts]=line.split("|");return{name:(name||"").trim(),smiles:smilesParts.join("|").trim()};}).filter(item=>item.smiles);}
+  $("discovery-form").addEventListener("submit",async event=>{
+    event.preventDefault();const button=$("discovery-run");button.disabled=true;button.textContent="Running gates…";
+    try{const payload=await apiJson("/api/discovery/run",{method:"POST",body:JSON.stringify({query:$("discovery-query").value,provider_mode:$("discovery-provider").value,molecules:parseMoleculeInput($("discovery-molecules").value)})});renderDiscovery(payload.run);updateDiscoveryBanner({live_provider:payload.run.workflow_state==="live"?"available":"unavailable",rdkit:payload.run.molecules.some(item=>item.standardization_engine==="RDKit")?"available":"unavailable",ab_ridge_scorer:"unavailable"},payload.run);}
+    catch(error){$("discovery-stages").innerHTML=`<p class="error-state">${esc(error.message)}</p>`;}
+    finally{button.disabled=false;button.textContent="Run shadow workflow";}
+  });
+  $("disposition-form").addEventListener("submit",async event=>{
+    event.preventDefault();if(!currentDiscoveryRun)return;
+    try{const payload=await apiJson("/api/discovery/disposition",{method:"POST",body:JSON.stringify({run_id:currentDiscoveryRun.run_id,status:$("disposition-choice").value,reviewer:$("disposition-reviewer").value,note:$("disposition-note").value})});renderDiscovery(payload.run);}
+    catch(error){$("disposition-state").textContent=error.message;$("disposition-state").className="status-pill blocked";}
+  });
+  apiJson("/api/discovery/status").then(payload=>{updateDiscoveryBanner(payload.capabilities,payload.latest_run);if(payload.latest_run)renderDiscovery(payload.latest_run);}).catch(error=>{$("discovery-state-banner").innerHTML=`<span class="state-dot"></span><div><strong>Discovery endpoint unavailable</strong><small>${esc(error.message)}</small></div>`;});
 
   $("shadow-workflow").innerHTML=shadowActions.map((action,index)=>`<article class="shadow-card ${esc(action.status)}"><span class="kicker">Step ${String(index+1).padStart(2,"0")}</span><h2>${esc(action.stage)}</h2><div class="executor">${esc(action.executor)} · ${esc(label(action.status))}</div><p>${esc(action.authority)}</p><div class="gate"><b>Required gate</b><br>${esc(action.required_gate)}</div><div class="source-line">${esc(action.source.path)}<br>${short(action.source.sha256,16)}</div></article>`).join("");
   const prohibited=[...new Set(shadowActions.flatMap(action=>action.prohibited_actions))];$("prohibited-grid").innerHTML=prohibited.map(item=>`<span>${esc(label(item))}</span>`).join("");

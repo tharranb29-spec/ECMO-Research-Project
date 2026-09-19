@@ -10,3 +10,7 @@ promotion, candidate release, or Tier B MD. Autonomous work is represented in th
 `shadow-actions` contract as bounded proposals with an executor, authority limit,
 required gate, prohibited actions, and source digest. Any future breaking field
 change requires a new version directory.
+
+`discovery-run.schema.json` defines the runtime live/cached shadow workflow,
+resolved upstream contracts, unordered queue composition, human disposition, and
+append-only runtime audit chain. Missing upstream contracts fail closed.

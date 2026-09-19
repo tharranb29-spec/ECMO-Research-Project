@@ -20,6 +20,12 @@ from urllib import error, request
 from build_dashboard_bundle import main as build_dashboard_bundle_main
 from gnina_pipeline import refresh_existing_outputs
 from research_autoupdater import refresh_research_outputs
+from track3_discovery_workflow import (
+    apply_disposition as apply_discovery_disposition,
+    capability_status as discovery_capability_status,
+    load_state as load_discovery_state,
+    run_workflow as run_discovery_workflow,
+)
 
 
 ROOT = Path(__file__).resolve().parent
@@ -67,6 +73,8 @@ CHAT_RATE_LIMIT_COUNT = env_int("ECMO_CHAT_RATE_LIMIT_COUNT", 20)
 CHAT_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_CHAT_RATE_LIMIT_WINDOW_SECONDS", 300)
 REFRESH_RATE_LIMIT_COUNT = env_int("ECMO_REFRESH_RATE_LIMIT_COUNT", 6)
 REFRESH_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_REFRESH_RATE_LIMIT_WINDOW_SECONDS", 3600)
+DISCOVERY_RATE_LIMIT_COUNT = env_int("ECMO_DISCOVERY_RATE_LIMIT_COUNT", 12)
+DISCOVERY_RATE_LIMIT_WINDOW_SECONDS = env_int("ECMO_DISCOVERY_RATE_LIMIT_WINDOW_SECONDS", 3600)
 ALLOWED_ORIGINS = {
     origin.strip().rstrip("/")
     for origin in os.environ.get("ECMO_ALLOWED_ORIGINS", "").split(",")
@@ -951,7 +959,7 @@ class Handler(BaseHTTPRequestHandler):
                 {
                     "ok": True,
                     "service": "ecmo-research-dashboard",
-                    "release": "a2a-track3-dashboard-v2",
+                    "release": "a2a-track3-competition-prototype-v3",
                     "git_commit": os.environ.get("RENDER_GIT_COMMIT") or "local",
                     "auth_mode": "app-login" if APP_LOGIN_ENABLED else ("basic" if BASIC_AUTH_ENABLED else "none"),
                 },
@@ -982,6 +990,16 @@ class Handler(BaseHTTPRequestHandler):
         if parsed.path == "/api/bundle":
             maybe_schedule_stale_refresh("bundle-poll")
             self._send_json({"ok": True, **load_bundle()}, method=method)
+            return
+        if parsed.path == "/api/discovery/status":
+            self._send_json(
+                {
+                    "ok": True,
+                    "capabilities": discovery_capability_status(),
+                    "latest_run": load_discovery_state(),
+                },
+                method=method,
+            )
             return
         if parsed.path == "/api/docking/status":
             self._send_json(
@@ -1133,6 +1151,45 @@ class Handler(BaseHTTPRequestHandler):
                     "gnina_status": read_json(ROOT / "outputs" / "gnina_status.json") or {},
                 }
             )
+            return
+
+        if self.path == "/api/discovery/run":
+            if not self._enforce_rate_limit("discovery", DISCOVERY_RATE_LIMIT_COUNT, DISCOVERY_RATE_LIMIT_WINDOW_SECONDS):
+                return
+            try:
+                payload = self._read_json_body()
+                query = str(payload.get("query") or "").strip()
+                molecules = payload.get("molecules")
+                provider_mode = str(payload.get("provider_mode") or "auto").strip().lower()
+                if len(query) > 500:
+                    raise ValueError("Discovery query is too long. Limit is 500 characters.")
+                if molecules is not None and not isinstance(molecules, list):
+                    raise ValueError("Molecules must be an array of name/SMILES objects.")
+                result = run_discovery_workflow(query, molecules=molecules, provider_mode=provider_mode)
+            except ValueError as exc:
+                self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc))
+                return
+            except RuntimeError as exc:
+                self._send_error_json(HTTPStatus.BAD_GATEWAY, str(exc), extra={"capabilities": discovery_capability_status()})
+                return
+            self._send_json({"ok": True, "run": result})
+            return
+
+        if self.path == "/api/discovery/disposition":
+            if not self._enforce_rate_limit("discovery", DISCOVERY_RATE_LIMIT_COUNT, DISCOVERY_RATE_LIMIT_WINDOW_SECONDS):
+                return
+            try:
+                payload = self._read_json_body()
+                result = apply_discovery_disposition(
+                    str(payload.get("run_id") or ""),
+                    str(payload.get("status") or ""),
+                    str(payload.get("reviewer") or ""),
+                    str(payload.get("note") or ""),
+                )
+            except ValueError as exc:
+                self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc))
+                return
+            self._send_json({"ok": True, "run": result})
             return
 
         if self.path != "/api/chat":

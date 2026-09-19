@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "a2a-dashboard.discovery-run.v1",
+  "title": "Track 3 shadow discovery run",
+  "type": "object",
+  "required": ["schema_version", "run_id", "workflow_state", "provider", "contract_inputs", "sources", "extractions", "molecules", "screen_eligible_queue", "human_disposition", "governance", "audit_log"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "run_id": {"type": "string", "pattern": "^shadow:"},
+    "workflow_state": {"enum": ["live", "cached_demo"]},
+    "provider": {"type": "object", "required": ["name", "api_key_exposed"], "properties": {"api_key_exposed": {"const": false}}},
+    "contract_inputs": {"type": "object"},
+    "sources": {"type": "array"},
+    "extractions": {"type": "array"},
+    "molecules": {"type": "array", "maxItems": 12},
+    "screen_eligible_queue": {"type": "object", "required": ["ordering", "records", "claim_limit"], "properties": {"ordering": {"const": "unordered_composition_only"}}},
+    "human_disposition": {"type": "object"},
+    "governance": {
+      "type": "object",
+      "required": ["autonomy_mode", "external_outcomes_loaded", "model_promotion_enabled", "tier_b_unlocked"],
+      "properties": {
+        "autonomy_mode": {"const": "shadow_only"},
+        "external_outcomes_loaded": {"const": false},
+        "model_promotion_enabled": {"const": false},
+        "tier_b_unlocked": {"const": false}
+      }
+    },
+    "audit_log": {"type": "array", "minItems": 1}
+  }
+}

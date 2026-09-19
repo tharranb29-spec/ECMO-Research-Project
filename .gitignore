@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 outputs/dashboard-server.log
 outputs/dashboard-server.pid
+outputs/track3_discovery_runtime.json
+outputs/track3_discovery_runtime.json.tmp
 outputs/structures/
 outputs/docking/
 docking_inputs/**/*.pdb

@@ -29,6 +29,9 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertEqual(set(self.payload["contracts"]), expected)
         for contract in self.payload["contracts"].values():
             self.assertEqual(contract["contract_version"], "1.0.0")
+        runtime_schema = ROOT / "track3_a2a" / "dashboard_contracts" / "v1" / "discovery-run.schema.json"
+        schema = json.loads(runtime_schema.read_text(encoding="utf-8"))
+        self.assertEqual(schema["properties"]["governance"]["properties"]["autonomy_mode"]["const"], "shadow_only")
 
     def test_source_hashes_match_repository_artifacts(self):
         a2a = ROOT / "track3_a2a"
@@ -104,7 +107,7 @@ class Track3DashboardTests(unittest.TestCase):
         html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
         expected_views = {
             "overview", "evidence", "molecules", "models", "applicability",
-            "docking", "md", "portfolio", "shadow", "audit",
+            "docking", "md", "portfolio", "discovery", "shadow", "audit",
         }
         for view in expected_views:
             self.assertIn(f'data-panel="{view}"', html)
@@ -115,8 +118,12 @@ class Track3DashboardTests(unittest.TestCase):
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")
         self.assertIn('"/": ROOT / "track3-dashboard.html"', server)
         self.assertIn('"/track3-dashboard-data.js"', server)
-        self.assertIn('"release": "a2a-track3-dashboard-v2"', server)
+        self.assertIn('"release": "a2a-track3-competition-prototype-v3"', server)
+        self.assertIn('"/api/discovery/run"', server)
+        self.assertIn('"/api/discovery/disposition"', server)
         self.assertIn('build_track3_dashboard.py', blueprint)
+        self.assertIn('key: AI_PROVIDER\n        value: openai', blueprint)
+        self.assertIn('key: OPENAI_API_KEY\n        sync: false', blueprint)
         self.assertIn('key: AUTO_RESEARCH_ENABLED\n        value: "0"', blueprint)
         self.assertIn('key: AUTO_RESEARCH_LLM_ENABLED\n        value: "0"', blueprint)
         self.assertIn('key: GNINA_MODE\n        value: disabled', blueprint)

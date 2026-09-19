@@ -13,7 +13,13 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.11"
       - key: AI_PROVIDER
-        value: deepseek
+        value: openai
+      - key: OPENAI_MODEL
+        value: gpt-5.4-mini
+      - key: OPENAI_REASONING_EFFORT
+        value: medium
+      - key: OPENAI_API_KEY
+        sync: false
       - key: DEEPSEEK_MODEL
         value: deepseek-chat
       - key: AUTO_RESEARCH_ENABLED
@@ -50,5 +56,9 @@ services:
         sync: false
       - key: ECMO_SESSION_TTL_HOURS
         value: "24"
+      - key: ECMO_DISCOVERY_RATE_LIMIT_COUNT
+        value: "12"
+      - key: ECMO_DISCOVERY_RATE_LIMIT_WINDOW_SECONDS
+        value: "3600"
       - key: DEEPSEEK_API_KEY
         sync: false
