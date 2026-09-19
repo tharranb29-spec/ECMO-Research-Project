@@ -9,3 +9,8 @@ The contracts never authorize label admission, model promotion, candidate releas
 or Tier B MD. Autonomous updates are represented only as `shadow_proposal` records.
 Any future breaking field change requires a new version directory.
 
+`uncertainty-review-queue.schema.json` defines the non-ranked review-queue payload.
+Its records expose evidence quality, scaffold composition, applicability, validated
+90% intervals, deterministic eligibility, and human disposition. The contract
+forbids outcome-loaded or docking-selected queue data and does not carry ordinal
+positions or per-molecule hit probabilities.

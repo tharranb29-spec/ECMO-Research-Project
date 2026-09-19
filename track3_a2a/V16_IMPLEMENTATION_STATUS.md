@@ -1,6 +1,6 @@
 # Track 3 v1.6 implementation status
 
-**Status date:** 2026-09-17
+**Status date:** 2026-09-19
 
 **Deadline:** 2026-09-30
 
@@ -32,6 +32,10 @@ The deterministic pass-1 preflight is now complete for all 240 candidates. It pr
 The independently configured pass-2 extractor is complete for the frozen v1.6 attempt. It inspected only categorical source evidence and provenance, did not extract a numeric Ki, and did not read or join the sealed external outcome fields. Twenty-nine queued candidates had a retrieved primary full text, of which 24 had passed the pass-1 metadata preflight. None could be admitted because no retrieved source contained a machine-verifiable structure identifier that independently tied the queued standardized molecule and stereochemistry to the paper record; additional species, wild-type, relation, unit, and assay ambiguities were quarantined rather than inferred.
 
 Membership for this attempt is frozen at zero admitted molecules and zero admitted generic Murcko scaffolds. The predeclared floors of at least 60 molecules and at least 20 scaffolds therefore failed. This is a non-confirmatory stress-test freeze, the one-time outcome join is not authorized, and no external predictive claim or model promotion is permitted. Any expanded evidence-retrieval attempt requires a prospectively versioned amendment while outcomes remain sealed.
+
+Under the modified competition scope, the claimed 335-candidate uncertainty analysis, proposed 276 screen-eligible subset, and `6.7412` threshold derivation could not be found in the repository or available workstream branches. A new uncertainty-aware review-queue intake therefore fails closed. It projects all 240 audited label-blind records without ordinal rank, docking selection, or per-molecule hit probabilities; all prediction-dependent eligibility fields remain blocked until the required source predictions, interval construction, applicability fields, model/code hashes, and threshold provenance are supplied.
+
+The queue contract uses an interval upper bound at or above a verified threshold only for `screen-eligible / not ruled out`; robust threshold support requires the lower bound to meet the threshold. A 60-record review shipment is an operational workload and is explicitly not interchangeable with the independent external-confirmation floor, which also requires evidence-admitted membership on at least 20 scaffolds and independent sealed outcomes.
 
 ## Workstream C — open MD v1.6
 

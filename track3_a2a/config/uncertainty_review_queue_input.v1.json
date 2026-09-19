@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "specification_id": "a2a-uncertainty-review-prediction-intake-v1",
+  "format": "CSV with one row per candidate and no duplicate candidate_id",
+  "required_columns": [
+    "candidate_id",
+    "standardized_inchikey",
+    "model_id",
+    "model_artifact_path",
+    "model_artifact_sha256",
+    "prediction_code_path",
+    "prediction_code_sha256",
+    "prediction_pbind_ki",
+    "interval_lower_90",
+    "interval_upper_90",
+    "interval_level",
+    "interval_method",
+    "interval_calibration_source_path",
+    "interval_calibration_source_sha256",
+    "applicability_status",
+    "nearest_neighbor_similarity",
+    "descriptor_distance",
+    "threshold_pbind_ki",
+    "threshold_operator",
+    "threshold_source_path",
+    "threshold_source_sha256",
+    "threshold_derivation",
+    "external_outcomes_loaded",
+    "docking_used_for_selection"
+  ],
+  "validation_rules": {
+    "candidate_identity": "candidate_id must occur exactly once in the audited label-blind ledger and standardized_inchikey must match",
+    "claimed_source_count": 335,
+    "interval": "finite lower <= point prediction <= upper, with interval_level exactly 0.90 and a named method plus hashed calibration source",
+    "threshold": "threshold_pbind_ki exactly 6.7412, operator >=, with a committed derivation artifact and matching SHA-256",
+    "applicability_status": ["inside_domain", "outside_domain", "indeterminate"],
+    "nearest_neighbor_similarity": "finite value in [0,1]",
+    "artifact_paths": "repository-relative, present, and matching their lowercase SHA-256 digests",
+    "external_outcomes_loaded": false,
+    "docking_used_for_selection": false,
+    "failure_mode": "any missing field, malformed row, unknown candidate, hash mismatch, outcome access, or docking selection rejects the entire artifact"
+  },
+  "eligibility_semantics": {
+    "screen_eligible_not_ruled_out": "upper_90 >= verified threshold; permissive screening language only",
+    "robust_threshold_support": "lower_90 >= verified threshold; still not a hit probability or experimental claim",
+    "ruled_out_by_90pct_interval": "upper_90 < verified threshold"
+  }
+}

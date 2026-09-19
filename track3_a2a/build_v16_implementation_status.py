@@ -31,6 +31,7 @@ def main() -> None:
     pass1, pass1_path = load("outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json")
     pass2, pass2_path = load("outputs/v1.6/external_evidence/pass2_source_extraction/pass2_source_extraction_audit.json")
     external_freeze, external_freeze_path = load("outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json")
+    review_queue, review_queue_path = load("outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue_audit.json")
     constructs, constructs_path = load("outputs/v1.6/md/tier_a_constructs/construct_audit.json")
     minimized, minimized_path = load("outputs/v1.6/md/tier_a_constructs/minimized/minimization_audit.json")
     native_poses, native_poses_path = load("outputs/v1.6/md/native_control_ligands/native_pose_mapping_audit.json")
@@ -82,6 +83,16 @@ def main() -> None:
                 "membership_frozen": external_freeze["membership_frozen"],
                 "minimum_floors_passed": external_freeze["minimum_floors_passed"],
                 "one_time_outcome_join_authorized": external_freeze["one_time_outcome_join_authorized"],
+                "uncertainty_review_queue": {
+                    "status": review_queue["status"],
+                    "audited_candidate_count": review_queue["audited_candidate_count"],
+                    "source_prediction_artifact_present": review_queue["source_prediction_intake"]["present"],
+                    "claimed_335_and_276_verified": review_queue["unverified_teammate_claims"]["verified"],
+                    "review_shipment_eligible_count": review_queue["review_shipment"]["eligible_count"],
+                    "ordinal_ranking_present": review_queue["governance"]["ordinal_ranking_present"],
+                    "external_outcomes_loaded": review_queue["governance"]["external_outcomes_loaded"],
+                    "not_equivalent_to_external_confirmation": review_queue["external_confirmation_floor"]["not_satisfied_by_review_shipment"],
+                },
                 "next_gate": "No outcome join. Report the frozen pass-2 attempt as a non-confirmatory floor failure; any expanded evidence campaign requires a prospectively versioned pre-outcome amendment.",
             },
             "C_open_md": {
@@ -142,7 +153,7 @@ def main() -> None:
             str(path.relative_to(ROOT)): sha256(path)
             for path in [
                 freeze_path, model_path, ligand_path, pubmed_path, pmc_path, pass1_path,
-                pass2_path, external_freeze_path,
+                pass2_path, external_freeze_path, review_queue_path,
                 constructs_path, minimized_path, native_poses_path, membrane_path,
                 membrane_relaxation_path, complexes_path, periodic_path, smoke_path,
                 releases_path, cuda_validation_path, equilibration_config_path, equilibration_gate_path,

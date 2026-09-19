@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-19T08:02:45.281547+00:00",
+  "specification_id": "a2a-uncertainty-aware-review-queue-v1",
+  "status": "fail_closed_prediction_intake",
+  "source_prediction_intake": {
+    "path": "track3_a2a/outputs/v1.6/uncertainty_review_queue/source_predictions.csv",
+    "present": false,
+    "accepted": false,
+    "errors": [
+      "source_predictions_missing"
+    ],
+    "required_columns": [
+      "candidate_id",
+      "standardized_inchikey",
+      "model_id",
+      "model_artifact_path",
+      "model_artifact_sha256",
+      "prediction_code_path",
+      "prediction_code_sha256",
+      "prediction_pbind_ki",
+      "interval_lower_90",
+      "interval_upper_90",
+      "interval_level",
+      "interval_method",
+      "interval_calibration_source_path",
+      "interval_calibration_source_sha256",
+      "applicability_status",
+      "nearest_neighbor_similarity",
+      "descriptor_distance",
+      "threshold_pbind_ki",
+      "threshold_operator",
+      "threshold_source_path",
+      "threshold_source_sha256",
+      "threshold_derivation",
+      "external_outcomes_loaded",
+      "docking_used_for_selection"
+    ],
+    "source_row_count": 0
+  },
+  "unverified_teammate_claims": {
+    "source_candidate_count": 335,
+    "screen_eligible_count": 276,
+    "threshold_pbind_ki": 6.7412,
+    "verified": false,
+    "rule_used_by_teammate": "not_determinable_without_source_artifact"
+  },
+  "audited_candidate_count": 240,
+  "generic_murcko_scaffold_count": 240,
+  "review_shipment": {
+    "operational_minimum": 60,
+    "eligible_count": 0,
+    "minimum_met": false,
+    "purpose": "human review workload shipment only"
+  },
+  "external_confirmation_floor": {
+    "minimum_molecules": 60,
+    "minimum_generic_murcko_scaffolds": 20,
+    "independent_outcomes_required": true,
+    "membership_freeze_before_outcome_join": true,
+    "not_satisfied_by_review_shipment": true
+  },
+  "set_level_rates": {
+    "source_prediction_coverage": {
+      "numerator": 0,
+      "denominator": 240,
+      "estimate": 0.0,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": 0.0,
+      "upper": 0.015753919941558815,
+      "status": "estimated"
+    },
+    "screen_eligible_not_ruled_out_among_valid_predictions": {
+      "numerator": 0,
+      "denominator": 0,
+      "estimate": null,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": null,
+      "upper": null,
+      "status": "not_estimable_zero_denominator"
+    },
+    "robust_threshold_support_among_valid_predictions": {
+      "numerator": 0,
+      "denominator": 0,
+      "estimate": null,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": null,
+      "upper": null,
+      "status": "not_estimable_zero_denominator"
+    },
+    "inside_domain_among_valid_predictions": {
+      "numerator": 0,
+      "denominator": 0,
+      "estimate": null,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": null,
+      "upper": null,
+      "status": "not_estimable_zero_denominator"
+    },
+    "fulltext_ready_evidence": {
+      "numerator": 24,
+      "denominator": 240,
+      "estimate": 0.1,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": 0.06812353039342264,
+      "upper": 0.14447960555982445,
+      "status": "estimated"
+    },
+    "singleton_scaffold_composition": {
+      "numerator": 240,
+      "denominator": 240,
+      "estimate": 1.0,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": 0.9842460800584412,
+      "upper": 1.0,
+      "status": "estimated"
+    },
+    "eligible_for_human_review": {
+      "numerator": 0,
+      "denominator": 240,
+      "estimate": 0.0,
+      "confidence_level": 0.95,
+      "method": "Wilson score interval",
+      "lower": 0.0,
+      "upper": 0.015753919941558815,
+      "status": "estimated"
+    }
+  },
+  "governance": {
+    "ordinal_ranking_present": false,
+    "per_position_reporting_present": false,
+    "per_molecule_hit_probability_present": false,
+    "docking_used_for_selection": false,
+    "external_outcomes_loaded": false,
+    "all_candidate_records_retained_without_rank": true
+  },
+  "source_hashes": {
+    "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight.json": "cd979f3207832eece12d78cc074c45a94b869c502294d8c0df1b722196a0aa24",
+    "outputs/v1.6/external_evidence/pass1_metadata_preflight/pass1_metadata_preflight_audit.json": "9536bc10e09888512cc37ccec1539506bc6f2908589d59a1964a1dc6a54b5867",
+    "config/protocol.v1.6.json": "72ff053253d9f7714ef450435a845bb4222eb6a3477d4d2f081ada17de5118a2"
+  },
+  "artifact_hashes": {
+    "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json": "7267b37cc7917d909b471da926b94819d01bc5432fa96936f10c5fff4dfe77c1",
+    "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.csv": "e5f98cf8922ec7da19ac4980a594a0c193436a5dc2f18538bdde5fdc2b8c8fe4"
+  }
+}
