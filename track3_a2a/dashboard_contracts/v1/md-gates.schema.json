@@ -6,7 +6,7 @@
   "properties": {
     "schema_id": {"const": "a2a-dashboard.md-gates.v1"},
     "contract_version": {"const": "1.0.0"},
-    "records": {"type": "array", "items": {"type": "object", "required": ["gate_id", "specification_id", "status", "passed_runs", "required_runs", "tier_a_production_unlocked", "tier_b_unlocked", "claim_limit", "source"]}}
+    "records": {"type": "array", "items": {"type": "object", "required": ["gate_id", "specification_id", "status", "passed_runs", "required_runs", "tier_a_production_unlocked", "tier_b_unlocked", "review_queue_dependency", "dashboard_operation_dependency", "release_dependency", "role", "claim_limit", "source"], "properties": {"review_queue_dependency": {"const": false}, "dashboard_operation_dependency": {"const": false}, "release_dependency": {"const": false}, "role": {"const": "optional_mechanistic_context_only"}}}}
   },
   "additionalProperties": false
 }

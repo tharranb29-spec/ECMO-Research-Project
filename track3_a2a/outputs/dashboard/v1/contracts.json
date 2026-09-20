@@ -190,64 +190,23 @@
       "contract_version": "1.0.0",
       "records": [
         {
-          "d_affinity_kcal_mol": 0.0684,
-          "dual_state_complete": true,
-          "label_status": "blinded",
-          "md_status": "tier_b_locked",
-          "molecule_id": "LIT25-MET-PGD2",
-          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
-          "portfolio_id": "portfolio:LIT25-MET-PGD2",
-          "promotion_status": "shadow_proposal",
-          "source": {
-            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
-            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+          "admission_basis": "governed_eligibility_contract_only",
+          "docking_role": "separate_structural_context_only",
+          "eligible_count": 0,
+          "md_role": "optional_mechanistic_context_only",
+          "ordering": "unordered_composition_only",
+          "portfolio_id": "review-queue:uncertainty-v1.6",
+          "record_count": 240,
+          "release_authorized": false,
+          "scaffold_composition": {
+            "singleton": 240
           },
-          "status": "computationally_prioritized"
-        },
-        {
-          "d_affinity_kcal_mol": -0.4107,
-          "dual_state_complete": true,
-          "label_status": "blinded",
-          "md_status": "tier_b_locked",
-          "molecule_id": "LIT25-RL-C5",
-          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
-          "portfolio_id": "portfolio:LIT25-RL-C5",
-          "promotion_status": "shadow_proposal",
+          "scaffold_count": 240,
           "source": {
-            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
-            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
+            "path": "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+            "sha256": "7267b37cc7917d909b471da926b94819d01bc5432fa96936f10c5fff4dfe77c1"
           },
-          "status": "computationally_prioritized"
-        },
-        {
-          "d_affinity_kcal_mol": 0.5118,
-          "dual_state_complete": true,
-          "label_status": "blinded",
-          "md_status": "tier_b_locked",
-          "molecule_id": "LIT25-RL-C7",
-          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
-          "portfolio_id": "portfolio:LIT25-RL-C7",
-          "promotion_status": "shadow_proposal",
-          "source": {
-            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
-            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
-          },
-          "status": "computationally_prioritized"
-        },
-        {
-          "d_affinity_kcal_mol": 0.7303,
-          "dual_state_complete": true,
-          "label_status": "blinded",
-          "md_status": "tier_b_locked",
-          "molecule_id": "LIT25-RL-C9",
-          "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
-          "portfolio_id": "portfolio:LIT25-RL-C9",
-          "promotion_status": "shadow_proposal",
-          "source": {
-            "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
-            "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
-          },
-          "status": "computationally_prioritized"
+          "status": "held_fail_closed"
         }
       ],
       "schema_id": "a2a-dashboard.candidate-portfolio.v1"
@@ -256,11 +215,14 @@
       "contract_version": "1.0.0",
       "records": [
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-MET-PGD2:5NM4",
           "median_affinity_kcal_mol": -7.1291,
           "median_cnn_score": 0.5859,
           "molecule_id": "LIT25-MET-PGD2",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "5NM4",
           "receptor_state": "inactive",
           "retained_pose_sha256": "cb4ed5dd1f12a71a52ebc90585c2789af30066b3f1f9731e7d3dfcf9873b6b46",
@@ -272,11 +234,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-MET-PGD2:2YDO",
           "median_affinity_kcal_mol": -7.0607,
           "median_cnn_score": 0.7386,
           "molecule_id": "LIT25-MET-PGD2",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "2YDO",
           "receptor_state": "active-like",
           "retained_pose_sha256": "ab2f616cd8212db94ccbc834fd7234db1167b104db20587a03ba89034d775cf2",
@@ -288,11 +253,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C5:5NM4",
           "median_affinity_kcal_mol": -9.6379,
           "median_cnn_score": 0.9373,
           "molecule_id": "LIT25-RL-C5",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "5NM4",
           "receptor_state": "inactive",
           "retained_pose_sha256": "eef82e4467fe43ce48c8a49dfb12d6736809d99e03c51027317e19d7233b3aa0",
@@ -304,11 +272,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C5:2YDO",
           "median_affinity_kcal_mol": -10.0486,
           "median_cnn_score": 0.9171,
           "molecule_id": "LIT25-RL-C5",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "2YDO",
           "receptor_state": "active-like",
           "retained_pose_sha256": "4c83f630af89935a0757ba91c7e60ece4ac058407c440a6f35b1e0e5aea65a5d",
@@ -320,11 +291,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C7:5NM4",
           "median_affinity_kcal_mol": -9.9848,
           "median_cnn_score": 0.9685,
           "molecule_id": "LIT25-RL-C7",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "5NM4",
           "receptor_state": "inactive",
           "retained_pose_sha256": "6b420e87e04ab119b58397408b35d7d506071bcfc62d0352459ea7a447351c34",
@@ -336,11 +310,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C7:2YDO",
           "median_affinity_kcal_mol": -9.473,
           "median_cnn_score": 0.9553,
           "molecule_id": "LIT25-RL-C7",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "2YDO",
           "receptor_state": "active-like",
           "retained_pose_sha256": "75e9cad3a1e9e90f8a0920aaa8d5169010269752b02aeaad242ff34621254db5",
@@ -352,11 +329,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C9:5NM4",
           "median_affinity_kcal_mol": -9.5699,
           "median_cnn_score": 0.97,
           "molecule_id": "LIT25-RL-C9",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "5NM4",
           "receptor_state": "inactive",
           "retained_pose_sha256": "b658fe15e11501aa691fedb3119391d445f5c4b09cb553fab938104d72f85991",
@@ -368,11 +348,14 @@
           "valid_seed_count": 3
         },
         {
-          "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+          "admission_signal": false,
+          "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
           "docking_id": "LIT25-RL-C9:2YDO",
           "median_affinity_kcal_mol": -8.8396,
           "median_cnn_score": 0.8326,
           "molecule_id": "LIT25-RL-C9",
+          "ordering_effect": false,
+          "priority_signal": false,
           "receptor_id": "2YDO",
           "receptor_state": "active-like",
           "retained_pose_sha256": "5456dd456a4e4a0274291b19c8d410845cb2f1ead3ef3e9cd0de7afd27b041de",
@@ -566,12 +549,16 @@
       "contract_version": "1.0.0",
       "records": [
         {
-          "claim_limit": "This gate authorizes Tier A pilot production; it does not establish control stability or unlock Tier B.",
+          "claim_limit": "Historical equilibration audits passed and, under the frozen protocol, authorized the Tier A pilot. This optional mechanistic context is not required for review-queue membership, dashboard operation, or release status.",
+          "dashboard_operation_dependency": false,
           "gate_id": "G7:tier-a-equilibration",
           "missing_audits": [],
           "observed_runs": 6,
           "passed_runs": 6,
+          "release_dependency": false,
           "required_runs": 6,
+          "review_queue_dependency": false,
+          "role": "optional_mechanistic_context_only",
           "source": {
             "path": "outputs/v1.6/md/tier_a_equilibration/equilibration_gate_report.json",
             "sha256": "9f5e377c4a2ca6754a710d491f520edee7663b432d147a90584dbcb4f555fd11"
@@ -583,14 +570,18 @@
         },
         {
           "aggregate_reported_ns": 5.92,
-          "claim_limit": "The pilot tests short-timescale pose stability. It is not a convergence, affinity, efficacy, or experimental-validation claim.",
+          "claim_limit": "The historical Tier A pilot was incomplete at cutoff. It does not establish convergence, affinity, efficacy, experimental validation, review-queue membership, or release status.",
           "completion_fraction_by_reported_ns": 0.019733333333333332,
+          "dashboard_operation_dependency": false,
           "gate_id": "G7:tier-a-production",
           "missing_audits": [],
           "observed_runs": 1,
           "passed_runs": 0,
+          "release_dependency": false,
           "required_ns": 300.0,
           "required_runs": 6,
+          "review_queue_dependency": false,
+          "role": "optional_mechanistic_context_only",
           "source": {
             "path": "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
             "sha256": "102de51bfc31b2696b046794c8961225aa8da073f72a534229a13ce71246f947"
@@ -601,12 +592,16 @@
           "tier_b_unlocked": false
         },
         {
-          "claim_limit": "Candidate MD cannot start until both Tier A native controls pass the frozen production rule.",
+          "claim_limit": "Historical Tier B execution remains locked under its frozen protocol; this optional mechanistic work is not required for review-queue membership, dashboard operation, or release status.",
+          "dashboard_operation_dependency": false,
           "gate_id": "G8:candidate-md",
           "missing_audits": [],
           "observed_runs": 0,
           "passed_runs": 0,
+          "release_dependency": false,
           "required_runs": 24,
+          "review_queue_dependency": false,
+          "role": "optional_mechanistic_context_only",
           "source": {
             "path": "outputs/v1.5/md/preflight_status.json",
             "sha256": "50c4d49deae777f47efdc55bac27440ddc945fe5d8af539d1e899bbb5d6a2ea8"
@@ -739,7 +734,7 @@
           "identity_status": "structure prepared",
           "molecule_id": "LIT25-MET-PGD2",
           "registry_version": "prospective-literature-pilot-v1.4",
-          "role": "label-blind prospective candidate",
+          "role": "label-blind historical structural-context record",
           "source": {
             "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
@@ -752,7 +747,7 @@
           "identity_status": "structure prepared",
           "molecule_id": "LIT25-RL-C5",
           "registry_version": "prospective-literature-pilot-v1.4",
-          "role": "label-blind prospective candidate",
+          "role": "label-blind historical structural-context record",
           "source": {
             "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
@@ -765,7 +760,7 @@
           "identity_status": "structure prepared",
           "molecule_id": "LIT25-RL-C7",
           "registry_version": "prospective-literature-pilot-v1.4",
-          "role": "label-blind prospective candidate",
+          "role": "label-blind historical structural-context record",
           "source": {
             "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
@@ -778,7 +773,7 @@
           "identity_status": "structure prepared",
           "molecule_id": "LIT25-RL-C9",
           "registry_version": "prospective-literature-pilot-v1.4",
-          "role": "label-blind prospective candidate",
+          "role": "label-blind historical structural-context record",
           "source": {
             "path": "outputs/v1.4/docking/literature_pilot_2025_report.json",
             "sha256": "2f34dbd781a1221ab3c7cd9215cef755b3d8b5974205b83c984b19ad74a50d17"
@@ -882,19 +877,21 @@
           "status": "human_review_required"
         },
         {
-          "action_id": "shadow-05-rank",
-          "authority": "May write computational priorities; predictions cannot become labels or hits.",
-          "executor": "Frozen development model",
+          "action_id": "shadow-05-review-composition",
+          "authority": "May record unordered human-review membership and scaffold composition only.",
+          "executor": "Governed eligibility contract",
           "prohibited_actions": [
+            "order_candidates",
+            "use_docking_for_admission",
             "serve_model",
-            "publish_validated_hit"
+            "publish_certified_hit"
           ],
-          "required_gate": "Model version, provenance, and molecule identity checks",
+          "required_gate": "Frozen prediction, validated interval, verified threshold, provenance, and molecule identity checks",
           "source": {
-            "path": "outputs/v1.6/model_reproduction/development_results.json",
-            "sha256": "c7ab76ca99cd79ee3dc37b1028a9fcf0933253e3d3dd226969189103902384db"
+            "path": "config/review_eligibility.v1.json",
+            "sha256": "2fd74bd7d359cc790fabe84af272b1b762c6a795b878d2692a40a6e3c1e0eed9"
           },
-          "stage": "Candidate ranking",
+          "stage": "Eligibility review composition",
           "status": "shadow_only"
         },
         {
@@ -1009,7 +1006,7 @@
   },
   "dashboard_contract_version": "1.0.0",
   "project": {
-    "claim_level": "Retrospective association plus limited prospective prioritization; no external or biological validation.",
+    "claim_level": "Retrospective association plus limited prospective human-review support; no candidate ordering, external confirmation, or biological validation.",
     "deadline": "2026-09-30",
     "protocol": "a2a-track3-protocol-v1.6",
     "short_title": "A2A Evidence Command Center",
@@ -1022,7 +1019,7 @@
     "external_gate_passed": false,
     "human_release_approved": false,
     "mode": "shadow_only",
-    "permitted_label": "computationally prioritized",
+    "permitted_label": "unordered human-review record",
     "prohibited_label": "validated hit",
     "served_model": null,
     "source": {

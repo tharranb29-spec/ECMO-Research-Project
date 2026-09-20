@@ -39,9 +39,16 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
             "a2a-review-eligibility.v1",
         )
         self.assertEqual(result["governance"]["autonomy_mode"], "shadow_only")
+        self.assertEqual(result["provider"]["requested_mode"], "demo")
+        self.assertFalse(result["provider"]["cached_fallback_allowed"])
         self.assertFalse(result["governance"]["external_outcomes_loaded"])
         self.assertFalse(result["governance"]["model_promotion_enabled"])
         self.assertFalse(result["governance"]["tier_b_unlocked"])
+        self.assertEqual(result["governance"]["docking_role"], "separate_structural_context_only")
+        self.assertEqual(result["governance"]["md_role"], "optional_mechanistic_context_only")
+        self.assertFalse(result["governance"]["md_required_for_review_queue"])
+        self.assertFalse(result["governance"]["md_required_for_dashboard_operation"])
+        self.assertFalse(result["governance"]["md_required_for_release"])
         self.assertFalse(result["governance"]["ordinal_ranking_presented"])
         self.assertFalse(result["governance"]["per_position_probability_presented"])
         self.assertFalse(result["governance"]["certified_hit_presented"])
@@ -160,14 +167,20 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertEqual(molecule["standardization_state"], "unavailable")
         self.assertFalse(molecule["screen_eligible"])
 
-    def test_live_request_without_key_falls_back_explicitly(self):
-        result = workflow.run_workflow("A2A evidence", provider_mode="live")
-        self.assertEqual(result["workflow_state"], "cached_demo")
-        self.assertIn("DEEPSEEK_API_KEY", result["fallback_reason"])
-        self.assertFalse(result["provider"]["api_key_exposed"])
+    def test_live_request_without_key_surfaces_failure_without_fallback(self):
+        with self.assertRaisesRegex(RuntimeError, "requires DEEPSEEK_API_KEY"):
+            workflow.run_workflow("A2A evidence", provider_mode="live")
         capabilities = workflow.capability_status()
         self.assertEqual(capabilities["live_provider_name"], "deepseek_evidence_extraction")
         self.assertEqual(capabilities["live_provider"], "unavailable")
+
+    def test_auto_request_without_key_uses_cached_fallback_explicitly(self):
+        result = workflow.run_workflow("A2A evidence", provider_mode="auto")
+        self.assertEqual(result["workflow_state"], "cached_demo")
+        self.assertIn("unconfigured", result["fallback_reason"])
+        self.assertEqual(result["provider"]["requested_mode"], "auto")
+        self.assertTrue(result["provider"]["cached_fallback_allowed"])
+        self.assertFalse(result["provider"]["api_key_exposed"])
 
     def test_deepseek_provider_structures_deterministically_retrieved_sources(self):
         europe_payload = {"resultList": {"result": [{
@@ -222,6 +235,8 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertEqual(result["workflow_state"], "cached_demo")
         self.assertIn("failed closed", result["fallback_reason"])
         self.assertIn("timed out", result["fallback_reason"])
+        self.assertEqual(result["provider"]["requested_mode"], "auto")
+        self.assertTrue(result["provider"]["cached_fallback_allowed"])
         self.assertFalse(result["governance"]["model_promotion_enabled"])
 
     def test_explicit_live_mode_surfaces_provider_timeout(self):

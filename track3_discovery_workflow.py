@@ -463,7 +463,7 @@ def select_provider(mode: str):
     if DEEPSEEK_API_KEY:
         return DeepSeekEvidenceProvider(DEEPSEEK_API_KEY), None
     if mode == "live":
-        return CachedDemoProvider(), "DEEPSEEK_API_KEY is unavailable; fell back to cached demo."
+        raise RuntimeError("Explicit live DeepSeek mode requires DEEPSEEK_API_KEY; cached fallback is disabled.")
     return CachedDemoProvider(), "Live DeepSeek provider is unconfigured; using cached demo."
 
 
@@ -512,7 +512,7 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
         ("structured_extraction", {"count": len(discovery["extractions"]), "llm_is_potency_oracle": False}),
         ("evidence_quality_gate", {"quarantined": sum(x.get("evidence_quality") == "quarantine" for x in discovery["extractions"]), "external_admission_changed": False}),
         ("identity_standardization", {"count": len(normalized), "rdkit_available": rdkit_available()}),
-        ("applicability_queue", {"eligible_count": queue["count"], "ordering": queue["ordering"]}),
+        ("eligibility_review_queue", {"eligible_count": queue["count"], "ordering": queue["ordering"]}),
         ("promotion_firewall", {"served_model": None, "promotion_enabled": False, "tier_b_unlocked": False}),
     ]
     payload = {
@@ -522,7 +522,13 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
         "workflow_state": "cached_demo" if demo_mode else "live",
         "fallback_reason": fallback_reason,
         "query": query,
-        "provider": {"name": discovery["provider"], "model": DEEPSEEK_MODEL if not demo_mode else None, "api_key_exposed": False},
+        "provider": {
+            "name": discovery["provider"],
+            "model": DEEPSEEK_MODEL if not demo_mode else None,
+            "requested_mode": provider_mode,
+            "cached_fallback_allowed": provider_mode == "auto",
+            "api_key_exposed": False,
+        },
         "contract_inputs": contract_status(),
         "sources": discovery["sources"],
         "extractions": discovery["extractions"],
@@ -536,7 +542,11 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
             "served_model": None,
             "model_promotion_enabled": False,
             "tier_b_unlocked": False,
-            "docking_role": "structural_evidence_only",
+            "docking_role": "separate_structural_context_only",
+            "md_role": "optional_mechanistic_context_only",
+            "md_required_for_review_queue": False,
+            "md_required_for_dashboard_operation": False,
+            "md_required_for_release": False,
             "llm_role": "extraction_and_orchestration_only",
             "ordinal_ranking_presented": False,
             "per_position_probability_presented": False,

@@ -6,7 +6,7 @@
   "properties": {
     "schema_id": {"const": "a2a-dashboard.dual-state-docking.v1"},
     "contract_version": {"const": "1.0.0"},
-    "records": {"type": "array", "items": {"type": "object", "required": ["docking_id", "molecule_id", "receptor_id", "receptor_state", "valid_seed_count", "median_affinity_kcal_mol", "median_cnn_score", "retained_pose_sha256", "claim_limit", "source"]}}
+    "records": {"type": "array", "items": {"type": "object", "required": ["docking_id", "molecule_id", "receptor_id", "receptor_state", "valid_seed_count", "median_affinity_kcal_mol", "median_cnn_score", "retained_pose_sha256", "admission_signal", "priority_signal", "ordering_effect", "claim_limit", "source"], "properties": {"admission_signal": {"const": false}, "priority_signal": {"const": false}, "ordering_effect": {"const": false}}}}
   },
   "additionalProperties": false
 }

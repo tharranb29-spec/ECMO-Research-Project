@@ -86,6 +86,7 @@ def build() -> dict:
     uncertainty_queue = data["uncertainty_queue"]
     eligibility_contract = data["eligibility"]
     md_cutoff = data["md_cutoff"]
+    raw_uncertainty_records = uncertainty_queue["records"]
 
     evidence_records = []
     evidence_labels = {
@@ -137,7 +138,6 @@ def build() -> dict:
 
     molecules = []
     docking_records = []
-    portfolio = []
     for candidate in docking["results"]:
         candidate_id = candidate["candidate_id"]
         states = candidate["receptors"]
@@ -145,13 +145,12 @@ def build() -> dict:
             "molecule_id": candidate_id,
             "display_name": candidate_id.replace("LIT25-", ""),
             "registry_version": "prospective-literature-pilot-v1.4",
-            "role": "label-blind prospective candidate",
+            "role": "label-blind historical structural-context record",
             "identity_status": "structure prepared",
             "functional_label_blinded": candidate.get("functional_label_blinded", True),
             "training_eligible": False,
             "source": source_ref("docking"),
         })
-        state_values = {}
         for receptor_id, receptor in states.items():
             state_name = "inactive" if receptor_id == "5NM4" else "active-like"
             record = {
@@ -164,26 +163,32 @@ def build() -> dict:
                 "median_affinity_kcal_mol": receptor["median_affinity_kcal_mol"],
                 "median_cnn_score": receptor["median_cnn_score"],
                 "retained_pose_sha256": receptor["retained_pose"]["sha256"],
-                "claim_limit": "Computational docking evidence; not measured affinity or functional activity.",
+                "admission_signal": False,
+                "priority_signal": False,
+                "ordering_effect": False,
+                "claim_limit": "Historical structural context only; not measured affinity, functional activity, queue admission, ordering, or release evidence.",
                 "source": source_ref("docking"),
             }
             docking_records.append(record)
-            state_values[receptor_id] = record
-        inactive = state_values["5NM4"]
-        active = state_values["2YDO"]
-        delta = active["median_affinity_kcal_mol"] - inactive["median_affinity_kcal_mol"]
-        portfolio.append({
-            "portfolio_id": f"portfolio:{candidate_id}",
-            "molecule_id": candidate_id,
-            "status": "computationally_prioritized",
-            "label_status": "blinded",
-            "promotion_status": "shadow_proposal",
-            "dual_state_complete": all(item["status"] == "valid" for item in state_values.values()),
-            "d_affinity_kcal_mol": round(delta, 4),
-            "md_status": "tier_b_locked",
-            "next_gate": "Not promotable under v1.6: external floors failed and Tier B remains locked.",
-            "source": source_ref("docking"),
-        })
+
+    scaffold_composition = {}
+    for record in raw_uncertainty_records:
+        composition = record["scaffold_composition"]
+        scaffold_composition[composition] = scaffold_composition.get(composition, 0) + 1
+    portfolio = [{
+        "portfolio_id": "review-queue:uncertainty-v1.6",
+        "status": "held_fail_closed",
+        "ordering": "unordered_composition_only",
+        "record_count": len(raw_uncertainty_records),
+        "eligible_count": sum(record["deterministic_review_eligibility"] == "eligible_for_human_review" for record in raw_uncertainty_records),
+        "scaffold_count": len({record["generic_murcko_scaffold_smiles"] for record in raw_uncertainty_records}),
+        "scaffold_composition": scaffold_composition,
+        "admission_basis": "governed_eligibility_contract_only",
+        "docking_role": "separate_structural_context_only",
+        "md_role": "optional_mechanistic_context_only",
+        "release_authorized": False,
+        "source": source_ref("uncertainty_queue"),
+    }]
 
     molecules.extend([
         {
@@ -254,7 +259,11 @@ def build() -> dict:
         "missing_audits": md["missing_audits"],
         "tier_a_production_unlocked": md["tier_a_production_unlocked"],
         "tier_b_unlocked": md["tier_b_unlocked"],
-        "claim_limit": md["claim_limit"],
+        "review_queue_dependency": False,
+        "dashboard_operation_dependency": False,
+        "release_dependency": False,
+        "role": "optional_mechanistic_context_only",
+        "claim_limit": "Historical equilibration audits passed and, under the frozen protocol, authorized the Tier A pilot. This optional mechanistic context is not required for review-queue membership, dashboard operation, or release status.",
         "source": source_ref("md"),
     }, {
         "gate_id": "G7:tier-a-production",
@@ -269,7 +278,11 @@ def build() -> dict:
         "missing_audits": [],
         "tier_a_production_unlocked": md["tier_a_production_unlocked"],
         "tier_b_unlocked": md["tier_b_unlocked"],
-        "claim_limit": md_production["claim_limit"],
+        "review_queue_dependency": False,
+        "dashboard_operation_dependency": False,
+        "release_dependency": False,
+        "role": "optional_mechanistic_context_only",
+        "claim_limit": "The historical Tier A pilot was incomplete at cutoff. It does not establish convergence, affinity, efficacy, experimental validation, review-queue membership, or release status.",
         "source": source_ref("md_cutoff"),
     }, {
         "gate_id": "G8:candidate-md",
@@ -281,7 +294,11 @@ def build() -> dict:
         "missing_audits": [],
         "tier_a_production_unlocked": md["tier_a_production_unlocked"],
         "tier_b_unlocked": md["tier_b_unlocked"],
-        "claim_limit": "Candidate MD cannot start until both Tier A native controls pass the frozen production rule.",
+        "review_queue_dependency": False,
+        "dashboard_operation_dependency": False,
+        "release_dependency": False,
+        "role": "optional_mechanistic_context_only",
+        "claim_limit": "Historical Tier B execution remains locked under its frozen protocol; this optional mechanistic work is not required for review-queue membership, dashboard operation, or release status.",
         "source": source_ref("md_plan"),
     }]
 
@@ -292,7 +309,7 @@ def build() -> dict:
         "external_gate_passed": shadow["external_gate_passed"],
         "human_release_approved": shadow["human_release_approved"],
         "automatic_model_replacement_enabled": shadow["automatic_model_replacement_enabled"],
-        "permitted_label": data["shadow_config"]["ui_contract"]["prediction_label"],
+        "permitted_label": "unordered human-review record",
         "prohibited_label": data["shadow_config"]["ui_contract"]["prohibited_label"],
         "source": source_ref("shadow_status"),
     }
@@ -339,14 +356,14 @@ def build() -> dict:
             "source": source_ref("pass2"),
         },
         {
-            "action_id": "shadow-05-rank",
-            "stage": "Candidate ranking",
-            "executor": "Frozen development model",
+            "action_id": "shadow-05-review-composition",
+            "stage": "Eligibility review composition",
+            "executor": "Governed eligibility contract",
             "status": "shadow_only",
-            "authority": "May write computational priorities; predictions cannot become labels or hits.",
-            "required_gate": "Model version, provenance, and molecule identity checks",
-            "prohibited_actions": ["serve_model", "publish_validated_hit"],
-            "source": source_ref("models"),
+            "authority": "May record unordered human-review membership and scaffold composition only.",
+            "required_gate": "Frozen prediction, validated interval, verified threshold, provenance, and molecule identity checks",
+            "prohibited_actions": ["order_candidates", "use_docking_for_admission", "serve_model", "publish_certified_hit"],
+            "source": source_ref("eligibility"),
         },
         {
             "action_id": "shadow-06-domain",
@@ -378,7 +395,6 @@ def build() -> dict:
         "autonomy": scope["autonomy"],
         "source": source_ref("scope"),
     }
-    raw_uncertainty_records = uncertainty_queue["records"]
     uncertainty_records = [{
         "status": uncertainty_queue["status"],
         "candidate_count": len(raw_uncertainty_records),
@@ -452,7 +468,7 @@ def build() -> dict:
             "target": "Human ADORA2A · CHEMBL251",
             "protocol": implementation["specification_id"],
             "deadline": implementation["deadline"],
-            "claim_level": "Retrospective association plus limited prospective prioritization; no external or biological validation.",
+            "claim_level": "Retrospective association plus limited prospective human-review support; no candidate ordering, external confirmation, or biological validation.",
         },
         "summary": {
             "evidence_queue": evidence["candidate_count"],
@@ -506,6 +522,15 @@ def validate(payload: dict) -> None:
         raise ValueError("Sealed external outcomes must remain unavailable")
     if payload["summary"]["tier_b_unlocked"]:
         raise ValueError("Tier B must remain locked")
+    portfolio = payload["contracts"]["candidate_portfolio"]["records"]
+    if len(portfolio) != 1 or portfolio[0]["ordering"] != "unordered_composition_only":
+        raise ValueError("Candidate projection must remain an unordered review-queue composition")
+    if portfolio[0]["docking_role"] != "separate_structural_context_only" or portfolio[0]["md_role"] != "optional_mechanistic_context_only":
+        raise ValueError("Docking and MD must remain separate from review admission")
+    if any(record["admission_signal"] or record["priority_signal"] or record["ordering_effect"] for record in payload["contracts"]["dual_state_docking"]["records"]):
+        raise ValueError("Docking may not affect admission, priority, or ordering")
+    if any(record["review_queue_dependency"] or record["dashboard_operation_dependency"] or record["release_dependency"] for record in payload["contracts"]["md_gates"]["records"]):
+        raise ValueError("MD may not gate the review queue, dashboard, or release state")
     queue = payload["contracts"]["uncertainty_review_queue"]["records"][0]
     eligibility = queue["eligibility_contract"]
     if queue["threshold_rule_semantics"] != eligibility["artifact_projection"]:

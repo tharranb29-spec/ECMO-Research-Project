@@ -6,7 +6,7 @@
   "properties": {
     "schema_id": {"const": "a2a-dashboard.candidate-portfolio.v1"},
     "contract_version": {"const": "1.0.0"},
-    "records": {"type": "array", "items": {"type": "object", "required": ["portfolio_id", "molecule_id", "status", "label_status", "promotion_status", "dual_state_complete", "md_status", "next_gate", "source"]}}
+    "records": {"type": "array", "items": {"type": "object", "required": ["portfolio_id", "status", "ordering", "record_count", "eligible_count", "scaffold_count", "scaffold_composition", "admission_basis", "docking_role", "md_role", "release_authorized", "source"], "properties": {"ordering": {"const": "unordered_composition_only"}, "admission_basis": {"const": "governed_eligibility_contract_only"}, "docking_role": {"const": "separate_structural_context_only"}, "md_role": {"const": "optional_mechanistic_context_only"}, "release_authorized": {"const": false}}}}
   },
   "additionalProperties": false
 }

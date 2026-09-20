@@ -12,9 +12,18 @@ promotion, candidate release, or Tier B MD. Autonomous work is represented in th
 required gate, prohibited actions, and source digest. Any future breaking field
 change requires a new version directory.
 
+The candidate-portfolio projection is an unordered human-review composition
+summary governed only by the frozen eligibility contract. Dual-state docking is
+separate historical structural context: it cannot admit, prioritize, order, or
+release a record. MD is optional mechanistic context and is not required for
+review-queue membership, dashboard operation, or release; its historical
+incomplete and Tier B locked states remain visible without becoming dependencies.
+
 `discovery-run.schema.json` defines the runtime live/cached shadow workflow,
 resolved upstream contracts, unordered queue composition, human disposition, and
-append-only runtime audit chain. Missing upstream contracts fail closed.
+append-only runtime audit chain. Missing upstream contracts fail closed. Provider
+mode is explicit: `auto` may fall back from live DeepSeek to the cached demo,
+whereas `live` never falls back and surfaces provider failure.
 
 ## Competition-scope overlay
 

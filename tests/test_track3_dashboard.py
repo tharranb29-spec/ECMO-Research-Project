@@ -50,8 +50,10 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertFalse(promotion["external_gate_passed"])
         self.assertFalse(promotion["human_release_approved"])
         self.assertFalse(promotion["automatic_model_replacement_enabled"])
-        for candidate in self.payload["contracts"]["candidate_portfolio"]["records"]:
-            self.assertEqual(candidate["promotion_status"], "shadow_proposal")
+        queue = self.payload["contracts"]["candidate_portfolio"]["records"]
+        self.assertEqual(len(queue), 1)
+        self.assertEqual(queue[0]["ordering"], "unordered_composition_only")
+        self.assertFalse(queue[0]["release_authorized"])
 
     def test_outcomes_and_tier_b_remain_locked(self):
         self.assertFalse(self.payload["summary"]["external_outcomes_loaded"])
@@ -96,19 +98,41 @@ class Track3DashboardTests(unittest.TestCase):
         molecules = self.payload["contracts"]["molecule_registry"]["records"]
         self.assertEqual(len(docking), 8)
         self.assertEqual(len(molecules), 6)
-        candidates = [molecule for molecule in molecules if molecule["role"] == "label-blind prospective candidate"]
+        candidates = [molecule for molecule in molecules if molecule["role"] == "label-blind historical structural-context record"]
         self.assertEqual(len(candidates), 4)
         for molecule in candidates:
             self.assertTrue(molecule["functional_label_blinded"])
             self.assertFalse(molecule["training_eligible"])
             states = {row["receptor_state"] for row in docking if row["molecule_id"] == molecule["molecule_id"]}
             self.assertEqual(states, {"inactive", "active-like"})
+        for row in docking:
+            self.assertFalse(row["admission_signal"])
+            self.assertFalse(row["priority_signal"])
+            self.assertFalse(row["ordering_effect"])
+
+    def test_review_queue_is_composition_only_and_independent_of_docking_and_md(self):
+        queue = self.payload["contracts"]["candidate_portfolio"]["records"][0]
+        self.assertEqual(queue["ordering"], "unordered_composition_only")
+        self.assertEqual(queue["admission_basis"], "governed_eligibility_contract_only")
+        self.assertEqual(queue["docking_role"], "separate_structural_context_only")
+        self.assertEqual(queue["md_role"], "optional_mechanistic_context_only")
+        self.assertEqual(queue["record_count"], 240)
+        self.assertEqual(queue["eligible_count"], 0)
+        self.assertFalse(queue["release_authorized"])
+        for record in self.payload["contracts"]["md_gates"]["records"]:
+            self.assertEqual(record["role"], "optional_mechanistic_context_only")
+            self.assertFalse(record["review_queue_dependency"])
+            self.assertFalse(record["dashboard_operation_dependency"])
+            self.assertFalse(record["release_dependency"])
 
     def test_shadow_actions_are_bounded_and_provenanced(self):
         actions = self.payload["contracts"]["shadow_actions"]["records"]
         self.assertEqual(len(actions), 7)
         prohibited = {item for action in actions for item in action["prohibited_actions"]}
         self.assertTrue({"read_sealed_outcomes", "promote_model", "start_tier_b", "release_candidate"} <= prohibited)
+        self.assertIn("order_candidates", prohibited)
+        self.assertIn("use_docking_for_admission", prohibited)
+        self.assertNotIn("Candidate ranking", {action["stage"] for action in actions})
         for action in actions:
             self.assertTrue(action["authority"])
             self.assertTrue(action["required_gate"])
@@ -128,8 +152,19 @@ class Track3DashboardTests(unittest.TestCase):
         js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8").lower()
         self.assertNotIn("validated hit", html)
         self.assertNotIn("validated hit", js)
+        self.assertNotIn("computationally prioritized", html)
+        self.assertNotIn("computationally prioritized", js)
+        self.assertNotIn("candidate ranking", html)
+        self.assertNotIn("candidate ranking", js)
+        self.assertNotIn("prefer live deepseek · cached fallback", html)
+        self.assertNotIn('data-sort="affinity"', html)
+        self.assertNotIn('data-sort="delta"', html)
+        self.assertNotIn("dockingsort", js)
         self.assertIn("shadow mode", html)
         self.assertIn("governed review queue", html)
+        self.assertIn("live deepseek · no fallback", html)
+        self.assertIn("structural context only · no queue or priority effect", html)
+        self.assertIn("optional molecular-dynamics context", html)
         self.assertIn("eligibility.display_label", js)
         self.assertIn("molecule.eligibility_state", js)
 

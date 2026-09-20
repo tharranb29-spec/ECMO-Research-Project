@@ -9,7 +9,7 @@
   const fmt=(value,digits=2)=>Number(value).toFixed(digits);
   const short=(value,length=12)=>String(value).slice(0,length)+"…";
   const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","discovery","shadow","audit"];
-  let moleculeFilter="all",moleculeQuery="",evidenceFilter="all",modelMetric="r2",dockingSort="name";
+  let moleculeFilter="all",moleculeQuery="",evidenceFilter="all",modelMetric="r2";
 
   function setView(view){
     const selected=views.includes(view)?view:"overview";
@@ -27,19 +27,17 @@
   const summary=[
     ["External cohort","0 / 60","Frozen floor failure"],
     ["Primary model",fmt(data.summary.primary_model_r2,3),"AB_Ridge development R²"],
-    ["Dual-state candidates",data.summary.docked_candidates,"4 blinded proposals"],
-    ["Tier A production",`${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns`,"1/6 observed · 0 complete"],
+    ["Structural context",data.summary.docked_candidates,"Historical records · no queue effect"],
+    ["Optional MD context",`${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns`,"Historical pilot · not a queue gate"],
     ["Served models","0","Shadow-only; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
 
   const gates=[
     ["G0–G1","Sources & evidence admission","Development evidence frozen; external pass 2 froze at zero","passed"],
-    ["G2–G3","Redocking & docking QC","Primary receptors and prospective dual-state runs complete","passed"],
-    ["G4–G6","Models & applicability","AB_Ridge leads development; no external confirmation","review"],
-    ["G7","Tier A native controls","Equilibration 6/6; production 1/6 observed, 0 complete","authorized"],
-    ["G8","Candidate MD","Locked until both controls pass 2/3 production replicas","locked"],
-    ["G9","Model promotion","Blocked: external floors failed and human release absent","blocked"]
+    ["G4–G6","Governed eligibility","Prediction, interval, threshold, provenance, and identity must all be verified","review"],
+    ["Review","Unordered human queue","Membership and scaffold composition only; no scientific ordering","review"],
+    ["Release","Human authority","Blocked: external floors failed and human approval is absent","blocked"]
   ];
   $("gate-map").innerHTML=gates.map(g=>`<div class="gate-row"><div class="gate-number">${g[0]}</div><div><strong>${g[1]}</strong><small>${g[2]}</small></div><span class="status-pill ${g[3]}">${g[3]}</span></div>`).join("");
 
@@ -78,20 +76,19 @@
   const dockingRows=records("dual_state_docking");
   function dockingGroups(){return dockingRows.reduce((acc,row)=>{(acc[row.molecule_id]??=[]).push(row);return acc;},{});}
   function renderDocking(){
-    let groups=Object.entries(dockingGroups()).map(([id,rows])=>{const inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return{id,inactive,active,delta:active.median_affinity_kcal_mol-inactive.median_affinity_kcal_mol,mean:(active.median_affinity_kcal_mol+inactive.median_affinity_kcal_mol)/2};});
-    groups.sort((a,b)=>dockingSort==="delta"?Math.abs(b.delta)-Math.abs(a.delta):dockingSort==="affinity"?a.mean-b.mean:a.id.localeCompare(b.id));
-    $("docking-grid").innerHTML=groups.map(group=>`<article class="docking-card"><header><div><span class="kicker">Label blind · 3+3 seeds</span><h2>${esc(group.id.replace("LIT25-",""))}</h2></div><span class="status-pill shadow">Shadow</span></header><div class="state-pair"><div class="state-box"><span>5NM4 inactive</span><strong>${fmt(group.inactive.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.inactive.median_cnn_score,3)}</small></div><div class="state-box active"><span>2YDO active-like</span><strong>${fmt(group.active.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.active.median_cnn_score,3)}</small></div></div><div class="delta-line"><span>State difference</span><b>${group.delta>0?"+":""}${fmt(group.delta,3)} kcal/mol</b></div><div class="source-line">${esc(group.inactive.source.path)} · retained poses hashed</div></article>`).join("");
+    const groups=Object.entries(dockingGroups()).map(([id,rows])=>{const inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return{id,inactive,active,delta:active.median_affinity_kcal_mol-inactive.median_affinity_kcal_mol};}).sort((a,b)=>a.id.localeCompare(b.id));
+    $("docking-grid").innerHTML=groups.map(group=>`<article class="docking-card"><header><div><span class="kicker">Label blind · historical structural context</span><h2>${esc(group.id.replace("LIT25-",""))}</h2></div><span class="status-pill shadow">No queue effect</span></header><div class="state-pair"><div class="state-box"><span>5NM4 inactive</span><strong>${fmt(group.inactive.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.inactive.median_cnn_score,3)}</small></div><div class="state-box active"><span>2YDO active-like</span><strong>${fmt(group.active.median_affinity_kcal_mol,2)}</strong><small>kcal/mol · CNN ${fmt(group.active.median_cnn_score,3)}</small></div></div><div class="delta-line"><span>Descriptive state difference</span><b>${group.delta>0?"+":""}${fmt(group.delta,3)} kcal/mol</b></div><p>Not an admission, priority, ordering, or release signal.</p><div class="source-line">${esc(group.inactive.source.path)} · retained poses hashed</div></article>`).join("");
   }
-  document.querySelectorAll("#docking-sort button").forEach(button=>button.addEventListener("click",()=>{dockingSort=button.dataset.sort;document.querySelectorAll("#docking-sort button").forEach(item=>item.classList.toggle("active",item===button));renderDocking();}));renderDocking();
+  renderDocking();
 
   const md=records("md_gates");
-  $("md-gates").innerHTML=md.map(gate=>{const isEquil=gate.gate_id.includes("equilibration"),isProduction=gate.gate_id.includes("production"),tone=isEquil?"passed":isProduction?"authorized":"locked",pct=isProduction?Math.round((gate.completion_fraction_by_reported_ns||0)*100):(gate.required_runs?Math.round(gate.passed_runs/gate.required_runs*100):0);return `<article class="md-card ${tone}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${isProduction?`${pct}%`:`${gate.passed_runs}/${gate.required_runs}`}</span></div><span class="kicker">${esc(gate.gate_id)}</span><h2>${isEquil?"Equilibration passed":isProduction?"Pilot running, incomplete":"Candidate MD locked"}</h2><span class="status-pill ${tone}">${esc(label(gate.status))}</span><p>${esc(gate.claim_limit)}</p><div class="source-line">${esc(gate.source.path)}</div></article>`;}).join("");
-  $("production-progress-copy").textContent=`${data.summary.tier_a_production_observed_replicas}/6 replicas observed, ${data.summary.tier_a_production_completed_replicas} complete, ${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns reported at cutoff. Tier B remains locked.`;
+  $("md-gates").innerHTML=md.map(gate=>{const isEquil=gate.gate_id.includes("equilibration"),isProduction=gate.gate_id.includes("production"),tone=isEquil?"passed":isProduction?"authorized":"locked",pct=isProduction?Math.round((gate.completion_fraction_by_reported_ns||0)*100):(gate.required_runs?Math.round(gate.passed_runs/gate.required_runs*100):0);return `<article class="md-card ${tone}"><div class="progress-ring" style="--progress:${pct*3.6}deg"><span>${isProduction?`${pct}%`:`${gate.passed_runs}/${gate.required_runs}`}</span></div><span class="kicker">Optional mechanistic context</span><h2>${isEquil?"Historical equilibration complete":isProduction?"Historical pilot incomplete":"Historical Tier B locked"}</h2><span class="status-pill ${tone}">${esc(label(gate.status))}</span><p>${esc(gate.claim_limit)}</p><p>Not required for review-queue membership, dashboard operation, or release.</p><div class="source-line">${esc(gate.source.path)}</div></article>`;}).join("");
+  $("production-progress-copy").textContent=`${data.summary.tier_a_production_observed_replicas}/6 replicas observed, ${data.summary.tier_a_production_completed_replicas} complete, ${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns reported at cutoff. Historical Tier B remains locked; this does not affect the review queue or release.`;
   const mdSource=md[0],missing=new Set(mdSource.missing_audits.map(path=>path.split("/").slice(0,2).join(":"))),systems=["5NM4_ZMA_native","5G53_NECA_miniGs_native_nucleotide_free"],seeds=[20260914,20260915,20260916];
   let matrix=`<div class="md-cell header">System</div>${seeds.map(seed=>`<div class="md-cell header">Seed ${seed}</div>`).join("")}`;systems.forEach(system=>{matrix+=`<div class="md-cell header">${esc(label(system))}</div>`;seeds.forEach(seed=>{const absent=missing.has(`${system}:seed-${seed}`);matrix+=`<div class="md-cell ${absent?"missing":"pass"}">${absent?"Missing audit":"Gate passed"}</div>`;});});$("md-matrix").innerHTML=matrix;
 
-  const portfolio=records("candidate_portfolio"),dockingById=dockingGroups();
-  $("portfolio-board").innerHTML=portfolio.map(item=>{const rows=dockingById[item.molecule_id],inactive=rows.find(row=>row.receptor_state==="inactive"),active=rows.find(row=>row.receptor_state==="active-like");return `<article class="portfolio-card"><header><div><span class="kicker">Computationally prioritized</span><h2>${esc(item.molecule_id.replace("LIT25-",""))}</h2></div><span class="status-pill blocked">Not releasable</span></header><div class="portfolio-metrics"><div><span>5NM4</span><strong>${fmt(inactive.median_affinity_kcal_mol,2)}</strong></div><div><span>2YDO</span><strong>${fmt(active.median_affinity_kcal_mol,2)}</strong></div><div><span>Δ score</span><strong>${item.d_affinity_kcal_mol>0?"+":""}${fmt(item.d_affinity_kcal_mol,2)}</strong></div></div><p>${esc(item.next_gate)} Label status: ${esc(item.label_status)}. MD state: ${esc(label(item.md_status))}.</p><div class="source-line">${esc(item.source.path)} · ${short(item.source.sha256)}</div></article>`;}).join("");
+  const reviewQueue=records("candidate_portfolio")[0],composition=Object.entries(reviewQueue.scaffold_composition);
+  $("portfolio-board").innerHTML=`<article class="portfolio-card"><header><div><span class="kicker">Unordered composition only</span><h2>Human-review evidence queue</h2></div><span class="status-pill blocked">${esc(label(reviewQueue.status))}</span></header><div class="portfolio-metrics"><div><span>Records reviewed</span><strong>${reviewQueue.record_count}</strong></div><div><span>Eligible</span><strong>${reviewQueue.eligible_count}</strong></div><div><span>Scaffolds</span><strong>${reviewQueue.scaffold_count}</strong></div></div><p>Admission basis: governed eligibility contract only. Docking is separate structural context; MD is optional mechanistic context. Neither can admit, order, or release a record.</p>${composition.map(([scaffold,count])=>`<div class="scaffold-row"><code>${esc(scaffold)}</code><b>${count}</b></div>`).join("")}<div class="source-line">${esc(reviewQueue.source.path)} · ${short(reviewQueue.source.sha256)}</div></article>`;
 
   let currentDiscoveryRun=null;
   async function apiJson(path,options={}){
@@ -104,7 +101,8 @@
   function updateDiscoveryBanner(capabilities,run){
     const banner=$("discovery-state-banner"),live=capabilities?.live_provider==="available";
     banner.classList.toggle("live",live);banner.classList.toggle("cached",!live);
-    banner.innerHTML=`<span class="state-dot"></span><div><strong>${live?"Live DeepSeek extraction available":"Cached demo ready · live DeepSeek unavailable"}</strong><small>${run?`Latest run: ${esc(label(run.workflow_state))}`:"API keys remain server-side. Missing capabilities fail closed."}</small></div><div class="capability-row">${capabilityBadge("RDKit",capabilities?.rdkit||"unavailable")}${capabilityBadge("AB Ridge",capabilities?.ab_ridge_scorer||"unavailable")}</div>`;
+    const providerNote=run?`Latest run: ${esc(label(run.workflow_state))} · requested ${esc(label(run.provider?.requested_mode||"unknown"))} · cached fallback ${run.provider?.cached_fallback_allowed?"allowed":"disabled"}`:"API keys remain server-side. Explicit live mode never falls back; auto mode may use the cached demo.";
+    banner.innerHTML=`<span class="state-dot"></span><div><strong>${live?"Live DeepSeek extraction available":"Cached demo ready · live DeepSeek unavailable"}</strong><small>${providerNote}</small></div><div class="capability-row">${capabilityBadge("RDKit",capabilities?.rdkit||"unavailable")}${capabilityBadge("AB Ridge",capabilities?.ab_ridge_scorer||"unavailable")}</div>`;
   }
   function renderDiscovery(run){
     if(!run)return;currentDiscoveryRun=run;$("discovery-results").hidden=false;$("discovery-run-id").textContent=run.run_id;

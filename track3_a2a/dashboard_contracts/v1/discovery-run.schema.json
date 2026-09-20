@@ -8,7 +8,7 @@
     "schema_version": {"const": 1},
     "run_id": {"type": "string", "pattern": "^shadow:"},
     "workflow_state": {"enum": ["live", "cached_demo"]},
-    "provider": {"type": "object", "required": ["name", "api_key_exposed"], "properties": {"api_key_exposed": {"const": false}}},
+    "provider": {"type": "object", "required": ["name", "requested_mode", "cached_fallback_allowed", "api_key_exposed"], "properties": {"requested_mode": {"enum": ["auto", "live", "demo"]}, "cached_fallback_allowed": {"type": "boolean"}, "api_key_exposed": {"const": false}}},
     "contract_inputs": {"type": "object"},
     "sources": {"type": "array"},
     "extractions": {"type": "array"},
@@ -17,12 +17,17 @@
     "human_disposition": {"type": "object"},
     "governance": {
       "type": "object",
-      "required": ["autonomy_mode", "external_outcomes_loaded", "model_promotion_enabled", "tier_b_unlocked"],
+      "required": ["autonomy_mode", "external_outcomes_loaded", "model_promotion_enabled", "tier_b_unlocked", "docking_role", "md_role", "md_required_for_review_queue", "md_required_for_dashboard_operation", "md_required_for_release"],
       "properties": {
         "autonomy_mode": {"const": "shadow_only"},
         "external_outcomes_loaded": {"const": false},
         "model_promotion_enabled": {"const": false},
-        "tier_b_unlocked": {"const": false}
+        "tier_b_unlocked": {"const": false},
+        "docking_role": {"const": "separate_structural_context_only"},
+        "md_role": {"const": "optional_mechanistic_context_only"},
+        "md_required_for_review_queue": {"const": false},
+        "md_required_for_dashboard_operation": {"const": false},
+        "md_required_for_release": {"const": false}
       }
     },
     "audit_log": {"type": "array", "minItems": 1}
