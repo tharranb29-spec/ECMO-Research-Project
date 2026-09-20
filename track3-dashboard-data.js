@@ -939,6 +939,53 @@ window.A2A_DASHBOARD_DATA = {
         {
           "candidate_count": 240,
           "docking_used_for_selection": false,
+          "eligibility_contract": {
+            "artifact_projection": {
+              "claim_limit": "Neither category is a per-molecule hit probability or experimental validation.",
+              "robust_threshold_support": "lower bound of the 90% interval is greater than or equal to the verified threshold",
+              "screen_eligible_not_ruled_out": "upper bound of the 90% interval is greater than or equal to the verified threshold"
+            },
+            "claim_limit": "Screen-eligible / not ruled out is a human-review queue state, not a scientific rank, candidate probability, external confirmation, or certified hit.",
+            "contract_version": "1.0.0",
+            "decision_rule": {
+              "evaluated_bound": "upper",
+              "interval_level": 0.9,
+              "meaning": "The upper bound of the validated 90% interval is greater than or equal to the verified threshold.",
+              "operator": ">="
+            },
+            "display_label": "screen-eligible / not ruled out",
+            "endpoint": "pBind_Ki",
+            "firewalls": {
+              "candidate_probability_allowed": false,
+              "certified_hit_allowed": false,
+              "docking_used_for_admission": false,
+              "external_outcomes_loaded": false,
+              "model_promotion_allowed": false,
+              "ranking_allowed": false,
+              "tier_b_unlock_allowed": false
+            },
+            "non_eligibility_states": {
+              "blocked_missing_governed_inputs": "One or more required governed prediction, interval, threshold, or provenance inputs are unavailable or invalid.",
+              "ruled_out_by_90pct_interval": "The upper bound of the validated 90% interval is below the verified threshold.",
+              "simulated_identity_demo": "Identity-only simulated demonstration; no scientific eligibility decision was made."
+            },
+            "required_governed_inputs": [
+              "frozen_model_prediction",
+              "validated_90pct_interval",
+              "verified_threshold",
+              "validated_model_interval_and_threshold_provenance"
+            ],
+            "required_provenance_states": {
+              "interval": "verified",
+              "model": "verified_frozen_artifact",
+              "threshold": "verified"
+            },
+            "schema_id": "a2a-review-eligibility.v1",
+            "source": {
+              "path": "config/review_eligibility.v1.json",
+              "sha256": "2fd74bd7d359cc790fabe84af272b1b762c6a795b878d2692a40a6e3c1e0eed9"
+            }
+          },
           "external_outcomes_loaded": false,
           "per_molecule_hit_probabilities_present": false,
           "ranking_prohibited": true,

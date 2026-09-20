@@ -38,6 +38,7 @@ SOURCES = {
     "shadow_status": A2A / "outputs/v1.4/shadow_update_status.json",
     "scope": A2A / "outputs/v1.6.1/governance/dashboard_scope_contract.json",
     "uncertainty_queue": A2A / "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
+    "eligibility": A2A / "config/review_eligibility.v1.json",
     "md_cutoff": A2A / "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
 }
 
@@ -83,6 +84,7 @@ def build() -> dict:
     shadow = data["shadow_status"]
     scope = data["scope"]
     uncertainty_queue = data["uncertainty_queue"]
+    eligibility_contract = data["eligibility"]
     md_cutoff = data["md_cutoff"]
 
     evidence_records = []
@@ -382,12 +384,13 @@ def build() -> dict:
         "candidate_count": len(raw_uncertainty_records),
         "validated_prediction_count": sum(record["prediction_pbind_ki"] is not None for record in raw_uncertainty_records),
         "validated_interval_count": sum(record["interval_90"] is not None for record in raw_uncertainty_records),
-        "review_eligible_count": sum(record["deterministic_review_eligibility"] == "eligible" for record in raw_uncertainty_records),
+        "review_eligible_count": sum(record["deterministic_review_eligibility"] == "eligible_for_human_review" for record in raw_uncertainty_records),
         "ranking_prohibited": uncertainty_queue["ranking_prohibited"],
         "per_molecule_hit_probabilities_present": uncertainty_queue["per_molecule_hit_probabilities_present"],
         "external_outcomes_loaded": uncertainty_queue["external_outcomes_loaded"],
         "docking_used_for_selection": uncertainty_queue["docking_used_for_selection"],
         "threshold_rule_semantics": uncertainty_queue["threshold_rule_semantics"],
+        "eligibility_contract": {**eligibility_contract, "source": source_ref("eligibility")},
         "source": source_ref("uncertainty_queue"),
     }]
     cutoff_records = []
@@ -503,6 +506,12 @@ def validate(payload: dict) -> None:
         raise ValueError("Sealed external outcomes must remain unavailable")
     if payload["summary"]["tier_b_unlocked"]:
         raise ValueError("Tier B must remain locked")
+    queue = payload["contracts"]["uncertainty_review_queue"]["records"][0]
+    eligibility = queue["eligibility_contract"]
+    if queue["threshold_rule_semantics"] != eligibility["artifact_projection"]:
+        raise ValueError("Uncertainty queue semantics diverge from the eligibility contract")
+    if any(eligibility["firewalls"].values()):
+        raise ValueError("Eligibility contract firewalls must remain locked")
     previous = "GENESIS"
     for entry in payload["contracts"]["audit_log"]["records"]:
         if entry["previous_entry_hash"] != previous:

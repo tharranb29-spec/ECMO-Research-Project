@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import re
 import threading
@@ -39,7 +40,9 @@ CONTRACT_INPUTS = {
     "competition_scope": ROOT / "track3_a2a/outputs/v1.6.1/governance/dashboard_scope_contract.json",
     "uncertainty_review_queue": ROOT / "track3_a2a/outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
     "md_production_cutoff": ROOT / "track3_a2a/outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
+    "review_eligibility": ROOT / "track3_a2a/config/review_eligibility.v1.json",
 }
+ELIGIBILITY_CONTRACT_PATH = CONTRACT_INPUTS["review_eligibility"]
 
 
 CACHED_SOURCES = [
@@ -274,9 +277,18 @@ def standardize_molecule(name: str, smiles: str, demo_mode: bool = False) -> dic
         "duplicate_of": None,
         "applicability": "unavailable",
         "uncertainty": "unavailable",
+        "model_id": None,
         "provisional_score": None,
+        "model_provenance_status": "missing_or_rejected",
+        "interval_90": None,
+        "interval_provenance_status": "missing_or_rejected",
+        "threshold_pbind_ki": None,
+        "threshold_provenance_status": "missing_or_rejected",
+        "external_outcomes_loaded": False,
+        "docking_used_for_admission": False,
         "score_state": "unavailable_no_serialized_ab_ridge",
         "screen_eligible": False,
+        "eligibility_state": "blocked_missing_governed_inputs",
         "eligibility_reasons": [],
         "state_label": "live",
     }
@@ -313,6 +325,7 @@ def standardize_molecule(name: str, smiles: str, demo_mode: bool = False) -> dic
             "applicability": cached["applicability"],
             "uncertainty": cached["uncertainty"],
             "state_label": "simulated",
+            "eligibility_state": "simulated_identity_demo",
         })
     return record
 
@@ -329,24 +342,89 @@ def deduplicate(records: list[dict]) -> None:
             seen[identity] = record["molecule_id"]
 
 
-def evaluate_queue(records: list[dict], demo_mode: bool) -> dict:
+def load_eligibility_contract() -> dict:
+    return json.loads(ELIGIBILITY_CONTRACT_PATH.read_text(encoding="utf-8"))
+
+
+def finite_number(value: object) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def evaluate_governed_eligibility(record: dict, contract: dict) -> bool:
+    record["screen_eligible"] = False
+    if record.get("state_label") == "simulated":
+        record["eligibility_state"] = "simulated_identity_demo"
+        record["eligibility_reasons"].append(
+            "Simulated identity demo only; governed prediction, interval, threshold, and provenance are absent."
+        )
+        return False
+
+    missing = []
+    point = record.get("provisional_score")
+    interval = record.get("interval_90")
+    threshold = record.get("threshold_pbind_ki")
+    if not finite_number(point):
+        missing.append("frozen_model_prediction")
+    if not isinstance(interval, dict):
+        missing.append("validated_90pct_interval")
+    if not finite_number(threshold):
+        missing.append("verified_threshold")
+
+    provenance = contract["required_provenance_states"]
+    if record.get("model_provenance_status") != provenance["model"]:
+        missing.append("validated_model_provenance")
+    if record.get("interval_provenance_status") != provenance["interval"]:
+        missing.append("validated_interval_provenance")
+    if record.get("threshold_provenance_status") != provenance["threshold"]:
+        missing.append("validated_threshold_provenance")
+    if record.get("external_outcomes_loaded") is not False:
+        missing.append("external_outcome_firewall")
+    if record.get("docking_used_for_admission") is not False:
+        missing.append("docking_admission_firewall")
+
+    if isinstance(interval, dict):
+        lower = interval.get("lower")
+        upper = interval.get("upper")
+        level = interval.get("level")
+        if not all(finite_number(value) for value in (lower, upper, level)):
+            missing.append("finite_90pct_interval")
+        elif not math.isclose(level, contract["decision_rule"]["interval_level"], abs_tol=1e-12):
+            missing.append("interval_level_must_equal_0.90")
+        elif finite_number(point) and not lower <= point <= upper:
+            missing.append("interval_must_contain_prediction")
+
+    rule = contract["decision_rule"]
+    if rule.get("evaluated_bound") != "upper" or rule.get("operator") != ">=":
+        missing.append("unsupported_eligibility_rule")
+
+    if missing:
+        record["eligibility_state"] = "blocked_missing_governed_inputs"
+        record["eligibility_reasons"].append("Missing or invalid governed inputs: " + ", ".join(sorted(set(missing))) + ".")
+        return False
+
+    upper = interval["upper"]
+    if upper >= threshold:
+        record["screen_eligible"] = True
+        record["eligibility_state"] = "screen_eligible_not_ruled_out"
+        record["eligibility_reasons"].append(contract["decision_rule"]["meaning"])
+        return True
+
+    record["eligibility_state"] = "ruled_out_by_90pct_interval"
+    record["eligibility_reasons"].append(contract["non_eligibility_states"]["ruled_out_by_90pct_interval"])
+    return False
+
+
+def evaluate_queue(records: list[dict], demo_mode: bool, eligibility_contract: dict | None = None) -> dict:
+    contract = eligibility_contract or load_eligibility_contract()
     for record in records:
         if record["duplicate_of"]:
+            record["eligibility_state"] = "duplicate_identity"
             continue
         if record["standardization_state"] not in {"standardized", "cached_precomputed"}:
+            record["eligibility_state"] = "blocked_identity_unavailable"
             record["eligibility_reasons"].append("Standardized identity is required.")
             continue
-        if record["applicability"] == "unavailable":
-            record["eligibility_reasons"].append("Applicability assessment is unavailable.")
-            continue
-        if record["applicability"] == "outside_domain":
-            record["eligibility_reasons"].append("Outside the provisional development domain.")
-            continue
-        if demo_mode and record["applicability"] == "inside_domain_simulated":
-            record["screen_eligible"] = True
-            record["eligibility_reasons"].append("Simulated demo eligibility only; not external admission.")
-        else:
-            record["eligibility_reasons"].append("No frozen production applicability adapter is integrated.")
+        evaluate_governed_eligibility(record, contract)
     queue = [record for record in records if record["screen_eligible"]]
     scaffold_counts = {}
     for record in queue:
@@ -358,7 +436,8 @@ def evaluate_queue(records: list[dict], demo_mode: bool) -> dict:
         "scaffold_count": len(scaffold_counts),
         "scaffold_composition": scaffold_counts,
         "records": queue,
-        "claim_limit": "Screen eligibility is not potency, rank, probability, cohort admission, or a certified hit.",
+        "eligibility_contract": contract,
+        "claim_limit": contract["claim_limit"],
     }
 
 
@@ -477,11 +556,35 @@ def save_state(payload: dict) -> None:
         temporary.replace(STATE_PATH)
 
 
+def enforce_current_eligibility(payload: dict) -> dict:
+    contract = load_eligibility_contract()
+    queue = payload.get("screen_eligible_queue") or {}
+    projected = queue.get("eligibility_contract") or {}
+    if (
+        projected.get("schema_id") == contract["schema_id"]
+        and projected.get("contract_version") == contract["contract_version"]
+    ):
+        return payload
+    molecules = payload.get("molecules") or []
+    obsolete_reason = "Simulated demo eligibility only; not external admission."
+    for record in molecules:
+        record["screen_eligible"] = False
+        record["eligibility_reasons"] = [
+            reason for reason in record.get("eligibility_reasons", []) if reason != obsolete_reason
+        ]
+    payload["screen_eligible_queue"] = evaluate_queue(
+        molecules,
+        payload.get("workflow_state") == "cached_demo",
+        contract,
+    )
+    return payload
+
+
 def load_state() -> dict | None:
     with STATE_LOCK:
         if not STATE_PATH.exists():
             return None
-        return json.loads(STATE_PATH.read_text(encoding="utf-8"))
+        return enforce_current_eligibility(json.loads(STATE_PATH.read_text(encoding="utf-8")))
 
 
 def apply_disposition(run_id: str, status: str, reviewer: str, note: str = "") -> dict:
@@ -493,7 +596,7 @@ def apply_disposition(run_id: str, status: str, reviewer: str, note: str = "") -
     with STATE_LOCK:
         if not STATE_PATH.exists():
             raise ValueError("No discovery run exists.")
-        payload = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+        payload = enforce_current_eligibility(json.loads(STATE_PATH.read_text(encoding="utf-8")))
         if payload.get("run_id") != run_id:
             raise ValueError("Run ID does not match the latest discovery run.")
         disposition = {"status": status, "reviewer": reviewer, "note": str(note or "")[:1000], "updated_at_utc": utc_now()}

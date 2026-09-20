@@ -1,0 +1,43 @@
+{
+  "schema_id": "a2a-review-eligibility.v1",
+  "contract_version": "1.0.0",
+  "endpoint": "pBind_Ki",
+  "display_label": "screen-eligible / not ruled out",
+  "decision_rule": {
+    "interval_level": 0.9,
+    "evaluated_bound": "upper",
+    "operator": ">=",
+    "meaning": "The upper bound of the validated 90% interval is greater than or equal to the verified threshold."
+  },
+  "artifact_projection": {
+    "screen_eligible_not_ruled_out": "upper bound of the 90% interval is greater than or equal to the verified threshold",
+    "robust_threshold_support": "lower bound of the 90% interval is greater than or equal to the verified threshold",
+    "claim_limit": "Neither category is a per-molecule hit probability or experimental validation."
+  },
+  "required_governed_inputs": [
+    "frozen_model_prediction",
+    "validated_90pct_interval",
+    "verified_threshold",
+    "validated_model_interval_and_threshold_provenance"
+  ],
+  "required_provenance_states": {
+    "model": "verified_frozen_artifact",
+    "interval": "verified",
+    "threshold": "verified"
+  },
+  "firewalls": {
+    "external_outcomes_loaded": false,
+    "docking_used_for_admission": false,
+    "ranking_allowed": false,
+    "candidate_probability_allowed": false,
+    "certified_hit_allowed": false,
+    "model_promotion_allowed": false,
+    "tier_b_unlock_allowed": false
+  },
+  "non_eligibility_states": {
+    "simulated_identity_demo": "Identity-only simulated demonstration; no scientific eligibility decision was made.",
+    "blocked_missing_governed_inputs": "One or more required governed prediction, interval, threshold, or provenance inputs are unavailable or invalid.",
+    "ruled_out_by_90pct_interval": "The upper bound of the validated 90% interval is below the verified threshold."
+  },
+  "claim_limit": "Screen-eligible / not ruled out is a human-review queue state, not a scientific rank, candidate probability, external confirmation, or certified hit."
+}

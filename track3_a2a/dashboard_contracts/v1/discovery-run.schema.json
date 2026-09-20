@@ -13,7 +13,7 @@
     "sources": {"type": "array"},
     "extractions": {"type": "array"},
     "molecules": {"type": "array", "maxItems": 12},
-    "screen_eligible_queue": {"type": "object", "required": ["ordering", "records", "claim_limit"], "properties": {"ordering": {"const": "unordered_composition_only"}}},
+    "screen_eligible_queue": {"type": "object", "required": ["ordering", "records", "eligibility_contract", "claim_limit"], "properties": {"ordering": {"const": "unordered_composition_only"}, "eligibility_contract": {"type": "object", "required": ["schema_id", "contract_version", "decision_rule", "required_governed_inputs", "required_provenance_states", "firewalls"]}}},
     "human_disposition": {"type": "object"},
     "governance": {
       "type": "object",

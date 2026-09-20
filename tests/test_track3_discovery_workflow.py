@@ -28,10 +28,16 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertTrue(all(source["url"].startswith("https://pubmed.ncbi.nlm.nih.gov/") for source in result["sources"]))
         self.assertTrue(all(item["evidence_quality"] == "quarantine" for item in result["extractions"]))
         self.assertEqual(result["screen_eligible_queue"]["ordering"], "unordered_composition_only")
-        self.assertEqual(result["screen_eligible_queue"]["count"], 1)
+        self.assertEqual(result["screen_eligible_queue"]["count"], 0)
         self.assertTrue(all(item["state"] == "available" for item in result["contract_inputs"].values()))
         self.assertTrue(all(item["provisional_score"] is None for item in result["molecules"]))
         self.assertTrue(all(item["score_state"] == "unavailable_no_serialized_ab_ridge" for item in result["molecules"]))
+        self.assertTrue(all(not item["screen_eligible"] for item in result["molecules"]))
+        self.assertTrue(all(item["eligibility_state"] == "simulated_identity_demo" for item in result["molecules"]))
+        self.assertEqual(
+            result["screen_eligible_queue"]["eligibility_contract"]["schema_id"],
+            "a2a-review-eligibility.v1",
+        )
         self.assertEqual(result["governance"]["autonomy_mode"], "shadow_only")
         self.assertFalse(result["governance"]["external_outcomes_loaded"])
         self.assertFalse(result["governance"]["model_promotion_enabled"])
@@ -60,8 +66,88 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
             molecules=[{"name": "A", "smiles": smiles}, {"name": "B", "smiles": smiles}],
             provider_mode="demo",
         )
-        self.assertEqual(result["screen_eligible_queue"]["count"], 1)
+        self.assertEqual(result["screen_eligible_queue"]["count"], 0)
         self.assertIsNotNone(result["molecules"][1]["duplicate_of"])
+        self.assertEqual(result["molecules"][1]["eligibility_state"], "duplicate_identity")
+
+    def governed_record(self):
+        return {
+            "molecule_id": "novel:test",
+            "standardization_state": "standardized",
+            "state_label": "live",
+            "duplicate_of": None,
+            "provisional_score": 6.8,
+            "interval_90": {"lower": 6.4, "upper": 7.1, "level": 0.9},
+            "threshold_pbind_ki": 6.7412,
+            "model_provenance_status": "verified_frozen_artifact",
+            "interval_provenance_status": "verified",
+            "threshold_provenance_status": "verified",
+            "external_outcomes_loaded": False,
+            "docking_used_for_admission": False,
+            "eligibility_reasons": [],
+            "screen_eligible": False,
+            "eligibility_state": "blocked_missing_governed_inputs",
+        }
+
+    def test_every_required_governed_input_fails_closed_when_missing(self):
+        contract = workflow.load_eligibility_contract()
+        for field in (
+            "provisional_score", "interval_90", "threshold_pbind_ki",
+            "model_provenance_status", "interval_provenance_status", "threshold_provenance_status",
+        ):
+            with self.subTest(field=field):
+                record = self.governed_record()
+                record[field] = None
+                self.assertFalse(workflow.evaluate_governed_eligibility(record, contract))
+                self.assertFalse(record["screen_eligible"])
+                self.assertEqual(record["eligibility_state"], "blocked_missing_governed_inputs")
+
+    def test_authoritative_upper_bound_rule_admits_only_fully_governed_record(self):
+        contract = workflow.load_eligibility_contract()
+        record = self.governed_record()
+        self.assertTrue(workflow.evaluate_governed_eligibility(record, contract))
+        self.assertTrue(record["screen_eligible"])
+        self.assertEqual(record["eligibility_state"], "screen_eligible_not_ruled_out")
+        record = self.governed_record()
+        record["interval_90"] = {"lower": 6.2, "upper": 6.7, "level": 0.9}
+        record["provisional_score"] = 6.5
+        self.assertFalse(workflow.evaluate_governed_eligibility(record, contract))
+        self.assertEqual(record["eligibility_state"], "ruled_out_by_90pct_interval")
+
+    def test_novel_query_without_governed_scientific_inputs_is_not_eligible(self):
+        result = workflow.run_workflow(
+            "novel ADORA2A query",
+            molecules=[{"name": "Novel", "smiles": "CCO"}],
+            provider_mode="demo",
+        )
+        self.assertEqual(result["screen_eligible_queue"]["count"], 0)
+        self.assertFalse(result["molecules"][0]["screen_eligible"])
+        self.assertIn(
+            result["molecules"][0]["eligibility_state"],
+            {"simulated_identity_demo", "blocked_identity_unavailable"},
+        )
+
+    def test_legacy_cached_state_is_reprojected_fail_closed(self):
+        legacy = {
+            "workflow_state": "cached_demo",
+            "molecules": [{
+                **self.governed_record(),
+                "state_label": "simulated",
+                "standardization_state": "cached_precomputed",
+                "screen_eligible": True,
+                "eligibility_reasons": ["Simulated demo eligibility only; not external admission."],
+            }],
+            "screen_eligible_queue": {"count": 1, "records": [{"molecule_id": "novel:test"}]},
+        }
+        self.state_path.write_text(json.dumps(legacy))
+        migrated = workflow.load_state()
+        self.assertEqual(migrated["screen_eligible_queue"]["count"], 0)
+        self.assertFalse(migrated["molecules"][0]["screen_eligible"])
+        self.assertEqual(migrated["molecules"][0]["eligibility_state"], "simulated_identity_demo")
+        self.assertEqual(
+            migrated["screen_eligible_queue"]["eligibility_contract"]["schema_id"],
+            "a2a-review-eligibility.v1",
+        )
 
     def test_missing_rdkit_holds_uncached_live_input(self):
         with mock.patch.object(workflow, "rdkit_available", return_value=False):

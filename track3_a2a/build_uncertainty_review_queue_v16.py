@@ -24,13 +24,16 @@ ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "outputs" / "v1.6" / "external_evidence" / "pass1_metadata_preflight" / "pass1_metadata_preflight.json"
 LEDGER_AUDIT = ROOT / "outputs" / "v1.6" / "external_evidence" / "pass1_metadata_preflight" / "pass1_metadata_preflight_audit.json"
 PROTOCOL = ROOT / "config" / "protocol.v1.6.json"
+ELIGIBILITY_CONTRACT_PATH = ROOT / "config" / "review_eligibility.v1.json"
 DEFAULT_PREDICTIONS = ROOT / "outputs" / "v1.6" / "uncertainty_review_queue" / "source_predictions.csv"
 DEFAULT_OUTPUT = ROOT / "outputs" / "v1.6" / "uncertainty_review_queue"
+
+ELIGIBILITY_CONTRACT = json.loads(ELIGIBILITY_CONTRACT_PATH.read_text(encoding="utf-8"))
 
 CLAIMED_SOURCE_COUNT = 335
 CLAIMED_SCREEN_ELIGIBLE_COUNT = 276
 CLAIMED_THRESHOLD = 6.7412
-INTERVAL_LEVEL = 0.90
+INTERVAL_LEVEL = ELIGIBILITY_CONTRACT["decision_rule"]["interval_level"]
 SHIPMENT_FLOOR = 60
 
 REQUIRED_PREDICTION_COLUMNS = [
@@ -214,7 +217,7 @@ def validate_predictions(
             row_errors.append("interval_level_must_equal_0.90")
         if not math.isclose(threshold, CLAIMED_THRESHOLD, abs_tol=1e-12):
             row_errors.append("threshold_value_mismatch")
-        if row["threshold_operator"].strip() != ">=":
+        if row["threshold_operator"].strip() != ELIGIBILITY_CONTRACT["decision_rule"]["operator"]:
             row_errors.append("threshold_operator_must_be_greater_than_or_equal")
         if outcomes_loaded:
             row_errors.append("external_outcome_firewall_violation")
@@ -411,9 +414,7 @@ def main() -> None:
         "external_outcomes_loaded": False,
         "docking_used_for_selection": False,
         "threshold_rule_semantics": {
-            "screen_eligible_not_ruled_out": "upper bound of the 90% interval is greater than or equal to the verified threshold",
-            "robust_threshold_support": "lower bound of the 90% interval is greater than or equal to the verified threshold",
-            "claim_limit": "Neither category is a per-molecule hit probability or experimental validation.",
+            **ELIGIBILITY_CONTRACT["artifact_projection"],
         },
         "records": records,
     }

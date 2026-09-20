@@ -7,6 +7,7 @@ from pathlib import Path
 
 from track3_a2a.build_uncertainty_review_queue_v16 import (
     CLAIMED_THRESHOLD,
+    ELIGIBILITY_CONTRACT,
     REQUIRED_PREDICTION_COLUMNS,
     record_for_dashboard,
     validate_predictions,
@@ -130,6 +131,14 @@ class A2AUncertaintyReviewQueueV16Tests(unittest.TestCase):
     def test_input_contract_columns_match_builder(self):
         contract = json.loads((self.ROOT / "config/uncertainty_review_queue_input.v1.json").read_text())
         self.assertEqual(contract["required_columns"], REQUIRED_PREDICTION_COLUMNS)
+
+    def test_single_eligibility_contract_governs_builder_semantics(self):
+        output = json.loads((self.ROOT / "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json").read_text())
+        self.assertEqual(ELIGIBILITY_CONTRACT["schema_id"], "a2a-review-eligibility.v1")
+        self.assertEqual(ELIGIBILITY_CONTRACT["decision_rule"]["evaluated_bound"], "upper")
+        self.assertEqual(ELIGIBILITY_CONTRACT["decision_rule"]["operator"], ">=")
+        self.assertEqual(output["threshold_rule_semantics"], ELIGIBILITY_CONTRACT["artifact_projection"])
+        self.assertTrue(all(value is False for value in ELIGIBILITY_CONTRACT["firewalls"].values()))
 
     def test_dashboard_payload_exposes_every_required_schema_field(self):
         schema = json.loads((self.ROOT / "dashboard_contracts/v1/uncertainty-review-queue.schema.json").read_text())

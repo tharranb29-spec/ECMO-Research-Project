@@ -33,6 +33,7 @@ class Track3DashboardTests(unittest.TestCase):
         runtime_schema = ROOT / "track3_a2a" / "dashboard_contracts" / "v1" / "discovery-run.schema.json"
         schema = json.loads(runtime_schema.read_text(encoding="utf-8"))
         self.assertEqual(schema["properties"]["governance"]["properties"]["autonomy_mode"]["const"], "shadow_only")
+        self.assertIn("eligibility_contract", schema["properties"]["screen_eligible_queue"]["required"])
 
     def test_source_hashes_match_repository_artifacts(self):
         a2a = ROOT / "track3_a2a"
@@ -82,6 +83,13 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertEqual(queue[0]["validated_interval_count"], 0)
         self.assertEqual(queue[0]["review_eligible_count"], 0)
         self.assertTrue(queue[0]["ranking_prohibited"])
+        eligibility = dict(queue[0]["eligibility_contract"])
+        expected = json.loads((ROOT / "track3_a2a/config/review_eligibility.v1.json").read_text())
+        source = eligibility.pop("source")
+        self.assertEqual(eligibility, expected)
+        self.assertEqual(source["path"], "config/review_eligibility.v1.json")
+        self.assertEqual(queue[0]["threshold_rule_semantics"], expected["artifact_projection"])
+        self.assertTrue(all(value is False for value in expected["firewalls"].values()))
 
     def test_docking_contract_is_dual_state_and_label_blind(self):
         docking = self.payload["contracts"]["dual_state_docking"]["records"]
@@ -121,6 +129,9 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertNotIn("validated hit", html)
         self.assertNotIn("validated hit", js)
         self.assertIn("shadow mode", html)
+        self.assertIn("governed review queue", html)
+        self.assertIn("eligibility.display_label", js)
+        self.assertIn("molecule.eligibility_state", js)
 
     def test_information_architecture_covers_every_competition_workspace(self):
         html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
