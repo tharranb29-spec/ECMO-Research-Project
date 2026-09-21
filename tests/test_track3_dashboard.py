@@ -206,6 +206,19 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertEqual(self.payload["summary"]["uncertainty_queue_eligible"], 0)
         self.assertEqual(self.payload["summary"]["external_admitted"], 0)
 
+    def test_design_keeps_long_content_and_status_badges_contained(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        css = (ROOT / "track3-dashboard.css").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        self.assertIn('id="project-full-title"', html)
+        self.assertIn('class="panel span-7 gate-panel"', html)
+        self.assertIn('class="mobile-scroll-hint"', html)
+        self.assertIn('$("project-full-title").textContent=data.project.title', js)
+        self.assertIn('.docking-card header,.portfolio-card header{align-items:flex-start', css)
+        self.assertIn('.shadow-workflow{grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible', css)
+        self.assertIn('.audit-item>div:nth-child(3) strong,.audit-item>div:nth-child(3) code{display:block', css)
+        self.assertIn('.search,.search input{width:100%;max-width:100%;min-width:0}', css)
+
     def test_application_server_and_render_blueprint_are_read_only_track3(self):
         server = (ROOT / "research_assistant_server.py").read_text(encoding="utf-8")
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")

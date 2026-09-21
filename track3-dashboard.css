@@ -30,3 +30,52 @@ main{min-width:0}.topbar{height:70px;border-bottom:1px solid var(--line);display
 @media(max-width:1180px){.reference-toggle{align-self:flex-start}}
 @media(max-width:650px){.reference-literature{grid-template-columns:1fr}.reference-toggle{width:100%}.reference-toggle button{flex:1}.reference-toggle-spaced button{flex:1 1 100%}}
 .reference-download{margin-top:13px;font-size:10px}
+
+/* Responsive containment: keep headings, filters, and long audit identifiers
+   inside their cards instead of letting intrinsic text width enlarge the grid. */
+.page-head>div,.panel-head>div,.toolbar>*{min-width:0}
+.page-head h1,.panel-head h2,.registry-card h2{overflow-wrap:break-word}
+.hero-stat{min-width:0;flex:0 1 auto}
+.hero-stat strong{font-size:clamp(32px,3.3vw,50px);overflow-wrap:break-word}
+.funnel-step:not(:last-child):after{display:none}
+.audit-item>div{min-width:0}
+@media(max-width:960px){
+  .audit-item{grid-template-columns:52px minmax(0,1fr);align-items:start}
+  .audit-item>div:nth-child(n+3){grid-column:2}
+}
+@media(max-width:650px){
+  .page-head,.panel-head{flex-direction:column;align-items:stretch}
+  .panel-head .segmented{align-self:flex-start;max-width:100%;flex-wrap:wrap}
+  .toolbar,.search,.search input{width:100%;max-width:100%;min-width:0}
+  .reference-precision-head{font-size:8px;letter-spacing:0}
+  .reference-precision-head span{overflow-wrap:anywhere}
+  .audit-item{grid-template-columns:minmax(0,1fr)}
+  .audit-item>div:nth-child(n+3){grid-column:1}
+}
+
+/* Presentation hierarchy and card polish. The official competition title stays
+   visible without making the opening viewport a wall of oversized text. */
+.hero{align-items:center}
+.hero h1{font-size:clamp(42px,4.5vw,64px);line-height:1.04;max-width:850px;margin-bottom:15px}
+.project-full-title{max-width:800px;margin:0;color:var(--green);font-size:15px;font-weight:650;line-height:1.5}
+.hero .lede{font-size:14px;line-height:1.6;margin-top:13px}
+.gate-panel .panel-head{display:block}
+.gate-panel .panel-head .caption{display:block;margin-top:9px;font-size:11px;max-width:420px}
+.gate-row small,.decision-stack small{font-size:11px;line-height:1.5}
+.shadow-mini .mini-step span{font-size:10px;line-height:1.4}
+.docking-card header,.portfolio-card header{align-items:flex-start;gap:12px}
+.docking-card header>div,.portfolio-card header>div{min-width:0}
+.docking-card header .status-pill,.portfolio-card header .status-pill{align-self:flex-start;flex:none;display:inline-flex;align-items:center;justify-content:center;min-height:24px}
+.portfolio-board{grid-template-columns:minmax(0,1fr);max-width:760px}
+.shadow-workflow{grid-template-columns:repeat(4,minmax(0,1fr));overflow:visible;gap:12px}
+.shadow-card{min-width:0;min-height:0;overflow-wrap:anywhere}
+.audit-item>div:nth-child(3) strong,.audit-item>div:nth-child(3) code{display:block;overflow-wrap:anywhere}
+.audit-item>div:nth-child(3) code{margin-top:6px;line-height:1.4}
+.mobile-scroll-hint{display:none}
+@media(max-width:1180px){.shadow-workflow{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+  .hero h1{font-size:clamp(38px,10vw,48px)}
+  .project-full-title{font-size:13px}
+  .shadow-workflow{grid-template-columns:minmax(0,1fr)}
+  .mobile-scroll-hint{display:block;margin:-8px 0 13px;color:var(--muted);font-size:10px}
+}

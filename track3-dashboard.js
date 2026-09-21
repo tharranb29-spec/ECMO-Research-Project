@@ -22,7 +22,7 @@
   document.querySelectorAll("[data-jump]").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.jump)));
   $("menu-toggle").addEventListener("click",()=>{const sidebar=document.querySelector(".sidebar"),open=sidebar.classList.toggle("open");$("menu-toggle").setAttribute("aria-expanded",String(open));});
 
-  $("project-title").textContent=data.project.title;$("claim-level").textContent=data.project.claim_level;$("target-label").textContent=data.project.target;$("deadline-label").textContent=`Deadline · ${data.project.deadline}`;$("protocol-label").textContent=data.project.protocol;$("snapshot-time").textContent=new Date(data.snapshot_created_at_utc).toLocaleString();
+  $("project-title").textContent="A2A Evidence Command Center";$("project-full-title").textContent=data.project.title;$("claim-level").textContent=data.project.claim_level;$("target-label").textContent=data.project.target;$("deadline-label").textContent=`Deadline · ${data.project.deadline}`;$("protocol-label").textContent=data.project.protocol;$("snapshot-time").textContent=new Date(data.snapshot_created_at_utc).toLocaleString();
 
   const summary=[
     ["External cohort","0 / 60","Frozen floor failure"],
