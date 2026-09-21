@@ -178,6 +178,22 @@ class Track3DashboardTests(unittest.TestCase):
             self.assertIn(f'data-panel="{view}"', html)
             self.assertIn(f'data-view="{view}"', html)
 
+    def test_teammate_pdf_reference_is_separate_from_frozen_contracts(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        source_note = (ROOT / "track3_a2a" / "TEAMMATE_PDF_REFERENCE_2026-09-22.md").read_text(encoding="utf-8")
+        self.assertIn('data-panel="teammate"', html)
+        self.assertIn('data-view="teammate"', html)
+        self.assertIn("not independently reproduced", html)
+        self.assertIn("240 held and 0 eligible", html)
+        self.assertIn("funnel:[[\"Library\",2963],[\"Inside PDF domain\",423],[\"Antagonist class\",335],[\"Screen-eligible\",276]]", js)
+        self.assertIn("pairwise:{total:55945,separable:2770,fraction:4.95", js)
+        self.assertIn("sha256:\"5308b8041c28657c9234b9a5a0f8b50b886ebe6146affa0b877a21f73fb9145f\"", js)
+        self.assertIn("The PDF is not an external-validation result", source_note)
+        self.assertEqual(self.payload["summary"]["uncertainty_queue_count"], 240)
+        self.assertEqual(self.payload["summary"]["uncertainty_queue_eligible"], 0)
+        self.assertEqual(self.payload["summary"]["external_admitted"], 0)
+
     def test_application_server_and_render_blueprint_are_read_only_track3(self):
         server = (ROOT / "research_assistant_server.py").read_text(encoding="utf-8")
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")

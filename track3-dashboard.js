@@ -8,7 +8,7 @@
   const label=value=>String(value??"").replaceAll("_"," ");
   const fmt=(value,digits=2)=>Number(value).toFixed(digits);
   const short=(value,length=12)=>String(value).slice(0,length)+"…";
-  const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","discovery","shadow","audit"];
+  const views=["overview","evidence","molecules","models","applicability","docking","md","portfolio","discovery","shadow","teammate","audit"];
   let moleculeFilter="all",moleculeQuery="",evidenceFilter="all",modelMetric="r2";
 
   function setView(view){
@@ -32,6 +32,35 @@
     ["Served models","0","Shadow-only; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
+
+  // PDF-reported aggregate reference only. This object is never used by queue,
+  // discovery, model, admission, or promotion logic.
+  const teammatePdf={
+    sha256:"5308b8041c28657c9234b9a5a0f8b50b886ebe6146affa0b877a21f73fb9145f",
+    funnel:[["Library",2963],["Inside PDF domain",423],["Antagonist class",335],["Screen-eligible",276]],
+    scaffolds:{antagonist:149,screenEligible:120},
+    pairwise:{total:55945,separable:2770,fraction:4.95,requiredGap:2.5176,largestAdjacentGap:0.3230},
+    interval:{halfWidth:1.2588,hitBar:8.0,upperBoundCutoff:6.7412},
+    precision:[[10,0.9600,0.4808,1.997],[20,0.7950,0.4808,1.654],[40,0.6200,0.4808,1.290]],
+    decisions:[
+      ["Endpoint","Strict Ki-only R² 0.5685 vs pooled R² 0.4768; D1 unresolved."],
+      ["Domain floor","PDF delivery 0.50 vs frozen plan 0.55; D2 unresolved. The 276 count depends on this choice."],
+      ["Interval width","Delivered half-width 1.2588 vs plan 1.299; one must be retired before promotion."],
+      ["Our frozen pipeline","Different 78-molecule development comparison, 2,048-bit fingerprint, and 240 held / 0 eligible external queue."]
+    ]
+  };
+  $("teammate-source-hash").textContent=teammatePdf.sha256;
+  $("teammate-metrics").innerHTML=[
+    ["PDF screen-eligible",teammatePdf.funnel[3][1].toLocaleString(),"Provisional; not our queue"],
+    ["PDF scaffolds",teammatePdf.scaffolds.screenEligible,"One reported review set"],
+    ["Separable pairs",`${fmt(teammatePdf.pairwise.fraction,2)}%`,"No defensible ordinal positions"],
+    ["Our eligible queue",data.summary.uncertainty_queue_eligible,"Frozen and independently governed"]
+  ].map(([name,value,note])=>`<div class="reference-metric"><span>${esc(name)}</span><strong>${esc(value)}</strong><small>${esc(note)}</small></div>`).join("");
+  const libraryCount=teammatePdf.funnel[0][1];
+  $("teammate-funnel").innerHTML=teammatePdf.funnel.map(([name,count])=>`<div class="reference-bar-row"><div><strong>${esc(name)}</strong><b>${Number(count).toLocaleString()}</b></div><div class="reference-track"><i style="width:${count/libraryCount*100}%"></i></div></div>`).join("")+`<p class="reference-note">PDF states 335 antagonist candidates across ${teammatePdf.scaffolds.antagonist} scaffolds; the 276 screen-eligible set spans ${teammatePdf.scaffolds.screenEligible}. The remaining 88 in-domain compounds are described as agonist class and are not ordered.</p>`;
+  $("teammate-separability").innerHTML=`<div class="reference-big-number">${fmt(teammatePdf.pairwise.fraction,2)}%</div><p class="reference-note">${teammatePdf.pairwise.separable.toLocaleString()} of ${teammatePdf.pairwise.total.toLocaleString()} PDF candidate pairs had non-overlapping calibrated 90% intervals. The largest adjacent prediction gap was ${fmt(teammatePdf.pairwise.largestAdjacentGap,4)} pKi, below the ${fmt(teammatePdf.pairwise.requiredGap,4)} separation requirement.</p><div class="reference-rule"><b>Admission ≠ hit prediction</b><span>PDF rule: predicted pKi ≥ ${fmt(teammatePdf.interval.upperBoundCutoff,4)} only means the upper 90% bound reaches ${fmt(teammatePdf.interval.hitBar,1)}. It does not certify a hit.</span></div>`;
+  $("teammate-precision").innerHTML=`<div class="reference-precision-head"><span>Set size</span><span>Precision</span><span>Base rate</span><span>Enrichment</span></div>`+teammatePdf.precision.map(([n,precision,base,ef])=>`<div class="reference-precision-row"><b>N = ${n}</b><span>${fmt(precision,4)}</span><span>${fmt(base,4)}</span><span>${fmt(ef,3)}×</span></div>`).join("");
+  $("teammate-decisions").innerHTML=teammatePdf.decisions.map(([name,detail])=>`<div class="reference-decision"><strong>${esc(name)}</strong><span>${esc(detail)}</span></div>`).join("");
 
   const gates=[
     ["G0–G1","Sources & evidence admission","Development evidence frozen; external pass 2 froze at zero","passed"],

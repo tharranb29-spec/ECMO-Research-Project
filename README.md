@@ -22,6 +22,12 @@ The Render blueprint disables legacy background literature automation and
 prototype GNINA. The Discovery Lab is request-driven, shadow-only, and stores only
 its latest ephemeral run; it cannot mutate the frozen scientific artifacts.
 
+The **Teammate analysis** view is an attributed, provisional transcription of
+aggregate figures from a supplied PDF. It is visually and computationally
+separate from the frozen 240-record review queue. Its source, page references,
+unresolved protocol differences, and reproducibility limits are recorded in
+`track3_a2a/TEAMMATE_PDF_REFERENCE_2026-09-22.md`; the PDF itself is not published.
+
 ### Discovery Lab demo
 
 ```bash
