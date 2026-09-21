@@ -36,12 +36,18 @@
   // PDF-reported aggregate reference only. This object is never used by queue,
   // discovery, model, admission, or promotion logic.
   const teammatePdf={
+    source_kind:"team_supplied_pdf_aggregate_transcription",
+    status:"provisional_not_independently_reproduced",
+    claim_limit:"not_external_validation_not_frozen_queue_not_molecule_level_data",
+    source_pages:[5,7,9,10,12],
     sha256:"5308b8041c28657c9234b9a5a0f8b50b886ebe6146affa0b877a21f73fb9145f",
     funnel:[["Library",2963],["Inside PDF domain",423],["Antagonist class",335],["Screen-eligible",276]],
     scaffolds:{antagonist:149,screenEligible:120},
     pairwise:{total:55945,separable:2770,fraction:4.95,requiredGap:2.5176,largestAdjacentGap:0.3230},
+    developmentStress:{n:74,calibrated:{separablePercent:4.2,coverage:0.8919},narrowed:{separablePercent:56.8,coverage:0.3649}},
     interval:{halfWidth:1.2588,hitBar:8.0,upperBoundCutoff:6.7412},
     precision:[[10,0.9600,0.4808,1.997],[20,0.7950,0.4808,1.654],[40,0.6200,0.4808,1.290]],
+    literature:{compoundsWithStrippedValues:155,deliveredCompounds:276,strippedValues:310,uniqueDocuments:65},
     decisions:[
       ["Endpoint","Strict Ki-only R² 0.5685 vs pooled R² 0.4768; D1 unresolved."],
       ["Domain floor","PDF delivery 0.50 vs frozen plan 0.55; D2 unresolved. The 276 count depends on this choice."],
@@ -57,10 +63,48 @@
     ["Our eligible queue",data.summary.uncertainty_queue_eligible,"Frozen and independently governed"]
   ].map(([name,value,note])=>`<div class="reference-metric"><span>${esc(name)}</span><strong>${esc(value)}</strong><small>${esc(note)}</small></div>`).join("");
   const libraryCount=teammatePdf.funnel[0][1];
-  $("teammate-funnel").innerHTML=teammatePdf.funnel.map(([name,count])=>`<div class="reference-bar-row"><div><strong>${esc(name)}</strong><b>${Number(count).toLocaleString()}</b></div><div class="reference-track"><i style="width:${count/libraryCount*100}%"></i></div></div>`).join("")+`<p class="reference-note">PDF states 335 antagonist candidates across ${teammatePdf.scaffolds.antagonist} scaffolds; the 276 screen-eligible set spans ${teammatePdf.scaffolds.screenEligible}. The remaining 88 in-domain compounds are described as agonist class and are not ordered.</p>`;
+  const stageDescriptions=[
+    "The PDF reports 2,963 library rows after its deterministic intake pass.",
+    "423 rows meet the PDF's applicability rule; its 0.50 similarity threshold remains disputed.",
+    "335 in-domain rows are assigned to the antagonist class across 149 scaffolds. The other 88 are not ordered.",
+    "276 rows across 120 scaffolds meet the PDF's non-exclusion rule. They are not certified hits or members of our frozen queue."
+  ];
+  let funnelMode="count",selectedFunnelStage=3;
+  function renderTeammateFunnel(){
+    $("teammate-funnel").innerHTML=teammatePdf.funnel.map(([name,count],index)=>`<button type="button" class="reference-bar-row ${selectedFunnelStage===index?"selected":""}" data-stage="${index}" aria-pressed="${selectedFunnelStage===index}"><span><strong>${esc(name)}</strong><b>${funnelMode==="count"?Number(count).toLocaleString():`${fmt(count/libraryCount*100,1)}%`}</b></span><span class="reference-track"><i style="width:${count/libraryCount*100}%"></i></span></button>`).join("");
+    $("teammate-funnel-detail").textContent=stageDescriptions[selectedFunnelStage];
+    document.querySelectorAll("#teammate-funnel [data-stage]").forEach(button=>button.addEventListener("click",()=>{selectedFunnelStage=Number(button.dataset.stage);renderTeammateFunnel();}));
+  }
+  document.querySelectorAll("#teammate-funnel-mode [data-mode]").forEach(button=>button.addEventListener("click",()=>{funnelMode=button.dataset.mode;document.querySelectorAll("#teammate-funnel-mode button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});renderTeammateFunnel();}));
+  renderTeammateFunnel();
   $("teammate-separability").innerHTML=`<div class="reference-big-number">${fmt(teammatePdf.pairwise.fraction,2)}%</div><p class="reference-note">${teammatePdf.pairwise.separable.toLocaleString()} of ${teammatePdf.pairwise.total.toLocaleString()} PDF candidate pairs had non-overlapping calibrated 90% intervals. The largest adjacent prediction gap was ${fmt(teammatePdf.pairwise.largestAdjacentGap,4)} pKi, below the ${fmt(teammatePdf.pairwise.requiredGap,4)} separation requirement.</p><div class="reference-rule"><b>Admission ≠ hit prediction</b><span>PDF rule: predicted pKi ≥ ${fmt(teammatePdf.interval.upperBoundCutoff,4)} only means the upper 90% bound reaches ${fmt(teammatePdf.interval.hitBar,1)}. It does not certify a hit.</span></div>`;
-  $("teammate-precision").innerHTML=`<div class="reference-precision-head"><span>Set size</span><span>Precision</span><span>Base rate</span><span>Enrichment</span></div>`+teammatePdf.precision.map(([n,precision,base,ef])=>`<div class="reference-precision-row"><b>N = ${n}</b><span>${fmt(precision,4)}</span><span>${fmt(base,4)}</span><span>${fmt(ef,3)}×</span></div>`).join("");
+  function comparisonBar(name,value,percent,tone="primary"){return `<div class="reference-comparison-row"><span>${esc(name)}</span><strong>${esc(value)}</strong><div class="reference-comparison-track"><i class="${tone}" style="width:${Math.max(0,Math.min(100,percent))}%"></i></div></div>`;}
+  function renderSeparation(mode){
+    if(mode==="development"){
+      const stress=teammatePdf.developmentStress;
+      $("teammate-separation-chart").innerHTML=`<p class="reference-note">Separate ${stress.n}-molecule development population. Narrowing intervals fourfold changes both separability and coverage:</p>${comparisonBar("Calibrated separability",`${fmt(stress.calibrated.separablePercent,1)}%`,stress.calibrated.separablePercent)}${comparisonBar("Fourfold-narrowed separability",`${fmt(stress.narrowed.separablePercent,1)}%`,stress.narrowed.separablePercent,"warning")}${comparisonBar("Calibrated coverage",`${fmt(stress.calibrated.coverage*100,2)}%`,stress.calibrated.coverage*100)}${comparisonBar("Narrowed coverage",`${fmt(stress.narrowed.coverage*100,2)}%`,stress.narrowed.coverage*100,"warning")}<p class="reference-note">Higher apparent separation is bought by losing interval coverage. These 74 molecules are not the 335-candidate pool.</p>`;
+    }else{
+      $("teammate-separation-chart").innerHTML=`${comparisonBar("Pairs distinguishable",`${fmt(teammatePdf.pairwise.fraction,2)}%`,teammatePdf.pairwise.fraction)}${comparisonBar("Pairs overlapping",`${fmt(100-teammatePdf.pairwise.fraction,2)}%`,100-teammatePdf.pairwise.fraction,"muted")}<p class="reference-note">Population: 335 PDF antagonist candidates; ${teammatePdf.pairwise.total.toLocaleString()} possible pairs. The PDF reports one connected interval-overlap component, so no ordinal list is presented.</p>`;
+    }
+  }
+  document.querySelectorAll("[data-separation]").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll("[data-separation]").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});renderSeparation(button.dataset.separation);}));
+  renderSeparation("candidates");
+  function renderPrecision(size){
+    const [n,precision,base,ef]=teammatePdf.precision.find(row=>row[0]===size);
+    $("teammate-precision-chart").innerHTML=`${comparisonBar(`N=${n} reported precision`,`${fmt(precision*100,2)}%`,precision*100)}${comparisonBar("Reference base rate",`${fmt(base*100,2)}%`,base*100,"muted")}<div class="reference-ef"><b>${fmt(ef,3)}×</b><span>reported enrichment factor at N=${n}</span></div>`;
+    $("teammate-precision").innerHTML=`<div class="reference-precision-head"><span>Set size</span><span>Precision</span><span>Base rate</span><span>Enrichment</span></div>`+teammatePdf.precision.map(([rowN,rowPrecision,rowBase,rowEf])=>`<div class="reference-precision-row ${rowN===n?"selected":""}"><b>N = ${rowN}</b><span>${fmt(rowPrecision,4)}</span><span>${fmt(rowBase,4)}</span><span>${fmt(rowEf,3)}×</span></div>`).join("");
+  }
+  document.querySelectorAll("#teammate-precision-selector [data-size]").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll("#teammate-precision-selector button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});renderPrecision(Number(button.dataset.size));}));
+  renderPrecision(10);
+  const literature=teammatePdf.literature;
+  $("teammate-literature").innerHTML=`<div><strong>${literature.compoundsWithStrippedValues}/${literature.deliveredCompounds}</strong><span>PDF compounds with stripped published potency values</span><div class="reference-comparison-track"><i class="primary" style="width:${literature.compoundsWithStrippedValues/literature.deliveredCompounds*100}%"></i></div></div><div><strong>${literature.strippedValues}</strong><span>values removed before extraction</span></div><div><strong>${literature.uniqueDocuments}</strong><span>unique documents reported</span></div>`;
   $("teammate-decisions").innerHTML=teammatePdf.decisions.map(([name,detail])=>`<div class="reference-decision"><strong>${esc(name)}</strong><span>${esc(detail)}</span></div>`).join("");
+  $("teammate-download").addEventListener("click",()=>{
+    const payload=JSON.stringify(teammatePdf,null,2)+"\n";
+    const url=URL.createObjectURL(new Blob([payload],{type:"application/json"}));
+    const link=document.createElement("a");link.href=url;link.download="a2a_teammate_pdf_reported_aggregates.json";document.body.append(link);link.click();link.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
 
   const gates=[
     ["G0–G1","Sources & evidence admission","Development evidence frozen; external pass 2 froze at zero","passed"],

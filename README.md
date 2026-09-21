@@ -27,6 +27,9 @@ aggregate figures from a supplied PDF. It is visually and computationally
 separate from the frozen 240-record review queue. Its source, page references,
 unresolved protocol differences, and reproducibility limits are recorded in
 `track3_a2a/TEAMMATE_PDF_REFERENCE_2026-09-22.md`; the PDF itself is not published.
+The view's count/percentage, separability-stress, and N-specific precision charts
+are interactive. A labelled JSON download contains only the PDF-reported
+aggregates, not molecule-level data or an independently reproduced result.
 
 ### Discovery Lab demo
 
