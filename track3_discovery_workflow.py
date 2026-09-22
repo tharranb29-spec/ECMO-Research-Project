@@ -467,9 +467,12 @@ def select_provider(mode: str):
     return CachedDemoProvider(), "Live DeepSeek provider is unconfigured; using cached demo."
 
 
-def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode: str = "auto") -> dict:
+def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode: str = "auto", *, run_id: str | None = None, persist: bool = True, progress=None) -> dict:
     query = str(query or "human ADORA2A primary ligand evidence").strip()[:500]
     provider_mode = provider_mode if provider_mode in {"auto", "live", "demo"} else "auto"
+    created_at = utc_now()
+    if progress:
+        progress("source_retrieval_and_extraction")
     provider, fallback_reason = select_provider(provider_mode)
     try:
         discovery = provider.discover(query)
@@ -479,9 +482,13 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
         provider = CachedDemoProvider()
         discovery = provider.discover(query)
         fallback_reason = f"Live DeepSeek provider failed closed; cached demo used: {exc}"
+    source_retrieved_at = utc_now() if discovery["state"] == "live" else None
     demo_mode = discovery["state"] == "cached"
+    if progress:
+        progress("identity_and_queue_gates")
     if molecules is None:
         molecules = []
+    requested_molecules = molecules
     if demo_mode and not molecules:
         molecules = [
             {"name": "Adenosine demo input", "smiles": "Nc1ncnc2c1ncn2[C@@H]1O[C@H](CO)[C@@H](O)[C@H]1O"},
@@ -501,10 +508,10 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
     run_basis = {
         "query": query,
         "provider": discovery["provider"],
-        "created_at_utc": utc_now(),
+        "created_at_utc": created_at,
         "molecule_identity_hashes": [item.get("identity_hash") for item in normalized],
     }
-    run_id = "shadow:" + canonical_hash(run_basis)[:16]
+    run_id = run_id or "shadow:" + canonical_hash(run_basis)[:16]
     events = [
         ("contract_resolution", {"inputs": contract_status(), "missing_inputs_fail_closed": True}),
         ("literature_query", {"query": query, "provider": discovery["provider"], "state": discovery["state"]}),
@@ -528,6 +535,14 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
             "requested_mode": provider_mode,
             "cached_fallback_allowed": provider_mode == "auto",
             "api_key_exposed": False,
+        },
+        "provenance": {
+            "workflow_schema": "a2a-shadow-discovery.v1",
+            "extraction_prompt_version": "a2a-conservative-source-extraction.v1",
+            "input_sha256": canonical_hash({"query": query, "molecules": requested_molecules, "provider_mode": provider_mode}),
+            "sources_sha256": canonical_hash({"sources": discovery["sources"]}),
+            "extractions_sha256": canonical_hash({"extractions": discovery["extractions"]}),
+            "live_sources_retrieved_at_utc": source_retrieved_at,
         },
         "contract_inputs": contract_status(),
         "sources": discovery["sources"],
@@ -554,7 +569,8 @@ def run_workflow(query: str, molecules: list[dict] | None = None, provider_mode:
         },
         "audit_log": audit_chain(events),
     }
-    save_state(payload)
+    if persist:
+        save_state(payload)
     return payload
 
 

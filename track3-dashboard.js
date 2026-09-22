@@ -214,18 +214,34 @@
     $("disposition-state").textContent=label(run.human_disposition.status);$("disposition-state").className=`status-pill ${run.human_disposition.status==="pending"?"review":"passed"}`;
   }
   function parseMoleculeInput(value){return value.split(/\n+/).map(line=>{const [name,...smilesParts]=line.split("|");return{name:(name||"").trim(),smiles:smilesParts.join("|").trim()};}).filter(item=>item.smiles);}
+  let activeDiscoveryJob=null,discoveryPoll=null;
+  function showDiscoveryJob(job){
+    activeDiscoveryJob=job;
+    const busy=job&&["queued","running"].includes(job.status);
+    $("discovery-run").disabled=Boolean(busy);$("discovery-run").textContent=busy?"Run in progress…":"Run shadow workflow";
+    $("discovery-cancel").hidden=!busy;
+    $("discovery-job-status").textContent=job?`${job.run_id} · ${label(job.status)} · ${label(job.stage)}${job.error?` · ${job.error}`:""}`:"No active run.";
+    if(job&&job.status!=="completed"&&job.run_id!==currentDiscoveryRun?.run_id){currentDiscoveryRun=null;$("discovery-results").hidden=true;$("discovery-run-id").textContent=job.run_id;$("discovery-stages").innerHTML=`<p class="${job.status==="failed"?"error-state":"empty-state"}">${esc(job.error||`Run ${label(job.status)} · ${label(job.stage)}`)}</p>`;}
+    if(job?.status==="completed"&&job.result){renderDiscovery(job.result);updateDiscoveryBanner({live_provider:job.result.workflow_state==="live"?"available":"unavailable",rdkit:job.result.molecules.some(item=>item.standardization_engine==="RDKit")?"available":"unavailable",ab_ridge_scorer:"unavailable"},job.result);}
+  }
+  async function pollDiscoveryJob(runId){
+    clearTimeout(discoveryPoll);
+    try{const payload=await apiJson(`/api/discovery/runs/${encodeURIComponent(runId)}`);showDiscoveryJob(payload.job);if(["queued","running"].includes(payload.job.status))discoveryPoll=setTimeout(()=>pollDiscoveryJob(runId),1500);}
+    catch(error){$("discovery-job-status").textContent=`Run status unavailable: ${error.message}`;discoveryPoll=setTimeout(()=>pollDiscoveryJob(runId),4000);}
+  }
   $("discovery-form").addEventListener("submit",async event=>{
-    event.preventDefault();const button=$("discovery-run");button.disabled=true;button.textContent="Running gates…";
-    try{const payload=await apiJson("/api/discovery/run",{method:"POST",body:JSON.stringify({query:$("discovery-query").value,provider_mode:$("discovery-provider").value,molecules:parseMoleculeInput($("discovery-molecules").value)})});renderDiscovery(payload.run);updateDiscoveryBanner({live_provider:payload.run.workflow_state==="live"?"available":"unavailable",rdkit:payload.run.molecules.some(item=>item.standardization_engine==="RDKit")?"available":"unavailable",ab_ridge_scorer:"unavailable"},payload.run);}
+    event.preventDefault();const button=$("discovery-run");button.disabled=true;button.textContent="Starting run…";
+    try{const payload=await apiJson("/api/discovery/run",{method:"POST",body:JSON.stringify({query:$("discovery-query").value,provider_mode:$("discovery-provider").value,molecules:parseMoleculeInput($("discovery-molecules").value)})});showDiscoveryJob(payload.job);pollDiscoveryJob(payload.job.run_id);}
     catch(error){$("discovery-stages").innerHTML=`<p class="error-state">${esc(error.message)}</p>`;}
-    finally{button.disabled=false;button.textContent="Run shadow workflow";}
+    finally{if(!activeDiscoveryJob||!["queued","running"].includes(activeDiscoveryJob.status)){button.disabled=false;button.textContent="Run shadow workflow";}}
   });
+  $("discovery-cancel").addEventListener("click",async()=>{if(!activeDiscoveryJob)return;try{const payload=await apiJson(`/api/discovery/runs/${encodeURIComponent(activeDiscoveryJob.run_id)}/cancel`,{method:"POST",body:"{}"});clearTimeout(discoveryPoll);showDiscoveryJob(payload.job);}catch(error){$("discovery-job-status").textContent=`Cancellation failed: ${error.message}`;}});
   $("disposition-form").addEventListener("submit",async event=>{
     event.preventDefault();if(!currentDiscoveryRun)return;
     try{const payload=await apiJson("/api/discovery/disposition",{method:"POST",body:JSON.stringify({run_id:currentDiscoveryRun.run_id,status:$("disposition-choice").value,reviewer:$("disposition-reviewer").value,note:$("disposition-note").value})});renderDiscovery(payload.run);}
     catch(error){$("disposition-state").textContent=error.message;$("disposition-state").className="status-pill blocked";}
   });
-  apiJson("/api/discovery/status").then(payload=>{updateDiscoveryBanner(payload.capabilities,payload.latest_run);if(payload.latest_run)renderDiscovery(payload.latest_run);}).catch(error=>{$("discovery-state-banner").innerHTML=`<span class="state-dot"></span><div><strong>Discovery endpoint unavailable</strong><small>${esc(error.message)}</small></div>`;});
+  apiJson("/api/discovery/status").then(payload=>{updateDiscoveryBanner(payload.capabilities,payload.latest_run);if(payload.latest_run)renderDiscovery(payload.latest_run);if(payload.latest_job){showDiscoveryJob(payload.latest_job);if(["queued","running"].includes(payload.latest_job.status))pollDiscoveryJob(payload.latest_job.run_id);}}).catch(error=>{$("discovery-state-banner").innerHTML=`<span class="state-dot"></span><div><strong>Discovery endpoint unavailable</strong><small>${esc(error.message)}</small></div>`;});
 
   $("shadow-workflow").innerHTML=shadowActions.map((action,index)=>`<article class="shadow-card ${esc(action.status)}"><span class="kicker">Step ${String(index+1).padStart(2,"0")}</span><h2>${esc(action.stage)}</h2><div class="executor">${esc(action.executor)} · ${esc(label(action.status))}</div><p>${esc(action.authority)}</p><div class="gate"><b>Required gate</b><br>${esc(action.required_gate)}</div><div class="source-line">${esc(action.source.path)}<br>${short(action.source.sha256,16)}</div></article>`).join("");
   const prohibited=[...new Set(shadowActions.flatMap(action=>action.prohibited_actions))];$("prohibited-grid").innerHTML=prohibited.map(item=>`<span>${esc(label(item))}</span>`).join("");

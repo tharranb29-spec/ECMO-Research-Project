@@ -45,6 +45,19 @@ No key is required. The demonstration labels cached source metadata and simulate
 applicability separately, leaves AB_Ridge scores unavailable, and records a
 hash-chained human disposition.
 
+Discovery starts as a background job: `POST /api/discovery/run` returns HTTP 202
+with a run ID, `GET /api/discovery/runs/{run_id}` reports the current stage and
+result, and `POST /api/discovery/runs/{run_id}/cancel` discards late output.
+The browser resumes the latest job after refresh. Run records are archived under
+`outputs/track3_discovery_jobs/` and interrupted jobs are marked on process
+restart. This is durable only on the current filesystem: Render's free ephemeral
+instance can lose these records on redeploy or replacement. Set
+`TRACK3_DISCOVERY_JOBS_PATH` to a persistent volume before claiming cross-instance
+durability. Cancellation cannot terminate an in-flight external API request, but
+its eventual response is not used or promoted. Completed results retain the
+requested provider mode, source identifiers and URLs, workflow/prompt versions,
+and hashes of the submitted input, retrieved sources, and structured extraction.
+
 For live source retrieval, configure `DEEPSEEK_API_KEY` only on the server and use
 Auto mode. Europe PMC supplies deterministic source records and citations; DeepSeek
 performs structured extraction through its server-side chat API and is never used
@@ -53,7 +66,7 @@ RDKit is installed. Without RDKit or a serialized frozen AB_Ridge scorer, those
 gates fail closed rather than generating substitute values.
 
 ```bash
-python3 -m unittest tests.test_track3_dashboard tests.test_track3_discovery_workflow
+python3 -m unittest tests.test_track3_dashboard tests.test_track3_discovery_workflow tests.test_track3_discovery_jobs
 ```
 
 This folder now contains a rough, trainable ranking prototype for the AI-driven part of your ECMO biomaterials project.

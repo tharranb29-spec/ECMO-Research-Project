@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import parse_qs, quote, urlparse
+from urllib.parse import parse_qs, quote, unquote, urlparse
 from urllib import error, request
 
 from build_dashboard_bundle import main as build_dashboard_bundle_main
@@ -24,8 +24,8 @@ from track3_discovery_workflow import (
     apply_disposition as apply_discovery_disposition,
     capability_status as discovery_capability_status,
     load_state as load_discovery_state,
-    run_workflow as run_discovery_workflow,
 )
+from track3_discovery_jobs import JOBS as DISCOVERY_JOBS
 
 
 ROOT = Path(__file__).resolve().parent
@@ -950,9 +950,21 @@ class Handler(BaseHTTPRequestHandler):
                     "ok": True,
                     "capabilities": discovery_capability_status(),
                     "latest_run": load_discovery_state(),
+                    "latest_job": DISCOVERY_JOBS.latest(),
                 },
                 method=method,
             )
+            return
+        if parsed.path.startswith("/api/discovery/runs/"):
+            try:
+                job = DISCOVERY_JOBS.get(unquote(parsed.path.removeprefix("/api/discovery/runs/")))
+            except ValueError as exc:
+                self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc), method=method)
+                return
+            if not job:
+                self._send_error_json(HTTPStatus.NOT_FOUND, "Discovery run not found.", method=method)
+                return
+            self._send_json({"ok": True, "job": job}, method=method)
             return
         if parsed.path == "/api/docking/status":
             self._send_json(
@@ -1106,6 +1118,18 @@ class Handler(BaseHTTPRequestHandler):
             )
             return
 
+        if self.path.startswith("/api/discovery/runs/") and self.path.endswith("/cancel"):
+            if not self._enforce_rate_limit("discovery", DISCOVERY_RATE_LIMIT_COUNT, DISCOVERY_RATE_LIMIT_WINDOW_SECONDS):
+                return
+            try:
+                run_id = unquote(self.path[len("/api/discovery/runs/"):-len("/cancel")])
+                job = DISCOVERY_JOBS.cancel(run_id)
+            except ValueError as exc:
+                self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc))
+                return
+            self._send_json({"ok": True, "job": job})
+            return
+
         if self.path == "/api/discovery/run":
             if not self._enforce_rate_limit("discovery", DISCOVERY_RATE_LIMIT_COUNT, DISCOVERY_RATE_LIMIT_WINDOW_SECONDS):
                 return
@@ -1118,14 +1142,15 @@ class Handler(BaseHTTPRequestHandler):
                     raise ValueError("Discovery query is too long. Limit is 500 characters.")
                 if molecules is not None and not isinstance(molecules, list):
                     raise ValueError("Molecules must be an array of name/SMILES objects.")
-                result = run_discovery_workflow(query, molecules=molecules, provider_mode=provider_mode)
+                if provider_mode not in {"auto", "live", "demo"}:
+                    raise ValueError("Provider mode must be auto, live, or demo.")
+                if len(molecules or []) > 12:
+                    raise ValueError("Too many molecules for one discovery run (maximum 12).")
+                job = DISCOVERY_JOBS.submit(query, molecules, provider_mode)
             except ValueError as exc:
                 self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc))
                 return
-            except RuntimeError as exc:
-                self._send_error_json(HTTPStatus.BAD_GATEWAY, str(exc), extra={"capabilities": discovery_capability_status()})
-                return
-            self._send_json({"ok": True, "run": result})
+            self._send_json({"ok": True, "job": job}, status=HTTPStatus.ACCEPTED)
             return
 
         if self.path == "/api/discovery/disposition":
@@ -1139,6 +1164,7 @@ class Handler(BaseHTTPRequestHandler):
                     str(payload.get("reviewer") or ""),
                     str(payload.get("note") or ""),
                 )
+                DISCOVERY_JOBS.update_result(result)
             except ValueError as exc:
                 self._send_error_json(HTTPStatus.BAD_REQUEST, str(exc))
                 return

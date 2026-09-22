@@ -66,6 +66,7 @@
             <label><span>Molecules · one per line: name | SMILES</span><textarea id="discovery-molecules" rows="6" placeholder="Leave blank for two cached demo inputs"></textarea></label>
             <button id="discovery-run" class="primary-button" type="submit">Run shadow workflow</button>
           </form>
+          <div class="discovery-job-line" aria-live="polite"><span id="discovery-job-status">No active run.</span><button id="discovery-cancel" class="text-button" type="button" hidden>Cancel run</button></div>
           <div class="prototype-rules"><b>Fail-closed rules</b><span>No identity without RDKit or a cached audited record.</span><span>No AB_Ridge score without a serialized frozen scorer.</span><span>No ordinal rank, probability, promotion, or hit claim.</span></div>
         </article>
         <article class="panel span-7 discovery-trace"><div class="panel-head"><div><span class="kicker">Execution trace</span><h2>Gate-by-gate state</h2></div></div><p class="trace-intro">Sources are collected, checked, and held for human review. Open the audit trail to inspect every step.</p><details><summary>Show all workflow gates <span id="discovery-run-id" class="caption">No run loaded</span></summary><div id="discovery-stages" class="discovery-stages"><p class="empty-state">Run the cached demo to inspect the complete workflow without credentials.</p></div></details></article>

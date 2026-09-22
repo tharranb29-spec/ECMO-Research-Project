@@ -140,6 +140,7 @@ main{min-width:0}.topbar{height:70px;border-bottom:1px solid var(--line);display
 .discovery-trace details summary .caption{font-weight:400;overflow-wrap:anywhere;text-align:right}
 .discovery-queue-panel{align-self:start}
 .runtime-banner>*{min-width:0}.runtime-banner .capability-row{min-width:0;max-width:100%;margin-left:0}.runtime-banner .capability-row .status-pill{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.discovery-job-line{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:12px;font-size:11px;color:var(--muted);overflow-wrap:anywhere}.discovery-job-line .text-button{padding:4px 0;color:#843e37}
 .source-grid{grid-template-columns:minmax(0,1fr)}
 .source-card{min-width:0;padding:18px 20px}
 .source-badges{display:flex;flex-wrap:wrap;align-items:center;gap:7px}

@@ -1,11 +1,14 @@
 import json
 import tempfile
+import threading
 import unittest
 from pathlib import Path
 from unittest import mock
 
 import track3_discovery_workflow as workflow
+import research_assistant_server as server
 from research_assistant_server import Handler
+from track3_discovery_jobs import DiscoveryJobs
 
 
 class Track3DiscoveryWorkflowTests(unittest.TestCase):
@@ -25,6 +28,9 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
     def test_cached_demo_is_cited_gated_and_fail_closed(self):
         result = workflow.run_workflow("human ADORA2A evidence", provider_mode="demo")
         self.assertEqual(result["workflow_state"], "cached_demo")
+        self.assertEqual(result["provenance"]["workflow_schema"], "a2a-shadow-discovery.v1")
+        self.assertIsNone(result["provenance"]["live_sources_retrieved_at_utc"])
+        self.assertEqual(len(result["provenance"]["sources_sha256"]), 64)
         self.assertTrue(all(source["url"].startswith("https://pubmed.ncbi.nlm.nih.gov/") for source in result["sources"]))
         self.assertTrue(all(item["evidence_quality"] == "quarantine" for item in result["extractions"]))
         self.assertEqual(result["screen_eligible_queue"]["ordering"], "unordered_composition_only")
@@ -258,6 +264,7 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
 
     def test_http_endpoints_run_demo_and_record_disposition(self):
         captured = []
+        jobs = DiscoveryJobs(Path(self.temp_dir.name) / "jobs", runner=workflow.run_workflow, save_latest=workflow.save_state)
         handler = object.__new__(Handler)
         handler.path = "/api/discovery/run"
         handler._origin_allowed = lambda: True
@@ -266,14 +273,27 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         handler._read_json_body = lambda: {"query": "A2A primary evidence", "provider_mode": "demo", "molecules": []}
         handler._send_json = lambda payload, **kwargs: captured.append(payload)
         handler._send_error_json = lambda *args, **kwargs: self.fail(f"Unexpected API error: {args}")
-        Handler.do_POST(handler)
+        with mock.patch.object(server, "DISCOVERY_JOBS", jobs):
+            Handler.do_POST(handler)
         self.assertTrue(captured[-1]["ok"])
-        run_id = captured[-1]["run"]["run_id"]
+        run_id = captured[-1]["job"]["run_id"]
+        for _ in range(100):
+            if jobs.get(run_id)["status"] == "completed":
+                break
+            threading.Event().wait(.01)
+        self.assertEqual(jobs.get(run_id)["status"], "completed")
+
+        handler.path = "/api/discovery/runs/" + run_id.replace(":", "%3A")
+        with mock.patch.object(server, "DISCOVERY_JOBS", jobs):
+            Handler._handle_get_like(handler)
+        self.assertEqual(captured[-1]["job"]["status"], "completed")
 
         handler.path = "/api/discovery/disposition"
         handler._read_json_body = lambda: {"run_id": run_id, "status": "retain_for_review", "reviewer": "QA reviewer"}
-        Handler.do_POST(handler)
+        with mock.patch.object(server, "DISCOVERY_JOBS", jobs):
+            Handler.do_POST(handler)
         self.assertEqual(captured[-1]["run"]["human_disposition"]["status"], "retain_for_review")
+        self.assertEqual(jobs.get(run_id)["result"]["human_disposition"]["status"], "retain_for_review")
 
 
 if __name__ == "__main__":
