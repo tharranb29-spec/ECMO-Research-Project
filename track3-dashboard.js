@@ -15,6 +15,8 @@
     const selected=views.includes(view)?view:"overview";
     document.querySelectorAll(".view").forEach(panel=>{const on=panel.dataset.panel===selected;panel.hidden=!on;panel.classList.toggle("active",on);});
     document.querySelectorAll(".nav-item").forEach(button=>button.classList.toggle("active",button.dataset.view===selected));
+    const activeNav=document.querySelector(`.nav-item[data-view="${selected}"]`);
+    if(activeNav?.closest("#nav-more"))$("nav-more").open=true;
     document.querySelector(".sidebar").classList.remove("open");$("menu-toggle").setAttribute("aria-expanded","false");
     history.replaceState(null,"",`#${selected}`);window.scrollTo({top:0,behavior:"instant"});
   }
@@ -27,11 +29,21 @@
   const summary=[
     ["External cohort","0 / 60","Frozen floor failure"],
     ["Primary model",fmt(data.summary.primary_model_r2,3),"AB_Ridge development R²"],
-    ["Structural context",data.summary.docked_candidates,"Historical records · no queue effect"],
-    ["Optional MD context",`${data.summary.tier_a_production_reported_ns}/${data.summary.tier_a_production_required_ns} ns`,"Historical pilot · not a queue gate"],
     ["Served models","0","Shadow-only; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
+
+  const overviewModels=records("model_registry");
+  let overviewMetric="r2";
+  function renderOverviewModels(){
+    const values=overviewModels.map(row=>Number(row[overviewMetric]));
+    const high=Math.max(...values),low=Math.min(...values),span=Math.max(high-low,.001);
+    const controls=[["r2","R²"],["rmse","RMSE"],["mae","MAE"]].map(([key,name])=>`<button type="button" data-overview-metric="${key}" class="${overviewMetric===key?"active":""}" aria-pressed="${overviewMetric===key}">${name}</button>`).join("");
+    const bars=overviewModels.map(row=>{const value=Number(row[overviewMetric]),width=overviewMetric==="r2"?Math.max(0,value)/Math.max(.6,high)*100:(high-value)/span*100;return `<div class="overview-bar-row"><span>${esc(row.display_name)}</span><span class="overview-bar-track"><i style="width:${width}%"></i></span><strong>${fmt(value,3)}</strong></div>`;}).join("");
+    $("overview-model-chart").innerHTML=`<div class="chart-switch" role="group" aria-label="Model metric">${controls}</div>${bars}<p class="chart-note">Grouped development evaluation only. ${overviewMetric==="r2"?"R² bars use a 0–0.6 axis; negative values show no positive bar.":"Error bars are relative to this comparison; lower is better."} No model is served.</p>`;
+    $("overview-model-chart").querySelectorAll("[data-overview-metric]").forEach(button=>button.addEventListener("click",()=>{overviewMetric=button.dataset.overviewMetric;renderOverviewModels();}));
+  }
+  renderOverviewModels();
 
   // PDF-reported aggregate reference only. This object is never used by queue,
   // discovery, model, admission, or promotion logic.
@@ -55,6 +67,18 @@
       ["Our frozen pipeline","Different 78-molecule development comparison, 2,048-bit fingerprint, and 240 held / 0 eligible external queue."]
     ]
   };
+  let overviewPrecisionN=10;
+  function renderOverviewPrecision(){
+    const rows=teammatePdf.precision;
+    const x=index=>44+index*136,y=value=>145-value*1.15;
+    const precisionPoints=rows.map((row,index)=>`${x(index)},${y(row[1]*100)}`).join(" ");
+    const basePoints=rows.map((row,index)=>`${x(index)},${y(row[2]*100)}`).join(" ");
+    const dots=rows.map((row,index)=>`<circle cx="${x(index)}" cy="${y(row[1]*100)}" r="${row[0]===overviewPrecisionN?7:5}" class="${row[0]===overviewPrecisionN?"selected":""}"/><text x="${x(index)}" y="165" text-anchor="middle">N=${row[0]}</text>`).join("");
+    const selected=rows.find(row=>row[0]===overviewPrecisionN);
+    $("overview-precision-chart").innerHTML=`<svg viewBox="0 0 360 180" role="img" aria-label="Teammate PDF reported precision declines from 96 percent at N 10 to 62 percent at N 40; reported base rate is 48.08 percent"><line x1="44" y1="145" x2="316" y2="145" class="axis"/><line x1="44" y1="87" x2="316" y2="87" class="grid"/><text x="8" y="90">50%</text><polyline points="${basePoints}" class="base-line"/><polyline points="${precisionPoints}" class="precision-line"/>${dots}</svg><div class="chart-switch" role="group" aria-label="Reported set size">${rows.map(row=>`<button type="button" data-overview-n="${row[0]}" class="${row[0]===overviewPrecisionN?"active":""}" aria-pressed="${row[0]===overviewPrecisionN}">N=${row[0]}</button>`).join("")}</div><p class="chart-note"><b>${fmt(selected[1]*100,1)}%</b> reported precision at N=${overviewPrecisionN}; PDF base rate ${fmt(selected[2]*100,2)}%. Not a prospective probability.</p>`;
+    $("overview-precision-chart").querySelectorAll("[data-overview-n]").forEach(button=>button.addEventListener("click",()=>{overviewPrecisionN=Number(button.dataset.overviewN);renderOverviewPrecision();}));
+  }
+  renderOverviewPrecision();
   $("teammate-source-hash").textContent=teammatePdf.sha256;
   $("teammate-metrics").innerHTML=[
     ["PDF screen-eligible",teammatePdf.funnel[3][1].toLocaleString(),"Provisional; not our queue"],
@@ -183,7 +207,7 @@
     const detailValue=value=>value&&typeof value==="object"?`${Object.keys(value).length} resolved contracts`:String(value);
     $("discovery-stages").innerHTML=run.audit_log.map(item=>`<div class="discovery-stage"><span>${String(item.sequence).padStart(2,"0")}</span><div><strong>${esc(label(item.event_type))}</strong><small>${esc(Object.entries(item.details).map(([key,value])=>`${label(key)}: ${detailValue(value)}`).join(" · "))}</small></div><i class="status-pill ${stateTone}">${run.workflow_state==="live"?"live":"cached"}</i></div>`).join("");
     $("source-count").textContent=`${run.sources.length} cited records · ${label(run.workflow_state)}`;
-    $("discovery-sources").innerHTML=run.sources.map(source=>{const extraction=run.extractions.find(item=>item.source_id===source.source_id)||{};return `<article class="source-card"><div><span class="status-pill ${source.retrieval_state==="live"?"passed":"shadow"}">${esc(source.retrieval_state)}</span><span class="status-pill ${extraction.evidence_quality==="quarantine"?"blocked":"review"}">${esc(extraction.evidence_quality||"unresolved")}</span></div><h3>${esc(source.title)}</h3><p>${esc(extraction.reason||"No extraction rationale returned.")}</p><a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer">${esc(source.source_id)} · source ↗</a><small>DOI ${esc(source.doi||"unresolved")} · full text ${esc(source.full_text_state||"unresolved")}</small></article>`;}).join("")||'<p class="empty-state">No citable sources returned.</p>';
+    $("discovery-sources").innerHTML=run.sources.map(source=>{const extraction=run.extractions.find(item=>item.source_id===source.source_id)||{};return `<article class="source-card"><div class="source-badges"><span class="status-pill ${source.retrieval_state==="live"?"passed":"shadow"}">${esc(source.retrieval_state)}</span><span class="status-pill ${extraction.evidence_quality==="quarantine"?"blocked":"review"}">${esc(extraction.evidence_quality||"unresolved")}</span></div><h3>${esc(source.title)}</h3><p>${esc(extraction.reason||"No extraction rationale returned.")}</p><a href="${esc(safeUrl(source.url))}" target="_blank" rel="noopener noreferrer">${esc(source.source_id)} · source ↗</a><small>DOI ${esc(source.doi||"unresolved")} · full text ${esc(source.full_text_state||"unresolved")}</small></article>`;}).join("")||'<p class="empty-state">No citable sources returned.</p>';
     const queue=run.screen_eligible_queue,eligibility=queue.eligibility_contract||records("uncertainty_review_queue")[0].eligibility_contract;$("queue-count").textContent=`${queue.count} ${eligibility.display_label}`;
     $("discovery-queue").innerHTML=`<div class="queue-summary"><strong>${queue.count}</strong><span>${esc(eligibility.display_label)} records</span><dl><dt>Scaffolds</dt><dd>${queue.scaffold_count}</dd><dt>Ordering</dt><dd>Composition only</dd><dt>Decision rule</dt><dd>Validated 90% upper bound ≥ verified threshold</dd></dl><p>${esc(eligibility.claim_limit)}</p></div>${Object.entries(queue.scaffold_composition).map(([scaffold,count])=>`<div class="scaffold-row"><code>${esc(scaffold)}</code><b>${count}</b></div>`).join("")}`;
     $("discovery-molecule-grid").innerHTML=run.molecules.map(molecule=>`<article class="registry-card ${molecule.screen_eligible?"control":"candidate"}"><header><span class="tag">${esc(molecule.state_label)}</span><span class="status-pill ${molecule.screen_eligible?"passed":"blocked"}">${esc(molecule.screen_eligible?eligibility.display_label:label(molecule.eligibility_state))}</span></header><h2>${esc(molecule.name)}</h2><small>${esc(molecule.molecule_id)}</small><p>Identity · ${esc(label(molecule.standardization_state))}<br>Domain · ${esc(label(molecule.applicability))}<br>Uncertainty · ${esc(label(molecule.uncertainty))}<br>AB_Ridge · ${esc(label(molecule.score_state))}</p><div class="eligibility-note">${esc(molecule.eligibility_reasons.join(" ")||"No gate rationale recorded.")}</div><div class="source-line">${esc(molecule.canonical_smiles||molecule.input_smiles)}</div></article>`).join("")||'<p class="empty-state">No molecule records were submitted.</p>';

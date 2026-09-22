@@ -219,6 +219,22 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('.audit-item>div:nth-child(3) strong,.audit-item>div:nth-child(3) code{display:block', css)
         self.assertIn('.search,.search input{width:100%;max-width:100%;min-width:0}', css)
 
+    def test_simplified_navigation_and_discovery_evidence_layout(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        css = (ROOT / "track3-dashboard.css").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        self.assertIn('id="nav-more"', html)
+        self.assertIn('class="overview-actions"', html)
+        self.assertIn('id="overview-model-chart"', html)
+        self.assertIn('id="overview-precision-chart"', html)
+        self.assertIn('class="panel span-5 discovery-queue-panel"', html)
+        self.assertIn('class="source-badges"', js)
+        self.assertIn('.source-badges{display:flex;flex-wrap:wrap;align-items:center;gap:7px}', css)
+        self.assertIn('function renderOverviewModels()', js)
+        self.assertIn('function renderOverviewPrecision()', js)
+        self.assertIn('Three reported development-set estimates, not prospective hit rates.', html)
+        self.assertIn('Scientific gates and detailed status', html)
+
     def test_team_sign_in_describes_track3_without_legacy_ranking_claims(self):
         login = (ROOT / "login.html").read_text(encoding="utf-8")
         login_js = (ROOT / "login.js").read_text(encoding="utf-8")

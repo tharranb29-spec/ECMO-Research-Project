@@ -79,3 +79,83 @@ main{min-width:0}.topbar{height:70px;border-bottom:1px solid var(--line);display
   .shadow-workflow{grid-template-columns:minmax(0,1fr)}
   .mobile-scroll-hint{display:block;margin:-8px 0 13px;color:var(--muted);font-size:10px}
 }
+
+/* First visit: five clear destinations, with specialist views still available. */
+.nav-group-label{display:block;padding:8px 11px 4px;color:#9ebbb1;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.nav-more{margin-top:11px;border-top:1px solid rgba(255,255,255,.13);padding-top:10px}
+.nav-more summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;padding:10px 11px;border-radius:7px;color:#d9e9e2;font-size:11px;font-weight:650}
+.nav-more summary::-webkit-details-marker{display:none}
+.nav-more summary:hover,.nav-more[open] summary{background:rgba(255,255,255,.09)}
+.nav-more[open] summary span{transform:rotate(180deg)}
+.nav-more>div{display:grid;gap:3px;margin-top:4px}
+.nav-more .nav-item{width:100%}
+
+/* Simple overview: key status, three starting points, and two sourced charts. */
+.metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.metric-grid .metric{border-bottom:0}
+.overview-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.overview-actions button{min-width:0;text-align:left;border:1px solid var(--line);background:var(--surface);padding:19px 20px;cursor:pointer;border-radius:8px}
+.overview-actions button:hover,.overview-actions button:focus-visible{border-color:var(--green2);outline:2px solid #b7d9ca;outline-offset:2px}
+.overview-actions strong,.overview-actions span{display:block;line-height:1.45}
+.overview-actions strong{font-size:14px;color:var(--green)}
+.overview-actions span{font-size:11px;color:var(--muted);margin-top:5px}
+.overview-charts{margin-bottom:20px}
+.overview-charts .panel{min-width:0;align-self:start}
+.overview-charts .panel-head{display:block}
+.overview-charts .text-button{display:block;white-space:normal;padding:0;margin-top:8px;text-align:left}
+.overview-details{border:1px solid var(--line);background:var(--surface);margin-top:20px}
+.overview-details>summary{cursor:pointer;list-style:none;padding:18px 22px;font-size:12px;font-weight:700;color:var(--green)}
+.overview-details>summary::-webkit-details-marker{display:none}
+.overview-details>summary:after{content:"⌄";float:right}
+.overview-details[open]>summary:after{transform:rotate(180deg)}
+.overview-details>.dashboard-grid{padding:0 18px 18px}
+.chart-switch{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 17px}
+.chart-switch button{border:1px solid var(--line);background:#f0f2eb;border-radius:6px;padding:7px 11px;cursor:pointer;color:var(--muted);font-size:11px}
+.chart-switch button.active{background:var(--green);border-color:var(--green);color:white}
+.overview-bar-row{display:grid;grid-template-columns:minmax(105px,1fr) minmax(70px,2fr) 50px;gap:12px;align-items:center;margin:14px 0;font-size:11px}
+.overview-bar-row strong{text-align:right;font-variant-numeric:tabular-nums}
+.overview-bar-track{display:block;height:13px;background:#e9ece5;border-radius:99px;overflow:hidden}
+.overview-bar-track i{display:block;height:100%;background:var(--green2);border-radius:99px}
+.chart-note{font-size:11px;line-height:1.5;color:var(--muted);margin:17px 0 0}
+.overview-precision-chart svg{display:block;width:100%;max-width:430px;height:auto;margin:0 auto 12px;overflow:visible}
+.overview-precision-chart svg text{font:11px Inter,"Avenir Next",sans-serif;fill:var(--muted)}
+.overview-precision-chart svg .axis{stroke:#b4c2b7;stroke-width:1}
+.overview-precision-chart svg .grid{stroke:#e1e6de;stroke-width:1}
+.overview-precision-chart svg .base-line{fill:none;stroke:#b5a477;stroke-width:2;stroke-dasharray:5 5}
+.overview-precision-chart svg .precision-line{fill:none;stroke:var(--green2);stroke-width:3}
+.overview-precision-chart svg circle{fill:var(--green2);stroke:var(--surface);stroke-width:2}
+.overview-precision-chart svg circle.selected{fill:var(--green);stroke:var(--lime);stroke-width:3}
+
+/* Discovery results: labels wrap as a group, never collide or squeeze a title. */
+.page-head .hero-stat{flex:0 0 165px;min-width:165px}
+.page-head .hero-stat strong{white-space:nowrap;font-size:clamp(37px,3.6vw,49px)}
+.discovery-queue-panel .panel-head{display:block}
+.discovery-queue-panel .panel-head>div{width:100%}
+.discovery-queue-panel .panel-head .status-pill{margin-top:13px;max-width:100%;white-space:normal;text-align:left}
+.discovery-layout{align-items:start}
+.discovery-trace .trace-intro{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 18px}
+.discovery-trace details{border-top:1px solid var(--line)}
+.discovery-trace details summary{list-style:none;cursor:pointer;padding:14px 0;display:flex;justify-content:space-between;gap:12px;align-items:center;font-size:12px;font-weight:700;color:var(--green)}
+.discovery-trace details summary::-webkit-details-marker{display:none}
+.discovery-trace details summary .caption{font-weight:400;overflow-wrap:anywhere;text-align:right}
+.discovery-queue-panel{align-self:start}
+.runtime-banner>*{min-width:0}.runtime-banner .capability-row{min-width:0;max-width:100%;margin-left:0}.runtime-banner .capability-row .status-pill{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.source-grid{grid-template-columns:minmax(0,1fr)}
+.source-card{min-width:0;padding:18px 20px}
+.source-badges{display:flex;flex-wrap:wrap;align-items:center;gap:7px}
+.source-badges .status-pill{display:inline-flex;white-space:normal;overflow-wrap:anywhere}
+.source-card h3{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+.source-card p{font-size:11px;line-height:1.55}
+.source-card small,.source-card a{overflow-wrap:anywhere}
+.queue-summary{text-align:left}
+.queue-summary>strong{font-size:48px}
+.queue-summary p{text-align:left;font-size:11px}
+@media(max-width:960px){.overview-actions{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+  .metric-grid,.overview-actions{grid-template-columns:minmax(0,1fr)}
+  .overview-charts .panel-head{display:block}
+  .overview-charts .text-button{margin-top:9px;padding:0}
+  .overview-bar-row{grid-template-columns:minmax(78px,1fr) minmax(65px,1.6fr) 45px;gap:7px}
+  .page-head .hero-stat{display:none}
+  .overview-details>.dashboard-grid{padding:0 10px 10px}
+}
