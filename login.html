@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ECMO Research Dashboard Sign In</title>
+    <title>A2A Track 3 Dashboard · Team Sign In</title>
     <style>
       :root {
-        --font-ui: Calibri, Arial, sans-serif;
-        --bg: #eef3f9;
-        --ink: #122742;
-        --muted: #5f6e84;
-        --accent: #155cf4;
-        --accent-strong: #0b45b6;
-        --line: rgba(18, 39, 66, 0.1);
-        --panel: rgba(255, 255, 255, 0.94);
-        --shadow: 0 28px 70px rgba(16, 36, 62, 0.16);
+        --font-ui: Inter, "Avenir Next", "Segoe UI", sans-serif;
+        --bg: #f2f1eb;
+        --ink: #14211e;
+        --muted: #68746f;
+        --accent: #276a59;
+        --accent-strong: #123c33;
+        --line: #d9ddd4;
+        --panel: #fffefa;
+        --shadow: 0 22px 70px rgba(19, 44, 36, 0.09);
       }
 
       * {
@@ -32,9 +32,9 @@
         color: var(--ink);
         font-family: var(--font-ui);
         background:
-          radial-gradient(circle at 0% 0%, rgba(21, 92, 244, 0.12), transparent 24%),
-          radial-gradient(circle at 100% 0%, rgba(13, 130, 117, 0.08), transparent 20%),
-          linear-gradient(180deg, #f9fbff 0%, #eef3f9 48%, #e8eef7 100%);
+          radial-gradient(circle at 0% 0%, rgba(39, 106, 89, 0.11), transparent 26%),
+          radial-gradient(circle at 100% 0%, rgba(201, 239, 114, 0.16), transparent 22%),
+          var(--bg);
       }
 
       .shell {
@@ -59,8 +59,7 @@
         overflow: hidden;
         padding: 34px;
         background:
-          linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(239, 245, 255, 0.92)),
-          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.08), transparent 30%);
+          linear-gradient(145deg, #fffefa, #edf5ed);
       }
 
       .story-panel::before {
@@ -69,8 +68,8 @@
         inset: 0;
         pointer-events: none;
         background:
-          radial-gradient(circle at 100% 0%, rgba(21, 92, 244, 0.08), transparent 26%),
-          radial-gradient(circle at 0% 100%, rgba(13, 130, 117, 0.06), transparent 24%);
+          radial-gradient(circle at 100% 0%, rgba(39, 106, 89, 0.08), transparent 26%),
+          radial-gradient(circle at 0% 100%, rgba(201, 239, 114, 0.16), transparent 24%);
       }
 
       .story-content {
@@ -93,8 +92,8 @@
         display: grid;
         place-items: center;
         background: rgba(255, 255, 255, 0.96);
-        border: 1px solid rgba(21, 92, 244, 0.12);
-        box-shadow: 0 16px 34px rgba(21, 92, 244, 0.14);
+        border: 1px solid var(--line);
+        box-shadow: 0 16px 34px rgba(19, 44, 36, 0.09);
       }
 
       .brand-mark img {
@@ -134,6 +133,7 @@
         font-size: clamp(2.6rem, 5vw, 4.4rem);
         line-height: 0.95;
         letter-spacing: -0.05em;
+        overflow-wrap: break-word;
       }
 
       .summary {
@@ -154,7 +154,8 @@
         padding: 18px;
         border-radius: 24px;
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.92);
+        background: #fffefa;
+        min-width: 0;
       }
 
       .signal-card span {
@@ -171,6 +172,7 @@
         display: block;
         font-size: 1.02rem;
         margin-bottom: 6px;
+        overflow-wrap: anywhere;
       }
 
       .signal-card p {
@@ -211,8 +213,8 @@
       .login-chip {
         padding: 8px 12px;
         border-radius: 999px;
-        border: 1px solid rgba(21, 92, 244, 0.12);
-        background: rgba(21, 92, 244, 0.08);
+        border: 1px solid var(--line);
+        background: #dcebe4;
         color: var(--accent-strong);
         font-size: 0.84rem;
         font-weight: 700;
@@ -246,8 +248,8 @@
       }
 
       .field input:focus {
-        outline: 2px solid rgba(21, 92, 244, 0.18);
-        border-color: rgba(21, 92, 244, 0.28);
+        outline: 2px solid rgba(39, 106, 89, 0.25);
+        border-color: var(--accent);
       }
 
       .submit-button {
@@ -258,7 +260,7 @@
         color: #fff;
         font-weight: 700;
         cursor: pointer;
-        box-shadow: 0 18px 36px rgba(21, 92, 244, 0.24);
+        box-shadow: 0 18px 36px rgba(19, 44, 36, 0.18);
       }
 
       .submit-button[disabled] {
@@ -300,6 +302,19 @@
           grid-template-columns: 1fr;
         }
       }
+      @media (max-width: 560px) {
+        .shell { width: min(100% - 24px, 460px); margin: 12px auto; gap: 12px; }
+        .story-panel, .login-panel { border-radius: 22px; padding: 22px; }
+        .story-content { gap: 22px; }
+        .brand-row { align-items: flex-start; gap: 12px; }
+        .brand-mark { width: 58px; height: 58px; flex: none; border-radius: 16px; }
+        .brand-mark img { width: 46px; height: 46px; }
+        .institution { font-size: 1rem; }
+        .eyebrow { font-size: 0.67rem; letter-spacing: 0.1em; }
+        .headline { font-size: clamp(2.05rem, 9vw, 2.8rem); line-height: 1.04; }
+        .summary { font-size: 0.95rem; line-height: 1.6; }
+        .signal-card { padding: 15px; border-radius: 18px; }
+      }
     </style>
   </head>
   <body>
@@ -313,34 +328,34 @@
             <div>
               <p class="eyebrow">Team Access Portal</p>
               <p class="institution">Zhejiang University International School of Medicine</p>
-              <p class="program">AI-Driven ECMO Interface Research Project</p>
+              <p class="program">Track 3 · A2A Adenosine Receptor Research</p>
             </div>
           </div>
 
           <div>
-            <h2 class="headline">Secure entry for the ECMO candidate discovery workspace.</h2>
+            <h2 class="headline">Evidence first. Discovery under review.</h2>
             <p class="summary">
-              This dashboard combines ligand ranking, autonomous literature discovery, structural review, and a live
-              research assistant for the Siglec-9 and SIRPalpha screening program. Team sign-in keeps the research
-              workspace private while preserving direct access to the live analytical tools.
+              Explore the Track 3 A2A evidence record, structural context, and a shadow-mode literature discovery
+              workflow. The review queue is governed by frozen eligibility rules; predictions and docking are not
+              validated hits or autonomous release decisions.
             </p>
           </div>
 
           <div class="signal-grid">
             <article class="signal-card">
-              <span>Ranking Engine</span>
-              <strong>Candidate triage</strong>
-              <p>Review the current lead set through affinity, surface-fit, immune-effect, and hemocompatibility logic.</p>
+              <span>Evidence Gates</span>
+              <strong>Auditable records</strong>
+              <p>Trace source evidence, model limitations, and the current review-queue gate.</p>
             </article>
             <article class="signal-card">
-              <span>Discovery Loop</span>
-              <strong>Autonomous updates</strong>
-              <p>Track literature-derived candidates, refresh cycles, and provisional ranking outputs from the live server.</p>
+              <span>Structural Context</span>
+              <strong>Dual-state docking</strong>
+              <p>Inspect receptor-state comparisons without treating docking as measured activity.</p>
             </article>
             <article class="signal-card">
-              <span>Discussion Layer</span>
-              <strong>Live assistant</strong>
-              <p>Ask broader project questions, compare pathways, and interpret pasted assay or docking notes in context.</p>
+              <span>Shadow System</span>
+              <strong>Human-reviewed intake</strong>
+              <p>Examine literature candidates and audit trails before any human decision.</p>
             </article>
           </div>
         </div>
@@ -354,7 +369,7 @@
           </div>
           <h1>Sign in to continue</h1>
           <p id="login-destination">
-            Enter the project credentials to open the ECMO research dashboard and return to your requested workspace.
+            Enter the project credentials to open the A2A Track 3 dashboard and return to your requested workspace.
           </p>
         </div>
 
@@ -376,7 +391,7 @@
 
         <div class="login-note">
           <strong>Access note:</strong> each team member can use a unique username and password. This sign-in protects
-          the live dashboard, its assistant endpoints, and the autonomous discovery workflow using a secure session
+          the dashboard and its research endpoints using a secure session
           cookie.
         </div>
       </section>

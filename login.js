@@ -72,7 +72,7 @@
   }
 
   if (destinationCopy) {
-    destinationCopy.textContent = `Enter the project credentials to open the ECMO research dashboard and return to ${destinationLabel(nextPath)}.`;
+    destinationCopy.textContent = `Enter the project credentials to open the A2A Track 3 dashboard and return to ${destinationLabel(nextPath)}.`;
   }
 
   form.addEventListener("submit", handleSubmit);

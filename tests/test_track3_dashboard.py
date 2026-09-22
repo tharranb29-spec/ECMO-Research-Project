@@ -219,6 +219,15 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('.audit-item>div:nth-child(3) strong,.audit-item>div:nth-child(3) code{display:block', css)
         self.assertIn('.search,.search input{width:100%;max-width:100%;min-width:0}', css)
 
+    def test_team_sign_in_describes_track3_without_legacy_ranking_claims(self):
+        login = (ROOT / "login.html").read_text(encoding="utf-8")
+        login_js = (ROOT / "login.js").read_text(encoding="utf-8")
+        self.assertIn("Evidence first. Discovery under review.", login)
+        self.assertIn("shadow-mode literature discovery", login)
+        self.assertIn("A2A Track 3 dashboard", login_js)
+        self.assertNotIn("Siglec-9", login)
+        self.assertNotIn("Ranking Engine", login)
+
     def test_application_server_and_render_blueprint_are_read_only_track3(self):
         server = (ROOT / "research_assistant_server.py").read_text(encoding="utf-8")
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")
