@@ -1,0 +1,3091 @@
+{
+  "candidate_worklist": [
+    {
+      "candidate_id": "BDB-106375",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "QIBAMLNBYLUZGF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)CC2C(CC3CCCCC3)CCC12)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23480235"
+    },
+    {
+      "candidate_id": "BDB-14390",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BNRNXUUZRGQAQC-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C2CCCC(C(C)(C)C3CCCCC3)C2)CC2CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-175385",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CQMZWYQNQJMCCO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCC1CCCCC1)CCC1CCCC(C2CC3CC(C)CC(C)C3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26851736"
+    },
+    {
+      "candidate_id": "BDB-175399",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "IDGFGLTVKLOCMJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCCC(CCC(C)C4CCCCCC4)C3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26851736"
+    },
+    {
+      "candidate_id": "BDB-175402",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UFDSXJSHQYVRHF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCCC(CCC(C)C4CCCC4)C3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26851736"
+    },
+    {
+      "candidate_id": "BDB-21199",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MJCNLEGNWBNHCX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CCCCCC1)CC1CC(C2CCCC2)CC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18307293"
+    },
+    {
+      "candidate_id": "BDB-21212",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FVYCZVOQAJZLBF-SFHVURJKSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC1)CC1CC(C2CCCC2)CC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18307293"
+    },
+    {
+      "candidate_id": "BDB-21217",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HQNVISKJTIKRQJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC2CC(C3CC4CCCCC4C3)CCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16366607"
+    },
+    {
+      "candidate_id": "BDB-26250",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FKWNFEDFTOOVQH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCCC(C3CCCC(C4CCCC4)C3)C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18947224"
+    },
+    {
+      "candidate_id": "BDB-35803",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HKDRLLSZDIGQIK-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19695884"
+    },
+    {
+      "candidate_id": "BDB-35839",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FOBLNBXDRQYXQV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC1)C1CCCC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19695884"
+    },
+    {
+      "candidate_id": "BDB-44650",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MYUCPCJDLCLXDA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C1CCCCC1)C1CCC2C(CCC3C4CCCCC4CC23)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50003108",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SJVLZHJJIWSOJI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CC3C(C)C(CC4CC4)C(C)C(CC4CC4)C3C2)CC1)C1CCC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18226909"
+    },
+    {
+      "candidate_id": "BDB-50003151",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KIDLMTBTXJXJRT-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCC(C)C4CCC(C(C)CC5CCCCC5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18226909"
+    },
+    {
+      "candidate_id": "BDB-50003212",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WQNHFQJVMCIZLP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCC(C)C4CCC(C(C)CCC5CCCCC5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18226909"
+    },
+    {
+      "candidate_id": "BDB-50003233",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FZSRIJONUFLHPK-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CC3C(C)C(CC4CC4)C(C)C(CC4CC4)C3C2)CC1)C1CCC(C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18226909"
+    },
+    {
+      "candidate_id": "BDB-50011305",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ZHQNOECYYOPOGK-AAAKGCLZSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "CC(CCCCC(C)C1CC(CCC(C2CCCCC2)C2CCCCC2)C2CCC(C3CCCC3)C2C1)CC1CCC(C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24164628"
+    },
+    {
+      "candidate_id": "BDB-50013702",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FHZRSYFMJLJWBS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCCC(C2CCC3CCCCC32)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19282184"
+    },
+    {
+      "candidate_id": "BDB-50018002",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NPCYZVFLXAHEOX-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCC(C)CC4C(C)CCC4C)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:2993622"
+    },
+    {
+      "candidate_id": "BDB-50022732",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SJGRLFUUACZQRA-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC2CC3CCCC3CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:3172141"
+    },
+    {
+      "candidate_id": "BDB-50023391",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MMUQMGJPHOIRRP-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC2CC(C3CCCCC3)CC2C(C)C1CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:3351850"
+    },
+    {
+      "candidate_id": "BDB-50026819",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MUXUIVVLQXFMRX-CXJTVLAKSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCC1CCC2CC(C)CC12)CC1CCC(CC(C)CCC2CCC(CCCC3CCC4CCC(C5CCCC5)C4C3)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:25221664"
+    },
+    {
+      "candidate_id": "BDB-50038005",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GJLCUFJWXOCCCT-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CCCCC2)CC(C2CCCC2)C2C3CC(C4CCCCC4)CC3CCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:25462223"
+    },
+    {
+      "candidate_id": "BDB-50047917",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_target_species",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "ZUZUSCXGJHXEMB-WXAVEZDYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCC2CC(CC3CC3C3CCCCC3)C3CCC(C4CCCC4)C3C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:24969016"
+    },
+    {
+      "candidate_id": "BDB-50047987",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NRSCJCCACLWGQC-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCCC1)CC1CCCC2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24972108"
+    },
+    {
+      "candidate_id": "BDB-50047995",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MBXDLCHXRJJXPM-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CC3CCCC(CC4CC4)C3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24972108"
+    },
+    {
+      "candidate_id": "BDB-50048017",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "RDPQQFRZIZWHKI-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CCC(CCC3CCCC4CC(C5CCCC5)CC34)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24972108"
+    },
+    {
+      "candidate_id": "BDB-50048061",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AISRPRRMNYPGJX-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CCCC1CCCCC1)C1CCC(CCC2CCCCC2)C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24972108"
+    },
+    {
+      "candidate_id": "BDB-50055085",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OYGJIKRTCDDVRM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CC2CCC3CC(C4CCCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:25063944"
+    },
+    {
+      "candidate_id": "BDB-50064625",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MEMQHGHFQKPZOS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CCCCC2C1)C1CCC(CC2CCCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:25686851"
+    },
+    {
+      "candidate_id": "BDB-50080287",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KQKYOWHVYGWBHO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CCCC1CCCC1CC(C2CCCCC2)CC2CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:10476879"
+    },
+    {
+      "candidate_id": "BDB-50083915",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UUFLIBCXLXMTGF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCC2)CCC2CC3CCCCC3C21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11462973"
+    },
+    {
+      "candidate_id": "BDB-50083916",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CQXMRLNWXNWPSV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCCC2)CCC2CC3CCCCC3C21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11462973"
+    },
+    {
+      "candidate_id": "BDB-50085666",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NANAINBLSKKKCP-YRIIQKNPSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(C(CCC2CC(CCCC3CCCC3)CC3C(C4CCCC4)CCC23)C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:10714510"
+    },
+    {
+      "candidate_id": "BDB-50091143",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CYSDHZJPDQKSJB-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCCC2CC3CCCCC3C3CC(C4CCCCC4)CC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:10956220"
+    },
+    {
+      "candidate_id": "BDB-50095788",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OGMPGZVDXMCVJD-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CCC2CCC3CC(C4CCCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11170626"
+    },
+    {
+      "candidate_id": "BDB-50102281",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JYELSORFHCQDSM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCCC2)CCC2C(CC3CCCCC3)C3CCCCC3C12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11462973"
+    },
+    {
+      "candidate_id": "BDB-50102286",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LAKWSLSTUWRCOM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCC2)CCC2C(CC3CCCCC3)C3CCCCC3C12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11462973"
+    },
+    {
+      "candidate_id": "BDB-50108038",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UIAWUQHFYVTKHM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C)(C1CCCCC1)C1CCC(CCC2CCC3C2CCC2CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11754583"
+    },
+    {
+      "candidate_id": "BDB-50116381",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MRCLOFVOQWMJPM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CCCCC2)C(C)C2C3CCCCC3CC2C1CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:12139445"
+    },
+    {
+      "candidate_id": "BDB-50116384",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SGNCTBLOFLIZCK-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CC2)C(C)C2C3CCCCC3CC2C1CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:12139445"
+    },
+    {
+      "candidate_id": "BDB-50119131",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OMYIZCDTYNHUGF-XWXWGSFUSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCC1)C1CCC(C2CCC3CCC(C4CCCC4)C3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:12270178"
+    },
+    {
+      "candidate_id": "BDB-50119157",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GAQVVAKOAPHOLM-VGKBRBPRSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCC(C3CCC4CCC(C5CCCC5)C4C3)C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:12270178"
+    },
+    {
+      "candidate_id": "BDB-50120761",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BSNJZTLENAKNNX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)CC2CCCC21)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:12408713"
+    },
+    {
+      "candidate_id": "BDB-50133368",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OOTVLKSCGYKBDY-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCC2CCCCC21)CC1CC2CC(CCCC3CCCCC3)CC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:13678407"
+    },
+    {
+      "candidate_id": "BDB-50137520",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HFNKEYSOOSBXSY-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCC2CC(C3CCCC3)CC12)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26717203"
+    },
+    {
+      "candidate_id": "BDB-50137522",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PBXFOUQUQNIFAX-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCCC1)CC1CC(CC2CCCCC2)CC2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26717203"
+    },
+    {
+      "candidate_id": "BDB-50137530",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XDBHEXCFNGFAMS-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCCC1)CC1CC(CCC2CCCCC2)CC2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26717203"
+    },
+    {
+      "candidate_id": "BDB-50137635",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MFDDHVJCVCVPIP-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(CCC2CC(CC3CCCCC3)CC3CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26717203"
+    },
+    {
+      "candidate_id": "BDB-50139711",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DHTUIDHJRHTUOI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(C2CCC(C3CCCCC3)C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:14741297"
+    },
+    {
+      "candidate_id": "BDB-50139722",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XLTCCJIUIMYSBX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCCC1CCCCC1)CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:14741297"
+    },
+    {
+      "candidate_id": "BDB-50139728",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PDTFIAGWAGDHCW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CCCCCC2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:14741297"
+    },
+    {
+      "candidate_id": "BDB-50139734",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JBZHGBGUPKQCBU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCCC1CCC2CCCCC2C1)CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:14741297"
+    },
+    {
+      "candidate_id": "BDB-50139768",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DVGQDYYVGLUGNW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC2CCCCC21)C1CCCC2CCCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26781932"
+    },
+    {
+      "candidate_id": "BDB-50139775",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KOGRSSNNCJISAU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC2CCCCC21)C1CCCC2C(C3CCCCC3)CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26781932"
+    },
+    {
+      "candidate_id": "BDB-50139817",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FIBSWIHKNWCKJD-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC2CCC(C)C12)C1CCCC2CCCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26781932"
+    },
+    {
+      "candidate_id": "BDB-50139836",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WKZDIXJLBNRISL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC2CC(C(C)C3CCCC4CCCCC43)CCC12)C1CCCC2CCCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26781932"
+    },
+    {
+      "candidate_id": "BDB-50141449",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SBJQACFELVSXPD-IWCJZZDYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)CC1CCC2CCC(C3CCCC3)C2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15006389"
+    },
+    {
+      "candidate_id": "BDB-50141455",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DDCUXRNACUVAKE-HGBQRMJASA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCC2CCC(C3CCCC3)C2C1)CCC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15006389"
+    },
+    {
+      "candidate_id": "BDB-50141456",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "RZWYFQWUSTWXOT-XKLVTHTNSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)CC1CCC2CCC(C3CCCC3)C2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15006389"
+    },
+    {
+      "candidate_id": "BDB-50147637",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LUUSEYRGIWCHGC-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(C1CCCCC1)C1CCC2CC(C3CCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15149696"
+    },
+    {
+      "candidate_id": "BDB-50147876",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "RCDDAILWTKWNPX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CCC2CCC(C3CCCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15163184"
+    },
+    {
+      "candidate_id": "BDB-50152092",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LHHKPNOHZCRPQI-CUVLRLMBSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CC(C3CCC(C4CCCCC4)C3)CC3C(C4CCCC4)CCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15341491"
+    },
+    {
+      "candidate_id": "BDB-50156616",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FARQWWRBQXFTDH-RDJZCZTQSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCC3CC(C4CCC5CC(C6CCCC6)CC5C4)CCC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18637670"
+    },
+    {
+      "candidate_id": "BDB-50170827",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "TYCRGJHWMDJLCO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCC(CC3CC4CCCC4C(CC4CC5CCC4C5)C3)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16033270"
+    },
+    {
+      "candidate_id": "BDB-50171290",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HMXDWDSNPRNUKI-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCCC1)C1CC(C2CCCCC2)C(C2CCCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:15131245"
+    },
+    {
+      "candidate_id": "BDB-50171753",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NOPDFTZVAJQFFF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCC1CCCCC1)C1CCC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16099648"
+    },
+    {
+      "candidate_id": "BDB-50171773",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GFTOIPQCHLKALF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CC2CCC3CCCCC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16099648"
+    },
+    {
+      "candidate_id": "BDB-50176819",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JPKVNXGYCSFLGI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCC3C(CCC4CCCCC4)CCCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16279775"
+    },
+    {
+      "candidate_id": "BDB-50179301",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LYALQSWCHUWEAF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CC2C3CCCC3C3CCCC3C2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16366607"
+    },
+    {
+      "candidate_id": "BDB-50180205",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AZMGORPHNMBVBU-KSVNGYGVSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CC1)C1CCC(C2CCC3C(CCC4CCCCC4)CCCC32)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392812"
+    },
+    {
+      "candidate_id": "BDB-50187588",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DJMAOAZZXABOFN-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2C(C1)CC1C(C3CCC(CCCC4CCCCC4)CC3)CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27485602"
+    },
+    {
+      "candidate_id": "BDB-50189175",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GMRJTVNCPZHTOX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)C(CC1CCCCC1)C1CC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27227326"
+    },
+    {
+      "candidate_id": "BDB-50189817",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CVTMECIYXVPNLC-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CC2CCCCC2C2C(C)C(C3CCCCC3)CC12)C(C1CCCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16789747"
+    },
+    {
+      "candidate_id": "BDB-50194816",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SVNVSTDRFRAKND-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CCC2CCCC(C3CCCCC3)C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16971117"
+    },
+    {
+      "candidate_id": "BDB-50196544",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JTJKCSSYQFNNON-WVSUBDOOSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC2CC(CC3CC(C4CCCC4)CC4C(C5CCCC5)CCC34)CCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17045477"
+    },
+    {
+      "candidate_id": "BDB-50196551",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FFXMREHKIUCCAM-WVSUBDOOSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CC2CC(C3CCCC3)CC3C(C4CCCC4)CCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17045477"
+    },
+    {
+      "candidate_id": "BDB-50199460",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "YLEQGEOHZFVIAR-QZUDQQPUSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC(C(CC2CCCC3C2CCC3C2CCC3CC32)C2CC2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:27933810"
+    },
+    {
+      "candidate_id": "BDB-50199463",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_target_species",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "PWANAKRSKQRVSS-QKZATRHHSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC(CC(C2CC2)C2CC2)C2CCC(C3CCC4CC43)C2C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:27933810"
+    },
+    {
+      "candidate_id": "BDB-50202575",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MXNGBNYQJCQGEV-PFHKOEEOSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CCC1CCCC2C(C3CCCC3)CCC12)CC1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17228880"
+    },
+    {
+      "candidate_id": "BDB-50202985",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NCRDZJIYEHKXFL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(C2CCC(CCC3CCC4C3CCC3CC(C5CCCC5)CC34)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17236762"
+    },
+    {
+      "candidate_id": "BDB-50208784",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LCDBQJZQQFLFGG-QTQZEZTPSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C(CC1CCC2CCCCC2C1)CC1CCC2CCC(C3CCCC3)C2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17378544"
+    },
+    {
+      "candidate_id": "BDB-50208811",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ZJDAEJJMDHYEGB-HUBRGWSESA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(C)(C1CCCCC1)C1C(CCCC2CCC3CCC(C4CCCC4)C3C2)CC2CCCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:17378544"
+    },
+    {
+      "candidate_id": "BDB-50211077",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KLLJKZAKUJQFQR-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27933962"
+    },
+    {
+      "candidate_id": "BDB-50232048",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NRRYCEINQLPTLE-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CC4CCC(C5CCCCC5)C4C)C3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27842891"
+    },
+    {
+      "candidate_id": "BDB-50232049",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FTYUKYLDBALLID-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CC(C)C4CCC(C5CCCCC5)CC4)C3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27842891"
+    },
+    {
+      "candidate_id": "BDB-50237076",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XHZNAIPWEJMXIP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCCC1)CC1CC(C2CCCC2)CC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18329269"
+    },
+    {
+      "candidate_id": "BDB-50237093",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FLJKEYOWOUCFNJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCC(CCC2CCCCC2)C1)CC1CC(C2CCCC2)CC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18329269"
+    },
+    {
+      "candidate_id": "BDB-50247456",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JTOBORUICCTILQ-WBMMKZCBSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CC(CC3CCCC3)C3CCC(C4CCC(CC5CCCC5)C4)C3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:29257884"
+    },
+    {
+      "candidate_id": "BDB-50247934",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LYNYVXYEWWSYMQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CCCCC2)C2CCC(CCCC3CCCC3)CC2C1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19181527"
+    },
+    {
+      "candidate_id": "BDB-50248436",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AJRRIEGYRSNLNQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC2CCC(CC3CC3)CC2C1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19181527"
+    },
+    {
+      "candidate_id": "BDB-50248576",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CPCBVGFLWLFBQV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CCCCC2)C2CCC(CCC3CCCCC3)CC2C1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19181527"
+    },
+    {
+      "candidate_id": "BDB-50248578",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UPPCVKRCEALPST-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CC2CCCCC2)C2CCC(CCCC3CCCCC3)CC2C1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19181527"
+    },
+    {
+      "candidate_id": "BDB-50256363",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DKTSTJQGCYJNIY-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(C2CCC(CCC(CC3CC3)C3CCC4CC(C5CCCC5)CC4C3)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19109019"
+    },
+    {
+      "candidate_id": "BDB-50256952",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "IVKXIMVGTFMPDF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCC3CCCCC32)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19282184"
+    },
+    {
+      "candidate_id": "BDB-50257000",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JGFAEEKLMAWINF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC2C(C1)CCC2C1CCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19282184"
+    },
+    {
+      "candidate_id": "BDB-50257025",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JIBITRQNBXVGNX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCCC2)CC2C(CC3CCCCC3)CC3CCCCC3C12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19301821"
+    },
+    {
+      "candidate_id": "BDB-50262150",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CQNPTEQAAAOVKX-MRXNPFEDSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CC2CCCC2CCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18637670"
+    },
+    {
+      "candidate_id": "BDB-50262266",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BSDPUVBSSGQTGP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCCC(C3CCC4CCCC4C3)C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18637670"
+    },
+    {
+      "candidate_id": "BDB-50264171",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "ZGLFUGCOCLZCQG-XWAOVWAASA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(C2CC2CC2CCCC3C2CCC3C2CCC3CC32)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:18752961"
+    },
+    {
+      "candidate_id": "BDB-50264831",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OLHVMYLPYPPJJK-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "CC(CC1CCCCC1)CC1CCC(CC2CC(C3CCCCC3)CC3C(CC4CCCCC4)CCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24164628"
+    },
+    {
+      "candidate_id": "BDB-50266022",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ORZFUSWWXUVGND-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C1CCCCC1)C1CC(CCCC2CCC3CCCC3C2)CC1C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19059776"
+    },
+    {
+      "candidate_id": "BDB-50266052",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "VZEXLUMZSFKUJP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C1CCCCC1)C1CC(CCCCC2CCCCC2)CC1C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19059776"
+    },
+    {
+      "candidate_id": "BDB-50266084",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UXTNNVIYBQKXOL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C1CCCCC1)C1CC(C(CC2CCCCC2)CC2CCCC2)CC1C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19059776"
+    },
+    {
+      "candidate_id": "BDB-50267396",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JCAVHDDDZIXFHB-NNBIHLJJSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCC3C(CC4CC5CCC4C5)CCCC23)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19317449"
+    },
+    {
+      "candidate_id": "BDB-50268211",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LKQSGKOYMDGWTQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(C(C)(C)C4CCC(CC5CCC6CCCC6C5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19569717"
+    },
+    {
+      "candidate_id": "BDB-50268247",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UOSGXUGKZYRNKU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(C(C)(C)C4CCC(CCC5CCCCC5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19569717"
+    },
+    {
+      "candidate_id": "BDB-50271536",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "VIBOPLGOAIYGMR-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)CC1CC2CCCCC2C2C(C)C(C3CCCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18468446"
+    },
+    {
+      "candidate_id": "BDB-50271642",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AUQHNAQGJBULMA-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CCC(C2CCCC2)C2CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:29627261"
+    },
+    {
+      "candidate_id": "BDB-50274074",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units"
+      ],
+      "inchikey": "DKRKGVPEEBGRFA-JTQLQIEISA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC1CCC2CCC(CC3CCCC4C5CCCCC5CC34)CC2C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:29792714"
+    },
+    {
+      "candidate_id": "BDB-50275637",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JXMVGWKOLQYAPP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CC2CCC3CCCC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:29880250"
+    },
+    {
+      "candidate_id": "BDB-50275669",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FAQMPXZLGHDHHK-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCC3CCCC3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:29880250"
+    },
+    {
+      "candidate_id": "BDB-50275914",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HQGPRKKHKJMXJP-HXUWFJFHSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CCC2CCCC(C3CCCC(C4CCCC4)C3)C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18835161"
+    },
+    {
+      "candidate_id": "BDB-50298497",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GIZJFZFSTGLKAS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)CC1CC2CCCC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19501513"
+    },
+    {
+      "candidate_id": "BDB-50298515",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DQISRGLAFBOHSH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CC(CCCC3CCCCC3)CC2C2CC(C3CCCC3)CC12)C(C1CCCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19501513"
+    },
+    {
+      "candidate_id": "BDB-50298523",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KASKCLZTEOJTOF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)CC1CC2CCCC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19501513"
+    },
+    {
+      "candidate_id": "BDB-50298541",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AZLDXOUTWIDEOW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCC1)CC1CC2CC(CCC3CCCCC3)CC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19501513"
+    },
+    {
+      "candidate_id": "BDB-50298553",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LWYRFEDQIGXNNB-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CC(CCC3CCCCC3)CC2C2CC(C3CCCC3)CC12)C(C1CCCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19501513"
+    },
+    {
+      "candidate_id": "BDB-50306777",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "IWDKSIOHIYCOBV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC(CC1CCCC1)C1CC2CC3CCCC(C)C3CC2C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20095623"
+    },
+    {
+      "candidate_id": "BDB-50306787",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "GHCCRBAXZVOAEU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC1CC(CC2CCCCC2)C(C)C2CCCCC12",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20095623"
+    },
+    {
+      "candidate_id": "BDB-50306789",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "LYSQKWDUPSIMCD-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC1CC2(CCCCC2)C(C)C1CC1CCCC(CC2CCCCC2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20095623"
+    },
+    {
+      "candidate_id": "BDB-50306792",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "CWYUCBLNLMTDMO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CC2CCCCC2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20095623"
+    },
+    {
+      "candidate_id": "BDB-50309781",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "IMOUNXQRZGLBSG-DYHDFLJKSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCC2CC(CCCCCCC3CCC(C45CC6CC(CC(C6)C4)C5)C3)CC3C2CCC3C2CCC3CC32)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20036562"
+    },
+    {
+      "candidate_id": "BDB-50312947",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "RWRIELQWXMXMNH-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCC(C2CCCC2)C1)C1CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20137946"
+    },
+    {
+      "candidate_id": "BDB-50313075",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FUZVDFCUPYVIEA-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CC3CCCC3CC2C2CCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20138516"
+    },
+    {
+      "candidate_id": "BDB-50313077",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OWBPIGOKYQPEBA-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC2CC(C3CCCCC3)C(C3CCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20138516"
+    },
+    {
+      "candidate_id": "BDB-50315633",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UDLCSCAETZRITG-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CCCC2C2CC(C3CCCCC3)CC12)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20307065"
+    },
+    {
+      "candidate_id": "BDB-50318250",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "QGDVJEIIAUKMBX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC1CC(CC2CCCCC2)CC(C2CCCCC2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:20405927"
+    },
+    {
+      "candidate_id": "BDB-50318270",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ACNFYYUXBQGWQL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)CC2CC(CC3CCCCC3)CC21)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20408530"
+    },
+    {
+      "candidate_id": "BDB-50318286",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GNLKLLHCPPYDLC-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCC2CC(CC3CCCCC3)CC21)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20408530"
+    },
+    {
+      "candidate_id": "BDB-50324969",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GQUGZFLBFPOQQC-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CCC(C2CCCCC2)C1)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:20659802"
+    },
+    {
+      "candidate_id": "BDB-50331936",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "IXGGHXNKNILFJL-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CCC1CCCCC1)CCC1CCC2CC(C)C(C3CCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21055932"
+    },
+    {
+      "candidate_id": "BDB-50336986",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UEBJAZCBAZVERF-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCC(C2CCCCC2)C(C2CCCC2)C1)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24900298"
+    },
+    {
+      "candidate_id": "BDB-50336988",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "QGEFGRKOALZSHD-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCC1)CC1CCC(C2CCCCC2)C(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24900298"
+    },
+    {
+      "candidate_id": "BDB-50341188",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SNJRGPSAULQWEJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CC2CCCCC2C1)C1CCC(C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21388809"
+    },
+    {
+      "candidate_id": "BDB-50341191",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "NCWRSHWNMYHJMN-AEFFLSMTSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CCC(C(C)CC2CC3CCCCC3C2)C1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21388809"
+    },
+    {
+      "candidate_id": "BDB-50341193",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OMVHCFMRXIFNMI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CC2CCCCC2C1)C1CCC(CC2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21388809"
+    },
+    {
+      "candidate_id": "BDB-50342519",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "HHKJUHAIZLHJQI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC(CCCCC(C)C1CCC(C2C3CCCCC3CC3CC(C)CCC32)CC1)CCC1CCC(CCCC2CCC3C2CCC2CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:21185184"
+    },
+    {
+      "candidate_id": "BDB-50343135",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UMYJKAPQXPVTEH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)CC1CC2CC(CCC3CCCCC3)CC2C2CC(C3CCCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21908194"
+    },
+    {
+      "candidate_id": "BDB-50346909",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BTNNZWURLUOUIL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCCC3C4CCCC4CCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21616671"
+    },
+    {
+      "candidate_id": "BDB-50360187",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JJJCYECCFBECJK-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(C1CCC(C2CCC3CC(C4CCCC4)CC3C2)CC1)C(C1CCCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21214204"
+    },
+    {
+      "candidate_id": "BDB-50360193",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HZRPPZVAFJLQIQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(CC(C)C2CCCCC2)C2CC(C3CCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21214204"
+    },
+    {
+      "candidate_id": "BDB-50360209",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CKNQBBJKRSXMPU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)C1CCC(C2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21214204"
+    },
+    {
+      "candidate_id": "BDB-50361327",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SLRFMWZADWPTCV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCC2CCC3CCC4CC(C5CCCC5)CC4C23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22204739"
+    },
+    {
+      "candidate_id": "BDB-50364064",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "DNPNXAXAKNFJDD-GFOALDQYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCCC2CCCC3C(C4CCCC4)CCC23)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22104008"
+    },
+    {
+      "candidate_id": "BDB-50366686",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "VRKBZQOPVJHRLW-VFIQZALSSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CC2CCCCC2C1C1CCCC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11459663"
+    },
+    {
+      "candidate_id": "BDB-50366767",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JEXFNNUDLKOIMC-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C(CCCCC1CCCC2C(C3CCCC3)CCC12)CCCC1CCCC2CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:11714602"
+    },
+    {
+      "candidate_id": "BDB-50375482",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JBNQXRACQBYPQU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)CC(C2CCC3CCCC3C2)C1)C1CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18258439"
+    },
+    {
+      "candidate_id": "BDB-50375483",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "VSEANJMMULLJNQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C2CCCC(C3CCC4CCCC4C3)C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18258439"
+    },
+    {
+      "candidate_id": "BDB-50376934",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AYTIQMDUSGIKIT-FTBITJBVSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CCC1CCC(CC2CC(CCCC3CCC4CCCCC43)CC3C(C4CCCC4)CCC23)CC1)CC1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18321038"
+    },
+    {
+      "candidate_id": "BDB-50376937",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "VZYBYMUZWCFKQU-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CC4CCC(C5CCCCC5)C4)C3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18321039"
+    },
+    {
+      "candidate_id": "BDB-50377454",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XEEQGYMUWCZPDN-IUODEOHRSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CC2CCCC3CCCCC32)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18406614"
+    },
+    {
+      "candidate_id": "BDB-50377544",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CECMCHUAHZIDKZ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CCCC2CCC3C(C4CCCC4)CCCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18411049"
+    },
+    {
+      "candidate_id": "BDB-50377546",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PDHBEXZQMIJQMS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CC2CCC3C(C4CCCC4)CCCC23)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18411049"
+    },
+    {
+      "candidate_id": "BDB-50377555",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MNONTGDJIJLFPU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCCC1)C1CCC2C(C3CCCCC3)CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18411049"
+    },
+    {
+      "candidate_id": "BDB-50377566",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FXGWAOVZUWGRNJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CCC1CCCCC1)C1CCC2C(C3CCCC3)CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18411049"
+    },
+    {
+      "candidate_id": "BDB-50379111",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KPGIVUGNOFGZRD-FFVUVFKMSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC(CC2CCCC3C2CCC3C2CCC3CC32)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21858244"
+    },
+    {
+      "candidate_id": "BDB-50382977",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "XEPILNOUAKDUOM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC1C2CCCC2CC2CCC(CC3CCCCC3)CC21",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22250781"
+    },
+    {
+      "candidate_id": "BDB-50382979",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "GCRYBPRWBPKFMF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CC2CCC(CC3CCCC4CCCCC43)C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22250781"
+    },
+    {
+      "candidate_id": "BDB-50382982",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "YNSVRVIBICMHME-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC(CCCC1CCCCC1)C1CC(C)C(C2CCCCC2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22250781"
+    },
+    {
+      "candidate_id": "BDB-50382986",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "WGFLLKYIRNKGKW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(C2CCCC(C3CCCC(C4CCCCC4)C3)C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22250781"
+    },
+    {
+      "candidate_id": "BDB-50382989",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "UKVAEISSAVZLLZ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(C2CCCC3CC(C4CC5CCCCC5C4)CC32)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:22250781"
+    },
+    {
+      "candidate_id": "BDB-50383010",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "TYMRXESQMJNRFG-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(C2CCCC2)CCC2C(CCC3CCCCC3)C3CCCCC3C12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22257095"
+    },
+    {
+      "candidate_id": "BDB-50384416",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AKMNUCBQGHFICM-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCC2CCCC2C1)CC1CCCC2CCCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:28807572"
+    },
+    {
+      "candidate_id": "BDB-50386112",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "RDILGXZZHKVVQM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCCC(C)C1CC2CCCCC2CC1C)C1CC2CCCCC2CC1C",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22677030"
+    },
+    {
+      "candidate_id": "BDB-50386113",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HFQZOXVLNQONST-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCC1CCC(CCCCC(C)C2CC3CCCCC3CC2C)CC1)C1CC2CCCCC2CC1C",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22677030"
+    },
+    {
+      "candidate_id": "BDB-50389830",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ULXHINOEZKZYNA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1C(C)C2CCCCC2C1C)CC1CC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50389835",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SQCJGLDOAFXMRT-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC2C(C1)CC1CCCCC12)CC1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50389836",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MIWQXYRPJRSUKA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCC1CC2CCCCC2C1)CC1C(C)C2CCCCC2C1C",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50389837",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WEBVJYSWMVKMFV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC(C)(C)C1CCCC1)CC1CC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50389844",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HHIJNJVKPRZBGF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCCC2CC3CCCCC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22563707"
+    },
+    {
+      "candidate_id": "BDB-50389918",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JONIAMPRFRZSLQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "CC(CC1CCC(C(C)CCCC2CCCCC2)CC1)CC1CC2CCCC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22568637"
+    },
+    {
+      "candidate_id": "BDB-50392831",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "FSGLHDPNBSOZED-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)CC1CCC(C2CCCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23342198"
+    },
+    {
+      "candidate_id": "BDB-50393169",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HRBBCJVEDBRVEG-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2C(C1)CC1C(C3CCCCC3)CCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:21664729"
+    },
+    {
+      "candidate_id": "BDB-50395552",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XJNXZELXQVQLKI-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCCC1)CC1CC2CCC(C3CCCC3)C2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:22827545"
+    },
+    {
+      "candidate_id": "BDB-50399560",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "QCJSUMWNJLEJCF-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CC3C(CCCC4CCC5CCCCC54)CC4CCCC4C3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23098605"
+    },
+    {
+      "candidate_id": "BDB-50399580",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "GQQIISWJBGUJTR-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(CC2CC3CCCC3C3CC(C4CCCC4)CC23)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23098605"
+    },
+    {
+      "candidate_id": "BDB-50399581",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OTZPDZBHTVRFPM-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC(CC2CC3CCCC3C3CC(C4CCCC4)CC23)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23098605"
+    },
+    {
+      "candidate_id": "BDB-50399597",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MKTDHKFRAQCBTM-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C(CC2CC3CCCC3C3CC(C4CCCC4)CC23)C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23098605"
+    },
+    {
+      "candidate_id": "BDB-50410648",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AVEYDODSONUKCQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCC(C)CC4CCC5CCCCC54)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50410682",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BEDJXTZHYOLEPQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CC3CC(C)CC(C)C3C2)CC1)CC1CCC(CCC2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50410728",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PDFGJPCUSITVSI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CCC(C(C)CCC2CCC(C3CC4CC(C)CC(C)C4C3)CC2)C(C)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50410730",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ARQDPBXHSFRPRH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CC3CC(C)CC(C)C3C2)CC1)CC1CCC(CC(C)(C)C2CCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50410755",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OBRLHFBUUWTVMS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCC(C)C4CCCC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50410768",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PCVZFCWEKBFCAJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCC1)CCC1CCC(C2CC3CC(C)CC(C)C3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:16392813"
+    },
+    {
+      "candidate_id": "BDB-50414356",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OWZKUWVVPFHDPB-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CC3CC(C)CC(C)C3C2)CC1)CC1CCC2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:19346133"
+    },
+    {
+      "candidate_id": "BDB-50432634",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "unresolved_assay_type",
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "WZFUWGODTRDSBO-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "CC(CCC1CCCCC1)C1CC2CCCCC2CC1C",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:23597047"
+    },
+    {
+      "candidate_id": "BDB-50464751",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "YPHPMZXEJNUQSP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC2CCCCC2C1)CC1CC2CC(C3CCCC3)CC2C(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:29268131"
+    },
+    {
+      "candidate_id": "BDB-50470461",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UHDZPXOSQNQCSS-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC(C1CCCCC1)C1CCCCC1)C1CCCC2CC(C3CCCC3)CC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30144700"
+    },
+    {
+      "candidate_id": "BDB-50470477",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LRBRBZRXARFWFP-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CCCCC2)CC1)C1CCCC2CC(C3CCCC3)CC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30144700"
+    },
+    {
+      "candidate_id": "BDB-50470488",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CJWPDQKJIQQPSQ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)C1CCCC2CC(C3CCCC3)CC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30144700"
+    },
+    {
+      "candidate_id": "BDB-50478209",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SZACFGFCZCXEEA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CCCCC2C2CC(C3CCCC3)CC12)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:18249548"
+    },
+    {
+      "candidate_id": "BDB-50487423",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UAWCCUPYYLZMFD-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_doi_only_needs_source_retrieval",
+      "scaffold": "CC1CCC2C(C)CC(C3CCCCC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "DOI:10.1007/s00044-008-9100-9"
+    },
+    {
+      "candidate_id": "BDB-50491507",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KLNYLDYPZCWDDA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCCCC1)CC1CC(C)C2CCCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23631427"
+    },
+    {
+      "candidate_id": "BDB-50491508",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "IYRBFSDYGUWBKM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCC1CCCCC1)CC1CC(C)C2CCCC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23631427"
+    },
+    {
+      "candidate_id": "BDB-50492059",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DDDMPSVRAPVZGB-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)C(C2CCCCC2)C1)C1CCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:23685887"
+    },
+    {
+      "candidate_id": "BDB-50494432",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AFPYJJLDUPLMID-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCCC2CC(C3CCCC3)CC12)C1CCC(C2CCCCC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24189496"
+    },
+    {
+      "candidate_id": "BDB-50494467",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WRHHNUZCUZVWLY-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC1CCCC(C2CCCC2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24900602"
+    },
+    {
+      "candidate_id": "BDB-50494549",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JNILKZBFDIKTIT-IOOBAMJDSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C34CC5CC(CC3C5)C4)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24139167"
+    },
+    {
+      "candidate_id": "BDB-50495053",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CVVQFVJXZSWYML-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_requires_endpoint_resolution",
+      "scaffold": "C1CCC(CC2CC(C3CCCC3)CC(C3CCCC3)C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24332624"
+    },
+    {
+      "candidate_id": "BDB-50495601",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BVHMCXNZSIPWQH-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "CC(CC1CCC2CCCC2C1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24518296"
+    },
+    {
+      "candidate_id": "BDB-50496139",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WHJCTOCJGOSTSO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(CC3CCC(CCCCC4CCC5(CCCC5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24556147"
+    },
+    {
+      "candidate_id": "BDB-50496142",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ACDUFNNGCHAONI-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2CC(C3CCC(CCCCC4CCC(CC5CCCCC5)CC4)CC3)CC2C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:24556147"
+    },
+    {
+      "candidate_id": "BDB-50499695",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "JOTQMKXKZIECRX-FQEVSTJZSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C(CCCCC2CCCCC2)CC2CC3CCCCC3CC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:26513641"
+    },
+    {
+      "candidate_id": "BDB-50505398",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CERHJURNDKCFRJ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCC1CCCC1)CC1CCC(C2CCC3CC(C4CCCCC4)C(C)C3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:31453698"
+    },
+    {
+      "candidate_id": "BDB-50508676",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "LPOBTRHTHNJVJG-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCC2CC(C3CCCCC3)CC12)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30638876"
+    },
+    {
+      "candidate_id": "BDB-50508681",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BTDPUZHZCQINFZ-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC(C2CCCCC2)CC2CC(C3CCCC3)CC12)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30638876"
+    },
+    {
+      "candidate_id": "BDB-50513536",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "BSBGWMHQUSMMBO-HIJSFIBBSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(C(C2CCCCC2)C2CCC(CCCC3CCC4CCC(C5CCCC5)C4C3)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:31255928"
+    },
+    {
+      "candidate_id": "BDB-50517299",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_target_species",
+        "unresolved_units"
+      ],
+      "inchikey": "VQFKOPZALUTGKJ-BGIGGGFGSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CC(C(CC2CCCC3C(C4CCCC4)CCC23)C2CCC2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:30605331"
+    },
+    {
+      "candidate_id": "BDB-50534168",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HJXMNEXKEFWFHF-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2C(C1)CC1CC(C3CCCCC3)CCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:27658798"
+    },
+    {
+      "candidate_id": "BDB-50537273",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HVFBZUURAZGZKR-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1CC(C)C2C(C1)CC1C(CC3CCCCC3)CCCC12",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:30808606"
+    },
+    {
+      "candidate_id": "BDB-50542172",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "KROGYTVNKZCWBC-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CCCC3CC4CCCCC4C32)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32573250"
+    },
+    {
+      "candidate_id": "BDB-50545315",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "UQWRJYJCAOENJM-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)CC1CCC(CCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32165041"
+    },
+    {
+      "candidate_id": "BDB-50545321",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "PMUTYNGFYXBVDY-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCC1CCC(C2CCC3CC(C4CCCC4)CC3C2)CC1)CCC1C(C)C2CCCCC2C1(C)C",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32165041"
+    },
+    {
+      "candidate_id": "BDB-50545419",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "SFXLMSXZEZYXTH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C2CC(C3CCC(CCCC4CCCC4)CC3)CCC2CC1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32241719"
+    },
+    {
+      "candidate_id": "BDB-50545432",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AWJQTLFPUKLVQL-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C2CC(C3CCC(CCCCC4CCCCC4)CC3)CCC2CC1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32241719"
+    },
+    {
+      "candidate_id": "BDB-50545434",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "QFMDFBRPJRPXLV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC1C2CC(C3CCC(CCCC4CCCCC4)CC3)CCC2CC1C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32241719"
+    },
+    {
+      "candidate_id": "BDB-50548094",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "CCHJCVDZPYFXQY-NSHDSACASA-N",
+      "pass_1_status": "quarantine_target_not_supported",
+      "scaffold": "C1CCC(C2CC3C4CCCC4CC(C4CCCC4)C3C2)C1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34046614"
+    },
+    {
+      "candidate_id": "BDB-50555716",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ILYCKBRKVXWUEH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCC(C2CCC3CC(C4CCCCC4)C(C)C3C2)CC1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32659606"
+    },
+    {
+      "candidate_id": "BDB-50555722",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XXOMDNKNONGBRR-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCCC1CCCCC1)CC1CCC(C2CCC3CC(C4CCCCC4)C(C)C3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32659606"
+    },
+    {
+      "candidate_id": "BDB-50555723",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "YKNBYIQXICDOOY-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CCCCC1CCCCC1)CC1CCC(C2CCC3CC(C4CCCCC4)C(C)C3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:32659606"
+    },
+    {
+      "candidate_id": "BDB-50559039",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "XEABBZPOOUCNPW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC(CCCC1CCC(CCCCCCCC(C)C2CCC(C3C4CCCCC4CC4CC(C)CCC43)CC2)C1)CC1CC2CCCC2C2CC(C3CCCC3)CC12",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:31787357"
+    },
+    {
+      "candidate_id": "BDB-50559043",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "PQBREZGPWVFSIR-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "CC(CCCCCCCCCCCCCCCC(C)CC1CCC(C2C3CCCCC3CC3CC(C)CCC32)CC1)CC1CCC(CC(C)CC2CC3CCCC3C3CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:31787357"
+    },
+    {
+      "candidate_id": "BDB-50563134",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "MVLSLPSPDRUARX-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CC2CCCC(C3CCCCC3)C2C1)C1CCCCC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:33548636"
+    },
+    {
+      "candidate_id": "BDB-50573591",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "XCPOOYABRFHDAQ-GZBFAFLISA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCC2CC3CCCCC3C2C2CCCC2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:34171656"
+    },
+    {
+      "candidate_id": "BDB-50580289",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "HDCIDGKVVBLQNA-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCCCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34783558"
+    },
+    {
+      "candidate_id": "BDB-50580305",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DSSCLJMOOUNHMW-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)C1CCC(CCCCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34783558"
+    },
+    {
+      "candidate_id": "BDB-50580308",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "ONXZCTJYOFXBKU-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)C1CCC(CCCC2CCC3C2CCC2CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34783558"
+    },
+    {
+      "candidate_id": "BDB-50580310",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "OJSWNBSTDSTLPO-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)C1CCC(CCCC2CCC3CC(C4CCCC4)CC3C2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34783558"
+    },
+    {
+      "candidate_id": "BDB-50580311",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "AWMBFBCZLVOQAV-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "CC(CC1CCCCC1)C1CCC(CCC2CCC3C2CCC2CC(C4CCCC4)CC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34783558"
+    },
+    {
+      "candidate_id": "BDB-50580512",
+      "frozen_pass_2_reasons": [
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "QYDDQJVHZBTEMT-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_needs_fulltext",
+      "scaffold": "C1CCC(CCCCC2CCC(C3CCCC4C5CCCCC5CC34)CC2)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34107215"
+    },
+    {
+      "candidate_id": "BDB-50584581",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_stereochemistry",
+        "unresolved_units"
+      ],
+      "inchikey": "BUXDJJICYXLCEH-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(C2CCCC(C3CCC4CCCCC4C3)C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:35068155"
+    },
+    {
+      "candidate_id": "BDB-50584629",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_stereochemistry",
+        "unresolved_units"
+      ],
+      "inchikey": "UTSMDVBQXYDAIT-UHFFFAOYSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CC2CC(C3CCCCC3)CC(C3CCCC3)C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:35068155"
+    },
+    {
+      "candidate_id": "BDB-50594653",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "WVAMXXSOZXMUOF-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "C1CCC(CCCC2CCCC3CCCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:34695776"
+    },
+    {
+      "candidate_id": "BDB-50627155",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_target_species",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "RATZCLQARSHGQO-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "CC1CCC(CC2CCCC2)C2CCC(CC3CCCC3)C12",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:37465301"
+    },
+    {
+      "candidate_id": "BDB-50628405",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "YFDPVXTZPTZXLH-KPAZRMRSSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCC2CCCC3C2CC(C2CCCC2)C3C2CCCC2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:37603705"
+    },
+    {
+      "candidate_id": "BDB-50628408",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "XRKKJGGYJHRJNY-OWDMVUQNSA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(CCCC2CCC3CC(C4CCCC4)C(C4CCCC4)C3C2)CC1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:37603705"
+    },
+    {
+      "candidate_id": "BDB-50638405",
+      "frozen_pass_2_reasons": [
+        "unresolved_molecule_identity",
+        "unresolved_relation",
+        "unresolved_stereochemistry",
+        "unresolved_units",
+        "unresolved_wild_type_status"
+      ],
+      "inchikey": "JFKRMUAVFJYHNX-KGBXAXFASA-N",
+      "pass_1_status": "metadata_pass_fulltext_ready",
+      "scaffold": "C1CCC(C2CCC3CC(C4CCCC4)C(C4CCCC4)C3C2)C1",
+      "shadow_review_band": "source_or_identity_unresolved",
+      "source_key": "PMID:38845345"
+    },
+    {
+      "candidate_id": "BDB-50649071",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "XMSOXVWUIFQNHX-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "C1CCC2C(C1)CC(C1CCCC1)C1CCCC21",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:38669910"
+    },
+    {
+      "candidate_id": "BDB-50649072",
+      "frozen_pass_2_reasons": [
+        "pass_1_rejected",
+        "retrieved_primary_full_text_unavailable"
+      ],
+      "inchikey": "DAEVVVNWLHLTCV-UHFFFAOYSA-N",
+      "pass_1_status": "quarantine_nonprimary_source",
+      "scaffold": "C1CCC(C2CC3CCCCC3C3CCCC23)CC1",
+      "shadow_review_band": "source_text_missing",
+      "source_key": "PMID:38669910"
+    }
+  ],
+  "checked_publications": [
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 7,
+      "candidate_ids": [
+        "BDB-14390",
+        "BDB-44650",
+        "BDB-50389830",
+        "BDB-50389835",
+        "BDB-50389836",
+        "BDB-50389837",
+        "BDB-50389844"
+      ],
+      "doi": "10.1021/jm300280e",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "22563707",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:22563707",
+      "source_url": "https://europepmc.org/article/MED/22563707",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "A prospective cross-screening study on G-protein-coupled receptors: lessons learned in virtual compound library design.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 6,
+      "candidate_ids": [
+        "BDB-50410648",
+        "BDB-50410682",
+        "BDB-50410728",
+        "BDB-50410730",
+        "BDB-50410755",
+        "BDB-50410768"
+      ],
+      "doi": "10.1021/jm0506221",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "16392813",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:16392813",
+      "source_url": "https://europepmc.org/article/MED/16392813",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Design, synthesis, and structure-activity relationships of 1-,3-,8-, and 9-substituted-9-deazaxanthines at the human A2B adenosine receptor.",
+      "title_target_flag": "other_receptor_focus_in_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 5,
+      "candidate_ids": [
+        "BDB-50298497",
+        "BDB-50298515",
+        "BDB-50298523",
+        "BDB-50298541",
+        "BDB-50298553"
+      ],
+      "doi": "10.1016/j.bmc.2009.05.038",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "19501513",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:19501513",
+      "source_url": "https://europepmc.org/article/MED/19501513",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Combining selectivity and affinity predictions using an integrated Support Vector Machine (SVM) approach: An alternative tool to discriminate between the human adenosine A(2A) and A(3) receptor pyrazolo-triazolo-pyrimidine antagonists binding sites.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 5,
+      "candidate_ids": [
+        "BDB-50580289",
+        "BDB-50580305",
+        "BDB-50580308",
+        "BDB-50580310",
+        "BDB-50580311"
+      ],
+      "doi": "10.1021/acs.jmedchem.1c01155",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "34783558",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:34783558",
+      "source_url": "https://europepmc.org/article/MED/34783558",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Structure-Based Design of Dual-Acting Compounds Targeting Adenosine A2A Receptor and Histone Deacetylase as Novel Tumor Immunotherapeutic Agents.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50083915",
+        "BDB-50083916",
+        "BDB-50102281",
+        "BDB-50102286"
+      ],
+      "doi": "10.1021/jm001054m",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "11462973",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:11462973",
+      "source_url": "https://europepmc.org/article/MED/11462973",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "3-Aryl[1,2,4]triazino[4,3-a]benzimidazol-4(10H)-ones: a new class of selective A1 adenosine receptor antagonists.",
+      "title_target_flag": "other_receptor_focus_in_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50139711",
+        "BDB-50139722",
+        "BDB-50139728",
+        "BDB-50139734"
+      ],
+      "doi": "10.1016/j.bmcl.2003.09.095",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "14741297",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:14741297",
+      "source_url": "https://europepmc.org/article/MED/14741297",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Synthesis and SAR evaluation of 1,2,4-triazoles as A(2A) receptor antagonists.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50003108",
+        "BDB-50003151",
+        "BDB-50003212",
+        "BDB-50003233"
+      ],
+      "doi": "10.1016/j.bmc.2008.01.002",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "18226909",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:18226909",
+      "source_url": "https://europepmc.org/article/MED/18226909",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "1-, 3- and 8-substituted-9-deazaxanthines as potent and selective antagonists at the human A2B adenosine receptor.",
+      "title_target_flag": "other_receptor_focus_in_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50377544",
+        "BDB-50377546",
+        "BDB-50377555",
+        "BDB-50377566"
+      ],
+      "doi": "10.1016/j.bmcl.2008.03.072",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "18411049",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:18411049",
+      "source_url": "https://europepmc.org/article/MED/18411049",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Antagonists of the human adenosine A2A receptor. Part 3: Design and synthesis of pyrazolo[3,4-d]pyrimidines, pyrrolo[2,3-d]pyrimidines and 6-arylpurines.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50247934",
+        "BDB-50248436",
+        "BDB-50248576",
+        "BDB-50248578"
+      ],
+      "doi": "10.1016/j.bmcl.2009.01.042",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "19181527",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:19181527",
+      "source_url": "https://europepmc.org/article/MED/19181527",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Synthesis and SAR studies of trisubstituted purinones as potent and selective adenosine A2A receptor antagonists.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 4,
+      "candidate_ids": [
+        "BDB-50139768",
+        "BDB-50139775",
+        "BDB-50139817",
+        "BDB-50139836"
+      ],
+      "doi": "10.1016/j.bmcl.2015.11.048",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "26781932",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:26781932",
+      "source_url": "https://europepmc.org/article/MED/26781932",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "Discovery of aminoquinazoline derivatives as human A(2A) adenosine receptor antagonists.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 3,
+      "candidate_ids": [
+        "BDB-50141449",
+        "BDB-50141455",
+        "BDB-50141456"
+      ],
+      "doi": "10.1016/j.bmcl.2004.01.011",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "15006389",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:15006389",
+      "source_url": "https://europepmc.org/article/MED/15006389",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "2-(N-acyl) and 2-N-acyl-N(6)-substituted analogues of adenosine and their affinity at the human adenosine receptors.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    },
+    {
+      "access_status": "metadata_verified",
+      "affected_count": 3,
+      "candidate_ids": [
+        "BDB-50156616",
+        "BDB-50262150",
+        "BDB-50262266"
+      ],
+      "doi": "10.1021/jm701594y",
+      "in_pmc": false,
+      "open_access": false,
+      "pmid": "18637670",
+      "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+      "source_key": "PMID:18637670",
+      "source_url": "https://europepmc.org/article/MED/18637670",
+      "supplement_flag": false,
+      "title_from_frozen_packet": "2-Amino-6-furan-2-yl-4-substituted nicotinonitriles as A2A adenosine receptor antagonists.",
+      "title_target_flag": "a2a_or_unspecified_title"
+    }
+  ],
+  "claim_limit": "Metadata access checks do not resolve assay endpoints, exact compound rows, stereochemistry, or potency. Frozen external confirmation remains failed and closed.",
+  "counts": {
+    "affected_candidates_in_checked_groups": 53,
+    "frozen_candidate_records": 240,
+    "metadata_verified": 12,
+    "open_access_metadata_flags": 0,
+    "other_receptor_title_flags": 3,
+    "publication_groups_checked": 12,
+    "publication_groups_with_missing_text": 89,
+    "supplement_metadata_flags": 0
+  },
+  "created_at_utc": "2026-09-23T02:08:45.742438+00:00",
+  "firewall": {
+    "candidate_promoted": false,
+    "external_outcomes_loaded": false,
+    "frozen_membership_modified": false,
+    "numeric_ki_extracted": false
+  },
+  "release_id": "a2a-shadow-evidence-source-access-v1.6.1",
+  "review_bands": {
+    "source_or_identity_unresolved": 29,
+    "source_text_missing": 211
+  },
+  "schema_version": 1,
+  "selection_rule": "Among frozen metadata-pass records lacking primary text, group by first PMID (DOI fallback), sort by affected candidate count descending then source key ascending, inspect first 12 groups.",
+  "source_access_checked_at_utc": "2026-09-23T02:08:45.742438+00:00",
+  "source_hashes": {
+    "frozen_pass1": "cd979f3207832eece12d78cc074c45a94b869c502294d8c0df1b722196a0aa24",
+    "frozen_pass2": "642ae6e5f577839d04c28f1d4c66602494d2df2b81edfe8941e78432c15b6bc1",
+    "publication_metadata_snapshot": "e0031d01c2d673fa5cd09fe075fc4b48bd4bf038bce7f3721b9e95b590d2fd8f"
+  },
+  "status": "shadow_worklist_only"
+}

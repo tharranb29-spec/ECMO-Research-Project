@@ -40,6 +40,7 @@ SOURCES = {
     "uncertainty_queue": A2A / "outputs/v1.6/uncertainty_review_queue/uncertainty_review_queue.json",
     "eligibility": A2A / "config/review_eligibility.v1.json",
     "md_cutoff": A2A / "outputs/v1.6/md/tier_a_production_cutoff/cutoff_status.json",
+    "shadow_evidence_sprint": A2A / "outputs/v1.6.1/shadow_evidence/source_access_sprint/shadow_evidence_release.json",
 }
 
 
@@ -86,6 +87,7 @@ def build() -> dict:
     uncertainty_queue = data["uncertainty_queue"]
     eligibility_contract = data["eligibility"]
     md_cutoff = data["md_cutoff"]
+    shadow_evidence_sprint = data["shadow_evidence_sprint"]
     raw_uncertainty_records = uncertainty_queue["records"]
 
     evidence_records = []
@@ -425,6 +427,18 @@ def build() -> dict:
         "governance_scope": envelope("governance-scope", [scope_record]),
         "uncertainty_review_queue": envelope("uncertainty-review-queue", uncertainty_records),
         "md_production_cutoff": envelope("md-production-cutoff", cutoff_records),
+        "shadow_evidence_sprint": envelope("shadow-evidence-sprint", [{
+            "release_id": shadow_evidence_sprint["release_id"],
+            "status": shadow_evidence_sprint["status"],
+            "source_access_checked_at_utc": shadow_evidence_sprint["source_access_checked_at_utc"],
+            "selection_rule": shadow_evidence_sprint["selection_rule"],
+            "counts": shadow_evidence_sprint["counts"],
+            "review_bands": shadow_evidence_sprint["review_bands"],
+            "checked_publications": shadow_evidence_sprint["checked_publications"],
+            "firewall": shadow_evidence_sprint["firewall"],
+            "claim_limit": shadow_evidence_sprint["claim_limit"],
+            "source": source_ref("shadow_evidence_sprint"),
+        }]),
     }
 
     audit_events = [
@@ -439,6 +453,7 @@ def build() -> dict:
         ("uncertainty-queue", "uncertainty_review_queue", uncertainty_queue["status"], "uncertainty_queue"),
         ("md-production-cutoff", "md_production_cutoff", md_cutoff["specification_id"], "md_cutoff"),
         ("shadow-policy", "promotion", data["shadow_config"]["specification_id"], "shadow_config"),
+        ("shadow-source-access", "shadow_evidence_sprint", shadow_evidence_sprint["release_id"], "shadow_evidence_sprint"),
     ]
     previous = "GENESIS"
     ledger = []
@@ -508,6 +523,7 @@ def validate(payload: dict) -> None:
         "applicability_uncertainty", "dual_state_docking", "md_gates",
         "candidate_portfolio", "shadow_actions", "audit_log",
         "governance_scope", "uncertainty_review_queue", "md_production_cutoff",
+        "shadow_evidence_sprint",
     }
     if set(payload["contracts"]) != expected:
         raise ValueError("Dashboard contract set is incomplete")

@@ -150,6 +150,13 @@
   }
   document.querySelectorAll("#evidence-filter button").forEach(button=>button.addEventListener("click",()=>{evidenceFilter=button.dataset.filter;document.querySelectorAll("#evidence-filter button").forEach(item=>item.classList.toggle("active",item===button));renderEvidence();}));renderEvidence();
 
+  const sprint=records("shadow_evidence_sprint")[0];
+  if(sprint){
+    const counts=sprint.counts;
+    $("shadow-evidence-summary").innerHTML=`<div><strong>${counts.publication_groups_checked}/${counts.publication_groups_with_missing_text}</strong><span>source groups checked</span></div><div><strong>${counts.affected_candidates_in_checked_groups}</strong><span>linked records needing source text</span></div><div><strong>${counts.metadata_verified}</strong><span>citations verified</span></div><div><strong>${counts.open_access_metadata_flags}</strong><span>open-access flags</span></div>`;
+    $("shadow-evidence-publications").innerHTML=sprint.checked_publications.map(item=>`<article class="evidence-sprint-card"><div><span class="status-pill ${item.title_target_flag==="other_receptor_focus_in_title"?"blocked":"review"}">${esc(item.title_target_flag==="other_receptor_focus_in_title"?"Check receptor focus":label(item.access_status))}</span><strong>${item.affected_count} linked records</strong></div><h3>${esc(item.title_from_frozen_packet||item.source_key)}</h3><p>${esc(item.source_key)} · DOI ${esc(item.doi||"unresolved")}</p><small>${esc(item.title_target_flag==="other_receptor_focus_in_title"?"Title focuses on another receptor subtype; inspect source before A2A use.":item.open_access===true?"Open access indicated; source review pending":"No open-access flag; source text remains missing")}</small>${item.source_url?`<a href="${esc(safeUrl(item.source_url))}" target="_blank" rel="noopener noreferrer">Check publication ↗</a>`:""}</article>`).join("");
+  }
+
   const molecules=records("molecule_registry");$("molecule-count").textContent=molecules.length;
   function renderMolecules(){
     const query=moleculeQuery.toLowerCase(),rows=molecules.filter(row=>{const type=row.role.includes("control")?"control":"candidate";return (moleculeFilter==="all"||type===moleculeFilter)&&`${row.molecule_id} ${row.display_name} ${row.role}`.toLowerCase().includes(query);});

@@ -26,6 +26,7 @@ class Track3DashboardTests(unittest.TestCase):
             "applicability_uncertainty", "dual_state_docking", "md_gates",
             "candidate_portfolio", "shadow_actions", "governance_scope",
             "uncertainty_review_queue", "md_production_cutoff", "audit_log",
+            "shadow_evidence_sprint",
         }
         self.assertEqual(set(self.payload["contracts"]), expected)
         for contract in self.payload["contracts"].values():
@@ -42,6 +43,15 @@ class Track3DashboardTests(unittest.TestCase):
                 source = record["source"]
                 digest = hashlib.sha256((a2a / source["path"]).read_bytes()).hexdigest()
                 self.assertEqual(source["sha256"], digest)
+
+    def test_shadow_evidence_sprint_is_metadata_only(self):
+        sprint = self.payload["contracts"]["shadow_evidence_sprint"]["records"][0]
+        self.assertEqual(sprint["status"], "shadow_worklist_only")
+        self.assertEqual(sprint["counts"]["frozen_candidate_records"], 240)
+        self.assertEqual(sprint["counts"]["publication_groups_checked"], 12)
+        self.assertEqual(sprint["counts"]["metadata_verified"], 12)
+        self.assertFalse(any(sprint["firewall"].values()))
+        self.assertTrue(all(item["access_status"] == "metadata_verified" for item in sprint["checked_publications"]))
 
     def test_autonomy_is_shadow_only_and_promotion_is_locked(self):
         promotion = self.payload["promotion"]

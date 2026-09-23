@@ -182,6 +182,20 @@ window.A2A_DASHBOARD_DATA = {
             "path": "config/shadow_update.v1.4.json",
             "sha256": "b48669165f967039449f9965b90ac8159a5b62890297e98c8690516a3cace908"
           }
+        },
+        {
+          "action": "shadow-source-access",
+          "actor": "repository-artifact-ingest",
+          "entry_hash": "b2d5ad6ac4258f1cd1d33c9517551deda4305e64a1b8f3f9b422c83b398ef14c",
+          "event_id": "audit-0012",
+          "previous_entry_hash": "7250d6f39db6a5d4ad0e9f479c433e20092f52c0c3b73390e78c7561d6533973",
+          "record_id": "a2a-shadow-evidence-source-access-v1.6.1",
+          "record_type": "shadow_evidence_sprint",
+          "sequence": 12,
+          "source": {
+            "path": "outputs/v1.6.1/shadow_evidence/source_access_sprint/shadow_evidence_release.json",
+            "sha256": "d0d4ed4fb391173b3715b128f040adcec9200fb2fd8186d3db07d08924dc5768"
+          }
         }
       ],
       "schema_id": "a2a-dashboard.audit-log.v1"
@@ -929,6 +943,290 @@ window.A2A_DASHBOARD_DATA = {
         }
       ],
       "schema_id": "a2a-dashboard.shadow-actions.v1"
+    },
+    "shadow_evidence_sprint": {
+      "contract_version": "1.0.0",
+      "records": [
+        {
+          "checked_publications": [
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 7,
+              "candidate_ids": [
+                "BDB-14390",
+                "BDB-44650",
+                "BDB-50389830",
+                "BDB-50389835",
+                "BDB-50389836",
+                "BDB-50389837",
+                "BDB-50389844"
+              ],
+              "doi": "10.1021/jm300280e",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "22563707",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:22563707",
+              "source_url": "https://europepmc.org/article/MED/22563707",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "A prospective cross-screening study on G-protein-coupled receptors: lessons learned in virtual compound library design.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 6,
+              "candidate_ids": [
+                "BDB-50410648",
+                "BDB-50410682",
+                "BDB-50410728",
+                "BDB-50410730",
+                "BDB-50410755",
+                "BDB-50410768"
+              ],
+              "doi": "10.1021/jm0506221",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "16392813",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:16392813",
+              "source_url": "https://europepmc.org/article/MED/16392813",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Design, synthesis, and structure-activity relationships of 1-,3-,8-, and 9-substituted-9-deazaxanthines at the human A2B adenosine receptor.",
+              "title_target_flag": "other_receptor_focus_in_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 5,
+              "candidate_ids": [
+                "BDB-50298497",
+                "BDB-50298515",
+                "BDB-50298523",
+                "BDB-50298541",
+                "BDB-50298553"
+              ],
+              "doi": "10.1016/j.bmc.2009.05.038",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "19501513",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:19501513",
+              "source_url": "https://europepmc.org/article/MED/19501513",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Combining selectivity and affinity predictions using an integrated Support Vector Machine (SVM) approach: An alternative tool to discriminate between the human adenosine A(2A) and A(3) receptor pyrazolo-triazolo-pyrimidine antagonists binding sites.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 5,
+              "candidate_ids": [
+                "BDB-50580289",
+                "BDB-50580305",
+                "BDB-50580308",
+                "BDB-50580310",
+                "BDB-50580311"
+              ],
+              "doi": "10.1021/acs.jmedchem.1c01155",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "34783558",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:34783558",
+              "source_url": "https://europepmc.org/article/MED/34783558",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Structure-Based Design of Dual-Acting Compounds Targeting Adenosine A2A Receptor and Histone Deacetylase as Novel Tumor Immunotherapeutic Agents.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50083915",
+                "BDB-50083916",
+                "BDB-50102281",
+                "BDB-50102286"
+              ],
+              "doi": "10.1021/jm001054m",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "11462973",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:11462973",
+              "source_url": "https://europepmc.org/article/MED/11462973",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "3-Aryl[1,2,4]triazino[4,3-a]benzimidazol-4(10H)-ones: a new class of selective A1 adenosine receptor antagonists.",
+              "title_target_flag": "other_receptor_focus_in_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50139711",
+                "BDB-50139722",
+                "BDB-50139728",
+                "BDB-50139734"
+              ],
+              "doi": "10.1016/j.bmcl.2003.09.095",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "14741297",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:14741297",
+              "source_url": "https://europepmc.org/article/MED/14741297",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Synthesis and SAR evaluation of 1,2,4-triazoles as A(2A) receptor antagonists.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50003108",
+                "BDB-50003151",
+                "BDB-50003212",
+                "BDB-50003233"
+              ],
+              "doi": "10.1016/j.bmc.2008.01.002",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "18226909",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:18226909",
+              "source_url": "https://europepmc.org/article/MED/18226909",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "1-, 3- and 8-substituted-9-deazaxanthines as potent and selective antagonists at the human A2B adenosine receptor.",
+              "title_target_flag": "other_receptor_focus_in_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50377544",
+                "BDB-50377546",
+                "BDB-50377555",
+                "BDB-50377566"
+              ],
+              "doi": "10.1016/j.bmcl.2008.03.072",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "18411049",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:18411049",
+              "source_url": "https://europepmc.org/article/MED/18411049",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Antagonists of the human adenosine A2A receptor. Part 3: Design and synthesis of pyrazolo[3,4-d]pyrimidines, pyrrolo[2,3-d]pyrimidines and 6-arylpurines.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50247934",
+                "BDB-50248436",
+                "BDB-50248576",
+                "BDB-50248578"
+              ],
+              "doi": "10.1016/j.bmcl.2009.01.042",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "19181527",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:19181527",
+              "source_url": "https://europepmc.org/article/MED/19181527",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Synthesis and SAR studies of trisubstituted purinones as potent and selective adenosine A2A receptor antagonists.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 4,
+              "candidate_ids": [
+                "BDB-50139768",
+                "BDB-50139775",
+                "BDB-50139817",
+                "BDB-50139836"
+              ],
+              "doi": "10.1016/j.bmcl.2015.11.048",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "26781932",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:26781932",
+              "source_url": "https://europepmc.org/article/MED/26781932",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "Discovery of aminoquinazoline derivatives as human A(2A) adenosine receptor antagonists.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 3,
+              "candidate_ids": [
+                "BDB-50141449",
+                "BDB-50141455",
+                "BDB-50141456"
+              ],
+              "doi": "10.1016/j.bmcl.2004.01.011",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "15006389",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:15006389",
+              "source_url": "https://europepmc.org/article/MED/15006389",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "2-(N-acyl) and 2-N-acyl-N(6)-substituted analogues of adenosine and their affinity at the human adenosine receptors.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            },
+            {
+              "access_status": "metadata_verified",
+              "affected_count": 3,
+              "candidate_ids": [
+                "BDB-50156616",
+                "BDB-50262150",
+                "BDB-50262266"
+              ],
+              "doi": "10.1021/jm701594y",
+              "in_pmc": false,
+              "open_access": false,
+              "pmid": "18637670",
+              "retrieval_note": "Primary text and candidate-to-structure linkage still require independent review.",
+              "source_key": "PMID:18637670",
+              "source_url": "https://europepmc.org/article/MED/18637670",
+              "supplement_flag": false,
+              "title_from_frozen_packet": "2-Amino-6-furan-2-yl-4-substituted nicotinonitriles as A2A adenosine receptor antagonists.",
+              "title_target_flag": "a2a_or_unspecified_title"
+            }
+          ],
+          "claim_limit": "Metadata access checks do not resolve assay endpoints, exact compound rows, stereochemistry, or potency. Frozen external confirmation remains failed and closed.",
+          "counts": {
+            "affected_candidates_in_checked_groups": 53,
+            "frozen_candidate_records": 240,
+            "metadata_verified": 12,
+            "open_access_metadata_flags": 0,
+            "other_receptor_title_flags": 3,
+            "publication_groups_checked": 12,
+            "publication_groups_with_missing_text": 89,
+            "supplement_metadata_flags": 0
+          },
+          "firewall": {
+            "candidate_promoted": false,
+            "external_outcomes_loaded": false,
+            "frozen_membership_modified": false,
+            "numeric_ki_extracted": false
+          },
+          "release_id": "a2a-shadow-evidence-source-access-v1.6.1",
+          "review_bands": {
+            "source_or_identity_unresolved": 29,
+            "source_text_missing": 211
+          },
+          "selection_rule": "Among frozen metadata-pass records lacking primary text, group by first PMID (DOI fallback), sort by affected candidate count descending then source key ascending, inspect first 12 groups.",
+          "source": {
+            "path": "outputs/v1.6.1/shadow_evidence/source_access_sprint/shadow_evidence_release.json",
+            "sha256": "d0d4ed4fb391173b3715b128f040adcec9200fb2fd8186d3db07d08924dc5768"
+          },
+          "source_access_checked_at_utc": "2026-09-23T02:08:45.742438+00:00",
+          "status": "shadow_worklist_only"
+        }
+      ],
+      "schema_id": "a2a-dashboard.shadow-evidence-sprint.v1"
     },
     "uncertainty_review_queue": {
       "contract_version": "1.0.0",

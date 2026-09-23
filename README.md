@@ -19,8 +19,25 @@ python3 -m unittest tests.test_track3_dashboard
 Autonomous records remain shadow proposals. The dashboard cannot admit labels,
 promote a model, unlock Tier B, or describe a candidate as experimentally validated.
 The Render blueprint disables legacy background literature automation and
-prototype GNINA. The Discovery Lab is request-driven, shadow-only, and stores only
-its latest ephemeral run; it cannot mutate the frozen scientific artifacts.
+prototype GNINA. The Discovery Lab is request-driven and shadow-only; its run
+archive cannot mutate the frozen scientific artifacts.
+
+The September 23 source-access sprint audits the existing outcome-blind evidence
+gaps. It selects 12 publication groups by the number of linked records requiring
+primary text, then queries Europe PMC for publication metadata only. The saved
+metadata snapshot, 240-record shadow worklist, selection rule, hashes, and claim
+limits are in `track3_a2a/outputs/v1.6.1/shadow_evidence/source_access_sprint/`.
+Rebuild the versioned release from the committed snapshot with:
+
+```bash
+python3 track3_a2a/build_shadow_evidence_sprint_v161.py
+python3 build_track3_dashboard.py
+```
+
+Use `--refresh` only to repeat the live metadata checks and record a new snapshot.
+This sprint does not retrieve article text or assay values, resolve compound-row
+identity, reopen frozen cohort membership, or authorize an outcome join. Its
+results appear in the dashboard Literature & evidence inbox.
 
 The **Teammate analysis** view is an attributed, provisional transcription of
 aggregate figures from a supplied PDF. It is visually and computationally
