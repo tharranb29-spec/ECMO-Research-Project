@@ -155,6 +155,33 @@ def build_release(pass1: dict, pass2: dict, snapshot: dict) -> dict:
             "Primary text and candidate-to-structure linkage still require independent review."
             if found["status"] == "metadata_verified" else "Publication metadata needs resolution."
         )
+    pass1_by_id = {item["candidate_id"]: item for item in pass1["records"]}
+    source_grounded_review = []
+    for item in pass2["records"]:
+        if not item["source_assessments"]:
+            continue
+        source_ids = sorted({source["primary_source_locator"] for source in item["source_assessments"]})
+        unresolved = sorted({
+            field for source in item["source_assessments"]
+            for field, value in source["categorical_fields"].items()
+            if field in item["agreement_fields"] and not value["resolved"]
+        })
+        source_grounded_review.append({
+            "candidate_id": item["candidate_id"],
+            "inchikey": item["standardized_inchikey"],
+            "source_ids": source_ids,
+            "source_urls": [f"https://europepmc.org/article/PMC/{pmcid}" for pmcid in source_ids],
+            "source_xml_sha256": {
+                source["primary_source_locator"]: source["categorical_fields"]["primary_source_locator"]["source_locator"]["raw_xml_sha256"]
+                for source in item["source_assessments"]
+            },
+            "publication_title": str(pass1_by_id[item["candidate_id"]].get("article_titles") or "").split("|")[0],
+            "unresolved_fields": unresolved,
+            "frozen_quarantine_reasons": item["quarantine_reasons"],
+            "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+            "status": "shadow_review_required",
+        })
+    source_grounded_review.sort(key=lambda item: item["candidate_id"])
     return {
         "schema_version": 1,
         "release_id": "a2a-shadow-evidence-source-access-v1.6.1",
@@ -171,9 +198,11 @@ def build_release(pass1: dict, pass2: dict, snapshot: dict) -> dict:
             "open_access_metadata_flags": sum(item["open_access"] is True for item in selected),
             "supplement_metadata_flags": sum(item["supplement_flag"] is True for item in selected),
             "other_receptor_title_flags": sum(item["title_target_flag"] == "other_receptor_focus_in_title" for item in selected),
+            "source_grounded_unresolved_candidates": len(source_grounded_review),
         },
         "review_bands": dict(sorted(Counter(item["shadow_review_band"] for item in rows).items())),
         "checked_publications": selected,
+        "source_grounded_review": source_grounded_review,
         "candidate_worklist": rows,
         "firewall": {"numeric_ki_extracted": False, "external_outcomes_loaded": False,
                      "frozen_membership_modified": False, "candidate_promoted": False},

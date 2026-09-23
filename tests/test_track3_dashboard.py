@@ -52,6 +52,7 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertEqual(sprint["counts"]["metadata_verified"], 12)
         self.assertFalse(any(sprint["firewall"].values()))
         self.assertTrue(all(item["access_status"] == "metadata_verified" for item in sprint["checked_publications"]))
+        self.assertEqual(len(sprint["source_grounded_review"]), 29)
 
     def test_autonomy_is_shadow_only_and_promotion_is_locked(self):
         promotion = self.payload["promotion"]

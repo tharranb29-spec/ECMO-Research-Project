@@ -186,7 +186,7 @@
         {
           "action": "shadow-source-access",
           "actor": "repository-artifact-ingest",
-          "entry_hash": "b2d5ad6ac4258f1cd1d33c9517551deda4305e64a1b8f3f9b422c83b398ef14c",
+          "entry_hash": "0dc4dd67cbff8f38ec6383d901990e0d2f7be38826252eff43b55eb45472656f",
           "event_id": "audit-0012",
           "previous_entry_hash": "7250d6f39db6a5d4ad0e9f479c433e20092f52c0c3b73390e78c7561d6533973",
           "record_id": "a2a-shadow-evidence-source-access-v1.6.1",
@@ -194,7 +194,7 @@
           "sequence": 12,
           "source": {
             "path": "outputs/v1.6.1/shadow_evidence/source_access_sprint/shadow_evidence_release.json",
-            "sha256": "d0d4ed4fb391173b3715b128f040adcec9200fb2fd8186d3db07d08924dc5768"
+            "sha256": "0c5bb6db3050ed5ebdc197467771bb4513ba534711b39b8b6cbf03fb18861a31"
           }
         }
       ],
@@ -1204,6 +1204,7 @@
             "other_receptor_title_flags": 3,
             "publication_groups_checked": 12,
             "publication_groups_with_missing_text": 89,
+            "source_grounded_unresolved_candidates": 29,
             "supplement_metadata_flags": 0
           },
           "firewall": {
@@ -1220,9 +1221,887 @@
           "selection_rule": "Among frozen metadata-pass records lacking primary text, group by first PMID (DOI fallback), sort by affected candidate count descending then source key ascending, inspect first 12 groups.",
           "source": {
             "path": "outputs/v1.6.1/shadow_evidence/source_access_sprint/shadow_evidence_release.json",
-            "sha256": "d0d4ed4fb391173b3715b128f040adcec9200fb2fd8186d3db07d08924dc5768"
+            "sha256": "0c5bb6db3050ed5ebdc197467771bb4513ba534711b39b8b6cbf03fb18861a31"
           },
           "source_access_checked_at_utc": "2026-09-23T02:08:45.742438+00:00",
+          "source_grounded_review": [
+            {
+              "candidate_id": "BDB-50047917",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_target_species",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "ZUZUSCXGJHXEMB-WXAVEZDYSA-N",
+              "publication_title": "Extended N(6) substitution of rigid C2-arylethynyl nucleosides for exploring the role of extracellular loops in ligand recognition at the A3 adenosine receptor.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC4158450"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC4158450"
+              ],
+              "source_xml_sha256": {
+                "PMC4158450": "0c41a98c27923a67458a89c16afab62c97a6fa3d6117070834cea525db177835"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "target_species",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50199460",
+              "frozen_quarantine_reasons": [
+                "pass_1_rejected",
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "YLEQGEOHZFVIAR-QZUDQQPUSA-N",
+              "publication_title": "Structure-Based Scaffold Repurposing for G Protein-Coupled Receptors: Transformation of Adenosine Derivatives into 5HT2B/5HT2C Serotonin Receptor Antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC5201133"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC5201133"
+              ],
+              "source_xml_sha256": {
+                "PMC5201133": "b525845a1c74f9f4000c98d036527e073cc159ef52cf50c22866478f9b67847e"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50199463",
+              "frozen_quarantine_reasons": [
+                "pass_1_rejected",
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_target_species",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "PWANAKRSKQRVSS-QKZATRHHSA-N",
+              "publication_title": "Structure-Based Scaffold Repurposing for G Protein-Coupled Receptors: Transformation of Adenosine Derivatives into 5HT2B/5HT2C Serotonin Receptor Antagonists. ",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC5201133",
+                "PMC6467784"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC5201133",
+                "https://europepmc.org/article/PMC/PMC6467784"
+              ],
+              "source_xml_sha256": {
+                "PMC5201133": "b525845a1c74f9f4000c98d036527e073cc159ef52cf50c22866478f9b67847e",
+                "PMC6467784": "3d0352ea9222313c2884b7d2e34a76547c2a2701b93bfb9b7dc7a22033ba6c30"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "target_species",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50264171",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "ZGLFUGCOCLZCQG-XWAOVWAASA-N",
+              "publication_title": "Selective A(3) adenosine receptor antagonists derived from nucleosides containing a bicyclo[3.1.0]hexane ring system.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2593936"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2593936"
+              ],
+              "source_xml_sha256": {
+                "PMC2593936": "e23e7af62dcaa437cdf811611b8d9e7ca9d19cdc751a83765c1c8854f9969a2f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50274074",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units"
+              ],
+              "inchikey": "DKRKGVPEEBGRFA-JTQLQIEISA-N",
+              "publication_title": "Docking Screens for Dual Inhibitors of Disparate Drug Targets for Parkinson's Disease.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC6716773"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC6716773"
+              ],
+              "source_xml_sha256": {
+                "PMC6716773": "88b10d1520b2f4df67fd252c1fc3db29111c6337491dc5a170bb7eff901a904d"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50306777",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "IWDKSIOHIYCOBV-UHFFFAOYSA-N",
+              "publication_title": "Structure-based discovery of novel chemotypes for adenosine A(2A) receptor antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2826142"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2826142"
+              ],
+              "source_xml_sha256": {
+                "PMC2826142": "ae2026cd98777c4e0a73e488e2143a02b96a8f8676b2a368f3bc0c5f645646ad"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50306787",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "GHCCRBAXZVOAEU-UHFFFAOYSA-N",
+              "publication_title": "Structure-based discovery of novel chemotypes for adenosine A(2A) receptor antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2826142"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2826142"
+              ],
+              "source_xml_sha256": {
+                "PMC2826142": "ae2026cd98777c4e0a73e488e2143a02b96a8f8676b2a368f3bc0c5f645646ad"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50306789",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "LYSQKWDUPSIMCD-UHFFFAOYSA-N",
+              "publication_title": "Structure-based discovery of novel chemotypes for adenosine A(2A) receptor antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2826142"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2826142"
+              ],
+              "source_xml_sha256": {
+                "PMC2826142": "ae2026cd98777c4e0a73e488e2143a02b96a8f8676b2a368f3bc0c5f645646ad"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50306792",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "CWYUCBLNLMTDMO-UHFFFAOYSA-N",
+              "publication_title": "Structure-based discovery of novel chemotypes for adenosine A(2A) receptor antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2826142"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2826142"
+              ],
+              "source_xml_sha256": {
+                "PMC2826142": "ae2026cd98777c4e0a73e488e2143a02b96a8f8676b2a368f3bc0c5f645646ad"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50309781",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "IMOUNXQRZGLBSG-DYHDFLJKSA-N",
+              "publication_title": "2-Dialkynyl derivatives of (N)-methanocarba nucleosides: 'Clickable' A(3) adenosine receptor-selective agonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2818678"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2818678"
+              ],
+              "source_xml_sha256": {
+                "PMC2818678": "59453a6571e55b25dbc34600ab443411866fbe4cd8afe42b3cd047b0362d4320"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50318250",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "QGDVJEIIAUKMBX-UHFFFAOYSA-N",
+              "publication_title": "Structure-based discovery of A2A adenosine receptor ligands.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC2865168"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC2865168"
+              ],
+              "source_xml_sha256": {
+                "PMC2865168": "c2b9ccd7830efab18647d67f2290d34a30c916073d4e4c7f913c5fa4f294baaf"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50342519",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "HHKJUHAIZLHJQI-UHFFFAOYSA-N",
+              "publication_title": "Molecular probes for the A2A adenosine receptor based on a pyrazolo[4,3-e][1,2,4]triazolo[1,5-c]pyrimidin-5-amine scaffold.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3081901"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3081901"
+              ],
+              "source_xml_sha256": {
+                "PMC3081901": "ead6c7e9000582c1eab874be7dd252171ae9f79a86f0eaa909a51a5ca778d4e3"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50364064",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "DNPNXAXAKNFJDD-GFOALDQYSA-N",
+              "publication_title": "Evaluation of molecular modeling of agonist binding in light of the crystallographic structure of an agonist-bound A\u2082A adenosine receptor.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3261785"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3261785"
+              ],
+              "source_xml_sha256": {
+                "PMC3261785": "d9271394c2f61c260a83bc7aa2fdab78ff887a68b4390028d4e1e53ee65f0309"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50382977",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "XEPILNOUAKDUOM-UHFFFAOYSA-N",
+              "publication_title": "Identification of novel adenosine A(2A) receptor antagonists by virtual screening.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3308209"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3308209"
+              ],
+              "source_xml_sha256": {
+                "PMC3308209": "f1d0b610fc3afe09d82179841c30f7bdbb2f6f6b30cabab24972ca777b1d638f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50382979",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "GCRYBPRWBPKFMF-UHFFFAOYSA-N",
+              "publication_title": "Identification of novel adenosine A(2A) receptor antagonists by virtual screening.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3308209"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3308209"
+              ],
+              "source_xml_sha256": {
+                "PMC3308209": "f1d0b610fc3afe09d82179841c30f7bdbb2f6f6b30cabab24972ca777b1d638f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50382982",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "YNSVRVIBICMHME-UHFFFAOYSA-N",
+              "publication_title": "Identification of novel adenosine A(2A) receptor antagonists by virtual screening.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3308209"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3308209"
+              ],
+              "source_xml_sha256": {
+                "PMC3308209": "f1d0b610fc3afe09d82179841c30f7bdbb2f6f6b30cabab24972ca777b1d638f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50382986",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "WGFLLKYIRNKGKW-UHFFFAOYSA-N",
+              "publication_title": "Identification of novel adenosine A(2A) receptor antagonists by virtual screening.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3308209"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3308209"
+              ],
+              "source_xml_sha256": {
+                "PMC3308209": "f1d0b610fc3afe09d82179841c30f7bdbb2f6f6b30cabab24972ca777b1d638f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50382989",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "UKVAEISSAVZLLZ-UHFFFAOYSA-N",
+              "publication_title": "Identification of novel adenosine A(2A) receptor antagonists by virtual screening.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3308209"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3308209"
+              ],
+              "source_xml_sha256": {
+                "PMC3308209": "f1d0b610fc3afe09d82179841c30f7bdbb2f6f6b30cabab24972ca777b1d638f"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50432634",
+              "frozen_quarantine_reasons": [
+                "pass_1_rejected",
+                "unresolved_assay_type",
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "WZFUWGODTRDSBO-UHFFFAOYSA-N",
+              "publication_title": "Structure-based approaches to ligands for G-protein-coupled adenosine and P2Y receptors, from small molecules to nanoconjugates.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC3701956"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC3701956"
+              ],
+              "source_xml_sha256": {
+                "PMC3701956": "79d0ba8485170738e90d6d78520c7fe7e16dd08c265acca720686b4fa7e0d4a8"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "assay_type",
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50517299",
+              "frozen_quarantine_reasons": [
+                "pass_1_rejected",
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_target_species",
+                "unresolved_units"
+              ],
+              "inchikey": "VQFKOPZALUTGKJ-BGIGGGFGSA-N",
+              "publication_title": "Design and in Vivo Characterization of A1 Adenosine Receptor Agonists in the Native Ribose and Conformationally Constrained (N)-Methanocarba Series.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC6467784"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC6467784"
+              ],
+              "source_xml_sha256": {
+                "PMC6467784": "3d0352ea9222313c2884b7d2e34a76547c2a2701b93bfb9b7dc7a22033ba6c30"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "target_species",
+                "units"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50559039",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "XEABBZPOOUCNPW-UHFFFAOYSA-N",
+              "publication_title": "Conjugable A3 adenosine receptor antagonists for the development of functionalized ligands and their use in fluorescent probes.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC7199890"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC7199890"
+              ],
+              "source_xml_sha256": {
+                "PMC7199890": "0ae5fc717a644d44b7ab0dc3f949cbb01d851196e18258eb5a4f09dc9f637d75"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50559043",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "PQBREZGPWVFSIR-UHFFFAOYSA-N",
+              "publication_title": "Conjugable A3 adenosine receptor antagonists for the development of functionalized ligands and their use in fluorescent probes.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC7199890"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC7199890"
+              ],
+              "source_xml_sha256": {
+                "PMC7199890": "0ae5fc717a644d44b7ab0dc3f949cbb01d851196e18258eb5a4f09dc9f637d75"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50573591",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "XCPOOYABRFHDAQ-GZBFAFLISA-N",
+              "publication_title": "Synthesis and evaluation of adenosine derivatives as A1, A2A, A2B and A3 adenosine receptor ligands containing boron clusters as phenyl isosteres and selective A3 agonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC8448983"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC8448983"
+              ],
+              "source_xml_sha256": {
+                "PMC8448983": "c3017aa635c59853d79320ae7c9311e7430cb5f492d68941a35b71f14af3150d"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50584581",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_stereochemistry",
+                "unresolved_units"
+              ],
+              "inchikey": "BUXDJJICYXLCEH-UHFFFAOYSA-N",
+              "publication_title": "Optimization of 2-Amino-4,6-diarylpyrimidine-5-carbonitriles as Potent and Selective A1 Antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC8842224"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC8842224"
+              ],
+              "source_xml_sha256": {
+                "PMC8842224": "79ba0964b86c13050d335f87012409617ba0144e0ed86372b648cdd7b14cb3e4"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "stereochemistry",
+                "units"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50584629",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_stereochemistry",
+                "unresolved_units"
+              ],
+              "inchikey": "UTSMDVBQXYDAIT-UHFFFAOYSA-N",
+              "publication_title": "Optimization of 2-Amino-4,6-diarylpyrimidine-5-carbonitriles as Potent and Selective A1 Antagonists.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC8842224"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC8842224"
+              ],
+              "source_xml_sha256": {
+                "PMC8842224": "79ba0964b86c13050d335f87012409617ba0144e0ed86372b648cdd7b14cb3e4"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "stereochemistry",
+                "units"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50627155",
+              "frozen_quarantine_reasons": [
+                "pass_1_rejected",
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_target_species",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "RATZCLQARSHGQO-UHFFFAOYSA-N",
+              "publication_title": "The Hitchhiker's Guide to Deep Learning Driven Generative Chemistry.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC10351082"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC10351082"
+              ],
+              "source_xml_sha256": {
+                "PMC10351082": "b1d527d1be2657d31f9778b53e18f58412e20d0fc188f08a88672c6729480317"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "target_species",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50628405",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "YFDPVXTZPTZXLH-KPAZRMRSSA-N",
+              "publication_title": "Structure-Activity Relationship of Truncated 2,8-Disubstituted-Adenosine Derivatives as Dual A2A/A3 Adenosine Receptor Antagonists and Their Cancer Immunotherapeutic Activity.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC10896643"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC10896643"
+              ],
+              "source_xml_sha256": {
+                "PMC10896643": "decdd7377dadccdc8dad619bf194d13891696421736099aaa2ee1ff9ec383733"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50628408",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "XRKKJGGYJHRJNY-OWDMVUQNSA-N",
+              "publication_title": "Structure-Activity Relationship of Truncated 2,8-Disubstituted-Adenosine Derivatives as Dual A2A/A3 Adenosine Receptor Antagonists and Their Cancer Immunotherapeutic Activity.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC10896643"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC10896643"
+              ],
+              "source_xml_sha256": {
+                "PMC10896643": "decdd7377dadccdc8dad619bf194d13891696421736099aaa2ee1ff9ec383733"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            },
+            {
+              "candidate_id": "BDB-50638405",
+              "frozen_quarantine_reasons": [
+                "unresolved_molecule_identity",
+                "unresolved_relation",
+                "unresolved_stereochemistry",
+                "unresolved_units",
+                "unresolved_wild_type_status"
+              ],
+              "inchikey": "JFKRMUAVFJYHNX-KGBXAXFASA-N",
+              "publication_title": "Structural Modification and Biological Evaluation of 2,8-Disubstituted Adenine and Its Nucleosides as A2A Adenosine Receptor Antagonists: Exploring the Roles of Ribose at Adenosine Receptors.",
+              "review_action": "Locate the exact source compound/table row and resolve the listed categorical fields; quarantine any disagreement.",
+              "source_ids": [
+                "PMC11302573"
+              ],
+              "source_urls": [
+                "https://europepmc.org/article/PMC/PMC11302573"
+              ],
+              "source_xml_sha256": {
+                "PMC11302573": "c98725a126131970a5f432124aa7f5ac792de0b86058d9faba50bfa6984bf29d"
+              },
+              "status": "shadow_review_required",
+              "unresolved_fields": [
+                "molecule_identity",
+                "relation",
+                "stereochemistry",
+                "units",
+                "wild_type_status"
+              ]
+            }
+          ],
           "status": "shadow_worklist_only"
         }
       ],

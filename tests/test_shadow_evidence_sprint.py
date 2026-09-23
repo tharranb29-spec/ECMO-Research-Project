@@ -15,6 +15,8 @@ class ShadowEvidenceSprintTests(unittest.TestCase):
         self.assertEqual(release["counts"]["frozen_candidate_records"], 240)
         self.assertEqual(release["counts"]["publication_groups_checked"], sprint.LIMIT)
         self.assertEqual(release["counts"]["other_receptor_title_flags"], 3)
+        self.assertEqual(release["counts"]["source_grounded_unresolved_candidates"], 29)
+        self.assertTrue(all("molecule_identity" in row["unresolved_fields"] for row in release["source_grounded_review"]))
         self.assertFalse(any(release["firewall"].values()))
         self.assertEqual(len({row["candidate_id"] for row in release["candidate_worklist"]}), 240)
         self.assertNotIn("standardized_smiles", release["candidate_worklist"][0])

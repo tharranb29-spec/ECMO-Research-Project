@@ -435,6 +435,7 @@ def build() -> dict:
             "counts": shadow_evidence_sprint["counts"],
             "review_bands": shadow_evidence_sprint["review_bands"],
             "checked_publications": shadow_evidence_sprint["checked_publications"],
+            "source_grounded_review": shadow_evidence_sprint["source_grounded_review"],
             "firewall": shadow_evidence_sprint["firewall"],
             "claim_limit": shadow_evidence_sprint["claim_limit"],
             "source": source_ref("shadow_evidence_sprint"),

@@ -23,6 +23,10 @@ snapshot. The release records hashes of both frozen inputs and that snapshot.
 - A title-level subtype screen flags 3 papers whose titles focus on A1 or A2B
   without mentioning A2A. This is a review prompt, not a paper-level verdict;
   the primary source must be checked before an A2A claim is made.
+- The release also contains a 29-record source-grounded review packet. Every
+  record lacks exact molecule identity and stereochemistry linkage in pass 2;
+  29 lack units, 27 lack an explicit relation, and 25 lack wild-type status.
+  Each packet row lists its PMCID links and the fields still needing evidence.
 
 The 53 records are **still blocked**. Publication-level citation verification
 does not identify which experimental table row belongs to a queued structure,
