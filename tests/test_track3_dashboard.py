@@ -186,6 +186,25 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn("eligibility.display_label", js)
         self.assertIn("molecule.eligibility_state", js)
 
+    def test_release_copy_distinguishes_shadow_scorer_from_promoted_model(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        model = json.loads((ROOT / "track3_a2a/outputs/v1.6/model_reproduction/development_results.json").read_text())
+        scorer = json.loads((ROOT / "track3_a2a/outputs/v1.6/model_reproduction/ab_ridge_shadow_scorer.json").read_text())
+        cohort = json.loads((ROOT / "track3_a2a/outputs/v1.6/external_evidence/pass2_source_extraction/cohort_freeze_manifest.json").read_text())
+        self.assertIn("development assay rows · 69 distinct molecules", html)
+        self.assertIn("A development-only shadow point-estimate scorer exists", html)
+        self.assertIn("Promoted models", js)
+        self.assertIn("Shadow scorer only", js)
+        self.assertNotIn("no deployable frozen scorer", html)
+        self.assertNotIn("development molecules", html)
+        self.assertEqual(model["result"]["n"], scorer["training_n"])
+        self.assertEqual(scorer["training_distinct_molecules"], 69)
+        self.assertEqual(round(model["result"]["metrics"]["AB_Ridge"]["r2"], 3), 0.561)
+        self.assertEqual(cohort["admitted_molecule_count"], 0)
+        self.assertEqual(cohort["minimum_molecule_floor"], 60)
+        self.assertFalse(cohort["one_time_outcome_join_authorized"])
+
     def test_information_architecture_covers_every_competition_workspace(self):
         html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
         expected_views = {

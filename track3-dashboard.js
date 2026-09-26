@@ -29,7 +29,7 @@
   const summary=[
     ["External cohort","0 / 60","Frozen floor failure"],
     ["Primary model",fmt(data.summary.primary_model_r2,3),"AB_Ridge development R²"],
-    ["Served models","0","Shadow-only; release locked"]
+    ["Promoted models","0","Development-only scorer; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
 
@@ -176,7 +176,7 @@
   function renderModels(){
     const values=models.map(row=>Number(row[modelMetric])),max=Math.max(...values),min=Math.min(...values),range=Math.max(max-min,.001),lowerBetter=modelMetric!=="r2";
     $("model-comparison").innerHTML=models.map(row=>{const value=Number(row[modelMetric]),width=lowerBetter?(max-value)/range*80+20:(value-min)/range*80+20;return `<div class="bar-row ${row.model_id==="AB_Ridge"?"primary":""}"><label>${esc(row.display_name)}</label><div class="bar-track"><i style="width:${width}%"></i></div><strong>${fmt(value,3)}</strong></div>`;}).join("");
-    $("model-grid").innerHTML=models.map(row=>`<article class="model-card ${row.model_id==="AB_Ridge"?"primary":""}"><span class="kicker">${esc(row.role)}</span><span class="lock">Not served</span><h3>${esc(row.display_name)}</h3><div class="score">${fmt(row.r2,3)}</div><small>R² · RMSE ${fmt(row.rmse,3)} · MAE ${fmt(row.mae,3)}</small><div class="source-line">${esc(row.source.path)}</div></article>`).join("");
+    $("model-grid").innerHTML=models.map(row=>`<article class="model-card ${row.model_id==="AB_Ridge"?"primary":""}"><span class="kicker">${esc(row.role)}</span><span class="lock">${row.model_id==="AB_Ridge"?"Shadow scorer only":"Not deployed"}</span><h3>${esc(row.display_name)}</h3><div class="score">${fmt(row.r2,3)}</div><small>R² · RMSE ${fmt(row.rmse,3)} · MAE ${fmt(row.mae,3)}</small><div class="source-line">${esc(row.source.path)}</div></article>`).join("");
   }
   document.querySelectorAll("#metric-toggle button").forEach(button=>button.addEventListener("click",()=>{modelMetric=button.dataset.metric;document.querySelectorAll("#metric-toggle button").forEach(item=>item.classList.toggle("active",item===button));renderModels();}));renderModels();
 
