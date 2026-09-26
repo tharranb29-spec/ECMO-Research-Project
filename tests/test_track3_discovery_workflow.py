@@ -236,6 +236,76 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertEqual(captured["authorization"], "Bearer server-secret")
         self.assertEqual(result["state"], "live")
         self.assertEqual(result["sources"][0]["retrieval_state"], "live")
+        self.assertEqual(result["extractions"][0]["evidence_quality"], "quarantine")
+        self.assertEqual(result["extractions"][0]["citation_url"], result["sources"][0]["url"])
+
+    def test_llm_cannot_supply_a_foreign_citation_or_admit_abstract_only_evidence(self):
+        source = {
+            "source_id": "PMID:1", "url": "https://europepmc.org/article/MED/1",
+            "title": "Retrieved source", "retrieval_state": "live",
+        }
+        response = {"choices": [{"message": {"content": json.dumps({"extractions": [
+            {"source_id": "PMID:1", "citation_url": "https://example.invalid/fake",
+             "evidence_quality": "admitted", "reason": "LLM says confirmed", "molecule_mentions": ["Example"]},
+            {"source_id": "PMID:invented", "citation_url": "https://example.invalid/other"},
+            "not an extraction",
+        ]})}}]}
+
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self):
+                return json.dumps(response).encode("utf-8")
+
+        with mock.patch.object(workflow, "fetch_europe_pmc_sources", return_value=[source]), mock.patch.object(
+            workflow.request, "urlopen", return_value=FakeResponse()
+        ):
+            result = workflow.DeepSeekEvidenceProvider("server-secret").discover("A2A evidence")
+        self.assertEqual(len(result["extractions"]), 1)
+        self.assertEqual(result["extractions"][0]["citation_url"], source["url"])
+        self.assertEqual(result["extractions"][0]["evidence_quality"], "quarantine")
+
+    def test_malformed_deepseek_payload_fails_closed_to_auto_demo(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self):
+                return json.dumps({"choices": [{"message": {"content": "[]"}}]}).encode("utf-8")
+
+        with mock.patch.object(workflow, "DEEPSEEK_API_KEY", "server-secret"), mock.patch.object(
+            workflow, "fetch_europe_pmc_sources", return_value=[{"source_id": "PMID:1", "url": "https://europepmc.org/article/MED/1"}]
+        ), mock.patch.object(workflow.request, "urlopen", return_value=FakeResponse()):
+            result = workflow.run_workflow("A2A evidence", provider_mode="auto", persist=False)
+        self.assertEqual(result["workflow_state"], "cached_demo")
+        self.assertIn("failed closed", result["fallback_reason"])
+        self.assertEqual(result["screen_eligible_queue"]["count"], 0)
+
+    def test_unreadable_source_search_fails_closed_to_auto_demo(self):
+        class FakeResponse:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                return False
+
+            def read(self):
+                return b"not-json"
+
+        with mock.patch.object(workflow, "DEEPSEEK_API_KEY", "server-secret"), mock.patch.object(
+            workflow.request, "urlopen", return_value=FakeResponse()
+        ):
+            result = workflow.run_workflow("A2A evidence", provider_mode="auto", persist=False)
+        self.assertEqual(result["workflow_state"], "cached_demo")
+        self.assertIn("Europe PMC returned an unreadable response", result["fallback_reason"])
+        self.assertEqual(result["screen_eligible_queue"]["count"], 0)
 
     def test_auto_mode_fails_closed_to_cached_demo_on_live_timeout(self):
         with mock.patch.object(workflow, "DEEPSEEK_API_KEY", "server-secret"), mock.patch.object(

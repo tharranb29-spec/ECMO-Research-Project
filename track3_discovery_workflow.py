@@ -176,8 +176,14 @@ def fetch_europe_pmc_sources(query: str, limit: int = 5) -> list[dict]:
         raise RuntimeError(f"Europe PMC retrieval network error: {exc.reason}") from exc
     except TimeoutError as exc:
         raise RuntimeError("Europe PMC retrieval timed out.") from exc
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        raise RuntimeError("Europe PMC returned an unreadable response.") from exc
+    if not isinstance(payload, dict) or not isinstance(payload.get("resultList"), dict):
+        raise RuntimeError("Europe PMC returned an invalid search response.")
     sources = []
-    for item in (payload.get("resultList") or {}).get("result") or []:
+    for item in payload["resultList"].get("result") or []:
+        if not isinstance(item, dict):
+            continue
         source_name = str(item.get("source") or "MED").upper()
         article_id = str(item.get("id") or item.get("pmid") or "").strip()
         if not article_id:
@@ -246,12 +252,28 @@ class DeepSeekEvidenceProvider:
             choices = parsed.get("choices") or []
             content = ((choices[0].get("message") or {}).get("content") if choices else "") or ""
             result = json.loads(strip_json_fence(content))
-        except (TypeError, json.JSONDecodeError) as exc:
+        except (AttributeError, IndexError, KeyError, TypeError, json.JSONDecodeError) as exc:
             raise RuntimeError("DeepSeek discovery response was not valid structured JSON.") from exc
-        if not isinstance(result.get("extractions"), list):
+        if not isinstance(result, dict) or not isinstance(result.get("extractions"), list):
             raise RuntimeError("DeepSeek discovery response omitted the required extraction array.")
-        allowed_ids = {source["source_id"] for source in sources}
-        result["extractions"] = [item for item in result["extractions"] if item.get("source_id") in allowed_ids]
+        source_by_id = {source["source_id"]: source for source in sources}
+        extractions = []
+        for item in result["extractions"]:
+            if not isinstance(item, dict) or item.get("source_id") not in source_by_id:
+                continue
+            source = source_by_id[item["source_id"]]
+            extractions.append({
+                "source_id": source["source_id"],
+                "target": str(item.get("target") or "unresolved")[:120],
+                "assay_context": str(item.get("assay_context") or "unresolved")[:500],
+                "molecule_mentions": [str(value)[:120] for value in item.get("molecule_mentions")[:12]]
+                if isinstance(item.get("molecule_mentions"), list) else [],
+                "evidence_quality": "quarantine",
+                "reason": "Abstract/metadata extraction only; exact compound and assay context require source review. "
+                          + str(item.get("reason") or "")[:500],
+                "citation_url": source["url"],
+            })
+        result["extractions"] = extractions
         result.update({"provider": self.name, "state": "live", "query": query, "sources": sources})
         return result
 
