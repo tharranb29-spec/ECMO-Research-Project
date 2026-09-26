@@ -278,6 +278,7 @@ def standardize_molecule(name: str, smiles: str, demo_mode: bool = False) -> dic
         "applicability": "unavailable",
         "uncertainty": "unavailable",
         "model_id": None,
+        "model_artifact_sha256": None,
         "provisional_score": None,
         "model_provenance_status": "missing_or_rejected",
         "interval_90": None,
@@ -290,19 +291,16 @@ def standardize_molecule(name: str, smiles: str, demo_mode: bool = False) -> dic
         "screen_eligible": False,
         "eligibility_state": "blocked_missing_governed_inputs",
         "eligibility_reasons": [],
-        "state_label": "live",
+        "state_label": "simulated" if demo_mode else "live",
     }
     try:
-        from rdkit import Chem
-        from rdkit.Chem.Scaffolds import MurckoScaffold
+        if not rdkit_available():
+            raise ImportError("RDKit unavailable")
+        from track3_a2a.standardize_quarantine import standardize_smiles
 
-        mol = Chem.MolFromSmiles(smiles)
-        if mol is None:
-            record["standardization_state"] = "invalid_smiles"
-            record["eligibility_reasons"].append("SMILES could not be parsed by RDKit.")
-            return record
-        canonical = Chem.MolToSmiles(mol, canonical=True, isomericSmiles=True)
-        scaffold = MurckoScaffold.MurckoScaffoldSmiles(mol=mol, includeChirality=True)
+        chemistry = standardize_smiles(smiles)
+        canonical = chemistry["standardized_smiles"]
+        scaffold = chemistry["generic_murcko_scaffold_smiles"]
         record.update({
             "canonical_smiles": canonical,
             "identity_hash": hashlib.sha256(canonical.encode("utf-8")).hexdigest(),
@@ -310,6 +308,25 @@ def standardize_molecule(name: str, smiles: str, demo_mode: bool = False) -> dic
             "standardization_state": "standardized",
             "standardization_engine": "RDKit",
         })
+        try:
+            from track3_ab_ridge_shadow import score_smiles
+            score = score_smiles(smiles)
+        except (RuntimeError, ImportError, OSError, KeyError, TypeError, ValueError):
+            record["eligibility_reasons"].append("Development AB Ridge scorer unavailable; no substituted score was generated.")
+        else:
+            record.update({
+                "model_id": score["model_id"],
+                "model_artifact_sha256": score["artifact_sha256"],
+                "provisional_score": score["pbind_ki"],
+                "score_state": "development_only_no_validated_interval",
+                "model_provenance_status": "development_only_not_externally_validated",
+                "applicability": "not_validated_for_new_input",
+                "uncertainty": "uncalibrated",
+            })
+    except ValueError:
+        record["standardization_state"] = "invalid_smiles"
+        record["eligibility_reasons"].append("SMILES could not be standardized by RDKit.")
+        return record
     except ImportError:
         cached = CACHED_MOLECULES.get(smiles) if demo_mode else None
         if not cached:
@@ -643,13 +660,15 @@ def apply_disposition(run_id: str, status: str, reviewer: str, note: str = "") -
 
 
 def capability_status() -> dict:
+    from track3_ab_ridge_shadow import capability as ridge_capability
+
     return {
         "live_provider": "available" if DEEPSEEK_API_KEY else "unavailable",
         "live_provider_name": "deepseek_evidence_extraction",
         "live_model": DEEPSEEK_MODEL if DEEPSEEK_API_KEY else None,
         "cached_demo": "available",
         "rdkit": "available" if rdkit_available() else "unavailable",
-        "ab_ridge_scorer": "unavailable_no_serialized_model_artifact",
+        "ab_ridge_scorer": ridge_capability(),
         "external_outcomes": "sealed",
         "model_promotion": "disabled",
         "tier_b": "locked",

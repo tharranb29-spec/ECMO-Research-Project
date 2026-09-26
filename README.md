@@ -59,8 +59,10 @@ AUTO_RESEARCH_ENABLED=0 AUTO_RESEARCH_LLM_ENABLED=0 GNINA_MODE=disabled \
 
 Open `http://127.0.0.1:8765/#discovery` and choose **Deterministic cached demo**.
 No key is required. The demonstration labels cached source metadata and simulated
-applicability separately, leaves AB_Ridge scores unavailable, and records a
-hash-chained human disposition.
+applicability separately and records a hash-chained human disposition. With RDKit
+installed, Discovery Lab displays a development-fit AB_Ridge point estimate.
+It has no validated interval or external confirmation and cannot admit, rank, or
+certify a molecule. Without RDKit, identity and scoring remain unavailable.
 
 Discovery starts as a background job: `POST /api/discovery/run` returns HTTP 202
 with a run ID, `GET /api/discovery/runs/{run_id}` reports the current stage and
@@ -78,12 +80,23 @@ and hashes of the submitted input, retrieved sources, and structured extraction.
 For live source retrieval, configure `DEEPSEEK_API_KEY` only on the server and use
 Auto mode. Europe PMC supplies deterministic source records and citations; DeepSeek
 performs structured extraction through its server-side chat API and is never used
-as a potency oracle. RDKit standardization is activated when
-RDKit is installed. Without RDKit or a serialized frozen AB_Ridge scorer, those
-gates fail closed rather than generating substitute values.
+as a potency oracle. Render installs pinned RDKit 2025.9.6. The committed
+`ab_ridge_shadow_scorer.json` was exported from the 78 frozen development rows
+(69 distinct molecules), with source hashes and transparent coefficients; it is
+not a promoted model. If RDKit, that artifact, or its source hashes are absent
+or inconsistent, those capabilities fail closed rather than generating substitute
+values. Regenerate the artifact only from the frozen development inputs with
+`python3 track3_a2a/export_ab_ridge_shadow_v16.py` in a local research
+environment with RDKit, NumPy, and scikit-learn; never fit it on the sealed
+external cohort.
+
+The Evidence inbox also offers a read-only search/detail view for 29 source-linked
+quarantined records. Opening a linked publication or searching its unresolved fields
+does not alter the frozen external result. Record-level admission/disposition remains
+out of scope until a separately audited protocol amendment.
 
 ```bash
-python3 -m unittest tests.test_track3_dashboard tests.test_track3_discovery_workflow tests.test_track3_discovery_jobs
+python3 -m unittest tests.test_track3_dashboard tests.test_track3_discovery_workflow tests.test_track3_discovery_jobs tests.test_track3_shadow_scorer tests.test_shadow_evidence_sprint
 ```
 
 This folder now contains a rough, trainable ranking prototype for the AI-driven part of your ECMO biomaterials project.

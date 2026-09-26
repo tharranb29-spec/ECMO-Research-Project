@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 
@@ -8,6 +11,25 @@ ROOT = Path(__file__).resolve().parent
 OUTPUTS = ROOT / "outputs"
 TARGET = ROOT / "dashboard-data.js"
 CONFIG = ROOT / "dashboard-config.json"
+
+
+def ensure_render_rdkit():
+    # The existing Render service uses this script in its build command. A
+    # specific-commit deploy may not sync render.yaml first, so install the
+    # pinned runtime dependency here as well. Local builds remain untouched.
+    if os.environ.get("RENDER") != "true":
+        return
+    try:
+        import rdkit
+    except ImportError:
+        installed = None
+    else:
+        installed = rdkit.__version__
+    if installed != "2025.09.6":
+        subprocess.run([sys.executable, "-m", "pip", "install", "--no-cache-dir", "rdkit==2025.9.6"], check=True)
+        import rdkit
+        if rdkit.__version__ != "2025.09.6":
+            raise RuntimeError("Pinned RDKit installation failed.")
 
 
 def load_json(path):
@@ -18,6 +40,7 @@ def load_json(path):
 
 
 def main():
+    ensure_render_rdkit()
     payload = {
         "config": load_json(CONFIG),
         "seed": load_json(OUTPUTS / "seed_ranking_results.json"),

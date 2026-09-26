@@ -53,6 +53,13 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertFalse(any(sprint["firewall"].values()))
         self.assertTrue(all(item["access_status"] == "metadata_verified" for item in sprint["checked_publications"]))
         self.assertEqual(len(sprint["source_grounded_review"]), 29)
+        self.assertTrue(all(item["status"] == "shadow_review_required" for item in sprint["source_grounded_review"]))
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        self.assertIn('id="review-packet-search"', html)
+        self.assertIn('id="review-packet-list"', html)
+        self.assertIn("sprint.source_grounded_review", js)
+        self.assertIn("Frozen external cohort unchanged", js)
 
     def test_autonomy_is_shadow_only_and_promotion_is_locked(self):
         promotion = self.payload["promotion"]

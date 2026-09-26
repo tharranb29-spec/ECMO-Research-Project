@@ -36,8 +36,14 @@ class Track3DiscoveryWorkflowTests(unittest.TestCase):
         self.assertEqual(result["screen_eligible_queue"]["ordering"], "unordered_composition_only")
         self.assertEqual(result["screen_eligible_queue"]["count"], 0)
         self.assertTrue(all(item["state"] == "available" for item in result["contract_inputs"].values()))
-        self.assertTrue(all(item["provisional_score"] is None for item in result["molecules"]))
-        self.assertTrue(all(item["score_state"] == "unavailable_no_serialized_ab_ridge" for item in result["molecules"]))
+        if workflow.capability_status()["ab_ridge_scorer"] == "development_only":
+            self.assertTrue(all(isinstance(item["provisional_score"], float) for item in result["molecules"]))
+            self.assertTrue(all(item["score_state"] == "development_only_no_validated_interval" for item in result["molecules"]))
+            self.assertTrue(all(item["interval_90"] is None for item in result["molecules"]))
+            self.assertTrue(all(item["model_provenance_status"] == "development_only_not_externally_validated" for item in result["molecules"]))
+        else:
+            self.assertTrue(all(item["provisional_score"] is None for item in result["molecules"]))
+            self.assertTrue(all(item["score_state"] == "unavailable_no_serialized_ab_ridge" for item in result["molecules"]))
         self.assertTrue(all(not item["screen_eligible"] for item in result["molecules"]))
         self.assertTrue(all(item["eligibility_state"] == "simulated_identity_demo" for item in result["molecules"]))
         self.assertEqual(

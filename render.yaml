@@ -7,7 +7,7 @@ services:
     # Scientific outputs are generated and reviewed before deployment. Render
     # only packages committed artifacts; it must not replace real GNINA results
     # with prototype scores during a production build.
-    buildCommand: "python3 build_dashboard_bundle.py && python3 build_track3_dashboard.py"
+    buildCommand: "python3 -m pip install --no-cache-dir rdkit==2025.9.6 && python3 build_dashboard_bundle.py && python3 build_track3_dashboard.py"
     startCommand: "python3 research_assistant_server.py"
     envVars:
       - key: PYTHON_VERSION
