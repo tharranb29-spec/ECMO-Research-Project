@@ -53,7 +53,7 @@
     claim_limit:"not_external_validation_not_frozen_queue_not_molecule_level_data",
     source_pages:[5,7,9,10,12],
     sha256:"5308b8041c28657c9234b9a5a0f8b50b886ebe6146affa0b877a21f73fb9145f",
-    funnel:[["Library",2963],["Inside PDF domain",423],["Antagonist class",335],["Screen-eligible",276]],
+    funnel:[["Library",2963,null],["Inside PDF domain",423,null],["Antagonist class",335,149],["Screen-eligible",276,120],["Point estimate ≥8.0",155,58],["Robust lower CI ≥8.0",13,4]],
     scaffolds:{antagonist:149,screenEligible:120},
     pairwise:{total:55945,separable:2770,fraction:4.95,requiredGap:2.5176,largestAdjacentGap:0.3230},
     developmentStress:{n:74,calibrated:{separablePercent:4.2,coverage:0.8919},narrowed:{separablePercent:56.8,coverage:0.3649}},
@@ -64,7 +64,7 @@
       ["Endpoint","Strict Ki-only R² 0.5685 vs pooled R² 0.4768; D1 unresolved."],
       ["Domain floor","PDF delivery 0.50 vs frozen plan 0.55; D2 unresolved. The 276 count depends on this choice."],
       ["Interval width","Delivered half-width 1.2588 vs plan 1.299; one must be retired before promotion."],
-      ["Our frozen pipeline","Different 78-molecule development comparison, 2,048-bit fingerprint, and 240 held / 0 eligible external queue."]
+      ["Our frozen pipeline","Different 78-row / 69-molecule development comparison, 2,048-bit fingerprint, and 240 held / 0 eligible external queue."]
     ]
   };
   let overviewPrecisionN=10;
@@ -91,11 +91,13 @@
     "The PDF reports 2,963 library rows after its deterministic intake pass.",
     "423 rows meet the PDF's applicability rule; its 0.50 similarity threshold remains disputed.",
     "335 in-domain rows are assigned to the antagonist class across 149 scaffolds. The other 88 are not ordered.",
-    "276 rows across 120 scaffolds meet the PDF's non-exclusion rule. They are not certified hits or members of our frozen queue."
+    "276 rows across 120 scaffolds meet the PDF's non-exclusion rule. They are not certified hits or members of our frozen queue.",
+    "Of those 276, the teammate PDF reports 155 compounds across 58 scaffolds with point-estimate pKi ≥8.0. This is a model threshold, not an observed hit count.",
+    "Of those 155, the teammate PDF reports 13 compounds across 4 scaffolds whose lower 90% interval bound reaches pKi 8.0. This remains a provisional model-derived tier, not validated activity."
   ];
   let funnelMode="count",selectedFunnelStage=3;
   function renderTeammateFunnel(){
-    $("teammate-funnel").innerHTML=teammatePdf.funnel.map(([name,count],index)=>`<button type="button" class="reference-bar-row ${selectedFunnelStage===index?"selected":""}" data-stage="${index}" aria-pressed="${selectedFunnelStage===index}"><span><strong>${esc(name)}</strong><b>${funnelMode==="count"?Number(count).toLocaleString():`${fmt(count/libraryCount*100,1)}%`}</b></span><span class="reference-track"><i style="width:${count/libraryCount*100}%"></i></span></button>`).join("");
+    $("teammate-funnel").innerHTML=teammatePdf.funnel.map(([name,count,scaffolds],index)=>`<button type="button" class="reference-bar-row ${selectedFunnelStage===index?"selected":""}" data-stage="${index}" aria-pressed="${selectedFunnelStage===index}"><span><strong>${esc(name)}</strong><b>${funnelMode==="count"?Number(count).toLocaleString():`${fmt(count/libraryCount*100,1)}%`}</b></span>${scaffolds===null?"":`<small class="reference-scaffold-count">${scaffolds} scaffolds</small>`}<span class="reference-track"><i style="width:${count/libraryCount*100}%"></i></span></button>`).join("");
     $("teammate-funnel-detail").textContent=stageDescriptions[selectedFunnelStage];
     document.querySelectorAll("#teammate-funnel [data-stage]").forEach(button=>button.addEventListener("click",()=>{selectedFunnelStage=Number(button.dataset.stage);renderTeammateFunnel();}));
   }
