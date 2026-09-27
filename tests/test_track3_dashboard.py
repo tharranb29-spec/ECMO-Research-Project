@@ -267,13 +267,15 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('id="nav-more"', html)
         self.assertIn('class="overview-actions"', html)
         self.assertIn('id="overview-model-chart"', html)
-        self.assertIn('id="overview-precision-chart"', html)
+        self.assertIn('id="overview-domain-chart"', html)
+        self.assertIn('const developmentDomain=records("applicability_uncertainty")[0]', js)
+        self.assertIn('id="teammate-precision-chart"', html)
         self.assertIn('class="panel span-5 discovery-queue-panel"', html)
         self.assertIn('class="source-badges"', js)
         self.assertIn('.source-badges{display:flex;flex-wrap:wrap;align-items:center;gap:7px}', css)
         self.assertIn('function renderOverviewModels()', js)
-        self.assertIn('function renderOverviewPrecision()', js)
-        self.assertIn('Three reported development-set estimates, not prospective hit rates.', html)
+        self.assertIn('function renderPrecision(size)', js)
+        self.assertIn('These resampling estimates exclude the 276 delivered compounds', html)
         self.assertIn('Scientific gates and detailed status', html)
 
     def test_team_sign_in_describes_track3_without_legacy_ranking_claims(self):

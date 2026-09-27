@@ -44,6 +44,14 @@
     $("overview-model-chart").querySelectorAll("[data-overview-metric]").forEach(button=>button.addEventListener("click",()=>{overviewMetric=button.dataset.overviewMetric;renderOverviewModels();}));
   }
   renderOverviewModels();
+  const developmentDomain=records("applicability_uncertainty")[0];
+  if(developmentDomain){
+    const inside=Number(developmentDomain.inside_n),outside=Number(developmentDomain.outside_n),total=inside+outside;
+    const insideShare=total?inside/total*100:0;
+    $("overview-domain-chart").innerHTML=`<div class="domain-chart-counts"><div><strong>${inside}</strong><span>Inside the development domain</span></div><div><strong>${outside}</strong><span>Outside the development domain</span></div></div><div class="domain-chart-track" role="img" aria-label="${inside} of ${total} development assay rows inside the assessed domain; ${outside} outside"><span style="width:${insideShare}%"></span><span style="width:${100-insideShare}%"></span></div><div class="domain-chart-legend"><span>Inside ${fmt(insideShare,1)}%</span><span>Outside ${fmt(100-insideShare,1)}%</span></div><p class="chart-note">${total} grouped out-of-fold development rows only. These are not externally calibrated eligibility counts.</p>`;
+  }else{
+    $("overview-domain-chart").textContent="Development-domain diagnostic unavailable in this snapshot.";
+  }
 
   // PDF-reported aggregate reference only. This object is never used by queue,
   // discovery, model, admission, or promotion logic.
@@ -67,18 +75,6 @@
       ["Our frozen pipeline","Different 78-row / 69-molecule development comparison, 2,048-bit fingerprint, and 240 held / 0 eligible external queue."]
     ]
   };
-  let overviewPrecisionN=10;
-  function renderOverviewPrecision(){
-    const rows=teammatePdf.precision;
-    const x=index=>44+index*136,y=value=>145-value*1.15;
-    const precisionPoints=rows.map((row,index)=>`${x(index)},${y(row[1]*100)}`).join(" ");
-    const basePoints=rows.map((row,index)=>`${x(index)},${y(row[2]*100)}`).join(" ");
-    const dots=rows.map((row,index)=>`<circle cx="${x(index)}" cy="${y(row[1]*100)}" r="${row[0]===overviewPrecisionN?7:5}" class="${row[0]===overviewPrecisionN?"selected":""}"/><text x="${x(index)}" y="165" text-anchor="middle">N=${row[0]}</text>`).join("");
-    const selected=rows.find(row=>row[0]===overviewPrecisionN);
-    $("overview-precision-chart").innerHTML=`<svg viewBox="0 0 360 180" role="img" aria-label="Teammate PDF reported precision declines from 96 percent at N 10 to 62 percent at N 40; reported base rate is 48.08 percent"><line x1="44" y1="145" x2="316" y2="145" class="axis"/><line x1="44" y1="87" x2="316" y2="87" class="grid"/><text x="8" y="90">50%</text><polyline points="${basePoints}" class="base-line"/><polyline points="${precisionPoints}" class="precision-line"/>${dots}</svg><div class="chart-switch" role="group" aria-label="Reported set size">${rows.map(row=>`<button type="button" data-overview-n="${row[0]}" class="${row[0]===overviewPrecisionN?"active":""}" aria-pressed="${row[0]===overviewPrecisionN}">N=${row[0]}</button>`).join("")}</div><p class="chart-note"><b>${fmt(selected[1]*100,1)}%</b> reported precision at N=${overviewPrecisionN}; PDF base rate ${fmt(selected[2]*100,2)}%. Not a prospective probability.</p>`;
-    $("overview-precision-chart").querySelectorAll("[data-overview-n]").forEach(button=>button.addEventListener("click",()=>{overviewPrecisionN=Number(button.dataset.overviewN);renderOverviewPrecision();}));
-  }
-  renderOverviewPrecision();
   $("teammate-source-hash").textContent=teammatePdf.sha256;
   $("teammate-metrics").innerHTML=[
     ["PDF screen-eligible",teammatePdf.funnel[3][1].toLocaleString(),"Provisional; not our queue"],
@@ -117,7 +113,11 @@
   renderSeparation("candidates");
   function renderPrecision(size){
     const [n,precision,base,ef]=teammatePdf.precision.find(row=>row[0]===size);
-    $("teammate-precision-chart").innerHTML=`${comparisonBar(`N=${n} reported precision`,`${fmt(precision*100,2)}%`,precision*100)}${comparisonBar("Reference base rate",`${fmt(base*100,2)}%`,base*100,"muted")}<div class="reference-ef"><b>${fmt(ef,3)}×</b><span>reported enrichment factor at N=${n}</span></div>`;
+    const rows=teammatePdf.precision,x=index=>52+index*148,y=value=>150-value*1.2;
+    const precisionPoints=rows.map((row,index)=>`${x(index)},${y(row[1]*100)}`).join(" ");
+    const basePoints=rows.map((row,index)=>`${x(index)},${y(row[2]*100)}`).join(" ");
+    const dots=rows.map((row,index)=>`<circle cx="${x(index)}" cy="${y(row[1]*100)}" r="${row[0]===n?7:5}" class="${row[0]===n?"selected":""}"/><text x="${x(index)}" y="173" text-anchor="middle">N=${row[0]}</text>`).join("");
+    $("teammate-precision-chart").innerHTML=`<svg viewBox="0 0 400 190" role="img" aria-label="Teammate PDF-reported precision by set size: 96 percent at N 10, 79.5 percent at N 20, 62 percent at N 40; reported base rate 48.08 percent"><line x1="52" y1="150" x2="348" y2="150" class="axis"/><line x1="52" y1="${y(base*100)}" x2="348" y2="${y(base*100)}" class="grid"/><text x="4" y="${y(base*100)+4}">Base</text><polyline points="${basePoints}" class="base-line"/><polyline points="${precisionPoints}" class="precision-line"/>${dots}</svg><p class="precision-reading"><strong>${fmt(precision*100,1)}%</strong> reported precision at N=${n} <span>·</span> ${fmt(ef,3)}× enrichment vs ${fmt(base*100,2)}% base rate</p>`;
     $("teammate-precision").innerHTML=`<div class="reference-precision-head"><span>Set size</span><span>Precision</span><span>Base rate</span><span>Enrichment</span></div>`+teammatePdf.precision.map(([rowN,rowPrecision,rowBase,rowEf])=>`<div class="reference-precision-row ${rowN===n?"selected":""}"><b>N = ${rowN}</b><span>${fmt(rowPrecision,4)}</span><span>${fmt(rowBase,4)}</span><span>${fmt(rowEf,3)}×</span></div>`).join("");
   }
   document.querySelectorAll("#teammate-precision-selector [data-size]").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll("#teammate-precision-selector button").forEach(item=>{const active=item===button;item.classList.toggle("active",active);item.setAttribute("aria-pressed",String(active));});renderPrecision(Number(button.dataset.size));}));
