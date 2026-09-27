@@ -303,6 +303,8 @@ class Track3DashboardTests(unittest.TestCase):
         server = (ROOT / "research_assistant_server.py").read_text(encoding="utf-8")
         blueprint = (ROOT / "render.yaml").read_text(encoding="utf-8")
         self.assertIn('"/": ROOT / "track3-dashboard.html"', server)
+        self.assertIn('"/track3-dashboard-theme.css": ROOT / "track3-dashboard-theme.css"', server)
+        self.assertIn('"/track3-dashboard-theme.css", "/track3-dashboard.js"', server)
         self.assertIn('"/track3-dashboard-data.js"', server)
         self.assertIn('"release": "a2a-track3-autonomous-deepseek-v4"', server)
         self.assertIn('"/api/discovery/run"', server)

@@ -88,6 +88,7 @@ STATIC_FILES = {
     "/": ROOT / "track3-dashboard.html",
     "/track3-dashboard.html": ROOT / "track3-dashboard.html",
     "/track3-dashboard.css": ROOT / "track3-dashboard.css",
+    "/track3-dashboard-theme.css": ROOT / "track3-dashboard-theme.css",
     "/track3-dashboard.js": ROOT / "track3-dashboard.js",
     "/track3-dashboard-data.js": ROOT / "track3-dashboard-data.js",
     "/dashboard.html": ROOT / "dashboard.html",
@@ -838,7 +839,7 @@ class Handler(BaseHTTPRequestHandler):
     def _cache_control_for_path(self, path):
         if path == "/healthz" or path.startswith("/api/"):
             return "no-store"
-        if path in {"/", "/track3-dashboard.html", "/track3-dashboard.css", "/track3-dashboard.js", "/track3-dashboard-data.js", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/evidence-dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
+        if path in {"/", "/track3-dashboard.html", "/track3-dashboard.css", "/track3-dashboard-theme.css", "/track3-dashboard.js", "/track3-dashboard-data.js", "/dashboard.html", "/structure-showcase.html", "/dashboard.js", "/evidence-dashboard.js", "/dashboard-data.js", "/dashboard-config.json"}:
             return "no-store"
         return "public, max-age=3600"
 
