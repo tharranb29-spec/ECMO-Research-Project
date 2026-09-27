@@ -22,6 +22,7 @@
   }
   document.querySelectorAll(".nav-item").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
   document.querySelectorAll("[data-jump]").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.jump)));
+  window.addEventListener("hashchange",()=>setView(location.hash.slice(1)));
   $("menu-toggle").addEventListener("click",()=>{const sidebar=document.querySelector(".sidebar"),open=sidebar.classList.toggle("open");$("menu-toggle").setAttribute("aria-expanded",String(open));});
 
   $("project-title").textContent="A2A Evidence Command Center";$("project-full-title").textContent=data.project.title;$("claim-level").textContent=data.project.claim_level;$("target-label").textContent=data.project.target;$("deadline-label").textContent=`Deadline · ${data.project.deadline}`;$("protocol-label").textContent=data.project.protocol;$("snapshot-time").textContent=new Date(data.snapshot_created_at_utc).toLocaleString();
@@ -37,12 +38,24 @@
 
   const overviewModels=records("model_registry");
   let overviewMetric="r2";
+  function modelChart(metric,rows){
+    const values=rows.map(row=>Number(row[metric]));
+    const lower=metric==="r2"?Math.floor(Math.min(0,...values)*10)/10:0;
+    const step=metric==="r2"?.2:metric==="rmse"?.3:.25;
+    const upper=lower+Math.ceil((Math.max(...values)-lower)/step)*step;
+    const span=upper-lower||1,zero=(0-lower)/span*100;
+    const ticks=Array.from({length:Math.round(span/step)+1},(_,index)=>lower+step*index);
+    const bars=rows.map(row=>{
+      const value=Number(row[metric]),position=(value-lower)/span*100;
+      const left=Math.min(zero,position),width=Math.abs(position-zero);
+      const negative=value<0;
+      return `<div class="model-chart-row ${row.model_id==="AB_Ridge"?"primary":""}"><span class="model-chart-name">${esc(row.display_name)}</span><span class="model-chart-track" role="img" aria-label="${esc(row.display_name)}: ${fmt(value,3)} ${metric==="r2"?"R squared":metric.toUpperCase()}"><i class="model-chart-zero" style="left:${zero}%"></i><i class="model-chart-bar ${negative?"negative":""}" style="left:${left}%;width:${width}%"></i></span><strong>${fmt(value,3)}</strong></div>`;
+    }).join("");
+    return `<div class="model-chart" data-metric="${metric}">${bars}<div class="model-chart-axis" aria-hidden="true"><span></span><div>${ticks.map(tick=>`<small>${Number(tick.toFixed(2))}</small>`).join("")}</div><span></span></div></div>`;
+  }
   function renderOverviewModels(){
-    const values=overviewModels.map(row=>Number(row[overviewMetric]));
-    const high=Math.max(...values),low=Math.min(...values),span=Math.max(high-low,.001);
     const controls=[["r2","R²"],["rmse","RMSE"],["mae","MAE"]].map(([key,name])=>`<button type="button" data-overview-metric="${key}" class="${overviewMetric===key?"active":""}" aria-pressed="${overviewMetric===key}">${name}</button>`).join("");
-    const bars=overviewModels.map(row=>{const value=Number(row[overviewMetric]),width=overviewMetric==="r2"?Math.max(0,value)/Math.max(.6,high)*100:(high-value)/span*100;return `<div class="overview-bar-row"><span>${esc(row.display_name)}</span><span class="overview-bar-track"><i style="width:${width}%"></i></span><strong>${fmt(value,3)}</strong></div>`;}).join("");
-    $("overview-model-chart").innerHTML=`<div class="chart-switch" role="group" aria-label="Model metric">${controls}</div>${bars}<p class="chart-note">Grouped development evaluation only. ${overviewMetric==="r2"?"R² bars use a 0–0.6 axis; negative values show no positive bar.":"Error bars are relative to this comparison; lower is better."} No model is served.</p>`;
+    $("overview-model-chart").innerHTML=`<div class="chart-switch" role="group" aria-label="Model metric">${controls}</div>${modelChart(overviewMetric,overviewModels)}<p class="chart-note">78 grouped out-of-fold development assay rows · 69 distinct molecules. ${overviewMetric==="r2"?"Higher R² is better; bars left of zero are negative.":"Lower error is better; bars show the measured value from zero."} No model is promoted.</p>`;
     $("overview-model-chart").querySelectorAll("[data-overview-metric]").forEach(button=>button.addEventListener("click",()=>{overviewMetric=button.dataset.overviewMetric;renderOverviewModels();}));
   }
   renderOverviewModels();
@@ -157,6 +170,9 @@
   const sprint=records("shadow_evidence_sprint")[0];
   if(sprint){
     const counts=sprint.counts;
+    const held=Number(data.summary.uncertainty_queue_count),quarantined=sprint.source_grounded_review.length,admitted=Number(data.summary.external_admitted);
+    const accounting=[["Held for review",held,"held"],["Quarantined subset",quarantined,"quarantined"],["Admitted externally",admitted,"admitted"]];
+    $("evidence-accounting-chart").innerHTML=`<div class="accounting-axis" aria-hidden="true"><span></span><div>${[0,.25,.5,.75,1].map(fraction=>`<small>${Math.round(held*fraction)}</small>`).join("")}</div><span></span></div>${accounting.map(([name,count,tone])=>`<div class="accounting-row"><span>${name}</span><span class="accounting-track" role="img" aria-label="${name}: ${count} records out of ${held} held"><i class="${tone}" style="width:${held?count/held*100:0}%"></i></span><strong>${count}</strong></div>`).join("")}<p class="chart-note">29 quarantined records are included within the 240 held; these bars must not be added. Zero records met frozen external admission. Source: ${esc(sprint.source.path)} and frozen queue contract.</p>`;
     $("shadow-evidence-summary").innerHTML=`<div><strong>${counts.publication_groups_checked}/${counts.publication_groups_with_missing_text}</strong><span>source groups checked</span></div><div><strong>${counts.affected_candidates_in_checked_groups}</strong><span>linked records needing source text</span></div><div><strong>${counts.metadata_verified}</strong><span>citations verified</span></div><div><strong>${counts.open_access_metadata_flags}</strong><span>open-access flags</span></div>`;
     $("shadow-evidence-publications").innerHTML=sprint.checked_publications.map(item=>`<article class="evidence-sprint-card"><div><span class="status-pill ${item.title_target_flag==="other_receptor_focus_in_title"?"blocked":"review"}">${esc(item.title_target_flag==="other_receptor_focus_in_title"?"Check receptor focus":label(item.access_status))}</span><strong>${item.affected_count} linked records</strong></div><h3>${esc(item.title_from_frozen_packet||item.source_key)}</h3><p>${esc(item.source_key)} · DOI ${esc(item.doi||"unresolved")}</p><small>${esc(item.title_target_flag==="other_receptor_focus_in_title"?"Title focuses on another receptor subtype; inspect source before A2A use.":item.open_access===true?"Open access indicated; source review pending":"No open-access flag; source text remains missing")}</small>${item.source_url?`<a href="${esc(safeUrl(item.source_url))}" target="_blank" rel="noopener noreferrer">Check publication ↗</a>`:""}</article>`).join("");
     const reviewRecords=sprint.source_grounded_review||[];
@@ -178,9 +194,8 @@
 
   const models=records("model_registry");
   function renderModels(){
-    const values=models.map(row=>Number(row[modelMetric])),max=Math.max(...values),min=Math.min(...values),range=Math.max(max-min,.001),lowerBetter=modelMetric!=="r2";
-    $("model-comparison").innerHTML=models.map(row=>{const value=Number(row[modelMetric]),width=lowerBetter?(max-value)/range*80+20:(value-min)/range*80+20;return `<div class="bar-row ${row.model_id==="AB_Ridge"?"primary":""}"><label>${esc(row.display_name)}</label><div class="bar-track"><i style="width:${width}%"></i></div><strong>${fmt(value,3)}</strong></div>`;}).join("");
-    $("model-grid").innerHTML=models.map(row=>`<article class="model-card ${row.model_id==="AB_Ridge"?"primary":""}"><span class="kicker">${esc(row.role)}</span><span class="lock">${row.model_id==="AB_Ridge"?"Shadow scorer only":"Not deployed"}</span><h3>${esc(row.display_name)}</h3><div class="score">${fmt(row.r2,3)}</div><small>R² · RMSE ${fmt(row.rmse,3)} · MAE ${fmt(row.mae,3)}</small><div class="source-line">${esc(row.source.path)}</div></article>`).join("");
+    $("model-comparison").innerHTML=`${modelChart(modelMetric,models)}<p class="chart-note">Shared numeric axis; ${modelMetric==="r2"?"higher is better":"lower is better"}. All values are grouped development estimates, not external confirmation.</p>`;
+    $("model-grid").innerHTML=models.map(row=>`<article class="model-card ${row.model_id==="AB_Ridge"?"primary":""}"><span class="kicker">${row.model_id==="AB_Ridge"?"Development primary · release locked":esc(row.role)}</span><span class="lock">${row.model_id==="AB_Ridge"?"Shadow scorer only":"Not deployed"}</span><h3>${esc(row.display_name)}</h3><div class="score">${fmt(row.r2,3)}</div><small>R² · RMSE ${fmt(row.rmse,3)} · MAE ${fmt(row.mae,3)}</small><div class="source-line">${esc(row.source.path)}</div></article>`).join("");
   }
   document.querySelectorAll("#metric-toggle button").forEach(button=>button.addEventListener("click",()=>{modelMetric=button.dataset.metric;document.querySelectorAll("#metric-toggle button").forEach(item=>item.classList.toggle("active",item===button));renderModels();}));renderModels();
 
@@ -235,6 +250,13 @@
   }
   function parseMoleculeInput(value){return value.split(/\n+/).map(line=>{const [name,...smilesParts]=line.split("|");return{name:(name||"").trim(),smiles:smilesParts.join("|").trim()};}).filter(item=>item.smiles);}
   let activeDiscoveryJob=null,discoveryPoll=null;
+  function fieldError(fieldId,messageId,invalid){
+    const field=$(fieldId),message=$(messageId);
+    field.setAttribute("aria-invalid",String(invalid));message.hidden=!invalid;
+    if(invalid)field.focus();
+  }
+  $("discovery-query").addEventListener("input",()=>fieldError("discovery-query","discovery-query-error",false));
+  $("disposition-reviewer").addEventListener("input",()=>fieldError("disposition-reviewer","disposition-reviewer-error",false));
   function showDiscoveryJob(job){
     activeDiscoveryJob=job;
     const busy=job&&["queued","running"].includes(job.status);
@@ -250,16 +272,22 @@
     catch(error){$("discovery-job-status").textContent=`Run status unavailable: ${error.message}`;discoveryPoll=setTimeout(()=>pollDiscoveryJob(runId),4000);}
   }
   $("discovery-form").addEventListener("submit",async event=>{
-    event.preventDefault();const button=$("discovery-run");button.disabled=true;button.textContent="Starting run…";
+    event.preventDefault();
+    if(!$("discovery-query").value.trim()){fieldError("discovery-query","discovery-query-error",true);return;}
+    const button=$("discovery-run");button.disabled=true;button.textContent="Starting run…";
     try{const payload=await apiJson("/api/discovery/run",{method:"POST",body:JSON.stringify({query:$("discovery-query").value,provider_mode:$("discovery-provider").value,molecules:parseMoleculeInput($("discovery-molecules").value)})});showDiscoveryJob(payload.job);pollDiscoveryJob(payload.job.run_id);}
     catch(error){$("discovery-stages").innerHTML=`<p class="error-state">${esc(error.message)}</p>`;}
     finally{if(!activeDiscoveryJob||!["queued","running"].includes(activeDiscoveryJob.status)){button.disabled=false;button.textContent="Run shadow workflow";}}
   });
   $("discovery-cancel").addEventListener("click",async()=>{if(!activeDiscoveryJob)return;try{const payload=await apiJson(`/api/discovery/runs/${encodeURIComponent(activeDiscoveryJob.run_id)}/cancel`,{method:"POST",body:"{}"});clearTimeout(discoveryPoll);showDiscoveryJob(payload.job);}catch(error){$("discovery-job-status").textContent=`Cancellation failed: ${error.message}`;}});
+  let dispositionBusy=false;
   $("disposition-form").addEventListener("submit",async event=>{
-    event.preventDefault();if(!currentDiscoveryRun)return;
+    event.preventDefault();if(!currentDiscoveryRun||dispositionBusy)return;
+    if(!$("disposition-reviewer").value.trim()){fieldError("disposition-reviewer","disposition-reviewer-error",true);return;}
+    dispositionBusy=true;const button=$("disposition-form").querySelector('button[type="submit"]');button.disabled=true;
     try{const payload=await apiJson("/api/discovery/disposition",{method:"POST",body:JSON.stringify({run_id:currentDiscoveryRun.run_id,status:$("disposition-choice").value,reviewer:$("disposition-reviewer").value,note:$("disposition-note").value})});renderDiscovery(payload.run);}
     catch(error){$("disposition-state").textContent=error.message;$("disposition-state").className="status-pill blocked";}
+    finally{dispositionBusy=false;button.disabled=false;}
   });
   apiJson("/api/discovery/status").then(payload=>{discoveryCapabilities=payload.capabilities;updateDiscoveryBanner(discoveryCapabilities,payload.latest_run);if(payload.latest_run)renderDiscovery(payload.latest_run);if(payload.latest_job){showDiscoveryJob(payload.latest_job);if(["queued","running"].includes(payload.latest_job.status))pollDiscoveryJob(payload.latest_job.run_id);}}).catch(error=>{$("discovery-state-banner").innerHTML=`<span class="state-dot"></span><div><strong>Discovery endpoint unavailable</strong><small>${esc(error.message)}</small></div>`;});
 

@@ -185,7 +185,7 @@ main{min-width:0}.topbar{height:70px;border-bottom:1px solid var(--line);display
 #teammate-funnel-mode{flex-wrap:nowrap;align-self:flex-start}
 #teammate-funnel-mode button{font-size:9px;padding:7px 6px}
 ::selection{background:#c9ef72;color:#14211e}
-html{scrollbar-color:#8ca99b #e3e9e1}
+html{scrollbar-color:#8ca99b #e3e9e1;scrollbar-width:thin}
 ::-webkit-scrollbar{width:11px;height:11px}
 ::-webkit-scrollbar-track{background:#e3e9e1}
 ::-webkit-scrollbar-thumb{background:#8ca99b;border:2px solid #e3e9e1;border-radius:7px}

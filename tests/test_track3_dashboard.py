@@ -292,6 +292,30 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('.gate-sequence', theme)
         self.assertIn('@media(max-width:650px)', theme)
 
+    def test_chart_scales_and_evidence_accounting_preserve_cohorts(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        theme = (ROOT / "track3-dashboard-theme.css").read_text(encoding="utf-8")
+        sprint = self.payload["contracts"]["shadow_evidence_sprint"]["records"][0]
+        self.assertEqual(len(sprint["source_grounded_review"]), 29)
+        self.assertEqual(self.payload["summary"]["uncertainty_queue_count"], 240)
+        self.assertEqual(self.payload["summary"]["external_admitted"], 0)
+        self.assertIn('id="evidence-accounting-chart"', html)
+        self.assertIn('sprint.source_grounded_review.length', js)
+        self.assertIn('29 quarantined records are included within the 240 held', js)
+        self.assertIn('function modelChart(metric,rows)', js)
+        self.assertIn('const lower=metric==="r2"?', js)
+        self.assertIn('window.addEventListener("hashchange"', js)
+        self.assertIn('grid-template-columns:minmax(0,1fr)', theme)
+        self.assertIn('.chart-note{overflow-wrap:anywhere}', theme)
+        self.assertIn('class="discovery-form" novalidate', html)
+        self.assertIn('class="disposition-form" novalidate', html)
+        self.assertIn('id="discovery-query-error"', html)
+        self.assertIn('id="disposition-reviewer-error"', html)
+        self.assertIn('class="resize-none"', html)
+        self.assertIn('if(!$("discovery-query").value.trim())', js)
+        self.assertIn('if(!$("disposition-reviewer").value.trim())', js)
+
     def test_every_track3_page_asset_is_served_by_the_app(self):
         html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
         assets = set(re.findall(r'(?:href|src)="(track3-dashboard[^"?#]+)"', html))

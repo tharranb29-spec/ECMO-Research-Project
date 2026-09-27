@@ -55,6 +55,8 @@ The display face is used for editorial titles and measured readouts. Avenir Next
 
 Desktop navigation is a 268px dark instrument index; below 960px it is an off-canvas menu. The overview pairs an evidence-state field with an unbordered metric strip, then offers three explicit routes and two development-only charts. Other views share the same title, panel, input, and status treatment. The experience must work at 390px without horizontal page overflow. Visible focus, reduced motion, keyboard-operable charts, readable loading/error states, and source provenance are required.
 
+Provider mode and human disposition deliberately use native selects: the operating-system popup is acceptable for these short, single-choice lists. The application owns text validation and inline recovery; chart axes use real cohort values rather than relative ranking widths.
+
 ## Scientific constraints
 
 - Keep frozen project counts and provisional PDF aggregates in separate views and contracts.

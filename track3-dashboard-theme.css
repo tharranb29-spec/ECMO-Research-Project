@@ -9,7 +9,7 @@
   --display:"Iowan Old Style","Baskerville","Palatino Linotype",Georgia,serif;
   --body:"Avenir Next","Segoe UI",sans-serif;
 }
-html{scrollbar-color:#9bb6c3 var(--paper)}
+html{scrollbar-color:#9bb6c3 var(--paper);scrollbar-width:thin}
 body{font-family:var(--body);font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums}
 ::selection{background:#a9dbe5;color:#102637}
 a{text-underline-offset:3px}
@@ -98,6 +98,7 @@ button{transition:background-color .2s ease,border-color .2s ease,color .2s ease
 .panel-head{margin-bottom:22px}
 .kicker,.page-head .eyebrow{display:none}
 .chart-scope,.caption,.muted-note,.chart-note{font-size:11px;color:#536d7e;line-height:1.55}
+.chart-note{overflow-wrap:anywhere}
 .text-button{font-size:12px;color:#0b607c;font-weight:750;text-decoration:underline;text-decoration-color:#9dbec9;text-underline-offset:3px}
 .overview-charts{gap:16px}
 .overview-charts .panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
@@ -108,6 +109,28 @@ button{transition:background-color .2s ease,border-color .2s ease,color .2s ease
 .overview-bar-row,.bar-row{font-size:12px;gap:11px}
 .overview-bar-track,.bar-track,.reference-track,.reference-comparison-track{background:#e1e9ed;border-radius:5px}
 .overview-bar-track i,.bar-row.primary .bar-track i,.reference-track i,.reference-comparison-track i.primary{background:#137994;border-radius:5px}
+.model-chart{display:grid;grid-template-columns:minmax(0,1fr);gap:13px;min-width:0}
+.model-chart-row,.model-chart-axis,.accounting-row,.accounting-axis{display:grid;grid-template-columns:minmax(145px,1.45fr) minmax(120px,2fr) 58px;gap:14px;align-items:center;min-width:0}
+.model-chart-name,.accounting-row>span:first-child{font-size:12px;line-height:1.3;color:#23485e;overflow-wrap:anywhere}
+.model-chart-row strong,.accounting-row strong{font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:#153a50}
+.model-chart-track,.accounting-track{height:20px;display:block;position:relative;background:#e5edf0;border-radius:4px;overflow:hidden}
+.model-chart-track{background-image:linear-gradient(to right,transparent calc(25% - 1px),#cad9df 25%,transparent calc(25% + 1px)),linear-gradient(to right,transparent calc(50% - 1px),#cad9df 50%,transparent calc(50% + 1px)),linear-gradient(to right,transparent calc(75% - 1px),#cad9df 75%,transparent calc(75% + 1px))}
+.model-chart-zero{position:absolute;top:0;bottom:0;width:2px;background:#536b78;z-index:2}
+.model-chart-bar,.accounting-track i{display:block;height:100%;position:absolute;top:0;background:#6da8ba}
+.model-chart-row.primary .model-chart-bar{background:#137994}
+.model-chart-bar.negative{background:#bd6b61}
+.model-chart-axis div,.accounting-axis div{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;color:#476579}
+.model-chart-axis small,.accounting-axis small{font-size:10px}
+.model-chart-axis{margin-top:-5px}
+.model-chart-row.primary .model-chart-name,.model-chart-row.primary strong{font-weight:800}
+.evidence-accounting-panel{margin:19px 0 22px}
+.evidence-accounting-panel .panel-head{margin-bottom:18px}
+.evidence-accounting-chart{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.accounting-track{height:23px}
+.accounting-track i.held{background:#137994}
+.accounting-track i.quarantined{background:#e8b45b}
+.accounting-track i.admitted{background:#488c79}
+.evidence-accounting-chart .chart-note{margin:5px 0 0;max-width:85ch}
 .domain-chart-counts strong{font:400 clamp(44px,4vw,65px)/1 var(--display);color:#123e56}
 .domain-chart-track{background:#e4eaee}.domain-chart-track span:first-child{background:#137994}.domain-chart-track span:last-child{background:#e8b45b}
 .domain-chart-counts span,.domain-chart-legend{color:#405d70;font-size:11px}
@@ -134,6 +157,13 @@ button{transition:background-color .2s ease,border-color .2s ease,color .2s ease
 .lane-card{border-left:0;border-bottom:3px solid #d6a94b;background:#f0f4f5;border-radius:8px}.lane-card.quarantined,.lane-card.blocked{border-color:#c15c51}
 .segmented,.reference-toggle{background:#e3ebef}
 .search input,.discovery-form input,.discovery-form select,.discovery-form textarea,.disposition-form input,.disposition-form select,.review-packet-controls input{background:#f7fafb;border:1px solid #bdcfd8;color:#17384d;border-radius:8px;font-size:13px}
+.discovery-form textarea{resize:none;min-height:142px}
+.disposition-form label{display:block;min-width:0}
+.disposition-form label>span{display:block;font-size:11px;font-weight:750;color:#405e70;margin-bottom:6px}
+.field-error{display:block;color:#963f37;font-size:11px;line-height:1.4;margin-top:5px}
+.field-error[hidden]{display:none}
+input[aria-invalid="true"]{border-color:#a84038!important;outline:2px solid #a84038;outline-offset:1px}
+.disposition-form button:disabled{opacity:.6;cursor:wait}
 input::placeholder,textarea::placeholder{color:#637d8a;opacity:1}
 .discovery-form label>span,.search span{font-size:11px;color:#405e70;font-weight:750;letter-spacing:.04em;text-transform:none}
 .primary-button{background:#0e607b;border-radius:8px;font-size:13px;font-weight:780;min-height:43px}.primary-button:hover:not(:disabled){background:#10475f;transform:translateY(-1px)}
@@ -167,6 +197,8 @@ input::placeholder,textarea::placeholder{color:#637d8a;opacity:1}
   .overview-charts .panel-head{display:block}.overview-charts .text-button{margin-top:8px}
 }
 @media(max-width:650px){
+  .model-chart-row,.model-chart-axis,.accounting-row,.accounting-axis{grid-template-columns:minmax(90px,1.25fr) minmax(100px,1.6fr) 44px;gap:8px}
+  .model-chart-name,.accounting-row>span:first-child{font-size:11px}
   .view{padding:23px 15px}.view[data-panel="overview"]{padding-top:15px}
   .topbar{height:61px;padding:0 15px}.top-actions{gap:5px}
   .hero{border-radius:11px;margin-bottom:15px}
