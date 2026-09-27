@@ -32,6 +32,8 @@
     ["Promoted models","0","Development-only scorer; release locked"]
   ];
   $("summary-grid").innerHTML=summary.map(item=>`<div class="metric"><span>${esc(item[0])}</span><strong>${esc(item[1])}</strong><small>${esc(item[2])}</small></div>`).join("");
+  $("hero-held").textContent=Number(data.summary.uncertainty_queue_count).toLocaleString();
+  $("hero-admitted").textContent=Number(data.summary.external_admitted).toLocaleString();
 
   const overviewModels=records("model_registry");
   let overviewMetric="r2";

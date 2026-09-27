@@ -276,6 +276,18 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('function renderOverviewModels()', js)
         self.assertIn('function renderPrecision(size)', js)
         self.assertIn('These resampling estimates exclude the 276 delivered compounds', html)
+
+    def test_evidence_gate_visual_uses_frozen_snapshot_values(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        theme = (ROOT / "track3-dashboard-theme.css").read_text(encoding="utf-8")
+        self.assertIn('href="track3-dashboard-theme.css"', html)
+        self.assertIn('id="hero-held"', html)
+        self.assertIn('id="hero-admitted"', html)
+        self.assertIn('data.summary.uncertainty_queue_count', js)
+        self.assertIn('data.summary.external_admitted', js)
+        self.assertIn('.gate-sequence', theme)
+        self.assertIn('@media(max-width:650px)', theme)
         self.assertIn('Scientific gates and detailed status', html)
 
     def test_team_sign_in_describes_track3_without_legacy_ranking_claims(self):

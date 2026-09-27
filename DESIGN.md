@@ -1,32 +1,32 @@
 ---
 version: alpha
-name: "A2A Track 3 evidence dashboard"
-description: "A quiet scientific control plane that makes evidence status and claim boundaries legible to competition judges."
+name: "A2A Track 3 Signal Atlas"
+description: "An evidence-gated scientific exhibit for judges and team reviewers."
 colors:
-  ink: "#14211e"
-  muted: "#68746f"
-  paper: "#f2f1eb"
-  surface: "#fffefa"
-  line: "#d9ddd4"
-  primary: "#123c33"
-  chart-primary: "#276a59"
-  chart-outside: "#c99b56"
-  highlight: "#c9ef72"
-  danger: "#b64b45"
+  ink: "#102637"
+  muted: "#526879"
+  paper: "#edf2f4"
+  surface: "#ffffff"
+  line: "#d4dfe5"
+  primary: "#102f46"
+  chart-primary: "#137994"
+  chart-outside: "#e8b45b"
+  highlight: "#f2cc70"
+  danger: "#a84038"
 typography:
   display:
-    fontFamily: "Georgia, 'Times New Roman', serif"
+    fontFamily: "'Iowan Old Style', Baskerville, 'Palatino Linotype', Georgia, serif"
   body:
-    fontFamily: "Inter, 'Avenir Next', 'Segoe UI', sans-serif"
+    fontFamily: "'Avenir Next', 'Segoe UI', sans-serif"
   data:
     fontFamily: "ui-monospace, monospace"
 rounded:
-  control: "6px"
-  overview-panel: "12px"
+  control: "8px"
+  panel: "13px"
 spacing:
   dashboard-grid-gap: "22px"
-  page-padding-min: "32px"
-  page-padding-max: "62px"
+  page-padding-min: "15px"
+  page-padding-max: "58px"
 components:
   chart: {}
   panel: {}
@@ -35,39 +35,29 @@ components:
 
 # A2A Track 3 dashboard design
 
-## Overview
+## Purpose and audience
 
-The interface should feel like a research instrument panel, not a promotional AI landing page. Its audience is a competition judge or team reviewer checking what has been measured, what remains provisional, and what the shadow system cannot authorize. This is an English-language product dashboard viewed on laptop and phone. Its distinctive contrast is a dark release-lock panel beside light, data-backed charts; the rest of the interface stays deliberately quiet. Avoid molecule imagery that implies a computed structure, predicted hits, or validated release.
+This is a judge-facing scientific exhibit that must also work as a team review instrument. Its first task is to make a limit understandable: 240 records are held for review, none entered the frozen external cohort, and no model was promoted. Discovery is demonstrable in shadow mode, not autonomous scientific authority. The dashboard should feel deliberate and memorable without presenting a decorative diagram as molecular or experimental evidence.
 
-The runtime CSS variables in `track3-dashboard.css` are canonical; this file mirrors their accepted values and explains their use. The `chart-outside` color is currently a local chart role. No generated theme or second token source is introduced.
+## Visual direction
 
-## Colors
+“Signal Atlas” uses cool laboratory paper, a deep-blue evidence field, and a three-stage state sequence as its signature. The dark field is a visual explanation of the real gate—not a marketing hero. The light workspace below holds clearly scoped charts, source records, and human actions. Avoid decorative molecule or receptor imagery, generic AI glows, and numbered navigation that implies a sequence where none exists.
 
-Pine conveys the dashboard's identity and stable measurement; amber denotes caveat or outside-domain values, and red denotes a hard stop. The supplied teammate PDFs use the same page but remain separated by explicit provisional labels. Never use color alone to explain admission, uncertainty, or release. The primary chart tone maps to `--green2`; surrounding neutrals map to `--paper`, `--surface`, `--line`, `--ink`, and `--muted`.
+## Tokens and source of truth
 
-## Typography
+`track3-dashboard.css` retains legacy layout and component behavior. `track3-dashboard-theme.css`, loaded after it, is the canonical visual layer and owns the runtime values listed above. New visual changes should go into the theme layer; changes to behavior and data remain in the HTML/JS and their tests. No chart, border, or status color may substitute for a written state label.
 
-Georgia is reserved for page titles and key numeric readouts; Inter and its fallbacks carry controls and explanatory copy. Monospace is for identifiers and measurement only. Use tabular numerals for chart values, preserve readable sentence case, and keep status copy precise rather than aspirational.
+## Typography and content
 
-## Layout
+The display face is used for editorial titles and measured readouts. Avenir Next/Segoe UI carries controls and explanatory text; monospace is limited to identifiers and code-like data. Chart captions state cohort and evaluation stage. Provisional teammate PDF analysis remains labeled as separate and not independently reproduced. The official competition project title stays readable in the overview.
 
-The persistent navigation is 244px on desktop and becomes an off-canvas menu below 960px. Content uses a twelve-column grid and 22px gutters. Overview charts pair the frozen development model comparison with a development-domain diagnostic. Provisional teammate precision lives only in its labeled reference view. Panels collapse to a single column on narrow screens; no chart may require horizontal page scrolling.
+## Layout and interaction
 
-## Elevation & Depth
+Desktop navigation is a 268px dark instrument index; below 960px it is an off-canvas menu. The overview pairs an evidence-state field with an unbordered metric strip, then offers three explicit routes and two development-only charts. Other views share the same title, panel, input, and status treatment. The experience must work at 390px without horizontal page overflow. Visible focus, reduced motion, keyboard-operable charts, readable loading/error states, and source provenance are required.
 
-Hierarchy primarily comes from surface tone and spacing. Overview chart panels use a border without a second shadow. The dark release-state panel is the visual anchor, not a claim of approval. Never add decorative glass or blur to scientific data.
+## Scientific constraints
 
-## Shapes
-
-Controls follow the existing 6–8px radius family. Overview chart panels use 12px corners. Data bars are flat-ended when they encode partitioned cohorts; small status badges may remain pill-shaped. Avoid decorative diagrams that could be mistaken for molecular evidence.
-
-## Components
-
-Chart axes, labels, and accessible text must expose the same counts. Model comparison and teammate precision keep keyboard-operable selectors with visible pressed and focus states. Empty diagnostics name the missing snapshot instead of substituting illustrative values. Screens that consume frozen data must not silently mix those values with provisional PDF aggregates. Preserve reduced-motion behavior and a visible application-wide scrollbar.
-
-## Do's and Don'ts
-
-- Do identify the cohort, evaluation stage, and data provenance beside each chart.
-- Do keep release and external-validation gates visibly separate from exploratory graphics.
-- Don't draw a molecule or receptor shape that could be mistaken for a computed result.
-- Don't convert a point estimate, docking score, or PDF aggregate into a hit or promotion claim.
+- Keep frozen project counts and provisional PDF aggregates in separate views and contracts.
+- Never represent development R², a shadow point estimate, docking, or MD as external confirmation.
+- Never imply candidate ordering, hit probability, or autonomous release.
+- Keep the 240-held → 0-admitted → locked diagram tied to the audited snapshot. If its meaning changes, update the label, accessible text, and tests together.
