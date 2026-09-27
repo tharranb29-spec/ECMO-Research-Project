@@ -1,8 +1,11 @@
 import hashlib
 import json
+import re
 import subprocess
 import unittest
 from pathlib import Path
+
+import research_assistant_server as dashboard_server
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -288,6 +291,25 @@ class Track3DashboardTests(unittest.TestCase):
         self.assertIn('data.summary.external_admitted', js)
         self.assertIn('.gate-sequence', theme)
         self.assertIn('@media(max-width:650px)', theme)
+
+    def test_every_track3_page_asset_is_served_by_the_app(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        assets = set(re.findall(r'(?:href|src)="(track3-dashboard[^"?#]+)"', html))
+        self.assertEqual(
+            assets,
+            {
+                "track3-dashboard.css",
+                "track3-dashboard-theme.css",
+                "track3-dashboard-data.js",
+                "track3-dashboard.js",
+            },
+        )
+        for asset in assets:
+            route = f"/{asset}"
+            with self.subTest(route=route):
+                self.assertEqual(dashboard_server.STATIC_FILES[route], ROOT / asset)
+                self.assertTrue(dashboard_server.STATIC_FILES[route].is_file())
+                self.assertEqual(dashboard_server.Handler._cache_control_for_path(None, route), "no-store")
         self.assertIn('Scientific gates and detailed status', html)
 
     def test_team_sign_in_describes_track3_without_legacy_ranking_claims(self):
