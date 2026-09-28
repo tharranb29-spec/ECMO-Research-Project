@@ -1,6 +1,6 @@
 # Track 3 dashboard submission candidate — 28 September 2026
 
-Status: **local release candidate verified; live deployment and signed-in rehearsal pending**. This document records what was actually checked, not a claim of scientific model promotion or final competition submission.
+Status: **local release candidate verified; deployed commit and signed-in overview verified; full live rehearsal pending**. This document records what was actually checked, not a claim of scientific model promotion or final competition submission.
 
 ## Frozen claims and chart sources
 
@@ -22,11 +22,18 @@ Status: **local release candidate verified; live deployment and signed-in rehear
 
 The broad premium static UI audit does **not** pass strict mode. It reports legacy-page controls and heuristic “actionless button” findings for JavaScript-bound controls; the Track 3 native-select ownership is explicitly documented in `DESIGN.md` but not represented in the audit manifest. The changed Track 3 routes were verified in the browser instead of treating that scan as proof of accessibility. This is not a full assistive-technology or cross-browser certification.
 
+## Live verification update
+
+- Render `/healthz` returned HTTP 200 and the exact deployed commit `b7ae26a1aadd057b50c7bc59bed75bf28daeceb6`. The dashboard redirects unauthenticated requests to app sign-in.
+- After normal sign-in, the overview rendered the 240-held → 0-admitted → locked gate, the AB_Ridge development R² 0.561 chart, and the 74/4 development-domain chart on a narrow viewport. Discovery showed RDKit available and AB Ridge development only.
+- A deterministic cached Discovery run completed in the signed-in browser: three cited records, two molecule gate records, and zero screen-eligible records were visible. The result is a shadow demonstration, not an external validation result or release approval.
+- A small follow-up change makes failed run requests visible in the Discovery status line instead of only inside a collapsed trace. This change requires a new deployment and fresh SHA check before it can be treated as live-verified.
+
 ## Required live gate before submission
 
-1. Deploy the new candidate commit to Render. `/healthz` must report that exact commit; the currently observed live service reported the earlier `0516b67` revision before this candidate was pushed.
+1. Deploy the follow-up commit to Render. `/healthz` must report that exact commit; `b7ae26a` is the currently verified live release.
 2. Sign in normally and verify `/track3-dashboard.html` loads the theme, all charts, the evidence accounting note, and the Discovery capability badges without console or network errors. Do not put credentials in screenshots or the repository.
-3. Run deterministic cached demo with no molecule input; verify three cached citations, two simulated molecules, zero admitted/eligible records, and the promotion firewall. Verify `BDB-50318250` remains quarantined and source-linked.
+3. After the follow-up deployment, repeat the deterministic cached demo with no molecule input; verify three cached citations, two molecule gate records, zero screen-eligible records, and the promotion firewall. Verify `BDB-50318250` remains quarantined and source-linked.
 4. Check desktop and phone layouts on the deployed site; capture overview, evidence, discovery, teammate, and model screenshots with timestamp and deployed SHA. Verify the 0.561/0.5685 cohort note and the 155/58 → 13/4 nested tiers.
 5. Only after the signed-in live gate passes, rehearse the judge story, create the submission tag, and submit the exact deployed SHA and dashboard URL. If a live provider is unavailable, use the deterministic cached demonstration and label it honestly.
 

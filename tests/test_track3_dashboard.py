@@ -23,6 +23,13 @@ class Track3DashboardTests(unittest.TestCase):
         subprocess.run(["python3", "build_track3_dashboard.py"], cwd=ROOT, check=True, capture_output=True)
         cls.payload = json.loads(OUTPUT.read_text(encoding="utf-8"))
 
+    def test_discovery_run_failure_has_visible_status(self):
+        html = (ROOT / "track3-dashboard.html").read_text(encoding="utf-8")
+        js = (ROOT / "track3-dashboard.js").read_text(encoding="utf-8")
+        self.assertIn('id="discovery-job-status"', html)
+        self.assertIn('class="discovery-job-line" aria-live="polite"', html)
+        self.assertIn('$("discovery-job-status").textContent=`Run request could not be confirmed:', js)
+
     def test_contract_set_and_versions_are_complete(self):
         expected = {
             "evidence_inbox", "molecule_registry", "model_registry",

@@ -276,7 +276,10 @@
     if(!$("discovery-query").value.trim()){fieldError("discovery-query","discovery-query-error",true);return;}
     const button=$("discovery-run");button.disabled=true;button.textContent="Starting run…";
     try{const payload=await apiJson("/api/discovery/run",{method:"POST",body:JSON.stringify({query:$("discovery-query").value,provider_mode:$("discovery-provider").value,molecules:parseMoleculeInput($("discovery-molecules").value)})});showDiscoveryJob(payload.job);pollDiscoveryJob(payload.job.run_id);}
-    catch(error){$("discovery-stages").innerHTML=`<p class="error-state">${esc(error.message)}</p>`;}
+    catch(error){
+      $("discovery-job-status").textContent=`Run request could not be confirmed: ${error.message}. Check recent runs before retrying.`;
+      $("discovery-stages").innerHTML=`<p class="error-state">${esc(error.message)}</p>`;
+    }
     finally{if(!activeDiscoveryJob||!["queued","running"].includes(activeDiscoveryJob.status)){button.disabled=false;button.textContent="Run shadow workflow";}}
   });
   $("discovery-cancel").addEventListener("click",async()=>{if(!activeDiscoveryJob)return;try{const payload=await apiJson(`/api/discovery/runs/${encodeURIComponent(activeDiscoveryJob.run_id)}/cancel`,{method:"POST",body:"{}"});clearTimeout(discoveryPoll);showDiscoveryJob(payload.job);}catch(error){$("discovery-job-status").textContent=`Cancellation failed: ${error.message}`;}});
